@@ -161,6 +161,10 @@ trait Manager {
     #[dbus_proxy(name = "DeactivateAllHomes")]
     fn deactivate_all_homes(&self) -> crate::zbus::Result<()>;
 
+    /// [📖](https://www.freedesktop.org/software/systemd/man/systemd.directives.html#Rebalance()) Call interface method `Rebalance`.
+    #[dbus_proxy(name = "Rebalance")]
+    fn rebalance(&self) -> crate::zbus::Result<()>;
+
     /// Get property `AutoLogin`.
     #[dbus_proxy(property, name = "AutoLogin")]
     fn auto_login(

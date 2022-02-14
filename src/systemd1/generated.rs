@@ -44,6 +44,15 @@ trait Manager {
         mode: String,
     ) -> crate::zbus::Result<crate::zvariant::OwnedObjectPath>;
 
+    /// [📖](https://www.freedesktop.org/software/systemd/man/systemd.directives.html#StartUnitWithFlags()) Call interface method `StartUnitWithFlags`.
+    #[dbus_proxy(name = "StartUnitWithFlags")]
+    fn start_unit_with_flags(
+        &self,
+        name: String,
+        mode: String,
+        flags: u64,
+    ) -> crate::zbus::Result<crate::zvariant::OwnedObjectPath>;
+
     /// [📖](https://www.freedesktop.org/software/systemd/man/systemd.directives.html#StartUnitReplace()) Call interface method `StartUnitReplace`.
     #[dbus_proxy(name = "StartUnitReplace")]
     fn start_unit_replace(
@@ -748,6 +757,14 @@ trait Manager {
     #[dbus_proxy(property, name = "UnitsLoadFinishTimestampMonotonic")]
     fn units_load_finish_timestamp_monotonic(&self) -> crate::zbus::Result<u64>;
 
+    /// Get property `UnitsLoadTimestamp`.
+    #[dbus_proxy(property, name = "UnitsLoadTimestamp")]
+    fn units_load_timestamp(&self) -> crate::zbus::Result<u64>;
+
+    /// Get property `UnitsLoadTimestampMonotonic`.
+    #[dbus_proxy(property, name = "UnitsLoadTimestampMonotonic")]
+    fn units_load_timestamp_monotonic(&self) -> crate::zbus::Result<u64>;
+
     /// Get property `InitRDSecurityStartTimestamp`.
     #[dbus_proxy(property, name = "InitRDSecurityStartTimestamp")]
     fn init_rd_security_start_timestamp(&self) -> crate::zbus::Result<u64>;
@@ -1039,6 +1056,10 @@ trait Manager {
     /// Get property `DefaultOOMPolicy`.
     #[dbus_proxy(property, name = "DefaultOOMPolicy")]
     fn default_oom_policy(&self) -> crate::zbus::Result<String>;
+
+    /// Get property `DefaultOOMScoreAdjust`.
+    #[dbus_proxy(property, name = "DefaultOOMScoreAdjust")]
+    fn default_oom_score_adjust(&self) -> crate::zbus::Result<i32>;
 
     /// Get property `CtrlAltDelBurstAction`.
     #[dbus_proxy(property, name = "CtrlAltDelBurstAction")]
@@ -1395,9 +1416,9 @@ trait Unit {
     #[dbus_proxy(property, name = "DefaultDependencies")]
     fn default_dependencies(&self) -> crate::zbus::Result<bool>;
 
-    /// Get property `OnSuccesJobMode`.
-    #[dbus_proxy(property, name = "OnSuccesJobMode")]
-    fn on_succes_job_mode(&self) -> crate::zbus::Result<String>;
+    /// Get property `OnSuccessJobMode`.
+    #[dbus_proxy(property, name = "OnSuccessJobMode")]
+    fn on_success_job_mode(&self) -> crate::zbus::Result<String>;
 
     /// Get property `OnFailureJobMode`.
     #[dbus_proxy(property, name = "OnFailureJobMode")]
@@ -1556,6 +1577,10 @@ trait Service {
     #[dbus_proxy(name = "AttachProcesses")]
     fn attach_processes(&self, subcgroup: String, pids: Vec<u32>) -> crate::zbus::Result<()>;
 
+    /// Get property `ExitType`.
+    #[dbus_proxy(property, name = "ExitType")]
+    fn exit_type(&self) -> crate::zbus::Result<String>;
+
     /// Get property `Restart`.
     #[dbus_proxy(property, name = "Restart")]
     fn restart(&self) -> crate::zbus::Result<String>;
@@ -1595,6 +1620,10 @@ trait Service {
     /// Get property `RuntimeMaxUSec`.
     #[dbus_proxy(property, name = "RuntimeMaxUSec")]
     fn runtime_max_u_sec(&self) -> crate::zbus::Result<u64>;
+
+    /// Get property `RuntimeRandomizedExtraUSec`.
+    #[dbus_proxy(property, name = "RuntimeRandomizedExtraUSec")]
+    fn runtime_randomized_extra_u_sec(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `WatchdogUSec`.
     #[dbus_proxy(property, name = "WatchdogUSec")]
@@ -2003,9 +2032,17 @@ trait Service {
     #[dbus_proxy(property, name = "AllowedCPUs")]
     fn allowed_cp_us(&self) -> crate::zbus::Result<Vec<u8>>;
 
+    /// Get property `StartupAllowedCPUs`.
+    #[dbus_proxy(property, name = "StartupAllowedCPUs")]
+    fn startup_allowed_cp_us(&self) -> crate::zbus::Result<Vec<u8>>;
+
     /// Get property `AllowedMemoryNodes`.
     #[dbus_proxy(property, name = "AllowedMemoryNodes")]
     fn allowed_memory_nodes(&self) -> crate::zbus::Result<Vec<u8>>;
+
+    /// Get property `StartupAllowedMemoryNodes`.
+    #[dbus_proxy(property, name = "StartupAllowedMemoryNodes")]
+    fn startup_allowed_memory_nodes(&self) -> crate::zbus::Result<Vec<u8>>;
 
     /// Get property `IOAccounting`.
     #[dbus_proxy(property, name = "IOAccounting")]
@@ -2170,6 +2207,10 @@ trait Service {
     /// Get property `SocketBindDeny`.
     #[dbus_proxy(property, name = "SocketBindDeny")]
     fn socket_bind_deny(&self) -> crate::zbus::Result<Vec<(i32, i32, u16, u16)>>;
+
+    /// Get property `RestrictNetworkInterfaces`.
+    #[dbus_proxy(property, name = "RestrictNetworkInterfaces")]
+    fn restrict_network_interfaces(&self) -> crate::zbus::Result<(bool, Vec<String>)>;
 
     /// Get property `Environment`.
     #[dbus_proxy(property, name = "Environment")]
@@ -2455,6 +2496,14 @@ trait Service {
     #[dbus_proxy(property, name = "TTYVTDisallocate")]
     fn ttyvt_disallocate(&self) -> crate::zbus::Result<bool>;
 
+    /// Get property `TTYRows`.
+    #[dbus_proxy(property, name = "TTYRows")]
+    fn tty_rows(&self) -> crate::zbus::Result<u16>;
+
+    /// Get property `TTYColumns`.
+    #[dbus_proxy(property, name = "TTYColumns")]
+    fn tty_columns(&self) -> crate::zbus::Result<u16>;
+
     /// Get property `SyslogPriority`.
     #[dbus_proxy(property, name = "SyslogPriority")]
     fn syslog_priority(&self) -> crate::zbus::Result<i32>;
@@ -2523,9 +2572,17 @@ trait Service {
     #[dbus_proxy(property, name = "SetCredential")]
     fn set_credential(&self) -> crate::zbus::Result<Vec<(String, Vec<u8>)>>;
 
+    /// Get property `SetCredentialEncrypted`.
+    #[dbus_proxy(property, name = "SetCredentialEncrypted")]
+    fn set_credential_encrypted(&self) -> crate::zbus::Result<Vec<(String, Vec<u8>)>>;
+
     /// Get property `LoadCredential`.
     #[dbus_proxy(property, name = "LoadCredential")]
     fn load_credential(&self) -> crate::zbus::Result<Vec<(String, String)>>;
+
+    /// Get property `LoadCredentialEncrypted`.
+    #[dbus_proxy(property, name = "LoadCredentialEncrypted")]
+    fn load_credential_encrypted(&self) -> crate::zbus::Result<Vec<(String, String)>>;
 
     /// Get property `SupplementaryGroups`.
     #[dbus_proxy(property, name = "SupplementaryGroups")]
@@ -2554,6 +2611,10 @@ trait Service {
     /// Get property `NoExecPaths`.
     #[dbus_proxy(property, name = "NoExecPaths")]
     fn no_exec_paths(&self) -> crate::zbus::Result<Vec<String>>;
+
+    /// Get property `ExecSearchPath`.
+    #[dbus_proxy(property, name = "ExecSearchPath")]
+    fn exec_search_path(&self) -> crate::zbus::Result<Vec<String>>;
 
     /// Get property `MountFlags`.
     #[dbus_proxy(property, name = "MountFlags")]
@@ -2671,6 +2732,10 @@ trait Service {
     #[dbus_proxy(property, name = "RestrictAddressFamilies")]
     fn restrict_address_families(&self) -> crate::zbus::Result<(bool, Vec<String>)>;
 
+    /// Get property `RuntimeDirectorySymlink`.
+    #[dbus_proxy(property, name = "RuntimeDirectorySymlink")]
+    fn runtime_directory_symlink(&self) -> crate::zbus::Result<Vec<(String, String, u64)>>;
+
     /// Get property `RuntimeDirectoryPreserve`.
     #[dbus_proxy(property, name = "RuntimeDirectoryPreserve")]
     fn runtime_directory_preserve(&self) -> crate::zbus::Result<String>;
@@ -2683,6 +2748,10 @@ trait Service {
     #[dbus_proxy(property, name = "RuntimeDirectory")]
     fn runtime_directory(&self) -> crate::zbus::Result<Vec<String>>;
 
+    /// Get property `StateDirectorySymlink`.
+    #[dbus_proxy(property, name = "StateDirectorySymlink")]
+    fn state_directory_symlink(&self) -> crate::zbus::Result<Vec<(String, String, u64)>>;
+
     /// Get property `StateDirectoryMode`.
     #[dbus_proxy(property, name = "StateDirectoryMode")]
     fn state_directory_mode(&self) -> crate::zbus::Result<u32>;
@@ -2691,6 +2760,10 @@ trait Service {
     #[dbus_proxy(property, name = "StateDirectory")]
     fn state_directory(&self) -> crate::zbus::Result<Vec<String>>;
 
+    /// Get property `CacheDirectorySymlink`.
+    #[dbus_proxy(property, name = "CacheDirectorySymlink")]
+    fn cache_directory_symlink(&self) -> crate::zbus::Result<Vec<(String, String, u64)>>;
+
     /// Get property `CacheDirectoryMode`.
     #[dbus_proxy(property, name = "CacheDirectoryMode")]
     fn cache_directory_mode(&self) -> crate::zbus::Result<u32>;
@@ -2698,6 +2771,10 @@ trait Service {
     /// Get property `CacheDirectory`.
     #[dbus_proxy(property, name = "CacheDirectory")]
     fn cache_directory(&self) -> crate::zbus::Result<Vec<String>>;
+
+    /// Get property `LogsDirectorySymlink`.
+    #[dbus_proxy(property, name = "LogsDirectorySymlink")]
+    fn logs_directory_symlink(&self) -> crate::zbus::Result<Vec<(String, String, u64)>>;
 
     /// Get property `LogsDirectoryMode`.
     #[dbus_proxy(property, name = "LogsDirectoryMode")]
@@ -2734,6 +2811,10 @@ trait Service {
     /// Get property `RestrictNamespaces`.
     #[dbus_proxy(property, name = "RestrictNamespaces")]
     fn restrict_namespaces(&self) -> crate::zbus::Result<u64>;
+
+    /// Get property `RestrictFileSystems`.
+    #[dbus_proxy(property, name = "RestrictFileSystems")]
+    fn restrict_file_systems(&self) -> crate::zbus::Result<(bool, Vec<String>)>;
 
     /// Get property `BindPaths`.
     #[dbus_proxy(property, name = "BindPaths")]
@@ -3163,9 +3244,17 @@ trait Socket {
     #[dbus_proxy(property, name = "AllowedCPUs")]
     fn allowed_cp_us(&self) -> crate::zbus::Result<Vec<u8>>;
 
+    /// Get property `StartupAllowedCPUs`.
+    #[dbus_proxy(property, name = "StartupAllowedCPUs")]
+    fn startup_allowed_cp_us(&self) -> crate::zbus::Result<Vec<u8>>;
+
     /// Get property `AllowedMemoryNodes`.
     #[dbus_proxy(property, name = "AllowedMemoryNodes")]
     fn allowed_memory_nodes(&self) -> crate::zbus::Result<Vec<u8>>;
+
+    /// Get property `StartupAllowedMemoryNodes`.
+    #[dbus_proxy(property, name = "StartupAllowedMemoryNodes")]
+    fn startup_allowed_memory_nodes(&self) -> crate::zbus::Result<Vec<u8>>;
 
     /// Get property `IOAccounting`.
     #[dbus_proxy(property, name = "IOAccounting")]
@@ -3330,6 +3419,10 @@ trait Socket {
     /// Get property `SocketBindDeny`.
     #[dbus_proxy(property, name = "SocketBindDeny")]
     fn socket_bind_deny(&self) -> crate::zbus::Result<Vec<(i32, i32, u16, u16)>>;
+
+    /// Get property `RestrictNetworkInterfaces`.
+    #[dbus_proxy(property, name = "RestrictNetworkInterfaces")]
+    fn restrict_network_interfaces(&self) -> crate::zbus::Result<(bool, Vec<String>)>;
 
     /// Get property `Environment`.
     #[dbus_proxy(property, name = "Environment")]
@@ -3615,6 +3708,14 @@ trait Socket {
     #[dbus_proxy(property, name = "TTYVTDisallocate")]
     fn ttyvt_disallocate(&self) -> crate::zbus::Result<bool>;
 
+    /// Get property `TTYRows`.
+    #[dbus_proxy(property, name = "TTYRows")]
+    fn tty_rows(&self) -> crate::zbus::Result<u16>;
+
+    /// Get property `TTYColumns`.
+    #[dbus_proxy(property, name = "TTYColumns")]
+    fn tty_columns(&self) -> crate::zbus::Result<u16>;
+
     /// Get property `SyslogPriority`.
     #[dbus_proxy(property, name = "SyslogPriority")]
     fn syslog_priority(&self) -> crate::zbus::Result<i32>;
@@ -3683,9 +3784,17 @@ trait Socket {
     #[dbus_proxy(property, name = "SetCredential")]
     fn set_credential(&self) -> crate::zbus::Result<Vec<(String, Vec<u8>)>>;
 
+    /// Get property `SetCredentialEncrypted`.
+    #[dbus_proxy(property, name = "SetCredentialEncrypted")]
+    fn set_credential_encrypted(&self) -> crate::zbus::Result<Vec<(String, Vec<u8>)>>;
+
     /// Get property `LoadCredential`.
     #[dbus_proxy(property, name = "LoadCredential")]
     fn load_credential(&self) -> crate::zbus::Result<Vec<(String, String)>>;
+
+    /// Get property `LoadCredentialEncrypted`.
+    #[dbus_proxy(property, name = "LoadCredentialEncrypted")]
+    fn load_credential_encrypted(&self) -> crate::zbus::Result<Vec<(String, String)>>;
 
     /// Get property `SupplementaryGroups`.
     #[dbus_proxy(property, name = "SupplementaryGroups")]
@@ -3714,6 +3823,10 @@ trait Socket {
     /// Get property `NoExecPaths`.
     #[dbus_proxy(property, name = "NoExecPaths")]
     fn no_exec_paths(&self) -> crate::zbus::Result<Vec<String>>;
+
+    /// Get property `ExecSearchPath`.
+    #[dbus_proxy(property, name = "ExecSearchPath")]
+    fn exec_search_path(&self) -> crate::zbus::Result<Vec<String>>;
 
     /// Get property `MountFlags`.
     #[dbus_proxy(property, name = "MountFlags")]
@@ -3831,6 +3944,10 @@ trait Socket {
     #[dbus_proxy(property, name = "RestrictAddressFamilies")]
     fn restrict_address_families(&self) -> crate::zbus::Result<(bool, Vec<String>)>;
 
+    /// Get property `RuntimeDirectorySymlink`.
+    #[dbus_proxy(property, name = "RuntimeDirectorySymlink")]
+    fn runtime_directory_symlink(&self) -> crate::zbus::Result<Vec<(String, String, u64)>>;
+
     /// Get property `RuntimeDirectoryPreserve`.
     #[dbus_proxy(property, name = "RuntimeDirectoryPreserve")]
     fn runtime_directory_preserve(&self) -> crate::zbus::Result<String>;
@@ -3843,6 +3960,10 @@ trait Socket {
     #[dbus_proxy(property, name = "RuntimeDirectory")]
     fn runtime_directory(&self) -> crate::zbus::Result<Vec<String>>;
 
+    /// Get property `StateDirectorySymlink`.
+    #[dbus_proxy(property, name = "StateDirectorySymlink")]
+    fn state_directory_symlink(&self) -> crate::zbus::Result<Vec<(String, String, u64)>>;
+
     /// Get property `StateDirectoryMode`.
     #[dbus_proxy(property, name = "StateDirectoryMode")]
     fn state_directory_mode(&self) -> crate::zbus::Result<u32>;
@@ -3851,6 +3972,10 @@ trait Socket {
     #[dbus_proxy(property, name = "StateDirectory")]
     fn state_directory(&self) -> crate::zbus::Result<Vec<String>>;
 
+    /// Get property `CacheDirectorySymlink`.
+    #[dbus_proxy(property, name = "CacheDirectorySymlink")]
+    fn cache_directory_symlink(&self) -> crate::zbus::Result<Vec<(String, String, u64)>>;
+
     /// Get property `CacheDirectoryMode`.
     #[dbus_proxy(property, name = "CacheDirectoryMode")]
     fn cache_directory_mode(&self) -> crate::zbus::Result<u32>;
@@ -3858,6 +3983,10 @@ trait Socket {
     /// Get property `CacheDirectory`.
     #[dbus_proxy(property, name = "CacheDirectory")]
     fn cache_directory(&self) -> crate::zbus::Result<Vec<String>>;
+
+    /// Get property `LogsDirectorySymlink`.
+    #[dbus_proxy(property, name = "LogsDirectorySymlink")]
+    fn logs_directory_symlink(&self) -> crate::zbus::Result<Vec<(String, String, u64)>>;
 
     /// Get property `LogsDirectoryMode`.
     #[dbus_proxy(property, name = "LogsDirectoryMode")]
@@ -3894,6 +4023,10 @@ trait Socket {
     /// Get property `RestrictNamespaces`.
     #[dbus_proxy(property, name = "RestrictNamespaces")]
     fn restrict_namespaces(&self) -> crate::zbus::Result<u64>;
+
+    /// Get property `RestrictFileSystems`.
+    #[dbus_proxy(property, name = "RestrictFileSystems")]
+    fn restrict_file_systems(&self) -> crate::zbus::Result<(bool, Vec<String>)>;
 
     /// Get property `BindPaths`.
     #[dbus_proxy(property, name = "BindPaths")]
@@ -4169,9 +4302,17 @@ trait Mount {
     #[dbus_proxy(property, name = "AllowedCPUs")]
     fn allowed_cp_us(&self) -> crate::zbus::Result<Vec<u8>>;
 
+    /// Get property `StartupAllowedCPUs`.
+    #[dbus_proxy(property, name = "StartupAllowedCPUs")]
+    fn startup_allowed_cp_us(&self) -> crate::zbus::Result<Vec<u8>>;
+
     /// Get property `AllowedMemoryNodes`.
     #[dbus_proxy(property, name = "AllowedMemoryNodes")]
     fn allowed_memory_nodes(&self) -> crate::zbus::Result<Vec<u8>>;
+
+    /// Get property `StartupAllowedMemoryNodes`.
+    #[dbus_proxy(property, name = "StartupAllowedMemoryNodes")]
+    fn startup_allowed_memory_nodes(&self) -> crate::zbus::Result<Vec<u8>>;
 
     /// Get property `IOAccounting`.
     #[dbus_proxy(property, name = "IOAccounting")]
@@ -4336,6 +4477,10 @@ trait Mount {
     /// Get property `SocketBindDeny`.
     #[dbus_proxy(property, name = "SocketBindDeny")]
     fn socket_bind_deny(&self) -> crate::zbus::Result<Vec<(i32, i32, u16, u16)>>;
+
+    /// Get property `RestrictNetworkInterfaces`.
+    #[dbus_proxy(property, name = "RestrictNetworkInterfaces")]
+    fn restrict_network_interfaces(&self) -> crate::zbus::Result<(bool, Vec<String>)>;
 
     /// Get property `Environment`.
     #[dbus_proxy(property, name = "Environment")]
@@ -4621,6 +4766,14 @@ trait Mount {
     #[dbus_proxy(property, name = "TTYVTDisallocate")]
     fn ttyvt_disallocate(&self) -> crate::zbus::Result<bool>;
 
+    /// Get property `TTYRows`.
+    #[dbus_proxy(property, name = "TTYRows")]
+    fn tty_rows(&self) -> crate::zbus::Result<u16>;
+
+    /// Get property `TTYColumns`.
+    #[dbus_proxy(property, name = "TTYColumns")]
+    fn tty_columns(&self) -> crate::zbus::Result<u16>;
+
     /// Get property `SyslogPriority`.
     #[dbus_proxy(property, name = "SyslogPriority")]
     fn syslog_priority(&self) -> crate::zbus::Result<i32>;
@@ -4689,9 +4842,17 @@ trait Mount {
     #[dbus_proxy(property, name = "SetCredential")]
     fn set_credential(&self) -> crate::zbus::Result<Vec<(String, Vec<u8>)>>;
 
+    /// Get property `SetCredentialEncrypted`.
+    #[dbus_proxy(property, name = "SetCredentialEncrypted")]
+    fn set_credential_encrypted(&self) -> crate::zbus::Result<Vec<(String, Vec<u8>)>>;
+
     /// Get property `LoadCredential`.
     #[dbus_proxy(property, name = "LoadCredential")]
     fn load_credential(&self) -> crate::zbus::Result<Vec<(String, String)>>;
+
+    /// Get property `LoadCredentialEncrypted`.
+    #[dbus_proxy(property, name = "LoadCredentialEncrypted")]
+    fn load_credential_encrypted(&self) -> crate::zbus::Result<Vec<(String, String)>>;
 
     /// Get property `SupplementaryGroups`.
     #[dbus_proxy(property, name = "SupplementaryGroups")]
@@ -4720,6 +4881,10 @@ trait Mount {
     /// Get property `NoExecPaths`.
     #[dbus_proxy(property, name = "NoExecPaths")]
     fn no_exec_paths(&self) -> crate::zbus::Result<Vec<String>>;
+
+    /// Get property `ExecSearchPath`.
+    #[dbus_proxy(property, name = "ExecSearchPath")]
+    fn exec_search_path(&self) -> crate::zbus::Result<Vec<String>>;
 
     /// Get property `MountFlags`.
     #[dbus_proxy(property, name = "MountFlags")]
@@ -4837,6 +5002,10 @@ trait Mount {
     #[dbus_proxy(property, name = "RestrictAddressFamilies")]
     fn restrict_address_families(&self) -> crate::zbus::Result<(bool, Vec<String>)>;
 
+    /// Get property `RuntimeDirectorySymlink`.
+    #[dbus_proxy(property, name = "RuntimeDirectorySymlink")]
+    fn runtime_directory_symlink(&self) -> crate::zbus::Result<Vec<(String, String, u64)>>;
+
     /// Get property `RuntimeDirectoryPreserve`.
     #[dbus_proxy(property, name = "RuntimeDirectoryPreserve")]
     fn runtime_directory_preserve(&self) -> crate::zbus::Result<String>;
@@ -4849,6 +5018,10 @@ trait Mount {
     #[dbus_proxy(property, name = "RuntimeDirectory")]
     fn runtime_directory(&self) -> crate::zbus::Result<Vec<String>>;
 
+    /// Get property `StateDirectorySymlink`.
+    #[dbus_proxy(property, name = "StateDirectorySymlink")]
+    fn state_directory_symlink(&self) -> crate::zbus::Result<Vec<(String, String, u64)>>;
+
     /// Get property `StateDirectoryMode`.
     #[dbus_proxy(property, name = "StateDirectoryMode")]
     fn state_directory_mode(&self) -> crate::zbus::Result<u32>;
@@ -4857,6 +5030,10 @@ trait Mount {
     #[dbus_proxy(property, name = "StateDirectory")]
     fn state_directory(&self) -> crate::zbus::Result<Vec<String>>;
 
+    /// Get property `CacheDirectorySymlink`.
+    #[dbus_proxy(property, name = "CacheDirectorySymlink")]
+    fn cache_directory_symlink(&self) -> crate::zbus::Result<Vec<(String, String, u64)>>;
+
     /// Get property `CacheDirectoryMode`.
     #[dbus_proxy(property, name = "CacheDirectoryMode")]
     fn cache_directory_mode(&self) -> crate::zbus::Result<u32>;
@@ -4864,6 +5041,10 @@ trait Mount {
     /// Get property `CacheDirectory`.
     #[dbus_proxy(property, name = "CacheDirectory")]
     fn cache_directory(&self) -> crate::zbus::Result<Vec<String>>;
+
+    /// Get property `LogsDirectorySymlink`.
+    #[dbus_proxy(property, name = "LogsDirectorySymlink")]
+    fn logs_directory_symlink(&self) -> crate::zbus::Result<Vec<(String, String, u64)>>;
 
     /// Get property `LogsDirectoryMode`.
     #[dbus_proxy(property, name = "LogsDirectoryMode")]
@@ -4900,6 +5081,10 @@ trait Mount {
     /// Get property `RestrictNamespaces`.
     #[dbus_proxy(property, name = "RestrictNamespaces")]
     fn restrict_namespaces(&self) -> crate::zbus::Result<u64>;
+
+    /// Get property `RestrictFileSystems`.
+    #[dbus_proxy(property, name = "RestrictFileSystems")]
+    fn restrict_file_systems(&self) -> crate::zbus::Result<(bool, Vec<String>)>;
 
     /// Get property `BindPaths`.
     #[dbus_proxy(property, name = "BindPaths")]
@@ -4977,6 +5162,10 @@ trait Mount {
     default_service = "org.freedesktop.systemd1"
 )]
 trait Automount {
+    /// Get property `ExtraOptions`.
+    #[dbus_proxy(property, name = "ExtraOptions")]
+    fn extra_options(&self) -> crate::zbus::Result<String>;
+
     /// Get property `DirectoryMode`.
     #[dbus_proxy(property, name = "DirectoryMode")]
     fn directory_mode(&self) -> crate::zbus::Result<u32>;
@@ -5225,9 +5414,17 @@ trait Swap {
     #[dbus_proxy(property, name = "AllowedCPUs")]
     fn allowed_cp_us(&self) -> crate::zbus::Result<Vec<u8>>;
 
+    /// Get property `StartupAllowedCPUs`.
+    #[dbus_proxy(property, name = "StartupAllowedCPUs")]
+    fn startup_allowed_cp_us(&self) -> crate::zbus::Result<Vec<u8>>;
+
     /// Get property `AllowedMemoryNodes`.
     #[dbus_proxy(property, name = "AllowedMemoryNodes")]
     fn allowed_memory_nodes(&self) -> crate::zbus::Result<Vec<u8>>;
+
+    /// Get property `StartupAllowedMemoryNodes`.
+    #[dbus_proxy(property, name = "StartupAllowedMemoryNodes")]
+    fn startup_allowed_memory_nodes(&self) -> crate::zbus::Result<Vec<u8>>;
 
     /// Get property `IOAccounting`.
     #[dbus_proxy(property, name = "IOAccounting")]
@@ -5392,6 +5589,10 @@ trait Swap {
     /// Get property `SocketBindDeny`.
     #[dbus_proxy(property, name = "SocketBindDeny")]
     fn socket_bind_deny(&self) -> crate::zbus::Result<Vec<(i32, i32, u16, u16)>>;
+
+    /// Get property `RestrictNetworkInterfaces`.
+    #[dbus_proxy(property, name = "RestrictNetworkInterfaces")]
+    fn restrict_network_interfaces(&self) -> crate::zbus::Result<(bool, Vec<String>)>;
 
     /// Get property `Environment`.
     #[dbus_proxy(property, name = "Environment")]
@@ -5677,6 +5878,14 @@ trait Swap {
     #[dbus_proxy(property, name = "TTYVTDisallocate")]
     fn ttyvt_disallocate(&self) -> crate::zbus::Result<bool>;
 
+    /// Get property `TTYRows`.
+    #[dbus_proxy(property, name = "TTYRows")]
+    fn tty_rows(&self) -> crate::zbus::Result<u16>;
+
+    /// Get property `TTYColumns`.
+    #[dbus_proxy(property, name = "TTYColumns")]
+    fn tty_columns(&self) -> crate::zbus::Result<u16>;
+
     /// Get property `SyslogPriority`.
     #[dbus_proxy(property, name = "SyslogPriority")]
     fn syslog_priority(&self) -> crate::zbus::Result<i32>;
@@ -5745,9 +5954,17 @@ trait Swap {
     #[dbus_proxy(property, name = "SetCredential")]
     fn set_credential(&self) -> crate::zbus::Result<Vec<(String, Vec<u8>)>>;
 
+    /// Get property `SetCredentialEncrypted`.
+    #[dbus_proxy(property, name = "SetCredentialEncrypted")]
+    fn set_credential_encrypted(&self) -> crate::zbus::Result<Vec<(String, Vec<u8>)>>;
+
     /// Get property `LoadCredential`.
     #[dbus_proxy(property, name = "LoadCredential")]
     fn load_credential(&self) -> crate::zbus::Result<Vec<(String, String)>>;
+
+    /// Get property `LoadCredentialEncrypted`.
+    #[dbus_proxy(property, name = "LoadCredentialEncrypted")]
+    fn load_credential_encrypted(&self) -> crate::zbus::Result<Vec<(String, String)>>;
 
     /// Get property `SupplementaryGroups`.
     #[dbus_proxy(property, name = "SupplementaryGroups")]
@@ -5776,6 +5993,10 @@ trait Swap {
     /// Get property `NoExecPaths`.
     #[dbus_proxy(property, name = "NoExecPaths")]
     fn no_exec_paths(&self) -> crate::zbus::Result<Vec<String>>;
+
+    /// Get property `ExecSearchPath`.
+    #[dbus_proxy(property, name = "ExecSearchPath")]
+    fn exec_search_path(&self) -> crate::zbus::Result<Vec<String>>;
 
     /// Get property `MountFlags`.
     #[dbus_proxy(property, name = "MountFlags")]
@@ -5893,6 +6114,10 @@ trait Swap {
     #[dbus_proxy(property, name = "RestrictAddressFamilies")]
     fn restrict_address_families(&self) -> crate::zbus::Result<(bool, Vec<String>)>;
 
+    /// Get property `RuntimeDirectorySymlink`.
+    #[dbus_proxy(property, name = "RuntimeDirectorySymlink")]
+    fn runtime_directory_symlink(&self) -> crate::zbus::Result<Vec<(String, String, u64)>>;
+
     /// Get property `RuntimeDirectoryPreserve`.
     #[dbus_proxy(property, name = "RuntimeDirectoryPreserve")]
     fn runtime_directory_preserve(&self) -> crate::zbus::Result<String>;
@@ -5905,6 +6130,10 @@ trait Swap {
     #[dbus_proxy(property, name = "RuntimeDirectory")]
     fn runtime_directory(&self) -> crate::zbus::Result<Vec<String>>;
 
+    /// Get property `StateDirectorySymlink`.
+    #[dbus_proxy(property, name = "StateDirectorySymlink")]
+    fn state_directory_symlink(&self) -> crate::zbus::Result<Vec<(String, String, u64)>>;
+
     /// Get property `StateDirectoryMode`.
     #[dbus_proxy(property, name = "StateDirectoryMode")]
     fn state_directory_mode(&self) -> crate::zbus::Result<u32>;
@@ -5913,6 +6142,10 @@ trait Swap {
     #[dbus_proxy(property, name = "StateDirectory")]
     fn state_directory(&self) -> crate::zbus::Result<Vec<String>>;
 
+    /// Get property `CacheDirectorySymlink`.
+    #[dbus_proxy(property, name = "CacheDirectorySymlink")]
+    fn cache_directory_symlink(&self) -> crate::zbus::Result<Vec<(String, String, u64)>>;
+
     /// Get property `CacheDirectoryMode`.
     #[dbus_proxy(property, name = "CacheDirectoryMode")]
     fn cache_directory_mode(&self) -> crate::zbus::Result<u32>;
@@ -5920,6 +6153,10 @@ trait Swap {
     /// Get property `CacheDirectory`.
     #[dbus_proxy(property, name = "CacheDirectory")]
     fn cache_directory(&self) -> crate::zbus::Result<Vec<String>>;
+
+    /// Get property `LogsDirectorySymlink`.
+    #[dbus_proxy(property, name = "LogsDirectorySymlink")]
+    fn logs_directory_symlink(&self) -> crate::zbus::Result<Vec<(String, String, u64)>>;
 
     /// Get property `LogsDirectoryMode`.
     #[dbus_proxy(property, name = "LogsDirectoryMode")]
@@ -5956,6 +6193,10 @@ trait Swap {
     /// Get property `RestrictNamespaces`.
     #[dbus_proxy(property, name = "RestrictNamespaces")]
     fn restrict_namespaces(&self) -> crate::zbus::Result<u64>;
+
+    /// Get property `RestrictFileSystems`.
+    #[dbus_proxy(property, name = "RestrictFileSystems")]
+    fn restrict_file_systems(&self) -> crate::zbus::Result<(bool, Vec<String>)>;
 
     /// Get property `BindPaths`.
     #[dbus_proxy(property, name = "BindPaths")]
@@ -6052,6 +6293,14 @@ trait Path {
     /// Get property `Result`.
     #[dbus_proxy(property, name = "Result")]
     fn result(&self) -> crate::zbus::Result<String>;
+
+    /// Get property `TriggerLimitIntervalUSec`.
+    #[dbus_proxy(property, name = "TriggerLimitIntervalUSec")]
+    fn trigger_limit_interval_u_sec(&self) -> crate::zbus::Result<u64>;
+
+    /// Get property `TriggerLimitBurst`.
+    #[dbus_proxy(property, name = "TriggerLimitBurst")]
+    fn trigger_limit_burst(&self) -> crate::zbus::Result<u32>;
 }
 
 /// Proxy object for `org.freedesktop.systemd1.Slice`.
@@ -6173,9 +6422,17 @@ trait Slice {
     #[dbus_proxy(property, name = "AllowedCPUs")]
     fn allowed_cp_us(&self) -> crate::zbus::Result<Vec<u8>>;
 
+    /// Get property `StartupAllowedCPUs`.
+    #[dbus_proxy(property, name = "StartupAllowedCPUs")]
+    fn startup_allowed_cp_us(&self) -> crate::zbus::Result<Vec<u8>>;
+
     /// Get property `AllowedMemoryNodes`.
     #[dbus_proxy(property, name = "AllowedMemoryNodes")]
     fn allowed_memory_nodes(&self) -> crate::zbus::Result<Vec<u8>>;
+
+    /// Get property `StartupAllowedMemoryNodes`.
+    #[dbus_proxy(property, name = "StartupAllowedMemoryNodes")]
+    fn startup_allowed_memory_nodes(&self) -> crate::zbus::Result<Vec<u8>>;
 
     /// Get property `IOAccounting`.
     #[dbus_proxy(property, name = "IOAccounting")]
@@ -6340,6 +6597,10 @@ trait Slice {
     /// Get property `SocketBindDeny`.
     #[dbus_proxy(property, name = "SocketBindDeny")]
     fn socket_bind_deny(&self) -> crate::zbus::Result<Vec<(i32, i32, u16, u16)>>;
+
+    /// Get property `RestrictNetworkInterfaces`.
+    #[dbus_proxy(property, name = "RestrictNetworkInterfaces")]
+    fn restrict_network_interfaces(&self) -> crate::zbus::Result<(bool, Vec<String>)>;
 }
 
 /// Proxy object for `org.freedesktop.systemd1.Scope`.
@@ -6380,6 +6641,10 @@ trait Scope {
     /// Get property `RuntimeMaxUSec`.
     #[dbus_proxy(property, name = "RuntimeMaxUSec")]
     fn runtime_max_u_sec(&self) -> crate::zbus::Result<u64>;
+
+    /// Get property `RuntimeRandomizedExtraUSec`.
+    #[dbus_proxy(property, name = "RuntimeRandomizedExtraUSec")]
+    fn runtime_randomized_extra_u_sec(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `Slice`.
     #[dbus_proxy(property, name = "Slice")]
@@ -6485,9 +6750,17 @@ trait Scope {
     #[dbus_proxy(property, name = "AllowedCPUs")]
     fn allowed_cp_us(&self) -> crate::zbus::Result<Vec<u8>>;
 
+    /// Get property `StartupAllowedCPUs`.
+    #[dbus_proxy(property, name = "StartupAllowedCPUs")]
+    fn startup_allowed_cp_us(&self) -> crate::zbus::Result<Vec<u8>>;
+
     /// Get property `AllowedMemoryNodes`.
     #[dbus_proxy(property, name = "AllowedMemoryNodes")]
     fn allowed_memory_nodes(&self) -> crate::zbus::Result<Vec<u8>>;
+
+    /// Get property `StartupAllowedMemoryNodes`.
+    #[dbus_proxy(property, name = "StartupAllowedMemoryNodes")]
+    fn startup_allowed_memory_nodes(&self) -> crate::zbus::Result<Vec<u8>>;
 
     /// Get property `IOAccounting`.
     #[dbus_proxy(property, name = "IOAccounting")]
@@ -6652,6 +6925,10 @@ trait Scope {
     /// Get property `SocketBindDeny`.
     #[dbus_proxy(property, name = "SocketBindDeny")]
     fn socket_bind_deny(&self) -> crate::zbus::Result<Vec<(i32, i32, u16, u16)>>;
+
+    /// Get property `RestrictNetworkInterfaces`.
+    #[dbus_proxy(property, name = "RestrictNetworkInterfaces")]
+    fn restrict_network_interfaces(&self) -> crate::zbus::Result<(bool, Vec<String>)>;
 
     /// Get property `KillMode`.
     #[dbus_proxy(property, name = "KillMode")]
