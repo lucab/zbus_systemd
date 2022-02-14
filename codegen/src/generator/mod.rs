@@ -1,3 +1,5 @@
+mod ztypes;
+
 use crate::config::Service;
 use crate::parser::data::{self, Node};
 use anyhow::{bail, format_err, Context, Result};
@@ -81,7 +83,7 @@ fn emit_methods(
 
         let mut inputs = Vec::with_capacity(method.inputs.len());
         for arg in &method.inputs {
-            let rtype = translate_signature_type(&arg.1).with_context(|| {
+            let rtype = ztypes::translate_sig(&arg.1).with_context(|| {
                 format_err!(
                     "Failed to generate method '{}' due to unhandled input argument",
                     &method.name,
@@ -91,15 +93,12 @@ fn emit_methods(
             inputs.push((arg.0.clone(), rtype));
         }
 
-        let translated_sig = match translate_sig_output(&method.outputs) {
-            Some(v) => v,
-            None => {
-                bail!(
-                    "Failed to generate method '{}' due to unhandled output argument",
-                    method.name
-                );
-            }
-        };
+        let translated_sig = translate_sig_output(&method.outputs).with_context(|| {
+            format_err!(
+                "Failed to generate method '{}' due to unhandled output argument",
+                method.name
+            )
+        })?;
 
         writeln!(
             output,
@@ -112,7 +111,7 @@ fn emit_methods(
             writeln!(output, "  {}: {},", arg.0, arg.1)?;
         }
         writeln!(output, ") ")?;
-        writeln!(output, "-> zbus::Result<{}>;", translated_sig)?;
+        writeln!(output, "-> crate::zbus::Result<{}>;", translated_sig)?;
         writeln!(output)?;
     }
 
@@ -123,7 +122,7 @@ fn emit_signals(output: &mut impl Write, signals: &[data::Signal]) -> Result<()>
     for entry in signals {
         let mut args = Vec::with_capacity(entry.args.len());
         for (sig, name) in &entry.args {
-            let rtype = translate_signature_type(sig).with_context(|| {
+            let rtype = ztypes::translate_sig(sig).with_context(|| {
                 format_err!(
                     "Failed to generate signal '{}' due to unhandled argument",
                     entry.name,
@@ -143,7 +142,7 @@ fn emit_signals(output: &mut impl Write, signals: &[data::Signal]) -> Result<()>
             };
             writeln!(output, "  {}: {},", mangled_name, rtype)?;
         }
-        writeln!(output, ") -> zbus::Result<()>;")?;
+        writeln!(output, ") -> crate::zbus::Result<()>;")?;
         writeln!(output)?;
     }
     Ok(())
@@ -161,10 +160,7 @@ fn emit_properties(
         }
 
         if entry.writable {
-            bail!(
-                " => Skipping property '{}' due to readwrite mode",
-                entry.name
-            );
+            bail!("Skipping property '{}' due to readwrite mode", entry.name);
         }
 
         let mut fn_name = entry.name.to_snake_case();
@@ -172,7 +168,7 @@ fn emit_properties(
             fn_name = "set_".to_string() + &fn_name;
         }
 
-        let output_type = translate_signature_type(&entry.type_label).with_context(|| {
+        let output_type = ztypes::translate_sig(&entry.type_label).with_context(|| {
             format_err!(
                 "Failed to generate property '{}' due to unhandled arguments",
                 entry.name,
@@ -187,7 +183,7 @@ fn emit_properties(
         )?;
         writeln!(
             output,
-            "fn {}(&self) -> zbus::Result<{}>;",
+            "fn {}(&self) -> crate::zbus::Result<{}>;",
             fn_name, output_type,
         )?;
         writeln!(output)?;
@@ -195,13 +191,13 @@ fn emit_properties(
     Ok(())
 }
 
-fn translate_sig_output(outputs: &Vec<(String, String)>) -> Option<String> {
+fn translate_sig_output(outputs: &Vec<(String, String)>) -> Result<String> {
     if outputs.is_empty() {
-        return Some("()".to_string());
+        return Ok("()".to_string());
     }
 
     if outputs.len() == 1 {
-        return translate_signature_type(&outputs[0].1).ok();
+        return ztypes::translate_sig(&outputs[0].1);
     }
 
     let mut res = String::new();
@@ -209,42 +205,8 @@ fn translate_sig_output(outputs: &Vec<(String, String)>) -> Option<String> {
         if !res.is_empty() {
             res.push_str(", ");
         }
-        let rtype = translate_signature_type(&arg.1).ok();
-        match rtype {
-            Some(arg) => res.push_str(&arg),
-            None => return None,
-        };
+        let rtype = ztypes::translate_sig(&arg.1)?;
+        res.push_str(&rtype);
     }
-    Some(format!("({})", res))
-}
-
-fn translate_signature_type(sig: &str) -> Result<String> {
-    let rtype = match sig {
-        "" => "()",
-        "ai" => "Vec<i32>",
-        "a(sb)" => "Vec<(String, bool)>",
-        "a(ss)" => "Vec<(String, String)>",
-        "a(st)" => "Vec<(String, u64)>",
-        "a(sv)" => "Vec<(String, zbus::zvariant::OwnedValue)>",
-        "a(sss)" => "Vec<(String, String, String)>",
-        "a(sus)" => "Vec<(String, u32, String)>",
-        "ao" => "Vec<zbus::zvariant::OwnedObjectPath>",
-        "as" => "Vec<String>",
-        "au" => "Vec<u32>",
-        "ay" => "Vec<u8>",
-        "b" => "bool",
-        "d" => "f64",
-        "h" => "zbus::zvariant::OwnedFd",
-        "i" => "i32",
-        "o" => "zbus::zvariant::OwnedObjectPath",
-        "q" => "u16",
-        "s" => "String",
-        "t" => "u64",
-        "u" => "u32",
-        "x" => "i64",
-        "y" => "u8",
-        "(so)" => "(String, zbus::zvariant::OwnedObjectPath)",
-        x => bail!("Unknown signature '{}'", x),
-    };
-    Ok(rtype.to_string())
+    Ok(format!("({})", res))
 }

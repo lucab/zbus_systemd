@@ -34,7 +34,7 @@ pub(crate) fn parse_single_node<'a>(
         };
         return Ok(("", node));
     }
-    
+
     unreachable!("failed to parse node");
 }
 

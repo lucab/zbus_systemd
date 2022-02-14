@@ -130,6 +130,8 @@ mod tests {
         let input = " ... ";
         let (rest, out) = parse_dummy_content(input).unwrap();
         assert_eq!(rest, "");
-        assert_eq!(out, (vec![], vec![], vec![]));
+        assert!(out.0.is_empty());
+        assert!(out.1.is_empty());
+        assert!(out.2.is_empty());
     }
 }

@@ -1,16 +1,15 @@
 [package]
 name = "codegen"
 version = "0.0.1"
-license = "MIT"
+license = "MIT/Apache-2.0"
 edition = "2018"
 publish = false
 
 [dependencies]
 anyhow = "1"
-codegenrs = "1"
+fn-error-context = "0.2"
 heck = "0.4"
 nom = "7"
 serde = { version = "1", features = ["derive"] }
-structopt = "0.3"
 toml = "0.5"
 xmltree = "0.10"

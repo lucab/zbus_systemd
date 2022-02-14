@@ -43,7 +43,7 @@ fn parse_single_method(rest: &str) -> nom::IResult<&str, data::Method> {
 
     // Parse arguments.
     let (_, args) = interface_method_args(args_body)?;
-    
+
     // FIXME(lucab): this results in the wrong DBus call.
     //  Push the workaround to the generator instead.
     let name = match method_name {
