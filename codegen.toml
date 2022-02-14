@@ -2,13 +2,6 @@
 hierarchy = "/org/freedesktop/home1"
 id = "org.freedesktop.home1"
 module = "home1"
-[[service.home1.overrides]]
-interface = "org.freedesktop.home1.Manager"
-todo_methods = ["ListHomes"]
-todo_properties = ["AutoLogin"]
-[[service.home1.overrides]]
-interface = "org.freedesktop.home1.Home"
-todo_properties = ["UnixRecord", "UserRecord"]
 
 [service.hostname1]
 default_object = "Hostnamed"
@@ -20,9 +13,6 @@ module = "hostname1"
 hierarchy = "/org/freedesktop/import1"
 id = "org.freedesktop.import1"
 module = "import1"
-[[service.import1.overrides]]
-interface = "org.freedesktop.import1.Manager"
-todo_methods = ["ListTransfers"]
 [[service.import1.overrides]]
 interface = "org.freedesktop.import1.Transfer"
 todo_properties = ["Type"]
@@ -39,22 +29,10 @@ id = "org.freedesktop.login1"
 module = "login1"
 [[service.login1.overrides]]
 interface = "org.freedesktop.login1.Manager"
-todo_methods = ["ListSessions", "ListUsers", "ListSeats", "ListInhibitors"]
-todo_properties = [
-    "EnableWallMessages",
-    "ScheduledShutdown",
-    "Sessions",
-    "WallMessage",
-]
-[[service.login1.overrides]]
-interface = "org.freedesktop.login1.Seat"
-todo_properties = ["ActiveSession", "Sessions"]
-[[service.login1.overrides]]
-interface = "org.freedesktop.login1.User"
-todo_properties = ["Display", "Sessions"]
+todo_properties = ["EnableWallMessages", "WallMessage"]
 [[service.login1.overrides]]
 interface = "org.freedesktop.login1.Session"
-todo_properties = ["Display", "Seat", "Type", "User"]
+todo_properties = ["Type"]
 
 [service.machine1]
 hierarchy = "/org/freedesktop/machine1"
@@ -62,13 +40,10 @@ id = "org.freedesktop.machine1"
 module = "machine1"
 [[service.machine1.overrides]]
 interface = "org.freedesktop.machine1.Machine"
-todo_methods = ["GetAddresses", "GetOSRelease"]
+todo_methods = ["GetOSRelease"]
 [[service.machine1.overrides]]
 interface = "org.freedesktop.machine1.Manager"
 todo_methods = [
-    "ListMachines",
-    "ListImages",
-    "GetMachineAddresses",
     "GetMachineOSRelease",
     "GetImageMachineInfo",
     "GetImageOSRelease",
@@ -86,7 +61,6 @@ module = "portable1"
 [[service.portable1.overrides]]
 interface = "org.freedesktop.portable1.Manager"
 todo_methods = [
-    "ListImages",
     "GetImageOSRelease",
     "GetImageMetadata",
     "GetImageMetadataWithExtensions",
@@ -96,38 +70,13 @@ interface = "org.freedesktop.portable1.Image"
 todo_methods = ["GetOSRelease", "GetMetadata", "GetMetadataWithExtensions"]
 todo_properties = ["Type"]
 
-
 [service.resolve1]
 hierarchy = "/org/freedesktop/resolve1"
 id = "org.freedesktop.resolve1"
 module = "resolve1"
 [[service.resolve1.overrides]]
 interface = "org.freedesktop.resolve1.Manager"
-todo_methods = [
-    "ResolveHostname",
-    "ResolveAddress",
-    "ResolveRecord",
-    "ResolveService",
-    "SetLinkDNS",
-    "SetLinkDNSEx",
-    "RegisterService",
-]
-todo_properties = [
-    "FallbackDNS",
-    "FallbackDNSEx",
-    "Domains",
-    "TransactionStatistics",
-    "CacheStatistics",
-    "DNSSECStatistics",
-    "DNS",
-    "DNSEx",
-    "CurrentDNSServer",
-    "CurrentDNSServerEx",
-]
-[[service.resolve1.overrides]]
-interface = "org.freedesktop.resolve1.Link"
-todo_methods = ["SetDNS", "SetDNSEx"]
-todo_properties = ["DNS", "DNSEx", "CurrentDNSServer", "CurrentDNSServerEx"]
+todo_methods = ["ResolveService", "RegisterService"]
 
 [service.systemd1]
 hierarchy = "/org/freedesktop/systemd1"
@@ -135,18 +84,7 @@ id = "org.freedesktop.systemd1"
 module = "systemd1"
 [[service.systemd1.overrides]]
 interface = "org.freedesktop.systemd1.Manager"
-todo_methods = [
-    "EnqueueUnitJob",
-    "StartTransientUnit",
-    "GetJobAfter",
-    "GetJobBefore",
-    "ListUnits",
-    "ListUnitsFiltered",
-    "ListUnitsByPatterns",
-    "ListUnitsByNames",
-    "ListJobs",
-    "GetDynamicUsers",
-]
+todo_methods = ["StartTransientUnit"]
 todo_properties = [
     "LogLevel",
     "LogTarget",
@@ -156,143 +94,26 @@ todo_properties = [
     "ServiceWatchdogs",
 ]
 [[service.systemd1.overrides]]
-interface = "org.freedesktop.systemd1.Unit"
-todo_methods = ["EnqueueJob"]
-todo_properties = ["Job", "Conditions", "Asserts", "LoadError"]
-[[service.systemd1.overrides]]
 interface = "org.freedesktop.systemd1.Service"
-todo_properties = [
-    "RestartPreventExitStatus",
-    "RestartForceExitStatus",
-    "SuccessExitStatus",
-    "ExecCondition",
-    "ExecConditionEx",
-    "ExecStartPre",
-    "ExecStartPreEx",
-    "ExecStart",
-    "ExecStartEx",
-    "ExecStartPost",
-    "ExecStartPostEx",
-    "ExecReload",
-    "ExecReloadEx",
-    "ExecStop",
-    "ExecStopEx",
-    "ExecStopPost",
-    "ExecStopPostEx",
-    "IPAddressAllow",
-    "IPAddressDeny",
-    "SocketBindAllow",
-    "SocketBindDeny",
-    "ExtensionImages",
-    "MountImages",
-    "LogExtraFields",
-    "SetCredential",
-    "SELinuxContext",
-    "AppArmorProfile",
-    "SmackProcessLabel",
-    "SystemCallFilter",
-    "SystemCallLog",
-    "RestrictAddressFamilies",
-    "BindPaths",
-    "BindReadOnlyPaths",
-    "Type",
-]
+todo_properties = ["ExtensionImages", "MountImages", "LogExtraFields", "Type"]
 [[service.systemd1.overrides]]
 interface = "org.freedesktop.systemd1.Socket"
-todo_properties = [
-    "ExecStartPre",
-    "ExecStartPost",
-    "ExecStopPre",
-    "ExecStopPost",
-    "IPAddressAllow",
-    "IPAddressDeny",
-    "SocketBindAllow",
-    "SocketBindDeny",
-    "ExtensionImages",
-    "MountImages",
-    "LogExtraFields",
-    "SetCredential",
-    "SELinuxContext",
-    "AppArmorProfile",
-    "SmackProcessLabel",
-    "SystemCallFilter",
-    "SystemCallLog",
-    "RestrictAddressFamilies",
-    "BindPaths",
-    "BindReadOnlyPaths",
-]
+todo_properties = ["ExtensionImages", "MountImages", "LogExtraFields"]
 [[service.systemd1.overrides]]
 interface = "org.freedesktop.systemd1.Automount"
 todo_properties = ["Where"]
 [[service.systemd1.overrides]]
 interface = "org.freedesktop.systemd1.Mount"
 todo_properties = [
-    "ExecMount",
-    "ExecUnmount",
-    "ExecRemount",
-    "IPAddressAllow",
-    "IPAddressDeny",
-    "SocketBindAllow",
-    "SocketBindDeny",
     "ExtensionImages",
     "MountImages",
     "LogExtraFields",
-    "SetCredential",
-    "SELinuxContext",
-    "AppArmorProfile",
-    "SmackProcessLabel",
-    "SystemCallFilter",
-    "SystemCallLog",
-    "RestrictAddressFamilies",
-    "BindPaths",
-    "BindReadOnlyPaths",
     "Where",
     "Type",
 ]
 [[service.systemd1.overrides]]
-interface = "org.freedesktop.systemd1.Timer"
-todo_properties = ["TimersMonotonic", "TimersCalendar"]
-[[service.systemd1.overrides]]
 interface = "org.freedesktop.systemd1.Swap"
-todo_properties = [
-    "AppArmorProfile",
-    "BindPaths",
-    "BindReadOnlyPaths",
-    "ExecActivate",
-    "ExecDeactivate",
-    "ExtensionImages",
-    "IPAddressAllow",
-    "IPAddressDeny",
-    "LogExtraFields",
-    "MountImages",
-    "RestrictAddressFamilies",
-    "SELinuxContext",
-    "SetCredential",
-    "SmackProcessLabel",
-    "SocketBindAllow",
-    "SocketBindDeny",
-    "SystemCallFilter",
-    "SystemCallLog",
-]
-[[service.systemd1.overrides]]
-interface = "org.freedesktop.systemd1.Slice"
-todo_properties = [
-    "IPAddressAllow",
-    "IPAddressDeny",
-    "SocketBindAllow",
-    "SocketBindDeny",
-]
-[[service.systemd1.overrides]]
-interface = "org.freedesktop.systemd1.Scope"
-todo_properties = [
-    "IPAddressAllow",
-    "IPAddressDeny",
-    "SocketBindAllow",
-    "SocketBindDeny",
-]
-[[service.systemd1.overrides]]
-interface = "org.freedesktop.systemd1.Job"
-todo_methods = ["GetAfter", "GetBefore"]
+todo_properties = ["ExtensionImages", "LogExtraFields", "MountImages"]
 
 [service.timedate1]
 default_object = "Timedated"
