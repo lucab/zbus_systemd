@@ -14,49 +14,49 @@ trait Manager {
     #[dbus_proxy(name = "ImportTar")]
     fn import_tar(
         &self,
-        fd: zbus::zvariant::OwnedFd,
+        fd: crate::zvariant::OwnedFd,
         local_name: String,
         force: bool,
         read_only: bool,
-    ) -> zbus::Result<(u32, zbus::zvariant::OwnedObjectPath)>;
+    ) -> crate::zbus::Result<(u32, crate::zvariant::OwnedObjectPath)>;
 
     /// [📖](https://www.freedesktop.org/software/systemd/man/systemd.directives.html#ImportRaw()) Call interface method `ImportRaw`.
     #[dbus_proxy(name = "ImportRaw")]
     fn import_raw(
         &self,
-        fd: zbus::zvariant::OwnedFd,
+        fd: crate::zvariant::OwnedFd,
         local_name: String,
         force: bool,
         read_only: bool,
-    ) -> zbus::Result<(u32, zbus::zvariant::OwnedObjectPath)>;
+    ) -> crate::zbus::Result<(u32, crate::zvariant::OwnedObjectPath)>;
 
     /// [📖](https://www.freedesktop.org/software/systemd/man/systemd.directives.html#ImportFileSystem()) Call interface method `ImportFileSystem`.
     #[dbus_proxy(name = "ImportFileSystem")]
     fn import_file_system(
         &self,
-        fd: zbus::zvariant::OwnedFd,
+        fd: crate::zvariant::OwnedFd,
         local_name: String,
         force: bool,
         read_only: bool,
-    ) -> zbus::Result<(u32, zbus::zvariant::OwnedObjectPath)>;
+    ) -> crate::zbus::Result<(u32, crate::zvariant::OwnedObjectPath)>;
 
     /// [📖](https://www.freedesktop.org/software/systemd/man/systemd.directives.html#ExportTar()) Call interface method `ExportTar`.
     #[dbus_proxy(name = "ExportTar")]
     fn export_tar(
         &self,
         local_name: String,
-        fd: zbus::zvariant::OwnedFd,
+        fd: crate::zvariant::OwnedFd,
         format: String,
-    ) -> zbus::Result<(u32, zbus::zvariant::OwnedObjectPath)>;
+    ) -> crate::zbus::Result<(u32, crate::zvariant::OwnedObjectPath)>;
 
     /// [📖](https://www.freedesktop.org/software/systemd/man/systemd.directives.html#ExportRaw()) Call interface method `ExportRaw`.
     #[dbus_proxy(name = "ExportRaw")]
     fn export_raw(
         &self,
         local_name: String,
-        fd: zbus::zvariant::OwnedFd,
+        fd: crate::zvariant::OwnedFd,
         format: String,
-    ) -> zbus::Result<(u32, zbus::zvariant::OwnedObjectPath)>;
+    ) -> crate::zbus::Result<(u32, crate::zvariant::OwnedObjectPath)>;
 
     /// [📖](https://www.freedesktop.org/software/systemd/man/systemd.directives.html#PullTar()) Call interface method `PullTar`.
     #[dbus_proxy(name = "PullTar")]
@@ -66,7 +66,7 @@ trait Manager {
         local_name: String,
         verify_mode: String,
         force: bool,
-    ) -> zbus::Result<(u32, zbus::zvariant::OwnedObjectPath)>;
+    ) -> crate::zbus::Result<(u32, crate::zvariant::OwnedObjectPath)>;
 
     /// [📖](https://www.freedesktop.org/software/systemd/man/systemd.directives.html#PullRaw()) Call interface method `PullRaw`.
     #[dbus_proxy(name = "PullRaw")]
@@ -76,28 +76,43 @@ trait Manager {
         local_name: String,
         verify_mode: String,
         force: bool,
-    ) -> zbus::Result<(u32, zbus::zvariant::OwnedObjectPath)>;
+    ) -> crate::zbus::Result<(u32, crate::zvariant::OwnedObjectPath)>;
+
+    /// [📖](https://www.freedesktop.org/software/systemd/man/systemd.directives.html#ListTransfers()) Call interface method `ListTransfers`.
+    #[dbus_proxy(name = "ListTransfers")]
+    fn list_transfers(
+        &self,
+    ) -> crate::zbus::Result<
+        Vec<(
+            u32,
+            String,
+            String,
+            String,
+            f64,
+            crate::zvariant::OwnedObjectPath,
+        )>,
+    >;
 
     /// [📖](https://www.freedesktop.org/software/systemd/man/systemd.directives.html#CancelTransfer()) Call interface method `CancelTransfer`.
     #[dbus_proxy(name = "CancelTransfer")]
-    fn cancel_transfer(&self, transfer_id: u32) -> zbus::Result<()>;
+    fn cancel_transfer(&self, transfer_id: u32) -> crate::zbus::Result<()>;
 
     /// Receive `TransferNew` signal.
     #[dbus_proxy(signal, name = "TransferNew")]
     fn transfer_new(
         &self,
         transfer_id: u32,
-        transfer_path: zbus::zvariant::OwnedObjectPath,
-    ) -> zbus::Result<()>;
+        transfer_path: crate::zvariant::OwnedObjectPath,
+    ) -> crate::zbus::Result<()>;
 
     /// Receive `TransferRemoved` signal.
     #[dbus_proxy(signal, name = "TransferRemoved")]
     fn transfer_removed(
         &self,
         transfer_id: u32,
-        transfer_path: zbus::zvariant::OwnedObjectPath,
+        transfer_path: crate::zvariant::OwnedObjectPath,
         result: String,
-    ) -> zbus::Result<()>;
+    ) -> crate::zbus::Result<()>;
 }
 
 /// Proxy object for `org.freedesktop.import1.Transfer`.
@@ -109,29 +124,29 @@ trait Manager {
 trait Transfer {
     /// [📖](https://www.freedesktop.org/software/systemd/man/systemd.directives.html#Cancel()) Call interface method `Cancel`.
     #[dbus_proxy(name = "Cancel")]
-    fn cancel(&self) -> zbus::Result<()>;
+    fn cancel(&self) -> crate::zbus::Result<()>;
 
     /// Receive `LogMessage` signal.
     #[dbus_proxy(signal, name = "LogMessage")]
-    fn log_message(&self, priority: u32, line: String) -> zbus::Result<()>;
+    fn log_message(&self, priority: u32, line: String) -> crate::zbus::Result<()>;
 
     /// Get property `Id`.
     #[dbus_proxy(property, name = "Id")]
-    fn id(&self) -> zbus::Result<u32>;
+    fn id(&self) -> crate::zbus::Result<u32>;
 
     /// Get property `Local`.
     #[dbus_proxy(property, name = "Local")]
-    fn local(&self) -> zbus::Result<String>;
+    fn local(&self) -> crate::zbus::Result<String>;
 
     /// Get property `Remote`.
     #[dbus_proxy(property, name = "Remote")]
-    fn remote(&self) -> zbus::Result<String>;
+    fn remote(&self) -> crate::zbus::Result<String>;
 
     /// Get property `Verify`.
     #[dbus_proxy(property, name = "Verify")]
-    fn verify(&self) -> zbus::Result<String>;
+    fn verify(&self) -> crate::zbus::Result<String>;
 
     /// Get property `Progress`.
     #[dbus_proxy(property, name = "Progress")]
-    fn progress(&self) -> zbus::Result<f64>;
+    fn progress(&self) -> crate::zbus::Result<f64>;
 }

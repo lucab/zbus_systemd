@@ -12,5 +12,5 @@ use zbus::dbus_proxy;
 trait Manager {
     /// [📖](https://www.freedesktop.org/software/systemd/man/systemd.directives.html#DumpByFileDescriptor()) Call interface method `DumpByFileDescriptor`.
     #[dbus_proxy(name = "DumpByFileDescriptor")]
-    fn dump_by_file_descriptor(&self) -> zbus::Result<zbus::zvariant::OwnedFd>;
+    fn dump_by_file_descriptor(&self) -> crate::zbus::Result<crate::zvariant::OwnedFd>;
 }

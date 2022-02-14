@@ -15,14 +15,14 @@ trait Manager {
     fn get_home_by_name(
         &self,
         user_name: String,
-    ) -> zbus::Result<(
+    ) -> crate::zbus::Result<(
         u32,
         String,
         u32,
         String,
         String,
         String,
-        zbus::zvariant::OwnedObjectPath,
+        crate::zvariant::OwnedObjectPath,
     )>;
 
     /// [📖](https://www.freedesktop.org/software/systemd/man/systemd.directives.html#GetHomeByUID()) Call interface method `GetHomeByUID`.
@@ -30,14 +30,14 @@ trait Manager {
     fn get_home_by_uid(
         &self,
         uid: u32,
-    ) -> zbus::Result<(
+    ) -> crate::zbus::Result<(
         String,
         String,
         u32,
         String,
         String,
         String,
-        zbus::zvariant::OwnedObjectPath,
+        crate::zvariant::OwnedObjectPath,
     )>;
 
     /// [📖](https://www.freedesktop.org/software/systemd/man/systemd.directives.html#GetUserRecordByName()) Call interface method `GetUserRecordByName`.
@@ -45,58 +45,75 @@ trait Manager {
     fn get_user_record_by_name(
         &self,
         user_name: String,
-    ) -> zbus::Result<(String, bool, zbus::zvariant::OwnedObjectPath)>;
+    ) -> crate::zbus::Result<(String, bool, crate::zvariant::OwnedObjectPath)>;
 
     /// [📖](https://www.freedesktop.org/software/systemd/man/systemd.directives.html#GetUserRecordByUID()) Call interface method `GetUserRecordByUID`.
     #[dbus_proxy(name = "GetUserRecordByUID")]
     fn get_user_record_by_uid(
         &self,
         uid: u32,
-    ) -> zbus::Result<(String, bool, zbus::zvariant::OwnedObjectPath)>;
+    ) -> crate::zbus::Result<(String, bool, crate::zvariant::OwnedObjectPath)>;
+
+    /// [📖](https://www.freedesktop.org/software/systemd/man/systemd.directives.html#ListHomes()) Call interface method `ListHomes`.
+    #[dbus_proxy(name = "ListHomes")]
+    fn list_homes(
+        &self,
+    ) -> crate::zbus::Result<
+        Vec<(
+            String,
+            u32,
+            String,
+            u32,
+            String,
+            String,
+            String,
+            crate::zvariant::OwnedObjectPath,
+        )>,
+    >;
 
     /// [📖](https://www.freedesktop.org/software/systemd/man/systemd.directives.html#ActivateHome()) Call interface method `ActivateHome`.
     #[dbus_proxy(name = "ActivateHome")]
-    fn activate_home(&self, user_name: String, secret: String) -> zbus::Result<()>;
+    fn activate_home(&self, user_name: String, secret: String) -> crate::zbus::Result<()>;
 
     /// [📖](https://www.freedesktop.org/software/systemd/man/systemd.directives.html#DeactivateHome()) Call interface method `DeactivateHome`.
     #[dbus_proxy(name = "DeactivateHome")]
-    fn deactivate_home(&self, user_name: String) -> zbus::Result<()>;
+    fn deactivate_home(&self, user_name: String) -> crate::zbus::Result<()>;
 
     /// [📖](https://www.freedesktop.org/software/systemd/man/systemd.directives.html#RegisterHome()) Call interface method `RegisterHome`.
     #[dbus_proxy(name = "RegisterHome")]
-    fn register_home(&self, user_record: String) -> zbus::Result<()>;
+    fn register_home(&self, user_record: String) -> crate::zbus::Result<()>;
 
     /// [📖](https://www.freedesktop.org/software/systemd/man/systemd.directives.html#UnregisterHome()) Call interface method `UnregisterHome`.
     #[dbus_proxy(name = "UnregisterHome")]
-    fn unregister_home(&self, user_name: String) -> zbus::Result<()>;
+    fn unregister_home(&self, user_name: String) -> crate::zbus::Result<()>;
 
     /// [📖](https://www.freedesktop.org/software/systemd/man/systemd.directives.html#CreateHome()) Call interface method `CreateHome`.
     #[dbus_proxy(name = "CreateHome")]
-    fn create_home(&self, user_record: String) -> zbus::Result<()>;
+    fn create_home(&self, user_record: String) -> crate::zbus::Result<()>;
 
     /// [📖](https://www.freedesktop.org/software/systemd/man/systemd.directives.html#RealizeHome()) Call interface method `RealizeHome`.
     #[dbus_proxy(name = "RealizeHome")]
-    fn realize_home(&self, user_name: String, secret: String) -> zbus::Result<()>;
+    fn realize_home(&self, user_name: String, secret: String) -> crate::zbus::Result<()>;
 
     /// [📖](https://www.freedesktop.org/software/systemd/man/systemd.directives.html#RemoveHome()) Call interface method `RemoveHome`.
     #[dbus_proxy(name = "RemoveHome")]
-    fn remove_home(&self, user_name: String) -> zbus::Result<()>;
+    fn remove_home(&self, user_name: String) -> crate::zbus::Result<()>;
 
     /// [📖](https://www.freedesktop.org/software/systemd/man/systemd.directives.html#FixateHome()) Call interface method `FixateHome`.
     #[dbus_proxy(name = "FixateHome")]
-    fn fixate_home(&self, user_name: String, secret: String) -> zbus::Result<()>;
+    fn fixate_home(&self, user_name: String, secret: String) -> crate::zbus::Result<()>;
 
     /// [📖](https://www.freedesktop.org/software/systemd/man/systemd.directives.html#AuthenticateHome()) Call interface method `AuthenticateHome`.
     #[dbus_proxy(name = "AuthenticateHome")]
-    fn authenticate_home(&self, user_name: String, secret: String) -> zbus::Result<()>;
+    fn authenticate_home(&self, user_name: String, secret: String) -> crate::zbus::Result<()>;
 
     /// [📖](https://www.freedesktop.org/software/systemd/man/systemd.directives.html#UpdateHome()) Call interface method `UpdateHome`.
     #[dbus_proxy(name = "UpdateHome")]
-    fn update_home(&self, user_record: String) -> zbus::Result<()>;
+    fn update_home(&self, user_record: String) -> crate::zbus::Result<()>;
 
     /// [📖](https://www.freedesktop.org/software/systemd/man/systemd.directives.html#ResizeHome()) Call interface method `ResizeHome`.
     #[dbus_proxy(name = "ResizeHome")]
-    fn resize_home(&self, user_name: String, size: u64, secret: String) -> zbus::Result<()>;
+    fn resize_home(&self, user_name: String, size: u64, secret: String) -> crate::zbus::Result<()>;
 
     /// [📖](https://www.freedesktop.org/software/systemd/man/systemd.directives.html#ChangePasswordHome()) Call interface method `ChangePasswordHome`.
     #[dbus_proxy(name = "ChangePasswordHome")]
@@ -105,15 +122,15 @@ trait Manager {
         user_name: String,
         new_secret: String,
         old_secret: String,
-    ) -> zbus::Result<()>;
+    ) -> crate::zbus::Result<()>;
 
     /// [📖](https://www.freedesktop.org/software/systemd/man/systemd.directives.html#LockHome()) Call interface method `LockHome`.
     #[dbus_proxy(name = "LockHome")]
-    fn lock_home(&self, user_name: String) -> zbus::Result<()>;
+    fn lock_home(&self, user_name: String) -> crate::zbus::Result<()>;
 
     /// [📖](https://www.freedesktop.org/software/systemd/man/systemd.directives.html#UnlockHome()) Call interface method `UnlockHome`.
     #[dbus_proxy(name = "UnlockHome")]
-    fn unlock_home(&self, user_name: String, secret: String) -> zbus::Result<()>;
+    fn unlock_home(&self, user_name: String, secret: String) -> crate::zbus::Result<()>;
 
     /// [📖](https://www.freedesktop.org/software/systemd/man/systemd.directives.html#AcquireHome()) Call interface method `AcquireHome`.
     #[dbus_proxy(name = "AcquireHome")]
@@ -122,7 +139,7 @@ trait Manager {
         user_name: String,
         secret: String,
         please_suspend: bool,
-    ) -> zbus::Result<zbus::zvariant::OwnedFd>;
+    ) -> crate::zbus::Result<crate::zvariant::OwnedFd>;
 
     /// [📖](https://www.freedesktop.org/software/systemd/man/systemd.directives.html#RefHome()) Call interface method `RefHome`.
     #[dbus_proxy(name = "RefHome")]
@@ -130,19 +147,25 @@ trait Manager {
         &self,
         user_name: String,
         please_suspend: bool,
-    ) -> zbus::Result<zbus::zvariant::OwnedFd>;
+    ) -> crate::zbus::Result<crate::zvariant::OwnedFd>;
 
     /// [📖](https://www.freedesktop.org/software/systemd/man/systemd.directives.html#ReleaseHome()) Call interface method `ReleaseHome`.
     #[dbus_proxy(name = "ReleaseHome")]
-    fn release_home(&self, user_name: String) -> zbus::Result<()>;
+    fn release_home(&self, user_name: String) -> crate::zbus::Result<()>;
 
     /// [📖](https://www.freedesktop.org/software/systemd/man/systemd.directives.html#LockAllHomes()) Call interface method `LockAllHomes`.
     #[dbus_proxy(name = "LockAllHomes")]
-    fn lock_all_homes(&self) -> zbus::Result<()>;
+    fn lock_all_homes(&self) -> crate::zbus::Result<()>;
 
     /// [📖](https://www.freedesktop.org/software/systemd/man/systemd.directives.html#DeactivateAllHomes()) Call interface method `DeactivateAllHomes`.
     #[dbus_proxy(name = "DeactivateAllHomes")]
-    fn deactivate_all_homes(&self) -> zbus::Result<()>;
+    fn deactivate_all_homes(&self) -> crate::zbus::Result<()>;
+
+    /// Get property `AutoLogin`.
+    #[dbus_proxy(property, name = "AutoLogin")]
+    fn auto_login(
+        &self,
+    ) -> crate::zbus::Result<Vec<(String, String, crate::zvariant::OwnedObjectPath)>>;
 }
 
 /// Proxy object for `org.freedesktop.home1.Home`.
@@ -154,51 +177,51 @@ trait Manager {
 trait Home {
     /// [📖](https://www.freedesktop.org/software/systemd/man/systemd.directives.html#Activate()) Call interface method `Activate`.
     #[dbus_proxy(name = "Activate")]
-    fn activate(&self, secret: String) -> zbus::Result<()>;
+    fn activate(&self, secret: String) -> crate::zbus::Result<()>;
 
     /// [📖](https://www.freedesktop.org/software/systemd/man/systemd.directives.html#Deactivate()) Call interface method `Deactivate`.
     #[dbus_proxy(name = "Deactivate")]
-    fn deactivate(&self) -> zbus::Result<()>;
+    fn deactivate(&self) -> crate::zbus::Result<()>;
 
     /// [📖](https://www.freedesktop.org/software/systemd/man/systemd.directives.html#Unregister()) Call interface method `Unregister`.
     #[dbus_proxy(name = "Unregister")]
-    fn unregister(&self) -> zbus::Result<()>;
+    fn unregister(&self) -> crate::zbus::Result<()>;
 
     /// [📖](https://www.freedesktop.org/software/systemd/man/systemd.directives.html#Realize()) Call interface method `Realize`.
     #[dbus_proxy(name = "Realize")]
-    fn realize(&self, secret: String) -> zbus::Result<()>;
+    fn realize(&self, secret: String) -> crate::zbus::Result<()>;
 
     /// [📖](https://www.freedesktop.org/software/systemd/man/systemd.directives.html#Remove()) Call interface method `Remove`.
     #[dbus_proxy(name = "Remove")]
-    fn remove(&self) -> zbus::Result<()>;
+    fn remove(&self) -> crate::zbus::Result<()>;
 
     /// [📖](https://www.freedesktop.org/software/systemd/man/systemd.directives.html#Fixate()) Call interface method `Fixate`.
     #[dbus_proxy(name = "Fixate")]
-    fn fixate(&self, secret: String) -> zbus::Result<()>;
+    fn fixate(&self, secret: String) -> crate::zbus::Result<()>;
 
     /// [📖](https://www.freedesktop.org/software/systemd/man/systemd.directives.html#Authenticate()) Call interface method `Authenticate`.
     #[dbus_proxy(name = "Authenticate")]
-    fn authenticate(&self, secret: String) -> zbus::Result<()>;
+    fn authenticate(&self, secret: String) -> crate::zbus::Result<()>;
 
     /// [📖](https://www.freedesktop.org/software/systemd/man/systemd.directives.html#Update()) Call interface method `Update`.
     #[dbus_proxy(name = "Update")]
-    fn update(&self, user_record: String) -> zbus::Result<()>;
+    fn update(&self, user_record: String) -> crate::zbus::Result<()>;
 
     /// [📖](https://www.freedesktop.org/software/systemd/man/systemd.directives.html#Resize()) Call interface method `Resize`.
     #[dbus_proxy(name = "Resize")]
-    fn resize(&self, size: u64, secret: String) -> zbus::Result<()>;
+    fn resize(&self, size: u64, secret: String) -> crate::zbus::Result<()>;
 
     /// [📖](https://www.freedesktop.org/software/systemd/man/systemd.directives.html#ChangePassword()) Call interface method `ChangePassword`.
     #[dbus_proxy(name = "ChangePassword")]
-    fn change_password(&self, new_secret: String, old_secret: String) -> zbus::Result<()>;
+    fn change_password(&self, new_secret: String, old_secret: String) -> crate::zbus::Result<()>;
 
     /// [📖](https://www.freedesktop.org/software/systemd/man/systemd.directives.html#Lock()) Call interface method `Lock`.
     #[dbus_proxy(name = "Lock")]
-    fn lock(&self) -> zbus::Result<()>;
+    fn lock(&self) -> crate::zbus::Result<()>;
 
     /// [📖](https://www.freedesktop.org/software/systemd/man/systemd.directives.html#Unlock()) Call interface method `Unlock`.
     #[dbus_proxy(name = "Unlock")]
-    fn unlock(&self, secret: String) -> zbus::Result<()>;
+    fn unlock(&self, secret: String) -> crate::zbus::Result<()>;
 
     /// [📖](https://www.freedesktop.org/software/systemd/man/systemd.directives.html#Acquire()) Call interface method `Acquire`.
     #[dbus_proxy(name = "Acquire")]
@@ -206,25 +229,33 @@ trait Home {
         &self,
         secret: String,
         please_suspend: bool,
-    ) -> zbus::Result<zbus::zvariant::OwnedFd>;
+    ) -> crate::zbus::Result<crate::zvariant::OwnedFd>;
 
     /// [📖](https://www.freedesktop.org/software/systemd/man/systemd.directives.html#Reference()) Call interface method `Reference`.
     #[dbus_proxy(name = "Reference")]
-    fn reference(&self, please_suspend: bool) -> zbus::Result<zbus::zvariant::OwnedFd>;
+    fn reference(&self, please_suspend: bool) -> crate::zbus::Result<crate::zvariant::OwnedFd>;
 
     /// [📖](https://www.freedesktop.org/software/systemd/man/systemd.directives.html#Release()) Call interface method `Release`.
     #[dbus_proxy(name = "Release")]
-    fn release(&self) -> zbus::Result<()>;
+    fn release(&self) -> crate::zbus::Result<()>;
 
     /// Get property `UserName`.
     #[dbus_proxy(property, name = "UserName")]
-    fn user_name(&self) -> zbus::Result<String>;
+    fn user_name(&self) -> crate::zbus::Result<String>;
 
     /// Get property `UID`.
     #[dbus_proxy(property, name = "UID")]
-    fn uid(&self) -> zbus::Result<u32>;
+    fn uid(&self) -> crate::zbus::Result<u32>;
+
+    /// Get property `UnixRecord`.
+    #[dbus_proxy(property, name = "UnixRecord")]
+    fn unix_record(&self) -> crate::zbus::Result<(String, u32, u32, String, String, String)>;
 
     /// Get property `State`.
     #[dbus_proxy(property, name = "State")]
-    fn state(&self) -> zbus::Result<String>;
+    fn state(&self) -> crate::zbus::Result<String>;
+
+    /// Get property `UserRecord`.
+    #[dbus_proxy(property, name = "UserRecord")]
+    fn user_record(&self) -> crate::zbus::Result<(String, bool)>;
 }

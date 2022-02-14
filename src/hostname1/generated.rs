@@ -12,105 +12,105 @@ use zbus::dbus_proxy;
 trait Hostnamed {
     /// [📖](https://www.freedesktop.org/software/systemd/man/systemd.directives.html#SetHostname()) Call interface method `SetHostname`.
     #[dbus_proxy(name = "SetHostname")]
-    fn set_hostname(&self, hostname: String, interactive: bool) -> zbus::Result<()>;
+    fn set_hostname(&self, hostname: String, interactive: bool) -> crate::zbus::Result<()>;
 
     /// [📖](https://www.freedesktop.org/software/systemd/man/systemd.directives.html#SetStaticHostname()) Call interface method `SetStaticHostname`.
     #[dbus_proxy(name = "SetStaticHostname")]
-    fn set_static_hostname(&self, hostname: String, interactive: bool) -> zbus::Result<()>;
+    fn set_static_hostname(&self, hostname: String, interactive: bool) -> crate::zbus::Result<()>;
 
     /// [📖](https://www.freedesktop.org/software/systemd/man/systemd.directives.html#SetPrettyHostname()) Call interface method `SetPrettyHostname`.
     #[dbus_proxy(name = "SetPrettyHostname")]
-    fn set_pretty_hostname(&self, hostname: String, interactive: bool) -> zbus::Result<()>;
+    fn set_pretty_hostname(&self, hostname: String, interactive: bool) -> crate::zbus::Result<()>;
 
     /// [📖](https://www.freedesktop.org/software/systemd/man/systemd.directives.html#SetIconName()) Call interface method `SetIconName`.
     #[dbus_proxy(name = "SetIconName")]
-    fn set_icon_name(&self, icon: String, interactive: bool) -> zbus::Result<()>;
+    fn set_icon_name(&self, icon: String, interactive: bool) -> crate::zbus::Result<()>;
 
     /// [📖](https://www.freedesktop.org/software/systemd/man/systemd.directives.html#SetChassis()) Call interface method `SetChassis`.
     #[dbus_proxy(name = "SetChassis")]
-    fn set_chassis(&self, chassis: String, interactive: bool) -> zbus::Result<()>;
+    fn set_chassis(&self, chassis: String, interactive: bool) -> crate::zbus::Result<()>;
 
     /// [📖](https://www.freedesktop.org/software/systemd/man/systemd.directives.html#SetDeployment()) Call interface method `SetDeployment`.
     #[dbus_proxy(name = "SetDeployment")]
-    fn set_deployment(&self, deployment: String, interactive: bool) -> zbus::Result<()>;
+    fn set_deployment(&self, deployment: String, interactive: bool) -> crate::zbus::Result<()>;
 
     /// [📖](https://www.freedesktop.org/software/systemd/man/systemd.directives.html#SetLocation()) Call interface method `SetLocation`.
     #[dbus_proxy(name = "SetLocation")]
-    fn set_location(&self, location: String, interactive: bool) -> zbus::Result<()>;
+    fn set_location(&self, location: String, interactive: bool) -> crate::zbus::Result<()>;
 
     /// [📖](https://www.freedesktop.org/software/systemd/man/systemd.directives.html#GetProductUUID()) Call interface method `GetProductUUID`.
     #[dbus_proxy(name = "GetProductUUID")]
-    fn get_product_uuid(&self, interactive: bool) -> zbus::Result<Vec<u8>>;
+    fn get_product_uuid(&self, interactive: bool) -> crate::zbus::Result<Vec<u8>>;
 
     /// [📖](https://www.freedesktop.org/software/systemd/man/systemd.directives.html#Describe()) Call interface method `Describe`.
     #[dbus_proxy(name = "Describe")]
-    fn describe(&self) -> zbus::Result<String>;
+    fn describe(&self) -> crate::zbus::Result<String>;
 
     /// Get property `Hostname`.
     #[dbus_proxy(property, name = "Hostname")]
-    fn hostname(&self) -> zbus::Result<String>;
+    fn hostname(&self) -> crate::zbus::Result<String>;
 
     /// Get property `StaticHostname`.
     #[dbus_proxy(property, name = "StaticHostname")]
-    fn static_hostname(&self) -> zbus::Result<String>;
+    fn static_hostname(&self) -> crate::zbus::Result<String>;
 
     /// Get property `PrettyHostname`.
     #[dbus_proxy(property, name = "PrettyHostname")]
-    fn pretty_hostname(&self) -> zbus::Result<String>;
+    fn pretty_hostname(&self) -> crate::zbus::Result<String>;
 
     /// Get property `DefaultHostname`.
     #[dbus_proxy(property, name = "DefaultHostname")]
-    fn default_hostname(&self) -> zbus::Result<String>;
+    fn default_hostname(&self) -> crate::zbus::Result<String>;
 
     /// Get property `HostnameSource`.
     #[dbus_proxy(property, name = "HostnameSource")]
-    fn hostname_source(&self) -> zbus::Result<String>;
+    fn hostname_source(&self) -> crate::zbus::Result<String>;
 
     /// Get property `IconName`.
     #[dbus_proxy(property, name = "IconName")]
-    fn icon_name(&self) -> zbus::Result<String>;
+    fn icon_name(&self) -> crate::zbus::Result<String>;
 
     /// Get property `Chassis`.
     #[dbus_proxy(property, name = "Chassis")]
-    fn chassis(&self) -> zbus::Result<String>;
+    fn chassis(&self) -> crate::zbus::Result<String>;
 
     /// Get property `Deployment`.
     #[dbus_proxy(property, name = "Deployment")]
-    fn deployment(&self) -> zbus::Result<String>;
+    fn deployment(&self) -> crate::zbus::Result<String>;
 
     /// Get property `Location`.
     #[dbus_proxy(property, name = "Location")]
-    fn location(&self) -> zbus::Result<String>;
+    fn location(&self) -> crate::zbus::Result<String>;
 
     /// Get property `KernelName`.
     #[dbus_proxy(property, name = "KernelName")]
-    fn kernel_name(&self) -> zbus::Result<String>;
+    fn kernel_name(&self) -> crate::zbus::Result<String>;
 
     /// Get property `KernelRelease`.
     #[dbus_proxy(property, name = "KernelRelease")]
-    fn kernel_release(&self) -> zbus::Result<String>;
+    fn kernel_release(&self) -> crate::zbus::Result<String>;
 
     /// Get property `KernelVersion`.
     #[dbus_proxy(property, name = "KernelVersion")]
-    fn kernel_version(&self) -> zbus::Result<String>;
+    fn kernel_version(&self) -> crate::zbus::Result<String>;
 
     /// Get property `OperatingSystemPrettyName`.
     #[dbus_proxy(property, name = "OperatingSystemPrettyName")]
-    fn operating_system_pretty_name(&self) -> zbus::Result<String>;
+    fn operating_system_pretty_name(&self) -> crate::zbus::Result<String>;
 
     /// Get property `OperatingSystemCPEName`.
     #[dbus_proxy(property, name = "OperatingSystemCPEName")]
-    fn operating_system_cpe_name(&self) -> zbus::Result<String>;
+    fn operating_system_cpe_name(&self) -> crate::zbus::Result<String>;
 
     /// Get property `HomeURL`.
     #[dbus_proxy(property, name = "HomeURL")]
-    fn home_url(&self) -> zbus::Result<String>;
+    fn home_url(&self) -> crate::zbus::Result<String>;
 
     /// Get property `HardwareVendor`.
     #[dbus_proxy(property, name = "HardwareVendor")]
-    fn hardware_vendor(&self) -> zbus::Result<String>;
+    fn hardware_vendor(&self) -> crate::zbus::Result<String>;
 
     /// Get property `HardwareModel`.
     #[dbus_proxy(property, name = "HardwareModel")]
-    fn hardware_model(&self) -> zbus::Result<String>;
+    fn hardware_model(&self) -> crate::zbus::Result<String>;
 }

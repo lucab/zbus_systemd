@@ -12,29 +12,29 @@ use zbus::dbus_proxy;
 trait Manager {
     /// [📖](https://www.freedesktop.org/software/systemd/man/systemd.directives.html#GetUnit()) Call interface method `GetUnit`.
     #[dbus_proxy(name = "GetUnit")]
-    fn get_unit(&self, name: String) -> zbus::Result<zbus::zvariant::OwnedObjectPath>;
+    fn get_unit(&self, name: String) -> crate::zbus::Result<crate::zvariant::OwnedObjectPath>;
 
     /// [📖](https://www.freedesktop.org/software/systemd/man/systemd.directives.html#GetUnitByPID()) Call interface method `GetUnitByPID`.
     #[dbus_proxy(name = "GetUnitByPID")]
-    fn get_unit_by_pid(&self, pid: u32) -> zbus::Result<zbus::zvariant::OwnedObjectPath>;
+    fn get_unit_by_pid(&self, pid: u32) -> crate::zbus::Result<crate::zvariant::OwnedObjectPath>;
 
     /// [📖](https://www.freedesktop.org/software/systemd/man/systemd.directives.html#GetUnitByInvocationID()) Call interface method `GetUnitByInvocationID`.
     #[dbus_proxy(name = "GetUnitByInvocationID")]
     fn get_unit_by_invocation_id(
         &self,
         invocation_id: Vec<u8>,
-    ) -> zbus::Result<zbus::zvariant::OwnedObjectPath>;
+    ) -> crate::zbus::Result<crate::zvariant::OwnedObjectPath>;
 
     /// [📖](https://www.freedesktop.org/software/systemd/man/systemd.directives.html#GetUnitByControlGroup()) Call interface method `GetUnitByControlGroup`.
     #[dbus_proxy(name = "GetUnitByControlGroup")]
     fn get_unit_by_control_group(
         &self,
         cgroup: String,
-    ) -> zbus::Result<zbus::zvariant::OwnedObjectPath>;
+    ) -> crate::zbus::Result<crate::zvariant::OwnedObjectPath>;
 
     /// [📖](https://www.freedesktop.org/software/systemd/man/systemd.directives.html#LoadUnit()) Call interface method `LoadUnit`.
     #[dbus_proxy(name = "LoadUnit")]
-    fn load_unit(&self, name: String) -> zbus::Result<zbus::zvariant::OwnedObjectPath>;
+    fn load_unit(&self, name: String) -> crate::zbus::Result<crate::zvariant::OwnedObjectPath>;
 
     /// [📖](https://www.freedesktop.org/software/systemd/man/systemd.directives.html#StartUnit()) Call interface method `StartUnit`.
     #[dbus_proxy(name = "StartUnit")]
@@ -42,7 +42,7 @@ trait Manager {
         &self,
         name: String,
         mode: String,
-    ) -> zbus::Result<zbus::zvariant::OwnedObjectPath>;
+    ) -> crate::zbus::Result<crate::zvariant::OwnedObjectPath>;
 
     /// [📖](https://www.freedesktop.org/software/systemd/man/systemd.directives.html#StartUnitReplace()) Call interface method `StartUnitReplace`.
     #[dbus_proxy(name = "StartUnitReplace")]
@@ -51,7 +51,7 @@ trait Manager {
         old_unit: String,
         new_unit: String,
         mode: String,
-    ) -> zbus::Result<zbus::zvariant::OwnedObjectPath>;
+    ) -> crate::zbus::Result<crate::zvariant::OwnedObjectPath>;
 
     /// [📖](https://www.freedesktop.org/software/systemd/man/systemd.directives.html#StopUnit()) Call interface method `StopUnit`.
     #[dbus_proxy(name = "StopUnit")]
@@ -59,7 +59,7 @@ trait Manager {
         &self,
         name: String,
         mode: String,
-    ) -> zbus::Result<zbus::zvariant::OwnedObjectPath>;
+    ) -> crate::zbus::Result<crate::zvariant::OwnedObjectPath>;
 
     /// [📖](https://www.freedesktop.org/software/systemd/man/systemd.directives.html#ReloadUnit()) Call interface method `ReloadUnit`.
     #[dbus_proxy(name = "ReloadUnit")]
@@ -67,7 +67,7 @@ trait Manager {
         &self,
         name: String,
         mode: String,
-    ) -> zbus::Result<zbus::zvariant::OwnedObjectPath>;
+    ) -> crate::zbus::Result<crate::zvariant::OwnedObjectPath>;
 
     /// [📖](https://www.freedesktop.org/software/systemd/man/systemd.directives.html#RestartUnit()) Call interface method `RestartUnit`.
     #[dbus_proxy(name = "RestartUnit")]
@@ -75,7 +75,7 @@ trait Manager {
         &self,
         name: String,
         mode: String,
-    ) -> zbus::Result<zbus::zvariant::OwnedObjectPath>;
+    ) -> crate::zbus::Result<crate::zvariant::OwnedObjectPath>;
 
     /// [📖](https://www.freedesktop.org/software/systemd/man/systemd.directives.html#TryRestartUnit()) Call interface method `TryRestartUnit`.
     #[dbus_proxy(name = "TryRestartUnit")]
@@ -83,7 +83,7 @@ trait Manager {
         &self,
         name: String,
         mode: String,
-    ) -> zbus::Result<zbus::zvariant::OwnedObjectPath>;
+    ) -> crate::zbus::Result<crate::zvariant::OwnedObjectPath>;
 
     /// [📖](https://www.freedesktop.org/software/systemd/man/systemd.directives.html#ReloadOrRestartUnit()) Call interface method `ReloadOrRestartUnit`.
     #[dbus_proxy(name = "ReloadOrRestartUnit")]
@@ -91,7 +91,7 @@ trait Manager {
         &self,
         name: String,
         mode: String,
-    ) -> zbus::Result<zbus::zvariant::OwnedObjectPath>;
+    ) -> crate::zbus::Result<crate::zvariant::OwnedObjectPath>;
 
     /// [📖](https://www.freedesktop.org/software/systemd/man/systemd.directives.html#ReloadOrTryRestartUnit()) Call interface method `ReloadOrTryRestartUnit`.
     #[dbus_proxy(name = "ReloadOrTryRestartUnit")]
@@ -99,27 +99,49 @@ trait Manager {
         &self,
         name: String,
         mode: String,
-    ) -> zbus::Result<zbus::zvariant::OwnedObjectPath>;
+    ) -> crate::zbus::Result<crate::zvariant::OwnedObjectPath>;
+
+    /// [📖](https://www.freedesktop.org/software/systemd/man/systemd.directives.html#EnqueueUnitJob()) Call interface method `EnqueueUnitJob`.
+    #[dbus_proxy(name = "EnqueueUnitJob")]
+    fn enqueue_unit_job(
+        &self,
+        name: String,
+        job_type: String,
+        job_mode: String,
+    ) -> crate::zbus::Result<(
+        u32,
+        crate::zvariant::OwnedObjectPath,
+        String,
+        crate::zvariant::OwnedObjectPath,
+        String,
+        Vec<(
+            u32,
+            crate::zvariant::OwnedObjectPath,
+            String,
+            crate::zvariant::OwnedObjectPath,
+            String,
+        )>,
+    )>;
 
     /// [📖](https://www.freedesktop.org/software/systemd/man/systemd.directives.html#KillUnit()) Call interface method `KillUnit`.
     #[dbus_proxy(name = "KillUnit")]
-    fn kill_unit(&self, name: String, whom: String, signal: i32) -> zbus::Result<()>;
+    fn kill_unit(&self, name: String, whom: String, signal: i32) -> crate::zbus::Result<()>;
 
     /// [📖](https://www.freedesktop.org/software/systemd/man/systemd.directives.html#CleanUnit()) Call interface method `CleanUnit`.
     #[dbus_proxy(name = "CleanUnit")]
-    fn clean_unit(&self, name: String, mask: Vec<String>) -> zbus::Result<()>;
+    fn clean_unit(&self, name: String, mask: Vec<String>) -> crate::zbus::Result<()>;
 
     /// [📖](https://www.freedesktop.org/software/systemd/man/systemd.directives.html#FreezeUnit()) Call interface method `FreezeUnit`.
     #[dbus_proxy(name = "FreezeUnit")]
-    fn freeze_unit(&self, name: String) -> zbus::Result<()>;
+    fn freeze_unit(&self, name: String) -> crate::zbus::Result<()>;
 
     /// [📖](https://www.freedesktop.org/software/systemd/man/systemd.directives.html#ThawUnit()) Call interface method `ThawUnit`.
     #[dbus_proxy(name = "ThawUnit")]
-    fn thaw_unit(&self, name: String) -> zbus::Result<()>;
+    fn thaw_unit(&self, name: String) -> crate::zbus::Result<()>;
 
     /// [📖](https://www.freedesktop.org/software/systemd/man/systemd.directives.html#ResetFailedUnit()) Call interface method `ResetFailedUnit`.
     #[dbus_proxy(name = "ResetFailedUnit")]
-    fn reset_failed_unit(&self, name: String) -> zbus::Result<()>;
+    fn reset_failed_unit(&self, name: String) -> crate::zbus::Result<()>;
 
     /// [📖](https://www.freedesktop.org/software/systemd/man/systemd.directives.html#SetUnitProperties()) Call interface method `SetUnitProperties`.
     #[dbus_proxy(name = "SetUnitProperties")]
@@ -127,8 +149,8 @@ trait Manager {
         &self,
         name: String,
         runtime: bool,
-        properties: Vec<(String, zbus::zvariant::OwnedValue)>,
-    ) -> zbus::Result<()>;
+        properties: Vec<(String, crate::zvariant::OwnedValue)>,
+    ) -> crate::zbus::Result<()>;
 
     /// [📖](https://www.freedesktop.org/software/systemd/man/systemd.directives.html#BindMountUnit()) Call interface method `BindMountUnit`.
     #[dbus_proxy(name = "BindMountUnit")]
@@ -139,7 +161,7 @@ trait Manager {
         destination: String,
         read_only: bool,
         mkdir: bool,
-    ) -> zbus::Result<()>;
+    ) -> crate::zbus::Result<()>;
 
     /// [📖](https://www.freedesktop.org/software/systemd/man/systemd.directives.html#MountImageUnit()) Call interface method `MountImageUnit`.
     #[dbus_proxy(name = "MountImageUnit")]
@@ -151,19 +173,19 @@ trait Manager {
         read_only: bool,
         mkdir: bool,
         options: Vec<(String, String)>,
-    ) -> zbus::Result<()>;
+    ) -> crate::zbus::Result<()>;
 
     /// [📖](https://www.freedesktop.org/software/systemd/man/systemd.directives.html#RefUnit()) Call interface method `RefUnit`.
     #[dbus_proxy(name = "RefUnit")]
-    fn ref_unit(&self, name: String) -> zbus::Result<()>;
+    fn ref_unit(&self, name: String) -> crate::zbus::Result<()>;
 
     /// [📖](https://www.freedesktop.org/software/systemd/man/systemd.directives.html#UnrefUnit()) Call interface method `UnrefUnit`.
     #[dbus_proxy(name = "UnrefUnit")]
-    fn unref_unit(&self, name: String) -> zbus::Result<()>;
+    fn unref_unit(&self, name: String) -> crate::zbus::Result<()>;
 
     /// [📖](https://www.freedesktop.org/software/systemd/man/systemd.directives.html#GetUnitProcesses()) Call interface method `GetUnitProcesses`.
     #[dbus_proxy(name = "GetUnitProcesses")]
-    fn get_unit_processes(&self, name: String) -> zbus::Result<Vec<(String, u32, String)>>;
+    fn get_unit_processes(&self, name: String) -> crate::zbus::Result<Vec<(String, u32, String)>>;
 
     /// [📖](https://www.freedesktop.org/software/systemd/man/systemd.directives.html#AttachProcessesToUnit()) Call interface method `AttachProcessesToUnit`.
     #[dbus_proxy(name = "AttachProcessesToUnit")]
@@ -172,87 +194,214 @@ trait Manager {
         unit_name: String,
         subcgroup: String,
         pids: Vec<u32>,
-    ) -> zbus::Result<()>;
+    ) -> crate::zbus::Result<()>;
 
     /// [📖](https://www.freedesktop.org/software/systemd/man/systemd.directives.html#AbandonScope()) Call interface method `AbandonScope`.
     #[dbus_proxy(name = "AbandonScope")]
-    fn abandon_scope(&self, name: String) -> zbus::Result<()>;
+    fn abandon_scope(&self, name: String) -> crate::zbus::Result<()>;
 
     /// [📖](https://www.freedesktop.org/software/systemd/man/systemd.directives.html#GetJob()) Call interface method `GetJob`.
     #[dbus_proxy(name = "GetJob")]
-    fn get_job(&self, id: u32) -> zbus::Result<zbus::zvariant::OwnedObjectPath>;
+    fn get_job(&self, id: u32) -> crate::zbus::Result<crate::zvariant::OwnedObjectPath>;
+
+    /// [📖](https://www.freedesktop.org/software/systemd/man/systemd.directives.html#GetJobAfter()) Call interface method `GetJobAfter`.
+    #[dbus_proxy(name = "GetJobAfter")]
+    fn get_job_after(
+        &self,
+        id: u32,
+    ) -> crate::zbus::Result<
+        Vec<(
+            u32,
+            String,
+            String,
+            String,
+            crate::zvariant::OwnedObjectPath,
+            crate::zvariant::OwnedObjectPath,
+        )>,
+    >;
+
+    /// [📖](https://www.freedesktop.org/software/systemd/man/systemd.directives.html#GetJobBefore()) Call interface method `GetJobBefore`.
+    #[dbus_proxy(name = "GetJobBefore")]
+    fn get_job_before(
+        &self,
+        id: u32,
+    ) -> crate::zbus::Result<
+        Vec<(
+            u32,
+            String,
+            String,
+            String,
+            crate::zvariant::OwnedObjectPath,
+            crate::zvariant::OwnedObjectPath,
+        )>,
+    >;
 
     /// [📖](https://www.freedesktop.org/software/systemd/man/systemd.directives.html#CancelJob()) Call interface method `CancelJob`.
     #[dbus_proxy(name = "CancelJob")]
-    fn cancel_job(&self, id: u32) -> zbus::Result<()>;
+    fn cancel_job(&self, id: u32) -> crate::zbus::Result<()>;
 
     /// [📖](https://www.freedesktop.org/software/systemd/man/systemd.directives.html#ClearJobs()) Call interface method `ClearJobs`.
     #[dbus_proxy(name = "ClearJobs")]
-    fn clear_jobs(&self) -> zbus::Result<()>;
+    fn clear_jobs(&self) -> crate::zbus::Result<()>;
 
     /// [📖](https://www.freedesktop.org/software/systemd/man/systemd.directives.html#ResetFailed()) Call interface method `ResetFailed`.
     #[dbus_proxy(name = "ResetFailed")]
-    fn reset_failed(&self) -> zbus::Result<()>;
+    fn reset_failed(&self) -> crate::zbus::Result<()>;
 
     /// [📖](https://www.freedesktop.org/software/systemd/man/systemd.directives.html#SetShowStatus()) Call interface method `SetShowStatus`.
     #[dbus_proxy(name = "SetShowStatus")]
-    fn set_show_status(&self, mode: String) -> zbus::Result<()>;
+    fn set_show_status(&self, mode: String) -> crate::zbus::Result<()>;
+
+    /// [📖](https://www.freedesktop.org/software/systemd/man/systemd.directives.html#ListUnits()) Call interface method `ListUnits`.
+    #[dbus_proxy(name = "ListUnits")]
+    fn list_units(
+        &self,
+    ) -> crate::zbus::Result<
+        Vec<(
+            String,
+            String,
+            String,
+            String,
+            String,
+            String,
+            crate::zvariant::OwnedObjectPath,
+            u32,
+            String,
+            crate::zvariant::OwnedObjectPath,
+        )>,
+    >;
+
+    /// [📖](https://www.freedesktop.org/software/systemd/man/systemd.directives.html#ListUnitsFiltered()) Call interface method `ListUnitsFiltered`.
+    #[dbus_proxy(name = "ListUnitsFiltered")]
+    fn list_units_filtered(
+        &self,
+        states: Vec<String>,
+    ) -> crate::zbus::Result<
+        Vec<(
+            String,
+            String,
+            String,
+            String,
+            String,
+            String,
+            crate::zvariant::OwnedObjectPath,
+            u32,
+            String,
+            crate::zvariant::OwnedObjectPath,
+        )>,
+    >;
+
+    /// [📖](https://www.freedesktop.org/software/systemd/man/systemd.directives.html#ListUnitsByPatterns()) Call interface method `ListUnitsByPatterns`.
+    #[dbus_proxy(name = "ListUnitsByPatterns")]
+    fn list_units_by_patterns(
+        &self,
+        states: Vec<String>,
+        patterns: Vec<String>,
+    ) -> crate::zbus::Result<
+        Vec<(
+            String,
+            String,
+            String,
+            String,
+            String,
+            String,
+            crate::zvariant::OwnedObjectPath,
+            u32,
+            String,
+            crate::zvariant::OwnedObjectPath,
+        )>,
+    >;
+
+    /// [📖](https://www.freedesktop.org/software/systemd/man/systemd.directives.html#ListUnitsByNames()) Call interface method `ListUnitsByNames`.
+    #[dbus_proxy(name = "ListUnitsByNames")]
+    fn list_units_by_names(
+        &self,
+        names: Vec<String>,
+    ) -> crate::zbus::Result<
+        Vec<(
+            String,
+            String,
+            String,
+            String,
+            String,
+            String,
+            crate::zvariant::OwnedObjectPath,
+            u32,
+            String,
+            crate::zvariant::OwnedObjectPath,
+        )>,
+    >;
+
+    /// [📖](https://www.freedesktop.org/software/systemd/man/systemd.directives.html#ListJobs()) Call interface method `ListJobs`.
+    #[dbus_proxy(name = "ListJobs")]
+    fn list_jobs(
+        &self,
+    ) -> crate::zbus::Result<
+        Vec<(
+            u32,
+            String,
+            String,
+            String,
+            crate::zvariant::OwnedObjectPath,
+            crate::zvariant::OwnedObjectPath,
+        )>,
+    >;
 
     /// [📖](https://www.freedesktop.org/software/systemd/man/systemd.directives.html#Subscribe()) Call interface method `Subscribe`.
     #[dbus_proxy(name = "Subscribe")]
-    fn subscribe(&self) -> zbus::Result<()>;
+    fn subscribe(&self) -> crate::zbus::Result<()>;
 
     /// [📖](https://www.freedesktop.org/software/systemd/man/systemd.directives.html#Unsubscribe()) Call interface method `Unsubscribe`.
     #[dbus_proxy(name = "Unsubscribe")]
-    fn unsubscribe(&self) -> zbus::Result<()>;
+    fn unsubscribe(&self) -> crate::zbus::Result<()>;
 
     /// [📖](https://www.freedesktop.org/software/systemd/man/systemd.directives.html#Dump()) Call interface method `Dump`.
     #[dbus_proxy(name = "Dump")]
-    fn dump(&self) -> zbus::Result<String>;
+    fn dump(&self) -> crate::zbus::Result<String>;
 
     /// [📖](https://www.freedesktop.org/software/systemd/man/systemd.directives.html#DumpByFileDescriptor()) Call interface method `DumpByFileDescriptor`.
     #[dbus_proxy(name = "DumpByFileDescriptor")]
-    fn dump_by_file_descriptor(&self) -> zbus::Result<zbus::zvariant::OwnedFd>;
+    fn dump_by_file_descriptor(&self) -> crate::zbus::Result<crate::zvariant::OwnedFd>;
 
     /// [📖](https://www.freedesktop.org/software/systemd/man/systemd.directives.html#Reload()) Call interface method `Reload`.
     #[dbus_proxy(name = "Reload")]
-    fn reload(&self) -> zbus::Result<()>;
+    fn reload(&self) -> crate::zbus::Result<()>;
 
     /// [📖](https://www.freedesktop.org/software/systemd/man/systemd.directives.html#Reexecute()) Call interface method `Reexecute`.
     #[dbus_proxy(name = "Reexecute")]
-    fn reexecute(&self) -> zbus::Result<()>;
+    fn reexecute(&self) -> crate::zbus::Result<()>;
 
     /// [📖](https://www.freedesktop.org/software/systemd/man/systemd.directives.html#Exit()) Call interface method `Exit`.
     #[dbus_proxy(name = "Exit")]
-    fn exit(&self) -> zbus::Result<()>;
+    fn exit(&self) -> crate::zbus::Result<()>;
 
     /// [📖](https://www.freedesktop.org/software/systemd/man/systemd.directives.html#Reboot()) Call interface method `Reboot`.
     #[dbus_proxy(name = "Reboot")]
-    fn reboot(&self) -> zbus::Result<()>;
+    fn reboot(&self) -> crate::zbus::Result<()>;
 
     /// [📖](https://www.freedesktop.org/software/systemd/man/systemd.directives.html#PowerOff()) Call interface method `PowerOff`.
     #[dbus_proxy(name = "PowerOff")]
-    fn power_off(&self) -> zbus::Result<()>;
+    fn power_off(&self) -> crate::zbus::Result<()>;
 
     /// [📖](https://www.freedesktop.org/software/systemd/man/systemd.directives.html#Halt()) Call interface method `Halt`.
     #[dbus_proxy(name = "Halt")]
-    fn halt(&self) -> zbus::Result<()>;
+    fn halt(&self) -> crate::zbus::Result<()>;
 
     /// [📖](https://www.freedesktop.org/software/systemd/man/systemd.directives.html#KExec()) Call interface method `KExec`.
     #[dbus_proxy(name = "KExec")]
-    fn k_exec(&self) -> zbus::Result<()>;
+    fn k_exec(&self) -> crate::zbus::Result<()>;
 
     /// [📖](https://www.freedesktop.org/software/systemd/man/systemd.directives.html#SwitchRoot()) Call interface method `SwitchRoot`.
     #[dbus_proxy(name = "SwitchRoot")]
-    fn switch_root(&self, new_root: String, init: String) -> zbus::Result<()>;
+    fn switch_root(&self, new_root: String, init: String) -> crate::zbus::Result<()>;
 
     /// [📖](https://www.freedesktop.org/software/systemd/man/systemd.directives.html#SetEnvironment()) Call interface method `SetEnvironment`.
     #[dbus_proxy(name = "SetEnvironment")]
-    fn set_environment(&self, assignments: Vec<String>) -> zbus::Result<()>;
+    fn set_environment(&self, assignments: Vec<String>) -> crate::zbus::Result<()>;
 
     /// [📖](https://www.freedesktop.org/software/systemd/man/systemd.directives.html#UnsetEnvironment()) Call interface method `UnsetEnvironment`.
     #[dbus_proxy(name = "UnsetEnvironment")]
-    fn unset_environment(&self, names: Vec<String>) -> zbus::Result<()>;
+    fn unset_environment(&self, names: Vec<String>) -> crate::zbus::Result<()>;
 
     /// [📖](https://www.freedesktop.org/software/systemd/man/systemd.directives.html#UnsetAndSetEnvironment()) Call interface method `UnsetAndSetEnvironment`.
     #[dbus_proxy(name = "UnsetAndSetEnvironment")]
@@ -260,15 +409,15 @@ trait Manager {
         &self,
         names: Vec<String>,
         assignments: Vec<String>,
-    ) -> zbus::Result<()>;
+    ) -> crate::zbus::Result<()>;
 
     /// [📖](https://www.freedesktop.org/software/systemd/man/systemd.directives.html#EnqueueMarkedJobs()) Call interface method `EnqueueMarkedJobs`.
     #[dbus_proxy(name = "EnqueueMarkedJobs")]
-    fn enqueue_marked_jobs(&self) -> zbus::Result<Vec<zbus::zvariant::OwnedObjectPath>>;
+    fn enqueue_marked_jobs(&self) -> crate::zbus::Result<Vec<crate::zvariant::OwnedObjectPath>>;
 
     /// [📖](https://www.freedesktop.org/software/systemd/man/systemd.directives.html#ListUnitFiles()) Call interface method `ListUnitFiles`.
     #[dbus_proxy(name = "ListUnitFiles")]
-    fn list_unit_files(&self) -> zbus::Result<Vec<(String, String)>>;
+    fn list_unit_files(&self) -> crate::zbus::Result<Vec<(String, String)>>;
 
     /// [📖](https://www.freedesktop.org/software/systemd/man/systemd.directives.html#ListUnitFilesByPatterns()) Call interface method `ListUnitFilesByPatterns`.
     #[dbus_proxy(name = "ListUnitFilesByPatterns")]
@@ -276,11 +425,11 @@ trait Manager {
         &self,
         states: Vec<String>,
         patterns: Vec<String>,
-    ) -> zbus::Result<Vec<(String, String)>>;
+    ) -> crate::zbus::Result<Vec<(String, String)>>;
 
     /// [📖](https://www.freedesktop.org/software/systemd/man/systemd.directives.html#GetUnitFileState()) Call interface method `GetUnitFileState`.
     #[dbus_proxy(name = "GetUnitFileState")]
-    fn get_unit_file_state(&self, file: String) -> zbus::Result<String>;
+    fn get_unit_file_state(&self, file: String) -> crate::zbus::Result<String>;
 
     /// [📖](https://www.freedesktop.org/software/systemd/man/systemd.directives.html#EnableUnitFiles()) Call interface method `EnableUnitFiles`.
     #[dbus_proxy(name = "EnableUnitFiles")]
@@ -289,7 +438,7 @@ trait Manager {
         files: Vec<String>,
         runtime: bool,
         force: bool,
-    ) -> zbus::Result<(bool, Vec<(String, String, String)>)>;
+    ) -> crate::zbus::Result<(bool, Vec<(String, String, String)>)>;
 
     /// [📖](https://www.freedesktop.org/software/systemd/man/systemd.directives.html#DisableUnitFiles()) Call interface method `DisableUnitFiles`.
     #[dbus_proxy(name = "DisableUnitFiles")]
@@ -297,7 +446,7 @@ trait Manager {
         &self,
         files: Vec<String>,
         runtime: bool,
-    ) -> zbus::Result<Vec<(String, String, String)>>;
+    ) -> crate::zbus::Result<Vec<(String, String, String)>>;
 
     /// [📖](https://www.freedesktop.org/software/systemd/man/systemd.directives.html#EnableUnitFilesWithFlags()) Call interface method `EnableUnitFilesWithFlags`.
     #[dbus_proxy(name = "EnableUnitFilesWithFlags")]
@@ -305,7 +454,7 @@ trait Manager {
         &self,
         files: Vec<String>,
         flags: u64,
-    ) -> zbus::Result<(bool, Vec<(String, String, String)>)>;
+    ) -> crate::zbus::Result<(bool, Vec<(String, String, String)>)>;
 
     /// [📖](https://www.freedesktop.org/software/systemd/man/systemd.directives.html#DisableUnitFilesWithFlags()) Call interface method `DisableUnitFilesWithFlags`.
     #[dbus_proxy(name = "DisableUnitFilesWithFlags")]
@@ -313,7 +462,7 @@ trait Manager {
         &self,
         files: Vec<String>,
         flags: u64,
-    ) -> zbus::Result<Vec<(String, String, String)>>;
+    ) -> crate::zbus::Result<Vec<(String, String, String)>>;
 
     /// [📖](https://www.freedesktop.org/software/systemd/man/systemd.directives.html#ReenableUnitFiles()) Call interface method `ReenableUnitFiles`.
     #[dbus_proxy(name = "ReenableUnitFiles")]
@@ -322,7 +471,7 @@ trait Manager {
         files: Vec<String>,
         runtime: bool,
         force: bool,
-    ) -> zbus::Result<(bool, Vec<(String, String, String)>)>;
+    ) -> crate::zbus::Result<(bool, Vec<(String, String, String)>)>;
 
     /// [📖](https://www.freedesktop.org/software/systemd/man/systemd.directives.html#LinkUnitFiles()) Call interface method `LinkUnitFiles`.
     #[dbus_proxy(name = "LinkUnitFiles")]
@@ -331,7 +480,7 @@ trait Manager {
         files: Vec<String>,
         runtime: bool,
         force: bool,
-    ) -> zbus::Result<Vec<(String, String, String)>>;
+    ) -> crate::zbus::Result<Vec<(String, String, String)>>;
 
     /// [📖](https://www.freedesktop.org/software/systemd/man/systemd.directives.html#PresetUnitFiles()) Call interface method `PresetUnitFiles`.
     #[dbus_proxy(name = "PresetUnitFiles")]
@@ -340,7 +489,7 @@ trait Manager {
         files: Vec<String>,
         runtime: bool,
         force: bool,
-    ) -> zbus::Result<(bool, Vec<(String, String, String)>)>;
+    ) -> crate::zbus::Result<(bool, Vec<(String, String, String)>)>;
 
     /// [📖](https://www.freedesktop.org/software/systemd/man/systemd.directives.html#PresetUnitFilesWithMode()) Call interface method `PresetUnitFilesWithMode`.
     #[dbus_proxy(name = "PresetUnitFilesWithMode")]
@@ -350,7 +499,7 @@ trait Manager {
         mode: String,
         runtime: bool,
         force: bool,
-    ) -> zbus::Result<(bool, Vec<(String, String, String)>)>;
+    ) -> crate::zbus::Result<(bool, Vec<(String, String, String)>)>;
 
     /// [📖](https://www.freedesktop.org/software/systemd/man/systemd.directives.html#MaskUnitFiles()) Call interface method `MaskUnitFiles`.
     #[dbus_proxy(name = "MaskUnitFiles")]
@@ -359,7 +508,7 @@ trait Manager {
         files: Vec<String>,
         runtime: bool,
         force: bool,
-    ) -> zbus::Result<Vec<(String, String, String)>>;
+    ) -> crate::zbus::Result<Vec<(String, String, String)>>;
 
     /// [📖](https://www.freedesktop.org/software/systemd/man/systemd.directives.html#UnmaskUnitFiles()) Call interface method `UnmaskUnitFiles`.
     #[dbus_proxy(name = "UnmaskUnitFiles")]
@@ -367,11 +516,14 @@ trait Manager {
         &self,
         files: Vec<String>,
         runtime: bool,
-    ) -> zbus::Result<Vec<(String, String, String)>>;
+    ) -> crate::zbus::Result<Vec<(String, String, String)>>;
 
     /// [📖](https://www.freedesktop.org/software/systemd/man/systemd.directives.html#RevertUnitFiles()) Call interface method `RevertUnitFiles`.
     #[dbus_proxy(name = "RevertUnitFiles")]
-    fn revert_unit_files(&self, files: Vec<String>) -> zbus::Result<Vec<(String, String, String)>>;
+    fn revert_unit_files(
+        &self,
+        files: Vec<String>,
+    ) -> crate::zbus::Result<Vec<(String, String, String)>>;
 
     /// [📖](https://www.freedesktop.org/software/systemd/man/systemd.directives.html#SetDefaultTarget()) Call interface method `SetDefaultTarget`.
     #[dbus_proxy(name = "SetDefaultTarget")]
@@ -379,11 +531,11 @@ trait Manager {
         &self,
         name: String,
         force: bool,
-    ) -> zbus::Result<Vec<(String, String, String)>>;
+    ) -> crate::zbus::Result<Vec<(String, String, String)>>;
 
     /// [📖](https://www.freedesktop.org/software/systemd/man/systemd.directives.html#GetDefaultTarget()) Call interface method `GetDefaultTarget`.
     #[dbus_proxy(name = "GetDefaultTarget")]
-    fn get_default_target(&self) -> zbus::Result<String>;
+    fn get_default_target(&self) -> crate::zbus::Result<String>;
 
     /// [📖](https://www.freedesktop.org/software/systemd/man/systemd.directives.html#PresetAllUnitFiles()) Call interface method `PresetAllUnitFiles`.
     #[dbus_proxy(name = "PresetAllUnitFiles")]
@@ -392,7 +544,7 @@ trait Manager {
         mode: String,
         runtime: bool,
         force: bool,
-    ) -> zbus::Result<Vec<(String, String, String)>>;
+    ) -> crate::zbus::Result<Vec<(String, String, String)>>;
 
     /// [📖](https://www.freedesktop.org/software/systemd/man/systemd.directives.html#AddDependencyUnitFiles()) Call interface method `AddDependencyUnitFiles`.
     #[dbus_proxy(name = "AddDependencyUnitFiles")]
@@ -403,50 +555,62 @@ trait Manager {
         typelabel: String,
         runtime: bool,
         force: bool,
-    ) -> zbus::Result<Vec<(String, String, String)>>;
+    ) -> crate::zbus::Result<Vec<(String, String, String)>>;
 
     /// [📖](https://www.freedesktop.org/software/systemd/man/systemd.directives.html#GetUnitFileLinks()) Call interface method `GetUnitFileLinks`.
     #[dbus_proxy(name = "GetUnitFileLinks")]
-    fn get_unit_file_links(&self, name: String, runtime: bool) -> zbus::Result<Vec<String>>;
+    fn get_unit_file_links(&self, name: String, runtime: bool) -> crate::zbus::Result<Vec<String>>;
 
     /// [📖](https://www.freedesktop.org/software/systemd/man/systemd.directives.html#SetExitCode()) Call interface method `SetExitCode`.
     #[dbus_proxy(name = "SetExitCode")]
-    fn set_exit_code(&self, number: u8) -> zbus::Result<()>;
+    fn set_exit_code(&self, number: u8) -> crate::zbus::Result<()>;
 
     /// [📖](https://www.freedesktop.org/software/systemd/man/systemd.directives.html#LookupDynamicUserByName()) Call interface method `LookupDynamicUserByName`.
     #[dbus_proxy(name = "LookupDynamicUserByName")]
-    fn lookup_dynamic_user_by_name(&self, name: String) -> zbus::Result<u32>;
+    fn lookup_dynamic_user_by_name(&self, name: String) -> crate::zbus::Result<u32>;
 
     /// [📖](https://www.freedesktop.org/software/systemd/man/systemd.directives.html#LookupDynamicUserByUID()) Call interface method `LookupDynamicUserByUID`.
     #[dbus_proxy(name = "LookupDynamicUserByUID")]
-    fn lookup_dynamic_user_by_uid(&self, uid: u32) -> zbus::Result<String>;
+    fn lookup_dynamic_user_by_uid(&self, uid: u32) -> crate::zbus::Result<String>;
+
+    /// [📖](https://www.freedesktop.org/software/systemd/man/systemd.directives.html#GetDynamicUsers()) Call interface method `GetDynamicUsers`.
+    #[dbus_proxy(name = "GetDynamicUsers")]
+    fn get_dynamic_users(&self) -> crate::zbus::Result<Vec<(u32, String)>>;
 
     /// Receive `UnitNew` signal.
     #[dbus_proxy(signal, name = "UnitNew")]
-    fn unit_new(&self, id: String, unit: zbus::zvariant::OwnedObjectPath) -> zbus::Result<()>;
+    fn unit_new(
+        &self,
+        id: String,
+        unit: crate::zvariant::OwnedObjectPath,
+    ) -> crate::zbus::Result<()>;
 
     /// Receive `UnitRemoved` signal.
     #[dbus_proxy(signal, name = "UnitRemoved")]
-    fn unit_removed(&self, id: String, unit: zbus::zvariant::OwnedObjectPath) -> zbus::Result<()>;
+    fn unit_removed(
+        &self,
+        id: String,
+        unit: crate::zvariant::OwnedObjectPath,
+    ) -> crate::zbus::Result<()>;
 
     /// Receive `JobNew` signal.
     #[dbus_proxy(signal, name = "JobNew")]
     fn job_new(
         &self,
         id: u32,
-        job: zbus::zvariant::OwnedObjectPath,
+        job: crate::zvariant::OwnedObjectPath,
         unit: String,
-    ) -> zbus::Result<()>;
+    ) -> crate::zbus::Result<()>;
 
     /// Receive `JobRemoved` signal.
     #[dbus_proxy(signal, name = "JobRemoved")]
     fn job_removed(
         &self,
         id: u32,
-        job: zbus::zvariant::OwnedObjectPath,
+        job: crate::zvariant::OwnedObjectPath,
         unit: String,
         result: String,
-    ) -> zbus::Result<()>;
+    ) -> crate::zbus::Result<()>;
 
     /// Receive `StartupFinished` signal.
     #[dbus_proxy(signal, name = "StartupFinished")]
@@ -458,427 +622,427 @@ trait Manager {
         initrd: u64,
         userspace: u64,
         total: u64,
-    ) -> zbus::Result<()>;
+    ) -> crate::zbus::Result<()>;
 
     /// Receive `UnitFilesChanged` signal.
     #[dbus_proxy(signal, name = "UnitFilesChanged")]
-    fn unit_files_changed(&self) -> zbus::Result<()>;
+    fn unit_files_changed(&self) -> crate::zbus::Result<()>;
 
     /// Receive `Reloading` signal.
     #[dbus_proxy(signal, name = "Reloading")]
-    fn reloading(&self, active: bool) -> zbus::Result<()>;
+    fn reloading(&self, active: bool) -> crate::zbus::Result<()>;
 
     /// Get property `Version`.
     #[dbus_proxy(property, name = "Version")]
-    fn version(&self) -> zbus::Result<String>;
+    fn version(&self) -> crate::zbus::Result<String>;
 
     /// Get property `Features`.
     #[dbus_proxy(property, name = "Features")]
-    fn features(&self) -> zbus::Result<String>;
+    fn features(&self) -> crate::zbus::Result<String>;
 
     /// Get property `Virtualization`.
     #[dbus_proxy(property, name = "Virtualization")]
-    fn virtualization(&self) -> zbus::Result<String>;
+    fn virtualization(&self) -> crate::zbus::Result<String>;
 
     /// Get property `Architecture`.
     #[dbus_proxy(property, name = "Architecture")]
-    fn architecture(&self) -> zbus::Result<String>;
+    fn architecture(&self) -> crate::zbus::Result<String>;
 
     /// Get property `Tainted`.
     #[dbus_proxy(property, name = "Tainted")]
-    fn tainted(&self) -> zbus::Result<String>;
+    fn tainted(&self) -> crate::zbus::Result<String>;
 
     /// Get property `FirmwareTimestamp`.
     #[dbus_proxy(property, name = "FirmwareTimestamp")]
-    fn firmware_timestamp(&self) -> zbus::Result<u64>;
+    fn firmware_timestamp(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `FirmwareTimestampMonotonic`.
     #[dbus_proxy(property, name = "FirmwareTimestampMonotonic")]
-    fn firmware_timestamp_monotonic(&self) -> zbus::Result<u64>;
+    fn firmware_timestamp_monotonic(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `LoaderTimestamp`.
     #[dbus_proxy(property, name = "LoaderTimestamp")]
-    fn loader_timestamp(&self) -> zbus::Result<u64>;
+    fn loader_timestamp(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `LoaderTimestampMonotonic`.
     #[dbus_proxy(property, name = "LoaderTimestampMonotonic")]
-    fn loader_timestamp_monotonic(&self) -> zbus::Result<u64>;
+    fn loader_timestamp_monotonic(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `KernelTimestamp`.
     #[dbus_proxy(property, name = "KernelTimestamp")]
-    fn kernel_timestamp(&self) -> zbus::Result<u64>;
+    fn kernel_timestamp(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `KernelTimestampMonotonic`.
     #[dbus_proxy(property, name = "KernelTimestampMonotonic")]
-    fn kernel_timestamp_monotonic(&self) -> zbus::Result<u64>;
+    fn kernel_timestamp_monotonic(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `InitRDTimestamp`.
     #[dbus_proxy(property, name = "InitRDTimestamp")]
-    fn init_rd_timestamp(&self) -> zbus::Result<u64>;
+    fn init_rd_timestamp(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `InitRDTimestampMonotonic`.
     #[dbus_proxy(property, name = "InitRDTimestampMonotonic")]
-    fn init_rd_timestamp_monotonic(&self) -> zbus::Result<u64>;
+    fn init_rd_timestamp_monotonic(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `UserspaceTimestamp`.
     #[dbus_proxy(property, name = "UserspaceTimestamp")]
-    fn userspace_timestamp(&self) -> zbus::Result<u64>;
+    fn userspace_timestamp(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `UserspaceTimestampMonotonic`.
     #[dbus_proxy(property, name = "UserspaceTimestampMonotonic")]
-    fn userspace_timestamp_monotonic(&self) -> zbus::Result<u64>;
+    fn userspace_timestamp_monotonic(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `FinishTimestamp`.
     #[dbus_proxy(property, name = "FinishTimestamp")]
-    fn finish_timestamp(&self) -> zbus::Result<u64>;
+    fn finish_timestamp(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `FinishTimestampMonotonic`.
     #[dbus_proxy(property, name = "FinishTimestampMonotonic")]
-    fn finish_timestamp_monotonic(&self) -> zbus::Result<u64>;
+    fn finish_timestamp_monotonic(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `SecurityStartTimestamp`.
     #[dbus_proxy(property, name = "SecurityStartTimestamp")]
-    fn security_start_timestamp(&self) -> zbus::Result<u64>;
+    fn security_start_timestamp(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `SecurityStartTimestampMonotonic`.
     #[dbus_proxy(property, name = "SecurityStartTimestampMonotonic")]
-    fn security_start_timestamp_monotonic(&self) -> zbus::Result<u64>;
+    fn security_start_timestamp_monotonic(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `SecurityFinishTimestamp`.
     #[dbus_proxy(property, name = "SecurityFinishTimestamp")]
-    fn security_finish_timestamp(&self) -> zbus::Result<u64>;
+    fn security_finish_timestamp(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `SecurityFinishTimestampMonotonic`.
     #[dbus_proxy(property, name = "SecurityFinishTimestampMonotonic")]
-    fn security_finish_timestamp_monotonic(&self) -> zbus::Result<u64>;
+    fn security_finish_timestamp_monotonic(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `GeneratorsStartTimestamp`.
     #[dbus_proxy(property, name = "GeneratorsStartTimestamp")]
-    fn generators_start_timestamp(&self) -> zbus::Result<u64>;
+    fn generators_start_timestamp(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `GeneratorsStartTimestampMonotonic`.
     #[dbus_proxy(property, name = "GeneratorsStartTimestampMonotonic")]
-    fn generators_start_timestamp_monotonic(&self) -> zbus::Result<u64>;
+    fn generators_start_timestamp_monotonic(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `GeneratorsFinishTimestamp`.
     #[dbus_proxy(property, name = "GeneratorsFinishTimestamp")]
-    fn generators_finish_timestamp(&self) -> zbus::Result<u64>;
+    fn generators_finish_timestamp(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `GeneratorsFinishTimestampMonotonic`.
     #[dbus_proxy(property, name = "GeneratorsFinishTimestampMonotonic")]
-    fn generators_finish_timestamp_monotonic(&self) -> zbus::Result<u64>;
+    fn generators_finish_timestamp_monotonic(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `UnitsLoadStartTimestamp`.
     #[dbus_proxy(property, name = "UnitsLoadStartTimestamp")]
-    fn units_load_start_timestamp(&self) -> zbus::Result<u64>;
+    fn units_load_start_timestamp(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `UnitsLoadStartTimestampMonotonic`.
     #[dbus_proxy(property, name = "UnitsLoadStartTimestampMonotonic")]
-    fn units_load_start_timestamp_monotonic(&self) -> zbus::Result<u64>;
+    fn units_load_start_timestamp_monotonic(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `UnitsLoadFinishTimestamp`.
     #[dbus_proxy(property, name = "UnitsLoadFinishTimestamp")]
-    fn units_load_finish_timestamp(&self) -> zbus::Result<u64>;
+    fn units_load_finish_timestamp(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `UnitsLoadFinishTimestampMonotonic`.
     #[dbus_proxy(property, name = "UnitsLoadFinishTimestampMonotonic")]
-    fn units_load_finish_timestamp_monotonic(&self) -> zbus::Result<u64>;
+    fn units_load_finish_timestamp_monotonic(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `InitRDSecurityStartTimestamp`.
     #[dbus_proxy(property, name = "InitRDSecurityStartTimestamp")]
-    fn init_rd_security_start_timestamp(&self) -> zbus::Result<u64>;
+    fn init_rd_security_start_timestamp(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `InitRDSecurityStartTimestampMonotonic`.
     #[dbus_proxy(property, name = "InitRDSecurityStartTimestampMonotonic")]
-    fn init_rd_security_start_timestamp_monotonic(&self) -> zbus::Result<u64>;
+    fn init_rd_security_start_timestamp_monotonic(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `InitRDSecurityFinishTimestamp`.
     #[dbus_proxy(property, name = "InitRDSecurityFinishTimestamp")]
-    fn init_rd_security_finish_timestamp(&self) -> zbus::Result<u64>;
+    fn init_rd_security_finish_timestamp(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `InitRDSecurityFinishTimestampMonotonic`.
     #[dbus_proxy(property, name = "InitRDSecurityFinishTimestampMonotonic")]
-    fn init_rd_security_finish_timestamp_monotonic(&self) -> zbus::Result<u64>;
+    fn init_rd_security_finish_timestamp_monotonic(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `InitRDGeneratorsStartTimestamp`.
     #[dbus_proxy(property, name = "InitRDGeneratorsStartTimestamp")]
-    fn init_rd_generators_start_timestamp(&self) -> zbus::Result<u64>;
+    fn init_rd_generators_start_timestamp(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `InitRDGeneratorsStartTimestampMonotonic`.
     #[dbus_proxy(property, name = "InitRDGeneratorsStartTimestampMonotonic")]
-    fn init_rd_generators_start_timestamp_monotonic(&self) -> zbus::Result<u64>;
+    fn init_rd_generators_start_timestamp_monotonic(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `InitRDGeneratorsFinishTimestamp`.
     #[dbus_proxy(property, name = "InitRDGeneratorsFinishTimestamp")]
-    fn init_rd_generators_finish_timestamp(&self) -> zbus::Result<u64>;
+    fn init_rd_generators_finish_timestamp(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `InitRDGeneratorsFinishTimestampMonotonic`.
     #[dbus_proxy(property, name = "InitRDGeneratorsFinishTimestampMonotonic")]
-    fn init_rd_generators_finish_timestamp_monotonic(&self) -> zbus::Result<u64>;
+    fn init_rd_generators_finish_timestamp_monotonic(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `InitRDUnitsLoadStartTimestamp`.
     #[dbus_proxy(property, name = "InitRDUnitsLoadStartTimestamp")]
-    fn init_rd_units_load_start_timestamp(&self) -> zbus::Result<u64>;
+    fn init_rd_units_load_start_timestamp(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `InitRDUnitsLoadStartTimestampMonotonic`.
     #[dbus_proxy(property, name = "InitRDUnitsLoadStartTimestampMonotonic")]
-    fn init_rd_units_load_start_timestamp_monotonic(&self) -> zbus::Result<u64>;
+    fn init_rd_units_load_start_timestamp_monotonic(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `InitRDUnitsLoadFinishTimestamp`.
     #[dbus_proxy(property, name = "InitRDUnitsLoadFinishTimestamp")]
-    fn init_rd_units_load_finish_timestamp(&self) -> zbus::Result<u64>;
+    fn init_rd_units_load_finish_timestamp(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `InitRDUnitsLoadFinishTimestampMonotonic`.
     #[dbus_proxy(property, name = "InitRDUnitsLoadFinishTimestampMonotonic")]
-    fn init_rd_units_load_finish_timestamp_monotonic(&self) -> zbus::Result<u64>;
+    fn init_rd_units_load_finish_timestamp_monotonic(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `NNames`.
     #[dbus_proxy(property, name = "NNames")]
-    fn n_names(&self) -> zbus::Result<u32>;
+    fn n_names(&self) -> crate::zbus::Result<u32>;
 
     /// Get property `NFailedUnits`.
     #[dbus_proxy(property, name = "NFailedUnits")]
-    fn n_failed_units(&self) -> zbus::Result<u32>;
+    fn n_failed_units(&self) -> crate::zbus::Result<u32>;
 
     /// Get property `NJobs`.
     #[dbus_proxy(property, name = "NJobs")]
-    fn n_jobs(&self) -> zbus::Result<u32>;
+    fn n_jobs(&self) -> crate::zbus::Result<u32>;
 
     /// Get property `NInstalledJobs`.
     #[dbus_proxy(property, name = "NInstalledJobs")]
-    fn n_installed_jobs(&self) -> zbus::Result<u32>;
+    fn n_installed_jobs(&self) -> crate::zbus::Result<u32>;
 
     /// Get property `NFailedJobs`.
     #[dbus_proxy(property, name = "NFailedJobs")]
-    fn n_failed_jobs(&self) -> zbus::Result<u32>;
+    fn n_failed_jobs(&self) -> crate::zbus::Result<u32>;
 
     /// Get property `Progress`.
     #[dbus_proxy(property, name = "Progress")]
-    fn progress(&self) -> zbus::Result<f64>;
+    fn progress(&self) -> crate::zbus::Result<f64>;
 
     /// Get property `Environment`.
     #[dbus_proxy(property, name = "Environment")]
-    fn environment(&self) -> zbus::Result<Vec<String>>;
+    fn environment(&self) -> crate::zbus::Result<Vec<String>>;
 
     /// Get property `ConfirmSpawn`.
     #[dbus_proxy(property, name = "ConfirmSpawn")]
-    fn confirm_spawn(&self) -> zbus::Result<bool>;
+    fn confirm_spawn(&self) -> crate::zbus::Result<bool>;
 
     /// Get property `ShowStatus`.
     #[dbus_proxy(property, name = "ShowStatus")]
-    fn show_status(&self) -> zbus::Result<bool>;
+    fn show_status(&self) -> crate::zbus::Result<bool>;
 
     /// Get property `UnitPath`.
     #[dbus_proxy(property, name = "UnitPath")]
-    fn unit_path(&self) -> zbus::Result<Vec<String>>;
+    fn unit_path(&self) -> crate::zbus::Result<Vec<String>>;
 
     /// Get property `DefaultStandardOutput`.
     #[dbus_proxy(property, name = "DefaultStandardOutput")]
-    fn default_standard_output(&self) -> zbus::Result<String>;
+    fn default_standard_output(&self) -> crate::zbus::Result<String>;
 
     /// Get property `DefaultStandardError`.
     #[dbus_proxy(property, name = "DefaultStandardError")]
-    fn default_standard_error(&self) -> zbus::Result<String>;
+    fn default_standard_error(&self) -> crate::zbus::Result<String>;
 
     /// Get property `ControlGroup`.
     #[dbus_proxy(property, name = "ControlGroup")]
-    fn control_group(&self) -> zbus::Result<String>;
+    fn control_group(&self) -> crate::zbus::Result<String>;
 
     /// Get property `SystemState`.
     #[dbus_proxy(property, name = "SystemState")]
-    fn system_state(&self) -> zbus::Result<String>;
+    fn system_state(&self) -> crate::zbus::Result<String>;
 
     /// Get property `ExitCode`.
     #[dbus_proxy(property, name = "ExitCode")]
-    fn exit_code(&self) -> zbus::Result<u8>;
+    fn exit_code(&self) -> crate::zbus::Result<u8>;
 
     /// Get property `DefaultTimerAccuracyUSec`.
     #[dbus_proxy(property, name = "DefaultTimerAccuracyUSec")]
-    fn default_timer_accuracy_u_sec(&self) -> zbus::Result<u64>;
+    fn default_timer_accuracy_u_sec(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `DefaultTimeoutStartUSec`.
     #[dbus_proxy(property, name = "DefaultTimeoutStartUSec")]
-    fn default_timeout_start_u_sec(&self) -> zbus::Result<u64>;
+    fn default_timeout_start_u_sec(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `DefaultTimeoutStopUSec`.
     #[dbus_proxy(property, name = "DefaultTimeoutStopUSec")]
-    fn default_timeout_stop_u_sec(&self) -> zbus::Result<u64>;
+    fn default_timeout_stop_u_sec(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `DefaultTimeoutAbortUSec`.
     #[dbus_proxy(property, name = "DefaultTimeoutAbortUSec")]
-    fn default_timeout_abort_u_sec(&self) -> zbus::Result<u64>;
+    fn default_timeout_abort_u_sec(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `DefaultRestartUSec`.
     #[dbus_proxy(property, name = "DefaultRestartUSec")]
-    fn default_restart_u_sec(&self) -> zbus::Result<u64>;
+    fn default_restart_u_sec(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `DefaultStartLimitIntervalUSec`.
     #[dbus_proxy(property, name = "DefaultStartLimitIntervalUSec")]
-    fn default_start_limit_interval_u_sec(&self) -> zbus::Result<u64>;
+    fn default_start_limit_interval_u_sec(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `DefaultStartLimitBurst`.
     #[dbus_proxy(property, name = "DefaultStartLimitBurst")]
-    fn default_start_limit_burst(&self) -> zbus::Result<u32>;
+    fn default_start_limit_burst(&self) -> crate::zbus::Result<u32>;
 
     /// Get property `DefaultCPUAccounting`.
     #[dbus_proxy(property, name = "DefaultCPUAccounting")]
-    fn default_cpu_accounting(&self) -> zbus::Result<bool>;
+    fn default_cpu_accounting(&self) -> crate::zbus::Result<bool>;
 
     /// Get property `DefaultBlockIOAccounting`.
     #[dbus_proxy(property, name = "DefaultBlockIOAccounting")]
-    fn default_block_io_accounting(&self) -> zbus::Result<bool>;
+    fn default_block_io_accounting(&self) -> crate::zbus::Result<bool>;
 
     /// Get property `DefaultMemoryAccounting`.
     #[dbus_proxy(property, name = "DefaultMemoryAccounting")]
-    fn default_memory_accounting(&self) -> zbus::Result<bool>;
+    fn default_memory_accounting(&self) -> crate::zbus::Result<bool>;
 
     /// Get property `DefaultTasksAccounting`.
     #[dbus_proxy(property, name = "DefaultTasksAccounting")]
-    fn default_tasks_accounting(&self) -> zbus::Result<bool>;
+    fn default_tasks_accounting(&self) -> crate::zbus::Result<bool>;
 
     /// Get property `DefaultLimitCPU`.
     #[dbus_proxy(property, name = "DefaultLimitCPU")]
-    fn default_limit_cpu(&self) -> zbus::Result<u64>;
+    fn default_limit_cpu(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `DefaultLimitCPUSoft`.
     #[dbus_proxy(property, name = "DefaultLimitCPUSoft")]
-    fn default_limit_cpu_soft(&self) -> zbus::Result<u64>;
+    fn default_limit_cpu_soft(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `DefaultLimitFSIZE`.
     #[dbus_proxy(property, name = "DefaultLimitFSIZE")]
-    fn default_limit_fsize(&self) -> zbus::Result<u64>;
+    fn default_limit_fsize(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `DefaultLimitFSIZESoft`.
     #[dbus_proxy(property, name = "DefaultLimitFSIZESoft")]
-    fn default_limit_fsize_soft(&self) -> zbus::Result<u64>;
+    fn default_limit_fsize_soft(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `DefaultLimitDATA`.
     #[dbus_proxy(property, name = "DefaultLimitDATA")]
-    fn default_limit_data(&self) -> zbus::Result<u64>;
+    fn default_limit_data(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `DefaultLimitDATASoft`.
     #[dbus_proxy(property, name = "DefaultLimitDATASoft")]
-    fn default_limit_data_soft(&self) -> zbus::Result<u64>;
+    fn default_limit_data_soft(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `DefaultLimitSTACK`.
     #[dbus_proxy(property, name = "DefaultLimitSTACK")]
-    fn default_limit_stack(&self) -> zbus::Result<u64>;
+    fn default_limit_stack(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `DefaultLimitSTACKSoft`.
     #[dbus_proxy(property, name = "DefaultLimitSTACKSoft")]
-    fn default_limit_stack_soft(&self) -> zbus::Result<u64>;
+    fn default_limit_stack_soft(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `DefaultLimitCORE`.
     #[dbus_proxy(property, name = "DefaultLimitCORE")]
-    fn default_limit_core(&self) -> zbus::Result<u64>;
+    fn default_limit_core(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `DefaultLimitCORESoft`.
     #[dbus_proxy(property, name = "DefaultLimitCORESoft")]
-    fn default_limit_core_soft(&self) -> zbus::Result<u64>;
+    fn default_limit_core_soft(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `DefaultLimitRSS`.
     #[dbus_proxy(property, name = "DefaultLimitRSS")]
-    fn default_limit_rss(&self) -> zbus::Result<u64>;
+    fn default_limit_rss(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `DefaultLimitRSSSoft`.
     #[dbus_proxy(property, name = "DefaultLimitRSSSoft")]
-    fn default_limit_rss_soft(&self) -> zbus::Result<u64>;
+    fn default_limit_rss_soft(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `DefaultLimitNOFILE`.
     #[dbus_proxy(property, name = "DefaultLimitNOFILE")]
-    fn default_limit_nofile(&self) -> zbus::Result<u64>;
+    fn default_limit_nofile(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `DefaultLimitNOFILESoft`.
     #[dbus_proxy(property, name = "DefaultLimitNOFILESoft")]
-    fn default_limit_nofile_soft(&self) -> zbus::Result<u64>;
+    fn default_limit_nofile_soft(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `DefaultLimitAS`.
     #[dbus_proxy(property, name = "DefaultLimitAS")]
-    fn default_limit_as(&self) -> zbus::Result<u64>;
+    fn default_limit_as(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `DefaultLimitASSoft`.
     #[dbus_proxy(property, name = "DefaultLimitASSoft")]
-    fn default_limit_as_soft(&self) -> zbus::Result<u64>;
+    fn default_limit_as_soft(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `DefaultLimitNPROC`.
     #[dbus_proxy(property, name = "DefaultLimitNPROC")]
-    fn default_limit_nproc(&self) -> zbus::Result<u64>;
+    fn default_limit_nproc(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `DefaultLimitNPROCSoft`.
     #[dbus_proxy(property, name = "DefaultLimitNPROCSoft")]
-    fn default_limit_nproc_soft(&self) -> zbus::Result<u64>;
+    fn default_limit_nproc_soft(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `DefaultLimitMEMLOCK`.
     #[dbus_proxy(property, name = "DefaultLimitMEMLOCK")]
-    fn default_limit_memlock(&self) -> zbus::Result<u64>;
+    fn default_limit_memlock(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `DefaultLimitMEMLOCKSoft`.
     #[dbus_proxy(property, name = "DefaultLimitMEMLOCKSoft")]
-    fn default_limit_memlock_soft(&self) -> zbus::Result<u64>;
+    fn default_limit_memlock_soft(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `DefaultLimitLOCKS`.
     #[dbus_proxy(property, name = "DefaultLimitLOCKS")]
-    fn default_limit_locks(&self) -> zbus::Result<u64>;
+    fn default_limit_locks(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `DefaultLimitLOCKSSoft`.
     #[dbus_proxy(property, name = "DefaultLimitLOCKSSoft")]
-    fn default_limit_locks_soft(&self) -> zbus::Result<u64>;
+    fn default_limit_locks_soft(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `DefaultLimitSIGPENDING`.
     #[dbus_proxy(property, name = "DefaultLimitSIGPENDING")]
-    fn default_limit_sigpending(&self) -> zbus::Result<u64>;
+    fn default_limit_sigpending(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `DefaultLimitSIGPENDINGSoft`.
     #[dbus_proxy(property, name = "DefaultLimitSIGPENDINGSoft")]
-    fn default_limit_sigpending_soft(&self) -> zbus::Result<u64>;
+    fn default_limit_sigpending_soft(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `DefaultLimitMSGQUEUE`.
     #[dbus_proxy(property, name = "DefaultLimitMSGQUEUE")]
-    fn default_limit_msgqueue(&self) -> zbus::Result<u64>;
+    fn default_limit_msgqueue(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `DefaultLimitMSGQUEUESoft`.
     #[dbus_proxy(property, name = "DefaultLimitMSGQUEUESoft")]
-    fn default_limit_msgqueue_soft(&self) -> zbus::Result<u64>;
+    fn default_limit_msgqueue_soft(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `DefaultLimitNICE`.
     #[dbus_proxy(property, name = "DefaultLimitNICE")]
-    fn default_limit_nice(&self) -> zbus::Result<u64>;
+    fn default_limit_nice(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `DefaultLimitNICESoft`.
     #[dbus_proxy(property, name = "DefaultLimitNICESoft")]
-    fn default_limit_nice_soft(&self) -> zbus::Result<u64>;
+    fn default_limit_nice_soft(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `DefaultLimitRTPRIO`.
     #[dbus_proxy(property, name = "DefaultLimitRTPRIO")]
-    fn default_limit_rtprio(&self) -> zbus::Result<u64>;
+    fn default_limit_rtprio(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `DefaultLimitRTPRIOSoft`.
     #[dbus_proxy(property, name = "DefaultLimitRTPRIOSoft")]
-    fn default_limit_rtprio_soft(&self) -> zbus::Result<u64>;
+    fn default_limit_rtprio_soft(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `DefaultLimitRTTIME`.
     #[dbus_proxy(property, name = "DefaultLimitRTTIME")]
-    fn default_limit_rttime(&self) -> zbus::Result<u64>;
+    fn default_limit_rttime(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `DefaultLimitRTTIMESoft`.
     #[dbus_proxy(property, name = "DefaultLimitRTTIMESoft")]
-    fn default_limit_rttime_soft(&self) -> zbus::Result<u64>;
+    fn default_limit_rttime_soft(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `DefaultTasksMax`.
     #[dbus_proxy(property, name = "DefaultTasksMax")]
-    fn default_tasks_max(&self) -> zbus::Result<u64>;
+    fn default_tasks_max(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `TimerSlackNSec`.
     #[dbus_proxy(property, name = "TimerSlackNSec")]
-    fn timer_slack_n_sec(&self) -> zbus::Result<u64>;
+    fn timer_slack_n_sec(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `DefaultOOMPolicy`.
     #[dbus_proxy(property, name = "DefaultOOMPolicy")]
-    fn default_oom_policy(&self) -> zbus::Result<String>;
+    fn default_oom_policy(&self) -> crate::zbus::Result<String>;
 
     /// Get property `CtrlAltDelBurstAction`.
     #[dbus_proxy(property, name = "CtrlAltDelBurstAction")]
-    fn ctrl_alt_del_burst_action(&self) -> zbus::Result<String>;
+    fn ctrl_alt_del_burst_action(&self) -> crate::zbus::Result<String>;
 }
 
 /// Proxy object for `org.freedesktop.systemd1.Unit`.
@@ -890,427 +1054,470 @@ trait Manager {
 trait Unit {
     /// [📖](https://www.freedesktop.org/software/systemd/man/systemd.directives.html#Start()) Call interface method `Start`.
     #[dbus_proxy(name = "Start")]
-    fn start(&self, mode: String) -> zbus::Result<zbus::zvariant::OwnedObjectPath>;
+    fn start(&self, mode: String) -> crate::zbus::Result<crate::zvariant::OwnedObjectPath>;
 
     /// [📖](https://www.freedesktop.org/software/systemd/man/systemd.directives.html#Stop()) Call interface method `Stop`.
     #[dbus_proxy(name = "Stop")]
-    fn stop(&self, mode: String) -> zbus::Result<zbus::zvariant::OwnedObjectPath>;
+    fn stop(&self, mode: String) -> crate::zbus::Result<crate::zvariant::OwnedObjectPath>;
 
     /// [📖](https://www.freedesktop.org/software/systemd/man/systemd.directives.html#Reload()) Call interface method `Reload`.
     #[dbus_proxy(name = "Reload")]
-    fn reload(&self, mode: String) -> zbus::Result<zbus::zvariant::OwnedObjectPath>;
+    fn reload(&self, mode: String) -> crate::zbus::Result<crate::zvariant::OwnedObjectPath>;
 
     /// [📖](https://www.freedesktop.org/software/systemd/man/systemd.directives.html#Restart()) Call interface method `Restart`.
     #[dbus_proxy(name = "Restart")]
-    fn restart(&self, mode: String) -> zbus::Result<zbus::zvariant::OwnedObjectPath>;
+    fn restart(&self, mode: String) -> crate::zbus::Result<crate::zvariant::OwnedObjectPath>;
 
     /// [📖](https://www.freedesktop.org/software/systemd/man/systemd.directives.html#TryRestart()) Call interface method `TryRestart`.
     #[dbus_proxy(name = "TryRestart")]
-    fn try_restart(&self, mode: String) -> zbus::Result<zbus::zvariant::OwnedObjectPath>;
+    fn try_restart(&self, mode: String) -> crate::zbus::Result<crate::zvariant::OwnedObjectPath>;
 
     /// [📖](https://www.freedesktop.org/software/systemd/man/systemd.directives.html#ReloadOrRestart()) Call interface method `ReloadOrRestart`.
     #[dbus_proxy(name = "ReloadOrRestart")]
-    fn reload_or_restart(&self, mode: String) -> zbus::Result<zbus::zvariant::OwnedObjectPath>;
+    fn reload_or_restart(
+        &self,
+        mode: String,
+    ) -> crate::zbus::Result<crate::zvariant::OwnedObjectPath>;
 
     /// [📖](https://www.freedesktop.org/software/systemd/man/systemd.directives.html#ReloadOrTryRestart()) Call interface method `ReloadOrTryRestart`.
     #[dbus_proxy(name = "ReloadOrTryRestart")]
-    fn reload_or_try_restart(&self, mode: String) -> zbus::Result<zbus::zvariant::OwnedObjectPath>;
+    fn reload_or_try_restart(
+        &self,
+        mode: String,
+    ) -> crate::zbus::Result<crate::zvariant::OwnedObjectPath>;
+
+    /// [📖](https://www.freedesktop.org/software/systemd/man/systemd.directives.html#EnqueueJob()) Call interface method `EnqueueJob`.
+    #[dbus_proxy(name = "EnqueueJob")]
+    fn enqueue_job(
+        &self,
+        job_type: String,
+        job_mode: String,
+    ) -> crate::zbus::Result<(
+        u32,
+        crate::zvariant::OwnedObjectPath,
+        String,
+        crate::zvariant::OwnedObjectPath,
+        String,
+        Vec<(
+            u32,
+            crate::zvariant::OwnedObjectPath,
+            String,
+            crate::zvariant::OwnedObjectPath,
+            String,
+        )>,
+    )>;
 
     /// [📖](https://www.freedesktop.org/software/systemd/man/systemd.directives.html#Kill()) Call interface method `Kill`.
     #[dbus_proxy(name = "Kill")]
-    fn kill(&self, whom: String, signal: i32) -> zbus::Result<()>;
+    fn kill(&self, whom: String, signal: i32) -> crate::zbus::Result<()>;
 
     /// [📖](https://www.freedesktop.org/software/systemd/man/systemd.directives.html#ResetFailed()) Call interface method `ResetFailed`.
     #[dbus_proxy(name = "ResetFailed")]
-    fn reset_failed(&self) -> zbus::Result<()>;
+    fn reset_failed(&self) -> crate::zbus::Result<()>;
 
     /// [📖](https://www.freedesktop.org/software/systemd/man/systemd.directives.html#SetProperties()) Call interface method `SetProperties`.
     #[dbus_proxy(name = "SetProperties")]
     fn set_properties(
         &self,
         runtime: bool,
-        properties: Vec<(String, zbus::zvariant::OwnedValue)>,
-    ) -> zbus::Result<()>;
+        properties: Vec<(String, crate::zvariant::OwnedValue)>,
+    ) -> crate::zbus::Result<()>;
 
     /// [📖](https://www.freedesktop.org/software/systemd/man/systemd.directives.html#Reference()) Call interface method `Reference`.
     #[dbus_proxy(name = "Reference")]
-    fn reference(&self) -> zbus::Result<()>;
+    fn reference(&self) -> crate::zbus::Result<()>;
 
     /// [📖](https://www.freedesktop.org/software/systemd/man/systemd.directives.html#Unref()) Call interface method `Unref`.
     #[dbus_proxy(name = "Unref")]
-    fn unref(&self) -> zbus::Result<()>;
+    fn unref(&self) -> crate::zbus::Result<()>;
 
     /// [📖](https://www.freedesktop.org/software/systemd/man/systemd.directives.html#Clean()) Call interface method `Clean`.
     #[dbus_proxy(name = "Clean")]
-    fn clean(&self, mask: Vec<String>) -> zbus::Result<()>;
+    fn clean(&self, mask: Vec<String>) -> crate::zbus::Result<()>;
 
     /// [📖](https://www.freedesktop.org/software/systemd/man/systemd.directives.html#Freeze()) Call interface method `Freeze`.
     #[dbus_proxy(name = "Freeze")]
-    fn freeze(&self) -> zbus::Result<()>;
+    fn freeze(&self) -> crate::zbus::Result<()>;
 
     /// [📖](https://www.freedesktop.org/software/systemd/man/systemd.directives.html#Thaw()) Call interface method `Thaw`.
     #[dbus_proxy(name = "Thaw")]
-    fn thaw(&self) -> zbus::Result<()>;
+    fn thaw(&self) -> crate::zbus::Result<()>;
 
     /// Get property `Id`.
     #[dbus_proxy(property, name = "Id")]
-    fn id(&self) -> zbus::Result<String>;
+    fn id(&self) -> crate::zbus::Result<String>;
 
     /// Get property `Names`.
     #[dbus_proxy(property, name = "Names")]
-    fn names(&self) -> zbus::Result<Vec<String>>;
+    fn names(&self) -> crate::zbus::Result<Vec<String>>;
 
     /// Get property `Following`.
     #[dbus_proxy(property, name = "Following")]
-    fn following(&self) -> zbus::Result<String>;
+    fn following(&self) -> crate::zbus::Result<String>;
 
     /// Get property `Requires`.
     #[dbus_proxy(property, name = "Requires")]
-    fn requires(&self) -> zbus::Result<Vec<String>>;
+    fn requires(&self) -> crate::zbus::Result<Vec<String>>;
 
     /// Get property `Requisite`.
     #[dbus_proxy(property, name = "Requisite")]
-    fn requisite(&self) -> zbus::Result<Vec<String>>;
+    fn requisite(&self) -> crate::zbus::Result<Vec<String>>;
 
     /// Get property `Wants`.
     #[dbus_proxy(property, name = "Wants")]
-    fn wants(&self) -> zbus::Result<Vec<String>>;
+    fn wants(&self) -> crate::zbus::Result<Vec<String>>;
 
     /// Get property `BindsTo`.
     #[dbus_proxy(property, name = "BindsTo")]
-    fn binds_to(&self) -> zbus::Result<Vec<String>>;
+    fn binds_to(&self) -> crate::zbus::Result<Vec<String>>;
 
     /// Get property `PartOf`.
     #[dbus_proxy(property, name = "PartOf")]
-    fn part_of(&self) -> zbus::Result<Vec<String>>;
+    fn part_of(&self) -> crate::zbus::Result<Vec<String>>;
 
     /// Get property `RequiredBy`.
     #[dbus_proxy(property, name = "RequiredBy")]
-    fn required_by(&self) -> zbus::Result<Vec<String>>;
+    fn required_by(&self) -> crate::zbus::Result<Vec<String>>;
 
     /// Get property `RequisiteOf`.
     #[dbus_proxy(property, name = "RequisiteOf")]
-    fn requisite_of(&self) -> zbus::Result<Vec<String>>;
+    fn requisite_of(&self) -> crate::zbus::Result<Vec<String>>;
 
     /// Get property `WantedBy`.
     #[dbus_proxy(property, name = "WantedBy")]
-    fn wanted_by(&self) -> zbus::Result<Vec<String>>;
+    fn wanted_by(&self) -> crate::zbus::Result<Vec<String>>;
 
     /// Get property `BoundBy`.
     #[dbus_proxy(property, name = "BoundBy")]
-    fn bound_by(&self) -> zbus::Result<Vec<String>>;
+    fn bound_by(&self) -> crate::zbus::Result<Vec<String>>;
 
     /// Get property `ConsistsOf`.
     #[dbus_proxy(property, name = "ConsistsOf")]
-    fn consists_of(&self) -> zbus::Result<Vec<String>>;
+    fn consists_of(&self) -> crate::zbus::Result<Vec<String>>;
 
     /// Get property `Conflicts`.
     #[dbus_proxy(property, name = "Conflicts")]
-    fn conflicts(&self) -> zbus::Result<Vec<String>>;
+    fn conflicts(&self) -> crate::zbus::Result<Vec<String>>;
 
     /// Get property `ConflictedBy`.
     #[dbus_proxy(property, name = "ConflictedBy")]
-    fn conflicted_by(&self) -> zbus::Result<Vec<String>>;
+    fn conflicted_by(&self) -> crate::zbus::Result<Vec<String>>;
 
     /// Get property `Before`.
     #[dbus_proxy(property, name = "Before")]
-    fn before(&self) -> zbus::Result<Vec<String>>;
+    fn before(&self) -> crate::zbus::Result<Vec<String>>;
 
     /// Get property `After`.
     #[dbus_proxy(property, name = "After")]
-    fn after(&self) -> zbus::Result<Vec<String>>;
+    fn after(&self) -> crate::zbus::Result<Vec<String>>;
 
     /// Get property `OnFailure`.
     #[dbus_proxy(property, name = "OnFailure")]
-    fn on_failure(&self) -> zbus::Result<Vec<String>>;
+    fn on_failure(&self) -> crate::zbus::Result<Vec<String>>;
 
     /// Get property `OnFailureOf`.
     #[dbus_proxy(property, name = "OnFailureOf")]
-    fn on_failure_of(&self) -> zbus::Result<Vec<String>>;
+    fn on_failure_of(&self) -> crate::zbus::Result<Vec<String>>;
 
     /// Get property `OnSuccess`.
     #[dbus_proxy(property, name = "OnSuccess")]
-    fn on_success(&self) -> zbus::Result<Vec<String>>;
+    fn on_success(&self) -> crate::zbus::Result<Vec<String>>;
 
     /// Get property `OnSuccessOf`.
     #[dbus_proxy(property, name = "OnSuccessOf")]
-    fn on_success_of(&self) -> zbus::Result<Vec<String>>;
+    fn on_success_of(&self) -> crate::zbus::Result<Vec<String>>;
 
     /// Get property `Triggers`.
     #[dbus_proxy(property, name = "Triggers")]
-    fn triggers(&self) -> zbus::Result<Vec<String>>;
+    fn triggers(&self) -> crate::zbus::Result<Vec<String>>;
 
     /// Get property `TriggeredBy`.
     #[dbus_proxy(property, name = "TriggeredBy")]
-    fn triggered_by(&self) -> zbus::Result<Vec<String>>;
+    fn triggered_by(&self) -> crate::zbus::Result<Vec<String>>;
 
     /// Get property `PropagatesReloadTo`.
     #[dbus_proxy(property, name = "PropagatesReloadTo")]
-    fn propagates_reload_to(&self) -> zbus::Result<Vec<String>>;
+    fn propagates_reload_to(&self) -> crate::zbus::Result<Vec<String>>;
 
     /// Get property `ReloadPropagatedFrom`.
     #[dbus_proxy(property, name = "ReloadPropagatedFrom")]
-    fn reload_propagated_from(&self) -> zbus::Result<Vec<String>>;
+    fn reload_propagated_from(&self) -> crate::zbus::Result<Vec<String>>;
 
     /// Get property `PropagatesStopTo`.
     #[dbus_proxy(property, name = "PropagatesStopTo")]
-    fn propagates_stop_to(&self) -> zbus::Result<Vec<String>>;
+    fn propagates_stop_to(&self) -> crate::zbus::Result<Vec<String>>;
 
     /// Get property `StopPropagatedFrom`.
     #[dbus_proxy(property, name = "StopPropagatedFrom")]
-    fn stop_propagated_from(&self) -> zbus::Result<Vec<String>>;
+    fn stop_propagated_from(&self) -> crate::zbus::Result<Vec<String>>;
 
     /// Get property `JoinsNamespaceOf`.
     #[dbus_proxy(property, name = "JoinsNamespaceOf")]
-    fn joins_namespace_of(&self) -> zbus::Result<Vec<String>>;
+    fn joins_namespace_of(&self) -> crate::zbus::Result<Vec<String>>;
 
     /// Get property `SliceOf`.
     #[dbus_proxy(property, name = "SliceOf")]
-    fn slice_of(&self) -> zbus::Result<Vec<String>>;
+    fn slice_of(&self) -> crate::zbus::Result<Vec<String>>;
 
     /// Get property `RequiresMountsFor`.
     #[dbus_proxy(property, name = "RequiresMountsFor")]
-    fn requires_mounts_for(&self) -> zbus::Result<Vec<String>>;
+    fn requires_mounts_for(&self) -> crate::zbus::Result<Vec<String>>;
 
     /// Get property `Documentation`.
     #[dbus_proxy(property, name = "Documentation")]
-    fn documentation(&self) -> zbus::Result<Vec<String>>;
+    fn documentation(&self) -> crate::zbus::Result<Vec<String>>;
 
     /// Get property `Description`.
     #[dbus_proxy(property, name = "Description")]
-    fn description(&self) -> zbus::Result<String>;
+    fn description(&self) -> crate::zbus::Result<String>;
 
     /// Get property `LoadState`.
     #[dbus_proxy(property, name = "LoadState")]
-    fn load_state(&self) -> zbus::Result<String>;
+    fn load_state(&self) -> crate::zbus::Result<String>;
 
     /// Get property `ActiveState`.
     #[dbus_proxy(property, name = "ActiveState")]
-    fn active_state(&self) -> zbus::Result<String>;
+    fn active_state(&self) -> crate::zbus::Result<String>;
 
     /// Get property `FreezerState`.
     #[dbus_proxy(property, name = "FreezerState")]
-    fn freezer_state(&self) -> zbus::Result<String>;
+    fn freezer_state(&self) -> crate::zbus::Result<String>;
 
     /// Get property `SubState`.
     #[dbus_proxy(property, name = "SubState")]
-    fn sub_state(&self) -> zbus::Result<String>;
+    fn sub_state(&self) -> crate::zbus::Result<String>;
 
     /// Get property `FragmentPath`.
     #[dbus_proxy(property, name = "FragmentPath")]
-    fn fragment_path(&self) -> zbus::Result<String>;
+    fn fragment_path(&self) -> crate::zbus::Result<String>;
 
     /// Get property `SourcePath`.
     #[dbus_proxy(property, name = "SourcePath")]
-    fn source_path(&self) -> zbus::Result<String>;
+    fn source_path(&self) -> crate::zbus::Result<String>;
 
     /// Get property `DropInPaths`.
     #[dbus_proxy(property, name = "DropInPaths")]
-    fn drop_in_paths(&self) -> zbus::Result<Vec<String>>;
+    fn drop_in_paths(&self) -> crate::zbus::Result<Vec<String>>;
 
     /// Get property `UnitFileState`.
     #[dbus_proxy(property, name = "UnitFileState")]
-    fn unit_file_state(&self) -> zbus::Result<String>;
+    fn unit_file_state(&self) -> crate::zbus::Result<String>;
 
     /// Get property `UnitFilePreset`.
     #[dbus_proxy(property, name = "UnitFilePreset")]
-    fn unit_file_preset(&self) -> zbus::Result<String>;
+    fn unit_file_preset(&self) -> crate::zbus::Result<String>;
 
     /// Get property `StateChangeTimestamp`.
     #[dbus_proxy(property, name = "StateChangeTimestamp")]
-    fn state_change_timestamp(&self) -> zbus::Result<u64>;
+    fn state_change_timestamp(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `StateChangeTimestampMonotonic`.
     #[dbus_proxy(property, name = "StateChangeTimestampMonotonic")]
-    fn state_change_timestamp_monotonic(&self) -> zbus::Result<u64>;
+    fn state_change_timestamp_monotonic(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `InactiveExitTimestamp`.
     #[dbus_proxy(property, name = "InactiveExitTimestamp")]
-    fn inactive_exit_timestamp(&self) -> zbus::Result<u64>;
+    fn inactive_exit_timestamp(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `InactiveExitTimestampMonotonic`.
     #[dbus_proxy(property, name = "InactiveExitTimestampMonotonic")]
-    fn inactive_exit_timestamp_monotonic(&self) -> zbus::Result<u64>;
+    fn inactive_exit_timestamp_monotonic(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `ActiveEnterTimestamp`.
     #[dbus_proxy(property, name = "ActiveEnterTimestamp")]
-    fn active_enter_timestamp(&self) -> zbus::Result<u64>;
+    fn active_enter_timestamp(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `ActiveEnterTimestampMonotonic`.
     #[dbus_proxy(property, name = "ActiveEnterTimestampMonotonic")]
-    fn active_enter_timestamp_monotonic(&self) -> zbus::Result<u64>;
+    fn active_enter_timestamp_monotonic(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `ActiveExitTimestamp`.
     #[dbus_proxy(property, name = "ActiveExitTimestamp")]
-    fn active_exit_timestamp(&self) -> zbus::Result<u64>;
+    fn active_exit_timestamp(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `ActiveExitTimestampMonotonic`.
     #[dbus_proxy(property, name = "ActiveExitTimestampMonotonic")]
-    fn active_exit_timestamp_monotonic(&self) -> zbus::Result<u64>;
+    fn active_exit_timestamp_monotonic(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `InactiveEnterTimestamp`.
     #[dbus_proxy(property, name = "InactiveEnterTimestamp")]
-    fn inactive_enter_timestamp(&self) -> zbus::Result<u64>;
+    fn inactive_enter_timestamp(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `InactiveEnterTimestampMonotonic`.
     #[dbus_proxy(property, name = "InactiveEnterTimestampMonotonic")]
-    fn inactive_enter_timestamp_monotonic(&self) -> zbus::Result<u64>;
+    fn inactive_enter_timestamp_monotonic(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `CanStart`.
     #[dbus_proxy(property, name = "CanStart")]
-    fn can_start(&self) -> zbus::Result<bool>;
+    fn can_start(&self) -> crate::zbus::Result<bool>;
 
     /// Get property `CanStop`.
     #[dbus_proxy(property, name = "CanStop")]
-    fn can_stop(&self) -> zbus::Result<bool>;
+    fn can_stop(&self) -> crate::zbus::Result<bool>;
 
     /// Get property `CanReload`.
     #[dbus_proxy(property, name = "CanReload")]
-    fn can_reload(&self) -> zbus::Result<bool>;
+    fn can_reload(&self) -> crate::zbus::Result<bool>;
 
     /// Get property `CanIsolate`.
     #[dbus_proxy(property, name = "CanIsolate")]
-    fn can_isolate(&self) -> zbus::Result<bool>;
+    fn can_isolate(&self) -> crate::zbus::Result<bool>;
 
     /// Get property `CanClean`.
     #[dbus_proxy(property, name = "CanClean")]
-    fn can_clean(&self) -> zbus::Result<Vec<String>>;
+    fn can_clean(&self) -> crate::zbus::Result<Vec<String>>;
 
     /// Get property `CanFreeze`.
     #[dbus_proxy(property, name = "CanFreeze")]
-    fn can_freeze(&self) -> zbus::Result<bool>;
+    fn can_freeze(&self) -> crate::zbus::Result<bool>;
+
+    /// Get property `Job`.
+    #[dbus_proxy(property, name = "Job")]
+    fn job(&self) -> crate::zbus::Result<(u32, crate::zvariant::OwnedObjectPath)>;
 
     /// Get property `StopWhenUnneeded`.
     #[dbus_proxy(property, name = "StopWhenUnneeded")]
-    fn stop_when_unneeded(&self) -> zbus::Result<bool>;
+    fn stop_when_unneeded(&self) -> crate::zbus::Result<bool>;
 
     /// Get property `RefuseManualStart`.
     #[dbus_proxy(property, name = "RefuseManualStart")]
-    fn refuse_manual_start(&self) -> zbus::Result<bool>;
+    fn refuse_manual_start(&self) -> crate::zbus::Result<bool>;
 
     /// Get property `RefuseManualStop`.
     #[dbus_proxy(property, name = "RefuseManualStop")]
-    fn refuse_manual_stop(&self) -> zbus::Result<bool>;
+    fn refuse_manual_stop(&self) -> crate::zbus::Result<bool>;
 
     /// Get property `AllowIsolate`.
     #[dbus_proxy(property, name = "AllowIsolate")]
-    fn allow_isolate(&self) -> zbus::Result<bool>;
+    fn allow_isolate(&self) -> crate::zbus::Result<bool>;
 
     /// Get property `DefaultDependencies`.
     #[dbus_proxy(property, name = "DefaultDependencies")]
-    fn default_dependencies(&self) -> zbus::Result<bool>;
+    fn default_dependencies(&self) -> crate::zbus::Result<bool>;
 
     /// Get property `OnSuccesJobMode`.
     #[dbus_proxy(property, name = "OnSuccesJobMode")]
-    fn on_succes_job_mode(&self) -> zbus::Result<String>;
+    fn on_succes_job_mode(&self) -> crate::zbus::Result<String>;
 
     /// Get property `OnFailureJobMode`.
     #[dbus_proxy(property, name = "OnFailureJobMode")]
-    fn on_failure_job_mode(&self) -> zbus::Result<String>;
+    fn on_failure_job_mode(&self) -> crate::zbus::Result<String>;
 
     /// Get property `IgnoreOnIsolate`.
     #[dbus_proxy(property, name = "IgnoreOnIsolate")]
-    fn ignore_on_isolate(&self) -> zbus::Result<bool>;
+    fn ignore_on_isolate(&self) -> crate::zbus::Result<bool>;
 
     /// Get property `NeedDaemonReload`.
     #[dbus_proxy(property, name = "NeedDaemonReload")]
-    fn need_daemon_reload(&self) -> zbus::Result<bool>;
+    fn need_daemon_reload(&self) -> crate::zbus::Result<bool>;
 
     /// Get property `Markers`.
     #[dbus_proxy(property, name = "Markers")]
-    fn markers(&self) -> zbus::Result<Vec<String>>;
+    fn markers(&self) -> crate::zbus::Result<Vec<String>>;
 
     /// Get property `JobTimeoutUSec`.
     #[dbus_proxy(property, name = "JobTimeoutUSec")]
-    fn job_timeout_u_sec(&self) -> zbus::Result<u64>;
+    fn job_timeout_u_sec(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `JobRunningTimeoutUSec`.
     #[dbus_proxy(property, name = "JobRunningTimeoutUSec")]
-    fn job_running_timeout_u_sec(&self) -> zbus::Result<u64>;
+    fn job_running_timeout_u_sec(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `JobTimeoutAction`.
     #[dbus_proxy(property, name = "JobTimeoutAction")]
-    fn job_timeout_action(&self) -> zbus::Result<String>;
+    fn job_timeout_action(&self) -> crate::zbus::Result<String>;
 
     /// Get property `JobTimeoutRebootArgument`.
     #[dbus_proxy(property, name = "JobTimeoutRebootArgument")]
-    fn job_timeout_reboot_argument(&self) -> zbus::Result<String>;
+    fn job_timeout_reboot_argument(&self) -> crate::zbus::Result<String>;
 
     /// Get property `ConditionResult`.
     #[dbus_proxy(property, name = "ConditionResult")]
-    fn condition_result(&self) -> zbus::Result<bool>;
+    fn condition_result(&self) -> crate::zbus::Result<bool>;
 
     /// Get property `AssertResult`.
     #[dbus_proxy(property, name = "AssertResult")]
-    fn assert_result(&self) -> zbus::Result<bool>;
+    fn assert_result(&self) -> crate::zbus::Result<bool>;
 
     /// Get property `ConditionTimestamp`.
     #[dbus_proxy(property, name = "ConditionTimestamp")]
-    fn condition_timestamp(&self) -> zbus::Result<u64>;
+    fn condition_timestamp(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `ConditionTimestampMonotonic`.
     #[dbus_proxy(property, name = "ConditionTimestampMonotonic")]
-    fn condition_timestamp_monotonic(&self) -> zbus::Result<u64>;
+    fn condition_timestamp_monotonic(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `AssertTimestamp`.
     #[dbus_proxy(property, name = "AssertTimestamp")]
-    fn assert_timestamp(&self) -> zbus::Result<u64>;
+    fn assert_timestamp(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `AssertTimestampMonotonic`.
     #[dbus_proxy(property, name = "AssertTimestampMonotonic")]
-    fn assert_timestamp_monotonic(&self) -> zbus::Result<u64>;
+    fn assert_timestamp_monotonic(&self) -> crate::zbus::Result<u64>;
+
+    /// Get property `Conditions`.
+    #[dbus_proxy(property, name = "Conditions")]
+    fn conditions(&self) -> crate::zbus::Result<Vec<(String, bool, bool, String, i32)>>;
+
+    /// Get property `Asserts`.
+    #[dbus_proxy(property, name = "Asserts")]
+    fn asserts(&self) -> crate::zbus::Result<Vec<(String, bool, bool, String, i32)>>;
+
+    /// Get property `LoadError`.
+    #[dbus_proxy(property, name = "LoadError")]
+    fn load_error(&self) -> crate::zbus::Result<(String, String)>;
 
     /// Get property `Transient`.
     #[dbus_proxy(property, name = "Transient")]
-    fn transient(&self) -> zbus::Result<bool>;
+    fn transient(&self) -> crate::zbus::Result<bool>;
 
     /// Get property `Perpetual`.
     #[dbus_proxy(property, name = "Perpetual")]
-    fn perpetual(&self) -> zbus::Result<bool>;
+    fn perpetual(&self) -> crate::zbus::Result<bool>;
 
     /// Get property `StartLimitIntervalUSec`.
     #[dbus_proxy(property, name = "StartLimitIntervalUSec")]
-    fn start_limit_interval_u_sec(&self) -> zbus::Result<u64>;
+    fn start_limit_interval_u_sec(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `StartLimitBurst`.
     #[dbus_proxy(property, name = "StartLimitBurst")]
-    fn start_limit_burst(&self) -> zbus::Result<u32>;
+    fn start_limit_burst(&self) -> crate::zbus::Result<u32>;
 
     /// Get property `StartLimitAction`.
     #[dbus_proxy(property, name = "StartLimitAction")]
-    fn start_limit_action(&self) -> zbus::Result<String>;
+    fn start_limit_action(&self) -> crate::zbus::Result<String>;
 
     /// Get property `FailureAction`.
     #[dbus_proxy(property, name = "FailureAction")]
-    fn failure_action(&self) -> zbus::Result<String>;
+    fn failure_action(&self) -> crate::zbus::Result<String>;
 
     /// Get property `FailureActionExitStatus`.
     #[dbus_proxy(property, name = "FailureActionExitStatus")]
-    fn failure_action_exit_status(&self) -> zbus::Result<i32>;
+    fn failure_action_exit_status(&self) -> crate::zbus::Result<i32>;
 
     /// Get property `SuccessAction`.
     #[dbus_proxy(property, name = "SuccessAction")]
-    fn success_action(&self) -> zbus::Result<String>;
+    fn success_action(&self) -> crate::zbus::Result<String>;
 
     /// Get property `SuccessActionExitStatus`.
     #[dbus_proxy(property, name = "SuccessActionExitStatus")]
-    fn success_action_exit_status(&self) -> zbus::Result<i32>;
+    fn success_action_exit_status(&self) -> crate::zbus::Result<i32>;
 
     /// Get property `RebootArgument`.
     #[dbus_proxy(property, name = "RebootArgument")]
-    fn reboot_argument(&self) -> zbus::Result<String>;
+    fn reboot_argument(&self) -> crate::zbus::Result<String>;
 
     /// Get property `InvocationID`.
     #[dbus_proxy(property, name = "InvocationID")]
-    fn invocation_id(&self) -> zbus::Result<Vec<u8>>;
+    fn invocation_id(&self) -> crate::zbus::Result<Vec<u8>>;
 
     /// Get property `CollectMode`.
     #[dbus_proxy(property, name = "CollectMode")]
-    fn collect_mode(&self) -> zbus::Result<String>;
+    fn collect_mode(&self) -> crate::zbus::Result<String>;
 
     /// Get property `Refs`.
     #[dbus_proxy(property, name = "Refs")]
-    fn refs(&self) -> zbus::Result<Vec<String>>;
+    fn refs(&self) -> crate::zbus::Result<Vec<String>>;
 }
 
 /// Proxy object for `org.freedesktop.systemd1.Service`.
@@ -1328,7 +1535,7 @@ trait Service {
         destination: String,
         read_only: bool,
         mkdir: bool,
-    ) -> zbus::Result<()>;
+    ) -> crate::zbus::Result<()>;
 
     /// [📖](https://www.freedesktop.org/software/systemd/man/systemd.directives.html#MountImage()) Call interface method `MountImage`.
     #[dbus_proxy(name = "MountImage")]
@@ -1339,1023 +1546,1262 @@ trait Service {
         read_only: bool,
         mkdir: bool,
         options: Vec<(String, String)>,
-    ) -> zbus::Result<()>;
+    ) -> crate::zbus::Result<()>;
 
     /// [📖](https://www.freedesktop.org/software/systemd/man/systemd.directives.html#GetProcesses()) Call interface method `GetProcesses`.
     #[dbus_proxy(name = "GetProcesses")]
-    fn get_processes(&self) -> zbus::Result<Vec<(String, u32, String)>>;
+    fn get_processes(&self) -> crate::zbus::Result<Vec<(String, u32, String)>>;
 
     /// [📖](https://www.freedesktop.org/software/systemd/man/systemd.directives.html#AttachProcesses()) Call interface method `AttachProcesses`.
     #[dbus_proxy(name = "AttachProcesses")]
-    fn attach_processes(&self, subcgroup: String, pids: Vec<u32>) -> zbus::Result<()>;
+    fn attach_processes(&self, subcgroup: String, pids: Vec<u32>) -> crate::zbus::Result<()>;
 
     /// Get property `Restart`.
     #[dbus_proxy(property, name = "Restart")]
-    fn restart(&self) -> zbus::Result<String>;
+    fn restart(&self) -> crate::zbus::Result<String>;
 
     /// Get property `PIDFile`.
     #[dbus_proxy(property, name = "PIDFile")]
-    fn pid_file(&self) -> zbus::Result<String>;
+    fn pid_file(&self) -> crate::zbus::Result<String>;
 
     /// Get property `NotifyAccess`.
     #[dbus_proxy(property, name = "NotifyAccess")]
-    fn notify_access(&self) -> zbus::Result<String>;
+    fn notify_access(&self) -> crate::zbus::Result<String>;
 
     /// Get property `RestartUSec`.
     #[dbus_proxy(property, name = "RestartUSec")]
-    fn restart_u_sec(&self) -> zbus::Result<u64>;
+    fn restart_u_sec(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `TimeoutStartUSec`.
     #[dbus_proxy(property, name = "TimeoutStartUSec")]
-    fn timeout_start_u_sec(&self) -> zbus::Result<u64>;
+    fn timeout_start_u_sec(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `TimeoutStopUSec`.
     #[dbus_proxy(property, name = "TimeoutStopUSec")]
-    fn timeout_stop_u_sec(&self) -> zbus::Result<u64>;
+    fn timeout_stop_u_sec(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `TimeoutAbortUSec`.
     #[dbus_proxy(property, name = "TimeoutAbortUSec")]
-    fn timeout_abort_u_sec(&self) -> zbus::Result<u64>;
+    fn timeout_abort_u_sec(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `TimeoutStartFailureMode`.
     #[dbus_proxy(property, name = "TimeoutStartFailureMode")]
-    fn timeout_start_failure_mode(&self) -> zbus::Result<String>;
+    fn timeout_start_failure_mode(&self) -> crate::zbus::Result<String>;
 
     /// Get property `TimeoutStopFailureMode`.
     #[dbus_proxy(property, name = "TimeoutStopFailureMode")]
-    fn timeout_stop_failure_mode(&self) -> zbus::Result<String>;
+    fn timeout_stop_failure_mode(&self) -> crate::zbus::Result<String>;
 
     /// Get property `RuntimeMaxUSec`.
     #[dbus_proxy(property, name = "RuntimeMaxUSec")]
-    fn runtime_max_u_sec(&self) -> zbus::Result<u64>;
+    fn runtime_max_u_sec(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `WatchdogUSec`.
     #[dbus_proxy(property, name = "WatchdogUSec")]
-    fn watchdog_u_sec(&self) -> zbus::Result<u64>;
+    fn watchdog_u_sec(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `WatchdogTimestamp`.
     #[dbus_proxy(property, name = "WatchdogTimestamp")]
-    fn watchdog_timestamp(&self) -> zbus::Result<u64>;
+    fn watchdog_timestamp(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `WatchdogTimestampMonotonic`.
     #[dbus_proxy(property, name = "WatchdogTimestampMonotonic")]
-    fn watchdog_timestamp_monotonic(&self) -> zbus::Result<u64>;
+    fn watchdog_timestamp_monotonic(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `RootDirectoryStartOnly`.
     #[dbus_proxy(property, name = "RootDirectoryStartOnly")]
-    fn root_directory_start_only(&self) -> zbus::Result<bool>;
+    fn root_directory_start_only(&self) -> crate::zbus::Result<bool>;
 
     /// Get property `RemainAfterExit`.
     #[dbus_proxy(property, name = "RemainAfterExit")]
-    fn remain_after_exit(&self) -> zbus::Result<bool>;
+    fn remain_after_exit(&self) -> crate::zbus::Result<bool>;
 
     /// Get property `GuessMainPID`.
     #[dbus_proxy(property, name = "GuessMainPID")]
-    fn guess_main_pid(&self) -> zbus::Result<bool>;
+    fn guess_main_pid(&self) -> crate::zbus::Result<bool>;
+
+    /// Get property `RestartPreventExitStatus`.
+    #[dbus_proxy(property, name = "RestartPreventExitStatus")]
+    fn restart_prevent_exit_status(&self) -> crate::zbus::Result<(Vec<i32>, Vec<i32>)>;
+
+    /// Get property `RestartForceExitStatus`.
+    #[dbus_proxy(property, name = "RestartForceExitStatus")]
+    fn restart_force_exit_status(&self) -> crate::zbus::Result<(Vec<i32>, Vec<i32>)>;
+
+    /// Get property `SuccessExitStatus`.
+    #[dbus_proxy(property, name = "SuccessExitStatus")]
+    fn success_exit_status(&self) -> crate::zbus::Result<(Vec<i32>, Vec<i32>)>;
 
     /// Get property `MainPID`.
     #[dbus_proxy(property, name = "MainPID")]
-    fn main_pid(&self) -> zbus::Result<u32>;
+    fn main_pid(&self) -> crate::zbus::Result<u32>;
 
     /// Get property `ControlPID`.
     #[dbus_proxy(property, name = "ControlPID")]
-    fn control_pid(&self) -> zbus::Result<u32>;
+    fn control_pid(&self) -> crate::zbus::Result<u32>;
 
     /// Get property `BusName`.
     #[dbus_proxy(property, name = "BusName")]
-    fn bus_name(&self) -> zbus::Result<String>;
+    fn bus_name(&self) -> crate::zbus::Result<String>;
 
     /// Get property `FileDescriptorStoreMax`.
     #[dbus_proxy(property, name = "FileDescriptorStoreMax")]
-    fn file_descriptor_store_max(&self) -> zbus::Result<u32>;
+    fn file_descriptor_store_max(&self) -> crate::zbus::Result<u32>;
 
     /// Get property `NFileDescriptorStore`.
     #[dbus_proxy(property, name = "NFileDescriptorStore")]
-    fn n_file_descriptor_store(&self) -> zbus::Result<u32>;
+    fn n_file_descriptor_store(&self) -> crate::zbus::Result<u32>;
 
     /// Get property `StatusText`.
     #[dbus_proxy(property, name = "StatusText")]
-    fn status_text(&self) -> zbus::Result<String>;
+    fn status_text(&self) -> crate::zbus::Result<String>;
 
     /// Get property `StatusErrno`.
     #[dbus_proxy(property, name = "StatusErrno")]
-    fn status_errno(&self) -> zbus::Result<i32>;
+    fn status_errno(&self) -> crate::zbus::Result<i32>;
 
     /// Get property `Result`.
     #[dbus_proxy(property, name = "Result")]
-    fn result(&self) -> zbus::Result<String>;
+    fn result(&self) -> crate::zbus::Result<String>;
 
     /// Get property `ReloadResult`.
     #[dbus_proxy(property, name = "ReloadResult")]
-    fn reload_result(&self) -> zbus::Result<String>;
+    fn reload_result(&self) -> crate::zbus::Result<String>;
 
     /// Get property `CleanResult`.
     #[dbus_proxy(property, name = "CleanResult")]
-    fn clean_result(&self) -> zbus::Result<String>;
+    fn clean_result(&self) -> crate::zbus::Result<String>;
 
     /// Get property `USBFunctionDescriptors`.
     #[dbus_proxy(property, name = "USBFunctionDescriptors")]
-    fn usb_function_descriptors(&self) -> zbus::Result<String>;
+    fn usb_function_descriptors(&self) -> crate::zbus::Result<String>;
 
     /// Get property `USBFunctionStrings`.
     #[dbus_proxy(property, name = "USBFunctionStrings")]
-    fn usb_function_strings(&self) -> zbus::Result<String>;
+    fn usb_function_strings(&self) -> crate::zbus::Result<String>;
 
     /// Get property `UID`.
     #[dbus_proxy(property, name = "UID")]
-    fn uid(&self) -> zbus::Result<u32>;
+    fn uid(&self) -> crate::zbus::Result<u32>;
 
     /// Get property `GID`.
     #[dbus_proxy(property, name = "GID")]
-    fn gid(&self) -> zbus::Result<u32>;
+    fn gid(&self) -> crate::zbus::Result<u32>;
 
     /// Get property `NRestarts`.
     #[dbus_proxy(property, name = "NRestarts")]
-    fn n_restarts(&self) -> zbus::Result<u32>;
+    fn n_restarts(&self) -> crate::zbus::Result<u32>;
 
     /// Get property `OOMPolicy`.
     #[dbus_proxy(property, name = "OOMPolicy")]
-    fn oom_policy(&self) -> zbus::Result<String>;
+    fn oom_policy(&self) -> crate::zbus::Result<String>;
 
     /// Get property `ExecMainStartTimestamp`.
     #[dbus_proxy(property, name = "ExecMainStartTimestamp")]
-    fn exec_main_start_timestamp(&self) -> zbus::Result<u64>;
+    fn exec_main_start_timestamp(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `ExecMainStartTimestampMonotonic`.
     #[dbus_proxy(property, name = "ExecMainStartTimestampMonotonic")]
-    fn exec_main_start_timestamp_monotonic(&self) -> zbus::Result<u64>;
+    fn exec_main_start_timestamp_monotonic(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `ExecMainExitTimestamp`.
     #[dbus_proxy(property, name = "ExecMainExitTimestamp")]
-    fn exec_main_exit_timestamp(&self) -> zbus::Result<u64>;
+    fn exec_main_exit_timestamp(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `ExecMainExitTimestampMonotonic`.
     #[dbus_proxy(property, name = "ExecMainExitTimestampMonotonic")]
-    fn exec_main_exit_timestamp_monotonic(&self) -> zbus::Result<u64>;
+    fn exec_main_exit_timestamp_monotonic(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `ExecMainPID`.
     #[dbus_proxy(property, name = "ExecMainPID")]
-    fn exec_main_pid(&self) -> zbus::Result<u32>;
+    fn exec_main_pid(&self) -> crate::zbus::Result<u32>;
 
     /// Get property `ExecMainCode`.
     #[dbus_proxy(property, name = "ExecMainCode")]
-    fn exec_main_code(&self) -> zbus::Result<i32>;
+    fn exec_main_code(&self) -> crate::zbus::Result<i32>;
 
     /// Get property `ExecMainStatus`.
     #[dbus_proxy(property, name = "ExecMainStatus")]
-    fn exec_main_status(&self) -> zbus::Result<i32>;
+    fn exec_main_status(&self) -> crate::zbus::Result<i32>;
+
+    /// Get property `ExecCondition`.
+    #[dbus_proxy(property, name = "ExecCondition")]
+    fn exec_condition(
+        &self,
+    ) -> crate::zbus::Result<Vec<(String, Vec<String>, bool, u64, u64, u64, u64, u32, i32, i32)>>;
+
+    /// Get property `ExecConditionEx`.
+    #[dbus_proxy(property, name = "ExecConditionEx")]
+    fn exec_condition_ex(
+        &self,
+    ) -> crate::zbus::Result<
+        Vec<(
+            String,
+            Vec<String>,
+            Vec<String>,
+            u64,
+            u64,
+            u64,
+            u64,
+            u32,
+            i32,
+            i32,
+        )>,
+    >;
+
+    /// Get property `ExecStartPre`.
+    #[dbus_proxy(property, name = "ExecStartPre")]
+    fn exec_start_pre(
+        &self,
+    ) -> crate::zbus::Result<Vec<(String, Vec<String>, bool, u64, u64, u64, u64, u32, i32, i32)>>;
+
+    /// Get property `ExecStartPreEx`.
+    #[dbus_proxy(property, name = "ExecStartPreEx")]
+    fn exec_start_pre_ex(
+        &self,
+    ) -> crate::zbus::Result<
+        Vec<(
+            String,
+            Vec<String>,
+            Vec<String>,
+            u64,
+            u64,
+            u64,
+            u64,
+            u32,
+            i32,
+            i32,
+        )>,
+    >;
+
+    /// Get property `ExecStart`.
+    #[dbus_proxy(property, name = "ExecStart")]
+    fn exec_start(
+        &self,
+    ) -> crate::zbus::Result<Vec<(String, Vec<String>, bool, u64, u64, u64, u64, u32, i32, i32)>>;
+
+    /// Get property `ExecStartEx`.
+    #[dbus_proxy(property, name = "ExecStartEx")]
+    fn exec_start_ex(
+        &self,
+    ) -> crate::zbus::Result<
+        Vec<(
+            String,
+            Vec<String>,
+            Vec<String>,
+            u64,
+            u64,
+            u64,
+            u64,
+            u32,
+            i32,
+            i32,
+        )>,
+    >;
+
+    /// Get property `ExecStartPost`.
+    #[dbus_proxy(property, name = "ExecStartPost")]
+    fn exec_start_post(
+        &self,
+    ) -> crate::zbus::Result<Vec<(String, Vec<String>, bool, u64, u64, u64, u64, u32, i32, i32)>>;
+
+    /// Get property `ExecStartPostEx`.
+    #[dbus_proxy(property, name = "ExecStartPostEx")]
+    fn exec_start_post_ex(
+        &self,
+    ) -> crate::zbus::Result<
+        Vec<(
+            String,
+            Vec<String>,
+            Vec<String>,
+            u64,
+            u64,
+            u64,
+            u64,
+            u32,
+            i32,
+            i32,
+        )>,
+    >;
+
+    /// Get property `ExecReload`.
+    #[dbus_proxy(property, name = "ExecReload")]
+    fn exec_reload(
+        &self,
+    ) -> crate::zbus::Result<Vec<(String, Vec<String>, bool, u64, u64, u64, u64, u32, i32, i32)>>;
+
+    /// Get property `ExecReloadEx`.
+    #[dbus_proxy(property, name = "ExecReloadEx")]
+    fn exec_reload_ex(
+        &self,
+    ) -> crate::zbus::Result<
+        Vec<(
+            String,
+            Vec<String>,
+            Vec<String>,
+            u64,
+            u64,
+            u64,
+            u64,
+            u32,
+            i32,
+            i32,
+        )>,
+    >;
+
+    /// Get property `ExecStop`.
+    #[dbus_proxy(property, name = "ExecStop")]
+    fn exec_stop(
+        &self,
+    ) -> crate::zbus::Result<Vec<(String, Vec<String>, bool, u64, u64, u64, u64, u32, i32, i32)>>;
+
+    /// Get property `ExecStopEx`.
+    #[dbus_proxy(property, name = "ExecStopEx")]
+    fn exec_stop_ex(
+        &self,
+    ) -> crate::zbus::Result<
+        Vec<(
+            String,
+            Vec<String>,
+            Vec<String>,
+            u64,
+            u64,
+            u64,
+            u64,
+            u32,
+            i32,
+            i32,
+        )>,
+    >;
+
+    /// Get property `ExecStopPost`.
+    #[dbus_proxy(property, name = "ExecStopPost")]
+    fn exec_stop_post(
+        &self,
+    ) -> crate::zbus::Result<Vec<(String, Vec<String>, bool, u64, u64, u64, u64, u32, i32, i32)>>;
+
+    /// Get property `ExecStopPostEx`.
+    #[dbus_proxy(property, name = "ExecStopPostEx")]
+    fn exec_stop_post_ex(
+        &self,
+    ) -> crate::zbus::Result<
+        Vec<(
+            String,
+            Vec<String>,
+            Vec<String>,
+            u64,
+            u64,
+            u64,
+            u64,
+            u32,
+            i32,
+            i32,
+        )>,
+    >;
 
     /// Get property `Slice`.
     #[dbus_proxy(property, name = "Slice")]
-    fn slice(&self) -> zbus::Result<String>;
+    fn slice(&self) -> crate::zbus::Result<String>;
 
     /// Get property `ControlGroup`.
     #[dbus_proxy(property, name = "ControlGroup")]
-    fn control_group(&self) -> zbus::Result<String>;
+    fn control_group(&self) -> crate::zbus::Result<String>;
 
     /// Get property `MemoryCurrent`.
     #[dbus_proxy(property, name = "MemoryCurrent")]
-    fn memory_current(&self) -> zbus::Result<u64>;
+    fn memory_current(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `MemoryAvailable`.
     #[dbus_proxy(property, name = "MemoryAvailable")]
-    fn memory_available(&self) -> zbus::Result<u64>;
+    fn memory_available(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `CPUUsageNSec`.
     #[dbus_proxy(property, name = "CPUUsageNSec")]
-    fn cpu_usage_n_sec(&self) -> zbus::Result<u64>;
+    fn cpu_usage_n_sec(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `EffectiveCPUs`.
     #[dbus_proxy(property, name = "EffectiveCPUs")]
-    fn effective_cp_us(&self) -> zbus::Result<Vec<u8>>;
+    fn effective_cp_us(&self) -> crate::zbus::Result<Vec<u8>>;
 
     /// Get property `EffectiveMemoryNodes`.
     #[dbus_proxy(property, name = "EffectiveMemoryNodes")]
-    fn effective_memory_nodes(&self) -> zbus::Result<Vec<u8>>;
+    fn effective_memory_nodes(&self) -> crate::zbus::Result<Vec<u8>>;
 
     /// Get property `TasksCurrent`.
     #[dbus_proxy(property, name = "TasksCurrent")]
-    fn tasks_current(&self) -> zbus::Result<u64>;
+    fn tasks_current(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `IPIngressBytes`.
     #[dbus_proxy(property, name = "IPIngressBytes")]
-    fn ip_ingress_bytes(&self) -> zbus::Result<u64>;
+    fn ip_ingress_bytes(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `IPIngressPackets`.
     #[dbus_proxy(property, name = "IPIngressPackets")]
-    fn ip_ingress_packets(&self) -> zbus::Result<u64>;
+    fn ip_ingress_packets(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `IPEgressBytes`.
     #[dbus_proxy(property, name = "IPEgressBytes")]
-    fn ip_egress_bytes(&self) -> zbus::Result<u64>;
+    fn ip_egress_bytes(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `IPEgressPackets`.
     #[dbus_proxy(property, name = "IPEgressPackets")]
-    fn ip_egress_packets(&self) -> zbus::Result<u64>;
+    fn ip_egress_packets(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `IOReadBytes`.
     #[dbus_proxy(property, name = "IOReadBytes")]
-    fn io_read_bytes(&self) -> zbus::Result<u64>;
+    fn io_read_bytes(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `IOReadOperations`.
     #[dbus_proxy(property, name = "IOReadOperations")]
-    fn io_read_operations(&self) -> zbus::Result<u64>;
+    fn io_read_operations(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `IOWriteBytes`.
     #[dbus_proxy(property, name = "IOWriteBytes")]
-    fn io_write_bytes(&self) -> zbus::Result<u64>;
+    fn io_write_bytes(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `IOWriteOperations`.
     #[dbus_proxy(property, name = "IOWriteOperations")]
-    fn io_write_operations(&self) -> zbus::Result<u64>;
+    fn io_write_operations(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `Delegate`.
     #[dbus_proxy(property, name = "Delegate")]
-    fn delegate(&self) -> zbus::Result<bool>;
+    fn delegate(&self) -> crate::zbus::Result<bool>;
 
     /// Get property `DelegateControllers`.
     #[dbus_proxy(property, name = "DelegateControllers")]
-    fn delegate_controllers(&self) -> zbus::Result<Vec<String>>;
+    fn delegate_controllers(&self) -> crate::zbus::Result<Vec<String>>;
 
     /// Get property `CPUAccounting`.
     #[dbus_proxy(property, name = "CPUAccounting")]
-    fn cpu_accounting(&self) -> zbus::Result<bool>;
+    fn cpu_accounting(&self) -> crate::zbus::Result<bool>;
 
     /// Get property `CPUWeight`.
     #[dbus_proxy(property, name = "CPUWeight")]
-    fn cpu_weight(&self) -> zbus::Result<u64>;
+    fn cpu_weight(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `StartupCPUWeight`.
     #[dbus_proxy(property, name = "StartupCPUWeight")]
-    fn startup_cpu_weight(&self) -> zbus::Result<u64>;
+    fn startup_cpu_weight(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `CPUShares`.
     #[dbus_proxy(property, name = "CPUShares")]
-    fn cpu_shares(&self) -> zbus::Result<u64>;
+    fn cpu_shares(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `StartupCPUShares`.
     #[dbus_proxy(property, name = "StartupCPUShares")]
-    fn startup_cpu_shares(&self) -> zbus::Result<u64>;
+    fn startup_cpu_shares(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `CPUQuotaPerSecUSec`.
     #[dbus_proxy(property, name = "CPUQuotaPerSecUSec")]
-    fn cpu_quota_per_sec_u_sec(&self) -> zbus::Result<u64>;
+    fn cpu_quota_per_sec_u_sec(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `CPUQuotaPeriodUSec`.
     #[dbus_proxy(property, name = "CPUQuotaPeriodUSec")]
-    fn cpu_quota_period_u_sec(&self) -> zbus::Result<u64>;
+    fn cpu_quota_period_u_sec(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `AllowedCPUs`.
     #[dbus_proxy(property, name = "AllowedCPUs")]
-    fn allowed_cp_us(&self) -> zbus::Result<Vec<u8>>;
+    fn allowed_cp_us(&self) -> crate::zbus::Result<Vec<u8>>;
 
     /// Get property `AllowedMemoryNodes`.
     #[dbus_proxy(property, name = "AllowedMemoryNodes")]
-    fn allowed_memory_nodes(&self) -> zbus::Result<Vec<u8>>;
+    fn allowed_memory_nodes(&self) -> crate::zbus::Result<Vec<u8>>;
 
     /// Get property `IOAccounting`.
     #[dbus_proxy(property, name = "IOAccounting")]
-    fn io_accounting(&self) -> zbus::Result<bool>;
+    fn io_accounting(&self) -> crate::zbus::Result<bool>;
 
     /// Get property `IOWeight`.
     #[dbus_proxy(property, name = "IOWeight")]
-    fn io_weight(&self) -> zbus::Result<u64>;
+    fn io_weight(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `StartupIOWeight`.
     #[dbus_proxy(property, name = "StartupIOWeight")]
-    fn startup_io_weight(&self) -> zbus::Result<u64>;
+    fn startup_io_weight(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `IODeviceWeight`.
     #[dbus_proxy(property, name = "IODeviceWeight")]
-    fn io_device_weight(&self) -> zbus::Result<Vec<(String, u64)>>;
+    fn io_device_weight(&self) -> crate::zbus::Result<Vec<(String, u64)>>;
 
     /// Get property `IOReadBandwidthMax`.
     #[dbus_proxy(property, name = "IOReadBandwidthMax")]
-    fn io_read_bandwidth_max(&self) -> zbus::Result<Vec<(String, u64)>>;
+    fn io_read_bandwidth_max(&self) -> crate::zbus::Result<Vec<(String, u64)>>;
 
     /// Get property `IOWriteBandwidthMax`.
     #[dbus_proxy(property, name = "IOWriteBandwidthMax")]
-    fn io_write_bandwidth_max(&self) -> zbus::Result<Vec<(String, u64)>>;
+    fn io_write_bandwidth_max(&self) -> crate::zbus::Result<Vec<(String, u64)>>;
 
     /// Get property `IOReadIOPSMax`.
     #[dbus_proxy(property, name = "IOReadIOPSMax")]
-    fn io_read_iops_max(&self) -> zbus::Result<Vec<(String, u64)>>;
+    fn io_read_iops_max(&self) -> crate::zbus::Result<Vec<(String, u64)>>;
 
     /// Get property `IOWriteIOPSMax`.
     #[dbus_proxy(property, name = "IOWriteIOPSMax")]
-    fn io_write_iops_max(&self) -> zbus::Result<Vec<(String, u64)>>;
+    fn io_write_iops_max(&self) -> crate::zbus::Result<Vec<(String, u64)>>;
 
     /// Get property `IODeviceLatencyTargetUSec`.
     #[dbus_proxy(property, name = "IODeviceLatencyTargetUSec")]
-    fn io_device_latency_target_u_sec(&self) -> zbus::Result<Vec<(String, u64)>>;
+    fn io_device_latency_target_u_sec(&self) -> crate::zbus::Result<Vec<(String, u64)>>;
 
     /// Get property `BlockIOAccounting`.
     #[dbus_proxy(property, name = "BlockIOAccounting")]
-    fn block_io_accounting(&self) -> zbus::Result<bool>;
+    fn block_io_accounting(&self) -> crate::zbus::Result<bool>;
 
     /// Get property `BlockIOWeight`.
     #[dbus_proxy(property, name = "BlockIOWeight")]
-    fn block_io_weight(&self) -> zbus::Result<u64>;
+    fn block_io_weight(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `StartupBlockIOWeight`.
     #[dbus_proxy(property, name = "StartupBlockIOWeight")]
-    fn startup_block_io_weight(&self) -> zbus::Result<u64>;
+    fn startup_block_io_weight(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `BlockIODeviceWeight`.
     #[dbus_proxy(property, name = "BlockIODeviceWeight")]
-    fn block_io_device_weight(&self) -> zbus::Result<Vec<(String, u64)>>;
+    fn block_io_device_weight(&self) -> crate::zbus::Result<Vec<(String, u64)>>;
 
     /// Get property `BlockIOReadBandwidth`.
     #[dbus_proxy(property, name = "BlockIOReadBandwidth")]
-    fn block_io_read_bandwidth(&self) -> zbus::Result<Vec<(String, u64)>>;
+    fn block_io_read_bandwidth(&self) -> crate::zbus::Result<Vec<(String, u64)>>;
 
     /// Get property `BlockIOWriteBandwidth`.
     #[dbus_proxy(property, name = "BlockIOWriteBandwidth")]
-    fn block_io_write_bandwidth(&self) -> zbus::Result<Vec<(String, u64)>>;
+    fn block_io_write_bandwidth(&self) -> crate::zbus::Result<Vec<(String, u64)>>;
 
     /// Get property `MemoryAccounting`.
     #[dbus_proxy(property, name = "MemoryAccounting")]
-    fn memory_accounting(&self) -> zbus::Result<bool>;
+    fn memory_accounting(&self) -> crate::zbus::Result<bool>;
 
     /// Get property `DefaultMemoryLow`.
     #[dbus_proxy(property, name = "DefaultMemoryLow")]
-    fn default_memory_low(&self) -> zbus::Result<u64>;
+    fn default_memory_low(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `DefaultMemoryMin`.
     #[dbus_proxy(property, name = "DefaultMemoryMin")]
-    fn default_memory_min(&self) -> zbus::Result<u64>;
+    fn default_memory_min(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `MemoryMin`.
     #[dbus_proxy(property, name = "MemoryMin")]
-    fn memory_min(&self) -> zbus::Result<u64>;
+    fn memory_min(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `MemoryLow`.
     #[dbus_proxy(property, name = "MemoryLow")]
-    fn memory_low(&self) -> zbus::Result<u64>;
+    fn memory_low(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `MemoryHigh`.
     #[dbus_proxy(property, name = "MemoryHigh")]
-    fn memory_high(&self) -> zbus::Result<u64>;
+    fn memory_high(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `MemoryMax`.
     #[dbus_proxy(property, name = "MemoryMax")]
-    fn memory_max(&self) -> zbus::Result<u64>;
+    fn memory_max(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `MemorySwapMax`.
     #[dbus_proxy(property, name = "MemorySwapMax")]
-    fn memory_swap_max(&self) -> zbus::Result<u64>;
+    fn memory_swap_max(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `MemoryLimit`.
     #[dbus_proxy(property, name = "MemoryLimit")]
-    fn memory_limit(&self) -> zbus::Result<u64>;
+    fn memory_limit(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `DevicePolicy`.
     #[dbus_proxy(property, name = "DevicePolicy")]
-    fn device_policy(&self) -> zbus::Result<String>;
+    fn device_policy(&self) -> crate::zbus::Result<String>;
 
     /// Get property `DeviceAllow`.
     #[dbus_proxy(property, name = "DeviceAllow")]
-    fn device_allow(&self) -> zbus::Result<Vec<(String, String)>>;
+    fn device_allow(&self) -> crate::zbus::Result<Vec<(String, String)>>;
 
     /// Get property `TasksAccounting`.
     #[dbus_proxy(property, name = "TasksAccounting")]
-    fn tasks_accounting(&self) -> zbus::Result<bool>;
+    fn tasks_accounting(&self) -> crate::zbus::Result<bool>;
 
     /// Get property `TasksMax`.
     #[dbus_proxy(property, name = "TasksMax")]
-    fn tasks_max(&self) -> zbus::Result<u64>;
+    fn tasks_max(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `IPAccounting`.
     #[dbus_proxy(property, name = "IPAccounting")]
-    fn ip_accounting(&self) -> zbus::Result<bool>;
+    fn ip_accounting(&self) -> crate::zbus::Result<bool>;
+
+    /// Get property `IPAddressAllow`.
+    #[dbus_proxy(property, name = "IPAddressAllow")]
+    fn ip_address_allow(&self) -> crate::zbus::Result<Vec<(i32, Vec<u8>, u32)>>;
+
+    /// Get property `IPAddressDeny`.
+    #[dbus_proxy(property, name = "IPAddressDeny")]
+    fn ip_address_deny(&self) -> crate::zbus::Result<Vec<(i32, Vec<u8>, u32)>>;
 
     /// Get property `IPIngressFilterPath`.
     #[dbus_proxy(property, name = "IPIngressFilterPath")]
-    fn ip_ingress_filter_path(&self) -> zbus::Result<Vec<String>>;
+    fn ip_ingress_filter_path(&self) -> crate::zbus::Result<Vec<String>>;
 
     /// Get property `IPEgressFilterPath`.
     #[dbus_proxy(property, name = "IPEgressFilterPath")]
-    fn ip_egress_filter_path(&self) -> zbus::Result<Vec<String>>;
+    fn ip_egress_filter_path(&self) -> crate::zbus::Result<Vec<String>>;
 
     /// Get property `DisableControllers`.
     #[dbus_proxy(property, name = "DisableControllers")]
-    fn disable_controllers(&self) -> zbus::Result<Vec<String>>;
+    fn disable_controllers(&self) -> crate::zbus::Result<Vec<String>>;
 
     /// Get property `ManagedOOMSwap`.
     #[dbus_proxy(property, name = "ManagedOOMSwap")]
-    fn managed_oom_swap(&self) -> zbus::Result<String>;
+    fn managed_oom_swap(&self) -> crate::zbus::Result<String>;
 
     /// Get property `ManagedOOMMemoryPressure`.
     #[dbus_proxy(property, name = "ManagedOOMMemoryPressure")]
-    fn managed_oom_memory_pressure(&self) -> zbus::Result<String>;
+    fn managed_oom_memory_pressure(&self) -> crate::zbus::Result<String>;
 
     /// Get property `ManagedOOMMemoryPressureLimit`.
     #[dbus_proxy(property, name = "ManagedOOMMemoryPressureLimit")]
-    fn managed_oom_memory_pressure_limit(&self) -> zbus::Result<u32>;
+    fn managed_oom_memory_pressure_limit(&self) -> crate::zbus::Result<u32>;
 
     /// Get property `ManagedOOMPreference`.
     #[dbus_proxy(property, name = "ManagedOOMPreference")]
-    fn managed_oom_preference(&self) -> zbus::Result<String>;
+    fn managed_oom_preference(&self) -> crate::zbus::Result<String>;
 
     /// Get property `BPFProgram`.
     #[dbus_proxy(property, name = "BPFProgram")]
-    fn bpf_program(&self) -> zbus::Result<Vec<(String, String)>>;
+    fn bpf_program(&self) -> crate::zbus::Result<Vec<(String, String)>>;
+
+    /// Get property `SocketBindAllow`.
+    #[dbus_proxy(property, name = "SocketBindAllow")]
+    fn socket_bind_allow(&self) -> crate::zbus::Result<Vec<(i32, i32, u16, u16)>>;
+
+    /// Get property `SocketBindDeny`.
+    #[dbus_proxy(property, name = "SocketBindDeny")]
+    fn socket_bind_deny(&self) -> crate::zbus::Result<Vec<(i32, i32, u16, u16)>>;
 
     /// Get property `Environment`.
     #[dbus_proxy(property, name = "Environment")]
-    fn environment(&self) -> zbus::Result<Vec<String>>;
+    fn environment(&self) -> crate::zbus::Result<Vec<String>>;
 
     /// Get property `EnvironmentFiles`.
     #[dbus_proxy(property, name = "EnvironmentFiles")]
-    fn environment_files(&self) -> zbus::Result<Vec<(String, bool)>>;
+    fn environment_files(&self) -> crate::zbus::Result<Vec<(String, bool)>>;
 
     /// Get property `PassEnvironment`.
     #[dbus_proxy(property, name = "PassEnvironment")]
-    fn pass_environment(&self) -> zbus::Result<Vec<String>>;
+    fn pass_environment(&self) -> crate::zbus::Result<Vec<String>>;
 
     /// Get property `UnsetEnvironment`.
     #[dbus_proxy(property, name = "UnsetEnvironment")]
-    fn unset_environment(&self) -> zbus::Result<Vec<String>>;
+    fn unset_environment(&self) -> crate::zbus::Result<Vec<String>>;
 
     /// Get property `UMask`.
     #[dbus_proxy(property, name = "UMask")]
-    fn u_mask(&self) -> zbus::Result<u32>;
+    fn u_mask(&self) -> crate::zbus::Result<u32>;
 
     /// Get property `LimitCPU`.
     #[dbus_proxy(property, name = "LimitCPU")]
-    fn limit_cpu(&self) -> zbus::Result<u64>;
+    fn limit_cpu(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `LimitCPUSoft`.
     #[dbus_proxy(property, name = "LimitCPUSoft")]
-    fn limit_cpu_soft(&self) -> zbus::Result<u64>;
+    fn limit_cpu_soft(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `LimitFSIZE`.
     #[dbus_proxy(property, name = "LimitFSIZE")]
-    fn limit_fsize(&self) -> zbus::Result<u64>;
+    fn limit_fsize(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `LimitFSIZESoft`.
     #[dbus_proxy(property, name = "LimitFSIZESoft")]
-    fn limit_fsize_soft(&self) -> zbus::Result<u64>;
+    fn limit_fsize_soft(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `LimitDATA`.
     #[dbus_proxy(property, name = "LimitDATA")]
-    fn limit_data(&self) -> zbus::Result<u64>;
+    fn limit_data(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `LimitDATASoft`.
     #[dbus_proxy(property, name = "LimitDATASoft")]
-    fn limit_data_soft(&self) -> zbus::Result<u64>;
+    fn limit_data_soft(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `LimitSTACK`.
     #[dbus_proxy(property, name = "LimitSTACK")]
-    fn limit_stack(&self) -> zbus::Result<u64>;
+    fn limit_stack(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `LimitSTACKSoft`.
     #[dbus_proxy(property, name = "LimitSTACKSoft")]
-    fn limit_stack_soft(&self) -> zbus::Result<u64>;
+    fn limit_stack_soft(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `LimitCORE`.
     #[dbus_proxy(property, name = "LimitCORE")]
-    fn limit_core(&self) -> zbus::Result<u64>;
+    fn limit_core(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `LimitCORESoft`.
     #[dbus_proxy(property, name = "LimitCORESoft")]
-    fn limit_core_soft(&self) -> zbus::Result<u64>;
+    fn limit_core_soft(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `LimitRSS`.
     #[dbus_proxy(property, name = "LimitRSS")]
-    fn limit_rss(&self) -> zbus::Result<u64>;
+    fn limit_rss(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `LimitRSSSoft`.
     #[dbus_proxy(property, name = "LimitRSSSoft")]
-    fn limit_rss_soft(&self) -> zbus::Result<u64>;
+    fn limit_rss_soft(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `LimitNOFILE`.
     #[dbus_proxy(property, name = "LimitNOFILE")]
-    fn limit_nofile(&self) -> zbus::Result<u64>;
+    fn limit_nofile(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `LimitNOFILESoft`.
     #[dbus_proxy(property, name = "LimitNOFILESoft")]
-    fn limit_nofile_soft(&self) -> zbus::Result<u64>;
+    fn limit_nofile_soft(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `LimitAS`.
     #[dbus_proxy(property, name = "LimitAS")]
-    fn limit_as(&self) -> zbus::Result<u64>;
+    fn limit_as(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `LimitASSoft`.
     #[dbus_proxy(property, name = "LimitASSoft")]
-    fn limit_as_soft(&self) -> zbus::Result<u64>;
+    fn limit_as_soft(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `LimitNPROC`.
     #[dbus_proxy(property, name = "LimitNPROC")]
-    fn limit_nproc(&self) -> zbus::Result<u64>;
+    fn limit_nproc(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `LimitNPROCSoft`.
     #[dbus_proxy(property, name = "LimitNPROCSoft")]
-    fn limit_nproc_soft(&self) -> zbus::Result<u64>;
+    fn limit_nproc_soft(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `LimitMEMLOCK`.
     #[dbus_proxy(property, name = "LimitMEMLOCK")]
-    fn limit_memlock(&self) -> zbus::Result<u64>;
+    fn limit_memlock(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `LimitMEMLOCKSoft`.
     #[dbus_proxy(property, name = "LimitMEMLOCKSoft")]
-    fn limit_memlock_soft(&self) -> zbus::Result<u64>;
+    fn limit_memlock_soft(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `LimitLOCKS`.
     #[dbus_proxy(property, name = "LimitLOCKS")]
-    fn limit_locks(&self) -> zbus::Result<u64>;
+    fn limit_locks(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `LimitLOCKSSoft`.
     #[dbus_proxy(property, name = "LimitLOCKSSoft")]
-    fn limit_locks_soft(&self) -> zbus::Result<u64>;
+    fn limit_locks_soft(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `LimitSIGPENDING`.
     #[dbus_proxy(property, name = "LimitSIGPENDING")]
-    fn limit_sigpending(&self) -> zbus::Result<u64>;
+    fn limit_sigpending(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `LimitSIGPENDINGSoft`.
     #[dbus_proxy(property, name = "LimitSIGPENDINGSoft")]
-    fn limit_sigpending_soft(&self) -> zbus::Result<u64>;
+    fn limit_sigpending_soft(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `LimitMSGQUEUE`.
     #[dbus_proxy(property, name = "LimitMSGQUEUE")]
-    fn limit_msgqueue(&self) -> zbus::Result<u64>;
+    fn limit_msgqueue(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `LimitMSGQUEUESoft`.
     #[dbus_proxy(property, name = "LimitMSGQUEUESoft")]
-    fn limit_msgqueue_soft(&self) -> zbus::Result<u64>;
+    fn limit_msgqueue_soft(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `LimitNICE`.
     #[dbus_proxy(property, name = "LimitNICE")]
-    fn limit_nice(&self) -> zbus::Result<u64>;
+    fn limit_nice(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `LimitNICESoft`.
     #[dbus_proxy(property, name = "LimitNICESoft")]
-    fn limit_nice_soft(&self) -> zbus::Result<u64>;
+    fn limit_nice_soft(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `LimitRTPRIO`.
     #[dbus_proxy(property, name = "LimitRTPRIO")]
-    fn limit_rtprio(&self) -> zbus::Result<u64>;
+    fn limit_rtprio(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `LimitRTPRIOSoft`.
     #[dbus_proxy(property, name = "LimitRTPRIOSoft")]
-    fn limit_rtprio_soft(&self) -> zbus::Result<u64>;
+    fn limit_rtprio_soft(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `LimitRTTIME`.
     #[dbus_proxy(property, name = "LimitRTTIME")]
-    fn limit_rttime(&self) -> zbus::Result<u64>;
+    fn limit_rttime(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `LimitRTTIMESoft`.
     #[dbus_proxy(property, name = "LimitRTTIMESoft")]
-    fn limit_rttime_soft(&self) -> zbus::Result<u64>;
+    fn limit_rttime_soft(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `WorkingDirectory`.
     #[dbus_proxy(property, name = "WorkingDirectory")]
-    fn working_directory(&self) -> zbus::Result<String>;
+    fn working_directory(&self) -> crate::zbus::Result<String>;
 
     /// Get property `RootDirectory`.
     #[dbus_proxy(property, name = "RootDirectory")]
-    fn root_directory(&self) -> zbus::Result<String>;
+    fn root_directory(&self) -> crate::zbus::Result<String>;
 
     /// Get property `RootImage`.
     #[dbus_proxy(property, name = "RootImage")]
-    fn root_image(&self) -> zbus::Result<String>;
+    fn root_image(&self) -> crate::zbus::Result<String>;
 
     /// Get property `RootImageOptions`.
     #[dbus_proxy(property, name = "RootImageOptions")]
-    fn root_image_options(&self) -> zbus::Result<Vec<(String, String)>>;
+    fn root_image_options(&self) -> crate::zbus::Result<Vec<(String, String)>>;
 
     /// Get property `RootHash`.
     #[dbus_proxy(property, name = "RootHash")]
-    fn root_hash(&self) -> zbus::Result<Vec<u8>>;
+    fn root_hash(&self) -> crate::zbus::Result<Vec<u8>>;
 
     /// Get property `RootHashPath`.
     #[dbus_proxy(property, name = "RootHashPath")]
-    fn root_hash_path(&self) -> zbus::Result<String>;
+    fn root_hash_path(&self) -> crate::zbus::Result<String>;
 
     /// Get property `RootHashSignature`.
     #[dbus_proxy(property, name = "RootHashSignature")]
-    fn root_hash_signature(&self) -> zbus::Result<Vec<u8>>;
+    fn root_hash_signature(&self) -> crate::zbus::Result<Vec<u8>>;
 
     /// Get property `RootHashSignaturePath`.
     #[dbus_proxy(property, name = "RootHashSignaturePath")]
-    fn root_hash_signature_path(&self) -> zbus::Result<String>;
+    fn root_hash_signature_path(&self) -> crate::zbus::Result<String>;
 
     /// Get property `RootVerity`.
     #[dbus_proxy(property, name = "RootVerity")]
-    fn root_verity(&self) -> zbus::Result<String>;
+    fn root_verity(&self) -> crate::zbus::Result<String>;
 
     /// Get property `OOMScoreAdjust`.
     #[dbus_proxy(property, name = "OOMScoreAdjust")]
-    fn oom_score_adjust(&self) -> zbus::Result<i32>;
+    fn oom_score_adjust(&self) -> crate::zbus::Result<i32>;
 
     /// Get property `CoredumpFilter`.
     #[dbus_proxy(property, name = "CoredumpFilter")]
-    fn coredump_filter(&self) -> zbus::Result<u64>;
+    fn coredump_filter(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `Nice`.
     #[dbus_proxy(property, name = "Nice")]
-    fn nice(&self) -> zbus::Result<i32>;
+    fn nice(&self) -> crate::zbus::Result<i32>;
 
     /// Get property `IOSchedulingClass`.
     #[dbus_proxy(property, name = "IOSchedulingClass")]
-    fn io_scheduling_class(&self) -> zbus::Result<i32>;
+    fn io_scheduling_class(&self) -> crate::zbus::Result<i32>;
 
     /// Get property `IOSchedulingPriority`.
     #[dbus_proxy(property, name = "IOSchedulingPriority")]
-    fn io_scheduling_priority(&self) -> zbus::Result<i32>;
+    fn io_scheduling_priority(&self) -> crate::zbus::Result<i32>;
 
     /// Get property `CPUSchedulingPolicy`.
     #[dbus_proxy(property, name = "CPUSchedulingPolicy")]
-    fn cpu_scheduling_policy(&self) -> zbus::Result<i32>;
+    fn cpu_scheduling_policy(&self) -> crate::zbus::Result<i32>;
 
     /// Get property `CPUSchedulingPriority`.
     #[dbus_proxy(property, name = "CPUSchedulingPriority")]
-    fn cpu_scheduling_priority(&self) -> zbus::Result<i32>;
+    fn cpu_scheduling_priority(&self) -> crate::zbus::Result<i32>;
 
     /// Get property `CPUAffinity`.
     #[dbus_proxy(property, name = "CPUAffinity")]
-    fn cpu_affinity(&self) -> zbus::Result<Vec<u8>>;
+    fn cpu_affinity(&self) -> crate::zbus::Result<Vec<u8>>;
 
     /// Get property `CPUAffinityFromNUMA`.
     #[dbus_proxy(property, name = "CPUAffinityFromNUMA")]
-    fn cpu_affinity_from_numa(&self) -> zbus::Result<bool>;
+    fn cpu_affinity_from_numa(&self) -> crate::zbus::Result<bool>;
 
     /// Get property `NUMAPolicy`.
     #[dbus_proxy(property, name = "NUMAPolicy")]
-    fn numa_policy(&self) -> zbus::Result<i32>;
+    fn numa_policy(&self) -> crate::zbus::Result<i32>;
 
     /// Get property `NUMAMask`.
     #[dbus_proxy(property, name = "NUMAMask")]
-    fn numa_mask(&self) -> zbus::Result<Vec<u8>>;
+    fn numa_mask(&self) -> crate::zbus::Result<Vec<u8>>;
 
     /// Get property `TimerSlackNSec`.
     #[dbus_proxy(property, name = "TimerSlackNSec")]
-    fn timer_slack_n_sec(&self) -> zbus::Result<u64>;
+    fn timer_slack_n_sec(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `CPUSchedulingResetOnFork`.
     #[dbus_proxy(property, name = "CPUSchedulingResetOnFork")]
-    fn cpu_scheduling_reset_on_fork(&self) -> zbus::Result<bool>;
+    fn cpu_scheduling_reset_on_fork(&self) -> crate::zbus::Result<bool>;
 
     /// Get property `NonBlocking`.
     #[dbus_proxy(property, name = "NonBlocking")]
-    fn non_blocking(&self) -> zbus::Result<bool>;
+    fn non_blocking(&self) -> crate::zbus::Result<bool>;
 
     /// Get property `StandardInput`.
     #[dbus_proxy(property, name = "StandardInput")]
-    fn standard_input(&self) -> zbus::Result<String>;
+    fn standard_input(&self) -> crate::zbus::Result<String>;
 
     /// Get property `StandardInputFileDescriptorName`.
     #[dbus_proxy(property, name = "StandardInputFileDescriptorName")]
-    fn standard_input_file_descriptor_name(&self) -> zbus::Result<String>;
+    fn standard_input_file_descriptor_name(&self) -> crate::zbus::Result<String>;
 
     /// Get property `StandardInputData`.
     #[dbus_proxy(property, name = "StandardInputData")]
-    fn standard_input_data(&self) -> zbus::Result<Vec<u8>>;
+    fn standard_input_data(&self) -> crate::zbus::Result<Vec<u8>>;
 
     /// Get property `StandardOutput`.
     #[dbus_proxy(property, name = "StandardOutput")]
-    fn standard_output(&self) -> zbus::Result<String>;
+    fn standard_output(&self) -> crate::zbus::Result<String>;
 
     /// Get property `StandardOutputFileDescriptorName`.
     #[dbus_proxy(property, name = "StandardOutputFileDescriptorName")]
-    fn standard_output_file_descriptor_name(&self) -> zbus::Result<String>;
+    fn standard_output_file_descriptor_name(&self) -> crate::zbus::Result<String>;
 
     /// Get property `StandardError`.
     #[dbus_proxy(property, name = "StandardError")]
-    fn standard_error(&self) -> zbus::Result<String>;
+    fn standard_error(&self) -> crate::zbus::Result<String>;
 
     /// Get property `StandardErrorFileDescriptorName`.
     #[dbus_proxy(property, name = "StandardErrorFileDescriptorName")]
-    fn standard_error_file_descriptor_name(&self) -> zbus::Result<String>;
+    fn standard_error_file_descriptor_name(&self) -> crate::zbus::Result<String>;
 
     /// Get property `TTYPath`.
     #[dbus_proxy(property, name = "TTYPath")]
-    fn tty_path(&self) -> zbus::Result<String>;
+    fn tty_path(&self) -> crate::zbus::Result<String>;
 
     /// Get property `TTYReset`.
     #[dbus_proxy(property, name = "TTYReset")]
-    fn tty_reset(&self) -> zbus::Result<bool>;
+    fn tty_reset(&self) -> crate::zbus::Result<bool>;
 
     /// Get property `TTYVHangup`.
     #[dbus_proxy(property, name = "TTYVHangup")]
-    fn ttyv_hangup(&self) -> zbus::Result<bool>;
+    fn ttyv_hangup(&self) -> crate::zbus::Result<bool>;
 
     /// Get property `TTYVTDisallocate`.
     #[dbus_proxy(property, name = "TTYVTDisallocate")]
-    fn ttyvt_disallocate(&self) -> zbus::Result<bool>;
+    fn ttyvt_disallocate(&self) -> crate::zbus::Result<bool>;
 
     /// Get property `SyslogPriority`.
     #[dbus_proxy(property, name = "SyslogPriority")]
-    fn syslog_priority(&self) -> zbus::Result<i32>;
+    fn syslog_priority(&self) -> crate::zbus::Result<i32>;
 
     /// Get property `SyslogIdentifier`.
     #[dbus_proxy(property, name = "SyslogIdentifier")]
-    fn syslog_identifier(&self) -> zbus::Result<String>;
+    fn syslog_identifier(&self) -> crate::zbus::Result<String>;
 
     /// Get property `SyslogLevelPrefix`.
     #[dbus_proxy(property, name = "SyslogLevelPrefix")]
-    fn syslog_level_prefix(&self) -> zbus::Result<bool>;
+    fn syslog_level_prefix(&self) -> crate::zbus::Result<bool>;
 
     /// Get property `SyslogLevel`.
     #[dbus_proxy(property, name = "SyslogLevel")]
-    fn syslog_level(&self) -> zbus::Result<i32>;
+    fn syslog_level(&self) -> crate::zbus::Result<i32>;
 
     /// Get property `SyslogFacility`.
     #[dbus_proxy(property, name = "SyslogFacility")]
-    fn syslog_facility(&self) -> zbus::Result<i32>;
+    fn syslog_facility(&self) -> crate::zbus::Result<i32>;
 
     /// Get property `LogLevelMax`.
     #[dbus_proxy(property, name = "LogLevelMax")]
-    fn log_level_max(&self) -> zbus::Result<i32>;
+    fn log_level_max(&self) -> crate::zbus::Result<i32>;
 
     /// Get property `LogRateLimitIntervalUSec`.
     #[dbus_proxy(property, name = "LogRateLimitIntervalUSec")]
-    fn log_rate_limit_interval_u_sec(&self) -> zbus::Result<u64>;
+    fn log_rate_limit_interval_u_sec(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `LogRateLimitBurst`.
     #[dbus_proxy(property, name = "LogRateLimitBurst")]
-    fn log_rate_limit_burst(&self) -> zbus::Result<u32>;
+    fn log_rate_limit_burst(&self) -> crate::zbus::Result<u32>;
 
     /// Get property `LogNamespace`.
     #[dbus_proxy(property, name = "LogNamespace")]
-    fn log_namespace(&self) -> zbus::Result<String>;
+    fn log_namespace(&self) -> crate::zbus::Result<String>;
 
     /// Get property `SecureBits`.
     #[dbus_proxy(property, name = "SecureBits")]
-    fn secure_bits(&self) -> zbus::Result<i32>;
+    fn secure_bits(&self) -> crate::zbus::Result<i32>;
 
     /// Get property `CapabilityBoundingSet`.
     #[dbus_proxy(property, name = "CapabilityBoundingSet")]
-    fn capability_bounding_set(&self) -> zbus::Result<u64>;
+    fn capability_bounding_set(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `AmbientCapabilities`.
     #[dbus_proxy(property, name = "AmbientCapabilities")]
-    fn ambient_capabilities(&self) -> zbus::Result<u64>;
+    fn ambient_capabilities(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `User`.
     #[dbus_proxy(property, name = "User")]
-    fn user(&self) -> zbus::Result<String>;
+    fn user(&self) -> crate::zbus::Result<String>;
 
     /// Get property `Group`.
     #[dbus_proxy(property, name = "Group")]
-    fn group(&self) -> zbus::Result<String>;
+    fn group(&self) -> crate::zbus::Result<String>;
 
     /// Get property `DynamicUser`.
     #[dbus_proxy(property, name = "DynamicUser")]
-    fn dynamic_user(&self) -> zbus::Result<bool>;
+    fn dynamic_user(&self) -> crate::zbus::Result<bool>;
 
     /// Get property `RemoveIPC`.
     #[dbus_proxy(property, name = "RemoveIPC")]
-    fn remove_ipc(&self) -> zbus::Result<bool>;
+    fn remove_ipc(&self) -> crate::zbus::Result<bool>;
+
+    /// Get property `SetCredential`.
+    #[dbus_proxy(property, name = "SetCredential")]
+    fn set_credential(&self) -> crate::zbus::Result<Vec<(String, Vec<u8>)>>;
 
     /// Get property `LoadCredential`.
     #[dbus_proxy(property, name = "LoadCredential")]
-    fn load_credential(&self) -> zbus::Result<Vec<(String, String)>>;
+    fn load_credential(&self) -> crate::zbus::Result<Vec<(String, String)>>;
 
     /// Get property `SupplementaryGroups`.
     #[dbus_proxy(property, name = "SupplementaryGroups")]
-    fn supplementary_groups(&self) -> zbus::Result<Vec<String>>;
+    fn supplementary_groups(&self) -> crate::zbus::Result<Vec<String>>;
 
     /// Get property `PAMName`.
     #[dbus_proxy(property, name = "PAMName")]
-    fn pam_name(&self) -> zbus::Result<String>;
+    fn pam_name(&self) -> crate::zbus::Result<String>;
 
     /// Get property `ReadWritePaths`.
     #[dbus_proxy(property, name = "ReadWritePaths")]
-    fn read_write_paths(&self) -> zbus::Result<Vec<String>>;
+    fn read_write_paths(&self) -> crate::zbus::Result<Vec<String>>;
 
     /// Get property `ReadOnlyPaths`.
     #[dbus_proxy(property, name = "ReadOnlyPaths")]
-    fn read_only_paths(&self) -> zbus::Result<Vec<String>>;
+    fn read_only_paths(&self) -> crate::zbus::Result<Vec<String>>;
 
     /// Get property `InaccessiblePaths`.
     #[dbus_proxy(property, name = "InaccessiblePaths")]
-    fn inaccessible_paths(&self) -> zbus::Result<Vec<String>>;
+    fn inaccessible_paths(&self) -> crate::zbus::Result<Vec<String>>;
 
     /// Get property `ExecPaths`.
     #[dbus_proxy(property, name = "ExecPaths")]
-    fn exec_paths(&self) -> zbus::Result<Vec<String>>;
+    fn exec_paths(&self) -> crate::zbus::Result<Vec<String>>;
 
     /// Get property `NoExecPaths`.
     #[dbus_proxy(property, name = "NoExecPaths")]
-    fn no_exec_paths(&self) -> zbus::Result<Vec<String>>;
+    fn no_exec_paths(&self) -> crate::zbus::Result<Vec<String>>;
 
     /// Get property `MountFlags`.
     #[dbus_proxy(property, name = "MountFlags")]
-    fn mount_flags(&self) -> zbus::Result<u64>;
+    fn mount_flags(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `PrivateTmp`.
     #[dbus_proxy(property, name = "PrivateTmp")]
-    fn private_tmp(&self) -> zbus::Result<bool>;
+    fn private_tmp(&self) -> crate::zbus::Result<bool>;
 
     /// Get property `PrivateDevices`.
     #[dbus_proxy(property, name = "PrivateDevices")]
-    fn private_devices(&self) -> zbus::Result<bool>;
+    fn private_devices(&self) -> crate::zbus::Result<bool>;
 
     /// Get property `ProtectClock`.
     #[dbus_proxy(property, name = "ProtectClock")]
-    fn protect_clock(&self) -> zbus::Result<bool>;
+    fn protect_clock(&self) -> crate::zbus::Result<bool>;
 
     /// Get property `ProtectKernelTunables`.
     #[dbus_proxy(property, name = "ProtectKernelTunables")]
-    fn protect_kernel_tunables(&self) -> zbus::Result<bool>;
+    fn protect_kernel_tunables(&self) -> crate::zbus::Result<bool>;
 
     /// Get property `ProtectKernelModules`.
     #[dbus_proxy(property, name = "ProtectKernelModules")]
-    fn protect_kernel_modules(&self) -> zbus::Result<bool>;
+    fn protect_kernel_modules(&self) -> crate::zbus::Result<bool>;
 
     /// Get property `ProtectKernelLogs`.
     #[dbus_proxy(property, name = "ProtectKernelLogs")]
-    fn protect_kernel_logs(&self) -> zbus::Result<bool>;
+    fn protect_kernel_logs(&self) -> crate::zbus::Result<bool>;
 
     /// Get property `ProtectControlGroups`.
     #[dbus_proxy(property, name = "ProtectControlGroups")]
-    fn protect_control_groups(&self) -> zbus::Result<bool>;
+    fn protect_control_groups(&self) -> crate::zbus::Result<bool>;
 
     /// Get property `PrivateNetwork`.
     #[dbus_proxy(property, name = "PrivateNetwork")]
-    fn private_network(&self) -> zbus::Result<bool>;
+    fn private_network(&self) -> crate::zbus::Result<bool>;
 
     /// Get property `PrivateUsers`.
     #[dbus_proxy(property, name = "PrivateUsers")]
-    fn private_users(&self) -> zbus::Result<bool>;
+    fn private_users(&self) -> crate::zbus::Result<bool>;
 
     /// Get property `PrivateMounts`.
     #[dbus_proxy(property, name = "PrivateMounts")]
-    fn private_mounts(&self) -> zbus::Result<bool>;
+    fn private_mounts(&self) -> crate::zbus::Result<bool>;
 
     /// Get property `PrivateIPC`.
     #[dbus_proxy(property, name = "PrivateIPC")]
-    fn private_ipc(&self) -> zbus::Result<bool>;
+    fn private_ipc(&self) -> crate::zbus::Result<bool>;
 
     /// Get property `ProtectHome`.
     #[dbus_proxy(property, name = "ProtectHome")]
-    fn protect_home(&self) -> zbus::Result<String>;
+    fn protect_home(&self) -> crate::zbus::Result<String>;
 
     /// Get property `ProtectSystem`.
     #[dbus_proxy(property, name = "ProtectSystem")]
-    fn protect_system(&self) -> zbus::Result<String>;
+    fn protect_system(&self) -> crate::zbus::Result<String>;
 
     /// Get property `SameProcessGroup`.
     #[dbus_proxy(property, name = "SameProcessGroup")]
-    fn same_process_group(&self) -> zbus::Result<bool>;
+    fn same_process_group(&self) -> crate::zbus::Result<bool>;
 
     /// Get property `UtmpIdentifier`.
     #[dbus_proxy(property, name = "UtmpIdentifier")]
-    fn utmp_identifier(&self) -> zbus::Result<String>;
+    fn utmp_identifier(&self) -> crate::zbus::Result<String>;
 
     /// Get property `UtmpMode`.
     #[dbus_proxy(property, name = "UtmpMode")]
-    fn utmp_mode(&self) -> zbus::Result<String>;
+    fn utmp_mode(&self) -> crate::zbus::Result<String>;
+
+    /// Get property `SELinuxContext`.
+    #[dbus_proxy(property, name = "SELinuxContext")]
+    fn se_linux_context(&self) -> crate::zbus::Result<(bool, String)>;
+
+    /// Get property `AppArmorProfile`.
+    #[dbus_proxy(property, name = "AppArmorProfile")]
+    fn app_armor_profile(&self) -> crate::zbus::Result<(bool, String)>;
+
+    /// Get property `SmackProcessLabel`.
+    #[dbus_proxy(property, name = "SmackProcessLabel")]
+    fn smack_process_label(&self) -> crate::zbus::Result<(bool, String)>;
 
     /// Get property `IgnoreSIGPIPE`.
     #[dbus_proxy(property, name = "IgnoreSIGPIPE")]
-    fn ignore_sigpipe(&self) -> zbus::Result<bool>;
+    fn ignore_sigpipe(&self) -> crate::zbus::Result<bool>;
 
     /// Get property `NoNewPrivileges`.
     #[dbus_proxy(property, name = "NoNewPrivileges")]
-    fn no_new_privileges(&self) -> zbus::Result<bool>;
+    fn no_new_privileges(&self) -> crate::zbus::Result<bool>;
+
+    /// Get property `SystemCallFilter`.
+    #[dbus_proxy(property, name = "SystemCallFilter")]
+    fn system_call_filter(&self) -> crate::zbus::Result<(bool, Vec<String>)>;
 
     /// Get property `SystemCallArchitectures`.
     #[dbus_proxy(property, name = "SystemCallArchitectures")]
-    fn system_call_architectures(&self) -> zbus::Result<Vec<String>>;
+    fn system_call_architectures(&self) -> crate::zbus::Result<Vec<String>>;
 
     /// Get property `SystemCallErrorNumber`.
     #[dbus_proxy(property, name = "SystemCallErrorNumber")]
-    fn system_call_error_number(&self) -> zbus::Result<i32>;
+    fn system_call_error_number(&self) -> crate::zbus::Result<i32>;
+
+    /// Get property `SystemCallLog`.
+    #[dbus_proxy(property, name = "SystemCallLog")]
+    fn system_call_log(&self) -> crate::zbus::Result<(bool, Vec<String>)>;
 
     /// Get property `Personality`.
     #[dbus_proxy(property, name = "Personality")]
-    fn personality(&self) -> zbus::Result<String>;
+    fn personality(&self) -> crate::zbus::Result<String>;
 
     /// Get property `LockPersonality`.
     #[dbus_proxy(property, name = "LockPersonality")]
-    fn lock_personality(&self) -> zbus::Result<bool>;
+    fn lock_personality(&self) -> crate::zbus::Result<bool>;
+
+    /// Get property `RestrictAddressFamilies`.
+    #[dbus_proxy(property, name = "RestrictAddressFamilies")]
+    fn restrict_address_families(&self) -> crate::zbus::Result<(bool, Vec<String>)>;
 
     /// Get property `RuntimeDirectoryPreserve`.
     #[dbus_proxy(property, name = "RuntimeDirectoryPreserve")]
-    fn runtime_directory_preserve(&self) -> zbus::Result<String>;
+    fn runtime_directory_preserve(&self) -> crate::zbus::Result<String>;
 
     /// Get property `RuntimeDirectoryMode`.
     #[dbus_proxy(property, name = "RuntimeDirectoryMode")]
-    fn runtime_directory_mode(&self) -> zbus::Result<u32>;
+    fn runtime_directory_mode(&self) -> crate::zbus::Result<u32>;
 
     /// Get property `RuntimeDirectory`.
     #[dbus_proxy(property, name = "RuntimeDirectory")]
-    fn runtime_directory(&self) -> zbus::Result<Vec<String>>;
+    fn runtime_directory(&self) -> crate::zbus::Result<Vec<String>>;
 
     /// Get property `StateDirectoryMode`.
     #[dbus_proxy(property, name = "StateDirectoryMode")]
-    fn state_directory_mode(&self) -> zbus::Result<u32>;
+    fn state_directory_mode(&self) -> crate::zbus::Result<u32>;
 
     /// Get property `StateDirectory`.
     #[dbus_proxy(property, name = "StateDirectory")]
-    fn state_directory(&self) -> zbus::Result<Vec<String>>;
+    fn state_directory(&self) -> crate::zbus::Result<Vec<String>>;
 
     /// Get property `CacheDirectoryMode`.
     #[dbus_proxy(property, name = "CacheDirectoryMode")]
-    fn cache_directory_mode(&self) -> zbus::Result<u32>;
+    fn cache_directory_mode(&self) -> crate::zbus::Result<u32>;
 
     /// Get property `CacheDirectory`.
     #[dbus_proxy(property, name = "CacheDirectory")]
-    fn cache_directory(&self) -> zbus::Result<Vec<String>>;
+    fn cache_directory(&self) -> crate::zbus::Result<Vec<String>>;
 
     /// Get property `LogsDirectoryMode`.
     #[dbus_proxy(property, name = "LogsDirectoryMode")]
-    fn logs_directory_mode(&self) -> zbus::Result<u32>;
+    fn logs_directory_mode(&self) -> crate::zbus::Result<u32>;
 
     /// Get property `LogsDirectory`.
     #[dbus_proxy(property, name = "LogsDirectory")]
-    fn logs_directory(&self) -> zbus::Result<Vec<String>>;
+    fn logs_directory(&self) -> crate::zbus::Result<Vec<String>>;
 
     /// Get property `ConfigurationDirectoryMode`.
     #[dbus_proxy(property, name = "ConfigurationDirectoryMode")]
-    fn configuration_directory_mode(&self) -> zbus::Result<u32>;
+    fn configuration_directory_mode(&self) -> crate::zbus::Result<u32>;
 
     /// Get property `ConfigurationDirectory`.
     #[dbus_proxy(property, name = "ConfigurationDirectory")]
-    fn configuration_directory(&self) -> zbus::Result<Vec<String>>;
+    fn configuration_directory(&self) -> crate::zbus::Result<Vec<String>>;
 
     /// Get property `TimeoutCleanUSec`.
     #[dbus_proxy(property, name = "TimeoutCleanUSec")]
-    fn timeout_clean_u_sec(&self) -> zbus::Result<u64>;
+    fn timeout_clean_u_sec(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `MemoryDenyWriteExecute`.
     #[dbus_proxy(property, name = "MemoryDenyWriteExecute")]
-    fn memory_deny_write_execute(&self) -> zbus::Result<bool>;
+    fn memory_deny_write_execute(&self) -> crate::zbus::Result<bool>;
 
     /// Get property `RestrictRealtime`.
     #[dbus_proxy(property, name = "RestrictRealtime")]
-    fn restrict_realtime(&self) -> zbus::Result<bool>;
+    fn restrict_realtime(&self) -> crate::zbus::Result<bool>;
 
     /// Get property `RestrictSUIDSGID`.
     #[dbus_proxy(property, name = "RestrictSUIDSGID")]
-    fn restrict_suidsgid(&self) -> zbus::Result<bool>;
+    fn restrict_suidsgid(&self) -> crate::zbus::Result<bool>;
 
     /// Get property `RestrictNamespaces`.
     #[dbus_proxy(property, name = "RestrictNamespaces")]
-    fn restrict_namespaces(&self) -> zbus::Result<u64>;
+    fn restrict_namespaces(&self) -> crate::zbus::Result<u64>;
+
+    /// Get property `BindPaths`.
+    #[dbus_proxy(property, name = "BindPaths")]
+    fn bind_paths(&self) -> crate::zbus::Result<Vec<(String, String, bool, u64)>>;
+
+    /// Get property `BindReadOnlyPaths`.
+    #[dbus_proxy(property, name = "BindReadOnlyPaths")]
+    fn bind_read_only_paths(&self) -> crate::zbus::Result<Vec<(String, String, bool, u64)>>;
 
     /// Get property `TemporaryFileSystem`.
     #[dbus_proxy(property, name = "TemporaryFileSystem")]
-    fn temporary_file_system(&self) -> zbus::Result<Vec<(String, String)>>;
+    fn temporary_file_system(&self) -> crate::zbus::Result<Vec<(String, String)>>;
 
     /// Get property `MountAPIVFS`.
     #[dbus_proxy(property, name = "MountAPIVFS")]
-    fn mount_apivfs(&self) -> zbus::Result<bool>;
+    fn mount_apivfs(&self) -> crate::zbus::Result<bool>;
 
     /// Get property `KeyringMode`.
     #[dbus_proxy(property, name = "KeyringMode")]
-    fn keyring_mode(&self) -> zbus::Result<String>;
+    fn keyring_mode(&self) -> crate::zbus::Result<String>;
 
     /// Get property `ProtectProc`.
     #[dbus_proxy(property, name = "ProtectProc")]
-    fn protect_proc(&self) -> zbus::Result<String>;
+    fn protect_proc(&self) -> crate::zbus::Result<String>;
 
     /// Get property `ProcSubset`.
     #[dbus_proxy(property, name = "ProcSubset")]
-    fn proc_subset(&self) -> zbus::Result<String>;
+    fn proc_subset(&self) -> crate::zbus::Result<String>;
 
     /// Get property `ProtectHostname`.
     #[dbus_proxy(property, name = "ProtectHostname")]
-    fn protect_hostname(&self) -> zbus::Result<bool>;
+    fn protect_hostname(&self) -> crate::zbus::Result<bool>;
 
     /// Get property `NetworkNamespacePath`.
     #[dbus_proxy(property, name = "NetworkNamespacePath")]
-    fn network_namespace_path(&self) -> zbus::Result<String>;
+    fn network_namespace_path(&self) -> crate::zbus::Result<String>;
 
     /// Get property `IPCNamespacePath`.
     #[dbus_proxy(property, name = "IPCNamespacePath")]
-    fn ipc_namespace_path(&self) -> zbus::Result<String>;
+    fn ipc_namespace_path(&self) -> crate::zbus::Result<String>;
 
     /// Get property `KillMode`.
     #[dbus_proxy(property, name = "KillMode")]
-    fn kill_mode(&self) -> zbus::Result<String>;
+    fn kill_mode(&self) -> crate::zbus::Result<String>;
 
     /// Get property `KillSignal`.
     #[dbus_proxy(property, name = "KillSignal")]
-    fn kill_signal(&self) -> zbus::Result<i32>;
+    fn kill_signal(&self) -> crate::zbus::Result<i32>;
 
     /// Get property `RestartKillSignal`.
     #[dbus_proxy(property, name = "RestartKillSignal")]
-    fn restart_kill_signal(&self) -> zbus::Result<i32>;
+    fn restart_kill_signal(&self) -> crate::zbus::Result<i32>;
 
     /// Get property `FinalKillSignal`.
     #[dbus_proxy(property, name = "FinalKillSignal")]
-    fn final_kill_signal(&self) -> zbus::Result<i32>;
+    fn final_kill_signal(&self) -> crate::zbus::Result<i32>;
 
     /// Get property `SendSIGKILL`.
     #[dbus_proxy(property, name = "SendSIGKILL")]
-    fn send_sigkill(&self) -> zbus::Result<bool>;
+    fn send_sigkill(&self) -> crate::zbus::Result<bool>;
 
     /// Get property `SendSIGHUP`.
     #[dbus_proxy(property, name = "SendSIGHUP")]
-    fn send_sighup(&self) -> zbus::Result<bool>;
+    fn send_sighup(&self) -> crate::zbus::Result<bool>;
 
     /// Get property `WatchdogSignal`.
     #[dbus_proxy(property, name = "WatchdogSignal")]
-    fn watchdog_signal(&self) -> zbus::Result<i32>;
+    fn watchdog_signal(&self) -> crate::zbus::Result<i32>;
 }
 
 /// Proxy object for `org.freedesktop.systemd1.Socket`.
@@ -2367,1079 +2813,1155 @@ trait Service {
 trait Socket {
     /// [📖](https://www.freedesktop.org/software/systemd/man/systemd.directives.html#GetProcesses()) Call interface method `GetProcesses`.
     #[dbus_proxy(name = "GetProcesses")]
-    fn get_processes(&self) -> zbus::Result<Vec<(String, u32, String)>>;
+    fn get_processes(&self) -> crate::zbus::Result<Vec<(String, u32, String)>>;
 
     /// [📖](https://www.freedesktop.org/software/systemd/man/systemd.directives.html#AttachProcesses()) Call interface method `AttachProcesses`.
     #[dbus_proxy(name = "AttachProcesses")]
-    fn attach_processes(&self, subcgroup: String, pids: Vec<u32>) -> zbus::Result<()>;
+    fn attach_processes(&self, subcgroup: String, pids: Vec<u32>) -> crate::zbus::Result<()>;
 
     /// Get property `BindIPv6Only`.
     #[dbus_proxy(property, name = "BindIPv6Only")]
-    fn bind_i_pv6_only(&self) -> zbus::Result<String>;
+    fn bind_i_pv6_only(&self) -> crate::zbus::Result<String>;
 
     /// Get property `Backlog`.
     #[dbus_proxy(property, name = "Backlog")]
-    fn backlog(&self) -> zbus::Result<u32>;
+    fn backlog(&self) -> crate::zbus::Result<u32>;
 
     /// Get property `TimeoutUSec`.
     #[dbus_proxy(property, name = "TimeoutUSec")]
-    fn timeout_u_sec(&self) -> zbus::Result<u64>;
+    fn timeout_u_sec(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `BindToDevice`.
     #[dbus_proxy(property, name = "BindToDevice")]
-    fn bind_to_device(&self) -> zbus::Result<String>;
+    fn bind_to_device(&self) -> crate::zbus::Result<String>;
 
     /// Get property `SocketUser`.
     #[dbus_proxy(property, name = "SocketUser")]
-    fn socket_user(&self) -> zbus::Result<String>;
+    fn socket_user(&self) -> crate::zbus::Result<String>;
 
     /// Get property `SocketGroup`.
     #[dbus_proxy(property, name = "SocketGroup")]
-    fn socket_group(&self) -> zbus::Result<String>;
+    fn socket_group(&self) -> crate::zbus::Result<String>;
 
     /// Get property `SocketMode`.
     #[dbus_proxy(property, name = "SocketMode")]
-    fn socket_mode(&self) -> zbus::Result<u32>;
+    fn socket_mode(&self) -> crate::zbus::Result<u32>;
 
     /// Get property `DirectoryMode`.
     #[dbus_proxy(property, name = "DirectoryMode")]
-    fn directory_mode(&self) -> zbus::Result<u32>;
+    fn directory_mode(&self) -> crate::zbus::Result<u32>;
 
     /// Get property `Accept`.
     #[dbus_proxy(property, name = "Accept")]
-    fn accept(&self) -> zbus::Result<bool>;
+    fn accept(&self) -> crate::zbus::Result<bool>;
 
     /// Get property `FlushPending`.
     #[dbus_proxy(property, name = "FlushPending")]
-    fn flush_pending(&self) -> zbus::Result<bool>;
+    fn flush_pending(&self) -> crate::zbus::Result<bool>;
 
     /// Get property `Writable`.
     #[dbus_proxy(property, name = "Writable")]
-    fn writable(&self) -> zbus::Result<bool>;
+    fn writable(&self) -> crate::zbus::Result<bool>;
 
     /// Get property `KeepAlive`.
     #[dbus_proxy(property, name = "KeepAlive")]
-    fn keep_alive(&self) -> zbus::Result<bool>;
+    fn keep_alive(&self) -> crate::zbus::Result<bool>;
 
     /// Get property `KeepAliveTimeUSec`.
     #[dbus_proxy(property, name = "KeepAliveTimeUSec")]
-    fn keep_alive_time_u_sec(&self) -> zbus::Result<u64>;
+    fn keep_alive_time_u_sec(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `KeepAliveIntervalUSec`.
     #[dbus_proxy(property, name = "KeepAliveIntervalUSec")]
-    fn keep_alive_interval_u_sec(&self) -> zbus::Result<u64>;
+    fn keep_alive_interval_u_sec(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `KeepAliveProbes`.
     #[dbus_proxy(property, name = "KeepAliveProbes")]
-    fn keep_alive_probes(&self) -> zbus::Result<u32>;
+    fn keep_alive_probes(&self) -> crate::zbus::Result<u32>;
 
     /// Get property `DeferAcceptUSec`.
     #[dbus_proxy(property, name = "DeferAcceptUSec")]
-    fn defer_accept_u_sec(&self) -> zbus::Result<u64>;
+    fn defer_accept_u_sec(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `NoDelay`.
     #[dbus_proxy(property, name = "NoDelay")]
-    fn no_delay(&self) -> zbus::Result<bool>;
+    fn no_delay(&self) -> crate::zbus::Result<bool>;
 
     /// Get property `Priority`.
     #[dbus_proxy(property, name = "Priority")]
-    fn priority(&self) -> zbus::Result<i32>;
+    fn priority(&self) -> crate::zbus::Result<i32>;
 
     /// Get property `ReceiveBuffer`.
     #[dbus_proxy(property, name = "ReceiveBuffer")]
-    fn receive_buffer(&self) -> zbus::Result<u64>;
+    fn receive_buffer(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `SendBuffer`.
     #[dbus_proxy(property, name = "SendBuffer")]
-    fn send_buffer(&self) -> zbus::Result<u64>;
+    fn send_buffer(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `IPTOS`.
     #[dbus_proxy(property, name = "IPTOS")]
-    fn iptos(&self) -> zbus::Result<i32>;
+    fn iptos(&self) -> crate::zbus::Result<i32>;
 
     /// Get property `IPTTL`.
     #[dbus_proxy(property, name = "IPTTL")]
-    fn ipttl(&self) -> zbus::Result<i32>;
+    fn ipttl(&self) -> crate::zbus::Result<i32>;
 
     /// Get property `PipeSize`.
     #[dbus_proxy(property, name = "PipeSize")]
-    fn pipe_size(&self) -> zbus::Result<u64>;
+    fn pipe_size(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `FreeBind`.
     #[dbus_proxy(property, name = "FreeBind")]
-    fn free_bind(&self) -> zbus::Result<bool>;
+    fn free_bind(&self) -> crate::zbus::Result<bool>;
 
     /// Get property `Transparent`.
     #[dbus_proxy(property, name = "Transparent")]
-    fn transparent(&self) -> zbus::Result<bool>;
+    fn transparent(&self) -> crate::zbus::Result<bool>;
 
     /// Get property `Broadcast`.
     #[dbus_proxy(property, name = "Broadcast")]
-    fn broadcast(&self) -> zbus::Result<bool>;
+    fn broadcast(&self) -> crate::zbus::Result<bool>;
 
     /// Get property `PassCredentials`.
     #[dbus_proxy(property, name = "PassCredentials")]
-    fn pass_credentials(&self) -> zbus::Result<bool>;
+    fn pass_credentials(&self) -> crate::zbus::Result<bool>;
 
     /// Get property `PassSecurity`.
     #[dbus_proxy(property, name = "PassSecurity")]
-    fn pass_security(&self) -> zbus::Result<bool>;
+    fn pass_security(&self) -> crate::zbus::Result<bool>;
 
     /// Get property `PassPacketInfo`.
     #[dbus_proxy(property, name = "PassPacketInfo")]
-    fn pass_packet_info(&self) -> zbus::Result<bool>;
+    fn pass_packet_info(&self) -> crate::zbus::Result<bool>;
 
     /// Get property `Timestamping`.
     #[dbus_proxy(property, name = "Timestamping")]
-    fn timestamping(&self) -> zbus::Result<String>;
+    fn timestamping(&self) -> crate::zbus::Result<String>;
 
     /// Get property `RemoveOnStop`.
     #[dbus_proxy(property, name = "RemoveOnStop")]
-    fn remove_on_stop(&self) -> zbus::Result<bool>;
+    fn remove_on_stop(&self) -> crate::zbus::Result<bool>;
 
     /// Get property `Listen`.
     #[dbus_proxy(property, name = "Listen")]
-    fn listen(&self) -> zbus::Result<Vec<(String, String)>>;
+    fn listen(&self) -> crate::zbus::Result<Vec<(String, String)>>;
 
     /// Get property `Symlinks`.
     #[dbus_proxy(property, name = "Symlinks")]
-    fn symlinks(&self) -> zbus::Result<Vec<String>>;
+    fn symlinks(&self) -> crate::zbus::Result<Vec<String>>;
 
     /// Get property `Mark`.
     #[dbus_proxy(property, name = "Mark")]
-    fn mark(&self) -> zbus::Result<i32>;
+    fn mark(&self) -> crate::zbus::Result<i32>;
 
     /// Get property `MaxConnections`.
     #[dbus_proxy(property, name = "MaxConnections")]
-    fn max_connections(&self) -> zbus::Result<u32>;
+    fn max_connections(&self) -> crate::zbus::Result<u32>;
 
     /// Get property `MaxConnectionsPerSource`.
     #[dbus_proxy(property, name = "MaxConnectionsPerSource")]
-    fn max_connections_per_source(&self) -> zbus::Result<u32>;
+    fn max_connections_per_source(&self) -> crate::zbus::Result<u32>;
 
     /// Get property `MessageQueueMaxMessages`.
     #[dbus_proxy(property, name = "MessageQueueMaxMessages")]
-    fn message_queue_max_messages(&self) -> zbus::Result<i64>;
+    fn message_queue_max_messages(&self) -> crate::zbus::Result<i64>;
 
     /// Get property `MessageQueueMessageSize`.
     #[dbus_proxy(property, name = "MessageQueueMessageSize")]
-    fn message_queue_message_size(&self) -> zbus::Result<i64>;
+    fn message_queue_message_size(&self) -> crate::zbus::Result<i64>;
 
     /// Get property `TCPCongestion`.
     #[dbus_proxy(property, name = "TCPCongestion")]
-    fn tcp_congestion(&self) -> zbus::Result<String>;
+    fn tcp_congestion(&self) -> crate::zbus::Result<String>;
 
     /// Get property `ReusePort`.
     #[dbus_proxy(property, name = "ReusePort")]
-    fn reuse_port(&self) -> zbus::Result<bool>;
+    fn reuse_port(&self) -> crate::zbus::Result<bool>;
 
     /// Get property `SmackLabel`.
     #[dbus_proxy(property, name = "SmackLabel")]
-    fn smack_label(&self) -> zbus::Result<String>;
+    fn smack_label(&self) -> crate::zbus::Result<String>;
 
     /// Get property `SmackLabelIPIn`.
     #[dbus_proxy(property, name = "SmackLabelIPIn")]
-    fn smack_label_ip_in(&self) -> zbus::Result<String>;
+    fn smack_label_ip_in(&self) -> crate::zbus::Result<String>;
 
     /// Get property `SmackLabelIPOut`.
     #[dbus_proxy(property, name = "SmackLabelIPOut")]
-    fn smack_label_ip_out(&self) -> zbus::Result<String>;
+    fn smack_label_ip_out(&self) -> crate::zbus::Result<String>;
 
     /// Get property `ControlPID`.
     #[dbus_proxy(property, name = "ControlPID")]
-    fn control_pid(&self) -> zbus::Result<u32>;
+    fn control_pid(&self) -> crate::zbus::Result<u32>;
 
     /// Get property `Result`.
     #[dbus_proxy(property, name = "Result")]
-    fn result(&self) -> zbus::Result<String>;
+    fn result(&self) -> crate::zbus::Result<String>;
 
     /// Get property `NConnections`.
     #[dbus_proxy(property, name = "NConnections")]
-    fn n_connections(&self) -> zbus::Result<u32>;
+    fn n_connections(&self) -> crate::zbus::Result<u32>;
 
     /// Get property `NAccepted`.
     #[dbus_proxy(property, name = "NAccepted")]
-    fn n_accepted(&self) -> zbus::Result<u32>;
+    fn n_accepted(&self) -> crate::zbus::Result<u32>;
 
     /// Get property `NRefused`.
     #[dbus_proxy(property, name = "NRefused")]
-    fn n_refused(&self) -> zbus::Result<u32>;
+    fn n_refused(&self) -> crate::zbus::Result<u32>;
 
     /// Get property `FileDescriptorName`.
     #[dbus_proxy(property, name = "FileDescriptorName")]
-    fn file_descriptor_name(&self) -> zbus::Result<String>;
+    fn file_descriptor_name(&self) -> crate::zbus::Result<String>;
 
     /// Get property `SocketProtocol`.
     #[dbus_proxy(property, name = "SocketProtocol")]
-    fn socket_protocol(&self) -> zbus::Result<i32>;
+    fn socket_protocol(&self) -> crate::zbus::Result<i32>;
 
     /// Get property `TriggerLimitIntervalUSec`.
     #[dbus_proxy(property, name = "TriggerLimitIntervalUSec")]
-    fn trigger_limit_interval_u_sec(&self) -> zbus::Result<u64>;
+    fn trigger_limit_interval_u_sec(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `TriggerLimitBurst`.
     #[dbus_proxy(property, name = "TriggerLimitBurst")]
-    fn trigger_limit_burst(&self) -> zbus::Result<u32>;
+    fn trigger_limit_burst(&self) -> crate::zbus::Result<u32>;
 
     /// Get property `UID`.
     #[dbus_proxy(property, name = "UID")]
-    fn uid(&self) -> zbus::Result<u32>;
+    fn uid(&self) -> crate::zbus::Result<u32>;
 
     /// Get property `GID`.
     #[dbus_proxy(property, name = "GID")]
-    fn gid(&self) -> zbus::Result<u32>;
+    fn gid(&self) -> crate::zbus::Result<u32>;
+
+    /// Get property `ExecStartPre`.
+    #[dbus_proxy(property, name = "ExecStartPre")]
+    fn exec_start_pre(
+        &self,
+    ) -> crate::zbus::Result<Vec<(String, Vec<String>, bool, u64, u64, u64, u64, u32, i32, i32)>>;
+
+    /// Get property `ExecStartPost`.
+    #[dbus_proxy(property, name = "ExecStartPost")]
+    fn exec_start_post(
+        &self,
+    ) -> crate::zbus::Result<Vec<(String, Vec<String>, bool, u64, u64, u64, u64, u32, i32, i32)>>;
+
+    /// Get property `ExecStopPre`.
+    #[dbus_proxy(property, name = "ExecStopPre")]
+    fn exec_stop_pre(
+        &self,
+    ) -> crate::zbus::Result<Vec<(String, Vec<String>, bool, u64, u64, u64, u64, u32, i32, i32)>>;
+
+    /// Get property `ExecStopPost`.
+    #[dbus_proxy(property, name = "ExecStopPost")]
+    fn exec_stop_post(
+        &self,
+    ) -> crate::zbus::Result<Vec<(String, Vec<String>, bool, u64, u64, u64, u64, u32, i32, i32)>>;
 
     /// Get property `Slice`.
     #[dbus_proxy(property, name = "Slice")]
-    fn slice(&self) -> zbus::Result<String>;
+    fn slice(&self) -> crate::zbus::Result<String>;
 
     /// Get property `ControlGroup`.
     #[dbus_proxy(property, name = "ControlGroup")]
-    fn control_group(&self) -> zbus::Result<String>;
+    fn control_group(&self) -> crate::zbus::Result<String>;
 
     /// Get property `MemoryCurrent`.
     #[dbus_proxy(property, name = "MemoryCurrent")]
-    fn memory_current(&self) -> zbus::Result<u64>;
+    fn memory_current(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `MemoryAvailable`.
     #[dbus_proxy(property, name = "MemoryAvailable")]
-    fn memory_available(&self) -> zbus::Result<u64>;
+    fn memory_available(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `CPUUsageNSec`.
     #[dbus_proxy(property, name = "CPUUsageNSec")]
-    fn cpu_usage_n_sec(&self) -> zbus::Result<u64>;
+    fn cpu_usage_n_sec(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `EffectiveCPUs`.
     #[dbus_proxy(property, name = "EffectiveCPUs")]
-    fn effective_cp_us(&self) -> zbus::Result<Vec<u8>>;
+    fn effective_cp_us(&self) -> crate::zbus::Result<Vec<u8>>;
 
     /// Get property `EffectiveMemoryNodes`.
     #[dbus_proxy(property, name = "EffectiveMemoryNodes")]
-    fn effective_memory_nodes(&self) -> zbus::Result<Vec<u8>>;
+    fn effective_memory_nodes(&self) -> crate::zbus::Result<Vec<u8>>;
 
     /// Get property `TasksCurrent`.
     #[dbus_proxy(property, name = "TasksCurrent")]
-    fn tasks_current(&self) -> zbus::Result<u64>;
+    fn tasks_current(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `IPIngressBytes`.
     #[dbus_proxy(property, name = "IPIngressBytes")]
-    fn ip_ingress_bytes(&self) -> zbus::Result<u64>;
+    fn ip_ingress_bytes(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `IPIngressPackets`.
     #[dbus_proxy(property, name = "IPIngressPackets")]
-    fn ip_ingress_packets(&self) -> zbus::Result<u64>;
+    fn ip_ingress_packets(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `IPEgressBytes`.
     #[dbus_proxy(property, name = "IPEgressBytes")]
-    fn ip_egress_bytes(&self) -> zbus::Result<u64>;
+    fn ip_egress_bytes(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `IPEgressPackets`.
     #[dbus_proxy(property, name = "IPEgressPackets")]
-    fn ip_egress_packets(&self) -> zbus::Result<u64>;
+    fn ip_egress_packets(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `IOReadBytes`.
     #[dbus_proxy(property, name = "IOReadBytes")]
-    fn io_read_bytes(&self) -> zbus::Result<u64>;
+    fn io_read_bytes(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `IOReadOperations`.
     #[dbus_proxy(property, name = "IOReadOperations")]
-    fn io_read_operations(&self) -> zbus::Result<u64>;
+    fn io_read_operations(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `IOWriteBytes`.
     #[dbus_proxy(property, name = "IOWriteBytes")]
-    fn io_write_bytes(&self) -> zbus::Result<u64>;
+    fn io_write_bytes(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `IOWriteOperations`.
     #[dbus_proxy(property, name = "IOWriteOperations")]
-    fn io_write_operations(&self) -> zbus::Result<u64>;
+    fn io_write_operations(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `Delegate`.
     #[dbus_proxy(property, name = "Delegate")]
-    fn delegate(&self) -> zbus::Result<bool>;
+    fn delegate(&self) -> crate::zbus::Result<bool>;
 
     /// Get property `DelegateControllers`.
     #[dbus_proxy(property, name = "DelegateControllers")]
-    fn delegate_controllers(&self) -> zbus::Result<Vec<String>>;
+    fn delegate_controllers(&self) -> crate::zbus::Result<Vec<String>>;
 
     /// Get property `CPUAccounting`.
     #[dbus_proxy(property, name = "CPUAccounting")]
-    fn cpu_accounting(&self) -> zbus::Result<bool>;
+    fn cpu_accounting(&self) -> crate::zbus::Result<bool>;
 
     /// Get property `CPUWeight`.
     #[dbus_proxy(property, name = "CPUWeight")]
-    fn cpu_weight(&self) -> zbus::Result<u64>;
+    fn cpu_weight(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `StartupCPUWeight`.
     #[dbus_proxy(property, name = "StartupCPUWeight")]
-    fn startup_cpu_weight(&self) -> zbus::Result<u64>;
+    fn startup_cpu_weight(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `CPUShares`.
     #[dbus_proxy(property, name = "CPUShares")]
-    fn cpu_shares(&self) -> zbus::Result<u64>;
+    fn cpu_shares(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `StartupCPUShares`.
     #[dbus_proxy(property, name = "StartupCPUShares")]
-    fn startup_cpu_shares(&self) -> zbus::Result<u64>;
+    fn startup_cpu_shares(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `CPUQuotaPerSecUSec`.
     #[dbus_proxy(property, name = "CPUQuotaPerSecUSec")]
-    fn cpu_quota_per_sec_u_sec(&self) -> zbus::Result<u64>;
+    fn cpu_quota_per_sec_u_sec(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `CPUQuotaPeriodUSec`.
     #[dbus_proxy(property, name = "CPUQuotaPeriodUSec")]
-    fn cpu_quota_period_u_sec(&self) -> zbus::Result<u64>;
+    fn cpu_quota_period_u_sec(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `AllowedCPUs`.
     #[dbus_proxy(property, name = "AllowedCPUs")]
-    fn allowed_cp_us(&self) -> zbus::Result<Vec<u8>>;
+    fn allowed_cp_us(&self) -> crate::zbus::Result<Vec<u8>>;
 
     /// Get property `AllowedMemoryNodes`.
     #[dbus_proxy(property, name = "AllowedMemoryNodes")]
-    fn allowed_memory_nodes(&self) -> zbus::Result<Vec<u8>>;
+    fn allowed_memory_nodes(&self) -> crate::zbus::Result<Vec<u8>>;
 
     /// Get property `IOAccounting`.
     #[dbus_proxy(property, name = "IOAccounting")]
-    fn io_accounting(&self) -> zbus::Result<bool>;
+    fn io_accounting(&self) -> crate::zbus::Result<bool>;
 
     /// Get property `IOWeight`.
     #[dbus_proxy(property, name = "IOWeight")]
-    fn io_weight(&self) -> zbus::Result<u64>;
+    fn io_weight(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `StartupIOWeight`.
     #[dbus_proxy(property, name = "StartupIOWeight")]
-    fn startup_io_weight(&self) -> zbus::Result<u64>;
+    fn startup_io_weight(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `IODeviceWeight`.
     #[dbus_proxy(property, name = "IODeviceWeight")]
-    fn io_device_weight(&self) -> zbus::Result<Vec<(String, u64)>>;
+    fn io_device_weight(&self) -> crate::zbus::Result<Vec<(String, u64)>>;
 
     /// Get property `IOReadBandwidthMax`.
     #[dbus_proxy(property, name = "IOReadBandwidthMax")]
-    fn io_read_bandwidth_max(&self) -> zbus::Result<Vec<(String, u64)>>;
+    fn io_read_bandwidth_max(&self) -> crate::zbus::Result<Vec<(String, u64)>>;
 
     /// Get property `IOWriteBandwidthMax`.
     #[dbus_proxy(property, name = "IOWriteBandwidthMax")]
-    fn io_write_bandwidth_max(&self) -> zbus::Result<Vec<(String, u64)>>;
+    fn io_write_bandwidth_max(&self) -> crate::zbus::Result<Vec<(String, u64)>>;
 
     /// Get property `IOReadIOPSMax`.
     #[dbus_proxy(property, name = "IOReadIOPSMax")]
-    fn io_read_iops_max(&self) -> zbus::Result<Vec<(String, u64)>>;
+    fn io_read_iops_max(&self) -> crate::zbus::Result<Vec<(String, u64)>>;
 
     /// Get property `IOWriteIOPSMax`.
     #[dbus_proxy(property, name = "IOWriteIOPSMax")]
-    fn io_write_iops_max(&self) -> zbus::Result<Vec<(String, u64)>>;
+    fn io_write_iops_max(&self) -> crate::zbus::Result<Vec<(String, u64)>>;
 
     /// Get property `IODeviceLatencyTargetUSec`.
     #[dbus_proxy(property, name = "IODeviceLatencyTargetUSec")]
-    fn io_device_latency_target_u_sec(&self) -> zbus::Result<Vec<(String, u64)>>;
+    fn io_device_latency_target_u_sec(&self) -> crate::zbus::Result<Vec<(String, u64)>>;
 
     /// Get property `BlockIOAccounting`.
     #[dbus_proxy(property, name = "BlockIOAccounting")]
-    fn block_io_accounting(&self) -> zbus::Result<bool>;
+    fn block_io_accounting(&self) -> crate::zbus::Result<bool>;
 
     /// Get property `BlockIOWeight`.
     #[dbus_proxy(property, name = "BlockIOWeight")]
-    fn block_io_weight(&self) -> zbus::Result<u64>;
+    fn block_io_weight(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `StartupBlockIOWeight`.
     #[dbus_proxy(property, name = "StartupBlockIOWeight")]
-    fn startup_block_io_weight(&self) -> zbus::Result<u64>;
+    fn startup_block_io_weight(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `BlockIODeviceWeight`.
     #[dbus_proxy(property, name = "BlockIODeviceWeight")]
-    fn block_io_device_weight(&self) -> zbus::Result<Vec<(String, u64)>>;
+    fn block_io_device_weight(&self) -> crate::zbus::Result<Vec<(String, u64)>>;
 
     /// Get property `BlockIOReadBandwidth`.
     #[dbus_proxy(property, name = "BlockIOReadBandwidth")]
-    fn block_io_read_bandwidth(&self) -> zbus::Result<Vec<(String, u64)>>;
+    fn block_io_read_bandwidth(&self) -> crate::zbus::Result<Vec<(String, u64)>>;
 
     /// Get property `BlockIOWriteBandwidth`.
     #[dbus_proxy(property, name = "BlockIOWriteBandwidth")]
-    fn block_io_write_bandwidth(&self) -> zbus::Result<Vec<(String, u64)>>;
+    fn block_io_write_bandwidth(&self) -> crate::zbus::Result<Vec<(String, u64)>>;
 
     /// Get property `MemoryAccounting`.
     #[dbus_proxy(property, name = "MemoryAccounting")]
-    fn memory_accounting(&self) -> zbus::Result<bool>;
+    fn memory_accounting(&self) -> crate::zbus::Result<bool>;
 
     /// Get property `DefaultMemoryLow`.
     #[dbus_proxy(property, name = "DefaultMemoryLow")]
-    fn default_memory_low(&self) -> zbus::Result<u64>;
+    fn default_memory_low(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `DefaultMemoryMin`.
     #[dbus_proxy(property, name = "DefaultMemoryMin")]
-    fn default_memory_min(&self) -> zbus::Result<u64>;
+    fn default_memory_min(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `MemoryMin`.
     #[dbus_proxy(property, name = "MemoryMin")]
-    fn memory_min(&self) -> zbus::Result<u64>;
+    fn memory_min(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `MemoryLow`.
     #[dbus_proxy(property, name = "MemoryLow")]
-    fn memory_low(&self) -> zbus::Result<u64>;
+    fn memory_low(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `MemoryHigh`.
     #[dbus_proxy(property, name = "MemoryHigh")]
-    fn memory_high(&self) -> zbus::Result<u64>;
+    fn memory_high(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `MemoryMax`.
     #[dbus_proxy(property, name = "MemoryMax")]
-    fn memory_max(&self) -> zbus::Result<u64>;
+    fn memory_max(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `MemorySwapMax`.
     #[dbus_proxy(property, name = "MemorySwapMax")]
-    fn memory_swap_max(&self) -> zbus::Result<u64>;
+    fn memory_swap_max(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `MemoryLimit`.
     #[dbus_proxy(property, name = "MemoryLimit")]
-    fn memory_limit(&self) -> zbus::Result<u64>;
+    fn memory_limit(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `DevicePolicy`.
     #[dbus_proxy(property, name = "DevicePolicy")]
-    fn device_policy(&self) -> zbus::Result<String>;
+    fn device_policy(&self) -> crate::zbus::Result<String>;
 
     /// Get property `DeviceAllow`.
     #[dbus_proxy(property, name = "DeviceAllow")]
-    fn device_allow(&self) -> zbus::Result<Vec<(String, String)>>;
+    fn device_allow(&self) -> crate::zbus::Result<Vec<(String, String)>>;
 
     /// Get property `TasksAccounting`.
     #[dbus_proxy(property, name = "TasksAccounting")]
-    fn tasks_accounting(&self) -> zbus::Result<bool>;
+    fn tasks_accounting(&self) -> crate::zbus::Result<bool>;
 
     /// Get property `TasksMax`.
     #[dbus_proxy(property, name = "TasksMax")]
-    fn tasks_max(&self) -> zbus::Result<u64>;
+    fn tasks_max(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `IPAccounting`.
     #[dbus_proxy(property, name = "IPAccounting")]
-    fn ip_accounting(&self) -> zbus::Result<bool>;
+    fn ip_accounting(&self) -> crate::zbus::Result<bool>;
+
+    /// Get property `IPAddressAllow`.
+    #[dbus_proxy(property, name = "IPAddressAllow")]
+    fn ip_address_allow(&self) -> crate::zbus::Result<Vec<(i32, Vec<u8>, u32)>>;
+
+    /// Get property `IPAddressDeny`.
+    #[dbus_proxy(property, name = "IPAddressDeny")]
+    fn ip_address_deny(&self) -> crate::zbus::Result<Vec<(i32, Vec<u8>, u32)>>;
 
     /// Get property `IPIngressFilterPath`.
     #[dbus_proxy(property, name = "IPIngressFilterPath")]
-    fn ip_ingress_filter_path(&self) -> zbus::Result<Vec<String>>;
+    fn ip_ingress_filter_path(&self) -> crate::zbus::Result<Vec<String>>;
 
     /// Get property `IPEgressFilterPath`.
     #[dbus_proxy(property, name = "IPEgressFilterPath")]
-    fn ip_egress_filter_path(&self) -> zbus::Result<Vec<String>>;
+    fn ip_egress_filter_path(&self) -> crate::zbus::Result<Vec<String>>;
 
     /// Get property `DisableControllers`.
     #[dbus_proxy(property, name = "DisableControllers")]
-    fn disable_controllers(&self) -> zbus::Result<Vec<String>>;
+    fn disable_controllers(&self) -> crate::zbus::Result<Vec<String>>;
 
     /// Get property `ManagedOOMSwap`.
     #[dbus_proxy(property, name = "ManagedOOMSwap")]
-    fn managed_oom_swap(&self) -> zbus::Result<String>;
+    fn managed_oom_swap(&self) -> crate::zbus::Result<String>;
 
     /// Get property `ManagedOOMMemoryPressure`.
     #[dbus_proxy(property, name = "ManagedOOMMemoryPressure")]
-    fn managed_oom_memory_pressure(&self) -> zbus::Result<String>;
+    fn managed_oom_memory_pressure(&self) -> crate::zbus::Result<String>;
 
     /// Get property `ManagedOOMMemoryPressureLimit`.
     #[dbus_proxy(property, name = "ManagedOOMMemoryPressureLimit")]
-    fn managed_oom_memory_pressure_limit(&self) -> zbus::Result<u32>;
+    fn managed_oom_memory_pressure_limit(&self) -> crate::zbus::Result<u32>;
 
     /// Get property `ManagedOOMPreference`.
     #[dbus_proxy(property, name = "ManagedOOMPreference")]
-    fn managed_oom_preference(&self) -> zbus::Result<String>;
+    fn managed_oom_preference(&self) -> crate::zbus::Result<String>;
 
     /// Get property `BPFProgram`.
     #[dbus_proxy(property, name = "BPFProgram")]
-    fn bpf_program(&self) -> zbus::Result<Vec<(String, String)>>;
+    fn bpf_program(&self) -> crate::zbus::Result<Vec<(String, String)>>;
+
+    /// Get property `SocketBindAllow`.
+    #[dbus_proxy(property, name = "SocketBindAllow")]
+    fn socket_bind_allow(&self) -> crate::zbus::Result<Vec<(i32, i32, u16, u16)>>;
+
+    /// Get property `SocketBindDeny`.
+    #[dbus_proxy(property, name = "SocketBindDeny")]
+    fn socket_bind_deny(&self) -> crate::zbus::Result<Vec<(i32, i32, u16, u16)>>;
 
     /// Get property `Environment`.
     #[dbus_proxy(property, name = "Environment")]
-    fn environment(&self) -> zbus::Result<Vec<String>>;
+    fn environment(&self) -> crate::zbus::Result<Vec<String>>;
 
     /// Get property `EnvironmentFiles`.
     #[dbus_proxy(property, name = "EnvironmentFiles")]
-    fn environment_files(&self) -> zbus::Result<Vec<(String, bool)>>;
+    fn environment_files(&self) -> crate::zbus::Result<Vec<(String, bool)>>;
 
     /// Get property `PassEnvironment`.
     #[dbus_proxy(property, name = "PassEnvironment")]
-    fn pass_environment(&self) -> zbus::Result<Vec<String>>;
+    fn pass_environment(&self) -> crate::zbus::Result<Vec<String>>;
 
     /// Get property `UnsetEnvironment`.
     #[dbus_proxy(property, name = "UnsetEnvironment")]
-    fn unset_environment(&self) -> zbus::Result<Vec<String>>;
+    fn unset_environment(&self) -> crate::zbus::Result<Vec<String>>;
 
     /// Get property `UMask`.
     #[dbus_proxy(property, name = "UMask")]
-    fn u_mask(&self) -> zbus::Result<u32>;
+    fn u_mask(&self) -> crate::zbus::Result<u32>;
 
     /// Get property `LimitCPU`.
     #[dbus_proxy(property, name = "LimitCPU")]
-    fn limit_cpu(&self) -> zbus::Result<u64>;
+    fn limit_cpu(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `LimitCPUSoft`.
     #[dbus_proxy(property, name = "LimitCPUSoft")]
-    fn limit_cpu_soft(&self) -> zbus::Result<u64>;
+    fn limit_cpu_soft(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `LimitFSIZE`.
     #[dbus_proxy(property, name = "LimitFSIZE")]
-    fn limit_fsize(&self) -> zbus::Result<u64>;
+    fn limit_fsize(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `LimitFSIZESoft`.
     #[dbus_proxy(property, name = "LimitFSIZESoft")]
-    fn limit_fsize_soft(&self) -> zbus::Result<u64>;
+    fn limit_fsize_soft(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `LimitDATA`.
     #[dbus_proxy(property, name = "LimitDATA")]
-    fn limit_data(&self) -> zbus::Result<u64>;
+    fn limit_data(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `LimitDATASoft`.
     #[dbus_proxy(property, name = "LimitDATASoft")]
-    fn limit_data_soft(&self) -> zbus::Result<u64>;
+    fn limit_data_soft(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `LimitSTACK`.
     #[dbus_proxy(property, name = "LimitSTACK")]
-    fn limit_stack(&self) -> zbus::Result<u64>;
+    fn limit_stack(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `LimitSTACKSoft`.
     #[dbus_proxy(property, name = "LimitSTACKSoft")]
-    fn limit_stack_soft(&self) -> zbus::Result<u64>;
+    fn limit_stack_soft(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `LimitCORE`.
     #[dbus_proxy(property, name = "LimitCORE")]
-    fn limit_core(&self) -> zbus::Result<u64>;
+    fn limit_core(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `LimitCORESoft`.
     #[dbus_proxy(property, name = "LimitCORESoft")]
-    fn limit_core_soft(&self) -> zbus::Result<u64>;
+    fn limit_core_soft(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `LimitRSS`.
     #[dbus_proxy(property, name = "LimitRSS")]
-    fn limit_rss(&self) -> zbus::Result<u64>;
+    fn limit_rss(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `LimitRSSSoft`.
     #[dbus_proxy(property, name = "LimitRSSSoft")]
-    fn limit_rss_soft(&self) -> zbus::Result<u64>;
+    fn limit_rss_soft(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `LimitNOFILE`.
     #[dbus_proxy(property, name = "LimitNOFILE")]
-    fn limit_nofile(&self) -> zbus::Result<u64>;
+    fn limit_nofile(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `LimitNOFILESoft`.
     #[dbus_proxy(property, name = "LimitNOFILESoft")]
-    fn limit_nofile_soft(&self) -> zbus::Result<u64>;
+    fn limit_nofile_soft(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `LimitAS`.
     #[dbus_proxy(property, name = "LimitAS")]
-    fn limit_as(&self) -> zbus::Result<u64>;
+    fn limit_as(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `LimitASSoft`.
     #[dbus_proxy(property, name = "LimitASSoft")]
-    fn limit_as_soft(&self) -> zbus::Result<u64>;
+    fn limit_as_soft(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `LimitNPROC`.
     #[dbus_proxy(property, name = "LimitNPROC")]
-    fn limit_nproc(&self) -> zbus::Result<u64>;
+    fn limit_nproc(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `LimitNPROCSoft`.
     #[dbus_proxy(property, name = "LimitNPROCSoft")]
-    fn limit_nproc_soft(&self) -> zbus::Result<u64>;
+    fn limit_nproc_soft(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `LimitMEMLOCK`.
     #[dbus_proxy(property, name = "LimitMEMLOCK")]
-    fn limit_memlock(&self) -> zbus::Result<u64>;
+    fn limit_memlock(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `LimitMEMLOCKSoft`.
     #[dbus_proxy(property, name = "LimitMEMLOCKSoft")]
-    fn limit_memlock_soft(&self) -> zbus::Result<u64>;
+    fn limit_memlock_soft(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `LimitLOCKS`.
     #[dbus_proxy(property, name = "LimitLOCKS")]
-    fn limit_locks(&self) -> zbus::Result<u64>;
+    fn limit_locks(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `LimitLOCKSSoft`.
     #[dbus_proxy(property, name = "LimitLOCKSSoft")]
-    fn limit_locks_soft(&self) -> zbus::Result<u64>;
+    fn limit_locks_soft(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `LimitSIGPENDING`.
     #[dbus_proxy(property, name = "LimitSIGPENDING")]
-    fn limit_sigpending(&self) -> zbus::Result<u64>;
+    fn limit_sigpending(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `LimitSIGPENDINGSoft`.
     #[dbus_proxy(property, name = "LimitSIGPENDINGSoft")]
-    fn limit_sigpending_soft(&self) -> zbus::Result<u64>;
+    fn limit_sigpending_soft(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `LimitMSGQUEUE`.
     #[dbus_proxy(property, name = "LimitMSGQUEUE")]
-    fn limit_msgqueue(&self) -> zbus::Result<u64>;
+    fn limit_msgqueue(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `LimitMSGQUEUESoft`.
     #[dbus_proxy(property, name = "LimitMSGQUEUESoft")]
-    fn limit_msgqueue_soft(&self) -> zbus::Result<u64>;
+    fn limit_msgqueue_soft(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `LimitNICE`.
     #[dbus_proxy(property, name = "LimitNICE")]
-    fn limit_nice(&self) -> zbus::Result<u64>;
+    fn limit_nice(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `LimitNICESoft`.
     #[dbus_proxy(property, name = "LimitNICESoft")]
-    fn limit_nice_soft(&self) -> zbus::Result<u64>;
+    fn limit_nice_soft(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `LimitRTPRIO`.
     #[dbus_proxy(property, name = "LimitRTPRIO")]
-    fn limit_rtprio(&self) -> zbus::Result<u64>;
+    fn limit_rtprio(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `LimitRTPRIOSoft`.
     #[dbus_proxy(property, name = "LimitRTPRIOSoft")]
-    fn limit_rtprio_soft(&self) -> zbus::Result<u64>;
+    fn limit_rtprio_soft(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `LimitRTTIME`.
     #[dbus_proxy(property, name = "LimitRTTIME")]
-    fn limit_rttime(&self) -> zbus::Result<u64>;
+    fn limit_rttime(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `LimitRTTIMESoft`.
     #[dbus_proxy(property, name = "LimitRTTIMESoft")]
-    fn limit_rttime_soft(&self) -> zbus::Result<u64>;
+    fn limit_rttime_soft(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `WorkingDirectory`.
     #[dbus_proxy(property, name = "WorkingDirectory")]
-    fn working_directory(&self) -> zbus::Result<String>;
+    fn working_directory(&self) -> crate::zbus::Result<String>;
 
     /// Get property `RootDirectory`.
     #[dbus_proxy(property, name = "RootDirectory")]
-    fn root_directory(&self) -> zbus::Result<String>;
+    fn root_directory(&self) -> crate::zbus::Result<String>;
 
     /// Get property `RootImage`.
     #[dbus_proxy(property, name = "RootImage")]
-    fn root_image(&self) -> zbus::Result<String>;
+    fn root_image(&self) -> crate::zbus::Result<String>;
 
     /// Get property `RootImageOptions`.
     #[dbus_proxy(property, name = "RootImageOptions")]
-    fn root_image_options(&self) -> zbus::Result<Vec<(String, String)>>;
+    fn root_image_options(&self) -> crate::zbus::Result<Vec<(String, String)>>;
 
     /// Get property `RootHash`.
     #[dbus_proxy(property, name = "RootHash")]
-    fn root_hash(&self) -> zbus::Result<Vec<u8>>;
+    fn root_hash(&self) -> crate::zbus::Result<Vec<u8>>;
 
     /// Get property `RootHashPath`.
     #[dbus_proxy(property, name = "RootHashPath")]
-    fn root_hash_path(&self) -> zbus::Result<String>;
+    fn root_hash_path(&self) -> crate::zbus::Result<String>;
 
     /// Get property `RootHashSignature`.
     #[dbus_proxy(property, name = "RootHashSignature")]
-    fn root_hash_signature(&self) -> zbus::Result<Vec<u8>>;
+    fn root_hash_signature(&self) -> crate::zbus::Result<Vec<u8>>;
 
     /// Get property `RootHashSignaturePath`.
     #[dbus_proxy(property, name = "RootHashSignaturePath")]
-    fn root_hash_signature_path(&self) -> zbus::Result<String>;
+    fn root_hash_signature_path(&self) -> crate::zbus::Result<String>;
 
     /// Get property `RootVerity`.
     #[dbus_proxy(property, name = "RootVerity")]
-    fn root_verity(&self) -> zbus::Result<String>;
+    fn root_verity(&self) -> crate::zbus::Result<String>;
 
     /// Get property `OOMScoreAdjust`.
     #[dbus_proxy(property, name = "OOMScoreAdjust")]
-    fn oom_score_adjust(&self) -> zbus::Result<i32>;
+    fn oom_score_adjust(&self) -> crate::zbus::Result<i32>;
 
     /// Get property `CoredumpFilter`.
     #[dbus_proxy(property, name = "CoredumpFilter")]
-    fn coredump_filter(&self) -> zbus::Result<u64>;
+    fn coredump_filter(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `Nice`.
     #[dbus_proxy(property, name = "Nice")]
-    fn nice(&self) -> zbus::Result<i32>;
+    fn nice(&self) -> crate::zbus::Result<i32>;
 
     /// Get property `IOSchedulingClass`.
     #[dbus_proxy(property, name = "IOSchedulingClass")]
-    fn io_scheduling_class(&self) -> zbus::Result<i32>;
+    fn io_scheduling_class(&self) -> crate::zbus::Result<i32>;
 
     /// Get property `IOSchedulingPriority`.
     #[dbus_proxy(property, name = "IOSchedulingPriority")]
-    fn io_scheduling_priority(&self) -> zbus::Result<i32>;
+    fn io_scheduling_priority(&self) -> crate::zbus::Result<i32>;
 
     /// Get property `CPUSchedulingPolicy`.
     #[dbus_proxy(property, name = "CPUSchedulingPolicy")]
-    fn cpu_scheduling_policy(&self) -> zbus::Result<i32>;
+    fn cpu_scheduling_policy(&self) -> crate::zbus::Result<i32>;
 
     /// Get property `CPUSchedulingPriority`.
     #[dbus_proxy(property, name = "CPUSchedulingPriority")]
-    fn cpu_scheduling_priority(&self) -> zbus::Result<i32>;
+    fn cpu_scheduling_priority(&self) -> crate::zbus::Result<i32>;
 
     /// Get property `CPUAffinity`.
     #[dbus_proxy(property, name = "CPUAffinity")]
-    fn cpu_affinity(&self) -> zbus::Result<Vec<u8>>;
+    fn cpu_affinity(&self) -> crate::zbus::Result<Vec<u8>>;
 
     /// Get property `CPUAffinityFromNUMA`.
     #[dbus_proxy(property, name = "CPUAffinityFromNUMA")]
-    fn cpu_affinity_from_numa(&self) -> zbus::Result<bool>;
+    fn cpu_affinity_from_numa(&self) -> crate::zbus::Result<bool>;
 
     /// Get property `NUMAPolicy`.
     #[dbus_proxy(property, name = "NUMAPolicy")]
-    fn numa_policy(&self) -> zbus::Result<i32>;
+    fn numa_policy(&self) -> crate::zbus::Result<i32>;
 
     /// Get property `NUMAMask`.
     #[dbus_proxy(property, name = "NUMAMask")]
-    fn numa_mask(&self) -> zbus::Result<Vec<u8>>;
+    fn numa_mask(&self) -> crate::zbus::Result<Vec<u8>>;
 
     /// Get property `TimerSlackNSec`.
     #[dbus_proxy(property, name = "TimerSlackNSec")]
-    fn timer_slack_n_sec(&self) -> zbus::Result<u64>;
+    fn timer_slack_n_sec(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `CPUSchedulingResetOnFork`.
     #[dbus_proxy(property, name = "CPUSchedulingResetOnFork")]
-    fn cpu_scheduling_reset_on_fork(&self) -> zbus::Result<bool>;
+    fn cpu_scheduling_reset_on_fork(&self) -> crate::zbus::Result<bool>;
 
     /// Get property `NonBlocking`.
     #[dbus_proxy(property, name = "NonBlocking")]
-    fn non_blocking(&self) -> zbus::Result<bool>;
+    fn non_blocking(&self) -> crate::zbus::Result<bool>;
 
     /// Get property `StandardInput`.
     #[dbus_proxy(property, name = "StandardInput")]
-    fn standard_input(&self) -> zbus::Result<String>;
+    fn standard_input(&self) -> crate::zbus::Result<String>;
 
     /// Get property `StandardInputFileDescriptorName`.
     #[dbus_proxy(property, name = "StandardInputFileDescriptorName")]
-    fn standard_input_file_descriptor_name(&self) -> zbus::Result<String>;
+    fn standard_input_file_descriptor_name(&self) -> crate::zbus::Result<String>;
 
     /// Get property `StandardInputData`.
     #[dbus_proxy(property, name = "StandardInputData")]
-    fn standard_input_data(&self) -> zbus::Result<Vec<u8>>;
+    fn standard_input_data(&self) -> crate::zbus::Result<Vec<u8>>;
 
     /// Get property `StandardOutput`.
     #[dbus_proxy(property, name = "StandardOutput")]
-    fn standard_output(&self) -> zbus::Result<String>;
+    fn standard_output(&self) -> crate::zbus::Result<String>;
 
     /// Get property `StandardOutputFileDescriptorName`.
     #[dbus_proxy(property, name = "StandardOutputFileDescriptorName")]
-    fn standard_output_file_descriptor_name(&self) -> zbus::Result<String>;
+    fn standard_output_file_descriptor_name(&self) -> crate::zbus::Result<String>;
 
     /// Get property `StandardError`.
     #[dbus_proxy(property, name = "StandardError")]
-    fn standard_error(&self) -> zbus::Result<String>;
+    fn standard_error(&self) -> crate::zbus::Result<String>;
 
     /// Get property `StandardErrorFileDescriptorName`.
     #[dbus_proxy(property, name = "StandardErrorFileDescriptorName")]
-    fn standard_error_file_descriptor_name(&self) -> zbus::Result<String>;
+    fn standard_error_file_descriptor_name(&self) -> crate::zbus::Result<String>;
 
     /// Get property `TTYPath`.
     #[dbus_proxy(property, name = "TTYPath")]
-    fn tty_path(&self) -> zbus::Result<String>;
+    fn tty_path(&self) -> crate::zbus::Result<String>;
 
     /// Get property `TTYReset`.
     #[dbus_proxy(property, name = "TTYReset")]
-    fn tty_reset(&self) -> zbus::Result<bool>;
+    fn tty_reset(&self) -> crate::zbus::Result<bool>;
 
     /// Get property `TTYVHangup`.
     #[dbus_proxy(property, name = "TTYVHangup")]
-    fn ttyv_hangup(&self) -> zbus::Result<bool>;
+    fn ttyv_hangup(&self) -> crate::zbus::Result<bool>;
 
     /// Get property `TTYVTDisallocate`.
     #[dbus_proxy(property, name = "TTYVTDisallocate")]
-    fn ttyvt_disallocate(&self) -> zbus::Result<bool>;
+    fn ttyvt_disallocate(&self) -> crate::zbus::Result<bool>;
 
     /// Get property `SyslogPriority`.
     #[dbus_proxy(property, name = "SyslogPriority")]
-    fn syslog_priority(&self) -> zbus::Result<i32>;
+    fn syslog_priority(&self) -> crate::zbus::Result<i32>;
 
     /// Get property `SyslogIdentifier`.
     #[dbus_proxy(property, name = "SyslogIdentifier")]
-    fn syslog_identifier(&self) -> zbus::Result<String>;
+    fn syslog_identifier(&self) -> crate::zbus::Result<String>;
 
     /// Get property `SyslogLevelPrefix`.
     #[dbus_proxy(property, name = "SyslogLevelPrefix")]
-    fn syslog_level_prefix(&self) -> zbus::Result<bool>;
+    fn syslog_level_prefix(&self) -> crate::zbus::Result<bool>;
 
     /// Get property `SyslogLevel`.
     #[dbus_proxy(property, name = "SyslogLevel")]
-    fn syslog_level(&self) -> zbus::Result<i32>;
+    fn syslog_level(&self) -> crate::zbus::Result<i32>;
 
     /// Get property `SyslogFacility`.
     #[dbus_proxy(property, name = "SyslogFacility")]
-    fn syslog_facility(&self) -> zbus::Result<i32>;
+    fn syslog_facility(&self) -> crate::zbus::Result<i32>;
 
     /// Get property `LogLevelMax`.
     #[dbus_proxy(property, name = "LogLevelMax")]
-    fn log_level_max(&self) -> zbus::Result<i32>;
+    fn log_level_max(&self) -> crate::zbus::Result<i32>;
 
     /// Get property `LogRateLimitIntervalUSec`.
     #[dbus_proxy(property, name = "LogRateLimitIntervalUSec")]
-    fn log_rate_limit_interval_u_sec(&self) -> zbus::Result<u64>;
+    fn log_rate_limit_interval_u_sec(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `LogRateLimitBurst`.
     #[dbus_proxy(property, name = "LogRateLimitBurst")]
-    fn log_rate_limit_burst(&self) -> zbus::Result<u32>;
+    fn log_rate_limit_burst(&self) -> crate::zbus::Result<u32>;
 
     /// Get property `LogNamespace`.
     #[dbus_proxy(property, name = "LogNamespace")]
-    fn log_namespace(&self) -> zbus::Result<String>;
+    fn log_namespace(&self) -> crate::zbus::Result<String>;
 
     /// Get property `SecureBits`.
     #[dbus_proxy(property, name = "SecureBits")]
-    fn secure_bits(&self) -> zbus::Result<i32>;
+    fn secure_bits(&self) -> crate::zbus::Result<i32>;
 
     /// Get property `CapabilityBoundingSet`.
     #[dbus_proxy(property, name = "CapabilityBoundingSet")]
-    fn capability_bounding_set(&self) -> zbus::Result<u64>;
+    fn capability_bounding_set(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `AmbientCapabilities`.
     #[dbus_proxy(property, name = "AmbientCapabilities")]
-    fn ambient_capabilities(&self) -> zbus::Result<u64>;
+    fn ambient_capabilities(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `User`.
     #[dbus_proxy(property, name = "User")]
-    fn user(&self) -> zbus::Result<String>;
+    fn user(&self) -> crate::zbus::Result<String>;
 
     /// Get property `Group`.
     #[dbus_proxy(property, name = "Group")]
-    fn group(&self) -> zbus::Result<String>;
+    fn group(&self) -> crate::zbus::Result<String>;
 
     /// Get property `DynamicUser`.
     #[dbus_proxy(property, name = "DynamicUser")]
-    fn dynamic_user(&self) -> zbus::Result<bool>;
+    fn dynamic_user(&self) -> crate::zbus::Result<bool>;
 
     /// Get property `RemoveIPC`.
     #[dbus_proxy(property, name = "RemoveIPC")]
-    fn remove_ipc(&self) -> zbus::Result<bool>;
+    fn remove_ipc(&self) -> crate::zbus::Result<bool>;
+
+    /// Get property `SetCredential`.
+    #[dbus_proxy(property, name = "SetCredential")]
+    fn set_credential(&self) -> crate::zbus::Result<Vec<(String, Vec<u8>)>>;
 
     /// Get property `LoadCredential`.
     #[dbus_proxy(property, name = "LoadCredential")]
-    fn load_credential(&self) -> zbus::Result<Vec<(String, String)>>;
+    fn load_credential(&self) -> crate::zbus::Result<Vec<(String, String)>>;
 
     /// Get property `SupplementaryGroups`.
     #[dbus_proxy(property, name = "SupplementaryGroups")]
-    fn supplementary_groups(&self) -> zbus::Result<Vec<String>>;
+    fn supplementary_groups(&self) -> crate::zbus::Result<Vec<String>>;
 
     /// Get property `PAMName`.
     #[dbus_proxy(property, name = "PAMName")]
-    fn pam_name(&self) -> zbus::Result<String>;
+    fn pam_name(&self) -> crate::zbus::Result<String>;
 
     /// Get property `ReadWritePaths`.
     #[dbus_proxy(property, name = "ReadWritePaths")]
-    fn read_write_paths(&self) -> zbus::Result<Vec<String>>;
+    fn read_write_paths(&self) -> crate::zbus::Result<Vec<String>>;
 
     /// Get property `ReadOnlyPaths`.
     #[dbus_proxy(property, name = "ReadOnlyPaths")]
-    fn read_only_paths(&self) -> zbus::Result<Vec<String>>;
+    fn read_only_paths(&self) -> crate::zbus::Result<Vec<String>>;
 
     /// Get property `InaccessiblePaths`.
     #[dbus_proxy(property, name = "InaccessiblePaths")]
-    fn inaccessible_paths(&self) -> zbus::Result<Vec<String>>;
+    fn inaccessible_paths(&self) -> crate::zbus::Result<Vec<String>>;
 
     /// Get property `ExecPaths`.
     #[dbus_proxy(property, name = "ExecPaths")]
-    fn exec_paths(&self) -> zbus::Result<Vec<String>>;
+    fn exec_paths(&self) -> crate::zbus::Result<Vec<String>>;
 
     /// Get property `NoExecPaths`.
     #[dbus_proxy(property, name = "NoExecPaths")]
-    fn no_exec_paths(&self) -> zbus::Result<Vec<String>>;
+    fn no_exec_paths(&self) -> crate::zbus::Result<Vec<String>>;
 
     /// Get property `MountFlags`.
     #[dbus_proxy(property, name = "MountFlags")]
-    fn mount_flags(&self) -> zbus::Result<u64>;
+    fn mount_flags(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `PrivateTmp`.
     #[dbus_proxy(property, name = "PrivateTmp")]
-    fn private_tmp(&self) -> zbus::Result<bool>;
+    fn private_tmp(&self) -> crate::zbus::Result<bool>;
 
     /// Get property `PrivateDevices`.
     #[dbus_proxy(property, name = "PrivateDevices")]
-    fn private_devices(&self) -> zbus::Result<bool>;
+    fn private_devices(&self) -> crate::zbus::Result<bool>;
 
     /// Get property `ProtectClock`.
     #[dbus_proxy(property, name = "ProtectClock")]
-    fn protect_clock(&self) -> zbus::Result<bool>;
+    fn protect_clock(&self) -> crate::zbus::Result<bool>;
 
     /// Get property `ProtectKernelTunables`.
     #[dbus_proxy(property, name = "ProtectKernelTunables")]
-    fn protect_kernel_tunables(&self) -> zbus::Result<bool>;
+    fn protect_kernel_tunables(&self) -> crate::zbus::Result<bool>;
 
     /// Get property `ProtectKernelModules`.
     #[dbus_proxy(property, name = "ProtectKernelModules")]
-    fn protect_kernel_modules(&self) -> zbus::Result<bool>;
+    fn protect_kernel_modules(&self) -> crate::zbus::Result<bool>;
 
     /// Get property `ProtectKernelLogs`.
     #[dbus_proxy(property, name = "ProtectKernelLogs")]
-    fn protect_kernel_logs(&self) -> zbus::Result<bool>;
+    fn protect_kernel_logs(&self) -> crate::zbus::Result<bool>;
 
     /// Get property `ProtectControlGroups`.
     #[dbus_proxy(property, name = "ProtectControlGroups")]
-    fn protect_control_groups(&self) -> zbus::Result<bool>;
+    fn protect_control_groups(&self) -> crate::zbus::Result<bool>;
 
     /// Get property `PrivateNetwork`.
     #[dbus_proxy(property, name = "PrivateNetwork")]
-    fn private_network(&self) -> zbus::Result<bool>;
+    fn private_network(&self) -> crate::zbus::Result<bool>;
 
     /// Get property `PrivateUsers`.
     #[dbus_proxy(property, name = "PrivateUsers")]
-    fn private_users(&self) -> zbus::Result<bool>;
+    fn private_users(&self) -> crate::zbus::Result<bool>;
 
     /// Get property `PrivateMounts`.
     #[dbus_proxy(property, name = "PrivateMounts")]
-    fn private_mounts(&self) -> zbus::Result<bool>;
+    fn private_mounts(&self) -> crate::zbus::Result<bool>;
 
     /// Get property `PrivateIPC`.
     #[dbus_proxy(property, name = "PrivateIPC")]
-    fn private_ipc(&self) -> zbus::Result<bool>;
+    fn private_ipc(&self) -> crate::zbus::Result<bool>;
 
     /// Get property `ProtectHome`.
     #[dbus_proxy(property, name = "ProtectHome")]
-    fn protect_home(&self) -> zbus::Result<String>;
+    fn protect_home(&self) -> crate::zbus::Result<String>;
 
     /// Get property `ProtectSystem`.
     #[dbus_proxy(property, name = "ProtectSystem")]
-    fn protect_system(&self) -> zbus::Result<String>;
+    fn protect_system(&self) -> crate::zbus::Result<String>;
 
     /// Get property `SameProcessGroup`.
     #[dbus_proxy(property, name = "SameProcessGroup")]
-    fn same_process_group(&self) -> zbus::Result<bool>;
+    fn same_process_group(&self) -> crate::zbus::Result<bool>;
 
     /// Get property `UtmpIdentifier`.
     #[dbus_proxy(property, name = "UtmpIdentifier")]
-    fn utmp_identifier(&self) -> zbus::Result<String>;
+    fn utmp_identifier(&self) -> crate::zbus::Result<String>;
 
     /// Get property `UtmpMode`.
     #[dbus_proxy(property, name = "UtmpMode")]
-    fn utmp_mode(&self) -> zbus::Result<String>;
+    fn utmp_mode(&self) -> crate::zbus::Result<String>;
+
+    /// Get property `SELinuxContext`.
+    #[dbus_proxy(property, name = "SELinuxContext")]
+    fn se_linux_context(&self) -> crate::zbus::Result<(bool, String)>;
+
+    /// Get property `AppArmorProfile`.
+    #[dbus_proxy(property, name = "AppArmorProfile")]
+    fn app_armor_profile(&self) -> crate::zbus::Result<(bool, String)>;
+
+    /// Get property `SmackProcessLabel`.
+    #[dbus_proxy(property, name = "SmackProcessLabel")]
+    fn smack_process_label(&self) -> crate::zbus::Result<(bool, String)>;
 
     /// Get property `IgnoreSIGPIPE`.
     #[dbus_proxy(property, name = "IgnoreSIGPIPE")]
-    fn ignore_sigpipe(&self) -> zbus::Result<bool>;
+    fn ignore_sigpipe(&self) -> crate::zbus::Result<bool>;
 
     /// Get property `NoNewPrivileges`.
     #[dbus_proxy(property, name = "NoNewPrivileges")]
-    fn no_new_privileges(&self) -> zbus::Result<bool>;
+    fn no_new_privileges(&self) -> crate::zbus::Result<bool>;
+
+    /// Get property `SystemCallFilter`.
+    #[dbus_proxy(property, name = "SystemCallFilter")]
+    fn system_call_filter(&self) -> crate::zbus::Result<(bool, Vec<String>)>;
 
     /// Get property `SystemCallArchitectures`.
     #[dbus_proxy(property, name = "SystemCallArchitectures")]
-    fn system_call_architectures(&self) -> zbus::Result<Vec<String>>;
+    fn system_call_architectures(&self) -> crate::zbus::Result<Vec<String>>;
 
     /// Get property `SystemCallErrorNumber`.
     #[dbus_proxy(property, name = "SystemCallErrorNumber")]
-    fn system_call_error_number(&self) -> zbus::Result<i32>;
+    fn system_call_error_number(&self) -> crate::zbus::Result<i32>;
+
+    /// Get property `SystemCallLog`.
+    #[dbus_proxy(property, name = "SystemCallLog")]
+    fn system_call_log(&self) -> crate::zbus::Result<(bool, Vec<String>)>;
 
     /// Get property `Personality`.
     #[dbus_proxy(property, name = "Personality")]
-    fn personality(&self) -> zbus::Result<String>;
+    fn personality(&self) -> crate::zbus::Result<String>;
 
     /// Get property `LockPersonality`.
     #[dbus_proxy(property, name = "LockPersonality")]
-    fn lock_personality(&self) -> zbus::Result<bool>;
+    fn lock_personality(&self) -> crate::zbus::Result<bool>;
+
+    /// Get property `RestrictAddressFamilies`.
+    #[dbus_proxy(property, name = "RestrictAddressFamilies")]
+    fn restrict_address_families(&self) -> crate::zbus::Result<(bool, Vec<String>)>;
 
     /// Get property `RuntimeDirectoryPreserve`.
     #[dbus_proxy(property, name = "RuntimeDirectoryPreserve")]
-    fn runtime_directory_preserve(&self) -> zbus::Result<String>;
+    fn runtime_directory_preserve(&self) -> crate::zbus::Result<String>;
 
     /// Get property `RuntimeDirectoryMode`.
     #[dbus_proxy(property, name = "RuntimeDirectoryMode")]
-    fn runtime_directory_mode(&self) -> zbus::Result<u32>;
+    fn runtime_directory_mode(&self) -> crate::zbus::Result<u32>;
 
     /// Get property `RuntimeDirectory`.
     #[dbus_proxy(property, name = "RuntimeDirectory")]
-    fn runtime_directory(&self) -> zbus::Result<Vec<String>>;
+    fn runtime_directory(&self) -> crate::zbus::Result<Vec<String>>;
 
     /// Get property `StateDirectoryMode`.
     #[dbus_proxy(property, name = "StateDirectoryMode")]
-    fn state_directory_mode(&self) -> zbus::Result<u32>;
+    fn state_directory_mode(&self) -> crate::zbus::Result<u32>;
 
     /// Get property `StateDirectory`.
     #[dbus_proxy(property, name = "StateDirectory")]
-    fn state_directory(&self) -> zbus::Result<Vec<String>>;
+    fn state_directory(&self) -> crate::zbus::Result<Vec<String>>;
 
     /// Get property `CacheDirectoryMode`.
     #[dbus_proxy(property, name = "CacheDirectoryMode")]
-    fn cache_directory_mode(&self) -> zbus::Result<u32>;
+    fn cache_directory_mode(&self) -> crate::zbus::Result<u32>;
 
     /// Get property `CacheDirectory`.
     #[dbus_proxy(property, name = "CacheDirectory")]
-    fn cache_directory(&self) -> zbus::Result<Vec<String>>;
+    fn cache_directory(&self) -> crate::zbus::Result<Vec<String>>;
 
     /// Get property `LogsDirectoryMode`.
     #[dbus_proxy(property, name = "LogsDirectoryMode")]
-    fn logs_directory_mode(&self) -> zbus::Result<u32>;
+    fn logs_directory_mode(&self) -> crate::zbus::Result<u32>;
 
     /// Get property `LogsDirectory`.
     #[dbus_proxy(property, name = "LogsDirectory")]
-    fn logs_directory(&self) -> zbus::Result<Vec<String>>;
+    fn logs_directory(&self) -> crate::zbus::Result<Vec<String>>;
 
     /// Get property `ConfigurationDirectoryMode`.
     #[dbus_proxy(property, name = "ConfigurationDirectoryMode")]
-    fn configuration_directory_mode(&self) -> zbus::Result<u32>;
+    fn configuration_directory_mode(&self) -> crate::zbus::Result<u32>;
 
     /// Get property `ConfigurationDirectory`.
     #[dbus_proxy(property, name = "ConfigurationDirectory")]
-    fn configuration_directory(&self) -> zbus::Result<Vec<String>>;
+    fn configuration_directory(&self) -> crate::zbus::Result<Vec<String>>;
 
     /// Get property `TimeoutCleanUSec`.
     #[dbus_proxy(property, name = "TimeoutCleanUSec")]
-    fn timeout_clean_u_sec(&self) -> zbus::Result<u64>;
+    fn timeout_clean_u_sec(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `MemoryDenyWriteExecute`.
     #[dbus_proxy(property, name = "MemoryDenyWriteExecute")]
-    fn memory_deny_write_execute(&self) -> zbus::Result<bool>;
+    fn memory_deny_write_execute(&self) -> crate::zbus::Result<bool>;
 
     /// Get property `RestrictRealtime`.
     #[dbus_proxy(property, name = "RestrictRealtime")]
-    fn restrict_realtime(&self) -> zbus::Result<bool>;
+    fn restrict_realtime(&self) -> crate::zbus::Result<bool>;
 
     /// Get property `RestrictSUIDSGID`.
     #[dbus_proxy(property, name = "RestrictSUIDSGID")]
-    fn restrict_suidsgid(&self) -> zbus::Result<bool>;
+    fn restrict_suidsgid(&self) -> crate::zbus::Result<bool>;
 
     /// Get property `RestrictNamespaces`.
     #[dbus_proxy(property, name = "RestrictNamespaces")]
-    fn restrict_namespaces(&self) -> zbus::Result<u64>;
+    fn restrict_namespaces(&self) -> crate::zbus::Result<u64>;
+
+    /// Get property `BindPaths`.
+    #[dbus_proxy(property, name = "BindPaths")]
+    fn bind_paths(&self) -> crate::zbus::Result<Vec<(String, String, bool, u64)>>;
+
+    /// Get property `BindReadOnlyPaths`.
+    #[dbus_proxy(property, name = "BindReadOnlyPaths")]
+    fn bind_read_only_paths(&self) -> crate::zbus::Result<Vec<(String, String, bool, u64)>>;
 
     /// Get property `TemporaryFileSystem`.
     #[dbus_proxy(property, name = "TemporaryFileSystem")]
-    fn temporary_file_system(&self) -> zbus::Result<Vec<(String, String)>>;
+    fn temporary_file_system(&self) -> crate::zbus::Result<Vec<(String, String)>>;
 
     /// Get property `MountAPIVFS`.
     #[dbus_proxy(property, name = "MountAPIVFS")]
-    fn mount_apivfs(&self) -> zbus::Result<bool>;
+    fn mount_apivfs(&self) -> crate::zbus::Result<bool>;
 
     /// Get property `KeyringMode`.
     #[dbus_proxy(property, name = "KeyringMode")]
-    fn keyring_mode(&self) -> zbus::Result<String>;
+    fn keyring_mode(&self) -> crate::zbus::Result<String>;
 
     /// Get property `ProtectProc`.
     #[dbus_proxy(property, name = "ProtectProc")]
-    fn protect_proc(&self) -> zbus::Result<String>;
+    fn protect_proc(&self) -> crate::zbus::Result<String>;
 
     /// Get property `ProcSubset`.
     #[dbus_proxy(property, name = "ProcSubset")]
-    fn proc_subset(&self) -> zbus::Result<String>;
+    fn proc_subset(&self) -> crate::zbus::Result<String>;
 
     /// Get property `ProtectHostname`.
     #[dbus_proxy(property, name = "ProtectHostname")]
-    fn protect_hostname(&self) -> zbus::Result<bool>;
+    fn protect_hostname(&self) -> crate::zbus::Result<bool>;
 
     /// Get property `NetworkNamespacePath`.
     #[dbus_proxy(property, name = "NetworkNamespacePath")]
-    fn network_namespace_path(&self) -> zbus::Result<String>;
+    fn network_namespace_path(&self) -> crate::zbus::Result<String>;
 
     /// Get property `IPCNamespacePath`.
     #[dbus_proxy(property, name = "IPCNamespacePath")]
-    fn ipc_namespace_path(&self) -> zbus::Result<String>;
+    fn ipc_namespace_path(&self) -> crate::zbus::Result<String>;
 
     /// Get property `KillMode`.
     #[dbus_proxy(property, name = "KillMode")]
-    fn kill_mode(&self) -> zbus::Result<String>;
+    fn kill_mode(&self) -> crate::zbus::Result<String>;
 
     /// Get property `KillSignal`.
     #[dbus_proxy(property, name = "KillSignal")]
-    fn kill_signal(&self) -> zbus::Result<i32>;
+    fn kill_signal(&self) -> crate::zbus::Result<i32>;
 
     /// Get property `RestartKillSignal`.
     #[dbus_proxy(property, name = "RestartKillSignal")]
-    fn restart_kill_signal(&self) -> zbus::Result<i32>;
+    fn restart_kill_signal(&self) -> crate::zbus::Result<i32>;
 
     /// Get property `FinalKillSignal`.
     #[dbus_proxy(property, name = "FinalKillSignal")]
-    fn final_kill_signal(&self) -> zbus::Result<i32>;
+    fn final_kill_signal(&self) -> crate::zbus::Result<i32>;
 
     /// Get property `SendSIGKILL`.
     #[dbus_proxy(property, name = "SendSIGKILL")]
-    fn send_sigkill(&self) -> zbus::Result<bool>;
+    fn send_sigkill(&self) -> crate::zbus::Result<bool>;
 
     /// Get property `SendSIGHUP`.
     #[dbus_proxy(property, name = "SendSIGHUP")]
-    fn send_sighup(&self) -> zbus::Result<bool>;
+    fn send_sighup(&self) -> crate::zbus::Result<bool>;
 
     /// Get property `WatchdogSignal`.
     #[dbus_proxy(property, name = "WatchdogSignal")]
-    fn watchdog_signal(&self) -> zbus::Result<i32>;
+    fn watchdog_signal(&self) -> crate::zbus::Result<i32>;
 }
 
 /// Proxy object for `org.freedesktop.systemd1.Target`.
@@ -3459,7 +3981,7 @@ trait Target {}
 trait Device {
     /// Get property `SysFSPath`.
     #[dbus_proxy(property, name = "SysFSPath")]
-    fn sys_fs_path(&self) -> zbus::Result<String>;
+    fn sys_fs_path(&self) -> crate::zbus::Result<String>;
 }
 
 /// Proxy object for `org.freedesktop.systemd1.Mount`.
@@ -3471,911 +3993,981 @@ trait Device {
 trait Mount {
     /// [📖](https://www.freedesktop.org/software/systemd/man/systemd.directives.html#GetProcesses()) Call interface method `GetProcesses`.
     #[dbus_proxy(name = "GetProcesses")]
-    fn get_processes(&self) -> zbus::Result<Vec<(String, u32, String)>>;
+    fn get_processes(&self) -> crate::zbus::Result<Vec<(String, u32, String)>>;
 
     /// [📖](https://www.freedesktop.org/software/systemd/man/systemd.directives.html#AttachProcesses()) Call interface method `AttachProcesses`.
     #[dbus_proxy(name = "AttachProcesses")]
-    fn attach_processes(&self, subcgroup: String, pids: Vec<u32>) -> zbus::Result<()>;
+    fn attach_processes(&self, subcgroup: String, pids: Vec<u32>) -> crate::zbus::Result<()>;
 
     /// Get property `What`.
     #[dbus_proxy(property, name = "What")]
-    fn what(&self) -> zbus::Result<String>;
+    fn what(&self) -> crate::zbus::Result<String>;
 
     /// Get property `Options`.
     #[dbus_proxy(property, name = "Options")]
-    fn options(&self) -> zbus::Result<String>;
+    fn options(&self) -> crate::zbus::Result<String>;
 
     /// Get property `TimeoutUSec`.
     #[dbus_proxy(property, name = "TimeoutUSec")]
-    fn timeout_u_sec(&self) -> zbus::Result<u64>;
+    fn timeout_u_sec(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `ControlPID`.
     #[dbus_proxy(property, name = "ControlPID")]
-    fn control_pid(&self) -> zbus::Result<u32>;
+    fn control_pid(&self) -> crate::zbus::Result<u32>;
 
     /// Get property `DirectoryMode`.
     #[dbus_proxy(property, name = "DirectoryMode")]
-    fn directory_mode(&self) -> zbus::Result<u32>;
+    fn directory_mode(&self) -> crate::zbus::Result<u32>;
 
     /// Get property `SloppyOptions`.
     #[dbus_proxy(property, name = "SloppyOptions")]
-    fn sloppy_options(&self) -> zbus::Result<bool>;
+    fn sloppy_options(&self) -> crate::zbus::Result<bool>;
 
     /// Get property `LazyUnmount`.
     #[dbus_proxy(property, name = "LazyUnmount")]
-    fn lazy_unmount(&self) -> zbus::Result<bool>;
+    fn lazy_unmount(&self) -> crate::zbus::Result<bool>;
 
     /// Get property `ForceUnmount`.
     #[dbus_proxy(property, name = "ForceUnmount")]
-    fn force_unmount(&self) -> zbus::Result<bool>;
+    fn force_unmount(&self) -> crate::zbus::Result<bool>;
 
     /// Get property `ReadWriteOnly`.
     #[dbus_proxy(property, name = "ReadWriteOnly")]
-    fn read_write_only(&self) -> zbus::Result<bool>;
+    fn read_write_only(&self) -> crate::zbus::Result<bool>;
 
     /// Get property `Result`.
     #[dbus_proxy(property, name = "Result")]
-    fn result(&self) -> zbus::Result<String>;
+    fn result(&self) -> crate::zbus::Result<String>;
 
     /// Get property `UID`.
     #[dbus_proxy(property, name = "UID")]
-    fn uid(&self) -> zbus::Result<u32>;
+    fn uid(&self) -> crate::zbus::Result<u32>;
 
     /// Get property `GID`.
     #[dbus_proxy(property, name = "GID")]
-    fn gid(&self) -> zbus::Result<u32>;
+    fn gid(&self) -> crate::zbus::Result<u32>;
+
+    /// Get property `ExecMount`.
+    #[dbus_proxy(property, name = "ExecMount")]
+    fn exec_mount(
+        &self,
+    ) -> crate::zbus::Result<Vec<(String, Vec<String>, bool, u64, u64, u64, u64, u32, i32, i32)>>;
+
+    /// Get property `ExecUnmount`.
+    #[dbus_proxy(property, name = "ExecUnmount")]
+    fn exec_unmount(
+        &self,
+    ) -> crate::zbus::Result<Vec<(String, Vec<String>, bool, u64, u64, u64, u64, u32, i32, i32)>>;
+
+    /// Get property `ExecRemount`.
+    #[dbus_proxy(property, name = "ExecRemount")]
+    fn exec_remount(
+        &self,
+    ) -> crate::zbus::Result<Vec<(String, Vec<String>, bool, u64, u64, u64, u64, u32, i32, i32)>>;
 
     /// Get property `Slice`.
     #[dbus_proxy(property, name = "Slice")]
-    fn slice(&self) -> zbus::Result<String>;
+    fn slice(&self) -> crate::zbus::Result<String>;
 
     /// Get property `ControlGroup`.
     #[dbus_proxy(property, name = "ControlGroup")]
-    fn control_group(&self) -> zbus::Result<String>;
+    fn control_group(&self) -> crate::zbus::Result<String>;
 
     /// Get property `MemoryCurrent`.
     #[dbus_proxy(property, name = "MemoryCurrent")]
-    fn memory_current(&self) -> zbus::Result<u64>;
+    fn memory_current(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `MemoryAvailable`.
     #[dbus_proxy(property, name = "MemoryAvailable")]
-    fn memory_available(&self) -> zbus::Result<u64>;
+    fn memory_available(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `CPUUsageNSec`.
     #[dbus_proxy(property, name = "CPUUsageNSec")]
-    fn cpu_usage_n_sec(&self) -> zbus::Result<u64>;
+    fn cpu_usage_n_sec(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `EffectiveCPUs`.
     #[dbus_proxy(property, name = "EffectiveCPUs")]
-    fn effective_cp_us(&self) -> zbus::Result<Vec<u8>>;
+    fn effective_cp_us(&self) -> crate::zbus::Result<Vec<u8>>;
 
     /// Get property `EffectiveMemoryNodes`.
     #[dbus_proxy(property, name = "EffectiveMemoryNodes")]
-    fn effective_memory_nodes(&self) -> zbus::Result<Vec<u8>>;
+    fn effective_memory_nodes(&self) -> crate::zbus::Result<Vec<u8>>;
 
     /// Get property `TasksCurrent`.
     #[dbus_proxy(property, name = "TasksCurrent")]
-    fn tasks_current(&self) -> zbus::Result<u64>;
+    fn tasks_current(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `IPIngressBytes`.
     #[dbus_proxy(property, name = "IPIngressBytes")]
-    fn ip_ingress_bytes(&self) -> zbus::Result<u64>;
+    fn ip_ingress_bytes(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `IPIngressPackets`.
     #[dbus_proxy(property, name = "IPIngressPackets")]
-    fn ip_ingress_packets(&self) -> zbus::Result<u64>;
+    fn ip_ingress_packets(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `IPEgressBytes`.
     #[dbus_proxy(property, name = "IPEgressBytes")]
-    fn ip_egress_bytes(&self) -> zbus::Result<u64>;
+    fn ip_egress_bytes(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `IPEgressPackets`.
     #[dbus_proxy(property, name = "IPEgressPackets")]
-    fn ip_egress_packets(&self) -> zbus::Result<u64>;
+    fn ip_egress_packets(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `IOReadBytes`.
     #[dbus_proxy(property, name = "IOReadBytes")]
-    fn io_read_bytes(&self) -> zbus::Result<u64>;
+    fn io_read_bytes(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `IOReadOperations`.
     #[dbus_proxy(property, name = "IOReadOperations")]
-    fn io_read_operations(&self) -> zbus::Result<u64>;
+    fn io_read_operations(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `IOWriteBytes`.
     #[dbus_proxy(property, name = "IOWriteBytes")]
-    fn io_write_bytes(&self) -> zbus::Result<u64>;
+    fn io_write_bytes(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `IOWriteOperations`.
     #[dbus_proxy(property, name = "IOWriteOperations")]
-    fn io_write_operations(&self) -> zbus::Result<u64>;
+    fn io_write_operations(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `Delegate`.
     #[dbus_proxy(property, name = "Delegate")]
-    fn delegate(&self) -> zbus::Result<bool>;
+    fn delegate(&self) -> crate::zbus::Result<bool>;
 
     /// Get property `DelegateControllers`.
     #[dbus_proxy(property, name = "DelegateControllers")]
-    fn delegate_controllers(&self) -> zbus::Result<Vec<String>>;
+    fn delegate_controllers(&self) -> crate::zbus::Result<Vec<String>>;
 
     /// Get property `CPUAccounting`.
     #[dbus_proxy(property, name = "CPUAccounting")]
-    fn cpu_accounting(&self) -> zbus::Result<bool>;
+    fn cpu_accounting(&self) -> crate::zbus::Result<bool>;
 
     /// Get property `CPUWeight`.
     #[dbus_proxy(property, name = "CPUWeight")]
-    fn cpu_weight(&self) -> zbus::Result<u64>;
+    fn cpu_weight(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `StartupCPUWeight`.
     #[dbus_proxy(property, name = "StartupCPUWeight")]
-    fn startup_cpu_weight(&self) -> zbus::Result<u64>;
+    fn startup_cpu_weight(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `CPUShares`.
     #[dbus_proxy(property, name = "CPUShares")]
-    fn cpu_shares(&self) -> zbus::Result<u64>;
+    fn cpu_shares(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `StartupCPUShares`.
     #[dbus_proxy(property, name = "StartupCPUShares")]
-    fn startup_cpu_shares(&self) -> zbus::Result<u64>;
+    fn startup_cpu_shares(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `CPUQuotaPerSecUSec`.
     #[dbus_proxy(property, name = "CPUQuotaPerSecUSec")]
-    fn cpu_quota_per_sec_u_sec(&self) -> zbus::Result<u64>;
+    fn cpu_quota_per_sec_u_sec(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `CPUQuotaPeriodUSec`.
     #[dbus_proxy(property, name = "CPUQuotaPeriodUSec")]
-    fn cpu_quota_period_u_sec(&self) -> zbus::Result<u64>;
+    fn cpu_quota_period_u_sec(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `AllowedCPUs`.
     #[dbus_proxy(property, name = "AllowedCPUs")]
-    fn allowed_cp_us(&self) -> zbus::Result<Vec<u8>>;
+    fn allowed_cp_us(&self) -> crate::zbus::Result<Vec<u8>>;
 
     /// Get property `AllowedMemoryNodes`.
     #[dbus_proxy(property, name = "AllowedMemoryNodes")]
-    fn allowed_memory_nodes(&self) -> zbus::Result<Vec<u8>>;
+    fn allowed_memory_nodes(&self) -> crate::zbus::Result<Vec<u8>>;
 
     /// Get property `IOAccounting`.
     #[dbus_proxy(property, name = "IOAccounting")]
-    fn io_accounting(&self) -> zbus::Result<bool>;
+    fn io_accounting(&self) -> crate::zbus::Result<bool>;
 
     /// Get property `IOWeight`.
     #[dbus_proxy(property, name = "IOWeight")]
-    fn io_weight(&self) -> zbus::Result<u64>;
+    fn io_weight(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `StartupIOWeight`.
     #[dbus_proxy(property, name = "StartupIOWeight")]
-    fn startup_io_weight(&self) -> zbus::Result<u64>;
+    fn startup_io_weight(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `IODeviceWeight`.
     #[dbus_proxy(property, name = "IODeviceWeight")]
-    fn io_device_weight(&self) -> zbus::Result<Vec<(String, u64)>>;
+    fn io_device_weight(&self) -> crate::zbus::Result<Vec<(String, u64)>>;
 
     /// Get property `IOReadBandwidthMax`.
     #[dbus_proxy(property, name = "IOReadBandwidthMax")]
-    fn io_read_bandwidth_max(&self) -> zbus::Result<Vec<(String, u64)>>;
+    fn io_read_bandwidth_max(&self) -> crate::zbus::Result<Vec<(String, u64)>>;
 
     /// Get property `IOWriteBandwidthMax`.
     #[dbus_proxy(property, name = "IOWriteBandwidthMax")]
-    fn io_write_bandwidth_max(&self) -> zbus::Result<Vec<(String, u64)>>;
+    fn io_write_bandwidth_max(&self) -> crate::zbus::Result<Vec<(String, u64)>>;
 
     /// Get property `IOReadIOPSMax`.
     #[dbus_proxy(property, name = "IOReadIOPSMax")]
-    fn io_read_iops_max(&self) -> zbus::Result<Vec<(String, u64)>>;
+    fn io_read_iops_max(&self) -> crate::zbus::Result<Vec<(String, u64)>>;
 
     /// Get property `IOWriteIOPSMax`.
     #[dbus_proxy(property, name = "IOWriteIOPSMax")]
-    fn io_write_iops_max(&self) -> zbus::Result<Vec<(String, u64)>>;
+    fn io_write_iops_max(&self) -> crate::zbus::Result<Vec<(String, u64)>>;
 
     /// Get property `IODeviceLatencyTargetUSec`.
     #[dbus_proxy(property, name = "IODeviceLatencyTargetUSec")]
-    fn io_device_latency_target_u_sec(&self) -> zbus::Result<Vec<(String, u64)>>;
+    fn io_device_latency_target_u_sec(&self) -> crate::zbus::Result<Vec<(String, u64)>>;
 
     /// Get property `BlockIOAccounting`.
     #[dbus_proxy(property, name = "BlockIOAccounting")]
-    fn block_io_accounting(&self) -> zbus::Result<bool>;
+    fn block_io_accounting(&self) -> crate::zbus::Result<bool>;
 
     /// Get property `BlockIOWeight`.
     #[dbus_proxy(property, name = "BlockIOWeight")]
-    fn block_io_weight(&self) -> zbus::Result<u64>;
+    fn block_io_weight(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `StartupBlockIOWeight`.
     #[dbus_proxy(property, name = "StartupBlockIOWeight")]
-    fn startup_block_io_weight(&self) -> zbus::Result<u64>;
+    fn startup_block_io_weight(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `BlockIODeviceWeight`.
     #[dbus_proxy(property, name = "BlockIODeviceWeight")]
-    fn block_io_device_weight(&self) -> zbus::Result<Vec<(String, u64)>>;
+    fn block_io_device_weight(&self) -> crate::zbus::Result<Vec<(String, u64)>>;
 
     /// Get property `BlockIOReadBandwidth`.
     #[dbus_proxy(property, name = "BlockIOReadBandwidth")]
-    fn block_io_read_bandwidth(&self) -> zbus::Result<Vec<(String, u64)>>;
+    fn block_io_read_bandwidth(&self) -> crate::zbus::Result<Vec<(String, u64)>>;
 
     /// Get property `BlockIOWriteBandwidth`.
     #[dbus_proxy(property, name = "BlockIOWriteBandwidth")]
-    fn block_io_write_bandwidth(&self) -> zbus::Result<Vec<(String, u64)>>;
+    fn block_io_write_bandwidth(&self) -> crate::zbus::Result<Vec<(String, u64)>>;
 
     /// Get property `MemoryAccounting`.
     #[dbus_proxy(property, name = "MemoryAccounting")]
-    fn memory_accounting(&self) -> zbus::Result<bool>;
+    fn memory_accounting(&self) -> crate::zbus::Result<bool>;
 
     /// Get property `DefaultMemoryLow`.
     #[dbus_proxy(property, name = "DefaultMemoryLow")]
-    fn default_memory_low(&self) -> zbus::Result<u64>;
+    fn default_memory_low(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `DefaultMemoryMin`.
     #[dbus_proxy(property, name = "DefaultMemoryMin")]
-    fn default_memory_min(&self) -> zbus::Result<u64>;
+    fn default_memory_min(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `MemoryMin`.
     #[dbus_proxy(property, name = "MemoryMin")]
-    fn memory_min(&self) -> zbus::Result<u64>;
+    fn memory_min(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `MemoryLow`.
     #[dbus_proxy(property, name = "MemoryLow")]
-    fn memory_low(&self) -> zbus::Result<u64>;
+    fn memory_low(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `MemoryHigh`.
     #[dbus_proxy(property, name = "MemoryHigh")]
-    fn memory_high(&self) -> zbus::Result<u64>;
+    fn memory_high(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `MemoryMax`.
     #[dbus_proxy(property, name = "MemoryMax")]
-    fn memory_max(&self) -> zbus::Result<u64>;
+    fn memory_max(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `MemorySwapMax`.
     #[dbus_proxy(property, name = "MemorySwapMax")]
-    fn memory_swap_max(&self) -> zbus::Result<u64>;
+    fn memory_swap_max(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `MemoryLimit`.
     #[dbus_proxy(property, name = "MemoryLimit")]
-    fn memory_limit(&self) -> zbus::Result<u64>;
+    fn memory_limit(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `DevicePolicy`.
     #[dbus_proxy(property, name = "DevicePolicy")]
-    fn device_policy(&self) -> zbus::Result<String>;
+    fn device_policy(&self) -> crate::zbus::Result<String>;
 
     /// Get property `DeviceAllow`.
     #[dbus_proxy(property, name = "DeviceAllow")]
-    fn device_allow(&self) -> zbus::Result<Vec<(String, String)>>;
+    fn device_allow(&self) -> crate::zbus::Result<Vec<(String, String)>>;
 
     /// Get property `TasksAccounting`.
     #[dbus_proxy(property, name = "TasksAccounting")]
-    fn tasks_accounting(&self) -> zbus::Result<bool>;
+    fn tasks_accounting(&self) -> crate::zbus::Result<bool>;
 
     /// Get property `TasksMax`.
     #[dbus_proxy(property, name = "TasksMax")]
-    fn tasks_max(&self) -> zbus::Result<u64>;
+    fn tasks_max(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `IPAccounting`.
     #[dbus_proxy(property, name = "IPAccounting")]
-    fn ip_accounting(&self) -> zbus::Result<bool>;
+    fn ip_accounting(&self) -> crate::zbus::Result<bool>;
+
+    /// Get property `IPAddressAllow`.
+    #[dbus_proxy(property, name = "IPAddressAllow")]
+    fn ip_address_allow(&self) -> crate::zbus::Result<Vec<(i32, Vec<u8>, u32)>>;
+
+    /// Get property `IPAddressDeny`.
+    #[dbus_proxy(property, name = "IPAddressDeny")]
+    fn ip_address_deny(&self) -> crate::zbus::Result<Vec<(i32, Vec<u8>, u32)>>;
 
     /// Get property `IPIngressFilterPath`.
     #[dbus_proxy(property, name = "IPIngressFilterPath")]
-    fn ip_ingress_filter_path(&self) -> zbus::Result<Vec<String>>;
+    fn ip_ingress_filter_path(&self) -> crate::zbus::Result<Vec<String>>;
 
     /// Get property `IPEgressFilterPath`.
     #[dbus_proxy(property, name = "IPEgressFilterPath")]
-    fn ip_egress_filter_path(&self) -> zbus::Result<Vec<String>>;
+    fn ip_egress_filter_path(&self) -> crate::zbus::Result<Vec<String>>;
 
     /// Get property `DisableControllers`.
     #[dbus_proxy(property, name = "DisableControllers")]
-    fn disable_controllers(&self) -> zbus::Result<Vec<String>>;
+    fn disable_controllers(&self) -> crate::zbus::Result<Vec<String>>;
 
     /// Get property `ManagedOOMSwap`.
     #[dbus_proxy(property, name = "ManagedOOMSwap")]
-    fn managed_oom_swap(&self) -> zbus::Result<String>;
+    fn managed_oom_swap(&self) -> crate::zbus::Result<String>;
 
     /// Get property `ManagedOOMMemoryPressure`.
     #[dbus_proxy(property, name = "ManagedOOMMemoryPressure")]
-    fn managed_oom_memory_pressure(&self) -> zbus::Result<String>;
+    fn managed_oom_memory_pressure(&self) -> crate::zbus::Result<String>;
 
     /// Get property `ManagedOOMMemoryPressureLimit`.
     #[dbus_proxy(property, name = "ManagedOOMMemoryPressureLimit")]
-    fn managed_oom_memory_pressure_limit(&self) -> zbus::Result<u32>;
+    fn managed_oom_memory_pressure_limit(&self) -> crate::zbus::Result<u32>;
 
     /// Get property `ManagedOOMPreference`.
     #[dbus_proxy(property, name = "ManagedOOMPreference")]
-    fn managed_oom_preference(&self) -> zbus::Result<String>;
+    fn managed_oom_preference(&self) -> crate::zbus::Result<String>;
 
     /// Get property `BPFProgram`.
     #[dbus_proxy(property, name = "BPFProgram")]
-    fn bpf_program(&self) -> zbus::Result<Vec<(String, String)>>;
+    fn bpf_program(&self) -> crate::zbus::Result<Vec<(String, String)>>;
+
+    /// Get property `SocketBindAllow`.
+    #[dbus_proxy(property, name = "SocketBindAllow")]
+    fn socket_bind_allow(&self) -> crate::zbus::Result<Vec<(i32, i32, u16, u16)>>;
+
+    /// Get property `SocketBindDeny`.
+    #[dbus_proxy(property, name = "SocketBindDeny")]
+    fn socket_bind_deny(&self) -> crate::zbus::Result<Vec<(i32, i32, u16, u16)>>;
 
     /// Get property `Environment`.
     #[dbus_proxy(property, name = "Environment")]
-    fn environment(&self) -> zbus::Result<Vec<String>>;
+    fn environment(&self) -> crate::zbus::Result<Vec<String>>;
 
     /// Get property `EnvironmentFiles`.
     #[dbus_proxy(property, name = "EnvironmentFiles")]
-    fn environment_files(&self) -> zbus::Result<Vec<(String, bool)>>;
+    fn environment_files(&self) -> crate::zbus::Result<Vec<(String, bool)>>;
 
     /// Get property `PassEnvironment`.
     #[dbus_proxy(property, name = "PassEnvironment")]
-    fn pass_environment(&self) -> zbus::Result<Vec<String>>;
+    fn pass_environment(&self) -> crate::zbus::Result<Vec<String>>;
 
     /// Get property `UnsetEnvironment`.
     #[dbus_proxy(property, name = "UnsetEnvironment")]
-    fn unset_environment(&self) -> zbus::Result<Vec<String>>;
+    fn unset_environment(&self) -> crate::zbus::Result<Vec<String>>;
 
     /// Get property `UMask`.
     #[dbus_proxy(property, name = "UMask")]
-    fn u_mask(&self) -> zbus::Result<u32>;
+    fn u_mask(&self) -> crate::zbus::Result<u32>;
 
     /// Get property `LimitCPU`.
     #[dbus_proxy(property, name = "LimitCPU")]
-    fn limit_cpu(&self) -> zbus::Result<u64>;
+    fn limit_cpu(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `LimitCPUSoft`.
     #[dbus_proxy(property, name = "LimitCPUSoft")]
-    fn limit_cpu_soft(&self) -> zbus::Result<u64>;
+    fn limit_cpu_soft(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `LimitFSIZE`.
     #[dbus_proxy(property, name = "LimitFSIZE")]
-    fn limit_fsize(&self) -> zbus::Result<u64>;
+    fn limit_fsize(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `LimitFSIZESoft`.
     #[dbus_proxy(property, name = "LimitFSIZESoft")]
-    fn limit_fsize_soft(&self) -> zbus::Result<u64>;
+    fn limit_fsize_soft(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `LimitDATA`.
     #[dbus_proxy(property, name = "LimitDATA")]
-    fn limit_data(&self) -> zbus::Result<u64>;
+    fn limit_data(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `LimitDATASoft`.
     #[dbus_proxy(property, name = "LimitDATASoft")]
-    fn limit_data_soft(&self) -> zbus::Result<u64>;
+    fn limit_data_soft(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `LimitSTACK`.
     #[dbus_proxy(property, name = "LimitSTACK")]
-    fn limit_stack(&self) -> zbus::Result<u64>;
+    fn limit_stack(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `LimitSTACKSoft`.
     #[dbus_proxy(property, name = "LimitSTACKSoft")]
-    fn limit_stack_soft(&self) -> zbus::Result<u64>;
+    fn limit_stack_soft(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `LimitCORE`.
     #[dbus_proxy(property, name = "LimitCORE")]
-    fn limit_core(&self) -> zbus::Result<u64>;
+    fn limit_core(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `LimitCORESoft`.
     #[dbus_proxy(property, name = "LimitCORESoft")]
-    fn limit_core_soft(&self) -> zbus::Result<u64>;
+    fn limit_core_soft(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `LimitRSS`.
     #[dbus_proxy(property, name = "LimitRSS")]
-    fn limit_rss(&self) -> zbus::Result<u64>;
+    fn limit_rss(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `LimitRSSSoft`.
     #[dbus_proxy(property, name = "LimitRSSSoft")]
-    fn limit_rss_soft(&self) -> zbus::Result<u64>;
+    fn limit_rss_soft(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `LimitNOFILE`.
     #[dbus_proxy(property, name = "LimitNOFILE")]
-    fn limit_nofile(&self) -> zbus::Result<u64>;
+    fn limit_nofile(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `LimitNOFILESoft`.
     #[dbus_proxy(property, name = "LimitNOFILESoft")]
-    fn limit_nofile_soft(&self) -> zbus::Result<u64>;
+    fn limit_nofile_soft(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `LimitAS`.
     #[dbus_proxy(property, name = "LimitAS")]
-    fn limit_as(&self) -> zbus::Result<u64>;
+    fn limit_as(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `LimitASSoft`.
     #[dbus_proxy(property, name = "LimitASSoft")]
-    fn limit_as_soft(&self) -> zbus::Result<u64>;
+    fn limit_as_soft(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `LimitNPROC`.
     #[dbus_proxy(property, name = "LimitNPROC")]
-    fn limit_nproc(&self) -> zbus::Result<u64>;
+    fn limit_nproc(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `LimitNPROCSoft`.
     #[dbus_proxy(property, name = "LimitNPROCSoft")]
-    fn limit_nproc_soft(&self) -> zbus::Result<u64>;
+    fn limit_nproc_soft(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `LimitMEMLOCK`.
     #[dbus_proxy(property, name = "LimitMEMLOCK")]
-    fn limit_memlock(&self) -> zbus::Result<u64>;
+    fn limit_memlock(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `LimitMEMLOCKSoft`.
     #[dbus_proxy(property, name = "LimitMEMLOCKSoft")]
-    fn limit_memlock_soft(&self) -> zbus::Result<u64>;
+    fn limit_memlock_soft(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `LimitLOCKS`.
     #[dbus_proxy(property, name = "LimitLOCKS")]
-    fn limit_locks(&self) -> zbus::Result<u64>;
+    fn limit_locks(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `LimitLOCKSSoft`.
     #[dbus_proxy(property, name = "LimitLOCKSSoft")]
-    fn limit_locks_soft(&self) -> zbus::Result<u64>;
+    fn limit_locks_soft(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `LimitSIGPENDING`.
     #[dbus_proxy(property, name = "LimitSIGPENDING")]
-    fn limit_sigpending(&self) -> zbus::Result<u64>;
+    fn limit_sigpending(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `LimitSIGPENDINGSoft`.
     #[dbus_proxy(property, name = "LimitSIGPENDINGSoft")]
-    fn limit_sigpending_soft(&self) -> zbus::Result<u64>;
+    fn limit_sigpending_soft(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `LimitMSGQUEUE`.
     #[dbus_proxy(property, name = "LimitMSGQUEUE")]
-    fn limit_msgqueue(&self) -> zbus::Result<u64>;
+    fn limit_msgqueue(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `LimitMSGQUEUESoft`.
     #[dbus_proxy(property, name = "LimitMSGQUEUESoft")]
-    fn limit_msgqueue_soft(&self) -> zbus::Result<u64>;
+    fn limit_msgqueue_soft(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `LimitNICE`.
     #[dbus_proxy(property, name = "LimitNICE")]
-    fn limit_nice(&self) -> zbus::Result<u64>;
+    fn limit_nice(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `LimitNICESoft`.
     #[dbus_proxy(property, name = "LimitNICESoft")]
-    fn limit_nice_soft(&self) -> zbus::Result<u64>;
+    fn limit_nice_soft(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `LimitRTPRIO`.
     #[dbus_proxy(property, name = "LimitRTPRIO")]
-    fn limit_rtprio(&self) -> zbus::Result<u64>;
+    fn limit_rtprio(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `LimitRTPRIOSoft`.
     #[dbus_proxy(property, name = "LimitRTPRIOSoft")]
-    fn limit_rtprio_soft(&self) -> zbus::Result<u64>;
+    fn limit_rtprio_soft(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `LimitRTTIME`.
     #[dbus_proxy(property, name = "LimitRTTIME")]
-    fn limit_rttime(&self) -> zbus::Result<u64>;
+    fn limit_rttime(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `LimitRTTIMESoft`.
     #[dbus_proxy(property, name = "LimitRTTIMESoft")]
-    fn limit_rttime_soft(&self) -> zbus::Result<u64>;
+    fn limit_rttime_soft(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `WorkingDirectory`.
     #[dbus_proxy(property, name = "WorkingDirectory")]
-    fn working_directory(&self) -> zbus::Result<String>;
+    fn working_directory(&self) -> crate::zbus::Result<String>;
 
     /// Get property `RootDirectory`.
     #[dbus_proxy(property, name = "RootDirectory")]
-    fn root_directory(&self) -> zbus::Result<String>;
+    fn root_directory(&self) -> crate::zbus::Result<String>;
 
     /// Get property `RootImage`.
     #[dbus_proxy(property, name = "RootImage")]
-    fn root_image(&self) -> zbus::Result<String>;
+    fn root_image(&self) -> crate::zbus::Result<String>;
 
     /// Get property `RootImageOptions`.
     #[dbus_proxy(property, name = "RootImageOptions")]
-    fn root_image_options(&self) -> zbus::Result<Vec<(String, String)>>;
+    fn root_image_options(&self) -> crate::zbus::Result<Vec<(String, String)>>;
 
     /// Get property `RootHash`.
     #[dbus_proxy(property, name = "RootHash")]
-    fn root_hash(&self) -> zbus::Result<Vec<u8>>;
+    fn root_hash(&self) -> crate::zbus::Result<Vec<u8>>;
 
     /// Get property `RootHashPath`.
     #[dbus_proxy(property, name = "RootHashPath")]
-    fn root_hash_path(&self) -> zbus::Result<String>;
+    fn root_hash_path(&self) -> crate::zbus::Result<String>;
 
     /// Get property `RootHashSignature`.
     #[dbus_proxy(property, name = "RootHashSignature")]
-    fn root_hash_signature(&self) -> zbus::Result<Vec<u8>>;
+    fn root_hash_signature(&self) -> crate::zbus::Result<Vec<u8>>;
 
     /// Get property `RootHashSignaturePath`.
     #[dbus_proxy(property, name = "RootHashSignaturePath")]
-    fn root_hash_signature_path(&self) -> zbus::Result<String>;
+    fn root_hash_signature_path(&self) -> crate::zbus::Result<String>;
 
     /// Get property `RootVerity`.
     #[dbus_proxy(property, name = "RootVerity")]
-    fn root_verity(&self) -> zbus::Result<String>;
+    fn root_verity(&self) -> crate::zbus::Result<String>;
 
     /// Get property `OOMScoreAdjust`.
     #[dbus_proxy(property, name = "OOMScoreAdjust")]
-    fn oom_score_adjust(&self) -> zbus::Result<i32>;
+    fn oom_score_adjust(&self) -> crate::zbus::Result<i32>;
 
     /// Get property `CoredumpFilter`.
     #[dbus_proxy(property, name = "CoredumpFilter")]
-    fn coredump_filter(&self) -> zbus::Result<u64>;
+    fn coredump_filter(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `Nice`.
     #[dbus_proxy(property, name = "Nice")]
-    fn nice(&self) -> zbus::Result<i32>;
+    fn nice(&self) -> crate::zbus::Result<i32>;
 
     /// Get property `IOSchedulingClass`.
     #[dbus_proxy(property, name = "IOSchedulingClass")]
-    fn io_scheduling_class(&self) -> zbus::Result<i32>;
+    fn io_scheduling_class(&self) -> crate::zbus::Result<i32>;
 
     /// Get property `IOSchedulingPriority`.
     #[dbus_proxy(property, name = "IOSchedulingPriority")]
-    fn io_scheduling_priority(&self) -> zbus::Result<i32>;
+    fn io_scheduling_priority(&self) -> crate::zbus::Result<i32>;
 
     /// Get property `CPUSchedulingPolicy`.
     #[dbus_proxy(property, name = "CPUSchedulingPolicy")]
-    fn cpu_scheduling_policy(&self) -> zbus::Result<i32>;
+    fn cpu_scheduling_policy(&self) -> crate::zbus::Result<i32>;
 
     /// Get property `CPUSchedulingPriority`.
     #[dbus_proxy(property, name = "CPUSchedulingPriority")]
-    fn cpu_scheduling_priority(&self) -> zbus::Result<i32>;
+    fn cpu_scheduling_priority(&self) -> crate::zbus::Result<i32>;
 
     /// Get property `CPUAffinity`.
     #[dbus_proxy(property, name = "CPUAffinity")]
-    fn cpu_affinity(&self) -> zbus::Result<Vec<u8>>;
+    fn cpu_affinity(&self) -> crate::zbus::Result<Vec<u8>>;
 
     /// Get property `CPUAffinityFromNUMA`.
     #[dbus_proxy(property, name = "CPUAffinityFromNUMA")]
-    fn cpu_affinity_from_numa(&self) -> zbus::Result<bool>;
+    fn cpu_affinity_from_numa(&self) -> crate::zbus::Result<bool>;
 
     /// Get property `NUMAPolicy`.
     #[dbus_proxy(property, name = "NUMAPolicy")]
-    fn numa_policy(&self) -> zbus::Result<i32>;
+    fn numa_policy(&self) -> crate::zbus::Result<i32>;
 
     /// Get property `NUMAMask`.
     #[dbus_proxy(property, name = "NUMAMask")]
-    fn numa_mask(&self) -> zbus::Result<Vec<u8>>;
+    fn numa_mask(&self) -> crate::zbus::Result<Vec<u8>>;
 
     /// Get property `TimerSlackNSec`.
     #[dbus_proxy(property, name = "TimerSlackNSec")]
-    fn timer_slack_n_sec(&self) -> zbus::Result<u64>;
+    fn timer_slack_n_sec(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `CPUSchedulingResetOnFork`.
     #[dbus_proxy(property, name = "CPUSchedulingResetOnFork")]
-    fn cpu_scheduling_reset_on_fork(&self) -> zbus::Result<bool>;
+    fn cpu_scheduling_reset_on_fork(&self) -> crate::zbus::Result<bool>;
 
     /// Get property `NonBlocking`.
     #[dbus_proxy(property, name = "NonBlocking")]
-    fn non_blocking(&self) -> zbus::Result<bool>;
+    fn non_blocking(&self) -> crate::zbus::Result<bool>;
 
     /// Get property `StandardInput`.
     #[dbus_proxy(property, name = "StandardInput")]
-    fn standard_input(&self) -> zbus::Result<String>;
+    fn standard_input(&self) -> crate::zbus::Result<String>;
 
     /// Get property `StandardInputFileDescriptorName`.
     #[dbus_proxy(property, name = "StandardInputFileDescriptorName")]
-    fn standard_input_file_descriptor_name(&self) -> zbus::Result<String>;
+    fn standard_input_file_descriptor_name(&self) -> crate::zbus::Result<String>;
 
     /// Get property `StandardInputData`.
     #[dbus_proxy(property, name = "StandardInputData")]
-    fn standard_input_data(&self) -> zbus::Result<Vec<u8>>;
+    fn standard_input_data(&self) -> crate::zbus::Result<Vec<u8>>;
 
     /// Get property `StandardOutput`.
     #[dbus_proxy(property, name = "StandardOutput")]
-    fn standard_output(&self) -> zbus::Result<String>;
+    fn standard_output(&self) -> crate::zbus::Result<String>;
 
     /// Get property `StandardOutputFileDescriptorName`.
     #[dbus_proxy(property, name = "StandardOutputFileDescriptorName")]
-    fn standard_output_file_descriptor_name(&self) -> zbus::Result<String>;
+    fn standard_output_file_descriptor_name(&self) -> crate::zbus::Result<String>;
 
     /// Get property `StandardError`.
     #[dbus_proxy(property, name = "StandardError")]
-    fn standard_error(&self) -> zbus::Result<String>;
+    fn standard_error(&self) -> crate::zbus::Result<String>;
 
     /// Get property `StandardErrorFileDescriptorName`.
     #[dbus_proxy(property, name = "StandardErrorFileDescriptorName")]
-    fn standard_error_file_descriptor_name(&self) -> zbus::Result<String>;
+    fn standard_error_file_descriptor_name(&self) -> crate::zbus::Result<String>;
 
     /// Get property `TTYPath`.
     #[dbus_proxy(property, name = "TTYPath")]
-    fn tty_path(&self) -> zbus::Result<String>;
+    fn tty_path(&self) -> crate::zbus::Result<String>;
 
     /// Get property `TTYReset`.
     #[dbus_proxy(property, name = "TTYReset")]
-    fn tty_reset(&self) -> zbus::Result<bool>;
+    fn tty_reset(&self) -> crate::zbus::Result<bool>;
 
     /// Get property `TTYVHangup`.
     #[dbus_proxy(property, name = "TTYVHangup")]
-    fn ttyv_hangup(&self) -> zbus::Result<bool>;
+    fn ttyv_hangup(&self) -> crate::zbus::Result<bool>;
 
     /// Get property `TTYVTDisallocate`.
     #[dbus_proxy(property, name = "TTYVTDisallocate")]
-    fn ttyvt_disallocate(&self) -> zbus::Result<bool>;
+    fn ttyvt_disallocate(&self) -> crate::zbus::Result<bool>;
 
     /// Get property `SyslogPriority`.
     #[dbus_proxy(property, name = "SyslogPriority")]
-    fn syslog_priority(&self) -> zbus::Result<i32>;
+    fn syslog_priority(&self) -> crate::zbus::Result<i32>;
 
     /// Get property `SyslogIdentifier`.
     #[dbus_proxy(property, name = "SyslogIdentifier")]
-    fn syslog_identifier(&self) -> zbus::Result<String>;
+    fn syslog_identifier(&self) -> crate::zbus::Result<String>;
 
     /// Get property `SyslogLevelPrefix`.
     #[dbus_proxy(property, name = "SyslogLevelPrefix")]
-    fn syslog_level_prefix(&self) -> zbus::Result<bool>;
+    fn syslog_level_prefix(&self) -> crate::zbus::Result<bool>;
 
     /// Get property `SyslogLevel`.
     #[dbus_proxy(property, name = "SyslogLevel")]
-    fn syslog_level(&self) -> zbus::Result<i32>;
+    fn syslog_level(&self) -> crate::zbus::Result<i32>;
 
     /// Get property `SyslogFacility`.
     #[dbus_proxy(property, name = "SyslogFacility")]
-    fn syslog_facility(&self) -> zbus::Result<i32>;
+    fn syslog_facility(&self) -> crate::zbus::Result<i32>;
 
     /// Get property `LogLevelMax`.
     #[dbus_proxy(property, name = "LogLevelMax")]
-    fn log_level_max(&self) -> zbus::Result<i32>;
+    fn log_level_max(&self) -> crate::zbus::Result<i32>;
 
     /// Get property `LogRateLimitIntervalUSec`.
     #[dbus_proxy(property, name = "LogRateLimitIntervalUSec")]
-    fn log_rate_limit_interval_u_sec(&self) -> zbus::Result<u64>;
+    fn log_rate_limit_interval_u_sec(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `LogRateLimitBurst`.
     #[dbus_proxy(property, name = "LogRateLimitBurst")]
-    fn log_rate_limit_burst(&self) -> zbus::Result<u32>;
+    fn log_rate_limit_burst(&self) -> crate::zbus::Result<u32>;
 
     /// Get property `LogNamespace`.
     #[dbus_proxy(property, name = "LogNamespace")]
-    fn log_namespace(&self) -> zbus::Result<String>;
+    fn log_namespace(&self) -> crate::zbus::Result<String>;
 
     /// Get property `SecureBits`.
     #[dbus_proxy(property, name = "SecureBits")]
-    fn secure_bits(&self) -> zbus::Result<i32>;
+    fn secure_bits(&self) -> crate::zbus::Result<i32>;
 
     /// Get property `CapabilityBoundingSet`.
     #[dbus_proxy(property, name = "CapabilityBoundingSet")]
-    fn capability_bounding_set(&self) -> zbus::Result<u64>;
+    fn capability_bounding_set(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `AmbientCapabilities`.
     #[dbus_proxy(property, name = "AmbientCapabilities")]
-    fn ambient_capabilities(&self) -> zbus::Result<u64>;
+    fn ambient_capabilities(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `User`.
     #[dbus_proxy(property, name = "User")]
-    fn user(&self) -> zbus::Result<String>;
+    fn user(&self) -> crate::zbus::Result<String>;
 
     /// Get property `Group`.
     #[dbus_proxy(property, name = "Group")]
-    fn group(&self) -> zbus::Result<String>;
+    fn group(&self) -> crate::zbus::Result<String>;
 
     /// Get property `DynamicUser`.
     #[dbus_proxy(property, name = "DynamicUser")]
-    fn dynamic_user(&self) -> zbus::Result<bool>;
+    fn dynamic_user(&self) -> crate::zbus::Result<bool>;
 
     /// Get property `RemoveIPC`.
     #[dbus_proxy(property, name = "RemoveIPC")]
-    fn remove_ipc(&self) -> zbus::Result<bool>;
+    fn remove_ipc(&self) -> crate::zbus::Result<bool>;
+
+    /// Get property `SetCredential`.
+    #[dbus_proxy(property, name = "SetCredential")]
+    fn set_credential(&self) -> crate::zbus::Result<Vec<(String, Vec<u8>)>>;
 
     /// Get property `LoadCredential`.
     #[dbus_proxy(property, name = "LoadCredential")]
-    fn load_credential(&self) -> zbus::Result<Vec<(String, String)>>;
+    fn load_credential(&self) -> crate::zbus::Result<Vec<(String, String)>>;
 
     /// Get property `SupplementaryGroups`.
     #[dbus_proxy(property, name = "SupplementaryGroups")]
-    fn supplementary_groups(&self) -> zbus::Result<Vec<String>>;
+    fn supplementary_groups(&self) -> crate::zbus::Result<Vec<String>>;
 
     /// Get property `PAMName`.
     #[dbus_proxy(property, name = "PAMName")]
-    fn pam_name(&self) -> zbus::Result<String>;
+    fn pam_name(&self) -> crate::zbus::Result<String>;
 
     /// Get property `ReadWritePaths`.
     #[dbus_proxy(property, name = "ReadWritePaths")]
-    fn read_write_paths(&self) -> zbus::Result<Vec<String>>;
+    fn read_write_paths(&self) -> crate::zbus::Result<Vec<String>>;
 
     /// Get property `ReadOnlyPaths`.
     #[dbus_proxy(property, name = "ReadOnlyPaths")]
-    fn read_only_paths(&self) -> zbus::Result<Vec<String>>;
+    fn read_only_paths(&self) -> crate::zbus::Result<Vec<String>>;
 
     /// Get property `InaccessiblePaths`.
     #[dbus_proxy(property, name = "InaccessiblePaths")]
-    fn inaccessible_paths(&self) -> zbus::Result<Vec<String>>;
+    fn inaccessible_paths(&self) -> crate::zbus::Result<Vec<String>>;
 
     /// Get property `ExecPaths`.
     #[dbus_proxy(property, name = "ExecPaths")]
-    fn exec_paths(&self) -> zbus::Result<Vec<String>>;
+    fn exec_paths(&self) -> crate::zbus::Result<Vec<String>>;
 
     /// Get property `NoExecPaths`.
     #[dbus_proxy(property, name = "NoExecPaths")]
-    fn no_exec_paths(&self) -> zbus::Result<Vec<String>>;
+    fn no_exec_paths(&self) -> crate::zbus::Result<Vec<String>>;
 
     /// Get property `MountFlags`.
     #[dbus_proxy(property, name = "MountFlags")]
-    fn mount_flags(&self) -> zbus::Result<u64>;
+    fn mount_flags(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `PrivateTmp`.
     #[dbus_proxy(property, name = "PrivateTmp")]
-    fn private_tmp(&self) -> zbus::Result<bool>;
+    fn private_tmp(&self) -> crate::zbus::Result<bool>;
 
     /// Get property `PrivateDevices`.
     #[dbus_proxy(property, name = "PrivateDevices")]
-    fn private_devices(&self) -> zbus::Result<bool>;
+    fn private_devices(&self) -> crate::zbus::Result<bool>;
 
     /// Get property `ProtectClock`.
     #[dbus_proxy(property, name = "ProtectClock")]
-    fn protect_clock(&self) -> zbus::Result<bool>;
+    fn protect_clock(&self) -> crate::zbus::Result<bool>;
 
     /// Get property `ProtectKernelTunables`.
     #[dbus_proxy(property, name = "ProtectKernelTunables")]
-    fn protect_kernel_tunables(&self) -> zbus::Result<bool>;
+    fn protect_kernel_tunables(&self) -> crate::zbus::Result<bool>;
 
     /// Get property `ProtectKernelModules`.
     #[dbus_proxy(property, name = "ProtectKernelModules")]
-    fn protect_kernel_modules(&self) -> zbus::Result<bool>;
+    fn protect_kernel_modules(&self) -> crate::zbus::Result<bool>;
 
     /// Get property `ProtectKernelLogs`.
     #[dbus_proxy(property, name = "ProtectKernelLogs")]
-    fn protect_kernel_logs(&self) -> zbus::Result<bool>;
+    fn protect_kernel_logs(&self) -> crate::zbus::Result<bool>;
 
     /// Get property `ProtectControlGroups`.
     #[dbus_proxy(property, name = "ProtectControlGroups")]
-    fn protect_control_groups(&self) -> zbus::Result<bool>;
+    fn protect_control_groups(&self) -> crate::zbus::Result<bool>;
 
     /// Get property `PrivateNetwork`.
     #[dbus_proxy(property, name = "PrivateNetwork")]
-    fn private_network(&self) -> zbus::Result<bool>;
+    fn private_network(&self) -> crate::zbus::Result<bool>;
 
     /// Get property `PrivateUsers`.
     #[dbus_proxy(property, name = "PrivateUsers")]
-    fn private_users(&self) -> zbus::Result<bool>;
+    fn private_users(&self) -> crate::zbus::Result<bool>;
 
     /// Get property `PrivateMounts`.
     #[dbus_proxy(property, name = "PrivateMounts")]
-    fn private_mounts(&self) -> zbus::Result<bool>;
+    fn private_mounts(&self) -> crate::zbus::Result<bool>;
 
     /// Get property `PrivateIPC`.
     #[dbus_proxy(property, name = "PrivateIPC")]
-    fn private_ipc(&self) -> zbus::Result<bool>;
+    fn private_ipc(&self) -> crate::zbus::Result<bool>;
 
     /// Get property `ProtectHome`.
     #[dbus_proxy(property, name = "ProtectHome")]
-    fn protect_home(&self) -> zbus::Result<String>;
+    fn protect_home(&self) -> crate::zbus::Result<String>;
 
     /// Get property `ProtectSystem`.
     #[dbus_proxy(property, name = "ProtectSystem")]
-    fn protect_system(&self) -> zbus::Result<String>;
+    fn protect_system(&self) -> crate::zbus::Result<String>;
 
     /// Get property `SameProcessGroup`.
     #[dbus_proxy(property, name = "SameProcessGroup")]
-    fn same_process_group(&self) -> zbus::Result<bool>;
+    fn same_process_group(&self) -> crate::zbus::Result<bool>;
 
     /// Get property `UtmpIdentifier`.
     #[dbus_proxy(property, name = "UtmpIdentifier")]
-    fn utmp_identifier(&self) -> zbus::Result<String>;
+    fn utmp_identifier(&self) -> crate::zbus::Result<String>;
 
     /// Get property `UtmpMode`.
     #[dbus_proxy(property, name = "UtmpMode")]
-    fn utmp_mode(&self) -> zbus::Result<String>;
+    fn utmp_mode(&self) -> crate::zbus::Result<String>;
+
+    /// Get property `SELinuxContext`.
+    #[dbus_proxy(property, name = "SELinuxContext")]
+    fn se_linux_context(&self) -> crate::zbus::Result<(bool, String)>;
+
+    /// Get property `AppArmorProfile`.
+    #[dbus_proxy(property, name = "AppArmorProfile")]
+    fn app_armor_profile(&self) -> crate::zbus::Result<(bool, String)>;
+
+    /// Get property `SmackProcessLabel`.
+    #[dbus_proxy(property, name = "SmackProcessLabel")]
+    fn smack_process_label(&self) -> crate::zbus::Result<(bool, String)>;
 
     /// Get property `IgnoreSIGPIPE`.
     #[dbus_proxy(property, name = "IgnoreSIGPIPE")]
-    fn ignore_sigpipe(&self) -> zbus::Result<bool>;
+    fn ignore_sigpipe(&self) -> crate::zbus::Result<bool>;
 
     /// Get property `NoNewPrivileges`.
     #[dbus_proxy(property, name = "NoNewPrivileges")]
-    fn no_new_privileges(&self) -> zbus::Result<bool>;
+    fn no_new_privileges(&self) -> crate::zbus::Result<bool>;
+
+    /// Get property `SystemCallFilter`.
+    #[dbus_proxy(property, name = "SystemCallFilter")]
+    fn system_call_filter(&self) -> crate::zbus::Result<(bool, Vec<String>)>;
 
     /// Get property `SystemCallArchitectures`.
     #[dbus_proxy(property, name = "SystemCallArchitectures")]
-    fn system_call_architectures(&self) -> zbus::Result<Vec<String>>;
+    fn system_call_architectures(&self) -> crate::zbus::Result<Vec<String>>;
 
     /// Get property `SystemCallErrorNumber`.
     #[dbus_proxy(property, name = "SystemCallErrorNumber")]
-    fn system_call_error_number(&self) -> zbus::Result<i32>;
+    fn system_call_error_number(&self) -> crate::zbus::Result<i32>;
+
+    /// Get property `SystemCallLog`.
+    #[dbus_proxy(property, name = "SystemCallLog")]
+    fn system_call_log(&self) -> crate::zbus::Result<(bool, Vec<String>)>;
 
     /// Get property `Personality`.
     #[dbus_proxy(property, name = "Personality")]
-    fn personality(&self) -> zbus::Result<String>;
+    fn personality(&self) -> crate::zbus::Result<String>;
 
     /// Get property `LockPersonality`.
     #[dbus_proxy(property, name = "LockPersonality")]
-    fn lock_personality(&self) -> zbus::Result<bool>;
+    fn lock_personality(&self) -> crate::zbus::Result<bool>;
+
+    /// Get property `RestrictAddressFamilies`.
+    #[dbus_proxy(property, name = "RestrictAddressFamilies")]
+    fn restrict_address_families(&self) -> crate::zbus::Result<(bool, Vec<String>)>;
 
     /// Get property `RuntimeDirectoryPreserve`.
     #[dbus_proxy(property, name = "RuntimeDirectoryPreserve")]
-    fn runtime_directory_preserve(&self) -> zbus::Result<String>;
+    fn runtime_directory_preserve(&self) -> crate::zbus::Result<String>;
 
     /// Get property `RuntimeDirectoryMode`.
     #[dbus_proxy(property, name = "RuntimeDirectoryMode")]
-    fn runtime_directory_mode(&self) -> zbus::Result<u32>;
+    fn runtime_directory_mode(&self) -> crate::zbus::Result<u32>;
 
     /// Get property `RuntimeDirectory`.
     #[dbus_proxy(property, name = "RuntimeDirectory")]
-    fn runtime_directory(&self) -> zbus::Result<Vec<String>>;
+    fn runtime_directory(&self) -> crate::zbus::Result<Vec<String>>;
 
     /// Get property `StateDirectoryMode`.
     #[dbus_proxy(property, name = "StateDirectoryMode")]
-    fn state_directory_mode(&self) -> zbus::Result<u32>;
+    fn state_directory_mode(&self) -> crate::zbus::Result<u32>;
 
     /// Get property `StateDirectory`.
     #[dbus_proxy(property, name = "StateDirectory")]
-    fn state_directory(&self) -> zbus::Result<Vec<String>>;
+    fn state_directory(&self) -> crate::zbus::Result<Vec<String>>;
 
     /// Get property `CacheDirectoryMode`.
     #[dbus_proxy(property, name = "CacheDirectoryMode")]
-    fn cache_directory_mode(&self) -> zbus::Result<u32>;
+    fn cache_directory_mode(&self) -> crate::zbus::Result<u32>;
 
     /// Get property `CacheDirectory`.
     #[dbus_proxy(property, name = "CacheDirectory")]
-    fn cache_directory(&self) -> zbus::Result<Vec<String>>;
+    fn cache_directory(&self) -> crate::zbus::Result<Vec<String>>;
 
     /// Get property `LogsDirectoryMode`.
     #[dbus_proxy(property, name = "LogsDirectoryMode")]
-    fn logs_directory_mode(&self) -> zbus::Result<u32>;
+    fn logs_directory_mode(&self) -> crate::zbus::Result<u32>;
 
     /// Get property `LogsDirectory`.
     #[dbus_proxy(property, name = "LogsDirectory")]
-    fn logs_directory(&self) -> zbus::Result<Vec<String>>;
+    fn logs_directory(&self) -> crate::zbus::Result<Vec<String>>;
 
     /// Get property `ConfigurationDirectoryMode`.
     #[dbus_proxy(property, name = "ConfigurationDirectoryMode")]
-    fn configuration_directory_mode(&self) -> zbus::Result<u32>;
+    fn configuration_directory_mode(&self) -> crate::zbus::Result<u32>;
 
     /// Get property `ConfigurationDirectory`.
     #[dbus_proxy(property, name = "ConfigurationDirectory")]
-    fn configuration_directory(&self) -> zbus::Result<Vec<String>>;
+    fn configuration_directory(&self) -> crate::zbus::Result<Vec<String>>;
 
     /// Get property `TimeoutCleanUSec`.
     #[dbus_proxy(property, name = "TimeoutCleanUSec")]
-    fn timeout_clean_u_sec(&self) -> zbus::Result<u64>;
+    fn timeout_clean_u_sec(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `MemoryDenyWriteExecute`.
     #[dbus_proxy(property, name = "MemoryDenyWriteExecute")]
-    fn memory_deny_write_execute(&self) -> zbus::Result<bool>;
+    fn memory_deny_write_execute(&self) -> crate::zbus::Result<bool>;
 
     /// Get property `RestrictRealtime`.
     #[dbus_proxy(property, name = "RestrictRealtime")]
-    fn restrict_realtime(&self) -> zbus::Result<bool>;
+    fn restrict_realtime(&self) -> crate::zbus::Result<bool>;
 
     /// Get property `RestrictSUIDSGID`.
     #[dbus_proxy(property, name = "RestrictSUIDSGID")]
-    fn restrict_suidsgid(&self) -> zbus::Result<bool>;
+    fn restrict_suidsgid(&self) -> crate::zbus::Result<bool>;
 
     /// Get property `RestrictNamespaces`.
     #[dbus_proxy(property, name = "RestrictNamespaces")]
-    fn restrict_namespaces(&self) -> zbus::Result<u64>;
+    fn restrict_namespaces(&self) -> crate::zbus::Result<u64>;
+
+    /// Get property `BindPaths`.
+    #[dbus_proxy(property, name = "BindPaths")]
+    fn bind_paths(&self) -> crate::zbus::Result<Vec<(String, String, bool, u64)>>;
+
+    /// Get property `BindReadOnlyPaths`.
+    #[dbus_proxy(property, name = "BindReadOnlyPaths")]
+    fn bind_read_only_paths(&self) -> crate::zbus::Result<Vec<(String, String, bool, u64)>>;
 
     /// Get property `TemporaryFileSystem`.
     #[dbus_proxy(property, name = "TemporaryFileSystem")]
-    fn temporary_file_system(&self) -> zbus::Result<Vec<(String, String)>>;
+    fn temporary_file_system(&self) -> crate::zbus::Result<Vec<(String, String)>>;
 
     /// Get property `MountAPIVFS`.
     #[dbus_proxy(property, name = "MountAPIVFS")]
-    fn mount_apivfs(&self) -> zbus::Result<bool>;
+    fn mount_apivfs(&self) -> crate::zbus::Result<bool>;
 
     /// Get property `KeyringMode`.
     #[dbus_proxy(property, name = "KeyringMode")]
-    fn keyring_mode(&self) -> zbus::Result<String>;
+    fn keyring_mode(&self) -> crate::zbus::Result<String>;
 
     /// Get property `ProtectProc`.
     #[dbus_proxy(property, name = "ProtectProc")]
-    fn protect_proc(&self) -> zbus::Result<String>;
+    fn protect_proc(&self) -> crate::zbus::Result<String>;
 
     /// Get property `ProcSubset`.
     #[dbus_proxy(property, name = "ProcSubset")]
-    fn proc_subset(&self) -> zbus::Result<String>;
+    fn proc_subset(&self) -> crate::zbus::Result<String>;
 
     /// Get property `ProtectHostname`.
     #[dbus_proxy(property, name = "ProtectHostname")]
-    fn protect_hostname(&self) -> zbus::Result<bool>;
+    fn protect_hostname(&self) -> crate::zbus::Result<bool>;
 
     /// Get property `NetworkNamespacePath`.
     #[dbus_proxy(property, name = "NetworkNamespacePath")]
-    fn network_namespace_path(&self) -> zbus::Result<String>;
+    fn network_namespace_path(&self) -> crate::zbus::Result<String>;
 
     /// Get property `IPCNamespacePath`.
     #[dbus_proxy(property, name = "IPCNamespacePath")]
-    fn ipc_namespace_path(&self) -> zbus::Result<String>;
+    fn ipc_namespace_path(&self) -> crate::zbus::Result<String>;
 
     /// Get property `KillMode`.
     #[dbus_proxy(property, name = "KillMode")]
-    fn kill_mode(&self) -> zbus::Result<String>;
+    fn kill_mode(&self) -> crate::zbus::Result<String>;
 
     /// Get property `KillSignal`.
     #[dbus_proxy(property, name = "KillSignal")]
-    fn kill_signal(&self) -> zbus::Result<i32>;
+    fn kill_signal(&self) -> crate::zbus::Result<i32>;
 
     /// Get property `RestartKillSignal`.
     #[dbus_proxy(property, name = "RestartKillSignal")]
-    fn restart_kill_signal(&self) -> zbus::Result<i32>;
+    fn restart_kill_signal(&self) -> crate::zbus::Result<i32>;
 
     /// Get property `FinalKillSignal`.
     #[dbus_proxy(property, name = "FinalKillSignal")]
-    fn final_kill_signal(&self) -> zbus::Result<i32>;
+    fn final_kill_signal(&self) -> crate::zbus::Result<i32>;
 
     /// Get property `SendSIGKILL`.
     #[dbus_proxy(property, name = "SendSIGKILL")]
-    fn send_sigkill(&self) -> zbus::Result<bool>;
+    fn send_sigkill(&self) -> crate::zbus::Result<bool>;
 
     /// Get property `SendSIGHUP`.
     #[dbus_proxy(property, name = "SendSIGHUP")]
-    fn send_sighup(&self) -> zbus::Result<bool>;
+    fn send_sighup(&self) -> crate::zbus::Result<bool>;
 
     /// Get property `WatchdogSignal`.
     #[dbus_proxy(property, name = "WatchdogSignal")]
-    fn watchdog_signal(&self) -> zbus::Result<i32>;
+    fn watchdog_signal(&self) -> crate::zbus::Result<i32>;
 }
 
 /// Proxy object for `org.freedesktop.systemd1.Automount`.
@@ -4387,15 +4979,15 @@ trait Mount {
 trait Automount {
     /// Get property `DirectoryMode`.
     #[dbus_proxy(property, name = "DirectoryMode")]
-    fn directory_mode(&self) -> zbus::Result<u32>;
+    fn directory_mode(&self) -> crate::zbus::Result<u32>;
 
     /// Get property `Result`.
     #[dbus_proxy(property, name = "Result")]
-    fn result(&self) -> zbus::Result<String>;
+    fn result(&self) -> crate::zbus::Result<String>;
 
     /// Get property `TimeoutIdleUSec`.
     #[dbus_proxy(property, name = "TimeoutIdleUSec")]
-    fn timeout_idle_u_sec(&self) -> zbus::Result<u64>;
+    fn timeout_idle_u_sec(&self) -> crate::zbus::Result<u64>;
 }
 
 /// Proxy object for `org.freedesktop.systemd1.Timer`.
@@ -4407,59 +4999,67 @@ trait Automount {
 trait Timer {
     /// Get property `Unit`.
     #[dbus_proxy(property, name = "Unit")]
-    fn unit(&self) -> zbus::Result<String>;
+    fn unit(&self) -> crate::zbus::Result<String>;
+
+    /// Get property `TimersMonotonic`.
+    #[dbus_proxy(property, name = "TimersMonotonic")]
+    fn timers_monotonic(&self) -> crate::zbus::Result<Vec<(String, u64, u64)>>;
+
+    /// Get property `TimersCalendar`.
+    #[dbus_proxy(property, name = "TimersCalendar")]
+    fn timers_calendar(&self) -> crate::zbus::Result<Vec<(String, String, u64)>>;
 
     /// Get property `OnClockChange`.
     #[dbus_proxy(property, name = "OnClockChange")]
-    fn on_clock_change(&self) -> zbus::Result<bool>;
+    fn on_clock_change(&self) -> crate::zbus::Result<bool>;
 
     /// Get property `OnTimezoneChange`.
     #[dbus_proxy(property, name = "OnTimezoneChange")]
-    fn on_timezone_change(&self) -> zbus::Result<bool>;
+    fn on_timezone_change(&self) -> crate::zbus::Result<bool>;
 
     /// Get property `NextElapseUSecRealtime`.
     #[dbus_proxy(property, name = "NextElapseUSecRealtime")]
-    fn next_elapse_u_sec_realtime(&self) -> zbus::Result<u64>;
+    fn next_elapse_u_sec_realtime(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `NextElapseUSecMonotonic`.
     #[dbus_proxy(property, name = "NextElapseUSecMonotonic")]
-    fn next_elapse_u_sec_monotonic(&self) -> zbus::Result<u64>;
+    fn next_elapse_u_sec_monotonic(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `LastTriggerUSec`.
     #[dbus_proxy(property, name = "LastTriggerUSec")]
-    fn last_trigger_u_sec(&self) -> zbus::Result<u64>;
+    fn last_trigger_u_sec(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `LastTriggerUSecMonotonic`.
     #[dbus_proxy(property, name = "LastTriggerUSecMonotonic")]
-    fn last_trigger_u_sec_monotonic(&self) -> zbus::Result<u64>;
+    fn last_trigger_u_sec_monotonic(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `Result`.
     #[dbus_proxy(property, name = "Result")]
-    fn result(&self) -> zbus::Result<String>;
+    fn result(&self) -> crate::zbus::Result<String>;
 
     /// Get property `AccuracyUSec`.
     #[dbus_proxy(property, name = "AccuracyUSec")]
-    fn accuracy_u_sec(&self) -> zbus::Result<u64>;
+    fn accuracy_u_sec(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `RandomizedDelayUSec`.
     #[dbus_proxy(property, name = "RandomizedDelayUSec")]
-    fn randomized_delay_u_sec(&self) -> zbus::Result<u64>;
+    fn randomized_delay_u_sec(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `FixedRandomDelay`.
     #[dbus_proxy(property, name = "FixedRandomDelay")]
-    fn fixed_random_delay(&self) -> zbus::Result<bool>;
+    fn fixed_random_delay(&self) -> crate::zbus::Result<bool>;
 
     /// Get property `Persistent`.
     #[dbus_proxy(property, name = "Persistent")]
-    fn persistent(&self) -> zbus::Result<bool>;
+    fn persistent(&self) -> crate::zbus::Result<bool>;
 
     /// Get property `WakeSystem`.
     #[dbus_proxy(property, name = "WakeSystem")]
-    fn wake_system(&self) -> zbus::Result<bool>;
+    fn wake_system(&self) -> crate::zbus::Result<bool>;
 
     /// Get property `RemainAfterElapse`.
     #[dbus_proxy(property, name = "RemainAfterElapse")]
-    fn remain_after_elapse(&self) -> zbus::Result<bool>;
+    fn remain_after_elapse(&self) -> crate::zbus::Result<bool>;
 }
 
 /// Proxy object for `org.freedesktop.systemd1.Swap`.
@@ -4471,895 +5071,959 @@ trait Timer {
 trait Swap {
     /// [📖](https://www.freedesktop.org/software/systemd/man/systemd.directives.html#GetProcesses()) Call interface method `GetProcesses`.
     #[dbus_proxy(name = "GetProcesses")]
-    fn get_processes(&self) -> zbus::Result<Vec<(String, u32, String)>>;
+    fn get_processes(&self) -> crate::zbus::Result<Vec<(String, u32, String)>>;
 
     /// [📖](https://www.freedesktop.org/software/systemd/man/systemd.directives.html#AttachProcesses()) Call interface method `AttachProcesses`.
     #[dbus_proxy(name = "AttachProcesses")]
-    fn attach_processes(&self, subcgroup: String, pids: Vec<u32>) -> zbus::Result<()>;
+    fn attach_processes(&self, subcgroup: String, pids: Vec<u32>) -> crate::zbus::Result<()>;
 
     /// Get property `What`.
     #[dbus_proxy(property, name = "What")]
-    fn what(&self) -> zbus::Result<String>;
+    fn what(&self) -> crate::zbus::Result<String>;
 
     /// Get property `Priority`.
     #[dbus_proxy(property, name = "Priority")]
-    fn priority(&self) -> zbus::Result<i32>;
+    fn priority(&self) -> crate::zbus::Result<i32>;
 
     /// Get property `Options`.
     #[dbus_proxy(property, name = "Options")]
-    fn options(&self) -> zbus::Result<String>;
+    fn options(&self) -> crate::zbus::Result<String>;
 
     /// Get property `TimeoutUSec`.
     #[dbus_proxy(property, name = "TimeoutUSec")]
-    fn timeout_u_sec(&self) -> zbus::Result<u64>;
+    fn timeout_u_sec(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `ControlPID`.
     #[dbus_proxy(property, name = "ControlPID")]
-    fn control_pid(&self) -> zbus::Result<u32>;
+    fn control_pid(&self) -> crate::zbus::Result<u32>;
 
     /// Get property `Result`.
     #[dbus_proxy(property, name = "Result")]
-    fn result(&self) -> zbus::Result<String>;
+    fn result(&self) -> crate::zbus::Result<String>;
 
     /// Get property `UID`.
     #[dbus_proxy(property, name = "UID")]
-    fn uid(&self) -> zbus::Result<u32>;
+    fn uid(&self) -> crate::zbus::Result<u32>;
 
     /// Get property `GID`.
     #[dbus_proxy(property, name = "GID")]
-    fn gid(&self) -> zbus::Result<u32>;
+    fn gid(&self) -> crate::zbus::Result<u32>;
+
+    /// Get property `ExecActivate`.
+    #[dbus_proxy(property, name = "ExecActivate")]
+    fn exec_activate(
+        &self,
+    ) -> crate::zbus::Result<Vec<(String, Vec<String>, bool, u64, u64, u64, u64, u32, i32, i32)>>;
+
+    /// Get property `ExecDeactivate`.
+    #[dbus_proxy(property, name = "ExecDeactivate")]
+    fn exec_deactivate(
+        &self,
+    ) -> crate::zbus::Result<Vec<(String, Vec<String>, bool, u64, u64, u64, u64, u32, i32, i32)>>;
 
     /// Get property `Slice`.
     #[dbus_proxy(property, name = "Slice")]
-    fn slice(&self) -> zbus::Result<String>;
+    fn slice(&self) -> crate::zbus::Result<String>;
 
     /// Get property `ControlGroup`.
     #[dbus_proxy(property, name = "ControlGroup")]
-    fn control_group(&self) -> zbus::Result<String>;
+    fn control_group(&self) -> crate::zbus::Result<String>;
 
     /// Get property `MemoryCurrent`.
     #[dbus_proxy(property, name = "MemoryCurrent")]
-    fn memory_current(&self) -> zbus::Result<u64>;
+    fn memory_current(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `MemoryAvailable`.
     #[dbus_proxy(property, name = "MemoryAvailable")]
-    fn memory_available(&self) -> zbus::Result<u64>;
+    fn memory_available(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `CPUUsageNSec`.
     #[dbus_proxy(property, name = "CPUUsageNSec")]
-    fn cpu_usage_n_sec(&self) -> zbus::Result<u64>;
+    fn cpu_usage_n_sec(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `EffectiveCPUs`.
     #[dbus_proxy(property, name = "EffectiveCPUs")]
-    fn effective_cp_us(&self) -> zbus::Result<Vec<u8>>;
+    fn effective_cp_us(&self) -> crate::zbus::Result<Vec<u8>>;
 
     /// Get property `EffectiveMemoryNodes`.
     #[dbus_proxy(property, name = "EffectiveMemoryNodes")]
-    fn effective_memory_nodes(&self) -> zbus::Result<Vec<u8>>;
+    fn effective_memory_nodes(&self) -> crate::zbus::Result<Vec<u8>>;
 
     /// Get property `TasksCurrent`.
     #[dbus_proxy(property, name = "TasksCurrent")]
-    fn tasks_current(&self) -> zbus::Result<u64>;
+    fn tasks_current(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `IPIngressBytes`.
     #[dbus_proxy(property, name = "IPIngressBytes")]
-    fn ip_ingress_bytes(&self) -> zbus::Result<u64>;
+    fn ip_ingress_bytes(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `IPIngressPackets`.
     #[dbus_proxy(property, name = "IPIngressPackets")]
-    fn ip_ingress_packets(&self) -> zbus::Result<u64>;
+    fn ip_ingress_packets(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `IPEgressBytes`.
     #[dbus_proxy(property, name = "IPEgressBytes")]
-    fn ip_egress_bytes(&self) -> zbus::Result<u64>;
+    fn ip_egress_bytes(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `IPEgressPackets`.
     #[dbus_proxy(property, name = "IPEgressPackets")]
-    fn ip_egress_packets(&self) -> zbus::Result<u64>;
+    fn ip_egress_packets(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `IOReadBytes`.
     #[dbus_proxy(property, name = "IOReadBytes")]
-    fn io_read_bytes(&self) -> zbus::Result<u64>;
+    fn io_read_bytes(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `IOReadOperations`.
     #[dbus_proxy(property, name = "IOReadOperations")]
-    fn io_read_operations(&self) -> zbus::Result<u64>;
+    fn io_read_operations(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `IOWriteBytes`.
     #[dbus_proxy(property, name = "IOWriteBytes")]
-    fn io_write_bytes(&self) -> zbus::Result<u64>;
+    fn io_write_bytes(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `IOWriteOperations`.
     #[dbus_proxy(property, name = "IOWriteOperations")]
-    fn io_write_operations(&self) -> zbus::Result<u64>;
+    fn io_write_operations(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `Delegate`.
     #[dbus_proxy(property, name = "Delegate")]
-    fn delegate(&self) -> zbus::Result<bool>;
+    fn delegate(&self) -> crate::zbus::Result<bool>;
 
     /// Get property `DelegateControllers`.
     #[dbus_proxy(property, name = "DelegateControllers")]
-    fn delegate_controllers(&self) -> zbus::Result<Vec<String>>;
+    fn delegate_controllers(&self) -> crate::zbus::Result<Vec<String>>;
 
     /// Get property `CPUAccounting`.
     #[dbus_proxy(property, name = "CPUAccounting")]
-    fn cpu_accounting(&self) -> zbus::Result<bool>;
+    fn cpu_accounting(&self) -> crate::zbus::Result<bool>;
 
     /// Get property `CPUWeight`.
     #[dbus_proxy(property, name = "CPUWeight")]
-    fn cpu_weight(&self) -> zbus::Result<u64>;
+    fn cpu_weight(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `StartupCPUWeight`.
     #[dbus_proxy(property, name = "StartupCPUWeight")]
-    fn startup_cpu_weight(&self) -> zbus::Result<u64>;
+    fn startup_cpu_weight(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `CPUShares`.
     #[dbus_proxy(property, name = "CPUShares")]
-    fn cpu_shares(&self) -> zbus::Result<u64>;
+    fn cpu_shares(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `StartupCPUShares`.
     #[dbus_proxy(property, name = "StartupCPUShares")]
-    fn startup_cpu_shares(&self) -> zbus::Result<u64>;
+    fn startup_cpu_shares(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `CPUQuotaPerSecUSec`.
     #[dbus_proxy(property, name = "CPUQuotaPerSecUSec")]
-    fn cpu_quota_per_sec_u_sec(&self) -> zbus::Result<u64>;
+    fn cpu_quota_per_sec_u_sec(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `CPUQuotaPeriodUSec`.
     #[dbus_proxy(property, name = "CPUQuotaPeriodUSec")]
-    fn cpu_quota_period_u_sec(&self) -> zbus::Result<u64>;
+    fn cpu_quota_period_u_sec(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `AllowedCPUs`.
     #[dbus_proxy(property, name = "AllowedCPUs")]
-    fn allowed_cp_us(&self) -> zbus::Result<Vec<u8>>;
+    fn allowed_cp_us(&self) -> crate::zbus::Result<Vec<u8>>;
 
     /// Get property `AllowedMemoryNodes`.
     #[dbus_proxy(property, name = "AllowedMemoryNodes")]
-    fn allowed_memory_nodes(&self) -> zbus::Result<Vec<u8>>;
+    fn allowed_memory_nodes(&self) -> crate::zbus::Result<Vec<u8>>;
 
     /// Get property `IOAccounting`.
     #[dbus_proxy(property, name = "IOAccounting")]
-    fn io_accounting(&self) -> zbus::Result<bool>;
+    fn io_accounting(&self) -> crate::zbus::Result<bool>;
 
     /// Get property `IOWeight`.
     #[dbus_proxy(property, name = "IOWeight")]
-    fn io_weight(&self) -> zbus::Result<u64>;
+    fn io_weight(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `StartupIOWeight`.
     #[dbus_proxy(property, name = "StartupIOWeight")]
-    fn startup_io_weight(&self) -> zbus::Result<u64>;
+    fn startup_io_weight(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `IODeviceWeight`.
     #[dbus_proxy(property, name = "IODeviceWeight")]
-    fn io_device_weight(&self) -> zbus::Result<Vec<(String, u64)>>;
+    fn io_device_weight(&self) -> crate::zbus::Result<Vec<(String, u64)>>;
 
     /// Get property `IOReadBandwidthMax`.
     #[dbus_proxy(property, name = "IOReadBandwidthMax")]
-    fn io_read_bandwidth_max(&self) -> zbus::Result<Vec<(String, u64)>>;
+    fn io_read_bandwidth_max(&self) -> crate::zbus::Result<Vec<(String, u64)>>;
 
     /// Get property `IOWriteBandwidthMax`.
     #[dbus_proxy(property, name = "IOWriteBandwidthMax")]
-    fn io_write_bandwidth_max(&self) -> zbus::Result<Vec<(String, u64)>>;
+    fn io_write_bandwidth_max(&self) -> crate::zbus::Result<Vec<(String, u64)>>;
 
     /// Get property `IOReadIOPSMax`.
     #[dbus_proxy(property, name = "IOReadIOPSMax")]
-    fn io_read_iops_max(&self) -> zbus::Result<Vec<(String, u64)>>;
+    fn io_read_iops_max(&self) -> crate::zbus::Result<Vec<(String, u64)>>;
 
     /// Get property `IOWriteIOPSMax`.
     #[dbus_proxy(property, name = "IOWriteIOPSMax")]
-    fn io_write_iops_max(&self) -> zbus::Result<Vec<(String, u64)>>;
+    fn io_write_iops_max(&self) -> crate::zbus::Result<Vec<(String, u64)>>;
 
     /// Get property `IODeviceLatencyTargetUSec`.
     #[dbus_proxy(property, name = "IODeviceLatencyTargetUSec")]
-    fn io_device_latency_target_u_sec(&self) -> zbus::Result<Vec<(String, u64)>>;
+    fn io_device_latency_target_u_sec(&self) -> crate::zbus::Result<Vec<(String, u64)>>;
 
     /// Get property `BlockIOAccounting`.
     #[dbus_proxy(property, name = "BlockIOAccounting")]
-    fn block_io_accounting(&self) -> zbus::Result<bool>;
+    fn block_io_accounting(&self) -> crate::zbus::Result<bool>;
 
     /// Get property `BlockIOWeight`.
     #[dbus_proxy(property, name = "BlockIOWeight")]
-    fn block_io_weight(&self) -> zbus::Result<u64>;
+    fn block_io_weight(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `StartupBlockIOWeight`.
     #[dbus_proxy(property, name = "StartupBlockIOWeight")]
-    fn startup_block_io_weight(&self) -> zbus::Result<u64>;
+    fn startup_block_io_weight(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `BlockIODeviceWeight`.
     #[dbus_proxy(property, name = "BlockIODeviceWeight")]
-    fn block_io_device_weight(&self) -> zbus::Result<Vec<(String, u64)>>;
+    fn block_io_device_weight(&self) -> crate::zbus::Result<Vec<(String, u64)>>;
 
     /// Get property `BlockIOReadBandwidth`.
     #[dbus_proxy(property, name = "BlockIOReadBandwidth")]
-    fn block_io_read_bandwidth(&self) -> zbus::Result<Vec<(String, u64)>>;
+    fn block_io_read_bandwidth(&self) -> crate::zbus::Result<Vec<(String, u64)>>;
 
     /// Get property `BlockIOWriteBandwidth`.
     #[dbus_proxy(property, name = "BlockIOWriteBandwidth")]
-    fn block_io_write_bandwidth(&self) -> zbus::Result<Vec<(String, u64)>>;
+    fn block_io_write_bandwidth(&self) -> crate::zbus::Result<Vec<(String, u64)>>;
 
     /// Get property `MemoryAccounting`.
     #[dbus_proxy(property, name = "MemoryAccounting")]
-    fn memory_accounting(&self) -> zbus::Result<bool>;
+    fn memory_accounting(&self) -> crate::zbus::Result<bool>;
 
     /// Get property `DefaultMemoryLow`.
     #[dbus_proxy(property, name = "DefaultMemoryLow")]
-    fn default_memory_low(&self) -> zbus::Result<u64>;
+    fn default_memory_low(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `DefaultMemoryMin`.
     #[dbus_proxy(property, name = "DefaultMemoryMin")]
-    fn default_memory_min(&self) -> zbus::Result<u64>;
+    fn default_memory_min(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `MemoryMin`.
     #[dbus_proxy(property, name = "MemoryMin")]
-    fn memory_min(&self) -> zbus::Result<u64>;
+    fn memory_min(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `MemoryLow`.
     #[dbus_proxy(property, name = "MemoryLow")]
-    fn memory_low(&self) -> zbus::Result<u64>;
+    fn memory_low(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `MemoryHigh`.
     #[dbus_proxy(property, name = "MemoryHigh")]
-    fn memory_high(&self) -> zbus::Result<u64>;
+    fn memory_high(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `MemoryMax`.
     #[dbus_proxy(property, name = "MemoryMax")]
-    fn memory_max(&self) -> zbus::Result<u64>;
+    fn memory_max(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `MemorySwapMax`.
     #[dbus_proxy(property, name = "MemorySwapMax")]
-    fn memory_swap_max(&self) -> zbus::Result<u64>;
+    fn memory_swap_max(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `MemoryLimit`.
     #[dbus_proxy(property, name = "MemoryLimit")]
-    fn memory_limit(&self) -> zbus::Result<u64>;
+    fn memory_limit(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `DevicePolicy`.
     #[dbus_proxy(property, name = "DevicePolicy")]
-    fn device_policy(&self) -> zbus::Result<String>;
+    fn device_policy(&self) -> crate::zbus::Result<String>;
 
     /// Get property `DeviceAllow`.
     #[dbus_proxy(property, name = "DeviceAllow")]
-    fn device_allow(&self) -> zbus::Result<Vec<(String, String)>>;
+    fn device_allow(&self) -> crate::zbus::Result<Vec<(String, String)>>;
 
     /// Get property `TasksAccounting`.
     #[dbus_proxy(property, name = "TasksAccounting")]
-    fn tasks_accounting(&self) -> zbus::Result<bool>;
+    fn tasks_accounting(&self) -> crate::zbus::Result<bool>;
 
     /// Get property `TasksMax`.
     #[dbus_proxy(property, name = "TasksMax")]
-    fn tasks_max(&self) -> zbus::Result<u64>;
+    fn tasks_max(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `IPAccounting`.
     #[dbus_proxy(property, name = "IPAccounting")]
-    fn ip_accounting(&self) -> zbus::Result<bool>;
+    fn ip_accounting(&self) -> crate::zbus::Result<bool>;
+
+    /// Get property `IPAddressAllow`.
+    #[dbus_proxy(property, name = "IPAddressAllow")]
+    fn ip_address_allow(&self) -> crate::zbus::Result<Vec<(i32, Vec<u8>, u32)>>;
+
+    /// Get property `IPAddressDeny`.
+    #[dbus_proxy(property, name = "IPAddressDeny")]
+    fn ip_address_deny(&self) -> crate::zbus::Result<Vec<(i32, Vec<u8>, u32)>>;
 
     /// Get property `IPIngressFilterPath`.
     #[dbus_proxy(property, name = "IPIngressFilterPath")]
-    fn ip_ingress_filter_path(&self) -> zbus::Result<Vec<String>>;
+    fn ip_ingress_filter_path(&self) -> crate::zbus::Result<Vec<String>>;
 
     /// Get property `IPEgressFilterPath`.
     #[dbus_proxy(property, name = "IPEgressFilterPath")]
-    fn ip_egress_filter_path(&self) -> zbus::Result<Vec<String>>;
+    fn ip_egress_filter_path(&self) -> crate::zbus::Result<Vec<String>>;
 
     /// Get property `DisableControllers`.
     #[dbus_proxy(property, name = "DisableControllers")]
-    fn disable_controllers(&self) -> zbus::Result<Vec<String>>;
+    fn disable_controllers(&self) -> crate::zbus::Result<Vec<String>>;
 
     /// Get property `ManagedOOMSwap`.
     #[dbus_proxy(property, name = "ManagedOOMSwap")]
-    fn managed_oom_swap(&self) -> zbus::Result<String>;
+    fn managed_oom_swap(&self) -> crate::zbus::Result<String>;
 
     /// Get property `ManagedOOMMemoryPressure`.
     #[dbus_proxy(property, name = "ManagedOOMMemoryPressure")]
-    fn managed_oom_memory_pressure(&self) -> zbus::Result<String>;
+    fn managed_oom_memory_pressure(&self) -> crate::zbus::Result<String>;
 
     /// Get property `ManagedOOMMemoryPressureLimit`.
     #[dbus_proxy(property, name = "ManagedOOMMemoryPressureLimit")]
-    fn managed_oom_memory_pressure_limit(&self) -> zbus::Result<u32>;
+    fn managed_oom_memory_pressure_limit(&self) -> crate::zbus::Result<u32>;
 
     /// Get property `ManagedOOMPreference`.
     #[dbus_proxy(property, name = "ManagedOOMPreference")]
-    fn managed_oom_preference(&self) -> zbus::Result<String>;
+    fn managed_oom_preference(&self) -> crate::zbus::Result<String>;
 
     /// Get property `BPFProgram`.
     #[dbus_proxy(property, name = "BPFProgram")]
-    fn bpf_program(&self) -> zbus::Result<Vec<(String, String)>>;
+    fn bpf_program(&self) -> crate::zbus::Result<Vec<(String, String)>>;
+
+    /// Get property `SocketBindAllow`.
+    #[dbus_proxy(property, name = "SocketBindAllow")]
+    fn socket_bind_allow(&self) -> crate::zbus::Result<Vec<(i32, i32, u16, u16)>>;
+
+    /// Get property `SocketBindDeny`.
+    #[dbus_proxy(property, name = "SocketBindDeny")]
+    fn socket_bind_deny(&self) -> crate::zbus::Result<Vec<(i32, i32, u16, u16)>>;
 
     /// Get property `Environment`.
     #[dbus_proxy(property, name = "Environment")]
-    fn environment(&self) -> zbus::Result<Vec<String>>;
+    fn environment(&self) -> crate::zbus::Result<Vec<String>>;
 
     /// Get property `EnvironmentFiles`.
     #[dbus_proxy(property, name = "EnvironmentFiles")]
-    fn environment_files(&self) -> zbus::Result<Vec<(String, bool)>>;
+    fn environment_files(&self) -> crate::zbus::Result<Vec<(String, bool)>>;
 
     /// Get property `PassEnvironment`.
     #[dbus_proxy(property, name = "PassEnvironment")]
-    fn pass_environment(&self) -> zbus::Result<Vec<String>>;
+    fn pass_environment(&self) -> crate::zbus::Result<Vec<String>>;
 
     /// Get property `UnsetEnvironment`.
     #[dbus_proxy(property, name = "UnsetEnvironment")]
-    fn unset_environment(&self) -> zbus::Result<Vec<String>>;
+    fn unset_environment(&self) -> crate::zbus::Result<Vec<String>>;
 
     /// Get property `UMask`.
     #[dbus_proxy(property, name = "UMask")]
-    fn u_mask(&self) -> zbus::Result<u32>;
+    fn u_mask(&self) -> crate::zbus::Result<u32>;
 
     /// Get property `LimitCPU`.
     #[dbus_proxy(property, name = "LimitCPU")]
-    fn limit_cpu(&self) -> zbus::Result<u64>;
+    fn limit_cpu(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `LimitCPUSoft`.
     #[dbus_proxy(property, name = "LimitCPUSoft")]
-    fn limit_cpu_soft(&self) -> zbus::Result<u64>;
+    fn limit_cpu_soft(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `LimitFSIZE`.
     #[dbus_proxy(property, name = "LimitFSIZE")]
-    fn limit_fsize(&self) -> zbus::Result<u64>;
+    fn limit_fsize(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `LimitFSIZESoft`.
     #[dbus_proxy(property, name = "LimitFSIZESoft")]
-    fn limit_fsize_soft(&self) -> zbus::Result<u64>;
+    fn limit_fsize_soft(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `LimitDATA`.
     #[dbus_proxy(property, name = "LimitDATA")]
-    fn limit_data(&self) -> zbus::Result<u64>;
+    fn limit_data(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `LimitDATASoft`.
     #[dbus_proxy(property, name = "LimitDATASoft")]
-    fn limit_data_soft(&self) -> zbus::Result<u64>;
+    fn limit_data_soft(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `LimitSTACK`.
     #[dbus_proxy(property, name = "LimitSTACK")]
-    fn limit_stack(&self) -> zbus::Result<u64>;
+    fn limit_stack(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `LimitSTACKSoft`.
     #[dbus_proxy(property, name = "LimitSTACKSoft")]
-    fn limit_stack_soft(&self) -> zbus::Result<u64>;
+    fn limit_stack_soft(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `LimitCORE`.
     #[dbus_proxy(property, name = "LimitCORE")]
-    fn limit_core(&self) -> zbus::Result<u64>;
+    fn limit_core(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `LimitCORESoft`.
     #[dbus_proxy(property, name = "LimitCORESoft")]
-    fn limit_core_soft(&self) -> zbus::Result<u64>;
+    fn limit_core_soft(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `LimitRSS`.
     #[dbus_proxy(property, name = "LimitRSS")]
-    fn limit_rss(&self) -> zbus::Result<u64>;
+    fn limit_rss(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `LimitRSSSoft`.
     #[dbus_proxy(property, name = "LimitRSSSoft")]
-    fn limit_rss_soft(&self) -> zbus::Result<u64>;
+    fn limit_rss_soft(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `LimitNOFILE`.
     #[dbus_proxy(property, name = "LimitNOFILE")]
-    fn limit_nofile(&self) -> zbus::Result<u64>;
+    fn limit_nofile(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `LimitNOFILESoft`.
     #[dbus_proxy(property, name = "LimitNOFILESoft")]
-    fn limit_nofile_soft(&self) -> zbus::Result<u64>;
+    fn limit_nofile_soft(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `LimitAS`.
     #[dbus_proxy(property, name = "LimitAS")]
-    fn limit_as(&self) -> zbus::Result<u64>;
+    fn limit_as(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `LimitASSoft`.
     #[dbus_proxy(property, name = "LimitASSoft")]
-    fn limit_as_soft(&self) -> zbus::Result<u64>;
+    fn limit_as_soft(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `LimitNPROC`.
     #[dbus_proxy(property, name = "LimitNPROC")]
-    fn limit_nproc(&self) -> zbus::Result<u64>;
+    fn limit_nproc(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `LimitNPROCSoft`.
     #[dbus_proxy(property, name = "LimitNPROCSoft")]
-    fn limit_nproc_soft(&self) -> zbus::Result<u64>;
+    fn limit_nproc_soft(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `LimitMEMLOCK`.
     #[dbus_proxy(property, name = "LimitMEMLOCK")]
-    fn limit_memlock(&self) -> zbus::Result<u64>;
+    fn limit_memlock(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `LimitMEMLOCKSoft`.
     #[dbus_proxy(property, name = "LimitMEMLOCKSoft")]
-    fn limit_memlock_soft(&self) -> zbus::Result<u64>;
+    fn limit_memlock_soft(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `LimitLOCKS`.
     #[dbus_proxy(property, name = "LimitLOCKS")]
-    fn limit_locks(&self) -> zbus::Result<u64>;
+    fn limit_locks(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `LimitLOCKSSoft`.
     #[dbus_proxy(property, name = "LimitLOCKSSoft")]
-    fn limit_locks_soft(&self) -> zbus::Result<u64>;
+    fn limit_locks_soft(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `LimitSIGPENDING`.
     #[dbus_proxy(property, name = "LimitSIGPENDING")]
-    fn limit_sigpending(&self) -> zbus::Result<u64>;
+    fn limit_sigpending(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `LimitSIGPENDINGSoft`.
     #[dbus_proxy(property, name = "LimitSIGPENDINGSoft")]
-    fn limit_sigpending_soft(&self) -> zbus::Result<u64>;
+    fn limit_sigpending_soft(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `LimitMSGQUEUE`.
     #[dbus_proxy(property, name = "LimitMSGQUEUE")]
-    fn limit_msgqueue(&self) -> zbus::Result<u64>;
+    fn limit_msgqueue(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `LimitMSGQUEUESoft`.
     #[dbus_proxy(property, name = "LimitMSGQUEUESoft")]
-    fn limit_msgqueue_soft(&self) -> zbus::Result<u64>;
+    fn limit_msgqueue_soft(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `LimitNICE`.
     #[dbus_proxy(property, name = "LimitNICE")]
-    fn limit_nice(&self) -> zbus::Result<u64>;
+    fn limit_nice(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `LimitNICESoft`.
     #[dbus_proxy(property, name = "LimitNICESoft")]
-    fn limit_nice_soft(&self) -> zbus::Result<u64>;
+    fn limit_nice_soft(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `LimitRTPRIO`.
     #[dbus_proxy(property, name = "LimitRTPRIO")]
-    fn limit_rtprio(&self) -> zbus::Result<u64>;
+    fn limit_rtprio(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `LimitRTPRIOSoft`.
     #[dbus_proxy(property, name = "LimitRTPRIOSoft")]
-    fn limit_rtprio_soft(&self) -> zbus::Result<u64>;
+    fn limit_rtprio_soft(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `LimitRTTIME`.
     #[dbus_proxy(property, name = "LimitRTTIME")]
-    fn limit_rttime(&self) -> zbus::Result<u64>;
+    fn limit_rttime(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `LimitRTTIMESoft`.
     #[dbus_proxy(property, name = "LimitRTTIMESoft")]
-    fn limit_rttime_soft(&self) -> zbus::Result<u64>;
+    fn limit_rttime_soft(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `WorkingDirectory`.
     #[dbus_proxy(property, name = "WorkingDirectory")]
-    fn working_directory(&self) -> zbus::Result<String>;
+    fn working_directory(&self) -> crate::zbus::Result<String>;
 
     /// Get property `RootDirectory`.
     #[dbus_proxy(property, name = "RootDirectory")]
-    fn root_directory(&self) -> zbus::Result<String>;
+    fn root_directory(&self) -> crate::zbus::Result<String>;
 
     /// Get property `RootImage`.
     #[dbus_proxy(property, name = "RootImage")]
-    fn root_image(&self) -> zbus::Result<String>;
+    fn root_image(&self) -> crate::zbus::Result<String>;
 
     /// Get property `RootImageOptions`.
     #[dbus_proxy(property, name = "RootImageOptions")]
-    fn root_image_options(&self) -> zbus::Result<Vec<(String, String)>>;
+    fn root_image_options(&self) -> crate::zbus::Result<Vec<(String, String)>>;
 
     /// Get property `RootHash`.
     #[dbus_proxy(property, name = "RootHash")]
-    fn root_hash(&self) -> zbus::Result<Vec<u8>>;
+    fn root_hash(&self) -> crate::zbus::Result<Vec<u8>>;
 
     /// Get property `RootHashPath`.
     #[dbus_proxy(property, name = "RootHashPath")]
-    fn root_hash_path(&self) -> zbus::Result<String>;
+    fn root_hash_path(&self) -> crate::zbus::Result<String>;
 
     /// Get property `RootHashSignature`.
     #[dbus_proxy(property, name = "RootHashSignature")]
-    fn root_hash_signature(&self) -> zbus::Result<Vec<u8>>;
+    fn root_hash_signature(&self) -> crate::zbus::Result<Vec<u8>>;
 
     /// Get property `RootHashSignaturePath`.
     #[dbus_proxy(property, name = "RootHashSignaturePath")]
-    fn root_hash_signature_path(&self) -> zbus::Result<String>;
+    fn root_hash_signature_path(&self) -> crate::zbus::Result<String>;
 
     /// Get property `RootVerity`.
     #[dbus_proxy(property, name = "RootVerity")]
-    fn root_verity(&self) -> zbus::Result<String>;
+    fn root_verity(&self) -> crate::zbus::Result<String>;
 
     /// Get property `OOMScoreAdjust`.
     #[dbus_proxy(property, name = "OOMScoreAdjust")]
-    fn oom_score_adjust(&self) -> zbus::Result<i32>;
+    fn oom_score_adjust(&self) -> crate::zbus::Result<i32>;
 
     /// Get property `CoredumpFilter`.
     #[dbus_proxy(property, name = "CoredumpFilter")]
-    fn coredump_filter(&self) -> zbus::Result<u64>;
+    fn coredump_filter(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `Nice`.
     #[dbus_proxy(property, name = "Nice")]
-    fn nice(&self) -> zbus::Result<i32>;
+    fn nice(&self) -> crate::zbus::Result<i32>;
 
     /// Get property `IOSchedulingClass`.
     #[dbus_proxy(property, name = "IOSchedulingClass")]
-    fn io_scheduling_class(&self) -> zbus::Result<i32>;
+    fn io_scheduling_class(&self) -> crate::zbus::Result<i32>;
 
     /// Get property `IOSchedulingPriority`.
     #[dbus_proxy(property, name = "IOSchedulingPriority")]
-    fn io_scheduling_priority(&self) -> zbus::Result<i32>;
+    fn io_scheduling_priority(&self) -> crate::zbus::Result<i32>;
 
     /// Get property `CPUSchedulingPolicy`.
     #[dbus_proxy(property, name = "CPUSchedulingPolicy")]
-    fn cpu_scheduling_policy(&self) -> zbus::Result<i32>;
+    fn cpu_scheduling_policy(&self) -> crate::zbus::Result<i32>;
 
     /// Get property `CPUSchedulingPriority`.
     #[dbus_proxy(property, name = "CPUSchedulingPriority")]
-    fn cpu_scheduling_priority(&self) -> zbus::Result<i32>;
+    fn cpu_scheduling_priority(&self) -> crate::zbus::Result<i32>;
 
     /// Get property `CPUAffinity`.
     #[dbus_proxy(property, name = "CPUAffinity")]
-    fn cpu_affinity(&self) -> zbus::Result<Vec<u8>>;
+    fn cpu_affinity(&self) -> crate::zbus::Result<Vec<u8>>;
 
     /// Get property `CPUAffinityFromNUMA`.
     #[dbus_proxy(property, name = "CPUAffinityFromNUMA")]
-    fn cpu_affinity_from_numa(&self) -> zbus::Result<bool>;
+    fn cpu_affinity_from_numa(&self) -> crate::zbus::Result<bool>;
 
     /// Get property `NUMAPolicy`.
     #[dbus_proxy(property, name = "NUMAPolicy")]
-    fn numa_policy(&self) -> zbus::Result<i32>;
+    fn numa_policy(&self) -> crate::zbus::Result<i32>;
 
     /// Get property `NUMAMask`.
     #[dbus_proxy(property, name = "NUMAMask")]
-    fn numa_mask(&self) -> zbus::Result<Vec<u8>>;
+    fn numa_mask(&self) -> crate::zbus::Result<Vec<u8>>;
 
     /// Get property `TimerSlackNSec`.
     #[dbus_proxy(property, name = "TimerSlackNSec")]
-    fn timer_slack_n_sec(&self) -> zbus::Result<u64>;
+    fn timer_slack_n_sec(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `CPUSchedulingResetOnFork`.
     #[dbus_proxy(property, name = "CPUSchedulingResetOnFork")]
-    fn cpu_scheduling_reset_on_fork(&self) -> zbus::Result<bool>;
+    fn cpu_scheduling_reset_on_fork(&self) -> crate::zbus::Result<bool>;
 
     /// Get property `NonBlocking`.
     #[dbus_proxy(property, name = "NonBlocking")]
-    fn non_blocking(&self) -> zbus::Result<bool>;
+    fn non_blocking(&self) -> crate::zbus::Result<bool>;
 
     /// Get property `StandardInput`.
     #[dbus_proxy(property, name = "StandardInput")]
-    fn standard_input(&self) -> zbus::Result<String>;
+    fn standard_input(&self) -> crate::zbus::Result<String>;
 
     /// Get property `StandardInputFileDescriptorName`.
     #[dbus_proxy(property, name = "StandardInputFileDescriptorName")]
-    fn standard_input_file_descriptor_name(&self) -> zbus::Result<String>;
+    fn standard_input_file_descriptor_name(&self) -> crate::zbus::Result<String>;
 
     /// Get property `StandardInputData`.
     #[dbus_proxy(property, name = "StandardInputData")]
-    fn standard_input_data(&self) -> zbus::Result<Vec<u8>>;
+    fn standard_input_data(&self) -> crate::zbus::Result<Vec<u8>>;
 
     /// Get property `StandardOutput`.
     #[dbus_proxy(property, name = "StandardOutput")]
-    fn standard_output(&self) -> zbus::Result<String>;
+    fn standard_output(&self) -> crate::zbus::Result<String>;
 
     /// Get property `StandardOutputFileDescriptorName`.
     #[dbus_proxy(property, name = "StandardOutputFileDescriptorName")]
-    fn standard_output_file_descriptor_name(&self) -> zbus::Result<String>;
+    fn standard_output_file_descriptor_name(&self) -> crate::zbus::Result<String>;
 
     /// Get property `StandardError`.
     #[dbus_proxy(property, name = "StandardError")]
-    fn standard_error(&self) -> zbus::Result<String>;
+    fn standard_error(&self) -> crate::zbus::Result<String>;
 
     /// Get property `StandardErrorFileDescriptorName`.
     #[dbus_proxy(property, name = "StandardErrorFileDescriptorName")]
-    fn standard_error_file_descriptor_name(&self) -> zbus::Result<String>;
+    fn standard_error_file_descriptor_name(&self) -> crate::zbus::Result<String>;
 
     /// Get property `TTYPath`.
     #[dbus_proxy(property, name = "TTYPath")]
-    fn tty_path(&self) -> zbus::Result<String>;
+    fn tty_path(&self) -> crate::zbus::Result<String>;
 
     /// Get property `TTYReset`.
     #[dbus_proxy(property, name = "TTYReset")]
-    fn tty_reset(&self) -> zbus::Result<bool>;
+    fn tty_reset(&self) -> crate::zbus::Result<bool>;
 
     /// Get property `TTYVHangup`.
     #[dbus_proxy(property, name = "TTYVHangup")]
-    fn ttyv_hangup(&self) -> zbus::Result<bool>;
+    fn ttyv_hangup(&self) -> crate::zbus::Result<bool>;
 
     /// Get property `TTYVTDisallocate`.
     #[dbus_proxy(property, name = "TTYVTDisallocate")]
-    fn ttyvt_disallocate(&self) -> zbus::Result<bool>;
+    fn ttyvt_disallocate(&self) -> crate::zbus::Result<bool>;
 
     /// Get property `SyslogPriority`.
     #[dbus_proxy(property, name = "SyslogPriority")]
-    fn syslog_priority(&self) -> zbus::Result<i32>;
+    fn syslog_priority(&self) -> crate::zbus::Result<i32>;
 
     /// Get property `SyslogIdentifier`.
     #[dbus_proxy(property, name = "SyslogIdentifier")]
-    fn syslog_identifier(&self) -> zbus::Result<String>;
+    fn syslog_identifier(&self) -> crate::zbus::Result<String>;
 
     /// Get property `SyslogLevelPrefix`.
     #[dbus_proxy(property, name = "SyslogLevelPrefix")]
-    fn syslog_level_prefix(&self) -> zbus::Result<bool>;
+    fn syslog_level_prefix(&self) -> crate::zbus::Result<bool>;
 
     /// Get property `SyslogLevel`.
     #[dbus_proxy(property, name = "SyslogLevel")]
-    fn syslog_level(&self) -> zbus::Result<i32>;
+    fn syslog_level(&self) -> crate::zbus::Result<i32>;
 
     /// Get property `SyslogFacility`.
     #[dbus_proxy(property, name = "SyslogFacility")]
-    fn syslog_facility(&self) -> zbus::Result<i32>;
+    fn syslog_facility(&self) -> crate::zbus::Result<i32>;
 
     /// Get property `LogLevelMax`.
     #[dbus_proxy(property, name = "LogLevelMax")]
-    fn log_level_max(&self) -> zbus::Result<i32>;
+    fn log_level_max(&self) -> crate::zbus::Result<i32>;
 
     /// Get property `LogRateLimitIntervalUSec`.
     #[dbus_proxy(property, name = "LogRateLimitIntervalUSec")]
-    fn log_rate_limit_interval_u_sec(&self) -> zbus::Result<u64>;
+    fn log_rate_limit_interval_u_sec(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `LogRateLimitBurst`.
     #[dbus_proxy(property, name = "LogRateLimitBurst")]
-    fn log_rate_limit_burst(&self) -> zbus::Result<u32>;
+    fn log_rate_limit_burst(&self) -> crate::zbus::Result<u32>;
 
     /// Get property `LogNamespace`.
     #[dbus_proxy(property, name = "LogNamespace")]
-    fn log_namespace(&self) -> zbus::Result<String>;
+    fn log_namespace(&self) -> crate::zbus::Result<String>;
 
     /// Get property `SecureBits`.
     #[dbus_proxy(property, name = "SecureBits")]
-    fn secure_bits(&self) -> zbus::Result<i32>;
+    fn secure_bits(&self) -> crate::zbus::Result<i32>;
 
     /// Get property `CapabilityBoundingSet`.
     #[dbus_proxy(property, name = "CapabilityBoundingSet")]
-    fn capability_bounding_set(&self) -> zbus::Result<u64>;
+    fn capability_bounding_set(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `AmbientCapabilities`.
     #[dbus_proxy(property, name = "AmbientCapabilities")]
-    fn ambient_capabilities(&self) -> zbus::Result<u64>;
+    fn ambient_capabilities(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `User`.
     #[dbus_proxy(property, name = "User")]
-    fn user(&self) -> zbus::Result<String>;
+    fn user(&self) -> crate::zbus::Result<String>;
 
     /// Get property `Group`.
     #[dbus_proxy(property, name = "Group")]
-    fn group(&self) -> zbus::Result<String>;
+    fn group(&self) -> crate::zbus::Result<String>;
 
     /// Get property `DynamicUser`.
     #[dbus_proxy(property, name = "DynamicUser")]
-    fn dynamic_user(&self) -> zbus::Result<bool>;
+    fn dynamic_user(&self) -> crate::zbus::Result<bool>;
 
     /// Get property `RemoveIPC`.
     #[dbus_proxy(property, name = "RemoveIPC")]
-    fn remove_ipc(&self) -> zbus::Result<bool>;
+    fn remove_ipc(&self) -> crate::zbus::Result<bool>;
+
+    /// Get property `SetCredential`.
+    #[dbus_proxy(property, name = "SetCredential")]
+    fn set_credential(&self) -> crate::zbus::Result<Vec<(String, Vec<u8>)>>;
 
     /// Get property `LoadCredential`.
     #[dbus_proxy(property, name = "LoadCredential")]
-    fn load_credential(&self) -> zbus::Result<Vec<(String, String)>>;
+    fn load_credential(&self) -> crate::zbus::Result<Vec<(String, String)>>;
 
     /// Get property `SupplementaryGroups`.
     #[dbus_proxy(property, name = "SupplementaryGroups")]
-    fn supplementary_groups(&self) -> zbus::Result<Vec<String>>;
+    fn supplementary_groups(&self) -> crate::zbus::Result<Vec<String>>;
 
     /// Get property `PAMName`.
     #[dbus_proxy(property, name = "PAMName")]
-    fn pam_name(&self) -> zbus::Result<String>;
+    fn pam_name(&self) -> crate::zbus::Result<String>;
 
     /// Get property `ReadWritePaths`.
     #[dbus_proxy(property, name = "ReadWritePaths")]
-    fn read_write_paths(&self) -> zbus::Result<Vec<String>>;
+    fn read_write_paths(&self) -> crate::zbus::Result<Vec<String>>;
 
     /// Get property `ReadOnlyPaths`.
     #[dbus_proxy(property, name = "ReadOnlyPaths")]
-    fn read_only_paths(&self) -> zbus::Result<Vec<String>>;
+    fn read_only_paths(&self) -> crate::zbus::Result<Vec<String>>;
 
     /// Get property `InaccessiblePaths`.
     #[dbus_proxy(property, name = "InaccessiblePaths")]
-    fn inaccessible_paths(&self) -> zbus::Result<Vec<String>>;
+    fn inaccessible_paths(&self) -> crate::zbus::Result<Vec<String>>;
 
     /// Get property `ExecPaths`.
     #[dbus_proxy(property, name = "ExecPaths")]
-    fn exec_paths(&self) -> zbus::Result<Vec<String>>;
+    fn exec_paths(&self) -> crate::zbus::Result<Vec<String>>;
 
     /// Get property `NoExecPaths`.
     #[dbus_proxy(property, name = "NoExecPaths")]
-    fn no_exec_paths(&self) -> zbus::Result<Vec<String>>;
+    fn no_exec_paths(&self) -> crate::zbus::Result<Vec<String>>;
 
     /// Get property `MountFlags`.
     #[dbus_proxy(property, name = "MountFlags")]
-    fn mount_flags(&self) -> zbus::Result<u64>;
+    fn mount_flags(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `PrivateTmp`.
     #[dbus_proxy(property, name = "PrivateTmp")]
-    fn private_tmp(&self) -> zbus::Result<bool>;
+    fn private_tmp(&self) -> crate::zbus::Result<bool>;
 
     /// Get property `PrivateDevices`.
     #[dbus_proxy(property, name = "PrivateDevices")]
-    fn private_devices(&self) -> zbus::Result<bool>;
+    fn private_devices(&self) -> crate::zbus::Result<bool>;
 
     /// Get property `ProtectClock`.
     #[dbus_proxy(property, name = "ProtectClock")]
-    fn protect_clock(&self) -> zbus::Result<bool>;
+    fn protect_clock(&self) -> crate::zbus::Result<bool>;
 
     /// Get property `ProtectKernelTunables`.
     #[dbus_proxy(property, name = "ProtectKernelTunables")]
-    fn protect_kernel_tunables(&self) -> zbus::Result<bool>;
+    fn protect_kernel_tunables(&self) -> crate::zbus::Result<bool>;
 
     /// Get property `ProtectKernelModules`.
     #[dbus_proxy(property, name = "ProtectKernelModules")]
-    fn protect_kernel_modules(&self) -> zbus::Result<bool>;
+    fn protect_kernel_modules(&self) -> crate::zbus::Result<bool>;
 
     /// Get property `ProtectKernelLogs`.
     #[dbus_proxy(property, name = "ProtectKernelLogs")]
-    fn protect_kernel_logs(&self) -> zbus::Result<bool>;
+    fn protect_kernel_logs(&self) -> crate::zbus::Result<bool>;
 
     /// Get property `ProtectControlGroups`.
     #[dbus_proxy(property, name = "ProtectControlGroups")]
-    fn protect_control_groups(&self) -> zbus::Result<bool>;
+    fn protect_control_groups(&self) -> crate::zbus::Result<bool>;
 
     /// Get property `PrivateNetwork`.
     #[dbus_proxy(property, name = "PrivateNetwork")]
-    fn private_network(&self) -> zbus::Result<bool>;
+    fn private_network(&self) -> crate::zbus::Result<bool>;
 
     /// Get property `PrivateUsers`.
     #[dbus_proxy(property, name = "PrivateUsers")]
-    fn private_users(&self) -> zbus::Result<bool>;
+    fn private_users(&self) -> crate::zbus::Result<bool>;
 
     /// Get property `PrivateMounts`.
     #[dbus_proxy(property, name = "PrivateMounts")]
-    fn private_mounts(&self) -> zbus::Result<bool>;
+    fn private_mounts(&self) -> crate::zbus::Result<bool>;
 
     /// Get property `PrivateIPC`.
     #[dbus_proxy(property, name = "PrivateIPC")]
-    fn private_ipc(&self) -> zbus::Result<bool>;
+    fn private_ipc(&self) -> crate::zbus::Result<bool>;
 
     /// Get property `ProtectHome`.
     #[dbus_proxy(property, name = "ProtectHome")]
-    fn protect_home(&self) -> zbus::Result<String>;
+    fn protect_home(&self) -> crate::zbus::Result<String>;
 
     /// Get property `ProtectSystem`.
     #[dbus_proxy(property, name = "ProtectSystem")]
-    fn protect_system(&self) -> zbus::Result<String>;
+    fn protect_system(&self) -> crate::zbus::Result<String>;
 
     /// Get property `SameProcessGroup`.
     #[dbus_proxy(property, name = "SameProcessGroup")]
-    fn same_process_group(&self) -> zbus::Result<bool>;
+    fn same_process_group(&self) -> crate::zbus::Result<bool>;
 
     /// Get property `UtmpIdentifier`.
     #[dbus_proxy(property, name = "UtmpIdentifier")]
-    fn utmp_identifier(&self) -> zbus::Result<String>;
+    fn utmp_identifier(&self) -> crate::zbus::Result<String>;
 
     /// Get property `UtmpMode`.
     #[dbus_proxy(property, name = "UtmpMode")]
-    fn utmp_mode(&self) -> zbus::Result<String>;
+    fn utmp_mode(&self) -> crate::zbus::Result<String>;
+
+    /// Get property `SELinuxContext`.
+    #[dbus_proxy(property, name = "SELinuxContext")]
+    fn se_linux_context(&self) -> crate::zbus::Result<(bool, String)>;
+
+    /// Get property `AppArmorProfile`.
+    #[dbus_proxy(property, name = "AppArmorProfile")]
+    fn app_armor_profile(&self) -> crate::zbus::Result<(bool, String)>;
+
+    /// Get property `SmackProcessLabel`.
+    #[dbus_proxy(property, name = "SmackProcessLabel")]
+    fn smack_process_label(&self) -> crate::zbus::Result<(bool, String)>;
 
     /// Get property `IgnoreSIGPIPE`.
     #[dbus_proxy(property, name = "IgnoreSIGPIPE")]
-    fn ignore_sigpipe(&self) -> zbus::Result<bool>;
+    fn ignore_sigpipe(&self) -> crate::zbus::Result<bool>;
 
     /// Get property `NoNewPrivileges`.
     #[dbus_proxy(property, name = "NoNewPrivileges")]
-    fn no_new_privileges(&self) -> zbus::Result<bool>;
+    fn no_new_privileges(&self) -> crate::zbus::Result<bool>;
+
+    /// Get property `SystemCallFilter`.
+    #[dbus_proxy(property, name = "SystemCallFilter")]
+    fn system_call_filter(&self) -> crate::zbus::Result<(bool, Vec<String>)>;
 
     /// Get property `SystemCallArchitectures`.
     #[dbus_proxy(property, name = "SystemCallArchitectures")]
-    fn system_call_architectures(&self) -> zbus::Result<Vec<String>>;
+    fn system_call_architectures(&self) -> crate::zbus::Result<Vec<String>>;
 
     /// Get property `SystemCallErrorNumber`.
     #[dbus_proxy(property, name = "SystemCallErrorNumber")]
-    fn system_call_error_number(&self) -> zbus::Result<i32>;
+    fn system_call_error_number(&self) -> crate::zbus::Result<i32>;
+
+    /// Get property `SystemCallLog`.
+    #[dbus_proxy(property, name = "SystemCallLog")]
+    fn system_call_log(&self) -> crate::zbus::Result<(bool, Vec<String>)>;
 
     /// Get property `Personality`.
     #[dbus_proxy(property, name = "Personality")]
-    fn personality(&self) -> zbus::Result<String>;
+    fn personality(&self) -> crate::zbus::Result<String>;
 
     /// Get property `LockPersonality`.
     #[dbus_proxy(property, name = "LockPersonality")]
-    fn lock_personality(&self) -> zbus::Result<bool>;
+    fn lock_personality(&self) -> crate::zbus::Result<bool>;
+
+    /// Get property `RestrictAddressFamilies`.
+    #[dbus_proxy(property, name = "RestrictAddressFamilies")]
+    fn restrict_address_families(&self) -> crate::zbus::Result<(bool, Vec<String>)>;
 
     /// Get property `RuntimeDirectoryPreserve`.
     #[dbus_proxy(property, name = "RuntimeDirectoryPreserve")]
-    fn runtime_directory_preserve(&self) -> zbus::Result<String>;
+    fn runtime_directory_preserve(&self) -> crate::zbus::Result<String>;
 
     /// Get property `RuntimeDirectoryMode`.
     #[dbus_proxy(property, name = "RuntimeDirectoryMode")]
-    fn runtime_directory_mode(&self) -> zbus::Result<u32>;
+    fn runtime_directory_mode(&self) -> crate::zbus::Result<u32>;
 
     /// Get property `RuntimeDirectory`.
     #[dbus_proxy(property, name = "RuntimeDirectory")]
-    fn runtime_directory(&self) -> zbus::Result<Vec<String>>;
+    fn runtime_directory(&self) -> crate::zbus::Result<Vec<String>>;
 
     /// Get property `StateDirectoryMode`.
     #[dbus_proxy(property, name = "StateDirectoryMode")]
-    fn state_directory_mode(&self) -> zbus::Result<u32>;
+    fn state_directory_mode(&self) -> crate::zbus::Result<u32>;
 
     /// Get property `StateDirectory`.
     #[dbus_proxy(property, name = "StateDirectory")]
-    fn state_directory(&self) -> zbus::Result<Vec<String>>;
+    fn state_directory(&self) -> crate::zbus::Result<Vec<String>>;
 
     /// Get property `CacheDirectoryMode`.
     #[dbus_proxy(property, name = "CacheDirectoryMode")]
-    fn cache_directory_mode(&self) -> zbus::Result<u32>;
+    fn cache_directory_mode(&self) -> crate::zbus::Result<u32>;
 
     /// Get property `CacheDirectory`.
     #[dbus_proxy(property, name = "CacheDirectory")]
-    fn cache_directory(&self) -> zbus::Result<Vec<String>>;
+    fn cache_directory(&self) -> crate::zbus::Result<Vec<String>>;
 
     /// Get property `LogsDirectoryMode`.
     #[dbus_proxy(property, name = "LogsDirectoryMode")]
-    fn logs_directory_mode(&self) -> zbus::Result<u32>;
+    fn logs_directory_mode(&self) -> crate::zbus::Result<u32>;
 
     /// Get property `LogsDirectory`.
     #[dbus_proxy(property, name = "LogsDirectory")]
-    fn logs_directory(&self) -> zbus::Result<Vec<String>>;
+    fn logs_directory(&self) -> crate::zbus::Result<Vec<String>>;
 
     /// Get property `ConfigurationDirectoryMode`.
     #[dbus_proxy(property, name = "ConfigurationDirectoryMode")]
-    fn configuration_directory_mode(&self) -> zbus::Result<u32>;
+    fn configuration_directory_mode(&self) -> crate::zbus::Result<u32>;
 
     /// Get property `ConfigurationDirectory`.
     #[dbus_proxy(property, name = "ConfigurationDirectory")]
-    fn configuration_directory(&self) -> zbus::Result<Vec<String>>;
+    fn configuration_directory(&self) -> crate::zbus::Result<Vec<String>>;
 
     /// Get property `TimeoutCleanUSec`.
     #[dbus_proxy(property, name = "TimeoutCleanUSec")]
-    fn timeout_clean_u_sec(&self) -> zbus::Result<u64>;
+    fn timeout_clean_u_sec(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `MemoryDenyWriteExecute`.
     #[dbus_proxy(property, name = "MemoryDenyWriteExecute")]
-    fn memory_deny_write_execute(&self) -> zbus::Result<bool>;
+    fn memory_deny_write_execute(&self) -> crate::zbus::Result<bool>;
 
     /// Get property `RestrictRealtime`.
     #[dbus_proxy(property, name = "RestrictRealtime")]
-    fn restrict_realtime(&self) -> zbus::Result<bool>;
+    fn restrict_realtime(&self) -> crate::zbus::Result<bool>;
 
     /// Get property `RestrictSUIDSGID`.
     #[dbus_proxy(property, name = "RestrictSUIDSGID")]
-    fn restrict_suidsgid(&self) -> zbus::Result<bool>;
+    fn restrict_suidsgid(&self) -> crate::zbus::Result<bool>;
 
     /// Get property `RestrictNamespaces`.
     #[dbus_proxy(property, name = "RestrictNamespaces")]
-    fn restrict_namespaces(&self) -> zbus::Result<u64>;
+    fn restrict_namespaces(&self) -> crate::zbus::Result<u64>;
+
+    /// Get property `BindPaths`.
+    #[dbus_proxy(property, name = "BindPaths")]
+    fn bind_paths(&self) -> crate::zbus::Result<Vec<(String, String, bool, u64)>>;
+
+    /// Get property `BindReadOnlyPaths`.
+    #[dbus_proxy(property, name = "BindReadOnlyPaths")]
+    fn bind_read_only_paths(&self) -> crate::zbus::Result<Vec<(String, String, bool, u64)>>;
 
     /// Get property `TemporaryFileSystem`.
     #[dbus_proxy(property, name = "TemporaryFileSystem")]
-    fn temporary_file_system(&self) -> zbus::Result<Vec<(String, String)>>;
+    fn temporary_file_system(&self) -> crate::zbus::Result<Vec<(String, String)>>;
 
     /// Get property `MountAPIVFS`.
     #[dbus_proxy(property, name = "MountAPIVFS")]
-    fn mount_apivfs(&self) -> zbus::Result<bool>;
+    fn mount_apivfs(&self) -> crate::zbus::Result<bool>;
 
     /// Get property `KeyringMode`.
     #[dbus_proxy(property, name = "KeyringMode")]
-    fn keyring_mode(&self) -> zbus::Result<String>;
+    fn keyring_mode(&self) -> crate::zbus::Result<String>;
 
     /// Get property `ProtectProc`.
     #[dbus_proxy(property, name = "ProtectProc")]
-    fn protect_proc(&self) -> zbus::Result<String>;
+    fn protect_proc(&self) -> crate::zbus::Result<String>;
 
     /// Get property `ProcSubset`.
     #[dbus_proxy(property, name = "ProcSubset")]
-    fn proc_subset(&self) -> zbus::Result<String>;
+    fn proc_subset(&self) -> crate::zbus::Result<String>;
 
     /// Get property `ProtectHostname`.
     #[dbus_proxy(property, name = "ProtectHostname")]
-    fn protect_hostname(&self) -> zbus::Result<bool>;
+    fn protect_hostname(&self) -> crate::zbus::Result<bool>;
 
     /// Get property `NetworkNamespacePath`.
     #[dbus_proxy(property, name = "NetworkNamespacePath")]
-    fn network_namespace_path(&self) -> zbus::Result<String>;
+    fn network_namespace_path(&self) -> crate::zbus::Result<String>;
 
     /// Get property `IPCNamespacePath`.
     #[dbus_proxy(property, name = "IPCNamespacePath")]
-    fn ipc_namespace_path(&self) -> zbus::Result<String>;
+    fn ipc_namespace_path(&self) -> crate::zbus::Result<String>;
 
     /// Get property `KillMode`.
     #[dbus_proxy(property, name = "KillMode")]
-    fn kill_mode(&self) -> zbus::Result<String>;
+    fn kill_mode(&self) -> crate::zbus::Result<String>;
 
     /// Get property `KillSignal`.
     #[dbus_proxy(property, name = "KillSignal")]
-    fn kill_signal(&self) -> zbus::Result<i32>;
+    fn kill_signal(&self) -> crate::zbus::Result<i32>;
 
     /// Get property `RestartKillSignal`.
     #[dbus_proxy(property, name = "RestartKillSignal")]
-    fn restart_kill_signal(&self) -> zbus::Result<i32>;
+    fn restart_kill_signal(&self) -> crate::zbus::Result<i32>;
 
     /// Get property `FinalKillSignal`.
     #[dbus_proxy(property, name = "FinalKillSignal")]
-    fn final_kill_signal(&self) -> zbus::Result<i32>;
+    fn final_kill_signal(&self) -> crate::zbus::Result<i32>;
 
     /// Get property `SendSIGKILL`.
     #[dbus_proxy(property, name = "SendSIGKILL")]
-    fn send_sigkill(&self) -> zbus::Result<bool>;
+    fn send_sigkill(&self) -> crate::zbus::Result<bool>;
 
     /// Get property `SendSIGHUP`.
     #[dbus_proxy(property, name = "SendSIGHUP")]
-    fn send_sighup(&self) -> zbus::Result<bool>;
+    fn send_sighup(&self) -> crate::zbus::Result<bool>;
 
     /// Get property `WatchdogSignal`.
     #[dbus_proxy(property, name = "WatchdogSignal")]
-    fn watchdog_signal(&self) -> zbus::Result<i32>;
+    fn watchdog_signal(&self) -> crate::zbus::Result<i32>;
 }
 
 /// Proxy object for `org.freedesktop.systemd1.Path`.
@@ -5371,23 +6035,23 @@ trait Swap {
 trait Path {
     /// Get property `Unit`.
     #[dbus_proxy(property, name = "Unit")]
-    fn unit(&self) -> zbus::Result<String>;
+    fn unit(&self) -> crate::zbus::Result<String>;
 
     /// Get property `Paths`.
     #[dbus_proxy(property, name = "Paths")]
-    fn paths(&self) -> zbus::Result<Vec<(String, String)>>;
+    fn paths(&self) -> crate::zbus::Result<Vec<(String, String)>>;
 
     /// Get property `MakeDirectory`.
     #[dbus_proxy(property, name = "MakeDirectory")]
-    fn make_directory(&self) -> zbus::Result<bool>;
+    fn make_directory(&self) -> crate::zbus::Result<bool>;
 
     /// Get property `DirectoryMode`.
     #[dbus_proxy(property, name = "DirectoryMode")]
-    fn directory_mode(&self) -> zbus::Result<u32>;
+    fn directory_mode(&self) -> crate::zbus::Result<u32>;
 
     /// Get property `Result`.
     #[dbus_proxy(property, name = "Result")]
-    fn result(&self) -> zbus::Result<String>;
+    fn result(&self) -> crate::zbus::Result<String>;
 }
 
 /// Proxy object for `org.freedesktop.systemd1.Slice`.
@@ -5399,267 +6063,283 @@ trait Path {
 trait Slice {
     /// [📖](https://www.freedesktop.org/software/systemd/man/systemd.directives.html#GetProcesses()) Call interface method `GetProcesses`.
     #[dbus_proxy(name = "GetProcesses")]
-    fn get_processes(&self) -> zbus::Result<Vec<(String, u32, String)>>;
+    fn get_processes(&self) -> crate::zbus::Result<Vec<(String, u32, String)>>;
 
     /// [📖](https://www.freedesktop.org/software/systemd/man/systemd.directives.html#AttachProcesses()) Call interface method `AttachProcesses`.
     #[dbus_proxy(name = "AttachProcesses")]
-    fn attach_processes(&self, subcgroup: String, pids: Vec<u32>) -> zbus::Result<()>;
+    fn attach_processes(&self, subcgroup: String, pids: Vec<u32>) -> crate::zbus::Result<()>;
 
     /// Get property `Slice`.
     #[dbus_proxy(property, name = "Slice")]
-    fn slice(&self) -> zbus::Result<String>;
+    fn slice(&self) -> crate::zbus::Result<String>;
 
     /// Get property `ControlGroup`.
     #[dbus_proxy(property, name = "ControlGroup")]
-    fn control_group(&self) -> zbus::Result<String>;
+    fn control_group(&self) -> crate::zbus::Result<String>;
 
     /// Get property `MemoryCurrent`.
     #[dbus_proxy(property, name = "MemoryCurrent")]
-    fn memory_current(&self) -> zbus::Result<u64>;
+    fn memory_current(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `MemoryAvailable`.
     #[dbus_proxy(property, name = "MemoryAvailable")]
-    fn memory_available(&self) -> zbus::Result<u64>;
+    fn memory_available(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `CPUUsageNSec`.
     #[dbus_proxy(property, name = "CPUUsageNSec")]
-    fn cpu_usage_n_sec(&self) -> zbus::Result<u64>;
+    fn cpu_usage_n_sec(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `EffectiveCPUs`.
     #[dbus_proxy(property, name = "EffectiveCPUs")]
-    fn effective_cp_us(&self) -> zbus::Result<Vec<u8>>;
+    fn effective_cp_us(&self) -> crate::zbus::Result<Vec<u8>>;
 
     /// Get property `EffectiveMemoryNodes`.
     #[dbus_proxy(property, name = "EffectiveMemoryNodes")]
-    fn effective_memory_nodes(&self) -> zbus::Result<Vec<u8>>;
+    fn effective_memory_nodes(&self) -> crate::zbus::Result<Vec<u8>>;
 
     /// Get property `TasksCurrent`.
     #[dbus_proxy(property, name = "TasksCurrent")]
-    fn tasks_current(&self) -> zbus::Result<u64>;
+    fn tasks_current(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `IPIngressBytes`.
     #[dbus_proxy(property, name = "IPIngressBytes")]
-    fn ip_ingress_bytes(&self) -> zbus::Result<u64>;
+    fn ip_ingress_bytes(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `IPIngressPackets`.
     #[dbus_proxy(property, name = "IPIngressPackets")]
-    fn ip_ingress_packets(&self) -> zbus::Result<u64>;
+    fn ip_ingress_packets(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `IPEgressBytes`.
     #[dbus_proxy(property, name = "IPEgressBytes")]
-    fn ip_egress_bytes(&self) -> zbus::Result<u64>;
+    fn ip_egress_bytes(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `IPEgressPackets`.
     #[dbus_proxy(property, name = "IPEgressPackets")]
-    fn ip_egress_packets(&self) -> zbus::Result<u64>;
+    fn ip_egress_packets(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `IOReadBytes`.
     #[dbus_proxy(property, name = "IOReadBytes")]
-    fn io_read_bytes(&self) -> zbus::Result<u64>;
+    fn io_read_bytes(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `IOReadOperations`.
     #[dbus_proxy(property, name = "IOReadOperations")]
-    fn io_read_operations(&self) -> zbus::Result<u64>;
+    fn io_read_operations(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `IOWriteBytes`.
     #[dbus_proxy(property, name = "IOWriteBytes")]
-    fn io_write_bytes(&self) -> zbus::Result<u64>;
+    fn io_write_bytes(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `IOWriteOperations`.
     #[dbus_proxy(property, name = "IOWriteOperations")]
-    fn io_write_operations(&self) -> zbus::Result<u64>;
+    fn io_write_operations(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `Delegate`.
     #[dbus_proxy(property, name = "Delegate")]
-    fn delegate(&self) -> zbus::Result<bool>;
+    fn delegate(&self) -> crate::zbus::Result<bool>;
 
     /// Get property `DelegateControllers`.
     #[dbus_proxy(property, name = "DelegateControllers")]
-    fn delegate_controllers(&self) -> zbus::Result<Vec<String>>;
+    fn delegate_controllers(&self) -> crate::zbus::Result<Vec<String>>;
 
     /// Get property `CPUAccounting`.
     #[dbus_proxy(property, name = "CPUAccounting")]
-    fn cpu_accounting(&self) -> zbus::Result<bool>;
+    fn cpu_accounting(&self) -> crate::zbus::Result<bool>;
 
     /// Get property `CPUWeight`.
     #[dbus_proxy(property, name = "CPUWeight")]
-    fn cpu_weight(&self) -> zbus::Result<u64>;
+    fn cpu_weight(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `StartupCPUWeight`.
     #[dbus_proxy(property, name = "StartupCPUWeight")]
-    fn startup_cpu_weight(&self) -> zbus::Result<u64>;
+    fn startup_cpu_weight(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `CPUShares`.
     #[dbus_proxy(property, name = "CPUShares")]
-    fn cpu_shares(&self) -> zbus::Result<u64>;
+    fn cpu_shares(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `StartupCPUShares`.
     #[dbus_proxy(property, name = "StartupCPUShares")]
-    fn startup_cpu_shares(&self) -> zbus::Result<u64>;
+    fn startup_cpu_shares(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `CPUQuotaPerSecUSec`.
     #[dbus_proxy(property, name = "CPUQuotaPerSecUSec")]
-    fn cpu_quota_per_sec_u_sec(&self) -> zbus::Result<u64>;
+    fn cpu_quota_per_sec_u_sec(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `CPUQuotaPeriodUSec`.
     #[dbus_proxy(property, name = "CPUQuotaPeriodUSec")]
-    fn cpu_quota_period_u_sec(&self) -> zbus::Result<u64>;
+    fn cpu_quota_period_u_sec(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `AllowedCPUs`.
     #[dbus_proxy(property, name = "AllowedCPUs")]
-    fn allowed_cp_us(&self) -> zbus::Result<Vec<u8>>;
+    fn allowed_cp_us(&self) -> crate::zbus::Result<Vec<u8>>;
 
     /// Get property `AllowedMemoryNodes`.
     #[dbus_proxy(property, name = "AllowedMemoryNodes")]
-    fn allowed_memory_nodes(&self) -> zbus::Result<Vec<u8>>;
+    fn allowed_memory_nodes(&self) -> crate::zbus::Result<Vec<u8>>;
 
     /// Get property `IOAccounting`.
     #[dbus_proxy(property, name = "IOAccounting")]
-    fn io_accounting(&self) -> zbus::Result<bool>;
+    fn io_accounting(&self) -> crate::zbus::Result<bool>;
 
     /// Get property `IOWeight`.
     #[dbus_proxy(property, name = "IOWeight")]
-    fn io_weight(&self) -> zbus::Result<u64>;
+    fn io_weight(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `StartupIOWeight`.
     #[dbus_proxy(property, name = "StartupIOWeight")]
-    fn startup_io_weight(&self) -> zbus::Result<u64>;
+    fn startup_io_weight(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `IODeviceWeight`.
     #[dbus_proxy(property, name = "IODeviceWeight")]
-    fn io_device_weight(&self) -> zbus::Result<Vec<(String, u64)>>;
+    fn io_device_weight(&self) -> crate::zbus::Result<Vec<(String, u64)>>;
 
     /// Get property `IOReadBandwidthMax`.
     #[dbus_proxy(property, name = "IOReadBandwidthMax")]
-    fn io_read_bandwidth_max(&self) -> zbus::Result<Vec<(String, u64)>>;
+    fn io_read_bandwidth_max(&self) -> crate::zbus::Result<Vec<(String, u64)>>;
 
     /// Get property `IOWriteBandwidthMax`.
     #[dbus_proxy(property, name = "IOWriteBandwidthMax")]
-    fn io_write_bandwidth_max(&self) -> zbus::Result<Vec<(String, u64)>>;
+    fn io_write_bandwidth_max(&self) -> crate::zbus::Result<Vec<(String, u64)>>;
 
     /// Get property `IOReadIOPSMax`.
     #[dbus_proxy(property, name = "IOReadIOPSMax")]
-    fn io_read_iops_max(&self) -> zbus::Result<Vec<(String, u64)>>;
+    fn io_read_iops_max(&self) -> crate::zbus::Result<Vec<(String, u64)>>;
 
     /// Get property `IOWriteIOPSMax`.
     #[dbus_proxy(property, name = "IOWriteIOPSMax")]
-    fn io_write_iops_max(&self) -> zbus::Result<Vec<(String, u64)>>;
+    fn io_write_iops_max(&self) -> crate::zbus::Result<Vec<(String, u64)>>;
 
     /// Get property `IODeviceLatencyTargetUSec`.
     #[dbus_proxy(property, name = "IODeviceLatencyTargetUSec")]
-    fn io_device_latency_target_u_sec(&self) -> zbus::Result<Vec<(String, u64)>>;
+    fn io_device_latency_target_u_sec(&self) -> crate::zbus::Result<Vec<(String, u64)>>;
 
     /// Get property `BlockIOAccounting`.
     #[dbus_proxy(property, name = "BlockIOAccounting")]
-    fn block_io_accounting(&self) -> zbus::Result<bool>;
+    fn block_io_accounting(&self) -> crate::zbus::Result<bool>;
 
     /// Get property `BlockIOWeight`.
     #[dbus_proxy(property, name = "BlockIOWeight")]
-    fn block_io_weight(&self) -> zbus::Result<u64>;
+    fn block_io_weight(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `StartupBlockIOWeight`.
     #[dbus_proxy(property, name = "StartupBlockIOWeight")]
-    fn startup_block_io_weight(&self) -> zbus::Result<u64>;
+    fn startup_block_io_weight(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `BlockIODeviceWeight`.
     #[dbus_proxy(property, name = "BlockIODeviceWeight")]
-    fn block_io_device_weight(&self) -> zbus::Result<Vec<(String, u64)>>;
+    fn block_io_device_weight(&self) -> crate::zbus::Result<Vec<(String, u64)>>;
 
     /// Get property `BlockIOReadBandwidth`.
     #[dbus_proxy(property, name = "BlockIOReadBandwidth")]
-    fn block_io_read_bandwidth(&self) -> zbus::Result<Vec<(String, u64)>>;
+    fn block_io_read_bandwidth(&self) -> crate::zbus::Result<Vec<(String, u64)>>;
 
     /// Get property `BlockIOWriteBandwidth`.
     #[dbus_proxy(property, name = "BlockIOWriteBandwidth")]
-    fn block_io_write_bandwidth(&self) -> zbus::Result<Vec<(String, u64)>>;
+    fn block_io_write_bandwidth(&self) -> crate::zbus::Result<Vec<(String, u64)>>;
 
     /// Get property `MemoryAccounting`.
     #[dbus_proxy(property, name = "MemoryAccounting")]
-    fn memory_accounting(&self) -> zbus::Result<bool>;
+    fn memory_accounting(&self) -> crate::zbus::Result<bool>;
 
     /// Get property `DefaultMemoryLow`.
     #[dbus_proxy(property, name = "DefaultMemoryLow")]
-    fn default_memory_low(&self) -> zbus::Result<u64>;
+    fn default_memory_low(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `DefaultMemoryMin`.
     #[dbus_proxy(property, name = "DefaultMemoryMin")]
-    fn default_memory_min(&self) -> zbus::Result<u64>;
+    fn default_memory_min(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `MemoryMin`.
     #[dbus_proxy(property, name = "MemoryMin")]
-    fn memory_min(&self) -> zbus::Result<u64>;
+    fn memory_min(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `MemoryLow`.
     #[dbus_proxy(property, name = "MemoryLow")]
-    fn memory_low(&self) -> zbus::Result<u64>;
+    fn memory_low(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `MemoryHigh`.
     #[dbus_proxy(property, name = "MemoryHigh")]
-    fn memory_high(&self) -> zbus::Result<u64>;
+    fn memory_high(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `MemoryMax`.
     #[dbus_proxy(property, name = "MemoryMax")]
-    fn memory_max(&self) -> zbus::Result<u64>;
+    fn memory_max(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `MemorySwapMax`.
     #[dbus_proxy(property, name = "MemorySwapMax")]
-    fn memory_swap_max(&self) -> zbus::Result<u64>;
+    fn memory_swap_max(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `MemoryLimit`.
     #[dbus_proxy(property, name = "MemoryLimit")]
-    fn memory_limit(&self) -> zbus::Result<u64>;
+    fn memory_limit(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `DevicePolicy`.
     #[dbus_proxy(property, name = "DevicePolicy")]
-    fn device_policy(&self) -> zbus::Result<String>;
+    fn device_policy(&self) -> crate::zbus::Result<String>;
 
     /// Get property `DeviceAllow`.
     #[dbus_proxy(property, name = "DeviceAllow")]
-    fn device_allow(&self) -> zbus::Result<Vec<(String, String)>>;
+    fn device_allow(&self) -> crate::zbus::Result<Vec<(String, String)>>;
 
     /// Get property `TasksAccounting`.
     #[dbus_proxy(property, name = "TasksAccounting")]
-    fn tasks_accounting(&self) -> zbus::Result<bool>;
+    fn tasks_accounting(&self) -> crate::zbus::Result<bool>;
 
     /// Get property `TasksMax`.
     #[dbus_proxy(property, name = "TasksMax")]
-    fn tasks_max(&self) -> zbus::Result<u64>;
+    fn tasks_max(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `IPAccounting`.
     #[dbus_proxy(property, name = "IPAccounting")]
-    fn ip_accounting(&self) -> zbus::Result<bool>;
+    fn ip_accounting(&self) -> crate::zbus::Result<bool>;
+
+    /// Get property `IPAddressAllow`.
+    #[dbus_proxy(property, name = "IPAddressAllow")]
+    fn ip_address_allow(&self) -> crate::zbus::Result<Vec<(i32, Vec<u8>, u32)>>;
+
+    /// Get property `IPAddressDeny`.
+    #[dbus_proxy(property, name = "IPAddressDeny")]
+    fn ip_address_deny(&self) -> crate::zbus::Result<Vec<(i32, Vec<u8>, u32)>>;
 
     /// Get property `IPIngressFilterPath`.
     #[dbus_proxy(property, name = "IPIngressFilterPath")]
-    fn ip_ingress_filter_path(&self) -> zbus::Result<Vec<String>>;
+    fn ip_ingress_filter_path(&self) -> crate::zbus::Result<Vec<String>>;
 
     /// Get property `IPEgressFilterPath`.
     #[dbus_proxy(property, name = "IPEgressFilterPath")]
-    fn ip_egress_filter_path(&self) -> zbus::Result<Vec<String>>;
+    fn ip_egress_filter_path(&self) -> crate::zbus::Result<Vec<String>>;
 
     /// Get property `DisableControllers`.
     #[dbus_proxy(property, name = "DisableControllers")]
-    fn disable_controllers(&self) -> zbus::Result<Vec<String>>;
+    fn disable_controllers(&self) -> crate::zbus::Result<Vec<String>>;
 
     /// Get property `ManagedOOMSwap`.
     #[dbus_proxy(property, name = "ManagedOOMSwap")]
-    fn managed_oom_swap(&self) -> zbus::Result<String>;
+    fn managed_oom_swap(&self) -> crate::zbus::Result<String>;
 
     /// Get property `ManagedOOMMemoryPressure`.
     #[dbus_proxy(property, name = "ManagedOOMMemoryPressure")]
-    fn managed_oom_memory_pressure(&self) -> zbus::Result<String>;
+    fn managed_oom_memory_pressure(&self) -> crate::zbus::Result<String>;
 
     /// Get property `ManagedOOMMemoryPressureLimit`.
     #[dbus_proxy(property, name = "ManagedOOMMemoryPressureLimit")]
-    fn managed_oom_memory_pressure_limit(&self) -> zbus::Result<u32>;
+    fn managed_oom_memory_pressure_limit(&self) -> crate::zbus::Result<u32>;
 
     /// Get property `ManagedOOMPreference`.
     #[dbus_proxy(property, name = "ManagedOOMPreference")]
-    fn managed_oom_preference(&self) -> zbus::Result<String>;
+    fn managed_oom_preference(&self) -> crate::zbus::Result<String>;
 
     /// Get property `BPFProgram`.
     #[dbus_proxy(property, name = "BPFProgram")]
-    fn bpf_program(&self) -> zbus::Result<Vec<(String, String)>>;
+    fn bpf_program(&self) -> crate::zbus::Result<Vec<(String, String)>>;
+
+    /// Get property `SocketBindAllow`.
+    #[dbus_proxy(property, name = "SocketBindAllow")]
+    fn socket_bind_allow(&self) -> crate::zbus::Result<Vec<(i32, i32, u16, u16)>>;
+
+    /// Get property `SocketBindDeny`.
+    #[dbus_proxy(property, name = "SocketBindDeny")]
+    fn socket_bind_deny(&self) -> crate::zbus::Result<Vec<(i32, i32, u16, u16)>>;
 }
 
 /// Proxy object for `org.freedesktop.systemd1.Scope`.
@@ -5671,319 +6351,335 @@ trait Slice {
 trait Scope {
     /// [📖](https://www.freedesktop.org/software/systemd/man/systemd.directives.html#Abandon()) Call interface method `Abandon`.
     #[dbus_proxy(name = "Abandon")]
-    fn abandon(&self) -> zbus::Result<()>;
+    fn abandon(&self) -> crate::zbus::Result<()>;
 
     /// [📖](https://www.freedesktop.org/software/systemd/man/systemd.directives.html#GetProcesses()) Call interface method `GetProcesses`.
     #[dbus_proxy(name = "GetProcesses")]
-    fn get_processes(&self) -> zbus::Result<Vec<(String, u32, String)>>;
+    fn get_processes(&self) -> crate::zbus::Result<Vec<(String, u32, String)>>;
 
     /// [📖](https://www.freedesktop.org/software/systemd/man/systemd.directives.html#AttachProcesses()) Call interface method `AttachProcesses`.
     #[dbus_proxy(name = "AttachProcesses")]
-    fn attach_processes(&self, subcgroup: String, pids: Vec<u32>) -> zbus::Result<()>;
+    fn attach_processes(&self, subcgroup: String, pids: Vec<u32>) -> crate::zbus::Result<()>;
 
     /// Receive `RequestStop` signal.
     #[dbus_proxy(signal, name = "RequestStop")]
-    fn request_stop(&self) -> zbus::Result<()>;
+    fn request_stop(&self) -> crate::zbus::Result<()>;
 
     /// Get property `Controller`.
     #[dbus_proxy(property, name = "Controller")]
-    fn controller(&self) -> zbus::Result<String>;
+    fn controller(&self) -> crate::zbus::Result<String>;
 
     /// Get property `TimeoutStopUSec`.
     #[dbus_proxy(property, name = "TimeoutStopUSec")]
-    fn timeout_stop_u_sec(&self) -> zbus::Result<u64>;
+    fn timeout_stop_u_sec(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `Result`.
     #[dbus_proxy(property, name = "Result")]
-    fn result(&self) -> zbus::Result<String>;
+    fn result(&self) -> crate::zbus::Result<String>;
 
     /// Get property `RuntimeMaxUSec`.
     #[dbus_proxy(property, name = "RuntimeMaxUSec")]
-    fn runtime_max_u_sec(&self) -> zbus::Result<u64>;
+    fn runtime_max_u_sec(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `Slice`.
     #[dbus_proxy(property, name = "Slice")]
-    fn slice(&self) -> zbus::Result<String>;
+    fn slice(&self) -> crate::zbus::Result<String>;
 
     /// Get property `ControlGroup`.
     #[dbus_proxy(property, name = "ControlGroup")]
-    fn control_group(&self) -> zbus::Result<String>;
+    fn control_group(&self) -> crate::zbus::Result<String>;
 
     /// Get property `MemoryCurrent`.
     #[dbus_proxy(property, name = "MemoryCurrent")]
-    fn memory_current(&self) -> zbus::Result<u64>;
+    fn memory_current(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `MemoryAvailable`.
     #[dbus_proxy(property, name = "MemoryAvailable")]
-    fn memory_available(&self) -> zbus::Result<u64>;
+    fn memory_available(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `CPUUsageNSec`.
     #[dbus_proxy(property, name = "CPUUsageNSec")]
-    fn cpu_usage_n_sec(&self) -> zbus::Result<u64>;
+    fn cpu_usage_n_sec(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `EffectiveCPUs`.
     #[dbus_proxy(property, name = "EffectiveCPUs")]
-    fn effective_cp_us(&self) -> zbus::Result<Vec<u8>>;
+    fn effective_cp_us(&self) -> crate::zbus::Result<Vec<u8>>;
 
     /// Get property `EffectiveMemoryNodes`.
     #[dbus_proxy(property, name = "EffectiveMemoryNodes")]
-    fn effective_memory_nodes(&self) -> zbus::Result<Vec<u8>>;
+    fn effective_memory_nodes(&self) -> crate::zbus::Result<Vec<u8>>;
 
     /// Get property `TasksCurrent`.
     #[dbus_proxy(property, name = "TasksCurrent")]
-    fn tasks_current(&self) -> zbus::Result<u64>;
+    fn tasks_current(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `IPIngressBytes`.
     #[dbus_proxy(property, name = "IPIngressBytes")]
-    fn ip_ingress_bytes(&self) -> zbus::Result<u64>;
+    fn ip_ingress_bytes(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `IPIngressPackets`.
     #[dbus_proxy(property, name = "IPIngressPackets")]
-    fn ip_ingress_packets(&self) -> zbus::Result<u64>;
+    fn ip_ingress_packets(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `IPEgressBytes`.
     #[dbus_proxy(property, name = "IPEgressBytes")]
-    fn ip_egress_bytes(&self) -> zbus::Result<u64>;
+    fn ip_egress_bytes(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `IPEgressPackets`.
     #[dbus_proxy(property, name = "IPEgressPackets")]
-    fn ip_egress_packets(&self) -> zbus::Result<u64>;
+    fn ip_egress_packets(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `IOReadBytes`.
     #[dbus_proxy(property, name = "IOReadBytes")]
-    fn io_read_bytes(&self) -> zbus::Result<u64>;
+    fn io_read_bytes(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `IOReadOperations`.
     #[dbus_proxy(property, name = "IOReadOperations")]
-    fn io_read_operations(&self) -> zbus::Result<u64>;
+    fn io_read_operations(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `IOWriteBytes`.
     #[dbus_proxy(property, name = "IOWriteBytes")]
-    fn io_write_bytes(&self) -> zbus::Result<u64>;
+    fn io_write_bytes(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `IOWriteOperations`.
     #[dbus_proxy(property, name = "IOWriteOperations")]
-    fn io_write_operations(&self) -> zbus::Result<u64>;
+    fn io_write_operations(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `Delegate`.
     #[dbus_proxy(property, name = "Delegate")]
-    fn delegate(&self) -> zbus::Result<bool>;
+    fn delegate(&self) -> crate::zbus::Result<bool>;
 
     /// Get property `DelegateControllers`.
     #[dbus_proxy(property, name = "DelegateControllers")]
-    fn delegate_controllers(&self) -> zbus::Result<Vec<String>>;
+    fn delegate_controllers(&self) -> crate::zbus::Result<Vec<String>>;
 
     /// Get property `CPUAccounting`.
     #[dbus_proxy(property, name = "CPUAccounting")]
-    fn cpu_accounting(&self) -> zbus::Result<bool>;
+    fn cpu_accounting(&self) -> crate::zbus::Result<bool>;
 
     /// Get property `CPUWeight`.
     #[dbus_proxy(property, name = "CPUWeight")]
-    fn cpu_weight(&self) -> zbus::Result<u64>;
+    fn cpu_weight(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `StartupCPUWeight`.
     #[dbus_proxy(property, name = "StartupCPUWeight")]
-    fn startup_cpu_weight(&self) -> zbus::Result<u64>;
+    fn startup_cpu_weight(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `CPUShares`.
     #[dbus_proxy(property, name = "CPUShares")]
-    fn cpu_shares(&self) -> zbus::Result<u64>;
+    fn cpu_shares(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `StartupCPUShares`.
     #[dbus_proxy(property, name = "StartupCPUShares")]
-    fn startup_cpu_shares(&self) -> zbus::Result<u64>;
+    fn startup_cpu_shares(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `CPUQuotaPerSecUSec`.
     #[dbus_proxy(property, name = "CPUQuotaPerSecUSec")]
-    fn cpu_quota_per_sec_u_sec(&self) -> zbus::Result<u64>;
+    fn cpu_quota_per_sec_u_sec(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `CPUQuotaPeriodUSec`.
     #[dbus_proxy(property, name = "CPUQuotaPeriodUSec")]
-    fn cpu_quota_period_u_sec(&self) -> zbus::Result<u64>;
+    fn cpu_quota_period_u_sec(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `AllowedCPUs`.
     #[dbus_proxy(property, name = "AllowedCPUs")]
-    fn allowed_cp_us(&self) -> zbus::Result<Vec<u8>>;
+    fn allowed_cp_us(&self) -> crate::zbus::Result<Vec<u8>>;
 
     /// Get property `AllowedMemoryNodes`.
     #[dbus_proxy(property, name = "AllowedMemoryNodes")]
-    fn allowed_memory_nodes(&self) -> zbus::Result<Vec<u8>>;
+    fn allowed_memory_nodes(&self) -> crate::zbus::Result<Vec<u8>>;
 
     /// Get property `IOAccounting`.
     #[dbus_proxy(property, name = "IOAccounting")]
-    fn io_accounting(&self) -> zbus::Result<bool>;
+    fn io_accounting(&self) -> crate::zbus::Result<bool>;
 
     /// Get property `IOWeight`.
     #[dbus_proxy(property, name = "IOWeight")]
-    fn io_weight(&self) -> zbus::Result<u64>;
+    fn io_weight(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `StartupIOWeight`.
     #[dbus_proxy(property, name = "StartupIOWeight")]
-    fn startup_io_weight(&self) -> zbus::Result<u64>;
+    fn startup_io_weight(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `IODeviceWeight`.
     #[dbus_proxy(property, name = "IODeviceWeight")]
-    fn io_device_weight(&self) -> zbus::Result<Vec<(String, u64)>>;
+    fn io_device_weight(&self) -> crate::zbus::Result<Vec<(String, u64)>>;
 
     /// Get property `IOReadBandwidthMax`.
     #[dbus_proxy(property, name = "IOReadBandwidthMax")]
-    fn io_read_bandwidth_max(&self) -> zbus::Result<Vec<(String, u64)>>;
+    fn io_read_bandwidth_max(&self) -> crate::zbus::Result<Vec<(String, u64)>>;
 
     /// Get property `IOWriteBandwidthMax`.
     #[dbus_proxy(property, name = "IOWriteBandwidthMax")]
-    fn io_write_bandwidth_max(&self) -> zbus::Result<Vec<(String, u64)>>;
+    fn io_write_bandwidth_max(&self) -> crate::zbus::Result<Vec<(String, u64)>>;
 
     /// Get property `IOReadIOPSMax`.
     #[dbus_proxy(property, name = "IOReadIOPSMax")]
-    fn io_read_iops_max(&self) -> zbus::Result<Vec<(String, u64)>>;
+    fn io_read_iops_max(&self) -> crate::zbus::Result<Vec<(String, u64)>>;
 
     /// Get property `IOWriteIOPSMax`.
     #[dbus_proxy(property, name = "IOWriteIOPSMax")]
-    fn io_write_iops_max(&self) -> zbus::Result<Vec<(String, u64)>>;
+    fn io_write_iops_max(&self) -> crate::zbus::Result<Vec<(String, u64)>>;
 
     /// Get property `IODeviceLatencyTargetUSec`.
     #[dbus_proxy(property, name = "IODeviceLatencyTargetUSec")]
-    fn io_device_latency_target_u_sec(&self) -> zbus::Result<Vec<(String, u64)>>;
+    fn io_device_latency_target_u_sec(&self) -> crate::zbus::Result<Vec<(String, u64)>>;
 
     /// Get property `BlockIOAccounting`.
     #[dbus_proxy(property, name = "BlockIOAccounting")]
-    fn block_io_accounting(&self) -> zbus::Result<bool>;
+    fn block_io_accounting(&self) -> crate::zbus::Result<bool>;
 
     /// Get property `BlockIOWeight`.
     #[dbus_proxy(property, name = "BlockIOWeight")]
-    fn block_io_weight(&self) -> zbus::Result<u64>;
+    fn block_io_weight(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `StartupBlockIOWeight`.
     #[dbus_proxy(property, name = "StartupBlockIOWeight")]
-    fn startup_block_io_weight(&self) -> zbus::Result<u64>;
+    fn startup_block_io_weight(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `BlockIODeviceWeight`.
     #[dbus_proxy(property, name = "BlockIODeviceWeight")]
-    fn block_io_device_weight(&self) -> zbus::Result<Vec<(String, u64)>>;
+    fn block_io_device_weight(&self) -> crate::zbus::Result<Vec<(String, u64)>>;
 
     /// Get property `BlockIOReadBandwidth`.
     #[dbus_proxy(property, name = "BlockIOReadBandwidth")]
-    fn block_io_read_bandwidth(&self) -> zbus::Result<Vec<(String, u64)>>;
+    fn block_io_read_bandwidth(&self) -> crate::zbus::Result<Vec<(String, u64)>>;
 
     /// Get property `BlockIOWriteBandwidth`.
     #[dbus_proxy(property, name = "BlockIOWriteBandwidth")]
-    fn block_io_write_bandwidth(&self) -> zbus::Result<Vec<(String, u64)>>;
+    fn block_io_write_bandwidth(&self) -> crate::zbus::Result<Vec<(String, u64)>>;
 
     /// Get property `MemoryAccounting`.
     #[dbus_proxy(property, name = "MemoryAccounting")]
-    fn memory_accounting(&self) -> zbus::Result<bool>;
+    fn memory_accounting(&self) -> crate::zbus::Result<bool>;
 
     /// Get property `DefaultMemoryLow`.
     #[dbus_proxy(property, name = "DefaultMemoryLow")]
-    fn default_memory_low(&self) -> zbus::Result<u64>;
+    fn default_memory_low(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `DefaultMemoryMin`.
     #[dbus_proxy(property, name = "DefaultMemoryMin")]
-    fn default_memory_min(&self) -> zbus::Result<u64>;
+    fn default_memory_min(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `MemoryMin`.
     #[dbus_proxy(property, name = "MemoryMin")]
-    fn memory_min(&self) -> zbus::Result<u64>;
+    fn memory_min(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `MemoryLow`.
     #[dbus_proxy(property, name = "MemoryLow")]
-    fn memory_low(&self) -> zbus::Result<u64>;
+    fn memory_low(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `MemoryHigh`.
     #[dbus_proxy(property, name = "MemoryHigh")]
-    fn memory_high(&self) -> zbus::Result<u64>;
+    fn memory_high(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `MemoryMax`.
     #[dbus_proxy(property, name = "MemoryMax")]
-    fn memory_max(&self) -> zbus::Result<u64>;
+    fn memory_max(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `MemorySwapMax`.
     #[dbus_proxy(property, name = "MemorySwapMax")]
-    fn memory_swap_max(&self) -> zbus::Result<u64>;
+    fn memory_swap_max(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `MemoryLimit`.
     #[dbus_proxy(property, name = "MemoryLimit")]
-    fn memory_limit(&self) -> zbus::Result<u64>;
+    fn memory_limit(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `DevicePolicy`.
     #[dbus_proxy(property, name = "DevicePolicy")]
-    fn device_policy(&self) -> zbus::Result<String>;
+    fn device_policy(&self) -> crate::zbus::Result<String>;
 
     /// Get property `DeviceAllow`.
     #[dbus_proxy(property, name = "DeviceAllow")]
-    fn device_allow(&self) -> zbus::Result<Vec<(String, String)>>;
+    fn device_allow(&self) -> crate::zbus::Result<Vec<(String, String)>>;
 
     /// Get property `TasksAccounting`.
     #[dbus_proxy(property, name = "TasksAccounting")]
-    fn tasks_accounting(&self) -> zbus::Result<bool>;
+    fn tasks_accounting(&self) -> crate::zbus::Result<bool>;
 
     /// Get property `TasksMax`.
     #[dbus_proxy(property, name = "TasksMax")]
-    fn tasks_max(&self) -> zbus::Result<u64>;
+    fn tasks_max(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `IPAccounting`.
     #[dbus_proxy(property, name = "IPAccounting")]
-    fn ip_accounting(&self) -> zbus::Result<bool>;
+    fn ip_accounting(&self) -> crate::zbus::Result<bool>;
+
+    /// Get property `IPAddressAllow`.
+    #[dbus_proxy(property, name = "IPAddressAllow")]
+    fn ip_address_allow(&self) -> crate::zbus::Result<Vec<(i32, Vec<u8>, u32)>>;
+
+    /// Get property `IPAddressDeny`.
+    #[dbus_proxy(property, name = "IPAddressDeny")]
+    fn ip_address_deny(&self) -> crate::zbus::Result<Vec<(i32, Vec<u8>, u32)>>;
 
     /// Get property `IPIngressFilterPath`.
     #[dbus_proxy(property, name = "IPIngressFilterPath")]
-    fn ip_ingress_filter_path(&self) -> zbus::Result<Vec<String>>;
+    fn ip_ingress_filter_path(&self) -> crate::zbus::Result<Vec<String>>;
 
     /// Get property `IPEgressFilterPath`.
     #[dbus_proxy(property, name = "IPEgressFilterPath")]
-    fn ip_egress_filter_path(&self) -> zbus::Result<Vec<String>>;
+    fn ip_egress_filter_path(&self) -> crate::zbus::Result<Vec<String>>;
 
     /// Get property `DisableControllers`.
     #[dbus_proxy(property, name = "DisableControllers")]
-    fn disable_controllers(&self) -> zbus::Result<Vec<String>>;
+    fn disable_controllers(&self) -> crate::zbus::Result<Vec<String>>;
 
     /// Get property `ManagedOOMSwap`.
     #[dbus_proxy(property, name = "ManagedOOMSwap")]
-    fn managed_oom_swap(&self) -> zbus::Result<String>;
+    fn managed_oom_swap(&self) -> crate::zbus::Result<String>;
 
     /// Get property `ManagedOOMMemoryPressure`.
     #[dbus_proxy(property, name = "ManagedOOMMemoryPressure")]
-    fn managed_oom_memory_pressure(&self) -> zbus::Result<String>;
+    fn managed_oom_memory_pressure(&self) -> crate::zbus::Result<String>;
 
     /// Get property `ManagedOOMMemoryPressureLimit`.
     #[dbus_proxy(property, name = "ManagedOOMMemoryPressureLimit")]
-    fn managed_oom_memory_pressure_limit(&self) -> zbus::Result<u32>;
+    fn managed_oom_memory_pressure_limit(&self) -> crate::zbus::Result<u32>;
 
     /// Get property `ManagedOOMPreference`.
     #[dbus_proxy(property, name = "ManagedOOMPreference")]
-    fn managed_oom_preference(&self) -> zbus::Result<String>;
+    fn managed_oom_preference(&self) -> crate::zbus::Result<String>;
 
     /// Get property `BPFProgram`.
     #[dbus_proxy(property, name = "BPFProgram")]
-    fn bpf_program(&self) -> zbus::Result<Vec<(String, String)>>;
+    fn bpf_program(&self) -> crate::zbus::Result<Vec<(String, String)>>;
+
+    /// Get property `SocketBindAllow`.
+    #[dbus_proxy(property, name = "SocketBindAllow")]
+    fn socket_bind_allow(&self) -> crate::zbus::Result<Vec<(i32, i32, u16, u16)>>;
+
+    /// Get property `SocketBindDeny`.
+    #[dbus_proxy(property, name = "SocketBindDeny")]
+    fn socket_bind_deny(&self) -> crate::zbus::Result<Vec<(i32, i32, u16, u16)>>;
 
     /// Get property `KillMode`.
     #[dbus_proxy(property, name = "KillMode")]
-    fn kill_mode(&self) -> zbus::Result<String>;
+    fn kill_mode(&self) -> crate::zbus::Result<String>;
 
     /// Get property `KillSignal`.
     #[dbus_proxy(property, name = "KillSignal")]
-    fn kill_signal(&self) -> zbus::Result<i32>;
+    fn kill_signal(&self) -> crate::zbus::Result<i32>;
 
     /// Get property `RestartKillSignal`.
     #[dbus_proxy(property, name = "RestartKillSignal")]
-    fn restart_kill_signal(&self) -> zbus::Result<i32>;
+    fn restart_kill_signal(&self) -> crate::zbus::Result<i32>;
 
     /// Get property `FinalKillSignal`.
     #[dbus_proxy(property, name = "FinalKillSignal")]
-    fn final_kill_signal(&self) -> zbus::Result<i32>;
+    fn final_kill_signal(&self) -> crate::zbus::Result<i32>;
 
     /// Get property `SendSIGKILL`.
     #[dbus_proxy(property, name = "SendSIGKILL")]
-    fn send_sigkill(&self) -> zbus::Result<bool>;
+    fn send_sigkill(&self) -> crate::zbus::Result<bool>;
 
     /// Get property `SendSIGHUP`.
     #[dbus_proxy(property, name = "SendSIGHUP")]
-    fn send_sighup(&self) -> zbus::Result<bool>;
+    fn send_sighup(&self) -> crate::zbus::Result<bool>;
 
     /// Get property `WatchdogSignal`.
     #[dbus_proxy(property, name = "WatchdogSignal")]
-    fn watchdog_signal(&self) -> zbus::Result<i32>;
+    fn watchdog_signal(&self) -> crate::zbus::Result<i32>;
 }
 
 /// Proxy object for `org.freedesktop.systemd1.Job`.
@@ -5995,21 +6691,51 @@ trait Scope {
 trait Job {
     /// [📖](https://www.freedesktop.org/software/systemd/man/systemd.directives.html#Cancel()) Call interface method `Cancel`.
     #[dbus_proxy(name = "Cancel")]
-    fn cancel(&self) -> zbus::Result<()>;
+    fn cancel(&self) -> crate::zbus::Result<()>;
+
+    /// [📖](https://www.freedesktop.org/software/systemd/man/systemd.directives.html#GetAfter()) Call interface method `GetAfter`.
+    #[dbus_proxy(name = "GetAfter")]
+    fn get_after(
+        &self,
+    ) -> crate::zbus::Result<
+        Vec<(
+            u32,
+            String,
+            String,
+            String,
+            crate::zvariant::OwnedObjectPath,
+            crate::zvariant::OwnedObjectPath,
+        )>,
+    >;
+
+    /// [📖](https://www.freedesktop.org/software/systemd/man/systemd.directives.html#GetBefore()) Call interface method `GetBefore`.
+    #[dbus_proxy(name = "GetBefore")]
+    fn get_before(
+        &self,
+    ) -> crate::zbus::Result<
+        Vec<(
+            u32,
+            String,
+            String,
+            String,
+            crate::zvariant::OwnedObjectPath,
+            crate::zvariant::OwnedObjectPath,
+        )>,
+    >;
 
     /// Get property `Id`.
     #[dbus_proxy(property, name = "Id")]
-    fn id(&self) -> zbus::Result<u32>;
+    fn id(&self) -> crate::zbus::Result<u32>;
 
     /// Get property `Unit`.
     #[dbus_proxy(property, name = "Unit")]
-    fn unit(&self) -> zbus::Result<(String, zbus::zvariant::OwnedObjectPath)>;
+    fn unit(&self) -> crate::zbus::Result<(String, crate::zvariant::OwnedObjectPath)>;
 
     /// Get property `JobType`.
     #[dbus_proxy(property, name = "JobType")]
-    fn job_type(&self) -> zbus::Result<String>;
+    fn job_type(&self) -> crate::zbus::Result<String>;
 
     /// Get property `State`.
     #[dbus_proxy(property, name = "State")]
-    fn state(&self) -> zbus::Result<String>;
+    fn state(&self) -> crate::zbus::Result<String>;
 }

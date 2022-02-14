@@ -12,7 +12,7 @@ use zbus::dbus_proxy;
 trait Localed {
     /// [📖](https://www.freedesktop.org/software/systemd/man/systemd.directives.html#SetLocale()) Call interface method `SetLocale`.
     #[dbus_proxy(name = "SetLocale")]
-    fn set_locale(&self, locale: Vec<String>, interactive: bool) -> zbus::Result<()>;
+    fn set_locale(&self, locale: Vec<String>, interactive: bool) -> crate::zbus::Result<()>;
 
     /// [📖](https://www.freedesktop.org/software/systemd/man/systemd.directives.html#SetVConsoleKeyboard()) Call interface method `SetVConsoleKeyboard`.
     #[dbus_proxy(name = "SetVConsoleKeyboard")]
@@ -22,7 +22,7 @@ trait Localed {
         keymap_toggle: String,
         convert: bool,
         interactive: bool,
-    ) -> zbus::Result<()>;
+    ) -> crate::zbus::Result<()>;
 
     /// [📖](https://www.freedesktop.org/software/systemd/man/systemd.directives.html#SetX11Keyboard()) Call interface method `SetX11Keyboard`.
     #[dbus_proxy(name = "SetX11Keyboard")]
@@ -34,33 +34,33 @@ trait Localed {
         options: String,
         convert: bool,
         interactive: bool,
-    ) -> zbus::Result<()>;
+    ) -> crate::zbus::Result<()>;
 
     /// Get property `Locale`.
     #[dbus_proxy(property, name = "Locale")]
-    fn locale(&self) -> zbus::Result<Vec<String>>;
+    fn locale(&self) -> crate::zbus::Result<Vec<String>>;
 
     /// Get property `X11Layout`.
     #[dbus_proxy(property, name = "X11Layout")]
-    fn x11_layout(&self) -> zbus::Result<String>;
+    fn x11_layout(&self) -> crate::zbus::Result<String>;
 
     /// Get property `X11Model`.
     #[dbus_proxy(property, name = "X11Model")]
-    fn x11_model(&self) -> zbus::Result<String>;
+    fn x11_model(&self) -> crate::zbus::Result<String>;
 
     /// Get property `X11Variant`.
     #[dbus_proxy(property, name = "X11Variant")]
-    fn x11_variant(&self) -> zbus::Result<String>;
+    fn x11_variant(&self) -> crate::zbus::Result<String>;
 
     /// Get property `X11Options`.
     #[dbus_proxy(property, name = "X11Options")]
-    fn x11_options(&self) -> zbus::Result<String>;
+    fn x11_options(&self) -> crate::zbus::Result<String>;
 
     /// Get property `VConsoleKeymap`.
     #[dbus_proxy(property, name = "VConsoleKeymap")]
-    fn v_console_keymap(&self) -> zbus::Result<String>;
+    fn v_console_keymap(&self) -> crate::zbus::Result<String>;
 
     /// Get property `VConsoleKeymapToggle`.
     #[dbus_proxy(property, name = "VConsoleKeymapToggle")]
-    fn v_console_keymap_toggle(&self) -> zbus::Result<String>;
+    fn v_console_keymap_toggle(&self) -> crate::zbus::Result<String>;
 }

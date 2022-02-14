@@ -10,33 +10,81 @@ use zbus::dbus_proxy;
     default_path = "/org/freedesktop/resolve1"
 )]
 trait Manager {
+    /// [📖](https://www.freedesktop.org/software/systemd/man/systemd.directives.html#ResolveHostname()) Call interface method `ResolveHostname`.
+    #[dbus_proxy(name = "ResolveHostname")]
+    fn resolve_hostname(
+        &self,
+        ifindex: i32,
+        name: String,
+        family: i32,
+        flags: u64,
+    ) -> crate::zbus::Result<(Vec<(i32, i32, Vec<u8>)>, String, u64)>;
+
+    /// [📖](https://www.freedesktop.org/software/systemd/man/systemd.directives.html#ResolveAddress()) Call interface method `ResolveAddress`.
+    #[dbus_proxy(name = "ResolveAddress")]
+    fn resolve_address(
+        &self,
+        ifindex: i32,
+        family: i32,
+        address: Vec<u8>,
+        flags: u64,
+    ) -> crate::zbus::Result<(Vec<(i32, String)>, u64)>;
+
+    /// [📖](https://www.freedesktop.org/software/systemd/man/systemd.directives.html#ResolveRecord()) Call interface method `ResolveRecord`.
+    #[dbus_proxy(name = "ResolveRecord")]
+    fn resolve_record(
+        &self,
+        ifindex: i32,
+        name: String,
+        class: u16,
+        typelabel: u16,
+        flags: u64,
+    ) -> crate::zbus::Result<(Vec<(i32, u16, u16, Vec<u8>)>, u64)>;
+
     /// [📖](https://www.freedesktop.org/software/systemd/man/systemd.directives.html#GetLink()) Call interface method `GetLink`.
     #[dbus_proxy(name = "GetLink")]
-    fn get_link(&self, ifindex: i32) -> zbus::Result<zbus::zvariant::OwnedObjectPath>;
+    fn get_link(&self, ifindex: i32) -> crate::zbus::Result<crate::zvariant::OwnedObjectPath>;
+
+    /// [📖](https://www.freedesktop.org/software/systemd/man/systemd.directives.html#SetLinkDNS()) Call interface method `SetLinkDNS`.
+    #[dbus_proxy(name = "SetLinkDNS")]
+    fn set_link_dns(&self, ifindex: i32, addresses: Vec<(i32, Vec<u8>)>)
+        -> crate::zbus::Result<()>;
+
+    /// [📖](https://www.freedesktop.org/software/systemd/man/systemd.directives.html#SetLinkDNSEx()) Call interface method `SetLinkDNSEx`.
+    #[dbus_proxy(name = "SetLinkDNSEx")]
+    fn set_link_dns_ex(
+        &self,
+        ifindex: i32,
+        addresses: Vec<(i32, Vec<u8>, u16, String)>,
+    ) -> crate::zbus::Result<()>;
 
     /// [📖](https://www.freedesktop.org/software/systemd/man/systemd.directives.html#SetLinkDomains()) Call interface method `SetLinkDomains`.
     #[dbus_proxy(name = "SetLinkDomains")]
-    fn set_link_domains(&self, ifindex: i32, domains: Vec<(String, bool)>) -> zbus::Result<()>;
+    fn set_link_domains(
+        &self,
+        ifindex: i32,
+        domains: Vec<(String, bool)>,
+    ) -> crate::zbus::Result<()>;
 
     /// [📖](https://www.freedesktop.org/software/systemd/man/systemd.directives.html#SetLinkDefaultRoute()) Call interface method `SetLinkDefaultRoute`.
     #[dbus_proxy(name = "SetLinkDefaultRoute")]
-    fn set_link_default_route(&self, ifindex: i32, enable: bool) -> zbus::Result<()>;
+    fn set_link_default_route(&self, ifindex: i32, enable: bool) -> crate::zbus::Result<()>;
 
     /// [📖](https://www.freedesktop.org/software/systemd/man/systemd.directives.html#SetLinkLLMNR()) Call interface method `SetLinkLLMNR`.
     #[dbus_proxy(name = "SetLinkLLMNR")]
-    fn set_link_llmnr(&self, ifindex: i32, mode: String) -> zbus::Result<()>;
+    fn set_link_llmnr(&self, ifindex: i32, mode: String) -> crate::zbus::Result<()>;
 
     /// [📖](https://www.freedesktop.org/software/systemd/man/systemd.directives.html#SetLinkMulticastDNS()) Call interface method `SetLinkMulticastDNS`.
     #[dbus_proxy(name = "SetLinkMulticastDNS")]
-    fn set_link_multicast_dns(&self, ifindex: i32, mode: String) -> zbus::Result<()>;
+    fn set_link_multicast_dns(&self, ifindex: i32, mode: String) -> crate::zbus::Result<()>;
 
     /// [📖](https://www.freedesktop.org/software/systemd/man/systemd.directives.html#SetLinkDNSOverTLS()) Call interface method `SetLinkDNSOverTLS`.
     #[dbus_proxy(name = "SetLinkDNSOverTLS")]
-    fn set_link_dns_over_tls(&self, ifindex: i32, mode: String) -> zbus::Result<()>;
+    fn set_link_dns_over_tls(&self, ifindex: i32, mode: String) -> crate::zbus::Result<()>;
 
     /// [📖](https://www.freedesktop.org/software/systemd/man/systemd.directives.html#SetLinkDNSSEC()) Call interface method `SetLinkDNSSEC`.
     #[dbus_proxy(name = "SetLinkDNSSEC")]
-    fn set_link_dnssec(&self, ifindex: i32, mode: String) -> zbus::Result<()>;
+    fn set_link_dnssec(&self, ifindex: i32, mode: String) -> crate::zbus::Result<()>;
 
     /// [📖](https://www.freedesktop.org/software/systemd/man/systemd.directives.html#SetLinkDNSSECNegativeTrustAnchors()) Call interface method `SetLinkDNSSECNegativeTrustAnchors`.
     #[dbus_proxy(name = "SetLinkDNSSECNegativeTrustAnchors")]
@@ -44,64 +92,106 @@ trait Manager {
         &self,
         ifindex: i32,
         names: Vec<String>,
-    ) -> zbus::Result<()>;
+    ) -> crate::zbus::Result<()>;
 
     /// [📖](https://www.freedesktop.org/software/systemd/man/systemd.directives.html#RevertLink()) Call interface method `RevertLink`.
     #[dbus_proxy(name = "RevertLink")]
-    fn revert_link(&self, ifindex: i32) -> zbus::Result<()>;
+    fn revert_link(&self, ifindex: i32) -> crate::zbus::Result<()>;
 
     /// [📖](https://www.freedesktop.org/software/systemd/man/systemd.directives.html#UnregisterService()) Call interface method `UnregisterService`.
     #[dbus_proxy(name = "UnregisterService")]
-    fn unregister_service(&self, service_path: zbus::zvariant::OwnedObjectPath)
-        -> zbus::Result<()>;
+    fn unregister_service(
+        &self,
+        service_path: crate::zvariant::OwnedObjectPath,
+    ) -> crate::zbus::Result<()>;
 
     /// [📖](https://www.freedesktop.org/software/systemd/man/systemd.directives.html#ResetStatistics()) Call interface method `ResetStatistics`.
     #[dbus_proxy(name = "ResetStatistics")]
-    fn reset_statistics(&self) -> zbus::Result<()>;
+    fn reset_statistics(&self) -> crate::zbus::Result<()>;
 
     /// [📖](https://www.freedesktop.org/software/systemd/man/systemd.directives.html#FlushCaches()) Call interface method `FlushCaches`.
     #[dbus_proxy(name = "FlushCaches")]
-    fn flush_caches(&self) -> zbus::Result<()>;
+    fn flush_caches(&self) -> crate::zbus::Result<()>;
 
     /// [📖](https://www.freedesktop.org/software/systemd/man/systemd.directives.html#ResetServerFeatures()) Call interface method `ResetServerFeatures`.
     #[dbus_proxy(name = "ResetServerFeatures")]
-    fn reset_server_features(&self) -> zbus::Result<()>;
+    fn reset_server_features(&self) -> crate::zbus::Result<()>;
 
     /// Get property `LLMNRHostname`.
     #[dbus_proxy(property, name = "LLMNRHostname")]
-    fn llmnr_hostname(&self) -> zbus::Result<String>;
+    fn llmnr_hostname(&self) -> crate::zbus::Result<String>;
 
     /// Get property `LLMNR`.
     #[dbus_proxy(property, name = "LLMNR")]
-    fn llmnr(&self) -> zbus::Result<String>;
+    fn llmnr(&self) -> crate::zbus::Result<String>;
 
     /// Get property `MulticastDNS`.
     #[dbus_proxy(property, name = "MulticastDNS")]
-    fn multicast_dns(&self) -> zbus::Result<String>;
+    fn multicast_dns(&self) -> crate::zbus::Result<String>;
 
     /// Get property `DNSOverTLS`.
     #[dbus_proxy(property, name = "DNSOverTLS")]
-    fn dns_over_tls(&self) -> zbus::Result<String>;
+    fn dns_over_tls(&self) -> crate::zbus::Result<String>;
+
+    /// Get property `DNS`.
+    #[dbus_proxy(property, name = "DNS")]
+    fn dns(&self) -> crate::zbus::Result<Vec<(i32, i32, Vec<u8>)>>;
+
+    /// Get property `DNSEx`.
+    #[dbus_proxy(property, name = "DNSEx")]
+    fn dns_ex(&self) -> crate::zbus::Result<Vec<(i32, i32, Vec<u8>, u16, String)>>;
+
+    /// Get property `FallbackDNS`.
+    #[dbus_proxy(property, name = "FallbackDNS")]
+    fn fallback_dns(&self) -> crate::zbus::Result<Vec<(i32, i32, Vec<u8>)>>;
+
+    /// Get property `FallbackDNSEx`.
+    #[dbus_proxy(property, name = "FallbackDNSEx")]
+    fn fallback_dns_ex(&self) -> crate::zbus::Result<Vec<(i32, i32, Vec<u8>, u16, String)>>;
+
+    /// Get property `CurrentDNSServer`.
+    #[dbus_proxy(property, name = "CurrentDNSServer")]
+    fn current_dns_server(&self) -> crate::zbus::Result<(i32, i32, Vec<u8>)>;
+
+    /// Get property `CurrentDNSServerEx`.
+    #[dbus_proxy(property, name = "CurrentDNSServerEx")]
+    fn current_dns_server_ex(&self) -> crate::zbus::Result<(i32, i32, Vec<u8>, u16, String)>;
+
+    /// Get property `Domains`.
+    #[dbus_proxy(property, name = "Domains")]
+    fn domains(&self) -> crate::zbus::Result<Vec<(i32, String, bool)>>;
+
+    /// Get property `TransactionStatistics`.
+    #[dbus_proxy(property, name = "TransactionStatistics")]
+    fn transaction_statistics(&self) -> crate::zbus::Result<(u64, u64)>;
+
+    /// Get property `CacheStatistics`.
+    #[dbus_proxy(property, name = "CacheStatistics")]
+    fn cache_statistics(&self) -> crate::zbus::Result<(u64, u64, u64)>;
 
     /// Get property `DNSSEC`.
     #[dbus_proxy(property, name = "DNSSEC")]
-    fn dnssec(&self) -> zbus::Result<String>;
+    fn dnssec(&self) -> crate::zbus::Result<String>;
+
+    /// Get property `DNSSECStatistics`.
+    #[dbus_proxy(property, name = "DNSSECStatistics")]
+    fn dnssec_statistics(&self) -> crate::zbus::Result<(u64, u64, u64, u64)>;
 
     /// Get property `DNSSECSupported`.
     #[dbus_proxy(property, name = "DNSSECSupported")]
-    fn dnssec_supported(&self) -> zbus::Result<bool>;
+    fn dnssec_supported(&self) -> crate::zbus::Result<bool>;
 
     /// Get property `DNSSECNegativeTrustAnchors`.
     #[dbus_proxy(property, name = "DNSSECNegativeTrustAnchors")]
-    fn dnssec_negative_trust_anchors(&self) -> zbus::Result<Vec<String>>;
+    fn dnssec_negative_trust_anchors(&self) -> crate::zbus::Result<Vec<String>>;
 
     /// Get property `DNSStubListener`.
     #[dbus_proxy(property, name = "DNSStubListener")]
-    fn dns_stub_listener(&self) -> zbus::Result<String>;
+    fn dns_stub_listener(&self) -> crate::zbus::Result<String>;
 
     /// Get property `ResolvConfMode`.
     #[dbus_proxy(property, name = "ResolvConfMode")]
-    fn resolv_conf_mode(&self) -> zbus::Result<String>;
+    fn resolv_conf_mode(&self) -> crate::zbus::Result<String>;
 }
 
 /// Proxy object for `org.freedesktop.resolve1.Link`.
@@ -111,71 +201,95 @@ trait Manager {
     default_service = "org.freedesktop.resolve1"
 )]
 trait Link {
+    /// [📖](https://www.freedesktop.org/software/systemd/man/systemd.directives.html#SetDNS()) Call interface method `SetDNS`.
+    #[dbus_proxy(name = "SetDNS")]
+    fn set_dns(&self, addresses: Vec<(i32, Vec<u8>)>) -> crate::zbus::Result<()>;
+
+    /// [📖](https://www.freedesktop.org/software/systemd/man/systemd.directives.html#SetDNSEx()) Call interface method `SetDNSEx`.
+    #[dbus_proxy(name = "SetDNSEx")]
+    fn set_dns_ex(&self, addresses: Vec<(i32, Vec<u8>, u16, String)>) -> crate::zbus::Result<()>;
+
     /// [📖](https://www.freedesktop.org/software/systemd/man/systemd.directives.html#SetDomains()) Call interface method `SetDomains`.
     #[dbus_proxy(name = "SetDomains")]
-    fn set_domains(&self, domains: Vec<(String, bool)>) -> zbus::Result<()>;
+    fn set_domains(&self, domains: Vec<(String, bool)>) -> crate::zbus::Result<()>;
 
     /// [📖](https://www.freedesktop.org/software/systemd/man/systemd.directives.html#SetDefaultRoute()) Call interface method `SetDefaultRoute`.
     #[dbus_proxy(name = "SetDefaultRoute")]
-    fn set_default_route(&self, enable: bool) -> zbus::Result<()>;
+    fn set_default_route(&self, enable: bool) -> crate::zbus::Result<()>;
 
     /// [📖](https://www.freedesktop.org/software/systemd/man/systemd.directives.html#SetLLMNR()) Call interface method `SetLLMNR`.
     #[dbus_proxy(name = "SetLLMNR")]
-    fn set_llmnr(&self, mode: String) -> zbus::Result<()>;
+    fn set_llmnr(&self, mode: String) -> crate::zbus::Result<()>;
 
     /// [📖](https://www.freedesktop.org/software/systemd/man/systemd.directives.html#SetMulticastDNS()) Call interface method `SetMulticastDNS`.
     #[dbus_proxy(name = "SetMulticastDNS")]
-    fn set_multicast_dns(&self, mode: String) -> zbus::Result<()>;
+    fn set_multicast_dns(&self, mode: String) -> crate::zbus::Result<()>;
 
     /// [📖](https://www.freedesktop.org/software/systemd/man/systemd.directives.html#SetDNSOverTLS()) Call interface method `SetDNSOverTLS`.
     #[dbus_proxy(name = "SetDNSOverTLS")]
-    fn set_dns_over_tls(&self, mode: String) -> zbus::Result<()>;
+    fn set_dns_over_tls(&self, mode: String) -> crate::zbus::Result<()>;
 
     /// [📖](https://www.freedesktop.org/software/systemd/man/systemd.directives.html#SetDNSSEC()) Call interface method `SetDNSSEC`.
     #[dbus_proxy(name = "SetDNSSEC")]
-    fn set_dnssec(&self, mode: String) -> zbus::Result<()>;
+    fn set_dnssec(&self, mode: String) -> crate::zbus::Result<()>;
 
     /// [📖](https://www.freedesktop.org/software/systemd/man/systemd.directives.html#SetDNSSECNegativeTrustAnchors()) Call interface method `SetDNSSECNegativeTrustAnchors`.
     #[dbus_proxy(name = "SetDNSSECNegativeTrustAnchors")]
-    fn set_dnssec_negative_trust_anchors(&self, names: Vec<String>) -> zbus::Result<()>;
+    fn set_dnssec_negative_trust_anchors(&self, names: Vec<String>) -> crate::zbus::Result<()>;
 
     /// [📖](https://www.freedesktop.org/software/systemd/man/systemd.directives.html#Revert()) Call interface method `Revert`.
     #[dbus_proxy(name = "Revert")]
-    fn revert(&self) -> zbus::Result<()>;
+    fn revert(&self) -> crate::zbus::Result<()>;
 
     /// Get property `ScopesMask`.
     #[dbus_proxy(property, name = "ScopesMask")]
-    fn scopes_mask(&self) -> zbus::Result<u64>;
+    fn scopes_mask(&self) -> crate::zbus::Result<u64>;
+
+    /// Get property `DNS`.
+    #[dbus_proxy(property, name = "DNS")]
+    fn dns(&self) -> crate::zbus::Result<Vec<(i32, Vec<u8>)>>;
+
+    /// Get property `DNSEx`.
+    #[dbus_proxy(property, name = "DNSEx")]
+    fn dns_ex(&self) -> crate::zbus::Result<Vec<(i32, Vec<u8>, u16, String)>>;
+
+    /// Get property `CurrentDNSServer`.
+    #[dbus_proxy(property, name = "CurrentDNSServer")]
+    fn current_dns_server(&self) -> crate::zbus::Result<(i32, Vec<u8>)>;
+
+    /// Get property `CurrentDNSServerEx`.
+    #[dbus_proxy(property, name = "CurrentDNSServerEx")]
+    fn current_dns_server_ex(&self) -> crate::zbus::Result<(i32, Vec<u8>, u16, String)>;
 
     /// Get property `Domains`.
     #[dbus_proxy(property, name = "Domains")]
-    fn domains(&self) -> zbus::Result<Vec<(String, bool)>>;
+    fn domains(&self) -> crate::zbus::Result<Vec<(String, bool)>>;
 
     /// Get property `DefaultRoute`.
     #[dbus_proxy(property, name = "DefaultRoute")]
-    fn default_route(&self) -> zbus::Result<bool>;
+    fn default_route(&self) -> crate::zbus::Result<bool>;
 
     /// Get property `LLMNR`.
     #[dbus_proxy(property, name = "LLMNR")]
-    fn llmnr(&self) -> zbus::Result<String>;
+    fn llmnr(&self) -> crate::zbus::Result<String>;
 
     /// Get property `MulticastDNS`.
     #[dbus_proxy(property, name = "MulticastDNS")]
-    fn multicast_dns(&self) -> zbus::Result<String>;
+    fn multicast_dns(&self) -> crate::zbus::Result<String>;
 
     /// Get property `DNSOverTLS`.
     #[dbus_proxy(property, name = "DNSOverTLS")]
-    fn dns_over_tls(&self) -> zbus::Result<String>;
+    fn dns_over_tls(&self) -> crate::zbus::Result<String>;
 
     /// Get property `DNSSEC`.
     #[dbus_proxy(property, name = "DNSSEC")]
-    fn dnssec(&self) -> zbus::Result<String>;
+    fn dnssec(&self) -> crate::zbus::Result<String>;
 
     /// Get property `DNSSECNegativeTrustAnchors`.
     #[dbus_proxy(property, name = "DNSSECNegativeTrustAnchors")]
-    fn dnssec_negative_trust_anchors(&self) -> zbus::Result<Vec<String>>;
+    fn dnssec_negative_trust_anchors(&self) -> crate::zbus::Result<Vec<String>>;
 
     /// Get property `DNSSECSupported`.
     #[dbus_proxy(property, name = "DNSSECSupported")]
-    fn dnssec_supported(&self) -> zbus::Result<bool>;
+    fn dnssec_supported(&self) -> crate::zbus::Result<bool>;
 }
