@@ -1,0 +1,3 @@
+[submodule "codegen/systemd"]
+	path = codegen/systemd
+	url = https://github.com/systemd/systemd.git
