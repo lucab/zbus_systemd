@@ -92,6 +92,8 @@ todo_properties = [
     "RebootWatchdogUSec",
     "KExecWatchdogUSec",
     "ServiceWatchdogs",
+    "RuntimeWatchdogPreUSec",
+    "RuntimeWatchdogPreGovernor",
 ]
 [[service.systemd1.overrides]]
 interface = "org.freedesktop.systemd1.Service"

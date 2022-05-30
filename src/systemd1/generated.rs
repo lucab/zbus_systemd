@@ -1196,6 +1196,10 @@ trait Unit {
     #[dbus_proxy(property, name = "PartOf")]
     fn part_of(&self) -> crate::zbus::Result<Vec<String>>;
 
+    /// Get property `Upholds`.
+    #[dbus_proxy(property, name = "Upholds")]
+    fn upholds(&self) -> crate::zbus::Result<Vec<String>>;
+
     /// Get property `RequiredBy`.
     #[dbus_proxy(property, name = "RequiredBy")]
     fn required_by(&self) -> crate::zbus::Result<Vec<String>>;
@@ -1211,6 +1215,10 @@ trait Unit {
     /// Get property `BoundBy`.
     #[dbus_proxy(property, name = "BoundBy")]
     fn bound_by(&self) -> crate::zbus::Result<Vec<String>>;
+
+    /// Get property `UpheldBy`.
+    #[dbus_proxy(property, name = "UpheldBy")]
+    fn upheld_by(&self) -> crate::zbus::Result<Vec<String>>;
 
     /// Get property `ConsistsOf`.
     #[dbus_proxy(property, name = "ConsistsOf")]
@@ -1232,14 +1240,6 @@ trait Unit {
     #[dbus_proxy(property, name = "After")]
     fn after(&self) -> crate::zbus::Result<Vec<String>>;
 
-    /// Get property `OnFailure`.
-    #[dbus_proxy(property, name = "OnFailure")]
-    fn on_failure(&self) -> crate::zbus::Result<Vec<String>>;
-
-    /// Get property `OnFailureOf`.
-    #[dbus_proxy(property, name = "OnFailureOf")]
-    fn on_failure_of(&self) -> crate::zbus::Result<Vec<String>>;
-
     /// Get property `OnSuccess`.
     #[dbus_proxy(property, name = "OnSuccess")]
     fn on_success(&self) -> crate::zbus::Result<Vec<String>>;
@@ -1247,6 +1247,14 @@ trait Unit {
     /// Get property `OnSuccessOf`.
     #[dbus_proxy(property, name = "OnSuccessOf")]
     fn on_success_of(&self) -> crate::zbus::Result<Vec<String>>;
+
+    /// Get property `OnFailure`.
+    #[dbus_proxy(property, name = "OnFailure")]
+    fn on_failure(&self) -> crate::zbus::Result<Vec<String>>;
+
+    /// Get property `OnFailureOf`.
+    #[dbus_proxy(property, name = "OnFailureOf")]
+    fn on_failure_of(&self) -> crate::zbus::Result<Vec<String>>;
 
     /// Get property `Triggers`.
     #[dbus_proxy(property, name = "Triggers")]
@@ -1936,6 +1944,10 @@ trait Service {
     #[dbus_proxy(property, name = "ControlGroup")]
     fn control_group(&self) -> crate::zbus::Result<String>;
 
+    /// Get property `ControlGroupId`.
+    #[dbus_proxy(property, name = "ControlGroupId")]
+    fn control_group_id(&self) -> crate::zbus::Result<u64>;
+
     /// Get property `MemoryCurrent`.
     #[dbus_proxy(property, name = "MemoryCurrent")]
     fn memory_current(&self) -> crate::zbus::Result<u64>;
@@ -2395,6 +2407,10 @@ trait Service {
     /// Get property `RootVerity`.
     #[dbus_proxy(property, name = "RootVerity")]
     fn root_verity(&self) -> crate::zbus::Result<String>;
+
+    /// Get property `ExtensionDirectories`.
+    #[dbus_proxy(property, name = "ExtensionDirectories")]
+    fn extension_directories(&self) -> crate::zbus::Result<Vec<String>>;
 
     /// Get property `OOMScoreAdjust`.
     #[dbus_proxy(property, name = "OOMScoreAdjust")]
@@ -3148,6 +3164,10 @@ trait Socket {
     #[dbus_proxy(property, name = "ControlGroup")]
     fn control_group(&self) -> crate::zbus::Result<String>;
 
+    /// Get property `ControlGroupId`.
+    #[dbus_proxy(property, name = "ControlGroupId")]
+    fn control_group_id(&self) -> crate::zbus::Result<u64>;
+
     /// Get property `MemoryCurrent`.
     #[dbus_proxy(property, name = "MemoryCurrent")]
     fn memory_current(&self) -> crate::zbus::Result<u64>;
@@ -3607,6 +3627,10 @@ trait Socket {
     /// Get property `RootVerity`.
     #[dbus_proxy(property, name = "RootVerity")]
     fn root_verity(&self) -> crate::zbus::Result<String>;
+
+    /// Get property `ExtensionDirectories`.
+    #[dbus_proxy(property, name = "ExtensionDirectories")]
+    fn extension_directories(&self) -> crate::zbus::Result<Vec<String>>;
 
     /// Get property `OOMScoreAdjust`.
     #[dbus_proxy(property, name = "OOMScoreAdjust")]
@@ -4206,6 +4230,10 @@ trait Mount {
     #[dbus_proxy(property, name = "ControlGroup")]
     fn control_group(&self) -> crate::zbus::Result<String>;
 
+    /// Get property `ControlGroupId`.
+    #[dbus_proxy(property, name = "ControlGroupId")]
+    fn control_group_id(&self) -> crate::zbus::Result<u64>;
+
     /// Get property `MemoryCurrent`.
     #[dbus_proxy(property, name = "MemoryCurrent")]
     fn memory_current(&self) -> crate::zbus::Result<u64>;
@@ -4665,6 +4693,10 @@ trait Mount {
     /// Get property `RootVerity`.
     #[dbus_proxy(property, name = "RootVerity")]
     fn root_verity(&self) -> crate::zbus::Result<String>;
+
+    /// Get property `ExtensionDirectories`.
+    #[dbus_proxy(property, name = "ExtensionDirectories")]
+    fn extension_directories(&self) -> crate::zbus::Result<Vec<String>>;
 
     /// Get property `OOMScoreAdjust`.
     #[dbus_proxy(property, name = "OOMScoreAdjust")]
@@ -5318,6 +5350,10 @@ trait Swap {
     #[dbus_proxy(property, name = "ControlGroup")]
     fn control_group(&self) -> crate::zbus::Result<String>;
 
+    /// Get property `ControlGroupId`.
+    #[dbus_proxy(property, name = "ControlGroupId")]
+    fn control_group_id(&self) -> crate::zbus::Result<u64>;
+
     /// Get property `MemoryCurrent`.
     #[dbus_proxy(property, name = "MemoryCurrent")]
     fn memory_current(&self) -> crate::zbus::Result<u64>;
@@ -5777,6 +5813,10 @@ trait Swap {
     /// Get property `RootVerity`.
     #[dbus_proxy(property, name = "RootVerity")]
     fn root_verity(&self) -> crate::zbus::Result<String>;
+
+    /// Get property `ExtensionDirectories`.
+    #[dbus_proxy(property, name = "ExtensionDirectories")]
+    fn extension_directories(&self) -> crate::zbus::Result<Vec<String>>;
 
     /// Get property `OOMScoreAdjust`.
     #[dbus_proxy(property, name = "OOMScoreAdjust")]
@@ -6326,6 +6366,10 @@ trait Slice {
     #[dbus_proxy(property, name = "ControlGroup")]
     fn control_group(&self) -> crate::zbus::Result<String>;
 
+    /// Get property `ControlGroupId`.
+    #[dbus_proxy(property, name = "ControlGroupId")]
+    fn control_group_id(&self) -> crate::zbus::Result<u64>;
+
     /// Get property `MemoryCurrent`.
     #[dbus_proxy(property, name = "MemoryCurrent")]
     fn memory_current(&self) -> crate::zbus::Result<u64>;
@@ -6653,6 +6697,10 @@ trait Scope {
     /// Get property `ControlGroup`.
     #[dbus_proxy(property, name = "ControlGroup")]
     fn control_group(&self) -> crate::zbus::Result<String>;
+
+    /// Get property `ControlGroupId`.
+    #[dbus_proxy(property, name = "ControlGroupId")]
+    fn control_group_id(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `MemoryCurrent`.
     #[dbus_proxy(property, name = "MemoryCurrent")]

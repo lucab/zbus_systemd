@@ -431,13 +431,33 @@ trait Manager {
     #[dbus_proxy(property, name = "HandlePowerKey")]
     fn handle_power_key(&self) -> crate::zbus::Result<String>;
 
+    /// Get property `HandlePowerKeyLongPress`.
+    #[dbus_proxy(property, name = "HandlePowerKeyLongPress")]
+    fn handle_power_key_long_press(&self) -> crate::zbus::Result<String>;
+
+    /// Get property `HandleRebootKey`.
+    #[dbus_proxy(property, name = "HandleRebootKey")]
+    fn handle_reboot_key(&self) -> crate::zbus::Result<String>;
+
+    /// Get property `HandleRebootKeyLongPress`.
+    #[dbus_proxy(property, name = "HandleRebootKeyLongPress")]
+    fn handle_reboot_key_long_press(&self) -> crate::zbus::Result<String>;
+
     /// Get property `HandleSuspendKey`.
     #[dbus_proxy(property, name = "HandleSuspendKey")]
     fn handle_suspend_key(&self) -> crate::zbus::Result<String>;
 
+    /// Get property `HandleSuspendKeyLongPress`.
+    #[dbus_proxy(property, name = "HandleSuspendKeyLongPress")]
+    fn handle_suspend_key_long_press(&self) -> crate::zbus::Result<String>;
+
     /// Get property `HandleHibernateKey`.
     #[dbus_proxy(property, name = "HandleHibernateKey")]
     fn handle_hibernate_key(&self) -> crate::zbus::Result<String>;
+
+    /// Get property `HandleHibernateKeyLongPress`.
+    #[dbus_proxy(property, name = "HandleHibernateKeyLongPress")]
+    fn handle_hibernate_key_long_press(&self) -> crate::zbus::Result<String>;
 
     /// Get property `HandleLidSwitch`.
     #[dbus_proxy(property, name = "HandleLidSwitch")]
