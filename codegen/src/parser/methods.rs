@@ -12,16 +12,17 @@ pub(crate) fn parse_interface_methods(input: &str) -> nom::IResult<&str, Vec<dat
     // Ensure this is a 'methods' section.
     let (rest, _) = delimited(multispace0, tag("methods:"), multispace0)(input)?;
 
-    // Split each method apart.
-    let (rest, out) = separated_list1(tag(";"), take_till(|b| b == ';'))(rest)?;
+    // Split method blocks apart.
+    let (rest, blocks) = separated_list1(tag(";"), take_till(|b| b == ';'))(rest)?;
     eof(rest)?;
 
     let mut methods = vec![];
-    for line in out {
-        let trimmed = line.trim();
+    for entry in blocks {
+        let trimmed = entry.trim();
         if trimmed.is_empty() {
             continue;
         }
+
         let (empty, m) = parse_single_method(trimmed)?;
         eof(empty)?;
 
@@ -32,7 +33,17 @@ pub(crate) fn parse_interface_methods(input: &str) -> nom::IResult<&str, Vec<dat
 }
 
 // Parse a single method.
-fn parse_single_method(rest: &str) -> nom::IResult<&str, data::Method> {
+fn parse_single_method(input: &str) -> nom::IResult<&str, data::Method> {
+    let mut rest = input;
+
+    // Handle annotations.
+    let mut annotations = vec![];
+    while rest.starts_with('@') {
+        let (next, annotation) = take_while(|b| b != '\n')(rest)?;
+        annotations.push(annotation);
+        rest = next.trim();
+    }
+
     // Extract method name.
     let (rest, method_name) = take_while(|b| b != '(')(rest)?;
 

@@ -13,7 +13,7 @@ pub(crate) fn translate_sig(sig: &str) -> Result<String> {
         bail!("Trailing unparsed leftover '{}'", rest);
     }
 
-	Ok(out)
+    Ok(out)
 }
 
 pub(crate) fn translate_void(sig: &str) -> Result<(String, &str)> {
