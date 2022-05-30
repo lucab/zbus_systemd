@@ -42,6 +42,10 @@ trait Hostnamed {
     #[dbus_proxy(name = "GetProductUUID")]
     fn get_product_uuid(&self, interactive: bool) -> crate::zbus::Result<Vec<u8>>;
 
+    /// [📖](https://www.freedesktop.org/software/systemd/man/systemd.directives.html#GetHardwareSerial()) Call interface method `GetHardwareSerial`.
+    #[dbus_proxy(name = "GetHardwareSerial")]
+    fn get_hardware_serial(&self) -> crate::zbus::Result<String>;
+
     /// [📖](https://www.freedesktop.org/software/systemd/man/systemd.directives.html#Describe()) Call interface method `Describe`.
     #[dbus_proxy(name = "Describe")]
     fn describe(&self) -> crate::zbus::Result<String>;
@@ -113,4 +117,8 @@ trait Hostnamed {
     /// Get property `HardwareModel`.
     #[dbus_proxy(property, name = "HardwareModel")]
     fn hardware_model(&self) -> crate::zbus::Result<String>;
+
+    /// Get property `FirmwareVersion`.
+    #[dbus_proxy(property, name = "FirmwareVersion")]
+    fn firmware_version(&self) -> crate::zbus::Result<String>;
 }

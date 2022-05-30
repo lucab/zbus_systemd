@@ -35,6 +35,15 @@ trait Manager {
     #[dbus_proxy(name = "GetImageState")]
     fn get_image_state(&self, image: String) -> crate::zbus::Result<String>;
 
+    /// [📖](https://www.freedesktop.org/software/systemd/man/systemd.directives.html#GetImageStateWithExtensions()) Call interface method `GetImageStateWithExtensions`.
+    #[dbus_proxy(name = "GetImageStateWithExtensions")]
+    fn get_image_state_with_extensions(
+        &self,
+        image: String,
+        extensions: Vec<String>,
+        flags: u64,
+    ) -> crate::zbus::Result<String>;
+
     /// [📖](https://www.freedesktop.org/software/systemd/man/systemd.directives.html#AttachImage()) Call interface method `AttachImage`.
     #[dbus_proxy(name = "AttachImage")]
     fn attach_image(
@@ -142,6 +151,14 @@ trait Image {
     /// [📖](https://www.freedesktop.org/software/systemd/man/systemd.directives.html#GetState()) Call interface method `GetState`.
     #[dbus_proxy(name = "GetState")]
     fn get_state(&self) -> crate::zbus::Result<String>;
+
+    /// [📖](https://www.freedesktop.org/software/systemd/man/systemd.directives.html#GetStateWithExtensions()) Call interface method `GetStateWithExtensions`.
+    #[dbus_proxy(name = "GetStateWithExtensions")]
+    fn get_state_with_extensions(
+        &self,
+        extensions: Vec<String>,
+        flags: u64,
+    ) -> crate::zbus::Result<String>;
 
     /// [📖](https://www.freedesktop.org/software/systemd/man/systemd.directives.html#Attach()) Call interface method `Attach`.
     #[dbus_proxy(name = "Attach")]
