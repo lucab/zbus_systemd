@@ -10,7 +10,7 @@ fn main() {
 }
 
 async fn run() -> ExResult<()> {
-    let conn = zbus_systemd::connect_system_dbus().await?;
+    let conn = zbus::Connection::system().await?;
     let timedated = zbus_systemd::timedate1::TimedatedProxy::new(&conn).await?;
     let timezones = timedated.list_timezones().await?;
     if timezones.len() > 0 {

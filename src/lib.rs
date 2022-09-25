@@ -51,8 +51,3 @@ pub mod systemd1;
 #[cfg_attr(docsrs, doc(cfg(feature = "timedate1")))]
 #[cfg(feature = "timedate1")]
 pub mod timedate1;
-
-/// Connect to the DBus system bus.
-pub async fn connect_system_dbus() -> zbus::Result<zbus::Connection> {
-    zbus::ConnectionBuilder::system()?.build().await
-}
