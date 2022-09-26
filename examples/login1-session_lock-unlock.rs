@@ -13,7 +13,7 @@ fn main() {
 
 async fn run() -> ExResult<()> {
     let session_id = "4";
-    let conn = zbus_systemd::connect_system_dbus().await?;
+    let conn = zbus::Connection::system().await?;
 
     let session_obj_path = {
         let manager = ManagerProxy::new(&conn).await?;

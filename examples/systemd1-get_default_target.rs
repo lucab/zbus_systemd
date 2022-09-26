@@ -10,7 +10,7 @@ fn main() {
 }
 
 async fn run() -> ExResult<()> {
-    let conn = zbus_systemd::connect_system_dbus().await?;
+    let conn = zbus::Connection::system().await?;
     let manager = zbus_systemd::systemd1::ManagerProxy::new(&conn).await?;
     let target = manager.get_default_target().await?;
     println!("Default target: '{}'", target);
