@@ -167,6 +167,26 @@ trait Manager {
         destination: String,
     ) -> crate::zbus::Result<()>;
 
+    /// [📖](https://www.freedesktop.org/software/systemd/man/systemd.directives.html#CopyFromMachineWithFlags()) Call interface method `CopyFromMachineWithFlags`.
+    #[dbus_proxy(name = "CopyFromMachineWithFlags")]
+    fn copy_from_machine_with_flags(
+        &self,
+        name: String,
+        source: String,
+        destination: String,
+        flags: u64,
+    ) -> crate::zbus::Result<()>;
+
+    /// [📖](https://www.freedesktop.org/software/systemd/man/systemd.directives.html#CopyToMachineWithFlags()) Call interface method `CopyToMachineWithFlags`.
+    #[dbus_proxy(name = "CopyToMachineWithFlags")]
+    fn copy_to_machine_with_flags(
+        &self,
+        name: String,
+        source: String,
+        destination: String,
+        flags: u64,
+    ) -> crate::zbus::Result<()>;
+
     /// [📖](https://www.freedesktop.org/software/systemd/man/systemd.directives.html#OpenMachineRootDirectory()) Call interface method `OpenMachineRootDirectory`.
     #[dbus_proxy(name = "OpenMachineRootDirectory")]
     fn open_machine_root_directory(
@@ -328,6 +348,24 @@ trait Machine {
     /// [📖](https://www.freedesktop.org/software/systemd/man/systemd.directives.html#CopyTo()) Call interface method `CopyTo`.
     #[dbus_proxy(name = "CopyTo")]
     fn copy_to(&self, source: String, destination: String) -> crate::zbus::Result<()>;
+
+    /// [📖](https://www.freedesktop.org/software/systemd/man/systemd.directives.html#CopyFromWithFlags()) Call interface method `CopyFromWithFlags`.
+    #[dbus_proxy(name = "CopyFromWithFlags")]
+    fn copy_from_with_flags(
+        &self,
+        source: String,
+        destination: String,
+        flags: u64,
+    ) -> crate::zbus::Result<()>;
+
+    /// [📖](https://www.freedesktop.org/software/systemd/man/systemd.directives.html#CopyToWithFlags()) Call interface method `CopyToWithFlags`.
+    #[dbus_proxy(name = "CopyToWithFlags")]
+    fn copy_to_with_flags(
+        &self,
+        source: String,
+        destination: String,
+        flags: u64,
+    ) -> crate::zbus::Result<()>;
 
     /// [📖](https://www.freedesktop.org/software/systemd/man/systemd.directives.html#OpenRootDirectory()) Call interface method `OpenRootDirectory`.
     #[dbus_proxy(name = "OpenRootDirectory")]

@@ -368,9 +368,20 @@ trait Manager {
     #[dbus_proxy(name = "Dump")]
     fn dump(&self) -> crate::zbus::Result<String>;
 
+    /// [📖](https://www.freedesktop.org/software/systemd/man/systemd.directives.html#DumpUnitsMatchingPatterns()) Call interface method `DumpUnitsMatchingPatterns`.
+    #[dbus_proxy(name = "DumpUnitsMatchingPatterns")]
+    fn dump_units_matching_patterns(&self, patterns: Vec<String>) -> crate::zbus::Result<String>;
+
     /// [📖](https://www.freedesktop.org/software/systemd/man/systemd.directives.html#DumpByFileDescriptor()) Call interface method `DumpByFileDescriptor`.
     #[dbus_proxy(name = "DumpByFileDescriptor")]
     fn dump_by_file_descriptor(&self) -> crate::zbus::Result<crate::zvariant::OwnedFd>;
+
+    /// [📖](https://www.freedesktop.org/software/systemd/man/systemd.directives.html#DumpUnitsMatchingPatternsByFileDescriptor()) Call interface method `DumpUnitsMatchingPatternsByFileDescriptor`.
+    #[dbus_proxy(name = "DumpUnitsMatchingPatternsByFileDescriptor")]
+    fn dump_units_matching_patterns_by_file_descriptor(
+        &self,
+        patterns: Vec<String>,
+    ) -> crate::zbus::Result<crate::zvariant::OwnedFd>;
 
     /// [📖](https://www.freedesktop.org/software/systemd/man/systemd.directives.html#Reload()) Call interface method `Reload`.
     #[dbus_proxy(name = "Reload")]
@@ -861,6 +872,18 @@ trait Manager {
     #[dbus_proxy(property, name = "DefaultStandardError")]
     fn default_standard_error(&self) -> crate::zbus::Result<String>;
 
+    /// Get property `WatchdogDevice`.
+    #[dbus_proxy(property, name = "WatchdogDevice")]
+    fn watchdog_device(&self) -> crate::zbus::Result<String>;
+
+    /// Get property `WatchdogLastPingTimestamp`.
+    #[dbus_proxy(property, name = "WatchdogLastPingTimestamp")]
+    fn watchdog_last_ping_timestamp(&self) -> crate::zbus::Result<u64>;
+
+    /// Get property `WatchdogLastPingTimestampMonotonic`.
+    #[dbus_proxy(property, name = "WatchdogLastPingTimestampMonotonic")]
+    fn watchdog_last_ping_timestamp_monotonic(&self) -> crate::zbus::Result<u64>;
+
     /// Get property `ControlGroup`.
     #[dbus_proxy(property, name = "ControlGroup")]
     fn control_group(&self) -> crate::zbus::Result<String>;
@@ -888,6 +911,10 @@ trait Manager {
     /// Get property `DefaultTimeoutAbortUSec`.
     #[dbus_proxy(property, name = "DefaultTimeoutAbortUSec")]
     fn default_timeout_abort_u_sec(&self) -> crate::zbus::Result<u64>;
+
+    /// Get property `DefaultDeviceTimeoutUSec`.
+    #[dbus_proxy(property, name = "DefaultDeviceTimeoutUSec")]
+    fn default_device_timeout_u_sec(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `DefaultRestartUSec`.
     #[dbus_proxy(property, name = "DefaultRestartUSec")]
@@ -1300,6 +1327,10 @@ trait Unit {
     #[dbus_proxy(property, name = "Description")]
     fn description(&self) -> crate::zbus::Result<String>;
 
+    /// Get property `AccessSELinuxContext`.
+    #[dbus_proxy(property, name = "AccessSELinuxContext")]
+    fn access_se_linux_context(&self) -> crate::zbus::Result<String>;
+
     /// Get property `LoadState`.
     #[dbus_proxy(property, name = "LoadState")]
     fn load_state(&self) -> crate::zbus::Result<String>;
@@ -1547,6 +1578,10 @@ trait Unit {
     /// Get property `Refs`.
     #[dbus_proxy(property, name = "Refs")]
     fn refs(&self) -> crate::zbus::Result<Vec<String>>;
+
+    /// Get property `ActivationDetails`.
+    #[dbus_proxy(property, name = "ActivationDetails")]
+    fn activation_details(&self) -> crate::zbus::Result<Vec<(String, String)>>;
 }
 
 /// Proxy object for `org.freedesktop.systemd1.Service`.
@@ -7063,4 +7098,8 @@ trait Job {
     /// Get property `State`.
     #[dbus_proxy(property, name = "State")]
     fn state(&self) -> crate::zbus::Result<String>;
+
+    /// Get property `ActivationDetails`.
+    #[dbus_proxy(property, name = "ActivationDetails")]
+    fn activation_details(&self) -> crate::zbus::Result<Vec<(String, String)>>;
 }

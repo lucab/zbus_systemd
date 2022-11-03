@@ -13,4 +13,8 @@ trait Manager {
     /// [📖](https://www.freedesktop.org/software/systemd/man/systemd.directives.html#DumpByFileDescriptor()) Call interface method `DumpByFileDescriptor`.
     #[dbus_proxy(name = "DumpByFileDescriptor")]
     fn dump_by_file_descriptor(&self) -> crate::zbus::Result<crate::zvariant::OwnedFd>;
+
+    /// Receive `Killed` signal.
+    #[dbus_proxy(signal, name = "Killed")]
+    fn killed(&self, cgroup: String, reason: String) -> crate::zbus::Result<()>;
 }
