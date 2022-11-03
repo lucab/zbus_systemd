@@ -534,6 +534,10 @@ trait Manager {
     /// Get property `NCurrentSessions`.
     #[dbus_proxy(property, name = "NCurrentSessions")]
     fn n_current_sessions(&self) -> crate::zbus::Result<u64>;
+
+    /// Get property `StopIdleSessionUSec`.
+    #[dbus_proxy(property, name = "StopIdleSessionUSec")]
+    fn stop_idle_session_u_sec(&self) -> crate::zbus::Result<u64>;
 }
 
 /// Proxy object for `org.freedesktop.login1.Seat`.
@@ -718,6 +722,10 @@ trait Session {
     /// [📖](https://www.freedesktop.org/software/systemd/man/systemd.directives.html#SetType()) Call interface method `SetType`.
     #[dbus_proxy(name = "SetType")]
     fn set_type(&self, typelabel: String) -> crate::zbus::Result<()>;
+
+    /// [📖](https://www.freedesktop.org/software/systemd/man/systemd.directives.html#SetDisplay()) Call interface method `SetDisplay`.
+    #[dbus_proxy(name = "SetDisplay")]
+    fn set_display(&self, display: String) -> crate::zbus::Result<()>;
 
     /// [📖](https://www.freedesktop.org/software/systemd/man/systemd.directives.html#TakeDevice()) Call interface method `TakeDevice`.
     #[dbus_proxy(name = "TakeDevice")]
