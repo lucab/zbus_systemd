@@ -1097,7 +1097,8 @@ trait Manager {
 #[dbus_proxy(
     interface = "org.freedesktop.systemd1.Unit",
     gen_blocking = false,
-    default_service = "org.freedesktop.systemd1"
+    default_service = "org.freedesktop.systemd1",
+    assume_defaults = false
 )]
 trait Unit {
     /// [📖](https://www.freedesktop.org/software/systemd/man/systemd.directives.html#Start()) Call interface method `Start`.
@@ -1588,7 +1589,8 @@ trait Unit {
 #[dbus_proxy(
     interface = "org.freedesktop.systemd1.Service",
     gen_blocking = false,
-    default_service = "org.freedesktop.systemd1"
+    default_service = "org.freedesktop.systemd1",
+    assume_defaults = false
 )]
 trait Service {
     /// [📖](https://www.freedesktop.org/software/systemd/man/systemd.directives.html#BindMount()) Call interface method `BindMount`.
@@ -2940,7 +2942,8 @@ trait Service {
 #[dbus_proxy(
     interface = "org.freedesktop.systemd1.Socket",
     gen_blocking = false,
-    default_service = "org.freedesktop.systemd1"
+    default_service = "org.freedesktop.systemd1",
+    assume_defaults = false
 )]
 trait Socket {
     /// [📖](https://www.freedesktop.org/software/systemd/man/systemd.directives.html#GetProcesses()) Call interface method `GetProcesses`.
@@ -4160,7 +4163,8 @@ trait Socket {
 #[dbus_proxy(
     interface = "org.freedesktop.systemd1.Target",
     gen_blocking = false,
-    default_service = "org.freedesktop.systemd1"
+    default_service = "org.freedesktop.systemd1",
+    assume_defaults = false
 )]
 trait Target {}
 
@@ -4168,7 +4172,8 @@ trait Target {}
 #[dbus_proxy(
     interface = "org.freedesktop.systemd1.Device",
     gen_blocking = false,
-    default_service = "org.freedesktop.systemd1"
+    default_service = "org.freedesktop.systemd1",
+    assume_defaults = false
 )]
 trait Device {
     /// Get property `SysFSPath`.
@@ -4180,7 +4185,8 @@ trait Device {
 #[dbus_proxy(
     interface = "org.freedesktop.systemd1.Mount",
     gen_blocking = false,
-    default_service = "org.freedesktop.systemd1"
+    default_service = "org.freedesktop.systemd1",
+    assume_defaults = false
 )]
 trait Mount {
     /// [📖](https://www.freedesktop.org/software/systemd/man/systemd.directives.html#GetProcesses()) Call interface method `GetProcesses`.
@@ -5226,7 +5232,8 @@ trait Mount {
 #[dbus_proxy(
     interface = "org.freedesktop.systemd1.Automount",
     gen_blocking = false,
-    default_service = "org.freedesktop.systemd1"
+    default_service = "org.freedesktop.systemd1",
+    assume_defaults = false
 )]
 trait Automount {
     /// Get property `ExtraOptions`.
@@ -5250,7 +5257,8 @@ trait Automount {
 #[dbus_proxy(
     interface = "org.freedesktop.systemd1.Timer",
     gen_blocking = false,
-    default_service = "org.freedesktop.systemd1"
+    default_service = "org.freedesktop.systemd1",
+    assume_defaults = false
 )]
 trait Timer {
     /// Get property `Unit`.
@@ -5322,7 +5330,8 @@ trait Timer {
 #[dbus_proxy(
     interface = "org.freedesktop.systemd1.Swap",
     gen_blocking = false,
-    default_service = "org.freedesktop.systemd1"
+    default_service = "org.freedesktop.systemd1",
+    assume_defaults = false
 )]
 trait Swap {
     /// [📖](https://www.freedesktop.org/software/systemd/man/systemd.directives.html#GetProcesses()) Call interface method `GetProcesses`.
@@ -6346,7 +6355,8 @@ trait Swap {
 #[dbus_proxy(
     interface = "org.freedesktop.systemd1.Path",
     gen_blocking = false,
-    default_service = "org.freedesktop.systemd1"
+    default_service = "org.freedesktop.systemd1",
+    assume_defaults = false
 )]
 trait Path {
     /// Get property `Unit`.
@@ -6382,7 +6392,8 @@ trait Path {
 #[dbus_proxy(
     interface = "org.freedesktop.systemd1.Slice",
     gen_blocking = false,
-    default_service = "org.freedesktop.systemd1"
+    default_service = "org.freedesktop.systemd1",
+    assume_defaults = false
 )]
 trait Slice {
     /// [📖](https://www.freedesktop.org/software/systemd/man/systemd.directives.html#GetProcesses()) Call interface method `GetProcesses`.
@@ -6686,7 +6697,8 @@ trait Slice {
 #[dbus_proxy(
     interface = "org.freedesktop.systemd1.Scope",
     gen_blocking = false,
-    default_service = "org.freedesktop.systemd1"
+    default_service = "org.freedesktop.systemd1",
+    assume_defaults = false
 )]
 trait Scope {
     /// [📖](https://www.freedesktop.org/software/systemd/man/systemd.directives.html#Abandon()) Call interface method `Abandon`.
@@ -7046,7 +7058,8 @@ trait Scope {
 #[dbus_proxy(
     interface = "org.freedesktop.systemd1.Job",
     gen_blocking = false,
-    default_service = "org.freedesktop.systemd1"
+    default_service = "org.freedesktop.systemd1",
+    assume_defaults = false
 )]
 trait Job {
     /// [📖](https://www.freedesktop.org/software/systemd/man/systemd.directives.html#Cancel()) Call interface method `Cancel`.

@@ -544,7 +544,8 @@ trait Manager {
 #[dbus_proxy(
     interface = "org.freedesktop.login1.Seat",
     gen_blocking = false,
-    default_service = "org.freedesktop.login1"
+    default_service = "org.freedesktop.login1",
+    assume_defaults = false
 )]
 trait Seat {
     /// [📖](https://www.freedesktop.org/software/systemd/man/systemd.directives.html#Terminate()) Call interface method `Terminate`.
@@ -604,7 +605,8 @@ trait Seat {
 #[dbus_proxy(
     interface = "org.freedesktop.login1.User",
     gen_blocking = false,
-    default_service = "org.freedesktop.login1"
+    default_service = "org.freedesktop.login1",
+    assume_defaults = false
 )]
 trait User {
     /// [📖](https://www.freedesktop.org/software/systemd/man/systemd.directives.html#Terminate()) Call interface method `Terminate`.
@@ -680,7 +682,8 @@ trait User {
 #[dbus_proxy(
     interface = "org.freedesktop.login1.Session",
     gen_blocking = false,
-    default_service = "org.freedesktop.login1"
+    default_service = "org.freedesktop.login1",
+    assume_defaults = false
 )]
 trait Session {
     /// [📖](https://www.freedesktop.org/software/systemd/man/systemd.directives.html#Terminate()) Call interface method `Terminate`.

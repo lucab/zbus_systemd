@@ -176,7 +176,8 @@ trait Manager {
 #[dbus_proxy(
     interface = "org.freedesktop.home1.Home",
     gen_blocking = false,
-    default_service = "org.freedesktop.home1"
+    default_service = "org.freedesktop.home1",
+    assume_defaults = false
 )]
 trait Home {
     /// [📖](https://www.freedesktop.org/software/systemd/man/systemd.directives.html#Activate()) Call interface method `Activate`.
