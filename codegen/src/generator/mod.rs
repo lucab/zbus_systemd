@@ -38,6 +38,8 @@ fn generate_single_object(file: &mut impl Write, node: Node, service: &Service) 
         writeln!(file, r#"default_service = "{}","#, service.id)?;
         if node.path == service.hierarchy {
             writeln!(file, r#"default_path = "{}","#, service.hierarchy)?;
+        } else {
+            writeln!(file, "assume_defaults = false,")?;
         }
     }
     writeln!(file, ")]")?;
