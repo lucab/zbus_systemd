@@ -198,7 +198,8 @@ trait Manager {
 #[dbus_proxy(
     interface = "org.freedesktop.resolve1.Link",
     gen_blocking = false,
-    default_service = "org.freedesktop.resolve1"
+    default_service = "org.freedesktop.resolve1",
+    assume_defaults = false
 )]
 trait Link {
     /// [📖](https://www.freedesktop.org/software/systemd/man/systemd.directives.html#SetDNS()) Call interface method `SetDNS`.

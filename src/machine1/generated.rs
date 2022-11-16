@@ -294,7 +294,8 @@ trait Manager {
 #[dbus_proxy(
     interface = "org.freedesktop.machine1.Machine",
     gen_blocking = false,
-    default_service = "org.freedesktop.machine1"
+    default_service = "org.freedesktop.machine1",
+    assume_defaults = false
 )]
 trait Machine {
     /// [📖](https://www.freedesktop.org/software/systemd/man/systemd.directives.html#Terminate()) Call interface method `Terminate`.

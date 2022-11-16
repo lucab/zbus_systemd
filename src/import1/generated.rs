@@ -119,7 +119,8 @@ trait Manager {
 #[dbus_proxy(
     interface = "org.freedesktop.import1.Transfer",
     gen_blocking = false,
-    default_service = "org.freedesktop.import1"
+    default_service = "org.freedesktop.import1",
+    assume_defaults = false
 )]
 trait Transfer {
     /// [📖](https://www.freedesktop.org/software/systemd/man/systemd.directives.html#Cancel()) Call interface method `Cancel`.
