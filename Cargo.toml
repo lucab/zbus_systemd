@@ -2,13 +2,14 @@
 authors = ["Luca Bruno <lucab@lucabruno.net>"]
 description = "A pure-Rust library to interact with systemd DBus services"
 documentation = "https://docs.rs/zbus_systemd"
-edition = "2018"
+edition = "2021"
 exclude = [".gitignore", "codegen", "justfile"]
 keywords = ["dbus", "systemd", "Linux", "zbus", "async"]
 license = "MIT/Apache-2.0"
 name = "zbus_systemd"
 repository = "https://github.com/lucab/zbus_systemd"
 version = "0.0.7"
+rust-version = "1.56.0"
 
 [dependencies]
 futures = "0.3"
