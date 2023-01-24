@@ -5,7 +5,7 @@ use zbus::dbus_proxy;
 /// Proxy object for `org.freedesktop.systemd1.Manager`.
 #[dbus_proxy(
     interface = "org.freedesktop.systemd1.Manager",
-    gen_blocking = false,
+    gen_blocking = true,
     default_service = "org.freedesktop.systemd1",
     default_path = "/org/freedesktop/systemd1"
 )]
@@ -1096,7 +1096,7 @@ trait Manager {
 /// Proxy object for `org.freedesktop.systemd1.Unit`.
 #[dbus_proxy(
     interface = "org.freedesktop.systemd1.Unit",
-    gen_blocking = false,
+    gen_blocking = true,
     default_service = "org.freedesktop.systemd1",
     assume_defaults = false
 )]
@@ -1588,7 +1588,7 @@ trait Unit {
 /// Proxy object for `org.freedesktop.systemd1.Service`.
 #[dbus_proxy(
     interface = "org.freedesktop.systemd1.Service",
-    gen_blocking = false,
+    gen_blocking = true,
     default_service = "org.freedesktop.systemd1",
     assume_defaults = false
 )]
@@ -2941,7 +2941,7 @@ trait Service {
 /// Proxy object for `org.freedesktop.systemd1.Socket`.
 #[dbus_proxy(
     interface = "org.freedesktop.systemd1.Socket",
-    gen_blocking = false,
+    gen_blocking = true,
     default_service = "org.freedesktop.systemd1",
     assume_defaults = false
 )]
@@ -4162,7 +4162,7 @@ trait Socket {
 /// Proxy object for `org.freedesktop.systemd1.Target`.
 #[dbus_proxy(
     interface = "org.freedesktop.systemd1.Target",
-    gen_blocking = false,
+    gen_blocking = true,
     default_service = "org.freedesktop.systemd1",
     assume_defaults = false
 )]
@@ -4171,7 +4171,7 @@ trait Target {}
 /// Proxy object for `org.freedesktop.systemd1.Device`.
 #[dbus_proxy(
     interface = "org.freedesktop.systemd1.Device",
-    gen_blocking = false,
+    gen_blocking = true,
     default_service = "org.freedesktop.systemd1",
     assume_defaults = false
 )]
@@ -4184,7 +4184,7 @@ trait Device {
 /// Proxy object for `org.freedesktop.systemd1.Mount`.
 #[dbus_proxy(
     interface = "org.freedesktop.systemd1.Mount",
-    gen_blocking = false,
+    gen_blocking = true,
     default_service = "org.freedesktop.systemd1",
     assume_defaults = false
 )]
@@ -5231,7 +5231,7 @@ trait Mount {
 /// Proxy object for `org.freedesktop.systemd1.Automount`.
 #[dbus_proxy(
     interface = "org.freedesktop.systemd1.Automount",
-    gen_blocking = false,
+    gen_blocking = true,
     default_service = "org.freedesktop.systemd1",
     assume_defaults = false
 )]
@@ -5256,7 +5256,7 @@ trait Automount {
 /// Proxy object for `org.freedesktop.systemd1.Timer`.
 #[dbus_proxy(
     interface = "org.freedesktop.systemd1.Timer",
-    gen_blocking = false,
+    gen_blocking = true,
     default_service = "org.freedesktop.systemd1",
     assume_defaults = false
 )]
@@ -5329,7 +5329,7 @@ trait Timer {
 /// Proxy object for `org.freedesktop.systemd1.Swap`.
 #[dbus_proxy(
     interface = "org.freedesktop.systemd1.Swap",
-    gen_blocking = false,
+    gen_blocking = true,
     default_service = "org.freedesktop.systemd1",
     assume_defaults = false
 )]
@@ -6354,7 +6354,7 @@ trait Swap {
 /// Proxy object for `org.freedesktop.systemd1.Path`.
 #[dbus_proxy(
     interface = "org.freedesktop.systemd1.Path",
-    gen_blocking = false,
+    gen_blocking = true,
     default_service = "org.freedesktop.systemd1",
     assume_defaults = false
 )]
@@ -6391,7 +6391,7 @@ trait Path {
 /// Proxy object for `org.freedesktop.systemd1.Slice`.
 #[dbus_proxy(
     interface = "org.freedesktop.systemd1.Slice",
-    gen_blocking = false,
+    gen_blocking = true,
     default_service = "org.freedesktop.systemd1",
     assume_defaults = false
 )]
@@ -6696,7 +6696,7 @@ trait Slice {
 /// Proxy object for `org.freedesktop.systemd1.Scope`.
 #[dbus_proxy(
     interface = "org.freedesktop.systemd1.Scope",
-    gen_blocking = false,
+    gen_blocking = true,
     default_service = "org.freedesktop.systemd1",
     assume_defaults = false
 )]
@@ -7057,7 +7057,7 @@ trait Scope {
 /// Proxy object for `org.freedesktop.systemd1.Job`.
 #[dbus_proxy(
     interface = "org.freedesktop.systemd1.Job",
-    gen_blocking = false,
+    gen_blocking = true,
     default_service = "org.freedesktop.systemd1",
     assume_defaults = false
 )]

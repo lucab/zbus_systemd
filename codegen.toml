@@ -1,5 +1,5 @@
 [general]
-gen_blocking = false
+gen_blocking = true
 
 [service.home1]
 hierarchy = "/org/freedesktop/home1"

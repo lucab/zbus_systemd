@@ -5,7 +5,7 @@ use zbus::dbus_proxy;
 /// Proxy object for `org.freedesktop.oom1.Manager`.
 #[dbus_proxy(
     interface = "org.freedesktop.oom1.Manager",
-    gen_blocking = false,
+    gen_blocking = true,
     default_service = "org.freedesktop.oom1",
     default_path = "/org/freedesktop/oom1"
 )]

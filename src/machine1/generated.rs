@@ -5,7 +5,7 @@ use zbus::dbus_proxy;
 /// Proxy object for `org.freedesktop.machine1.Manager`.
 #[dbus_proxy(
     interface = "org.freedesktop.machine1.Manager",
-    gen_blocking = false,
+    gen_blocking = true,
     default_service = "org.freedesktop.machine1",
     default_path = "/org/freedesktop/machine1"
 )]
@@ -293,7 +293,7 @@ trait Manager {
 /// Proxy object for `org.freedesktop.machine1.Machine`.
 #[dbus_proxy(
     interface = "org.freedesktop.machine1.Machine",
-    gen_blocking = false,
+    gen_blocking = true,
     default_service = "org.freedesktop.machine1",
     assume_defaults = false
 )]

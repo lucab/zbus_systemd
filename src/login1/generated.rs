@@ -5,7 +5,7 @@ use zbus::dbus_proxy;
 /// Proxy object for `org.freedesktop.login1.Manager`.
 #[dbus_proxy(
     interface = "org.freedesktop.login1.Manager",
-    gen_blocking = false,
+    gen_blocking = true,
     default_service = "org.freedesktop.login1",
     default_path = "/org/freedesktop/login1"
 )]
@@ -543,7 +543,7 @@ trait Manager {
 /// Proxy object for `org.freedesktop.login1.Seat`.
 #[dbus_proxy(
     interface = "org.freedesktop.login1.Seat",
-    gen_blocking = false,
+    gen_blocking = true,
     default_service = "org.freedesktop.login1",
     assume_defaults = false
 )]
@@ -604,7 +604,7 @@ trait Seat {
 /// Proxy object for `org.freedesktop.login1.User`.
 #[dbus_proxy(
     interface = "org.freedesktop.login1.User",
-    gen_blocking = false,
+    gen_blocking = true,
     default_service = "org.freedesktop.login1",
     assume_defaults = false
 )]
@@ -681,7 +681,7 @@ trait User {
 /// Proxy object for `org.freedesktop.login1.Session`.
 #[dbus_proxy(
     interface = "org.freedesktop.login1.Session",
-    gen_blocking = false,
+    gen_blocking = true,
     default_service = "org.freedesktop.login1",
     assume_defaults = false
 )]

@@ -5,7 +5,7 @@ use zbus::dbus_proxy;
 /// Proxy object for `org.freedesktop.resolve1.Manager`.
 #[dbus_proxy(
     interface = "org.freedesktop.resolve1.Manager",
-    gen_blocking = false,
+    gen_blocking = true,
     default_service = "org.freedesktop.resolve1",
     default_path = "/org/freedesktop/resolve1"
 )]
@@ -197,7 +197,7 @@ trait Manager {
 /// Proxy object for `org.freedesktop.resolve1.Link`.
 #[dbus_proxy(
     interface = "org.freedesktop.resolve1.Link",
-    gen_blocking = false,
+    gen_blocking = true,
     default_service = "org.freedesktop.resolve1",
     assume_defaults = false
 )]

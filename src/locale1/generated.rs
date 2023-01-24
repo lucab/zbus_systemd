@@ -5,7 +5,7 @@ use zbus::dbus_proxy;
 /// Proxy object for `org.freedesktop.locale1`.
 #[dbus_proxy(
     interface = "org.freedesktop.locale1",
-    gen_blocking = false,
+    gen_blocking = true,
     default_service = "org.freedesktop.locale1",
     default_path = "/org/freedesktop/locale1"
 )]

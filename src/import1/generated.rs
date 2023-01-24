@@ -5,7 +5,7 @@ use zbus::dbus_proxy;
 /// Proxy object for `org.freedesktop.import1.Manager`.
 #[dbus_proxy(
     interface = "org.freedesktop.import1.Manager",
-    gen_blocking = false,
+    gen_blocking = true,
     default_service = "org.freedesktop.import1",
     default_path = "/org/freedesktop/import1"
 )]
@@ -118,7 +118,7 @@ trait Manager {
 /// Proxy object for `org.freedesktop.import1.Transfer`.
 #[dbus_proxy(
     interface = "org.freedesktop.import1.Transfer",
-    gen_blocking = false,
+    gen_blocking = true,
     default_service = "org.freedesktop.import1",
     assume_defaults = false
 )]

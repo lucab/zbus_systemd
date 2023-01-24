@@ -5,7 +5,7 @@ use zbus::dbus_proxy;
 /// Proxy object for `org.freedesktop.portable1.Manager`.
 #[dbus_proxy(
     interface = "org.freedesktop.portable1.Manager",
-    gen_blocking = false,
+    gen_blocking = true,
     default_service = "org.freedesktop.portable1",
     default_path = "/org/freedesktop/portable1"
 )]
@@ -143,7 +143,7 @@ trait Manager {
 /// Proxy object for `org.freedesktop.portable1.Image`.
 #[dbus_proxy(
     interface = "org.freedesktop.portable1.Image",
-    gen_blocking = false,
+    gen_blocking = true,
     default_service = "org.freedesktop.portable1",
     default_path = "/org/freedesktop/portable1"
 )]

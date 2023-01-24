@@ -5,7 +5,7 @@ use zbus::dbus_proxy;
 /// Proxy object for `org.freedesktop.hostname1`.
 #[dbus_proxy(
     interface = "org.freedesktop.hostname1",
-    gen_blocking = false,
+    gen_blocking = true,
     default_service = "org.freedesktop.hostname1",
     default_path = "/org/freedesktop/hostname1"
 )]
