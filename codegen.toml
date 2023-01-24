@@ -1,3 +1,6 @@
+[general]
+gen_blocking = false
+
 [service.home1]
 hierarchy = "/org/freedesktop/home1"
 id = "org.freedesktop.home1"
