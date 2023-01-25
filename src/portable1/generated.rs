@@ -3,11 +3,23 @@
 use zbus::dbus_proxy;
 
 /// Proxy object for `org.freedesktop.portable1.Manager`.
-#[dbus_proxy(
-    interface = "org.freedesktop.portable1.Manager",
-    gen_blocking = true,
-    default_service = "org.freedesktop.portable1",
-    default_path = "/org/freedesktop/portable1"
+#[cfg_attr(
+    feature = "blocking",
+    dbus_proxy(
+        interface = "org.freedesktop.portable1.Manager",
+        gen_blocking = true,
+        default_service = "org.freedesktop.portable1",
+        default_path = "/org/freedesktop/portable1",
+    )
+)]
+#[cfg_attr(
+    not(feature = "blocking"),
+    dbus_proxy(
+        interface = "org.freedesktop.portable1.Manager",
+        gen_blocking = false,
+        default_service = "org.freedesktop.portable1",
+        default_path = "/org/freedesktop/portable1",
+    )
 )]
 trait Manager {
     /// [📖](https://www.freedesktop.org/software/systemd/man/systemd.directives.html#GetImage()) Call interface method `GetImage`.
@@ -141,11 +153,23 @@ trait Manager {
 }
 
 /// Proxy object for `org.freedesktop.portable1.Image`.
-#[dbus_proxy(
-    interface = "org.freedesktop.portable1.Image",
-    gen_blocking = true,
-    default_service = "org.freedesktop.portable1",
-    default_path = "/org/freedesktop/portable1"
+#[cfg_attr(
+    feature = "blocking",
+    dbus_proxy(
+        interface = "org.freedesktop.portable1.Image",
+        gen_blocking = true,
+        default_service = "org.freedesktop.portable1",
+        default_path = "/org/freedesktop/portable1",
+    )
+)]
+#[cfg_attr(
+    not(feature = "blocking"),
+    dbus_proxy(
+        interface = "org.freedesktop.portable1.Image",
+        gen_blocking = false,
+        default_service = "org.freedesktop.portable1",
+        default_path = "/org/freedesktop/portable1",
+    )
 )]
 trait Image {
     /// [📖](https://www.freedesktop.org/software/systemd/man/systemd.directives.html#GetState()) Call interface method `GetState`.

@@ -3,11 +3,23 @@
 use zbus::dbus_proxy;
 
 /// Proxy object for `org.freedesktop.login1.Manager`.
-#[dbus_proxy(
-    interface = "org.freedesktop.login1.Manager",
-    gen_blocking = true,
-    default_service = "org.freedesktop.login1",
-    default_path = "/org/freedesktop/login1"
+#[cfg_attr(
+    feature = "blocking",
+    dbus_proxy(
+        interface = "org.freedesktop.login1.Manager",
+        gen_blocking = true,
+        default_service = "org.freedesktop.login1",
+        default_path = "/org/freedesktop/login1",
+    )
+)]
+#[cfg_attr(
+    not(feature = "blocking"),
+    dbus_proxy(
+        interface = "org.freedesktop.login1.Manager",
+        gen_blocking = false,
+        default_service = "org.freedesktop.login1",
+        default_path = "/org/freedesktop/login1",
+    )
 )]
 trait Manager {
     /// [📖](https://www.freedesktop.org/software/systemd/man/systemd.directives.html#GetSession()) Call interface method `GetSession`.
@@ -541,11 +553,23 @@ trait Manager {
 }
 
 /// Proxy object for `org.freedesktop.login1.Seat`.
-#[dbus_proxy(
-    interface = "org.freedesktop.login1.Seat",
-    gen_blocking = true,
-    default_service = "org.freedesktop.login1",
-    assume_defaults = false
+#[cfg_attr(
+    feature = "blocking",
+    dbus_proxy(
+        interface = "org.freedesktop.login1.Seat",
+        gen_blocking = true,
+        default_service = "org.freedesktop.login1",
+        assume_defaults = false,
+    )
+)]
+#[cfg_attr(
+    not(feature = "blocking"),
+    dbus_proxy(
+        interface = "org.freedesktop.login1.Seat",
+        gen_blocking = false,
+        default_service = "org.freedesktop.login1",
+        assume_defaults = false,
+    )
 )]
 trait Seat {
     /// [📖](https://www.freedesktop.org/software/systemd/man/systemd.directives.html#Terminate()) Call interface method `Terminate`.
@@ -602,11 +626,23 @@ trait Seat {
 }
 
 /// Proxy object for `org.freedesktop.login1.User`.
-#[dbus_proxy(
-    interface = "org.freedesktop.login1.User",
-    gen_blocking = true,
-    default_service = "org.freedesktop.login1",
-    assume_defaults = false
+#[cfg_attr(
+    feature = "blocking",
+    dbus_proxy(
+        interface = "org.freedesktop.login1.User",
+        gen_blocking = true,
+        default_service = "org.freedesktop.login1",
+        assume_defaults = false,
+    )
+)]
+#[cfg_attr(
+    not(feature = "blocking"),
+    dbus_proxy(
+        interface = "org.freedesktop.login1.User",
+        gen_blocking = false,
+        default_service = "org.freedesktop.login1",
+        assume_defaults = false,
+    )
 )]
 trait User {
     /// [📖](https://www.freedesktop.org/software/systemd/man/systemd.directives.html#Terminate()) Call interface method `Terminate`.
@@ -679,11 +715,23 @@ trait User {
 }
 
 /// Proxy object for `org.freedesktop.login1.Session`.
-#[dbus_proxy(
-    interface = "org.freedesktop.login1.Session",
-    gen_blocking = true,
-    default_service = "org.freedesktop.login1",
-    assume_defaults = false
+#[cfg_attr(
+    feature = "blocking",
+    dbus_proxy(
+        interface = "org.freedesktop.login1.Session",
+        gen_blocking = true,
+        default_service = "org.freedesktop.login1",
+        assume_defaults = false,
+    )
+)]
+#[cfg_attr(
+    not(feature = "blocking"),
+    dbus_proxy(
+        interface = "org.freedesktop.login1.Session",
+        gen_blocking = false,
+        default_service = "org.freedesktop.login1",
+        assume_defaults = false,
+    )
 )]
 trait Session {
     /// [📖](https://www.freedesktop.org/software/systemd/man/systemd.directives.html#Terminate()) Call interface method `Terminate`.

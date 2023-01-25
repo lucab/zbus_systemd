@@ -3,11 +3,23 @@
 use zbus::dbus_proxy;
 
 /// Proxy object for `org.freedesktop.machine1.Manager`.
-#[dbus_proxy(
-    interface = "org.freedesktop.machine1.Manager",
-    gen_blocking = true,
-    default_service = "org.freedesktop.machine1",
-    default_path = "/org/freedesktop/machine1"
+#[cfg_attr(
+    feature = "blocking",
+    dbus_proxy(
+        interface = "org.freedesktop.machine1.Manager",
+        gen_blocking = true,
+        default_service = "org.freedesktop.machine1",
+        default_path = "/org/freedesktop/machine1",
+    )
+)]
+#[cfg_attr(
+    not(feature = "blocking"),
+    dbus_proxy(
+        interface = "org.freedesktop.machine1.Manager",
+        gen_blocking = false,
+        default_service = "org.freedesktop.machine1",
+        default_path = "/org/freedesktop/machine1",
+    )
 )]
 trait Manager {
     /// [📖](https://www.freedesktop.org/software/systemd/man/systemd.directives.html#GetMachine()) Call interface method `GetMachine`.
@@ -291,11 +303,23 @@ trait Manager {
 }
 
 /// Proxy object for `org.freedesktop.machine1.Machine`.
-#[dbus_proxy(
-    interface = "org.freedesktop.machine1.Machine",
-    gen_blocking = true,
-    default_service = "org.freedesktop.machine1",
-    assume_defaults = false
+#[cfg_attr(
+    feature = "blocking",
+    dbus_proxy(
+        interface = "org.freedesktop.machine1.Machine",
+        gen_blocking = true,
+        default_service = "org.freedesktop.machine1",
+        assume_defaults = false,
+    )
+)]
+#[cfg_attr(
+    not(feature = "blocking"),
+    dbus_proxy(
+        interface = "org.freedesktop.machine1.Machine",
+        gen_blocking = false,
+        default_service = "org.freedesktop.machine1",
+        assume_defaults = false,
+    )
 )]
 trait Machine {
     /// [📖](https://www.freedesktop.org/software/systemd/man/systemd.directives.html#Terminate()) Call interface method `Terminate`.

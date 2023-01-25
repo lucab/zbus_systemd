@@ -3,11 +3,23 @@
 use zbus::dbus_proxy;
 
 /// Proxy object for `org.freedesktop.locale1`.
-#[dbus_proxy(
-    interface = "org.freedesktop.locale1",
-    gen_blocking = true,
-    default_service = "org.freedesktop.locale1",
-    default_path = "/org/freedesktop/locale1"
+#[cfg_attr(
+    feature = "blocking",
+    dbus_proxy(
+        interface = "org.freedesktop.locale1",
+        gen_blocking = true,
+        default_service = "org.freedesktop.locale1",
+        default_path = "/org/freedesktop/locale1",
+    )
+)]
+#[cfg_attr(
+    not(feature = "blocking"),
+    dbus_proxy(
+        interface = "org.freedesktop.locale1",
+        gen_blocking = false,
+        default_service = "org.freedesktop.locale1",
+        default_path = "/org/freedesktop/locale1",
+    )
 )]
 trait Localed {
     /// [📖](https://www.freedesktop.org/software/systemd/man/systemd.directives.html#SetLocale()) Call interface method `SetLocale`.

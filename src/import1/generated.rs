@@ -3,11 +3,23 @@
 use zbus::dbus_proxy;
 
 /// Proxy object for `org.freedesktop.import1.Manager`.
-#[dbus_proxy(
-    interface = "org.freedesktop.import1.Manager",
-    gen_blocking = true,
-    default_service = "org.freedesktop.import1",
-    default_path = "/org/freedesktop/import1"
+#[cfg_attr(
+    feature = "blocking",
+    dbus_proxy(
+        interface = "org.freedesktop.import1.Manager",
+        gen_blocking = true,
+        default_service = "org.freedesktop.import1",
+        default_path = "/org/freedesktop/import1",
+    )
+)]
+#[cfg_attr(
+    not(feature = "blocking"),
+    dbus_proxy(
+        interface = "org.freedesktop.import1.Manager",
+        gen_blocking = false,
+        default_service = "org.freedesktop.import1",
+        default_path = "/org/freedesktop/import1",
+    )
 )]
 trait Manager {
     /// [📖](https://www.freedesktop.org/software/systemd/man/systemd.directives.html#ImportTar()) Call interface method `ImportTar`.
@@ -116,11 +128,23 @@ trait Manager {
 }
 
 /// Proxy object for `org.freedesktop.import1.Transfer`.
-#[dbus_proxy(
-    interface = "org.freedesktop.import1.Transfer",
-    gen_blocking = true,
-    default_service = "org.freedesktop.import1",
-    assume_defaults = false
+#[cfg_attr(
+    feature = "blocking",
+    dbus_proxy(
+        interface = "org.freedesktop.import1.Transfer",
+        gen_blocking = true,
+        default_service = "org.freedesktop.import1",
+        assume_defaults = false,
+    )
+)]
+#[cfg_attr(
+    not(feature = "blocking"),
+    dbus_proxy(
+        interface = "org.freedesktop.import1.Transfer",
+        gen_blocking = false,
+        default_service = "org.freedesktop.import1",
+        assume_defaults = false,
+    )
 )]
 trait Transfer {
     /// [📖](https://www.freedesktop.org/software/systemd/man/systemd.directives.html#Cancel()) Call interface method `Cancel`.

@@ -3,11 +3,23 @@
 use zbus::dbus_proxy;
 
 /// Proxy object for `org.freedesktop.home1.Manager`.
-#[dbus_proxy(
-    interface = "org.freedesktop.home1.Manager",
-    gen_blocking = true,
-    default_service = "org.freedesktop.home1",
-    default_path = "/org/freedesktop/home1"
+#[cfg_attr(
+    feature = "blocking",
+    dbus_proxy(
+        interface = "org.freedesktop.home1.Manager",
+        gen_blocking = true,
+        default_service = "org.freedesktop.home1",
+        default_path = "/org/freedesktop/home1",
+    )
+)]
+#[cfg_attr(
+    not(feature = "blocking"),
+    dbus_proxy(
+        interface = "org.freedesktop.home1.Manager",
+        gen_blocking = false,
+        default_service = "org.freedesktop.home1",
+        default_path = "/org/freedesktop/home1",
+    )
 )]
 trait Manager {
     /// [📖](https://www.freedesktop.org/software/systemd/man/systemd.directives.html#GetHomeByName()) Call interface method `GetHomeByName`.
@@ -173,11 +185,23 @@ trait Manager {
 }
 
 /// Proxy object for `org.freedesktop.home1.Home`.
-#[dbus_proxy(
-    interface = "org.freedesktop.home1.Home",
-    gen_blocking = true,
-    default_service = "org.freedesktop.home1",
-    assume_defaults = false
+#[cfg_attr(
+    feature = "blocking",
+    dbus_proxy(
+        interface = "org.freedesktop.home1.Home",
+        gen_blocking = true,
+        default_service = "org.freedesktop.home1",
+        assume_defaults = false,
+    )
+)]
+#[cfg_attr(
+    not(feature = "blocking"),
+    dbus_proxy(
+        interface = "org.freedesktop.home1.Home",
+        gen_blocking = false,
+        default_service = "org.freedesktop.home1",
+        assume_defaults = false,
+    )
 )]
 trait Home {
     /// [📖](https://www.freedesktop.org/software/systemd/man/systemd.directives.html#Activate()) Call interface method `Activate`.
