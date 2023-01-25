@@ -20,6 +20,7 @@ zbus = "3.5"
 tokio = {version = "1", features = ["full"]}
 
 [features]
+blocking = []
 home1 = []
 hostname1 = []
 import1 = []

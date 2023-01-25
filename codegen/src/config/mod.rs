@@ -8,7 +8,6 @@ use std::path::Path;
 
 #[derive(Debug, Deserialize)]
 pub(crate) struct CodegenConfig {
-    pub(crate) general: General,
     #[serde(rename = "service")]
     pub(crate) services: BTreeMap<String, Service>,
 }
@@ -24,11 +23,6 @@ impl CodegenConfig {
     pub(crate) fn get_service_by_id(&self, id: &str) -> Option<&Service> {
         self.services.values().find(|s| s.id == id)
     }
-}
-
-#[derive(Debug, Deserialize)]
-pub(crate) struct General {
-    pub(crate) gen_blocking: bool,
 }
 
 #[derive(Debug, Deserialize, PartialEq, Eq, PartialOrd, Ord)]

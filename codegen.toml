@@ -1,6 +1,3 @@
-[general]
-gen_blocking = true
-
 [service.home1]
 hierarchy = "/org/freedesktop/home1"
 id = "org.freedesktop.home1"

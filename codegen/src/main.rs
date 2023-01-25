@@ -38,7 +38,7 @@ fn run() -> Result<()> {
             .with_context(|| format!("Parsing XML for '{}'", service_cfg.module))?;
 
         let mut rust_output = File::create(format!("./src/{}/generated.rs", service_cfg.module))?;
-        generator::generate(&mut rust_output, nodes, &cfg.general, &service_cfg)
+        generator::generate(&mut rust_output, nodes, &service_cfg)
             .with_context(|| format!("Analyzing '{}'", entry.path().display()))?;
     }
 
