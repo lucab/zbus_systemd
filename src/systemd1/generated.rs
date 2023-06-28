@@ -199,6 +199,16 @@ trait Manager {
     #[dbus_proxy(name = "UnrefUnit")]
     fn unref_unit(&self, name: String) -> crate::zbus::Result<()>;
 
+    /// [📖](https://www.freedesktop.org/software/systemd/man/systemd.directives.html#StartTransientUnit()) Call interface method `StartTransientUnit`.
+    #[dbus_proxy(name = "StartTransientUnit")]
+    fn start_transient_unit(
+        &self,
+        name: String,
+        mode: String,
+        properties: Vec<(String, crate::zvariant::OwnedValue)>,
+        aux: Vec<(String, Vec<(String, crate::zvariant::OwnedValue)>)>,
+    ) -> crate::zbus::Result<crate::zvariant::OwnedObjectPath>;
+
     /// [📖](https://www.freedesktop.org/software/systemd/man/systemd.directives.html#GetUnitProcesses()) Call interface method `GetUnitProcesses`.
     #[dbus_proxy(name = "GetUnitProcesses")]
     fn get_unit_processes(&self, name: String) -> crate::zbus::Result<Vec<(String, u32, String)>>;

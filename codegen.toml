@@ -84,7 +84,6 @@ id = "org.freedesktop.systemd1"
 module = "systemd1"
 [[service.systemd1.overrides]]
 interface = "org.freedesktop.systemd1.Manager"
-todo_methods = ["StartTransientUnit"]
 todo_properties = [
     "LogLevel",
     "LogTarget",
