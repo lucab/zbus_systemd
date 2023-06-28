@@ -32,6 +32,13 @@ trait Manager {
         cgroup: String,
     ) -> crate::zbus::Result<crate::zvariant::OwnedObjectPath>;
 
+    /// [📖](https://www.freedesktop.org/software/systemd/man/systemd.directives.html#GetUnitByPIDFD()) Call interface method `GetUnitByPIDFD`.
+    #[dbus_proxy(name = "GetUnitByPIDFD")]
+    fn get_unit_by_pidfd(
+        &self,
+        pidfd: crate::zvariant::OwnedFd,
+    ) -> crate::zbus::Result<(crate::zvariant::OwnedObjectPath, String, Vec<u8>)>;
+
     /// [📖](https://www.freedesktop.org/software/systemd/man/systemd.directives.html#LoadUnit()) Call interface method `LoadUnit`.
     #[dbus_proxy(name = "LoadUnit")]
     fn load_unit(&self, name: String) -> crate::zbus::Result<crate::zvariant::OwnedObjectPath>;
@@ -483,6 +490,14 @@ trait Manager {
         files: Vec<String>,
         flags: u64,
     ) -> crate::zbus::Result<Vec<(String, String, String)>>;
+
+    /// [📖](https://www.freedesktop.org/software/systemd/man/systemd.directives.html#DisableUnitFilesWithFlagsAndInstallInfo()) Call interface method `DisableUnitFilesWithFlagsAndInstallInfo`.
+    #[dbus_proxy(name = "DisableUnitFilesWithFlagsAndInstallInfo")]
+    fn disable_unit_files_with_flags_and_install_info(
+        &self,
+        files: Vec<String>,
+        flags: u64,
+    ) -> crate::zbus::Result<(bool, Vec<(String, String, String)>)>;
 
     /// [📖](https://www.freedesktop.org/software/systemd/man/systemd.directives.html#ReenableUnitFiles()) Call interface method `ReenableUnitFiles`.
     #[dbus_proxy(name = "ReenableUnitFiles")]
@@ -1770,6 +1785,14 @@ trait Service {
     #[dbus_proxy(property, name = "OOMPolicy")]
     fn oom_policy(&self) -> crate::zbus::Result<String>;
 
+    /// Get property `OpenFile`.
+    #[dbus_proxy(property, name = "OpenFile")]
+    fn open_file(&self) -> crate::zbus::Result<Vec<(String, String, u64)>>;
+
+    /// Get property `ReloadSignal`.
+    #[dbus_proxy(property, name = "ReloadSignal")]
+    fn reload_signal(&self) -> crate::zbus::Result<i32>;
+
     /// Get property `ExecMainStartTimestamp`.
     #[dbus_proxy(property, name = "ExecMainStartTimestamp")]
     fn exec_main_start_timestamp(&self) -> crate::zbus::Result<u64>;
@@ -2185,6 +2208,10 @@ trait Service {
     #[dbus_proxy(property, name = "MemorySwapMax")]
     fn memory_swap_max(&self) -> crate::zbus::Result<u64>;
 
+    /// Get property `MemoryZSwapMax`.
+    #[dbus_proxy(property, name = "MemoryZSwapMax")]
+    fn memory_z_swap_max(&self) -> crate::zbus::Result<u64>;
+
     /// Get property `MemoryLimit`.
     #[dbus_proxy(property, name = "MemoryLimit")]
     fn memory_limit(&self) -> crate::zbus::Result<u64>;
@@ -2588,6 +2615,10 @@ trait Service {
     /// Get property `LogRateLimitBurst`.
     #[dbus_proxy(property, name = "LogRateLimitBurst")]
     fn log_rate_limit_burst(&self) -> crate::zbus::Result<u32>;
+
+    /// Get property `LogFilterPatterns`.
+    #[dbus_proxy(property, name = "LogFilterPatterns")]
+    fn log_filter_patterns(&self) -> crate::zbus::Result<Vec<(bool, String)>>;
 
     /// Get property `LogNamespace`.
     #[dbus_proxy(property, name = "LogNamespace")]
@@ -3406,6 +3437,10 @@ trait Socket {
     #[dbus_proxy(property, name = "MemorySwapMax")]
     fn memory_swap_max(&self) -> crate::zbus::Result<u64>;
 
+    /// Get property `MemoryZSwapMax`.
+    #[dbus_proxy(property, name = "MemoryZSwapMax")]
+    fn memory_z_swap_max(&self) -> crate::zbus::Result<u64>;
+
     /// Get property `MemoryLimit`.
     #[dbus_proxy(property, name = "MemoryLimit")]
     fn memory_limit(&self) -> crate::zbus::Result<u64>;
@@ -3809,6 +3844,10 @@ trait Socket {
     /// Get property `LogRateLimitBurst`.
     #[dbus_proxy(property, name = "LogRateLimitBurst")]
     fn log_rate_limit_burst(&self) -> crate::zbus::Result<u32>;
+
+    /// Get property `LogFilterPatterns`.
+    #[dbus_proxy(property, name = "LogFilterPatterns")]
+    fn log_filter_patterns(&self) -> crate::zbus::Result<Vec<(bool, String)>>;
 
     /// Get property `LogNamespace`.
     #[dbus_proxy(property, name = "LogNamespace")]
@@ -4475,6 +4514,10 @@ trait Mount {
     #[dbus_proxy(property, name = "MemorySwapMax")]
     fn memory_swap_max(&self) -> crate::zbus::Result<u64>;
 
+    /// Get property `MemoryZSwapMax`.
+    #[dbus_proxy(property, name = "MemoryZSwapMax")]
+    fn memory_z_swap_max(&self) -> crate::zbus::Result<u64>;
+
     /// Get property `MemoryLimit`.
     #[dbus_proxy(property, name = "MemoryLimit")]
     fn memory_limit(&self) -> crate::zbus::Result<u64>;
@@ -4878,6 +4921,10 @@ trait Mount {
     /// Get property `LogRateLimitBurst`.
     #[dbus_proxy(property, name = "LogRateLimitBurst")]
     fn log_rate_limit_burst(&self) -> crate::zbus::Result<u32>;
+
+    /// Get property `LogFilterPatterns`.
+    #[dbus_proxy(property, name = "LogFilterPatterns")]
+    fn log_filter_patterns(&self) -> crate::zbus::Result<Vec<(bool, String)>>;
 
     /// Get property `LogNamespace`.
     #[dbus_proxy(property, name = "LogNamespace")]
@@ -5598,6 +5645,10 @@ trait Swap {
     #[dbus_proxy(property, name = "MemorySwapMax")]
     fn memory_swap_max(&self) -> crate::zbus::Result<u64>;
 
+    /// Get property `MemoryZSwapMax`.
+    #[dbus_proxy(property, name = "MemoryZSwapMax")]
+    fn memory_z_swap_max(&self) -> crate::zbus::Result<u64>;
+
     /// Get property `MemoryLimit`.
     #[dbus_proxy(property, name = "MemoryLimit")]
     fn memory_limit(&self) -> crate::zbus::Result<u64>;
@@ -6001,6 +6052,10 @@ trait Swap {
     /// Get property `LogRateLimitBurst`.
     #[dbus_proxy(property, name = "LogRateLimitBurst")]
     fn log_rate_limit_burst(&self) -> crate::zbus::Result<u32>;
+
+    /// Get property `LogFilterPatterns`.
+    #[dbus_proxy(property, name = "LogFilterPatterns")]
+    fn log_filter_patterns(&self) -> crate::zbus::Result<Vec<(bool, String)>>;
 
     /// Get property `LogNamespace`.
     #[dbus_proxy(property, name = "LogNamespace")]
@@ -6616,6 +6671,10 @@ trait Slice {
     #[dbus_proxy(property, name = "MemorySwapMax")]
     fn memory_swap_max(&self) -> crate::zbus::Result<u64>;
 
+    /// Get property `MemoryZSwapMax`.
+    #[dbus_proxy(property, name = "MemoryZSwapMax")]
+    fn memory_z_swap_max(&self) -> crate::zbus::Result<u64>;
+
     /// Get property `MemoryLimit`.
     #[dbus_proxy(property, name = "MemoryLimit")]
     fn memory_limit(&self) -> crate::zbus::Result<u64>;
@@ -6736,6 +6795,10 @@ trait Scope {
     /// Get property `RuntimeRandomizedExtraUSec`.
     #[dbus_proxy(property, name = "RuntimeRandomizedExtraUSec")]
     fn runtime_randomized_extra_u_sec(&self) -> crate::zbus::Result<u64>;
+
+    /// Get property `OOMPolicy`.
+    #[dbus_proxy(property, name = "OOMPolicy")]
+    fn oom_policy(&self) -> crate::zbus::Result<String>;
 
     /// Get property `Slice`.
     #[dbus_proxy(property, name = "Slice")]
@@ -6948,6 +7011,10 @@ trait Scope {
     /// Get property `MemorySwapMax`.
     #[dbus_proxy(property, name = "MemorySwapMax")]
     fn memory_swap_max(&self) -> crate::zbus::Result<u64>;
+
+    /// Get property `MemoryZSwapMax`.
+    #[dbus_proxy(property, name = "MemoryZSwapMax")]
+    fn memory_z_swap_max(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `MemoryLimit`.
     #[dbus_proxy(property, name = "MemoryLimit")]

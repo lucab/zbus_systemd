@@ -106,6 +106,10 @@ trait Hostnamed {
     #[dbus_proxy(property, name = "OperatingSystemCPEName")]
     fn operating_system_cpe_name(&self) -> crate::zbus::Result<String>;
 
+    /// Get property `OperatingSystemSupportEnd`.
+    #[dbus_proxy(property, name = "OperatingSystemSupportEnd")]
+    fn operating_system_support_end(&self) -> crate::zbus::Result<u64>;
+
     /// Get property `HomeURL`.
     #[dbus_proxy(property, name = "HomeURL")]
     fn home_url(&self) -> crate::zbus::Result<String>;
@@ -121,4 +125,12 @@ trait Hostnamed {
     /// Get property `FirmwareVersion`.
     #[dbus_proxy(property, name = "FirmwareVersion")]
     fn firmware_version(&self) -> crate::zbus::Result<String>;
+
+    /// Get property `FirmwareVendor`.
+    #[dbus_proxy(property, name = "FirmwareVendor")]
+    fn firmware_vendor(&self) -> crate::zbus::Result<String>;
+
+    /// Get property `FirmwareDate`.
+    #[dbus_proxy(property, name = "FirmwareDate")]
+    fn firmware_date(&self) -> crate::zbus::Result<u64>;
 }
