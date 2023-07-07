@@ -199,6 +199,16 @@ trait Manager {
     #[dbus_proxy(name = "UnrefUnit")]
     fn unref_unit(&self, name: String) -> crate::zbus::Result<()>;
 
+    /// [📖](https://www.freedesktop.org/software/systemd/man/systemd.directives.html#StartTransientUnit()) Call interface method `StartTransientUnit`.
+    #[dbus_proxy(name = "StartTransientUnit")]
+    fn start_transient_unit(
+        &self,
+        name: String,
+        mode: String,
+        properties: Vec<(String, crate::zvariant::OwnedValue)>,
+        aux: Vec<(String, Vec<(String, crate::zvariant::OwnedValue)>)>,
+    ) -> crate::zbus::Result<crate::zvariant::OwnedObjectPath>;
+
     /// [📖](https://www.freedesktop.org/software/systemd/man/systemd.directives.html#GetUnitProcesses()) Call interface method `GetUnitProcesses`.
     #[dbus_proxy(name = "GetUnitProcesses")]
     fn get_unit_processes(&self, name: String) -> crate::zbus::Result<Vec<(String, u32, String)>>;
@@ -2476,6 +2486,16 @@ trait Service {
     #[dbus_proxy(property, name = "ExtensionDirectories")]
     fn extension_directories(&self) -> crate::zbus::Result<Vec<String>>;
 
+    /// Get property `ExtensionImages`.
+    #[dbus_proxy(property, name = "ExtensionImages")]
+    fn extension_images(&self) -> crate::zbus::Result<Vec<(String, bool, Vec<(String, String)>)>>;
+
+    /// Get property `MountImages`.
+    #[dbus_proxy(property, name = "MountImages")]
+    fn mount_images(
+        &self,
+    ) -> crate::zbus::Result<Vec<(String, String, bool, Vec<(String, String)>)>>;
+
     /// Get property `OOMScoreAdjust`.
     #[dbus_proxy(property, name = "OOMScoreAdjust")]
     fn oom_score_adjust(&self) -> crate::zbus::Result<i32>;
@@ -2615,6 +2635,10 @@ trait Service {
     /// Get property `LogRateLimitBurst`.
     #[dbus_proxy(property, name = "LogRateLimitBurst")]
     fn log_rate_limit_burst(&self) -> crate::zbus::Result<u32>;
+
+    /// Get property `LogExtraFields`.
+    #[dbus_proxy(property, name = "LogExtraFields")]
+    fn log_extra_fields(&self) -> crate::zbus::Result<Vec<Vec<u8>>>;
 
     /// Get property `LogFilterPatterns`.
     #[dbus_proxy(property, name = "LogFilterPatterns")]
@@ -3705,6 +3729,16 @@ trait Socket {
     #[dbus_proxy(property, name = "ExtensionDirectories")]
     fn extension_directories(&self) -> crate::zbus::Result<Vec<String>>;
 
+    /// Get property `ExtensionImages`.
+    #[dbus_proxy(property, name = "ExtensionImages")]
+    fn extension_images(&self) -> crate::zbus::Result<Vec<(String, bool, Vec<(String, String)>)>>;
+
+    /// Get property `MountImages`.
+    #[dbus_proxy(property, name = "MountImages")]
+    fn mount_images(
+        &self,
+    ) -> crate::zbus::Result<Vec<(String, String, bool, Vec<(String, String)>)>>;
+
     /// Get property `OOMScoreAdjust`.
     #[dbus_proxy(property, name = "OOMScoreAdjust")]
     fn oom_score_adjust(&self) -> crate::zbus::Result<i32>;
@@ -3844,6 +3878,10 @@ trait Socket {
     /// Get property `LogRateLimitBurst`.
     #[dbus_proxy(property, name = "LogRateLimitBurst")]
     fn log_rate_limit_burst(&self) -> crate::zbus::Result<u32>;
+
+    /// Get property `LogExtraFields`.
+    #[dbus_proxy(property, name = "LogExtraFields")]
+    fn log_extra_fields(&self) -> crate::zbus::Result<Vec<Vec<u8>>>;
 
     /// Get property `LogFilterPatterns`.
     #[dbus_proxy(property, name = "LogFilterPatterns")]
@@ -4782,6 +4820,16 @@ trait Mount {
     #[dbus_proxy(property, name = "ExtensionDirectories")]
     fn extension_directories(&self) -> crate::zbus::Result<Vec<String>>;
 
+    /// Get property `ExtensionImages`.
+    #[dbus_proxy(property, name = "ExtensionImages")]
+    fn extension_images(&self) -> crate::zbus::Result<Vec<(String, bool, Vec<(String, String)>)>>;
+
+    /// Get property `MountImages`.
+    #[dbus_proxy(property, name = "MountImages")]
+    fn mount_images(
+        &self,
+    ) -> crate::zbus::Result<Vec<(String, String, bool, Vec<(String, String)>)>>;
+
     /// Get property `OOMScoreAdjust`.
     #[dbus_proxy(property, name = "OOMScoreAdjust")]
     fn oom_score_adjust(&self) -> crate::zbus::Result<i32>;
@@ -4921,6 +4969,10 @@ trait Mount {
     /// Get property `LogRateLimitBurst`.
     #[dbus_proxy(property, name = "LogRateLimitBurst")]
     fn log_rate_limit_burst(&self) -> crate::zbus::Result<u32>;
+
+    /// Get property `LogExtraFields`.
+    #[dbus_proxy(property, name = "LogExtraFields")]
+    fn log_extra_fields(&self) -> crate::zbus::Result<Vec<Vec<u8>>>;
 
     /// Get property `LogFilterPatterns`.
     #[dbus_proxy(property, name = "LogFilterPatterns")]
@@ -5913,6 +5965,16 @@ trait Swap {
     #[dbus_proxy(property, name = "ExtensionDirectories")]
     fn extension_directories(&self) -> crate::zbus::Result<Vec<String>>;
 
+    /// Get property `ExtensionImages`.
+    #[dbus_proxy(property, name = "ExtensionImages")]
+    fn extension_images(&self) -> crate::zbus::Result<Vec<(String, bool, Vec<(String, String)>)>>;
+
+    /// Get property `MountImages`.
+    #[dbus_proxy(property, name = "MountImages")]
+    fn mount_images(
+        &self,
+    ) -> crate::zbus::Result<Vec<(String, String, bool, Vec<(String, String)>)>>;
+
     /// Get property `OOMScoreAdjust`.
     #[dbus_proxy(property, name = "OOMScoreAdjust")]
     fn oom_score_adjust(&self) -> crate::zbus::Result<i32>;
@@ -6052,6 +6114,10 @@ trait Swap {
     /// Get property `LogRateLimitBurst`.
     #[dbus_proxy(property, name = "LogRateLimitBurst")]
     fn log_rate_limit_burst(&self) -> crate::zbus::Result<u32>;
+
+    /// Get property `LogExtraFields`.
+    #[dbus_proxy(property, name = "LogExtraFields")]
+    fn log_extra_fields(&self) -> crate::zbus::Result<Vec<Vec<u8>>>;
 
     /// Get property `LogFilterPatterns`.
     #[dbus_proxy(property, name = "LogFilterPatterns")]

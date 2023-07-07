@@ -31,6 +31,40 @@ trait Manager {
         )>,
     >;
 
+    /// [📖](https://www.freedesktop.org/software/systemd/man/systemd.directives.html#GetImageOSRelease()) Call interface method `GetImageOSRelease`.
+    #[dbus_proxy(name = "GetImageOSRelease")]
+    fn get_image_os_release(
+        &self,
+        image: String,
+    ) -> crate::zbus::Result<::std::collections::HashMap<String, String>>;
+
+    /// [📖](https://www.freedesktop.org/software/systemd/man/systemd.directives.html#GetImageMetadata()) Call interface method `GetImageMetadata`.
+    #[dbus_proxy(name = "GetImageMetadata")]
+    fn get_image_metadata(
+        &self,
+        image: String,
+        matches: Vec<String>,
+    ) -> crate::zbus::Result<(
+        String,
+        Vec<u8>,
+        ::std::collections::HashMap<String, Vec<u8>>,
+    )>;
+
+    /// [📖](https://www.freedesktop.org/software/systemd/man/systemd.directives.html#GetImageMetadataWithExtensions()) Call interface method `GetImageMetadataWithExtensions`.
+    #[dbus_proxy(name = "GetImageMetadataWithExtensions")]
+    fn get_image_metadata_with_extensions(
+        &self,
+        image: String,
+        extensions: Vec<String>,
+        matches: Vec<String>,
+        flags: u64,
+    ) -> crate::zbus::Result<(
+        String,
+        Vec<u8>,
+        ::std::collections::HashMap<String, Vec<u8>>,
+        ::std::collections::HashMap<String, Vec<u8>>,
+    )>;
+
     /// [📖](https://www.freedesktop.org/software/systemd/man/systemd.directives.html#GetImageState()) Call interface method `GetImageState`.
     #[dbus_proxy(name = "GetImageState")]
     fn get_image_state(&self, image: String) -> crate::zbus::Result<String>;
@@ -148,6 +182,35 @@ trait Manager {
     default_path = "/org/freedesktop/portable1"
 )]
 trait Image {
+    /// [📖](https://www.freedesktop.org/software/systemd/man/systemd.directives.html#GetOSRelease()) Call interface method `GetOSRelease`.
+    #[dbus_proxy(name = "GetOSRelease")]
+    fn get_os_release(&self) -> crate::zbus::Result<::std::collections::HashMap<String, String>>;
+
+    /// [📖](https://www.freedesktop.org/software/systemd/man/systemd.directives.html#GetMetadata()) Call interface method `GetMetadata`.
+    #[dbus_proxy(name = "GetMetadata")]
+    fn get_metadata(
+        &self,
+        matches: Vec<String>,
+    ) -> crate::zbus::Result<(
+        String,
+        Vec<u8>,
+        ::std::collections::HashMap<String, Vec<u8>>,
+    )>;
+
+    /// [📖](https://www.freedesktop.org/software/systemd/man/systemd.directives.html#GetMetadataWithExtensions()) Call interface method `GetMetadataWithExtensions`.
+    #[dbus_proxy(name = "GetMetadataWithExtensions")]
+    fn get_metadata_with_extensions(
+        &self,
+        extensions: Vec<String>,
+        matches: Vec<String>,
+        flags: u64,
+    ) -> crate::zbus::Result<(
+        String,
+        Vec<u8>,
+        ::std::collections::HashMap<String, Vec<u8>>,
+        ::std::collections::HashMap<String, Vec<u8>>,
+    )>;
+
     /// [📖](https://www.freedesktop.org/software/systemd/man/systemd.directives.html#GetState()) Call interface method `GetState`.
     #[dbus_proxy(name = "GetState")]
     fn get_state(&self) -> crate::zbus::Result<String>;

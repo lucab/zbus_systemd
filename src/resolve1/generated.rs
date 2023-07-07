@@ -41,6 +41,25 @@ trait Manager {
         flags: u64,
     ) -> crate::zbus::Result<(Vec<(i32, u16, u16, Vec<u8>)>, u64)>;
 
+    /// [📖](https://www.freedesktop.org/software/systemd/man/systemd.directives.html#ResolveService()) Call interface method `ResolveService`.
+    #[dbus_proxy(name = "ResolveService")]
+    fn resolve_service(
+        &self,
+        ifindex: i32,
+        name: String,
+        typelabel: String,
+        domain: String,
+        family: i32,
+        flags: u64,
+    ) -> crate::zbus::Result<(
+        Vec<(u16, u16, u16, String, Vec<(i32, i32, Vec<u8>)>, String)>,
+        Vec<Vec<u8>>,
+        String,
+        String,
+        String,
+        u64,
+    )>;
+
     /// [📖](https://www.freedesktop.org/software/systemd/man/systemd.directives.html#GetLink()) Call interface method `GetLink`.
     #[dbus_proxy(name = "GetLink")]
     fn get_link(&self, ifindex: i32) -> crate::zbus::Result<crate::zvariant::OwnedObjectPath>;
@@ -97,6 +116,19 @@ trait Manager {
     /// [📖](https://www.freedesktop.org/software/systemd/man/systemd.directives.html#RevertLink()) Call interface method `RevertLink`.
     #[dbus_proxy(name = "RevertLink")]
     fn revert_link(&self, ifindex: i32) -> crate::zbus::Result<()>;
+
+    /// [📖](https://www.freedesktop.org/software/systemd/man/systemd.directives.html#RegisterService()) Call interface method `RegisterService`.
+    #[dbus_proxy(name = "RegisterService")]
+    fn register_service(
+        &self,
+        name: String,
+        name_template: String,
+        typelabel: String,
+        service_port: u16,
+        service_priority: u16,
+        service_weight: u16,
+        txt_datas: Vec<::std::collections::HashMap<String, Vec<u8>>>,
+    ) -> crate::zbus::Result<crate::zvariant::OwnedObjectPath>;
 
     /// [📖](https://www.freedesktop.org/software/systemd/man/systemd.directives.html#UnregisterService()) Call interface method `UnregisterService`.
     #[dbus_proxy(name = "UnregisterService")]

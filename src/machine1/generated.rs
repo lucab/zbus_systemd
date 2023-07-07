@@ -113,6 +113,13 @@ trait Manager {
     #[dbus_proxy(name = "GetMachineAddresses")]
     fn get_machine_addresses(&self, name: String) -> crate::zbus::Result<Vec<(i32, Vec<u8>)>>;
 
+    /// [📖](https://www.freedesktop.org/software/systemd/man/systemd.directives.html#GetMachineOSRelease()) Call interface method `GetMachineOSRelease`.
+    #[dbus_proxy(name = "GetMachineOSRelease")]
+    fn get_machine_os_release(
+        &self,
+        name: String,
+    ) -> crate::zbus::Result<::std::collections::HashMap<String, String>>;
+
     /// [📖](https://www.freedesktop.org/software/systemd/man/systemd.directives.html#OpenMachinePTY()) Call interface method `OpenMachinePTY`.
     #[dbus_proxy(name = "OpenMachinePTY")]
     fn open_machine_pty(
@@ -227,6 +234,20 @@ trait Manager {
     #[dbus_proxy(name = "GetImageMachineID")]
     fn get_image_machine_id(&self, name: String) -> crate::zbus::Result<Vec<u8>>;
 
+    /// [📖](https://www.freedesktop.org/software/systemd/man/systemd.directives.html#GetImageMachineInfo()) Call interface method `GetImageMachineInfo`.
+    #[dbus_proxy(name = "GetImageMachineInfo")]
+    fn get_image_machine_info(
+        &self,
+        name: String,
+    ) -> crate::zbus::Result<::std::collections::HashMap<String, String>>;
+
+    /// [📖](https://www.freedesktop.org/software/systemd/man/systemd.directives.html#GetImageOSRelease()) Call interface method `GetImageOSRelease`.
+    #[dbus_proxy(name = "GetImageOSRelease")]
+    fn get_image_os_release(
+        &self,
+        name: String,
+    ) -> crate::zbus::Result<::std::collections::HashMap<String, String>>;
+
     /// [📖](https://www.freedesktop.org/software/systemd/man/systemd.directives.html#SetPoolLimit()) Call interface method `SetPoolLimit`.
     #[dbus_proxy(name = "SetPoolLimit")]
     fn set_pool_limit(&self, size: u64) -> crate::zbus::Result<()>;
@@ -309,6 +330,10 @@ trait Machine {
     /// [📖](https://www.freedesktop.org/software/systemd/man/systemd.directives.html#GetAddresses()) Call interface method `GetAddresses`.
     #[dbus_proxy(name = "GetAddresses")]
     fn get_addresses(&self) -> crate::zbus::Result<Vec<(i32, Vec<u8>)>>;
+
+    /// [📖](https://www.freedesktop.org/software/systemd/man/systemd.directives.html#GetOSRelease()) Call interface method `GetOSRelease`.
+    #[dbus_proxy(name = "GetOSRelease")]
+    fn get_os_release(&self) -> crate::zbus::Result<::std::collections::HashMap<String, String>>;
 
     /// [📖](https://www.freedesktop.org/software/systemd/man/systemd.directives.html#GetUIDShift()) Call interface method `GetUIDShift`.
     #[dbus_proxy(name = "GetUIDShift")]

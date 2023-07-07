@@ -40,14 +40,8 @@ id = "org.freedesktop.machine1"
 module = "machine1"
 [[service.machine1.overrides]]
 interface = "org.freedesktop.machine1.Machine"
-todo_methods = ["GetOSRelease"]
 [[service.machine1.overrides]]
 interface = "org.freedesktop.machine1.Manager"
-todo_methods = [
-    "GetMachineOSRelease",
-    "GetImageMachineInfo",
-    "GetImageOSRelease",
-]
 
 [service.oom1]
 hierarchy = "/org/freedesktop/oom1"
@@ -60,14 +54,8 @@ id = "org.freedesktop.portable1"
 module = "portable1"
 [[service.portable1.overrides]]
 interface = "org.freedesktop.portable1.Manager"
-todo_methods = [
-    "GetImageOSRelease",
-    "GetImageMetadata",
-    "GetImageMetadataWithExtensions",
-]
 [[service.portable1.overrides]]
 interface = "org.freedesktop.portable1.Image"
-todo_methods = ["GetOSRelease", "GetMetadata", "GetMetadataWithExtensions"]
 todo_properties = ["Type"]
 
 [service.resolve1]
@@ -76,7 +64,6 @@ id = "org.freedesktop.resolve1"
 module = "resolve1"
 [[service.resolve1.overrides]]
 interface = "org.freedesktop.resolve1.Manager"
-todo_methods = ["ResolveService", "RegisterService"]
 
 [service.systemd1]
 hierarchy = "/org/freedesktop/systemd1"
@@ -84,7 +71,6 @@ id = "org.freedesktop.systemd1"
 module = "systemd1"
 [[service.systemd1.overrides]]
 interface = "org.freedesktop.systemd1.Manager"
-todo_methods = ["StartTransientUnit"]
 todo_properties = [
     "LogLevel",
     "LogTarget",
@@ -97,25 +83,20 @@ todo_properties = [
 ]
 [[service.systemd1.overrides]]
 interface = "org.freedesktop.systemd1.Service"
-todo_properties = ["ExtensionImages", "MountImages", "LogExtraFields", "Type"]
+todo_properties = ["Type"]
 [[service.systemd1.overrides]]
 interface = "org.freedesktop.systemd1.Socket"
-todo_properties = ["ExtensionImages", "MountImages", "LogExtraFields"]
 [[service.systemd1.overrides]]
 interface = "org.freedesktop.systemd1.Automount"
 todo_properties = ["Where"]
 [[service.systemd1.overrides]]
 interface = "org.freedesktop.systemd1.Mount"
 todo_properties = [
-    "ExtensionImages",
-    "MountImages",
-    "LogExtraFields",
     "Where",
     "Type",
 ]
 [[service.systemd1.overrides]]
 interface = "org.freedesktop.systemd1.Swap"
-todo_properties = ["ExtensionImages", "LogExtraFields", "MountImages"]
 
 [service.timedate1]
 default_object = "Timedated"

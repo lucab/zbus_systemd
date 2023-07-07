@@ -10,6 +10,10 @@ A pure-Rust library to interact with systemd DBus services.
 `zbus_systemd` provides support for interacting with the whole suite of systemd
 services over DBus.
 
+## Generating the code
+
+This project uses [just](https://github.com/casey/just) for commands, to generate the code after making changes 'just' run `just`.
+
 ## Motivations and trade-offs
 
 This library tries to achieve the following goals:
