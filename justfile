@@ -1,4 +1,4 @@
-@default: generate fmt check
+@default: bump-systemd generate fmt check
 
 check:
   cargo check --all-features

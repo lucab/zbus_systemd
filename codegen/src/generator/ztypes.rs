@@ -1,3 +1,5 @@
+/// This module implements translating DBus data types to Rust. More details can be found at:
+/// https://dbus.freedesktop.org/doc/dbus-specification.html
 use anyhow::Result;
 use fn_error_context::context;
 use nom::{
@@ -5,7 +7,7 @@ use nom::{
     bytes::complete::tag,
     combinator::{map, value},
     multi::many1,
-    sequence::{delimited, preceded},
+    sequence::{delimited, pair, preceded},
     Finish, IResult, Parser,
 };
 
@@ -22,7 +24,7 @@ pub fn translate_sig(sig: &str) -> Result<String> {
 }
 
 fn parse_type(input: &str) -> IResult<&str, String> {
-    alt((parse_simple, parse_tuple, parse_array)).parse(input)
+    alt((parse_simple, parse_tuple, parse_dictionary, parse_array)).parse(input)
 }
 
 fn parse_simple(input: &str) -> IResult<&str, String> {
@@ -53,6 +55,14 @@ fn parse_tuple(input: &str) -> IResult<&str, String> {
     .parse(input)
 }
 
+fn parse_dictionary(input: &str) -> IResult<&str, String> {
+    map(
+        delimited(tag("a{"), pair(parse_type, parse_type), tag("}")),
+        |(key, value)| format!("::std::collections::HashMap<{}, {}>", key, value),
+    )
+    .parse(input)
+}
+
 fn parse_array(input: &str) -> IResult<&str, String> {
     map(preceded(tag("a"), parse_type), |t| format!("Vec<{}>", t)).parse(input)
 }
@@ -65,6 +75,7 @@ mod tests {
     fn test_translate_sig() {
         let ok_cases = &[
             ("", ""),
+            ("a{ss}", "::std::collections::HashMap<String, String>"),
             ("b", "bool"),
             ("a(iiayqs)", "Vec<(i32, i32, Vec<u8>, u16, String,)>"),
             (
