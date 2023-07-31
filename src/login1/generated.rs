@@ -730,6 +730,10 @@ trait Session {
     #[dbus_proxy(name = "SetDisplay")]
     fn set_display(&self, display: String) -> crate::zbus::Result<()>;
 
+    /// [📖](https://www.freedesktop.org/software/systemd/man/systemd.directives.html#SetTTY()) Call interface method `SetTTY`.
+    #[dbus_proxy(name = "SetTTY")]
+    fn set_tty(&self, tty_fd: crate::zvariant::OwnedFd) -> crate::zbus::Result<()>;
+
     /// [📖](https://www.freedesktop.org/software/systemd/man/systemd.directives.html#TakeDevice()) Call interface method `TakeDevice`.
     #[dbus_proxy(name = "TakeDevice")]
     fn take_device(

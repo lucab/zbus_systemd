@@ -266,9 +266,9 @@ trait Image {
         copy_mode: String,
     ) -> crate::zbus::Result<(Vec<(String, String, String)>, Vec<(String, String, String)>)>;
 
-    /// [📖](https://www.freedesktop.org/software/systemd/man/systemd.directives.html#ReattacheWithExtensions()) Call interface method `ReattacheWithExtensions`.
-    #[dbus_proxy(name = "ReattacheWithExtensions")]
-    fn reattache_with_extensions(
+    /// [📖](https://www.freedesktop.org/software/systemd/man/systemd.directives.html#ReattachWithExtensions()) Call interface method `ReattachWithExtensions`.
+    #[dbus_proxy(name = "ReattachWithExtensions")]
+    fn reattach_with_extensions(
         &self,
         extensions: Vec<String>,
         matches: Vec<String>,
