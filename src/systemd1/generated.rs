@@ -143,6 +143,16 @@ trait Manager {
     #[dbus_proxy(name = "KillUnit")]
     fn kill_unit(&self, name: String, whom: String, signal: i32) -> crate::zbus::Result<()>;
 
+    /// [📖](https://www.freedesktop.org/software/systemd/man/systemd.directives.html#QueueSignalUnit()) Call interface method `QueueSignalUnit`.
+    #[dbus_proxy(name = "QueueSignalUnit")]
+    fn queue_signal_unit(
+        &self,
+        name: String,
+        whom: String,
+        signal: i32,
+        value: i32,
+    ) -> crate::zbus::Result<()>;
+
     /// [📖](https://www.freedesktop.org/software/systemd/man/systemd.directives.html#CleanUnit()) Call interface method `CleanUnit`.
     #[dbus_proxy(name = "CleanUnit")]
     fn clean_unit(&self, name: String, mask: Vec<String>) -> crate::zbus::Result<()>;
@@ -416,6 +426,10 @@ trait Manager {
     #[dbus_proxy(name = "Reboot")]
     fn reboot(&self) -> crate::zbus::Result<()>;
 
+    /// [📖](https://www.freedesktop.org/software/systemd/man/systemd.directives.html#SoftReboot()) Call interface method `SoftReboot`.
+    #[dbus_proxy(name = "SoftReboot")]
+    fn soft_reboot(&self, new_root: String) -> crate::zbus::Result<()>;
+
     /// [📖](https://www.freedesktop.org/software/systemd/man/systemd.directives.html#PowerOff()) Call interface method `PowerOff`.
     #[dbus_proxy(name = "PowerOff")]
     fn power_off(&self) -> crate::zbus::Result<()>;
@@ -622,6 +636,13 @@ trait Manager {
     #[dbus_proxy(name = "GetDynamicUsers")]
     fn get_dynamic_users(&self) -> crate::zbus::Result<Vec<(u32, String)>>;
 
+    /// [📖](https://www.freedesktop.org/software/systemd/man/systemd.directives.html#DumpUnitFileDescriptorStore()) Call interface method `DumpUnitFileDescriptorStore`.
+    #[dbus_proxy(name = "DumpUnitFileDescriptorStore")]
+    fn dump_unit_file_descriptor_store(
+        &self,
+        name: String,
+    ) -> crate::zbus::Result<Vec<(String, u32, u32, u32, u64, u32, u32, String, u32)>>;
+
     /// Receive `UnitNew` signal.
     #[dbus_proxy(signal, name = "UnitNew")]
     fn unit_new(
@@ -688,6 +709,10 @@ trait Manager {
     /// Get property `Virtualization`.
     #[dbus_proxy(property, name = "Virtualization")]
     fn virtualization(&self) -> crate::zbus::Result<String>;
+
+    /// Get property `ConfidentialVirtualization`.
+    #[dbus_proxy(property, name = "ConfidentialVirtualization")]
+    fn confidential_virtualization(&self) -> crate::zbus::Result<String>;
 
     /// Get property `Architecture`.
     #[dbus_proxy(property, name = "Architecture")]
@@ -961,6 +986,14 @@ trait Manager {
     #[dbus_proxy(property, name = "DefaultBlockIOAccounting")]
     fn default_block_io_accounting(&self) -> crate::zbus::Result<bool>;
 
+    /// Get property `DefaultIOAccounting`.
+    #[dbus_proxy(property, name = "DefaultIOAccounting")]
+    fn default_io_accounting(&self) -> crate::zbus::Result<bool>;
+
+    /// Get property `DefaultIPAccounting`.
+    #[dbus_proxy(property, name = "DefaultIPAccounting")]
+    fn default_ip_accounting(&self) -> crate::zbus::Result<bool>;
+
     /// Get property `DefaultMemoryAccounting`.
     #[dbus_proxy(property, name = "DefaultMemoryAccounting")]
     fn default_memory_accounting(&self) -> crate::zbus::Result<bool>;
@@ -1101,6 +1134,14 @@ trait Manager {
     #[dbus_proxy(property, name = "DefaultTasksMax")]
     fn default_tasks_max(&self) -> crate::zbus::Result<u64>;
 
+    /// Get property `DefaultMemoryPressureThresholdUSec`.
+    #[dbus_proxy(property, name = "DefaultMemoryPressureThresholdUSec")]
+    fn default_memory_pressure_threshold_u_sec(&self) -> crate::zbus::Result<u64>;
+
+    /// Get property `DefaultMemoryPressureWatch`.
+    #[dbus_proxy(property, name = "DefaultMemoryPressureWatch")]
+    fn default_memory_pressure_watch(&self) -> crate::zbus::Result<String>;
+
     /// Get property `TimerSlackNSec`.
     #[dbus_proxy(property, name = "TimerSlackNSec")]
     fn timer_slack_n_sec(&self) -> crate::zbus::Result<u64>;
@@ -1184,6 +1225,10 @@ trait Unit {
     /// [📖](https://www.freedesktop.org/software/systemd/man/systemd.directives.html#Kill()) Call interface method `Kill`.
     #[dbus_proxy(name = "Kill")]
     fn kill(&self, whom: String, signal: i32) -> crate::zbus::Result<()>;
+
+    /// [📖](https://www.freedesktop.org/software/systemd/man/systemd.directives.html#QueueSignal()) Call interface method `QueueSignal`.
+    #[dbus_proxy(name = "QueueSignal")]
+    fn queue_signal(&self, whom: String, signal: i32, value: i32) -> crate::zbus::Result<()>;
 
     /// [📖](https://www.freedesktop.org/software/systemd/man/systemd.directives.html#ResetFailed()) Call interface method `ResetFailed`.
     #[dbus_proxy(name = "ResetFailed")]
@@ -1639,6 +1684,12 @@ trait Service {
         options: Vec<(String, String)>,
     ) -> crate::zbus::Result<()>;
 
+    /// [📖](https://www.freedesktop.org/software/systemd/man/systemd.directives.html#DumpFileDescriptorStore()) Call interface method `DumpFileDescriptorStore`.
+    #[dbus_proxy(name = "DumpFileDescriptorStore")]
+    fn dump_file_descriptor_store(
+        &self,
+    ) -> crate::zbus::Result<Vec<(String, u32, u32, u32, u64, u32, u32, String, u32)>>;
+
     /// [📖](https://www.freedesktop.org/software/systemd/man/systemd.directives.html#GetProcesses()) Call interface method `GetProcesses`.
     #[dbus_proxy(name = "GetProcesses")]
     fn get_processes(&self) -> crate::zbus::Result<Vec<(String, u32, String)>>;
@@ -1655,6 +1706,10 @@ trait Service {
     #[dbus_proxy(property, name = "Restart")]
     fn restart(&self) -> crate::zbus::Result<String>;
 
+    /// Get property `RestartMode`.
+    #[dbus_proxy(property, name = "RestartMode")]
+    fn restart_mode(&self) -> crate::zbus::Result<String>;
+
     /// Get property `PIDFile`.
     #[dbus_proxy(property, name = "PIDFile")]
     fn pid_file(&self) -> crate::zbus::Result<String>;
@@ -1666,6 +1721,18 @@ trait Service {
     /// Get property `RestartUSec`.
     #[dbus_proxy(property, name = "RestartUSec")]
     fn restart_u_sec(&self) -> crate::zbus::Result<u64>;
+
+    /// Get property `RestartSteps`.
+    #[dbus_proxy(property, name = "RestartSteps")]
+    fn restart_steps(&self) -> crate::zbus::Result<u32>;
+
+    /// Get property `RestartMaxDelayUSec`.
+    #[dbus_proxy(property, name = "RestartMaxDelayUSec")]
+    fn restart_max_delay_u_sec(&self) -> crate::zbus::Result<u64>;
+
+    /// Get property `RestartUSecNext`.
+    #[dbus_proxy(property, name = "RestartUSecNext")]
+    fn restart_u_sec_next(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `TimeoutStartUSec`.
     #[dbus_proxy(property, name = "TimeoutStartUSec")]
@@ -1750,6 +1817,10 @@ trait Service {
     /// Get property `NFileDescriptorStore`.
     #[dbus_proxy(property, name = "NFileDescriptorStore")]
     fn n_file_descriptor_store(&self) -> crate::zbus::Result<u32>;
+
+    /// Get property `FileDescriptorStorePreserve`.
+    #[dbus_proxy(property, name = "FileDescriptorStorePreserve")]
+    fn file_descriptor_store_preserve(&self) -> crate::zbus::Result<String>;
 
     /// Get property `StatusText`.
     #[dbus_proxy(property, name = "StatusText")]
@@ -2082,6 +2153,10 @@ trait Service {
     #[dbus_proxy(property, name = "DelegateControllers")]
     fn delegate_controllers(&self) -> crate::zbus::Result<Vec<String>>;
 
+    /// Get property `DelegateSubgroup`.
+    #[dbus_proxy(property, name = "DelegateSubgroup")]
+    fn delegate_subgroup(&self) -> crate::zbus::Result<String>;
+
     /// Get property `CPUAccounting`.
     #[dbus_proxy(property, name = "CPUAccounting")]
     fn cpu_accounting(&self) -> crate::zbus::Result<bool>;
@@ -2194,6 +2269,10 @@ trait Service {
     #[dbus_proxy(property, name = "DefaultMemoryLow")]
     fn default_memory_low(&self) -> crate::zbus::Result<u64>;
 
+    /// Get property `DefaultStartupMemoryLow`.
+    #[dbus_proxy(property, name = "DefaultStartupMemoryLow")]
+    fn default_startup_memory_low(&self) -> crate::zbus::Result<u64>;
+
     /// Get property `DefaultMemoryMin`.
     #[dbus_proxy(property, name = "DefaultMemoryMin")]
     fn default_memory_min(&self) -> crate::zbus::Result<u64>;
@@ -2206,21 +2285,41 @@ trait Service {
     #[dbus_proxy(property, name = "MemoryLow")]
     fn memory_low(&self) -> crate::zbus::Result<u64>;
 
+    /// Get property `StartupMemoryLow`.
+    #[dbus_proxy(property, name = "StartupMemoryLow")]
+    fn startup_memory_low(&self) -> crate::zbus::Result<u64>;
+
     /// Get property `MemoryHigh`.
     #[dbus_proxy(property, name = "MemoryHigh")]
     fn memory_high(&self) -> crate::zbus::Result<u64>;
+
+    /// Get property `StartupMemoryHigh`.
+    #[dbus_proxy(property, name = "StartupMemoryHigh")]
+    fn startup_memory_high(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `MemoryMax`.
     #[dbus_proxy(property, name = "MemoryMax")]
     fn memory_max(&self) -> crate::zbus::Result<u64>;
 
+    /// Get property `StartupMemoryMax`.
+    #[dbus_proxy(property, name = "StartupMemoryMax")]
+    fn startup_memory_max(&self) -> crate::zbus::Result<u64>;
+
     /// Get property `MemorySwapMax`.
     #[dbus_proxy(property, name = "MemorySwapMax")]
     fn memory_swap_max(&self) -> crate::zbus::Result<u64>;
 
+    /// Get property `StartupMemorySwapMax`.
+    #[dbus_proxy(property, name = "StartupMemorySwapMax")]
+    fn startup_memory_swap_max(&self) -> crate::zbus::Result<u64>;
+
     /// Get property `MemoryZSwapMax`.
     #[dbus_proxy(property, name = "MemoryZSwapMax")]
     fn memory_z_swap_max(&self) -> crate::zbus::Result<u64>;
+
+    /// Get property `StartupMemoryZSwapMax`.
+    #[dbus_proxy(property, name = "StartupMemoryZSwapMax")]
+    fn startup_memory_z_swap_max(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `MemoryLimit`.
     #[dbus_proxy(property, name = "MemoryLimit")]
@@ -2297,6 +2396,14 @@ trait Service {
     /// Get property `RestrictNetworkInterfaces`.
     #[dbus_proxy(property, name = "RestrictNetworkInterfaces")]
     fn restrict_network_interfaces(&self) -> crate::zbus::Result<(bool, Vec<String>)>;
+
+    /// Get property `MemoryPressureWatch`.
+    #[dbus_proxy(property, name = "MemoryPressureWatch")]
+    fn memory_pressure_watch(&self) -> crate::zbus::Result<String>;
+
+    /// Get property `MemoryPressureThresholdUSec`.
+    #[dbus_proxy(property, name = "MemoryPressureThresholdUSec")]
+    fn memory_pressure_threshold_u_sec(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `Environment`.
     #[dbus_proxy(property, name = "Environment")]
@@ -2481,6 +2588,10 @@ trait Service {
     /// Get property `RootVerity`.
     #[dbus_proxy(property, name = "RootVerity")]
     fn root_verity(&self) -> crate::zbus::Result<String>;
+
+    /// Get property `RootEphemeral`.
+    #[dbus_proxy(property, name = "RootEphemeral")]
+    fn root_ephemeral(&self) -> crate::zbus::Result<bool>;
 
     /// Get property `ExtensionDirectories`.
     #[dbus_proxy(property, name = "ExtensionDirectories")]
@@ -2691,6 +2802,10 @@ trait Service {
     /// Get property `LoadCredentialEncrypted`.
     #[dbus_proxy(property, name = "LoadCredentialEncrypted")]
     fn load_credential_encrypted(&self) -> crate::zbus::Result<Vec<(String, String)>>;
+
+    /// Get property `ImportCredential`.
+    #[dbus_proxy(property, name = "ImportCredential")]
+    fn import_credential(&self) -> crate::zbus::Result<Vec<String>>;
 
     /// Get property `SupplementaryGroups`.
     #[dbus_proxy(property, name = "SupplementaryGroups")]
@@ -2956,6 +3071,10 @@ trait Service {
     #[dbus_proxy(property, name = "ProtectHostname")]
     fn protect_hostname(&self) -> crate::zbus::Result<bool>;
 
+    /// Get property `MemoryKSM`.
+    #[dbus_proxy(property, name = "MemoryKSM")]
+    fn memory_ksm(&self) -> crate::zbus::Result<bool>;
+
     /// Get property `NetworkNamespacePath`.
     #[dbus_proxy(property, name = "NetworkNamespacePath")]
     fn network_namespace_path(&self) -> crate::zbus::Result<String>;
@@ -2963,6 +3082,18 @@ trait Service {
     /// Get property `IPCNamespacePath`.
     #[dbus_proxy(property, name = "IPCNamespacePath")]
     fn ipc_namespace_path(&self) -> crate::zbus::Result<String>;
+
+    /// Get property `RootImagePolicy`.
+    #[dbus_proxy(property, name = "RootImagePolicy")]
+    fn root_image_policy(&self) -> crate::zbus::Result<String>;
+
+    /// Get property `MountImagePolicy`.
+    #[dbus_proxy(property, name = "MountImagePolicy")]
+    fn mount_image_policy(&self) -> crate::zbus::Result<String>;
+
+    /// Get property `ExtensionImagePolicy`.
+    #[dbus_proxy(property, name = "ExtensionImagePolicy")]
+    fn extension_image_policy(&self) -> crate::zbus::Result<String>;
 
     /// Get property `KillMode`.
     #[dbus_proxy(property, name = "KillMode")]
@@ -3325,6 +3456,10 @@ trait Socket {
     #[dbus_proxy(property, name = "DelegateControllers")]
     fn delegate_controllers(&self) -> crate::zbus::Result<Vec<String>>;
 
+    /// Get property `DelegateSubgroup`.
+    #[dbus_proxy(property, name = "DelegateSubgroup")]
+    fn delegate_subgroup(&self) -> crate::zbus::Result<String>;
+
     /// Get property `CPUAccounting`.
     #[dbus_proxy(property, name = "CPUAccounting")]
     fn cpu_accounting(&self) -> crate::zbus::Result<bool>;
@@ -3437,6 +3572,10 @@ trait Socket {
     #[dbus_proxy(property, name = "DefaultMemoryLow")]
     fn default_memory_low(&self) -> crate::zbus::Result<u64>;
 
+    /// Get property `DefaultStartupMemoryLow`.
+    #[dbus_proxy(property, name = "DefaultStartupMemoryLow")]
+    fn default_startup_memory_low(&self) -> crate::zbus::Result<u64>;
+
     /// Get property `DefaultMemoryMin`.
     #[dbus_proxy(property, name = "DefaultMemoryMin")]
     fn default_memory_min(&self) -> crate::zbus::Result<u64>;
@@ -3449,21 +3588,41 @@ trait Socket {
     #[dbus_proxy(property, name = "MemoryLow")]
     fn memory_low(&self) -> crate::zbus::Result<u64>;
 
+    /// Get property `StartupMemoryLow`.
+    #[dbus_proxy(property, name = "StartupMemoryLow")]
+    fn startup_memory_low(&self) -> crate::zbus::Result<u64>;
+
     /// Get property `MemoryHigh`.
     #[dbus_proxy(property, name = "MemoryHigh")]
     fn memory_high(&self) -> crate::zbus::Result<u64>;
+
+    /// Get property `StartupMemoryHigh`.
+    #[dbus_proxy(property, name = "StartupMemoryHigh")]
+    fn startup_memory_high(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `MemoryMax`.
     #[dbus_proxy(property, name = "MemoryMax")]
     fn memory_max(&self) -> crate::zbus::Result<u64>;
 
+    /// Get property `StartupMemoryMax`.
+    #[dbus_proxy(property, name = "StartupMemoryMax")]
+    fn startup_memory_max(&self) -> crate::zbus::Result<u64>;
+
     /// Get property `MemorySwapMax`.
     #[dbus_proxy(property, name = "MemorySwapMax")]
     fn memory_swap_max(&self) -> crate::zbus::Result<u64>;
 
+    /// Get property `StartupMemorySwapMax`.
+    #[dbus_proxy(property, name = "StartupMemorySwapMax")]
+    fn startup_memory_swap_max(&self) -> crate::zbus::Result<u64>;
+
     /// Get property `MemoryZSwapMax`.
     #[dbus_proxy(property, name = "MemoryZSwapMax")]
     fn memory_z_swap_max(&self) -> crate::zbus::Result<u64>;
+
+    /// Get property `StartupMemoryZSwapMax`.
+    #[dbus_proxy(property, name = "StartupMemoryZSwapMax")]
+    fn startup_memory_z_swap_max(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `MemoryLimit`.
     #[dbus_proxy(property, name = "MemoryLimit")]
@@ -3540,6 +3699,14 @@ trait Socket {
     /// Get property `RestrictNetworkInterfaces`.
     #[dbus_proxy(property, name = "RestrictNetworkInterfaces")]
     fn restrict_network_interfaces(&self) -> crate::zbus::Result<(bool, Vec<String>)>;
+
+    /// Get property `MemoryPressureWatch`.
+    #[dbus_proxy(property, name = "MemoryPressureWatch")]
+    fn memory_pressure_watch(&self) -> crate::zbus::Result<String>;
+
+    /// Get property `MemoryPressureThresholdUSec`.
+    #[dbus_proxy(property, name = "MemoryPressureThresholdUSec")]
+    fn memory_pressure_threshold_u_sec(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `Environment`.
     #[dbus_proxy(property, name = "Environment")]
@@ -3724,6 +3891,10 @@ trait Socket {
     /// Get property `RootVerity`.
     #[dbus_proxy(property, name = "RootVerity")]
     fn root_verity(&self) -> crate::zbus::Result<String>;
+
+    /// Get property `RootEphemeral`.
+    #[dbus_proxy(property, name = "RootEphemeral")]
+    fn root_ephemeral(&self) -> crate::zbus::Result<bool>;
 
     /// Get property `ExtensionDirectories`.
     #[dbus_proxy(property, name = "ExtensionDirectories")]
@@ -3934,6 +4105,10 @@ trait Socket {
     /// Get property `LoadCredentialEncrypted`.
     #[dbus_proxy(property, name = "LoadCredentialEncrypted")]
     fn load_credential_encrypted(&self) -> crate::zbus::Result<Vec<(String, String)>>;
+
+    /// Get property `ImportCredential`.
+    #[dbus_proxy(property, name = "ImportCredential")]
+    fn import_credential(&self) -> crate::zbus::Result<Vec<String>>;
 
     /// Get property `SupplementaryGroups`.
     #[dbus_proxy(property, name = "SupplementaryGroups")]
@@ -4199,6 +4374,10 @@ trait Socket {
     #[dbus_proxy(property, name = "ProtectHostname")]
     fn protect_hostname(&self) -> crate::zbus::Result<bool>;
 
+    /// Get property `MemoryKSM`.
+    #[dbus_proxy(property, name = "MemoryKSM")]
+    fn memory_ksm(&self) -> crate::zbus::Result<bool>;
+
     /// Get property `NetworkNamespacePath`.
     #[dbus_proxy(property, name = "NetworkNamespacePath")]
     fn network_namespace_path(&self) -> crate::zbus::Result<String>;
@@ -4206,6 +4385,18 @@ trait Socket {
     /// Get property `IPCNamespacePath`.
     #[dbus_proxy(property, name = "IPCNamespacePath")]
     fn ipc_namespace_path(&self) -> crate::zbus::Result<String>;
+
+    /// Get property `RootImagePolicy`.
+    #[dbus_proxy(property, name = "RootImagePolicy")]
+    fn root_image_policy(&self) -> crate::zbus::Result<String>;
+
+    /// Get property `MountImagePolicy`.
+    #[dbus_proxy(property, name = "MountImagePolicy")]
+    fn mount_image_policy(&self) -> crate::zbus::Result<String>;
+
+    /// Get property `ExtensionImagePolicy`.
+    #[dbus_proxy(property, name = "ExtensionImagePolicy")]
+    fn extension_image_policy(&self) -> crate::zbus::Result<String>;
 
     /// Get property `KillMode`.
     #[dbus_proxy(property, name = "KillMode")]
@@ -4416,6 +4607,10 @@ trait Mount {
     #[dbus_proxy(property, name = "DelegateControllers")]
     fn delegate_controllers(&self) -> crate::zbus::Result<Vec<String>>;
 
+    /// Get property `DelegateSubgroup`.
+    #[dbus_proxy(property, name = "DelegateSubgroup")]
+    fn delegate_subgroup(&self) -> crate::zbus::Result<String>;
+
     /// Get property `CPUAccounting`.
     #[dbus_proxy(property, name = "CPUAccounting")]
     fn cpu_accounting(&self) -> crate::zbus::Result<bool>;
@@ -4528,6 +4723,10 @@ trait Mount {
     #[dbus_proxy(property, name = "DefaultMemoryLow")]
     fn default_memory_low(&self) -> crate::zbus::Result<u64>;
 
+    /// Get property `DefaultStartupMemoryLow`.
+    #[dbus_proxy(property, name = "DefaultStartupMemoryLow")]
+    fn default_startup_memory_low(&self) -> crate::zbus::Result<u64>;
+
     /// Get property `DefaultMemoryMin`.
     #[dbus_proxy(property, name = "DefaultMemoryMin")]
     fn default_memory_min(&self) -> crate::zbus::Result<u64>;
@@ -4540,21 +4739,41 @@ trait Mount {
     #[dbus_proxy(property, name = "MemoryLow")]
     fn memory_low(&self) -> crate::zbus::Result<u64>;
 
+    /// Get property `StartupMemoryLow`.
+    #[dbus_proxy(property, name = "StartupMemoryLow")]
+    fn startup_memory_low(&self) -> crate::zbus::Result<u64>;
+
     /// Get property `MemoryHigh`.
     #[dbus_proxy(property, name = "MemoryHigh")]
     fn memory_high(&self) -> crate::zbus::Result<u64>;
+
+    /// Get property `StartupMemoryHigh`.
+    #[dbus_proxy(property, name = "StartupMemoryHigh")]
+    fn startup_memory_high(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `MemoryMax`.
     #[dbus_proxy(property, name = "MemoryMax")]
     fn memory_max(&self) -> crate::zbus::Result<u64>;
 
+    /// Get property `StartupMemoryMax`.
+    #[dbus_proxy(property, name = "StartupMemoryMax")]
+    fn startup_memory_max(&self) -> crate::zbus::Result<u64>;
+
     /// Get property `MemorySwapMax`.
     #[dbus_proxy(property, name = "MemorySwapMax")]
     fn memory_swap_max(&self) -> crate::zbus::Result<u64>;
 
+    /// Get property `StartupMemorySwapMax`.
+    #[dbus_proxy(property, name = "StartupMemorySwapMax")]
+    fn startup_memory_swap_max(&self) -> crate::zbus::Result<u64>;
+
     /// Get property `MemoryZSwapMax`.
     #[dbus_proxy(property, name = "MemoryZSwapMax")]
     fn memory_z_swap_max(&self) -> crate::zbus::Result<u64>;
+
+    /// Get property `StartupMemoryZSwapMax`.
+    #[dbus_proxy(property, name = "StartupMemoryZSwapMax")]
+    fn startup_memory_z_swap_max(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `MemoryLimit`.
     #[dbus_proxy(property, name = "MemoryLimit")]
@@ -4631,6 +4850,14 @@ trait Mount {
     /// Get property `RestrictNetworkInterfaces`.
     #[dbus_proxy(property, name = "RestrictNetworkInterfaces")]
     fn restrict_network_interfaces(&self) -> crate::zbus::Result<(bool, Vec<String>)>;
+
+    /// Get property `MemoryPressureWatch`.
+    #[dbus_proxy(property, name = "MemoryPressureWatch")]
+    fn memory_pressure_watch(&self) -> crate::zbus::Result<String>;
+
+    /// Get property `MemoryPressureThresholdUSec`.
+    #[dbus_proxy(property, name = "MemoryPressureThresholdUSec")]
+    fn memory_pressure_threshold_u_sec(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `Environment`.
     #[dbus_proxy(property, name = "Environment")]
@@ -4815,6 +5042,10 @@ trait Mount {
     /// Get property `RootVerity`.
     #[dbus_proxy(property, name = "RootVerity")]
     fn root_verity(&self) -> crate::zbus::Result<String>;
+
+    /// Get property `RootEphemeral`.
+    #[dbus_proxy(property, name = "RootEphemeral")]
+    fn root_ephemeral(&self) -> crate::zbus::Result<bool>;
 
     /// Get property `ExtensionDirectories`.
     #[dbus_proxy(property, name = "ExtensionDirectories")]
@@ -5025,6 +5256,10 @@ trait Mount {
     /// Get property `LoadCredentialEncrypted`.
     #[dbus_proxy(property, name = "LoadCredentialEncrypted")]
     fn load_credential_encrypted(&self) -> crate::zbus::Result<Vec<(String, String)>>;
+
+    /// Get property `ImportCredential`.
+    #[dbus_proxy(property, name = "ImportCredential")]
+    fn import_credential(&self) -> crate::zbus::Result<Vec<String>>;
 
     /// Get property `SupplementaryGroups`.
     #[dbus_proxy(property, name = "SupplementaryGroups")]
@@ -5290,6 +5525,10 @@ trait Mount {
     #[dbus_proxy(property, name = "ProtectHostname")]
     fn protect_hostname(&self) -> crate::zbus::Result<bool>;
 
+    /// Get property `MemoryKSM`.
+    #[dbus_proxy(property, name = "MemoryKSM")]
+    fn memory_ksm(&self) -> crate::zbus::Result<bool>;
+
     /// Get property `NetworkNamespacePath`.
     #[dbus_proxy(property, name = "NetworkNamespacePath")]
     fn network_namespace_path(&self) -> crate::zbus::Result<String>;
@@ -5297,6 +5536,18 @@ trait Mount {
     /// Get property `IPCNamespacePath`.
     #[dbus_proxy(property, name = "IPCNamespacePath")]
     fn ipc_namespace_path(&self) -> crate::zbus::Result<String>;
+
+    /// Get property `RootImagePolicy`.
+    #[dbus_proxy(property, name = "RootImagePolicy")]
+    fn root_image_policy(&self) -> crate::zbus::Result<String>;
+
+    /// Get property `MountImagePolicy`.
+    #[dbus_proxy(property, name = "MountImagePolicy")]
+    fn mount_image_policy(&self) -> crate::zbus::Result<String>;
+
+    /// Get property `ExtensionImagePolicy`.
+    #[dbus_proxy(property, name = "ExtensionImagePolicy")]
+    fn extension_image_policy(&self) -> crate::zbus::Result<String>;
 
     /// Get property `KillMode`.
     #[dbus_proxy(property, name = "KillMode")]
@@ -5561,6 +5812,10 @@ trait Swap {
     #[dbus_proxy(property, name = "DelegateControllers")]
     fn delegate_controllers(&self) -> crate::zbus::Result<Vec<String>>;
 
+    /// Get property `DelegateSubgroup`.
+    #[dbus_proxy(property, name = "DelegateSubgroup")]
+    fn delegate_subgroup(&self) -> crate::zbus::Result<String>;
+
     /// Get property `CPUAccounting`.
     #[dbus_proxy(property, name = "CPUAccounting")]
     fn cpu_accounting(&self) -> crate::zbus::Result<bool>;
@@ -5673,6 +5928,10 @@ trait Swap {
     #[dbus_proxy(property, name = "DefaultMemoryLow")]
     fn default_memory_low(&self) -> crate::zbus::Result<u64>;
 
+    /// Get property `DefaultStartupMemoryLow`.
+    #[dbus_proxy(property, name = "DefaultStartupMemoryLow")]
+    fn default_startup_memory_low(&self) -> crate::zbus::Result<u64>;
+
     /// Get property `DefaultMemoryMin`.
     #[dbus_proxy(property, name = "DefaultMemoryMin")]
     fn default_memory_min(&self) -> crate::zbus::Result<u64>;
@@ -5685,21 +5944,41 @@ trait Swap {
     #[dbus_proxy(property, name = "MemoryLow")]
     fn memory_low(&self) -> crate::zbus::Result<u64>;
 
+    /// Get property `StartupMemoryLow`.
+    #[dbus_proxy(property, name = "StartupMemoryLow")]
+    fn startup_memory_low(&self) -> crate::zbus::Result<u64>;
+
     /// Get property `MemoryHigh`.
     #[dbus_proxy(property, name = "MemoryHigh")]
     fn memory_high(&self) -> crate::zbus::Result<u64>;
+
+    /// Get property `StartupMemoryHigh`.
+    #[dbus_proxy(property, name = "StartupMemoryHigh")]
+    fn startup_memory_high(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `MemoryMax`.
     #[dbus_proxy(property, name = "MemoryMax")]
     fn memory_max(&self) -> crate::zbus::Result<u64>;
 
+    /// Get property `StartupMemoryMax`.
+    #[dbus_proxy(property, name = "StartupMemoryMax")]
+    fn startup_memory_max(&self) -> crate::zbus::Result<u64>;
+
     /// Get property `MemorySwapMax`.
     #[dbus_proxy(property, name = "MemorySwapMax")]
     fn memory_swap_max(&self) -> crate::zbus::Result<u64>;
 
+    /// Get property `StartupMemorySwapMax`.
+    #[dbus_proxy(property, name = "StartupMemorySwapMax")]
+    fn startup_memory_swap_max(&self) -> crate::zbus::Result<u64>;
+
     /// Get property `MemoryZSwapMax`.
     #[dbus_proxy(property, name = "MemoryZSwapMax")]
     fn memory_z_swap_max(&self) -> crate::zbus::Result<u64>;
+
+    /// Get property `StartupMemoryZSwapMax`.
+    #[dbus_proxy(property, name = "StartupMemoryZSwapMax")]
+    fn startup_memory_z_swap_max(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `MemoryLimit`.
     #[dbus_proxy(property, name = "MemoryLimit")]
@@ -5776,6 +6055,14 @@ trait Swap {
     /// Get property `RestrictNetworkInterfaces`.
     #[dbus_proxy(property, name = "RestrictNetworkInterfaces")]
     fn restrict_network_interfaces(&self) -> crate::zbus::Result<(bool, Vec<String>)>;
+
+    /// Get property `MemoryPressureWatch`.
+    #[dbus_proxy(property, name = "MemoryPressureWatch")]
+    fn memory_pressure_watch(&self) -> crate::zbus::Result<String>;
+
+    /// Get property `MemoryPressureThresholdUSec`.
+    #[dbus_proxy(property, name = "MemoryPressureThresholdUSec")]
+    fn memory_pressure_threshold_u_sec(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `Environment`.
     #[dbus_proxy(property, name = "Environment")]
@@ -5960,6 +6247,10 @@ trait Swap {
     /// Get property `RootVerity`.
     #[dbus_proxy(property, name = "RootVerity")]
     fn root_verity(&self) -> crate::zbus::Result<String>;
+
+    /// Get property `RootEphemeral`.
+    #[dbus_proxy(property, name = "RootEphemeral")]
+    fn root_ephemeral(&self) -> crate::zbus::Result<bool>;
 
     /// Get property `ExtensionDirectories`.
     #[dbus_proxy(property, name = "ExtensionDirectories")]
@@ -6170,6 +6461,10 @@ trait Swap {
     /// Get property `LoadCredentialEncrypted`.
     #[dbus_proxy(property, name = "LoadCredentialEncrypted")]
     fn load_credential_encrypted(&self) -> crate::zbus::Result<Vec<(String, String)>>;
+
+    /// Get property `ImportCredential`.
+    #[dbus_proxy(property, name = "ImportCredential")]
+    fn import_credential(&self) -> crate::zbus::Result<Vec<String>>;
 
     /// Get property `SupplementaryGroups`.
     #[dbus_proxy(property, name = "SupplementaryGroups")]
@@ -6435,6 +6730,10 @@ trait Swap {
     #[dbus_proxy(property, name = "ProtectHostname")]
     fn protect_hostname(&self) -> crate::zbus::Result<bool>;
 
+    /// Get property `MemoryKSM`.
+    #[dbus_proxy(property, name = "MemoryKSM")]
+    fn memory_ksm(&self) -> crate::zbus::Result<bool>;
+
     /// Get property `NetworkNamespacePath`.
     #[dbus_proxy(property, name = "NetworkNamespacePath")]
     fn network_namespace_path(&self) -> crate::zbus::Result<String>;
@@ -6442,6 +6741,18 @@ trait Swap {
     /// Get property `IPCNamespacePath`.
     #[dbus_proxy(property, name = "IPCNamespacePath")]
     fn ipc_namespace_path(&self) -> crate::zbus::Result<String>;
+
+    /// Get property `RootImagePolicy`.
+    #[dbus_proxy(property, name = "RootImagePolicy")]
+    fn root_image_policy(&self) -> crate::zbus::Result<String>;
+
+    /// Get property `MountImagePolicy`.
+    #[dbus_proxy(property, name = "MountImagePolicy")]
+    fn mount_image_policy(&self) -> crate::zbus::Result<String>;
+
+    /// Get property `ExtensionImagePolicy`.
+    #[dbus_proxy(property, name = "ExtensionImagePolicy")]
+    fn extension_image_policy(&self) -> crate::zbus::Result<String>;
 
     /// Get property `KillMode`.
     #[dbus_proxy(property, name = "KillMode")]
@@ -6601,6 +6912,10 @@ trait Slice {
     #[dbus_proxy(property, name = "DelegateControllers")]
     fn delegate_controllers(&self) -> crate::zbus::Result<Vec<String>>;
 
+    /// Get property `DelegateSubgroup`.
+    #[dbus_proxy(property, name = "DelegateSubgroup")]
+    fn delegate_subgroup(&self) -> crate::zbus::Result<String>;
+
     /// Get property `CPUAccounting`.
     #[dbus_proxy(property, name = "CPUAccounting")]
     fn cpu_accounting(&self) -> crate::zbus::Result<bool>;
@@ -6713,6 +7028,10 @@ trait Slice {
     #[dbus_proxy(property, name = "DefaultMemoryLow")]
     fn default_memory_low(&self) -> crate::zbus::Result<u64>;
 
+    /// Get property `DefaultStartupMemoryLow`.
+    #[dbus_proxy(property, name = "DefaultStartupMemoryLow")]
+    fn default_startup_memory_low(&self) -> crate::zbus::Result<u64>;
+
     /// Get property `DefaultMemoryMin`.
     #[dbus_proxy(property, name = "DefaultMemoryMin")]
     fn default_memory_min(&self) -> crate::zbus::Result<u64>;
@@ -6725,21 +7044,41 @@ trait Slice {
     #[dbus_proxy(property, name = "MemoryLow")]
     fn memory_low(&self) -> crate::zbus::Result<u64>;
 
+    /// Get property `StartupMemoryLow`.
+    #[dbus_proxy(property, name = "StartupMemoryLow")]
+    fn startup_memory_low(&self) -> crate::zbus::Result<u64>;
+
     /// Get property `MemoryHigh`.
     #[dbus_proxy(property, name = "MemoryHigh")]
     fn memory_high(&self) -> crate::zbus::Result<u64>;
+
+    /// Get property `StartupMemoryHigh`.
+    #[dbus_proxy(property, name = "StartupMemoryHigh")]
+    fn startup_memory_high(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `MemoryMax`.
     #[dbus_proxy(property, name = "MemoryMax")]
     fn memory_max(&self) -> crate::zbus::Result<u64>;
 
+    /// Get property `StartupMemoryMax`.
+    #[dbus_proxy(property, name = "StartupMemoryMax")]
+    fn startup_memory_max(&self) -> crate::zbus::Result<u64>;
+
     /// Get property `MemorySwapMax`.
     #[dbus_proxy(property, name = "MemorySwapMax")]
     fn memory_swap_max(&self) -> crate::zbus::Result<u64>;
 
+    /// Get property `StartupMemorySwapMax`.
+    #[dbus_proxy(property, name = "StartupMemorySwapMax")]
+    fn startup_memory_swap_max(&self) -> crate::zbus::Result<u64>;
+
     /// Get property `MemoryZSwapMax`.
     #[dbus_proxy(property, name = "MemoryZSwapMax")]
     fn memory_z_swap_max(&self) -> crate::zbus::Result<u64>;
+
+    /// Get property `StartupMemoryZSwapMax`.
+    #[dbus_proxy(property, name = "StartupMemoryZSwapMax")]
+    fn startup_memory_z_swap_max(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `MemoryLimit`.
     #[dbus_proxy(property, name = "MemoryLimit")]
@@ -6816,6 +7155,14 @@ trait Slice {
     /// Get property `RestrictNetworkInterfaces`.
     #[dbus_proxy(property, name = "RestrictNetworkInterfaces")]
     fn restrict_network_interfaces(&self) -> crate::zbus::Result<(bool, Vec<String>)>;
+
+    /// Get property `MemoryPressureWatch`.
+    #[dbus_proxy(property, name = "MemoryPressureWatch")]
+    fn memory_pressure_watch(&self) -> crate::zbus::Result<String>;
+
+    /// Get property `MemoryPressureThresholdUSec`.
+    #[dbus_proxy(property, name = "MemoryPressureThresholdUSec")]
+    fn memory_pressure_threshold_u_sec(&self) -> crate::zbus::Result<u64>;
 }
 
 /// Proxy object for `org.freedesktop.systemd1.Scope`.
@@ -6942,6 +7289,10 @@ trait Scope {
     #[dbus_proxy(property, name = "DelegateControllers")]
     fn delegate_controllers(&self) -> crate::zbus::Result<Vec<String>>;
 
+    /// Get property `DelegateSubgroup`.
+    #[dbus_proxy(property, name = "DelegateSubgroup")]
+    fn delegate_subgroup(&self) -> crate::zbus::Result<String>;
+
     /// Get property `CPUAccounting`.
     #[dbus_proxy(property, name = "CPUAccounting")]
     fn cpu_accounting(&self) -> crate::zbus::Result<bool>;
@@ -7054,6 +7405,10 @@ trait Scope {
     #[dbus_proxy(property, name = "DefaultMemoryLow")]
     fn default_memory_low(&self) -> crate::zbus::Result<u64>;
 
+    /// Get property `DefaultStartupMemoryLow`.
+    #[dbus_proxy(property, name = "DefaultStartupMemoryLow")]
+    fn default_startup_memory_low(&self) -> crate::zbus::Result<u64>;
+
     /// Get property `DefaultMemoryMin`.
     #[dbus_proxy(property, name = "DefaultMemoryMin")]
     fn default_memory_min(&self) -> crate::zbus::Result<u64>;
@@ -7066,21 +7421,41 @@ trait Scope {
     #[dbus_proxy(property, name = "MemoryLow")]
     fn memory_low(&self) -> crate::zbus::Result<u64>;
 
+    /// Get property `StartupMemoryLow`.
+    #[dbus_proxy(property, name = "StartupMemoryLow")]
+    fn startup_memory_low(&self) -> crate::zbus::Result<u64>;
+
     /// Get property `MemoryHigh`.
     #[dbus_proxy(property, name = "MemoryHigh")]
     fn memory_high(&self) -> crate::zbus::Result<u64>;
+
+    /// Get property `StartupMemoryHigh`.
+    #[dbus_proxy(property, name = "StartupMemoryHigh")]
+    fn startup_memory_high(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `MemoryMax`.
     #[dbus_proxy(property, name = "MemoryMax")]
     fn memory_max(&self) -> crate::zbus::Result<u64>;
 
+    /// Get property `StartupMemoryMax`.
+    #[dbus_proxy(property, name = "StartupMemoryMax")]
+    fn startup_memory_max(&self) -> crate::zbus::Result<u64>;
+
     /// Get property `MemorySwapMax`.
     #[dbus_proxy(property, name = "MemorySwapMax")]
     fn memory_swap_max(&self) -> crate::zbus::Result<u64>;
 
+    /// Get property `StartupMemorySwapMax`.
+    #[dbus_proxy(property, name = "StartupMemorySwapMax")]
+    fn startup_memory_swap_max(&self) -> crate::zbus::Result<u64>;
+
     /// Get property `MemoryZSwapMax`.
     #[dbus_proxy(property, name = "MemoryZSwapMax")]
     fn memory_z_swap_max(&self) -> crate::zbus::Result<u64>;
+
+    /// Get property `StartupMemoryZSwapMax`.
+    #[dbus_proxy(property, name = "StartupMemoryZSwapMax")]
+    fn startup_memory_z_swap_max(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `MemoryLimit`.
     #[dbus_proxy(property, name = "MemoryLimit")]
@@ -7157,6 +7532,14 @@ trait Scope {
     /// Get property `RestrictNetworkInterfaces`.
     #[dbus_proxy(property, name = "RestrictNetworkInterfaces")]
     fn restrict_network_interfaces(&self) -> crate::zbus::Result<(bool, Vec<String>)>;
+
+    /// Get property `MemoryPressureWatch`.
+    #[dbus_proxy(property, name = "MemoryPressureWatch")]
+    fn memory_pressure_watch(&self) -> crate::zbus::Result<String>;
+
+    /// Get property `MemoryPressureThresholdUSec`.
+    #[dbus_proxy(property, name = "MemoryPressureThresholdUSec")]
+    fn memory_pressure_threshold_u_sec(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `KillMode`.
     #[dbus_proxy(property, name = "KillMode")]
