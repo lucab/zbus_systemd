@@ -1526,6 +1526,10 @@ trait Unit {
     #[dbus_proxy(property, name = "DefaultDependencies")]
     fn default_dependencies(&self) -> crate::zbus::Result<bool>;
 
+    /// Get property `SurviveFinalKillSignal`.
+    #[dbus_proxy(property, name = "SurviveFinalKillSignal")]
+    fn survive_final_kill_signal(&self) -> crate::zbus::Result<bool>;
+
     /// Get property `OnSuccessJobMode`.
     #[dbus_proxy(property, name = "OnSuccessJobMode")]
     fn on_success_job_mode(&self) -> crate::zbus::Result<String>;
@@ -2093,6 +2097,22 @@ trait Service {
     #[dbus_proxy(property, name = "MemoryCurrent")]
     fn memory_current(&self) -> crate::zbus::Result<u64>;
 
+    /// Get property `MemoryPeak`.
+    #[dbus_proxy(property, name = "MemoryPeak")]
+    fn memory_peak(&self) -> crate::zbus::Result<u64>;
+
+    /// Get property `MemorySwapCurrent`.
+    #[dbus_proxy(property, name = "MemorySwapCurrent")]
+    fn memory_swap_current(&self) -> crate::zbus::Result<u64>;
+
+    /// Get property `MemorySwapPeak`.
+    #[dbus_proxy(property, name = "MemorySwapPeak")]
+    fn memory_swap_peak(&self) -> crate::zbus::Result<u64>;
+
+    /// Get property `MemoryZSwapCurrent`.
+    #[dbus_proxy(property, name = "MemoryZSwapCurrent")]
+    fn memory_z_swap_current(&self) -> crate::zbus::Result<u64>;
+
     /// Get property `MemoryAvailable`.
     #[dbus_proxy(property, name = "MemoryAvailable")]
     fn memory_available(&self) -> crate::zbus::Result<u64>;
@@ -2404,6 +2424,14 @@ trait Service {
     /// Get property `MemoryPressureThresholdUSec`.
     #[dbus_proxy(property, name = "MemoryPressureThresholdUSec")]
     fn memory_pressure_threshold_u_sec(&self) -> crate::zbus::Result<u64>;
+
+    /// Get property `NFTSet`.
+    #[dbus_proxy(property, name = "NFTSet")]
+    fn nft_set(&self) -> crate::zbus::Result<Vec<(i32, i32, String, String)>>;
+
+    /// Get property `CoredumpReceive`.
+    #[dbus_proxy(property, name = "CoredumpReceive")]
+    fn coredump_receive(&self) -> crate::zbus::Result<bool>;
 
     /// Get property `Environment`.
     #[dbus_proxy(property, name = "Environment")]
@@ -2782,6 +2810,10 @@ trait Service {
     /// Get property `DynamicUser`.
     #[dbus_proxy(property, name = "DynamicUser")]
     fn dynamic_user(&self) -> crate::zbus::Result<bool>;
+
+    /// Get property `SetLoginEnvironment`.
+    #[dbus_proxy(property, name = "SetLoginEnvironment")]
+    fn set_login_environment(&self) -> crate::zbus::Result<bool>;
 
     /// Get property `RemoveIPC`.
     #[dbus_proxy(property, name = "RemoveIPC")]
@@ -3348,6 +3380,14 @@ trait Socket {
     #[dbus_proxy(property, name = "TriggerLimitBurst")]
     fn trigger_limit_burst(&self) -> crate::zbus::Result<u32>;
 
+    /// Get property `PollLimitIntervalUSec`.
+    #[dbus_proxy(property, name = "PollLimitIntervalUSec")]
+    fn poll_limit_interval_u_sec(&self) -> crate::zbus::Result<u64>;
+
+    /// Get property `PollLimitBurst`.
+    #[dbus_proxy(property, name = "PollLimitBurst")]
+    fn poll_limit_burst(&self) -> crate::zbus::Result<u32>;
+
     /// Get property `UID`.
     #[dbus_proxy(property, name = "UID")]
     fn uid(&self) -> crate::zbus::Result<u32>;
@@ -3395,6 +3435,22 @@ trait Socket {
     /// Get property `MemoryCurrent`.
     #[dbus_proxy(property, name = "MemoryCurrent")]
     fn memory_current(&self) -> crate::zbus::Result<u64>;
+
+    /// Get property `MemoryPeak`.
+    #[dbus_proxy(property, name = "MemoryPeak")]
+    fn memory_peak(&self) -> crate::zbus::Result<u64>;
+
+    /// Get property `MemorySwapCurrent`.
+    #[dbus_proxy(property, name = "MemorySwapCurrent")]
+    fn memory_swap_current(&self) -> crate::zbus::Result<u64>;
+
+    /// Get property `MemorySwapPeak`.
+    #[dbus_proxy(property, name = "MemorySwapPeak")]
+    fn memory_swap_peak(&self) -> crate::zbus::Result<u64>;
+
+    /// Get property `MemoryZSwapCurrent`.
+    #[dbus_proxy(property, name = "MemoryZSwapCurrent")]
+    fn memory_z_swap_current(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `MemoryAvailable`.
     #[dbus_proxy(property, name = "MemoryAvailable")]
@@ -3707,6 +3763,14 @@ trait Socket {
     /// Get property `MemoryPressureThresholdUSec`.
     #[dbus_proxy(property, name = "MemoryPressureThresholdUSec")]
     fn memory_pressure_threshold_u_sec(&self) -> crate::zbus::Result<u64>;
+
+    /// Get property `NFTSet`.
+    #[dbus_proxy(property, name = "NFTSet")]
+    fn nft_set(&self) -> crate::zbus::Result<Vec<(i32, i32, String, String)>>;
+
+    /// Get property `CoredumpReceive`.
+    #[dbus_proxy(property, name = "CoredumpReceive")]
+    fn coredump_receive(&self) -> crate::zbus::Result<bool>;
 
     /// Get property `Environment`.
     #[dbus_proxy(property, name = "Environment")]
@@ -4085,6 +4149,10 @@ trait Socket {
     /// Get property `DynamicUser`.
     #[dbus_proxy(property, name = "DynamicUser")]
     fn dynamic_user(&self) -> crate::zbus::Result<bool>;
+
+    /// Get property `SetLoginEnvironment`.
+    #[dbus_proxy(property, name = "SetLoginEnvironment")]
+    fn set_login_environment(&self) -> crate::zbus::Result<bool>;
 
     /// Get property `RemoveIPC`.
     #[dbus_proxy(property, name = "RemoveIPC")]
@@ -4547,6 +4615,22 @@ trait Mount {
     #[dbus_proxy(property, name = "MemoryCurrent")]
     fn memory_current(&self) -> crate::zbus::Result<u64>;
 
+    /// Get property `MemoryPeak`.
+    #[dbus_proxy(property, name = "MemoryPeak")]
+    fn memory_peak(&self) -> crate::zbus::Result<u64>;
+
+    /// Get property `MemorySwapCurrent`.
+    #[dbus_proxy(property, name = "MemorySwapCurrent")]
+    fn memory_swap_current(&self) -> crate::zbus::Result<u64>;
+
+    /// Get property `MemorySwapPeak`.
+    #[dbus_proxy(property, name = "MemorySwapPeak")]
+    fn memory_swap_peak(&self) -> crate::zbus::Result<u64>;
+
+    /// Get property `MemoryZSwapCurrent`.
+    #[dbus_proxy(property, name = "MemoryZSwapCurrent")]
+    fn memory_z_swap_current(&self) -> crate::zbus::Result<u64>;
+
     /// Get property `MemoryAvailable`.
     #[dbus_proxy(property, name = "MemoryAvailable")]
     fn memory_available(&self) -> crate::zbus::Result<u64>;
@@ -4858,6 +4942,14 @@ trait Mount {
     /// Get property `MemoryPressureThresholdUSec`.
     #[dbus_proxy(property, name = "MemoryPressureThresholdUSec")]
     fn memory_pressure_threshold_u_sec(&self) -> crate::zbus::Result<u64>;
+
+    /// Get property `NFTSet`.
+    #[dbus_proxy(property, name = "NFTSet")]
+    fn nft_set(&self) -> crate::zbus::Result<Vec<(i32, i32, String, String)>>;
+
+    /// Get property `CoredumpReceive`.
+    #[dbus_proxy(property, name = "CoredumpReceive")]
+    fn coredump_receive(&self) -> crate::zbus::Result<bool>;
 
     /// Get property `Environment`.
     #[dbus_proxy(property, name = "Environment")]
@@ -5236,6 +5328,10 @@ trait Mount {
     /// Get property `DynamicUser`.
     #[dbus_proxy(property, name = "DynamicUser")]
     fn dynamic_user(&self) -> crate::zbus::Result<bool>;
+
+    /// Get property `SetLoginEnvironment`.
+    #[dbus_proxy(property, name = "SetLoginEnvironment")]
+    fn set_login_environment(&self) -> crate::zbus::Result<bool>;
 
     /// Get property `RemoveIPC`.
     #[dbus_proxy(property, name = "RemoveIPC")]
@@ -5752,6 +5848,22 @@ trait Swap {
     #[dbus_proxy(property, name = "MemoryCurrent")]
     fn memory_current(&self) -> crate::zbus::Result<u64>;
 
+    /// Get property `MemoryPeak`.
+    #[dbus_proxy(property, name = "MemoryPeak")]
+    fn memory_peak(&self) -> crate::zbus::Result<u64>;
+
+    /// Get property `MemorySwapCurrent`.
+    #[dbus_proxy(property, name = "MemorySwapCurrent")]
+    fn memory_swap_current(&self) -> crate::zbus::Result<u64>;
+
+    /// Get property `MemorySwapPeak`.
+    #[dbus_proxy(property, name = "MemorySwapPeak")]
+    fn memory_swap_peak(&self) -> crate::zbus::Result<u64>;
+
+    /// Get property `MemoryZSwapCurrent`.
+    #[dbus_proxy(property, name = "MemoryZSwapCurrent")]
+    fn memory_z_swap_current(&self) -> crate::zbus::Result<u64>;
+
     /// Get property `MemoryAvailable`.
     #[dbus_proxy(property, name = "MemoryAvailable")]
     fn memory_available(&self) -> crate::zbus::Result<u64>;
@@ -6063,6 +6175,14 @@ trait Swap {
     /// Get property `MemoryPressureThresholdUSec`.
     #[dbus_proxy(property, name = "MemoryPressureThresholdUSec")]
     fn memory_pressure_threshold_u_sec(&self) -> crate::zbus::Result<u64>;
+
+    /// Get property `NFTSet`.
+    #[dbus_proxy(property, name = "NFTSet")]
+    fn nft_set(&self) -> crate::zbus::Result<Vec<(i32, i32, String, String)>>;
+
+    /// Get property `CoredumpReceive`.
+    #[dbus_proxy(property, name = "CoredumpReceive")]
+    fn coredump_receive(&self) -> crate::zbus::Result<bool>;
 
     /// Get property `Environment`.
     #[dbus_proxy(property, name = "Environment")]
@@ -6441,6 +6561,10 @@ trait Swap {
     /// Get property `DynamicUser`.
     #[dbus_proxy(property, name = "DynamicUser")]
     fn dynamic_user(&self) -> crate::zbus::Result<bool>;
+
+    /// Get property `SetLoginEnvironment`.
+    #[dbus_proxy(property, name = "SetLoginEnvironment")]
+    fn set_login_environment(&self) -> crate::zbus::Result<bool>;
 
     /// Get property `RemoveIPC`.
     #[dbus_proxy(property, name = "RemoveIPC")]
@@ -6852,6 +6976,22 @@ trait Slice {
     #[dbus_proxy(property, name = "MemoryCurrent")]
     fn memory_current(&self) -> crate::zbus::Result<u64>;
 
+    /// Get property `MemoryPeak`.
+    #[dbus_proxy(property, name = "MemoryPeak")]
+    fn memory_peak(&self) -> crate::zbus::Result<u64>;
+
+    /// Get property `MemorySwapCurrent`.
+    #[dbus_proxy(property, name = "MemorySwapCurrent")]
+    fn memory_swap_current(&self) -> crate::zbus::Result<u64>;
+
+    /// Get property `MemorySwapPeak`.
+    #[dbus_proxy(property, name = "MemorySwapPeak")]
+    fn memory_swap_peak(&self) -> crate::zbus::Result<u64>;
+
+    /// Get property `MemoryZSwapCurrent`.
+    #[dbus_proxy(property, name = "MemoryZSwapCurrent")]
+    fn memory_z_swap_current(&self) -> crate::zbus::Result<u64>;
+
     /// Get property `MemoryAvailable`.
     #[dbus_proxy(property, name = "MemoryAvailable")]
     fn memory_available(&self) -> crate::zbus::Result<u64>;
@@ -7163,6 +7303,14 @@ trait Slice {
     /// Get property `MemoryPressureThresholdUSec`.
     #[dbus_proxy(property, name = "MemoryPressureThresholdUSec")]
     fn memory_pressure_threshold_u_sec(&self) -> crate::zbus::Result<u64>;
+
+    /// Get property `NFTSet`.
+    #[dbus_proxy(property, name = "NFTSet")]
+    fn nft_set(&self) -> crate::zbus::Result<Vec<(i32, i32, String, String)>>;
+
+    /// Get property `CoredumpReceive`.
+    #[dbus_proxy(property, name = "CoredumpReceive")]
+    fn coredump_receive(&self) -> crate::zbus::Result<bool>;
 }
 
 /// Proxy object for `org.freedesktop.systemd1.Scope`.
@@ -7229,6 +7377,22 @@ trait Scope {
     #[dbus_proxy(property, name = "MemoryCurrent")]
     fn memory_current(&self) -> crate::zbus::Result<u64>;
 
+    /// Get property `MemoryPeak`.
+    #[dbus_proxy(property, name = "MemoryPeak")]
+    fn memory_peak(&self) -> crate::zbus::Result<u64>;
+
+    /// Get property `MemorySwapCurrent`.
+    #[dbus_proxy(property, name = "MemorySwapCurrent")]
+    fn memory_swap_current(&self) -> crate::zbus::Result<u64>;
+
+    /// Get property `MemorySwapPeak`.
+    #[dbus_proxy(property, name = "MemorySwapPeak")]
+    fn memory_swap_peak(&self) -> crate::zbus::Result<u64>;
+
+    /// Get property `MemoryZSwapCurrent`.
+    #[dbus_proxy(property, name = "MemoryZSwapCurrent")]
+    fn memory_z_swap_current(&self) -> crate::zbus::Result<u64>;
+
     /// Get property `MemoryAvailable`.
     #[dbus_proxy(property, name = "MemoryAvailable")]
     fn memory_available(&self) -> crate::zbus::Result<u64>;
@@ -7540,6 +7704,14 @@ trait Scope {
     /// Get property `MemoryPressureThresholdUSec`.
     #[dbus_proxy(property, name = "MemoryPressureThresholdUSec")]
     fn memory_pressure_threshold_u_sec(&self) -> crate::zbus::Result<u64>;
+
+    /// Get property `NFTSet`.
+    #[dbus_proxy(property, name = "NFTSet")]
+    fn nft_set(&self) -> crate::zbus::Result<Vec<(i32, i32, String, String)>>;
+
+    /// Get property `CoredumpReceive`.
+    #[dbus_proxy(property, name = "CoredumpReceive")]
+    fn coredump_receive(&self) -> crate::zbus::Result<bool>;
 
     /// Get property `KillMode`.
     #[dbus_proxy(property, name = "KillMode")]

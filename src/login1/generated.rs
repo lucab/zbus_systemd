@@ -93,6 +93,36 @@ trait Manager {
         bool,
     )>;
 
+    /// [📖](https://www.freedesktop.org/software/systemd/man/systemd.directives.html#CreateSessionWithPIDFD()) Call interface method `CreateSessionWithPIDFD`.
+    #[dbus_proxy(name = "CreateSessionWithPIDFD")]
+    fn create_session_with_pidfd(
+        &self,
+        uid: u32,
+        pidfd: crate::zvariant::OwnedFd,
+        service: String,
+        typelabel: String,
+        class: String,
+        desktop: String,
+        seat_id: String,
+        vtnr: u32,
+        tty: String,
+        display: String,
+        remote: bool,
+        remote_user: String,
+        remote_host: String,
+        flags: u64,
+        properties: Vec<(String, crate::zvariant::OwnedValue)>,
+    ) -> crate::zbus::Result<(
+        String,
+        crate::zvariant::OwnedObjectPath,
+        String,
+        crate::zvariant::OwnedFd,
+        u32,
+        String,
+        u32,
+        bool,
+    )>;
+
     /// [📖](https://www.freedesktop.org/software/systemd/man/systemd.directives.html#ReleaseSession()) Call interface method `ReleaseSession`.
     #[dbus_proxy(name = "ReleaseSession")]
     fn release_session(&self, session_id: String) -> crate::zbus::Result<()>;
@@ -358,6 +388,14 @@ trait Manager {
     /// Receive `PrepareForShutdown` signal.
     #[dbus_proxy(signal, name = "PrepareForShutdown")]
     fn prepare_for_shutdown(&self, start: bool) -> crate::zbus::Result<()>;
+
+    /// Receive `PrepareForShutdownWithMetadata` signal.
+    #[dbus_proxy(signal, name = "PrepareForShutdownWithMetadata")]
+    fn prepare_for_shutdown_with_metadata(
+        &self,
+        start: bool,
+        metadata: ::std::collections::HashMap<String, crate::zvariant::OwnedValue>,
+    ) -> crate::zbus::Result<()>;
 
     /// Receive `PrepareForSleep` signal.
     #[dbus_proxy(signal, name = "PrepareForSleep")]
