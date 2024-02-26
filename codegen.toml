@@ -43,6 +43,11 @@ interface = "org.freedesktop.machine1.Machine"
 [[service.machine1.overrides]]
 interface = "org.freedesktop.machine1.Manager"
 
+[service.network1]
+hierarchy = "/org/freedesktop/network1"
+id = "org.freedesktop.network1"
+module = "network1"
+
 [service.oom1]
 hierarchy = "/org/freedesktop/oom1"
 id = "org.freedesktop.oom1"
