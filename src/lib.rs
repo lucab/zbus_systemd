@@ -32,6 +32,10 @@ pub mod login1;
 #[cfg(feature = "machine1")]
 pub mod machine1;
 
+#[cfg_attr(docsrs, doc(cfg(feature = "network1")))]
+#[cfg(feature = "network1")]
+pub mod network1;
+
 #[cfg_attr(docsrs, doc(cfg(feature = "oom1")))]
 #[cfg(feature = "oom1")]
 pub mod oom1;
