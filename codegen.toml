@@ -38,10 +38,6 @@ todo_properties = ["Type"]
 hierarchy = "/org/freedesktop/machine1"
 id = "org.freedesktop.machine1"
 module = "machine1"
-[[service.machine1.overrides]]
-interface = "org.freedesktop.machine1.Machine"
-[[service.machine1.overrides]]
-interface = "org.freedesktop.machine1.Manager"
 
 [service.network1]
 hierarchy = "/org/freedesktop/network1"
@@ -58,8 +54,6 @@ hierarchy = "/org/freedesktop/portable1"
 id = "org.freedesktop.portable1"
 module = "portable1"
 [[service.portable1.overrides]]
-interface = "org.freedesktop.portable1.Manager"
-[[service.portable1.overrides]]
 interface = "org.freedesktop.portable1.Image"
 todo_properties = ["Type"]
 
@@ -67,8 +61,6 @@ todo_properties = ["Type"]
 hierarchy = "/org/freedesktop/resolve1"
 id = "org.freedesktop.resolve1"
 module = "resolve1"
-[[service.resolve1.overrides]]
-interface = "org.freedesktop.resolve1.Manager"
 
 [service.systemd1]
 hierarchy = "/org/freedesktop/systemd1"
@@ -90,8 +82,6 @@ todo_properties = [
 interface = "org.freedesktop.systemd1.Service"
 todo_properties = ["Type"]
 [[service.systemd1.overrides]]
-interface = "org.freedesktop.systemd1.Socket"
-[[service.systemd1.overrides]]
 interface = "org.freedesktop.systemd1.Automount"
 todo_properties = ["Where"]
 [[service.systemd1.overrides]]
@@ -100,8 +90,6 @@ todo_properties = [
     "Where",
     "Type",
 ]
-[[service.systemd1.overrides]]
-interface = "org.freedesktop.systemd1.Swap"
 
 [service.timedate1]
 default_object = "Timedated"
