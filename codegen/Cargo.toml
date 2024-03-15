@@ -8,8 +8,8 @@ publish = false
 [dependencies]
 anyhow = "1"
 fn-error-context = "0.2"
-heck = "0.4"
+heck = "0.5"
 nom = "7"
 serde = { version = "1", features = ["derive"] }
-toml = "0.5"
+toml = "0.8"
 xmltree = "0.10"
