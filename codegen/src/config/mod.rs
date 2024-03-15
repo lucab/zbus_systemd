@@ -14,9 +14,9 @@ pub(crate) struct CodegenConfig {
 
 impl CodegenConfig {
     pub(crate) fn parse_toml(input: &mut impl BufRead) -> Result<CodegenConfig> {
-        let mut content = vec![];
-        input.read_to_end(&mut content)?;
-        let cfg: CodegenConfig = toml::from_slice(&content)?;
+        let mut content = String::new();
+        input.read_to_string(&mut content)?;
+        let cfg: CodegenConfig = toml::from_str(&content)?;
         Ok(cfg)
     }
 
