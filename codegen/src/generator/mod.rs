@@ -15,7 +15,7 @@ pub(crate) fn generate(output: &mut impl Write, nodes: Vec<Node>, service: &Serv
     writeln!(output, "\n")?;
 
     if !nodes.is_empty() {
-        writeln!(output, "use zbus::dbus_proxy;")?;
+        writeln!(output, "use crate::zbus::proxy;")?;
         writeln!(output, "\n")?;
 
         for object in nodes {
@@ -31,7 +31,7 @@ pub(crate) fn generate(output: &mut impl Write, nodes: Vec<Node>, service: &Serv
 fn generate_single_object(file: &mut impl Write, node: Node, service: &Service) -> Result<()> {
     writeln!(file, "/// Proxy object for `{}`.", node.interface)?;
 
-    writeln!(file, "#[dbus_proxy(")?;
+    writeln!(file, "#[proxy(")?;
     {
         writeln!(file, r#"interface = "{}","#, node.interface)?;
         writeln!(file, r#"gen_blocking = false,"#)?;
@@ -107,7 +107,7 @@ fn emit_methods(
             "/// [📖]({}) Call interface method `{}`.",
             directive_link, method.name,
         )?;
-        writeln!(output, r#"#[dbus_proxy(name = "{}")]"#, method.name)?;
+        writeln!(output, r#"#[zbus(name = "{}")]"#, method.name)?;
         writeln!(output, "fn {}(&self,", method.name.to_snake_case())?;
         for arg in inputs {
             writeln!(output, "  {}: {},", arg.0, arg.1)?;
@@ -135,7 +135,7 @@ fn emit_signals(output: &mut impl Write, signals: &[data::Signal]) -> Result<()>
 
         let fn_name = entry.name.to_snake_case();
         writeln!(output, "/// Receive `{}` signal.", entry.name)?;
-        writeln!(output, r#"#[dbus_proxy(signal, name = "{}")]"#, entry.name)?;
+        writeln!(output, r#"#[zbus(signal, name = "{}")]"#, entry.name)?;
         writeln!(output, "fn {}(&self,", fn_name,)?;
         for (name, rtype) in args {
             let mangled_name = match name.as_str() {
@@ -180,7 +180,7 @@ fn emit_properties(
         writeln!(output, "/// Get property `{}`.", entry.name)?;
         writeln!(
             output,
-            r#"#[dbus_proxy(property, name = "{}")]"#,
+            r#"#[zbus(property, name = "{}")]"#,
             entry.name
         )?;
         writeln!(
