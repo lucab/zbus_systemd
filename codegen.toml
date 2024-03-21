@@ -29,7 +29,6 @@ id = "org.freedesktop.login1"
 module = "login1"
 [[service.login1.overrides]]
 interface = "org.freedesktop.login1.Manager"
-todo_properties = ["EnableWallMessages", "WallMessage"]
 [[service.login1.overrides]]
 interface = "org.freedesktop.login1.Session"
 todo_properties = ["Type"]
@@ -68,16 +67,6 @@ id = "org.freedesktop.systemd1"
 module = "systemd1"
 [[service.systemd1.overrides]]
 interface = "org.freedesktop.systemd1.Manager"
-todo_properties = [
-    "LogLevel",
-    "LogTarget",
-    "RuntimeWatchdogUSec",
-    "RebootWatchdogUSec",
-    "KExecWatchdogUSec",
-    "ServiceWatchdogs",
-    "RuntimeWatchdogPreUSec",
-    "RuntimeWatchdogPreGovernor",
-]
 [[service.systemd1.overrides]]
 interface = "org.freedesktop.systemd1.Service"
 todo_properties = ["Type"]
