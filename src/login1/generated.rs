@@ -401,6 +401,22 @@ trait Manager {
     #[zbus(signal, name = "PrepareForSleep")]
     fn prepare_for_sleep(&self, start: bool) -> crate::zbus::Result<()>;
 
+    /// Get property `EnableWallMessages`.
+    #[zbus(property, name = "EnableWallMessages")]
+    fn enable_wall_messages(&self) -> crate::zbus::Result<bool>;
+
+    /// Set property `EnableWallMessages`.
+    #[zbus(property, name = "EnableWallMessages")]
+    fn set_property_enable_wall_messages(&self, new_value: bool) -> crate::zbus::Result<()>;
+
+    /// Get property `WallMessage`.
+    #[zbus(property, name = "WallMessage")]
+    fn wall_message(&self) -> crate::zbus::Result<String>;
+
+    /// Set property `WallMessage`.
+    #[zbus(property, name = "WallMessage")]
+    fn set_property_wall_message(&self, new_value: String) -> crate::zbus::Result<()>;
+
     /// Get property `NAutoVTs`.
     #[zbus(property, name = "NAutoVTs")]
     fn n_auto_v_ts(&self) -> crate::zbus::Result<u32>;
