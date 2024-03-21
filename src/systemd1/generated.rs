@@ -874,6 +874,22 @@ trait Manager {
     #[zbus(property, name = "InitRDUnitsLoadFinishTimestampMonotonic")]
     fn init_rd_units_load_finish_timestamp_monotonic(&self) -> crate::zbus::Result<u64>;
 
+    /// Get property `LogLevel`.
+    #[zbus(property, name = "LogLevel")]
+    fn log_level(&self) -> crate::zbus::Result<String>;
+
+    /// Set property `LogLevel`.
+    #[zbus(property, name = "LogLevel")]
+    fn set_property_log_level(&self, new_value: String) -> crate::zbus::Result<()>;
+
+    /// Get property `LogTarget`.
+    #[zbus(property, name = "LogTarget")]
+    fn log_target(&self) -> crate::zbus::Result<String>;
+
+    /// Set property `LogTarget`.
+    #[zbus(property, name = "LogTarget")]
+    fn set_property_log_target(&self, new_value: String) -> crate::zbus::Result<()>;
+
     /// Get property `NNames`.
     #[zbus(property, name = "NNames")]
     fn n_names(&self) -> crate::zbus::Result<u32>;
@@ -933,6 +949,57 @@ trait Manager {
     /// Get property `WatchdogLastPingTimestampMonotonic`.
     #[zbus(property, name = "WatchdogLastPingTimestampMonotonic")]
     fn watchdog_last_ping_timestamp_monotonic(&self) -> crate::zbus::Result<u64>;
+
+    /// Get property `RuntimeWatchdogUSec`.
+    #[zbus(property, name = "RuntimeWatchdogUSec")]
+    fn runtime_watchdog_u_sec(&self) -> crate::zbus::Result<u64>;
+
+    /// Set property `RuntimeWatchdogUSec`.
+    #[zbus(property, name = "RuntimeWatchdogUSec")]
+    fn set_property_runtime_watchdog_u_sec(&self, new_value: u64) -> crate::zbus::Result<()>;
+
+    /// Get property `RuntimeWatchdogPreUSec`.
+    #[zbus(property, name = "RuntimeWatchdogPreUSec")]
+    fn runtime_watchdog_pre_u_sec(&self) -> crate::zbus::Result<u64>;
+
+    /// Set property `RuntimeWatchdogPreUSec`.
+    #[zbus(property, name = "RuntimeWatchdogPreUSec")]
+    fn set_property_runtime_watchdog_pre_u_sec(&self, new_value: u64) -> crate::zbus::Result<()>;
+
+    /// Get property `RuntimeWatchdogPreGovernor`.
+    #[zbus(property, name = "RuntimeWatchdogPreGovernor")]
+    fn runtime_watchdog_pre_governor(&self) -> crate::zbus::Result<String>;
+
+    /// Set property `RuntimeWatchdogPreGovernor`.
+    #[zbus(property, name = "RuntimeWatchdogPreGovernor")]
+    fn set_property_runtime_watchdog_pre_governor(
+        &self,
+        new_value: String,
+    ) -> crate::zbus::Result<()>;
+
+    /// Get property `RebootWatchdogUSec`.
+    #[zbus(property, name = "RebootWatchdogUSec")]
+    fn reboot_watchdog_u_sec(&self) -> crate::zbus::Result<u64>;
+
+    /// Set property `RebootWatchdogUSec`.
+    #[zbus(property, name = "RebootWatchdogUSec")]
+    fn set_property_reboot_watchdog_u_sec(&self, new_value: u64) -> crate::zbus::Result<()>;
+
+    /// Get property `KExecWatchdogUSec`.
+    #[zbus(property, name = "KExecWatchdogUSec")]
+    fn k_exec_watchdog_u_sec(&self) -> crate::zbus::Result<u64>;
+
+    /// Set property `KExecWatchdogUSec`.
+    #[zbus(property, name = "KExecWatchdogUSec")]
+    fn set_property_k_exec_watchdog_u_sec(&self, new_value: u64) -> crate::zbus::Result<()>;
+
+    /// Get property `ServiceWatchdogs`.
+    #[zbus(property, name = "ServiceWatchdogs")]
+    fn service_watchdogs(&self) -> crate::zbus::Result<bool>;
+
+    /// Set property `ServiceWatchdogs`.
+    #[zbus(property, name = "ServiceWatchdogs")]
+    fn set_property_service_watchdogs(&self, new_value: bool) -> crate::zbus::Result<()>;
 
     /// Get property `ControlGroup`.
     #[zbus(property, name = "ControlGroup")]

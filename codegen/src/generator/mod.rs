@@ -2,7 +2,7 @@ mod ztypes;
 
 use crate::config::Service;
 use crate::parser::data::{self, Node};
-use anyhow::{bail, format_err, Context, Result};
+use anyhow::{format_err, Context, Result};
 use heck::ToSnakeCase;
 use std::collections::HashSet;
 use std::io::Write;
@@ -161,16 +161,8 @@ fn emit_properties(
             continue;
         }
 
-        if entry.writable {
-            bail!("Skipping property '{}' due to readwrite mode", entry.name);
-        }
-
-        let mut fn_name = entry.name.to_snake_case();
-        if entry.writable {
-            fn_name = "set_".to_string() + &fn_name;
-        }
-
-        let output_type = ztypes::translate_sig(&entry.type_label).with_context(|| {
+        let fn_name = entry.name.to_snake_case();
+        let decoded_type = ztypes::translate_sig(&entry.type_label).with_context(|| {
             format_err!(
                 "Failed to generate property '{}' due to unhandled arguments",
                 entry.name,
@@ -182,9 +174,23 @@ fn emit_properties(
         writeln!(
             output,
             "fn {}(&self) -> crate::zbus::Result<{}>;",
-            fn_name, output_type,
+            fn_name, decoded_type,
         )?;
         writeln!(output)?;
+
+        if entry.writable {
+            // NOTE(lucab): `set_property_` prefix is ugly, but a shorter `set_`
+            // prefix unfortunately will result in a conflict on `SetWallMessage`
+            // method.
+            writeln!(output, "/// Set property `{}`.", entry.name)?;
+            writeln!(output, r#"#[zbus(property, name = "{}")]"#, entry.name)?;
+            writeln!(
+                output,
+                "fn set_property_{}(&self, new_value: {}) -> crate::zbus::Result<()>;",
+                fn_name, decoded_type,
+            )?;
+            writeln!(output)?;
+        }
     }
     Ok(())
 }
