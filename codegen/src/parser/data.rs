@@ -35,6 +35,7 @@ pub(crate) struct Property {
     pub(crate) name: String,
     pub(crate) type_label: String,
     pub(crate) writable: bool,
+    pub(crate) emits_changed_signal: String,
 }
 
 #[derive(Debug)]
