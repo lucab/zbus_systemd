@@ -161,7 +161,12 @@ fn emit_properties(
             continue;
         }
 
-        let fn_name = entry.name.to_snake_case();
+        let fn_name = match entry.name.as_str() {
+            "Where" | "Type" => {
+                format!("{}_property", entry.name.to_snake_case())
+            }
+            x => x.to_snake_case(),
+        };
         let decoded_type = ztypes::translate_sig(&entry.type_label).with_context(|| {
             format_err!(
                 "Failed to generate property '{}' due to unhandled arguments",
@@ -187,7 +192,8 @@ fn emit_properties(
             writeln!(
                 output,
                 "fn set_property_{}(&self, new_value: {}) -> crate::zbus::Result<()>;",
-                fn_name, decoded_type,
+                entry.name.to_snake_case(),
+                decoded_type,
             )?;
             writeln!(output)?;
         }

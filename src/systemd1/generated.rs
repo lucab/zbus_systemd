@@ -1769,6 +1769,10 @@ trait Service {
     #[zbus(name = "AttachProcesses")]
     fn attach_processes(&self, subcgroup: String, pids: Vec<u32>) -> crate::zbus::Result<()>;
 
+    /// Get property `Type`.
+    #[zbus(property, name = "Type")]
+    fn type_property(&self) -> crate::zbus::Result<String>;
+
     /// Get property `ExitType`.
     #[zbus(property, name = "ExitType")]
     fn exit_type(&self) -> crate::zbus::Result<String>;
@@ -4600,6 +4604,10 @@ trait Mount {
     #[zbus(name = "AttachProcesses")]
     fn attach_processes(&self, subcgroup: String, pids: Vec<u32>) -> crate::zbus::Result<()>;
 
+    /// Get property `Where`.
+    #[zbus(property, name = "Where")]
+    fn where_property(&self) -> crate::zbus::Result<String>;
+
     /// Get property `What`.
     #[zbus(property, name = "What")]
     fn what(&self) -> crate::zbus::Result<String>;
@@ -4607,6 +4615,10 @@ trait Mount {
     /// Get property `Options`.
     #[zbus(property, name = "Options")]
     fn options(&self) -> crate::zbus::Result<String>;
+
+    /// Get property `Type`.
+    #[zbus(property, name = "Type")]
+    fn type_property(&self) -> crate::zbus::Result<String>;
 
     /// Get property `TimeoutUSec`.
     #[zbus(property, name = "TimeoutUSec")]
@@ -5749,6 +5761,10 @@ trait Mount {
     assume_defaults = false
 )]
 trait Automount {
+    /// Get property `Where`.
+    #[zbus(property, name = "Where")]
+    fn where_property(&self) -> crate::zbus::Result<String>;
+
     /// Get property `ExtraOptions`.
     #[zbus(property, name = "ExtraOptions")]
     fn extra_options(&self) -> crate::zbus::Result<String>;

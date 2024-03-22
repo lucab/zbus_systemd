@@ -902,6 +902,10 @@ trait Session {
     #[zbus(property, name = "Audit")]
     fn audit(&self) -> crate::zbus::Result<u32>;
 
+    /// Get property `Type`.
+    #[zbus(property, name = "Type")]
+    fn type_property(&self) -> crate::zbus::Result<String>;
+
     /// Get property `Class`.
     #[zbus(property, name = "Class")]
     fn class(&self) -> crate::zbus::Result<String>;
