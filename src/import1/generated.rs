@@ -143,6 +143,10 @@ trait Transfer {
     #[zbus(property, name = "Remote")]
     fn remote(&self) -> crate::zbus::Result<String>;
 
+    /// Get property `Type`.
+    #[zbus(property, name = "Type")]
+    fn type_property(&self) -> crate::zbus::Result<String>;
+
     /// Get property `Verify`.
     #[zbus(property, name = "Verify")]
     fn verify(&self) -> crate::zbus::Result<String>;

@@ -297,6 +297,10 @@ trait Image {
     #[zbus(property, name = "Path")]
     fn path(&self) -> crate::zbus::Result<String>;
 
+    /// Get property `Type`.
+    #[zbus(property, name = "Type")]
+    fn type_property(&self) -> crate::zbus::Result<String>;
+
     /// Get property `ReadOnly`.
     #[zbus(property, name = "ReadOnly")]
     fn read_only(&self) -> crate::zbus::Result<bool>;
