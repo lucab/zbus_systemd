@@ -15,7 +15,6 @@ id = "org.freedesktop.import1"
 module = "import1"
 [[service.import1.overrides]]
 interface = "org.freedesktop.import1.Transfer"
-todo_properties = ["Type"]
 
 [service.locale1]
 default_object = "Localed"
@@ -31,7 +30,6 @@ module = "login1"
 interface = "org.freedesktop.login1.Manager"
 [[service.login1.overrides]]
 interface = "org.freedesktop.login1.Session"
-todo_properties = ["Type"]
 
 [service.machine1]
 hierarchy = "/org/freedesktop/machine1"
@@ -54,7 +52,6 @@ id = "org.freedesktop.portable1"
 module = "portable1"
 [[service.portable1.overrides]]
 interface = "org.freedesktop.portable1.Image"
-todo_properties = ["Type"]
 
 [service.resolve1]
 hierarchy = "/org/freedesktop/resolve1"
@@ -69,16 +66,10 @@ module = "systemd1"
 interface = "org.freedesktop.systemd1.Manager"
 [[service.systemd1.overrides]]
 interface = "org.freedesktop.systemd1.Service"
-todo_properties = ["Type"]
 [[service.systemd1.overrides]]
 interface = "org.freedesktop.systemd1.Automount"
-todo_properties = ["Where"]
 [[service.systemd1.overrides]]
 interface = "org.freedesktop.systemd1.Mount"
-todo_properties = [
-    "Where",
-    "Type",
-]
 
 [service.timedate1]
 default_object = "Timedated"
