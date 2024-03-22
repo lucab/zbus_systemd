@@ -116,31 +116,31 @@ trait Manager {
     fn describe(&self) -> crate::zbus::Result<String>;
 
     /// Get property `OperationalState`.
-    #[zbus(property, name = "OperationalState")]
+    #[zbus(property(emits_changed_signal = "true"), name = "OperationalState")]
     fn operational_state(&self) -> crate::zbus::Result<String>;
 
     /// Get property `CarrierState`.
-    #[zbus(property, name = "CarrierState")]
+    #[zbus(property(emits_changed_signal = "true"), name = "CarrierState")]
     fn carrier_state(&self) -> crate::zbus::Result<String>;
 
     /// Get property `AddressState`.
-    #[zbus(property, name = "AddressState")]
+    #[zbus(property(emits_changed_signal = "true"), name = "AddressState")]
     fn address_state(&self) -> crate::zbus::Result<String>;
 
     /// Get property `IPv4AddressState`.
-    #[zbus(property, name = "IPv4AddressState")]
+    #[zbus(property(emits_changed_signal = "true"), name = "IPv4AddressState")]
     fn i_pv4_address_state(&self) -> crate::zbus::Result<String>;
 
     /// Get property `IPv6AddressState`.
-    #[zbus(property, name = "IPv6AddressState")]
+    #[zbus(property(emits_changed_signal = "true"), name = "IPv6AddressState")]
     fn i_pv6_address_state(&self) -> crate::zbus::Result<String>;
 
     /// Get property `OnlineState`.
-    #[zbus(property, name = "OnlineState")]
+    #[zbus(property(emits_changed_signal = "true"), name = "OnlineState")]
     fn online_state(&self) -> crate::zbus::Result<String>;
 
     /// Get property `NamespaceId`.
-    #[zbus(property, name = "NamespaceId")]
+    #[zbus(property(emits_changed_signal = "const"), name = "NamespaceId")]
     fn namespace_id(&self) -> crate::zbus::Result<u64>;
 }
 
@@ -217,35 +217,35 @@ trait Link {
     fn describe(&self) -> crate::zbus::Result<String>;
 
     /// Get property `OperationalState`.
-    #[zbus(property, name = "OperationalState")]
+    #[zbus(property(emits_changed_signal = "true"), name = "OperationalState")]
     fn operational_state(&self) -> crate::zbus::Result<String>;
 
     /// Get property `CarrierState`.
-    #[zbus(property, name = "CarrierState")]
+    #[zbus(property(emits_changed_signal = "true"), name = "CarrierState")]
     fn carrier_state(&self) -> crate::zbus::Result<String>;
 
     /// Get property `AddressState`.
-    #[zbus(property, name = "AddressState")]
+    #[zbus(property(emits_changed_signal = "true"), name = "AddressState")]
     fn address_state(&self) -> crate::zbus::Result<String>;
 
     /// Get property `IPv4AddressState`.
-    #[zbus(property, name = "IPv4AddressState")]
+    #[zbus(property(emits_changed_signal = "true"), name = "IPv4AddressState")]
     fn i_pv4_address_state(&self) -> crate::zbus::Result<String>;
 
     /// Get property `IPv6AddressState`.
-    #[zbus(property, name = "IPv6AddressState")]
+    #[zbus(property(emits_changed_signal = "true"), name = "IPv6AddressState")]
     fn i_pv6_address_state(&self) -> crate::zbus::Result<String>;
 
     /// Get property `OnlineState`.
-    #[zbus(property, name = "OnlineState")]
+    #[zbus(property(emits_changed_signal = "true"), name = "OnlineState")]
     fn online_state(&self) -> crate::zbus::Result<String>;
 
     /// Get property `AdministrativeState`.
-    #[zbus(property, name = "AdministrativeState")]
+    #[zbus(property(emits_changed_signal = "true"), name = "AdministrativeState")]
     fn administrative_state(&self) -> crate::zbus::Result<String>;
 
     /// Get property `BitRates`.
-    #[zbus(property, name = "BitRates")]
+    #[zbus(property(emits_changed_signal = "false"), name = "BitRates")]
     fn bit_rates(&self) -> crate::zbus::Result<(u64, u64)>;
 }
 
@@ -258,31 +258,31 @@ trait Link {
 )]
 trait Network {
     /// Get property `Description`.
-    #[zbus(property, name = "Description")]
+    #[zbus(property(emits_changed_signal = "const"), name = "Description")]
     fn description(&self) -> crate::zbus::Result<String>;
 
     /// Get property `SourcePath`.
-    #[zbus(property, name = "SourcePath")]
+    #[zbus(property(emits_changed_signal = "const"), name = "SourcePath")]
     fn source_path(&self) -> crate::zbus::Result<String>;
 
     /// Get property `MatchMAC`.
-    #[zbus(property, name = "MatchMAC")]
+    #[zbus(property(emits_changed_signal = "const"), name = "MatchMAC")]
     fn match_mac(&self) -> crate::zbus::Result<Vec<String>>;
 
     /// Get property `MatchPath`.
-    #[zbus(property, name = "MatchPath")]
+    #[zbus(property(emits_changed_signal = "const"), name = "MatchPath")]
     fn match_path(&self) -> crate::zbus::Result<Vec<String>>;
 
     /// Get property `MatchDriver`.
-    #[zbus(property, name = "MatchDriver")]
+    #[zbus(property(emits_changed_signal = "const"), name = "MatchDriver")]
     fn match_driver(&self) -> crate::zbus::Result<Vec<String>>;
 
     /// Get property `MatchType`.
-    #[zbus(property, name = "MatchType")]
+    #[zbus(property(emits_changed_signal = "const"), name = "MatchType")]
     fn match_type(&self) -> crate::zbus::Result<Vec<String>>;
 
     /// Get property `MatchName`.
-    #[zbus(property, name = "MatchName")]
+    #[zbus(property(emits_changed_signal = "const"), name = "MatchName")]
     fn match_name(&self) -> crate::zbus::Result<Vec<String>>;
 }
 
@@ -295,7 +295,7 @@ trait Network {
 )]
 trait DHCPServer {
     /// Get property `Leases`.
-    #[zbus(property, name = "Leases")]
+    #[zbus(property(emits_changed_signal = "true"), name = "Leases")]
     fn leases(&self) -> crate::zbus::Result<Vec<(u32, Vec<u8>, Vec<u8>, Vec<u8>, Vec<u8>, u64)>>;
 }
 
@@ -308,7 +308,7 @@ trait DHCPServer {
 )]
 trait DHCPv4Client {
     /// Get property `State`.
-    #[zbus(property, name = "State")]
+    #[zbus(property(emits_changed_signal = "true"), name = "State")]
     fn state(&self) -> crate::zbus::Result<String>;
 }
 
@@ -321,6 +321,6 @@ trait DHCPv4Client {
 )]
 trait DHCPv6Client {
     /// Get property `State`.
-    #[zbus(property, name = "State")]
+    #[zbus(property(emits_changed_signal = "true"), name = "State")]
     fn state(&self) -> crate::zbus::Result<String>;
 }

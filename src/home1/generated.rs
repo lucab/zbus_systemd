@@ -166,7 +166,7 @@ trait Manager {
     fn rebalance(&self) -> crate::zbus::Result<()>;
 
     /// Get property `AutoLogin`.
-    #[zbus(property, name = "AutoLogin")]
+    #[zbus(property(emits_changed_signal = "true"), name = "AutoLogin")]
     fn auto_login(
         &self,
     ) -> crate::zbus::Result<Vec<(String, String, crate::zvariant::OwnedObjectPath)>>;
@@ -245,22 +245,22 @@ trait Home {
     fn release(&self) -> crate::zbus::Result<()>;
 
     /// Get property `UserName`.
-    #[zbus(property, name = "UserName")]
+    #[zbus(property(emits_changed_signal = "const"), name = "UserName")]
     fn user_name(&self) -> crate::zbus::Result<String>;
 
     /// Get property `UID`.
-    #[zbus(property, name = "UID")]
+    #[zbus(property(emits_changed_signal = "true"), name = "UID")]
     fn uid(&self) -> crate::zbus::Result<u32>;
 
     /// Get property `UnixRecord`.
-    #[zbus(property, name = "UnixRecord")]
+    #[zbus(property(emits_changed_signal = "true"), name = "UnixRecord")]
     fn unix_record(&self) -> crate::zbus::Result<(String, u32, u32, String, String, String)>;
 
     /// Get property `State`.
-    #[zbus(property, name = "State")]
+    #[zbus(property(emits_changed_signal = "false"), name = "State")]
     fn state(&self) -> crate::zbus::Result<String>;
 
     /// Get property `UserRecord`.
-    #[zbus(property, name = "UserRecord")]
+    #[zbus(property(emits_changed_signal = "invalidates"), name = "UserRecord")]
     fn user_record(&self) -> crate::zbus::Result<(String, bool)>;
 }

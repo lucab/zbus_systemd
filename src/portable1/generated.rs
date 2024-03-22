@@ -158,19 +158,19 @@ trait Manager {
     fn set_pool_limit(&self, limit: u64) -> crate::zbus::Result<()>;
 
     /// Get property `PoolPath`.
-    #[zbus(property, name = "PoolPath")]
+    #[zbus(property(emits_changed_signal = "false"), name = "PoolPath")]
     fn pool_path(&self) -> crate::zbus::Result<String>;
 
     /// Get property `PoolUsage`.
-    #[zbus(property, name = "PoolUsage")]
+    #[zbus(property(emits_changed_signal = "false"), name = "PoolUsage")]
     fn pool_usage(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `PoolLimit`.
-    #[zbus(property, name = "PoolLimit")]
+    #[zbus(property(emits_changed_signal = "false"), name = "PoolLimit")]
     fn pool_limit(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `Profiles`.
-    #[zbus(property, name = "Profiles")]
+    #[zbus(property(emits_changed_signal = "false"), name = "Profiles")]
     fn profiles(&self) -> crate::zbus::Result<Vec<String>>;
 }
 
@@ -290,42 +290,45 @@ trait Image {
     fn set_limit(&self, limit: u64) -> crate::zbus::Result<()>;
 
     /// Get property `Name`.
-    #[zbus(property, name = "Name")]
+    #[zbus(property(emits_changed_signal = "false"), name = "Name")]
     fn name(&self) -> crate::zbus::Result<String>;
 
     /// Get property `Path`.
-    #[zbus(property, name = "Path")]
+    #[zbus(property(emits_changed_signal = "false"), name = "Path")]
     fn path(&self) -> crate::zbus::Result<String>;
 
     /// Get property `Type`.
-    #[zbus(property, name = "Type")]
+    #[zbus(property(emits_changed_signal = "false"), name = "Type")]
     fn type_property(&self) -> crate::zbus::Result<String>;
 
     /// Get property `ReadOnly`.
-    #[zbus(property, name = "ReadOnly")]
+    #[zbus(property(emits_changed_signal = "false"), name = "ReadOnly")]
     fn read_only(&self) -> crate::zbus::Result<bool>;
 
     /// Get property `CreationTimestamp`.
-    #[zbus(property, name = "CreationTimestamp")]
+    #[zbus(property(emits_changed_signal = "false"), name = "CreationTimestamp")]
     fn creation_timestamp(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `ModificationTimestamp`.
-    #[zbus(property, name = "ModificationTimestamp")]
+    #[zbus(
+        property(emits_changed_signal = "false"),
+        name = "ModificationTimestamp"
+    )]
     fn modification_timestamp(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `Usage`.
-    #[zbus(property, name = "Usage")]
+    #[zbus(property(emits_changed_signal = "false"), name = "Usage")]
     fn usage(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `Limit`.
-    #[zbus(property, name = "Limit")]
+    #[zbus(property(emits_changed_signal = "false"), name = "Limit")]
     fn limit(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `UsageExclusive`.
-    #[zbus(property, name = "UsageExclusive")]
+    #[zbus(property(emits_changed_signal = "false"), name = "UsageExclusive")]
     fn usage_exclusive(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `LimitExclusive`.
-    #[zbus(property, name = "LimitExclusive")]
+    #[zbus(property(emits_changed_signal = "false"), name = "LimitExclusive")]
     fn limit_exclusive(&self) -> crate::zbus::Result<u64>;
 }

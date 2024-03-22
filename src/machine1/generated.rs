@@ -299,15 +299,15 @@ trait Manager {
     ) -> crate::zbus::Result<()>;
 
     /// Get property `PoolPath`.
-    #[zbus(property, name = "PoolPath")]
+    #[zbus(property(emits_changed_signal = "false"), name = "PoolPath")]
     fn pool_path(&self) -> crate::zbus::Result<String>;
 
     /// Get property `PoolUsage`.
-    #[zbus(property, name = "PoolUsage")]
+    #[zbus(property(emits_changed_signal = "false"), name = "PoolUsage")]
     fn pool_usage(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `PoolLimit`.
-    #[zbus(property, name = "PoolLimit")]
+    #[zbus(property(emits_changed_signal = "false"), name = "PoolLimit")]
     fn pool_limit(&self) -> crate::zbus::Result<u64>;
 }
 
@@ -398,46 +398,46 @@ trait Machine {
     fn open_root_directory(&self) -> crate::zbus::Result<crate::zvariant::OwnedFd>;
 
     /// Get property `Name`.
-    #[zbus(property, name = "Name")]
+    #[zbus(property(emits_changed_signal = "const"), name = "Name")]
     fn name(&self) -> crate::zbus::Result<String>;
 
     /// Get property `Id`.
-    #[zbus(property, name = "Id")]
+    #[zbus(property(emits_changed_signal = "const"), name = "Id")]
     fn id(&self) -> crate::zbus::Result<Vec<u8>>;
 
     /// Get property `Timestamp`.
-    #[zbus(property, name = "Timestamp")]
+    #[zbus(property(emits_changed_signal = "const"), name = "Timestamp")]
     fn timestamp(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `TimestampMonotonic`.
-    #[zbus(property, name = "TimestampMonotonic")]
+    #[zbus(property(emits_changed_signal = "const"), name = "TimestampMonotonic")]
     fn timestamp_monotonic(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `Service`.
-    #[zbus(property, name = "Service")]
+    #[zbus(property(emits_changed_signal = "const"), name = "Service")]
     fn service(&self) -> crate::zbus::Result<String>;
 
     /// Get property `Unit`.
-    #[zbus(property, name = "Unit")]
+    #[zbus(property(emits_changed_signal = "const"), name = "Unit")]
     fn unit(&self) -> crate::zbus::Result<String>;
 
     /// Get property `Leader`.
-    #[zbus(property, name = "Leader")]
+    #[zbus(property(emits_changed_signal = "const"), name = "Leader")]
     fn leader(&self) -> crate::zbus::Result<u32>;
 
     /// Get property `Class`.
-    #[zbus(property, name = "Class")]
+    #[zbus(property(emits_changed_signal = "const"), name = "Class")]
     fn class(&self) -> crate::zbus::Result<String>;
 
     /// Get property `RootDirectory`.
-    #[zbus(property, name = "RootDirectory")]
+    #[zbus(property(emits_changed_signal = "const"), name = "RootDirectory")]
     fn root_directory(&self) -> crate::zbus::Result<String>;
 
     /// Get property `NetworkInterfaces`.
-    #[zbus(property, name = "NetworkInterfaces")]
+    #[zbus(property(emits_changed_signal = "const"), name = "NetworkInterfaces")]
     fn network_interfaces(&self) -> crate::zbus::Result<Vec<i32>>;
 
     /// Get property `State`.
-    #[zbus(property, name = "State")]
+    #[zbus(property(emits_changed_signal = "false"), name = "State")]
     fn state(&self) -> crate::zbus::Result<String>;
 }

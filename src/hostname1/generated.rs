@@ -51,86 +51,95 @@ trait Hostnamed {
     fn describe(&self) -> crate::zbus::Result<String>;
 
     /// Get property `Hostname`.
-    #[zbus(property, name = "Hostname")]
+    #[zbus(property(emits_changed_signal = "true"), name = "Hostname")]
     fn hostname(&self) -> crate::zbus::Result<String>;
 
     /// Get property `StaticHostname`.
-    #[zbus(property, name = "StaticHostname")]
+    #[zbus(property(emits_changed_signal = "true"), name = "StaticHostname")]
     fn static_hostname(&self) -> crate::zbus::Result<String>;
 
     /// Get property `PrettyHostname`.
-    #[zbus(property, name = "PrettyHostname")]
+    #[zbus(property(emits_changed_signal = "true"), name = "PrettyHostname")]
     fn pretty_hostname(&self) -> crate::zbus::Result<String>;
 
     /// Get property `DefaultHostname`.
-    #[zbus(property, name = "DefaultHostname")]
+    #[zbus(property(emits_changed_signal = "const"), name = "DefaultHostname")]
     fn default_hostname(&self) -> crate::zbus::Result<String>;
 
     /// Get property `HostnameSource`.
-    #[zbus(property, name = "HostnameSource")]
+    #[zbus(property(emits_changed_signal = "true"), name = "HostnameSource")]
     fn hostname_source(&self) -> crate::zbus::Result<String>;
 
     /// Get property `IconName`.
-    #[zbus(property, name = "IconName")]
+    #[zbus(property(emits_changed_signal = "true"), name = "IconName")]
     fn icon_name(&self) -> crate::zbus::Result<String>;
 
     /// Get property `Chassis`.
-    #[zbus(property, name = "Chassis")]
+    #[zbus(property(emits_changed_signal = "true"), name = "Chassis")]
     fn chassis(&self) -> crate::zbus::Result<String>;
 
     /// Get property `Deployment`.
-    #[zbus(property, name = "Deployment")]
+    #[zbus(property(emits_changed_signal = "true"), name = "Deployment")]
     fn deployment(&self) -> crate::zbus::Result<String>;
 
     /// Get property `Location`.
-    #[zbus(property, name = "Location")]
+    #[zbus(property(emits_changed_signal = "true"), name = "Location")]
     fn location(&self) -> crate::zbus::Result<String>;
 
     /// Get property `KernelName`.
-    #[zbus(property, name = "KernelName")]
+    #[zbus(property(emits_changed_signal = "const"), name = "KernelName")]
     fn kernel_name(&self) -> crate::zbus::Result<String>;
 
     /// Get property `KernelRelease`.
-    #[zbus(property, name = "KernelRelease")]
+    #[zbus(property(emits_changed_signal = "const"), name = "KernelRelease")]
     fn kernel_release(&self) -> crate::zbus::Result<String>;
 
     /// Get property `KernelVersion`.
-    #[zbus(property, name = "KernelVersion")]
+    #[zbus(property(emits_changed_signal = "const"), name = "KernelVersion")]
     fn kernel_version(&self) -> crate::zbus::Result<String>;
 
     /// Get property `OperatingSystemPrettyName`.
-    #[zbus(property, name = "OperatingSystemPrettyName")]
+    #[zbus(
+        property(emits_changed_signal = "const"),
+        name = "OperatingSystemPrettyName"
+    )]
     fn operating_system_pretty_name(&self) -> crate::zbus::Result<String>;
 
     /// Get property `OperatingSystemCPEName`.
-    #[zbus(property, name = "OperatingSystemCPEName")]
+    #[zbus(
+        property(emits_changed_signal = "const"),
+        name = "OperatingSystemCPEName"
+    )]
     fn operating_system_cpe_name(&self) -> crate::zbus::Result<String>;
 
     /// Get property `OperatingSystemSupportEnd`.
-    #[zbus(property, name = "OperatingSystemSupportEnd")]
+    #[zbus(
+        property(emits_changed_signal = "const"),
+        name = "OperatingSystemSupportEnd"
+    )]
     fn operating_system_support_end(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `HomeURL`.
-    #[zbus(property, name = "HomeURL")]
+    #[zbus(property(emits_changed_signal = "const"), name = "HomeURL")]
     fn home_url(&self) -> crate::zbus::Result<String>;
 
     /// Get property `HardwareVendor`.
-    #[zbus(property, name = "HardwareVendor")]
+    #[zbus(property(emits_changed_signal = "const"), name = "HardwareVendor")]
     fn hardware_vendor(&self) -> crate::zbus::Result<String>;
 
     /// Get property `HardwareModel`.
-    #[zbus(property, name = "HardwareModel")]
+    #[zbus(property(emits_changed_signal = "const"), name = "HardwareModel")]
     fn hardware_model(&self) -> crate::zbus::Result<String>;
 
     /// Get property `FirmwareVersion`.
-    #[zbus(property, name = "FirmwareVersion")]
+    #[zbus(property(emits_changed_signal = "const"), name = "FirmwareVersion")]
     fn firmware_version(&self) -> crate::zbus::Result<String>;
 
     /// Get property `FirmwareVendor`.
-    #[zbus(property, name = "FirmwareVendor")]
+    #[zbus(property(emits_changed_signal = "const"), name = "FirmwareVendor")]
     fn firmware_vendor(&self) -> crate::zbus::Result<String>;
 
     /// Get property `FirmwareDate`.
-    #[zbus(property, name = "FirmwareDate")]
+    #[zbus(property(emits_changed_signal = "const"), name = "FirmwareDate")]
     fn firmware_date(&self) -> crate::zbus::Result<u64>;
 }
