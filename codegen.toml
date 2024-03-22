@@ -13,8 +13,6 @@ module = "hostname1"
 hierarchy = "/org/freedesktop/import1"
 id = "org.freedesktop.import1"
 module = "import1"
-[[service.import1.overrides]]
-interface = "org.freedesktop.import1.Transfer"
 
 [service.locale1]
 default_object = "Localed"
@@ -26,10 +24,6 @@ module = "locale1"
 hierarchy = "/org/freedesktop/login1"
 id = "org.freedesktop.login1"
 module = "login1"
-[[service.login1.overrides]]
-interface = "org.freedesktop.login1.Manager"
-[[service.login1.overrides]]
-interface = "org.freedesktop.login1.Session"
 
 [service.machine1]
 hierarchy = "/org/freedesktop/machine1"
@@ -50,8 +44,6 @@ module = "oom1"
 hierarchy = "/org/freedesktop/portable1"
 id = "org.freedesktop.portable1"
 module = "portable1"
-[[service.portable1.overrides]]
-interface = "org.freedesktop.portable1.Image"
 
 [service.resolve1]
 hierarchy = "/org/freedesktop/resolve1"
@@ -62,14 +54,6 @@ module = "resolve1"
 hierarchy = "/org/freedesktop/systemd1"
 id = "org.freedesktop.systemd1"
 module = "systemd1"
-[[service.systemd1.overrides]]
-interface = "org.freedesktop.systemd1.Manager"
-[[service.systemd1.overrides]]
-interface = "org.freedesktop.systemd1.Service"
-[[service.systemd1.overrides]]
-interface = "org.freedesktop.systemd1.Automount"
-[[service.systemd1.overrides]]
-interface = "org.freedesktop.systemd1.Mount"
 
 [service.timedate1]
 default_object = "Timedated"
