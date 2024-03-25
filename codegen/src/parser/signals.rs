@@ -3,11 +3,14 @@ use nom::bytes::complete::{tag, take, take_till, take_while};
 use nom::character::complete::{multispace0, multispace1};
 use nom::character::is_space;
 use nom::combinator::eof;
+use nom::error::VerboseError;
 use nom::multi::{separated_list0, separated_list1};
 use nom::sequence::{delimited, tuple};
 
 // Parse the 'signal:' section of an interface.
-pub(crate) fn parse_interface_signals(input: &str) -> nom::IResult<&str, Vec<data::Signal>> {
+pub(crate) fn parse_interface_signals(
+    input: &str,
+) -> nom::IResult<&str, Vec<data::Signal>, VerboseError<&str>> {
     // Ensure this is a 'signals' section.
     let (rest, _) = delimited(multispace0, tag("signals:"), multispace0)(input)?;
 
@@ -15,7 +18,7 @@ pub(crate) fn parse_interface_signals(input: &str) -> nom::IResult<&str, Vec<dat
     let (rest, out) = separated_list1(tag(";"), take_till(|b| b == ';'))(rest)?;
     eof(rest)?;
 
-    let mut signals = vec![];
+    let mut signals = Vec::with_capacity(out.len());
     for line in out {
         let trimmed = line.trim();
         if trimmed.is_empty() {
@@ -26,12 +29,13 @@ pub(crate) fn parse_interface_signals(input: &str) -> nom::IResult<&str, Vec<dat
 
         signals.push(s);
     }
+    signals.shrink_to_fit();
 
     Ok((rest, signals))
 }
 
 // Parse a single signal.
-fn parse_single_signal(rest: &str) -> nom::IResult<&str, data::Signal> {
+fn parse_single_signal(rest: &str) -> nom::IResult<&str, data::Signal, VerboseError<&str>> {
     // Extract signal name.
     let (rest, signal_name) = take_while(|b| b != '(')(rest)?;
 
@@ -49,16 +53,15 @@ fn parse_single_signal(rest: &str) -> nom::IResult<&str, data::Signal> {
         args,
     };
 
-    // Parse arguments.
     Ok((rest, signal))
 }
 
 // Parse signal arguments.
-fn parse_signal_args(input: &str) -> nom::IResult<&str, Vec<(String, String)>> {
+fn parse_signal_args(input: &str) -> nom::IResult<&str, Vec<(String, String)>, VerboseError<&str>> {
     let (rest, out) = separated_list0(tag(","), take_till(|b| b == ','))(input)?;
     eof(rest)?;
 
-    let mut result = vec![];
+    let mut result = Vec::with_capacity(out.len());
     for line in out {
         let trimmed = line.trim();
         if trimmed.is_empty() {
@@ -76,6 +79,7 @@ fn parse_signal_args(input: &str) -> nom::IResult<&str, Vec<(String, String)>> {
         let entry = (arg.1.to_string(), arg.3.to_string());
         result.push(entry);
     }
+    result.shrink_to_fit();
 
     Ok((rest, result))
 }

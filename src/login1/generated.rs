@@ -402,7 +402,7 @@ trait Manager {
     fn prepare_for_sleep(&self, start: bool) -> crate::zbus::Result<()>;
 
     /// Get property `EnableWallMessages`.
-    #[zbus(property, name = "EnableWallMessages")]
+    #[zbus(property(emits_changed_signal = "false"), name = "EnableWallMessages")]
     fn enable_wall_messages(&self) -> crate::zbus::Result<bool>;
 
     /// Set property `EnableWallMessages`.
@@ -410,7 +410,7 @@ trait Manager {
     fn set_property_enable_wall_messages(&self, new_value: bool) -> crate::zbus::Result<()>;
 
     /// Get property `WallMessage`.
-    #[zbus(property, name = "WallMessage")]
+    #[zbus(property(emits_changed_signal = "false"), name = "WallMessage")]
     fn wall_message(&self) -> crate::zbus::Result<String>;
 
     /// Set property `WallMessage`.
@@ -418,179 +418,218 @@ trait Manager {
     fn set_property_wall_message(&self, new_value: String) -> crate::zbus::Result<()>;
 
     /// Get property `NAutoVTs`.
-    #[zbus(property, name = "NAutoVTs")]
+    #[zbus(property(emits_changed_signal = "const"), name = "NAutoVTs")]
     fn n_auto_v_ts(&self) -> crate::zbus::Result<u32>;
 
     /// Get property `KillOnlyUsers`.
-    #[zbus(property, name = "KillOnlyUsers")]
+    #[zbus(property(emits_changed_signal = "const"), name = "KillOnlyUsers")]
     fn kill_only_users(&self) -> crate::zbus::Result<Vec<String>>;
 
     /// Get property `KillExcludeUsers`.
-    #[zbus(property, name = "KillExcludeUsers")]
+    #[zbus(property(emits_changed_signal = "const"), name = "KillExcludeUsers")]
     fn kill_exclude_users(&self) -> crate::zbus::Result<Vec<String>>;
 
     /// Get property `KillUserProcesses`.
-    #[zbus(property, name = "KillUserProcesses")]
+    #[zbus(property(emits_changed_signal = "const"), name = "KillUserProcesses")]
     fn kill_user_processes(&self) -> crate::zbus::Result<bool>;
 
     /// Get property `RebootParameter`.
-    #[zbus(property, name = "RebootParameter")]
+    #[zbus(property(emits_changed_signal = "false"), name = "RebootParameter")]
     fn reboot_parameter(&self) -> crate::zbus::Result<String>;
 
     /// Get property `RebootToFirmwareSetup`.
-    #[zbus(property, name = "RebootToFirmwareSetup")]
+    #[zbus(
+        property(emits_changed_signal = "false"),
+        name = "RebootToFirmwareSetup"
+    )]
     fn reboot_to_firmware_setup(&self) -> crate::zbus::Result<bool>;
 
     /// Get property `RebootToBootLoaderMenu`.
-    #[zbus(property, name = "RebootToBootLoaderMenu")]
+    #[zbus(
+        property(emits_changed_signal = "false"),
+        name = "RebootToBootLoaderMenu"
+    )]
     fn reboot_to_boot_loader_menu(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `RebootToBootLoaderEntry`.
-    #[zbus(property, name = "RebootToBootLoaderEntry")]
+    #[zbus(
+        property(emits_changed_signal = "false"),
+        name = "RebootToBootLoaderEntry"
+    )]
     fn reboot_to_boot_loader_entry(&self) -> crate::zbus::Result<String>;
 
     /// Get property `BootLoaderEntries`.
-    #[zbus(property, name = "BootLoaderEntries")]
+    #[zbus(property(emits_changed_signal = "const"), name = "BootLoaderEntries")]
     fn boot_loader_entries(&self) -> crate::zbus::Result<Vec<String>>;
 
     /// Get property `IdleHint`.
-    #[zbus(property, name = "IdleHint")]
+    #[zbus(property(emits_changed_signal = "true"), name = "IdleHint")]
     fn idle_hint(&self) -> crate::zbus::Result<bool>;
 
     /// Get property `IdleSinceHint`.
-    #[zbus(property, name = "IdleSinceHint")]
+    #[zbus(property(emits_changed_signal = "true"), name = "IdleSinceHint")]
     fn idle_since_hint(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `IdleSinceHintMonotonic`.
-    #[zbus(property, name = "IdleSinceHintMonotonic")]
+    #[zbus(
+        property(emits_changed_signal = "true"),
+        name = "IdleSinceHintMonotonic"
+    )]
     fn idle_since_hint_monotonic(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `BlockInhibited`.
-    #[zbus(property, name = "BlockInhibited")]
+    #[zbus(property(emits_changed_signal = "true"), name = "BlockInhibited")]
     fn block_inhibited(&self) -> crate::zbus::Result<String>;
 
     /// Get property `DelayInhibited`.
-    #[zbus(property, name = "DelayInhibited")]
+    #[zbus(property(emits_changed_signal = "true"), name = "DelayInhibited")]
     fn delay_inhibited(&self) -> crate::zbus::Result<String>;
 
     /// Get property `InhibitDelayMaxUSec`.
-    #[zbus(property, name = "InhibitDelayMaxUSec")]
+    #[zbus(property(emits_changed_signal = "const"), name = "InhibitDelayMaxUSec")]
     fn inhibit_delay_max_u_sec(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `UserStopDelayUSec`.
-    #[zbus(property, name = "UserStopDelayUSec")]
+    #[zbus(property(emits_changed_signal = "const"), name = "UserStopDelayUSec")]
     fn user_stop_delay_u_sec(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `HandlePowerKey`.
-    #[zbus(property, name = "HandlePowerKey")]
+    #[zbus(property(emits_changed_signal = "const"), name = "HandlePowerKey")]
     fn handle_power_key(&self) -> crate::zbus::Result<String>;
 
     /// Get property `HandlePowerKeyLongPress`.
-    #[zbus(property, name = "HandlePowerKeyLongPress")]
+    #[zbus(
+        property(emits_changed_signal = "const"),
+        name = "HandlePowerKeyLongPress"
+    )]
     fn handle_power_key_long_press(&self) -> crate::zbus::Result<String>;
 
     /// Get property `HandleRebootKey`.
-    #[zbus(property, name = "HandleRebootKey")]
+    #[zbus(property(emits_changed_signal = "const"), name = "HandleRebootKey")]
     fn handle_reboot_key(&self) -> crate::zbus::Result<String>;
 
     /// Get property `HandleRebootKeyLongPress`.
-    #[zbus(property, name = "HandleRebootKeyLongPress")]
+    #[zbus(
+        property(emits_changed_signal = "const"),
+        name = "HandleRebootKeyLongPress"
+    )]
     fn handle_reboot_key_long_press(&self) -> crate::zbus::Result<String>;
 
     /// Get property `HandleSuspendKey`.
-    #[zbus(property, name = "HandleSuspendKey")]
+    #[zbus(property(emits_changed_signal = "const"), name = "HandleSuspendKey")]
     fn handle_suspend_key(&self) -> crate::zbus::Result<String>;
 
     /// Get property `HandleSuspendKeyLongPress`.
-    #[zbus(property, name = "HandleSuspendKeyLongPress")]
+    #[zbus(
+        property(emits_changed_signal = "const"),
+        name = "HandleSuspendKeyLongPress"
+    )]
     fn handle_suspend_key_long_press(&self) -> crate::zbus::Result<String>;
 
     /// Get property `HandleHibernateKey`.
-    #[zbus(property, name = "HandleHibernateKey")]
+    #[zbus(property(emits_changed_signal = "const"), name = "HandleHibernateKey")]
     fn handle_hibernate_key(&self) -> crate::zbus::Result<String>;
 
     /// Get property `HandleHibernateKeyLongPress`.
-    #[zbus(property, name = "HandleHibernateKeyLongPress")]
+    #[zbus(
+        property(emits_changed_signal = "const"),
+        name = "HandleHibernateKeyLongPress"
+    )]
     fn handle_hibernate_key_long_press(&self) -> crate::zbus::Result<String>;
 
     /// Get property `HandleLidSwitch`.
-    #[zbus(property, name = "HandleLidSwitch")]
+    #[zbus(property(emits_changed_signal = "const"), name = "HandleLidSwitch")]
     fn handle_lid_switch(&self) -> crate::zbus::Result<String>;
 
     /// Get property `HandleLidSwitchExternalPower`.
-    #[zbus(property, name = "HandleLidSwitchExternalPower")]
+    #[zbus(
+        property(emits_changed_signal = "const"),
+        name = "HandleLidSwitchExternalPower"
+    )]
     fn handle_lid_switch_external_power(&self) -> crate::zbus::Result<String>;
 
     /// Get property `HandleLidSwitchDocked`.
-    #[zbus(property, name = "HandleLidSwitchDocked")]
+    #[zbus(
+        property(emits_changed_signal = "const"),
+        name = "HandleLidSwitchDocked"
+    )]
     fn handle_lid_switch_docked(&self) -> crate::zbus::Result<String>;
 
     /// Get property `HoldoffTimeoutUSec`.
-    #[zbus(property, name = "HoldoffTimeoutUSec")]
+    #[zbus(property(emits_changed_signal = "const"), name = "HoldoffTimeoutUSec")]
     fn holdoff_timeout_u_sec(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `IdleAction`.
-    #[zbus(property, name = "IdleAction")]
+    #[zbus(property(emits_changed_signal = "const"), name = "IdleAction")]
     fn idle_action(&self) -> crate::zbus::Result<String>;
 
     /// Get property `IdleActionUSec`.
-    #[zbus(property, name = "IdleActionUSec")]
+    #[zbus(property(emits_changed_signal = "const"), name = "IdleActionUSec")]
     fn idle_action_u_sec(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `PreparingForShutdown`.
-    #[zbus(property, name = "PreparingForShutdown")]
+    #[zbus(
+        property(emits_changed_signal = "false"),
+        name = "PreparingForShutdown"
+    )]
     fn preparing_for_shutdown(&self) -> crate::zbus::Result<bool>;
 
     /// Get property `PreparingForSleep`.
-    #[zbus(property, name = "PreparingForSleep")]
+    #[zbus(property(emits_changed_signal = "false"), name = "PreparingForSleep")]
     fn preparing_for_sleep(&self) -> crate::zbus::Result<bool>;
 
     /// Get property `ScheduledShutdown`.
-    #[zbus(property, name = "ScheduledShutdown")]
+    #[zbus(property(emits_changed_signal = "false"), name = "ScheduledShutdown")]
     fn scheduled_shutdown(&self) -> crate::zbus::Result<(String, u64)>;
 
     /// Get property `Docked`.
-    #[zbus(property, name = "Docked")]
+    #[zbus(property(emits_changed_signal = "false"), name = "Docked")]
     fn docked(&self) -> crate::zbus::Result<bool>;
 
     /// Get property `LidClosed`.
-    #[zbus(property, name = "LidClosed")]
+    #[zbus(property(emits_changed_signal = "false"), name = "LidClosed")]
     fn lid_closed(&self) -> crate::zbus::Result<bool>;
 
     /// Get property `OnExternalPower`.
-    #[zbus(property, name = "OnExternalPower")]
+    #[zbus(property(emits_changed_signal = "false"), name = "OnExternalPower")]
     fn on_external_power(&self) -> crate::zbus::Result<bool>;
 
     /// Get property `RemoveIPC`.
-    #[zbus(property, name = "RemoveIPC")]
+    #[zbus(property(emits_changed_signal = "const"), name = "RemoveIPC")]
     fn remove_ipc(&self) -> crate::zbus::Result<bool>;
 
     /// Get property `RuntimeDirectorySize`.
-    #[zbus(property, name = "RuntimeDirectorySize")]
+    #[zbus(
+        property(emits_changed_signal = "const"),
+        name = "RuntimeDirectorySize"
+    )]
     fn runtime_directory_size(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `RuntimeDirectoryInodesMax`.
-    #[zbus(property, name = "RuntimeDirectoryInodesMax")]
+    #[zbus(
+        property(emits_changed_signal = "const"),
+        name = "RuntimeDirectoryInodesMax"
+    )]
     fn runtime_directory_inodes_max(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `InhibitorsMax`.
-    #[zbus(property, name = "InhibitorsMax")]
+    #[zbus(property(emits_changed_signal = "const"), name = "InhibitorsMax")]
     fn inhibitors_max(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `NCurrentInhibitors`.
-    #[zbus(property, name = "NCurrentInhibitors")]
+    #[zbus(property(emits_changed_signal = "false"), name = "NCurrentInhibitors")]
     fn n_current_inhibitors(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `SessionsMax`.
-    #[zbus(property, name = "SessionsMax")]
+    #[zbus(property(emits_changed_signal = "const"), name = "SessionsMax")]
     fn sessions_max(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `NCurrentSessions`.
-    #[zbus(property, name = "NCurrentSessions")]
+    #[zbus(property(emits_changed_signal = "false"), name = "NCurrentSessions")]
     fn n_current_sessions(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `StopIdleSessionUSec`.
-    #[zbus(property, name = "StopIdleSessionUSec")]
+    #[zbus(property(emits_changed_signal = "const"), name = "StopIdleSessionUSec")]
     fn stop_idle_session_u_sec(&self) -> crate::zbus::Result<u64>;
 }
 
@@ -623,35 +662,38 @@ trait Seat {
     fn switch_to_previous(&self) -> crate::zbus::Result<()>;
 
     /// Get property `Id`.
-    #[zbus(property, name = "Id")]
+    #[zbus(property(emits_changed_signal = "const"), name = "Id")]
     fn id(&self) -> crate::zbus::Result<String>;
 
     /// Get property `ActiveSession`.
-    #[zbus(property, name = "ActiveSession")]
+    #[zbus(property(emits_changed_signal = "true"), name = "ActiveSession")]
     fn active_session(&self) -> crate::zbus::Result<(String, crate::zvariant::OwnedObjectPath)>;
 
     /// Get property `CanTTY`.
-    #[zbus(property, name = "CanTTY")]
+    #[zbus(property(emits_changed_signal = "const"), name = "CanTTY")]
     fn can_tty(&self) -> crate::zbus::Result<bool>;
 
     /// Get property `CanGraphical`.
-    #[zbus(property, name = "CanGraphical")]
+    #[zbus(property(emits_changed_signal = "true"), name = "CanGraphical")]
     fn can_graphical(&self) -> crate::zbus::Result<bool>;
 
     /// Get property `Sessions`.
-    #[zbus(property, name = "Sessions")]
+    #[zbus(property(emits_changed_signal = "false"), name = "Sessions")]
     fn sessions(&self) -> crate::zbus::Result<Vec<(String, crate::zvariant::OwnedObjectPath)>>;
 
     /// Get property `IdleHint`.
-    #[zbus(property, name = "IdleHint")]
+    #[zbus(property(emits_changed_signal = "true"), name = "IdleHint")]
     fn idle_hint(&self) -> crate::zbus::Result<bool>;
 
     /// Get property `IdleSinceHint`.
-    #[zbus(property, name = "IdleSinceHint")]
+    #[zbus(property(emits_changed_signal = "true"), name = "IdleSinceHint")]
     fn idle_since_hint(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `IdleSinceHintMonotonic`.
-    #[zbus(property, name = "IdleSinceHintMonotonic")]
+    #[zbus(
+        property(emits_changed_signal = "true"),
+        name = "IdleSinceHintMonotonic"
+    )]
     fn idle_since_hint_monotonic(&self) -> crate::zbus::Result<u64>;
 }
 
@@ -672,63 +714,66 @@ trait User {
     fn kill(&self, signal_number: i32) -> crate::zbus::Result<()>;
 
     /// Get property `UID`.
-    #[zbus(property, name = "UID")]
+    #[zbus(property(emits_changed_signal = "const"), name = "UID")]
     fn uid(&self) -> crate::zbus::Result<u32>;
 
     /// Get property `GID`.
-    #[zbus(property, name = "GID")]
+    #[zbus(property(emits_changed_signal = "const"), name = "GID")]
     fn gid(&self) -> crate::zbus::Result<u32>;
 
     /// Get property `Name`.
-    #[zbus(property, name = "Name")]
+    #[zbus(property(emits_changed_signal = "const"), name = "Name")]
     fn name(&self) -> crate::zbus::Result<String>;
 
     /// Get property `Timestamp`.
-    #[zbus(property, name = "Timestamp")]
+    #[zbus(property(emits_changed_signal = "const"), name = "Timestamp")]
     fn timestamp(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `TimestampMonotonic`.
-    #[zbus(property, name = "TimestampMonotonic")]
+    #[zbus(property(emits_changed_signal = "const"), name = "TimestampMonotonic")]
     fn timestamp_monotonic(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `RuntimePath`.
-    #[zbus(property, name = "RuntimePath")]
+    #[zbus(property(emits_changed_signal = "const"), name = "RuntimePath")]
     fn runtime_path(&self) -> crate::zbus::Result<String>;
 
     /// Get property `Service`.
-    #[zbus(property, name = "Service")]
+    #[zbus(property(emits_changed_signal = "const"), name = "Service")]
     fn service(&self) -> crate::zbus::Result<String>;
 
     /// Get property `Slice`.
-    #[zbus(property, name = "Slice")]
+    #[zbus(property(emits_changed_signal = "const"), name = "Slice")]
     fn slice(&self) -> crate::zbus::Result<String>;
 
     /// Get property `Display`.
-    #[zbus(property, name = "Display")]
+    #[zbus(property(emits_changed_signal = "true"), name = "Display")]
     fn display(&self) -> crate::zbus::Result<(String, crate::zvariant::OwnedObjectPath)>;
 
     /// Get property `State`.
-    #[zbus(property, name = "State")]
+    #[zbus(property(emits_changed_signal = "false"), name = "State")]
     fn state(&self) -> crate::zbus::Result<String>;
 
     /// Get property `Sessions`.
-    #[zbus(property, name = "Sessions")]
+    #[zbus(property(emits_changed_signal = "false"), name = "Sessions")]
     fn sessions(&self) -> crate::zbus::Result<Vec<(String, crate::zvariant::OwnedObjectPath)>>;
 
     /// Get property `IdleHint`.
-    #[zbus(property, name = "IdleHint")]
+    #[zbus(property(emits_changed_signal = "true"), name = "IdleHint")]
     fn idle_hint(&self) -> crate::zbus::Result<bool>;
 
     /// Get property `IdleSinceHint`.
-    #[zbus(property, name = "IdleSinceHint")]
+    #[zbus(property(emits_changed_signal = "true"), name = "IdleSinceHint")]
     fn idle_since_hint(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `IdleSinceHintMonotonic`.
-    #[zbus(property, name = "IdleSinceHintMonotonic")]
+    #[zbus(
+        property(emits_changed_signal = "true"),
+        name = "IdleSinceHintMonotonic"
+    )]
     fn idle_since_hint_monotonic(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `Linger`.
-    #[zbus(property, name = "Linger")]
+    #[zbus(property(emits_changed_signal = "false"), name = "Linger")]
     fn linger(&self) -> crate::zbus::Result<bool>;
 }
 
@@ -835,102 +880,105 @@ trait Session {
     fn unlock(&self) -> crate::zbus::Result<()>;
 
     /// Get property `Id`.
-    #[zbus(property, name = "Id")]
+    #[zbus(property(emits_changed_signal = "const"), name = "Id")]
     fn id(&self) -> crate::zbus::Result<String>;
 
     /// Get property `User`.
-    #[zbus(property, name = "User")]
+    #[zbus(property(emits_changed_signal = "const"), name = "User")]
     fn user(&self) -> crate::zbus::Result<(u32, crate::zvariant::OwnedObjectPath)>;
 
     /// Get property `Name`.
-    #[zbus(property, name = "Name")]
+    #[zbus(property(emits_changed_signal = "const"), name = "Name")]
     fn name(&self) -> crate::zbus::Result<String>;
 
     /// Get property `Timestamp`.
-    #[zbus(property, name = "Timestamp")]
+    #[zbus(property(emits_changed_signal = "const"), name = "Timestamp")]
     fn timestamp(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `TimestampMonotonic`.
-    #[zbus(property, name = "TimestampMonotonic")]
+    #[zbus(property(emits_changed_signal = "const"), name = "TimestampMonotonic")]
     fn timestamp_monotonic(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `VTNr`.
-    #[zbus(property, name = "VTNr")]
+    #[zbus(property(emits_changed_signal = "const"), name = "VTNr")]
     fn vt_nr(&self) -> crate::zbus::Result<u32>;
 
     /// Get property `Seat`.
-    #[zbus(property, name = "Seat")]
+    #[zbus(property(emits_changed_signal = "const"), name = "Seat")]
     fn seat(&self) -> crate::zbus::Result<(String, crate::zvariant::OwnedObjectPath)>;
 
     /// Get property `TTY`.
-    #[zbus(property, name = "TTY")]
+    #[zbus(property(emits_changed_signal = "true"), name = "TTY")]
     fn tty(&self) -> crate::zbus::Result<String>;
 
     /// Get property `Display`.
-    #[zbus(property, name = "Display")]
+    #[zbus(property(emits_changed_signal = "true"), name = "Display")]
     fn display(&self) -> crate::zbus::Result<String>;
 
     /// Get property `Remote`.
-    #[zbus(property, name = "Remote")]
+    #[zbus(property(emits_changed_signal = "const"), name = "Remote")]
     fn remote(&self) -> crate::zbus::Result<bool>;
 
     /// Get property `RemoteHost`.
-    #[zbus(property, name = "RemoteHost")]
+    #[zbus(property(emits_changed_signal = "const"), name = "RemoteHost")]
     fn remote_host(&self) -> crate::zbus::Result<String>;
 
     /// Get property `RemoteUser`.
-    #[zbus(property, name = "RemoteUser")]
+    #[zbus(property(emits_changed_signal = "const"), name = "RemoteUser")]
     fn remote_user(&self) -> crate::zbus::Result<String>;
 
     /// Get property `Service`.
-    #[zbus(property, name = "Service")]
+    #[zbus(property(emits_changed_signal = "const"), name = "Service")]
     fn service(&self) -> crate::zbus::Result<String>;
 
     /// Get property `Desktop`.
-    #[zbus(property, name = "Desktop")]
+    #[zbus(property(emits_changed_signal = "const"), name = "Desktop")]
     fn desktop(&self) -> crate::zbus::Result<String>;
 
     /// Get property `Scope`.
-    #[zbus(property, name = "Scope")]
+    #[zbus(property(emits_changed_signal = "const"), name = "Scope")]
     fn scope(&self) -> crate::zbus::Result<String>;
 
     /// Get property `Leader`.
-    #[zbus(property, name = "Leader")]
+    #[zbus(property(emits_changed_signal = "const"), name = "Leader")]
     fn leader(&self) -> crate::zbus::Result<u32>;
 
     /// Get property `Audit`.
-    #[zbus(property, name = "Audit")]
+    #[zbus(property(emits_changed_signal = "const"), name = "Audit")]
     fn audit(&self) -> crate::zbus::Result<u32>;
 
     /// Get property `Type`.
-    #[zbus(property, name = "Type")]
+    #[zbus(property(emits_changed_signal = "true"), name = "Type")]
     fn type_property(&self) -> crate::zbus::Result<String>;
 
     /// Get property `Class`.
-    #[zbus(property, name = "Class")]
+    #[zbus(property(emits_changed_signal = "const"), name = "Class")]
     fn class(&self) -> crate::zbus::Result<String>;
 
     /// Get property `Active`.
-    #[zbus(property, name = "Active")]
+    #[zbus(property(emits_changed_signal = "true"), name = "Active")]
     fn active(&self) -> crate::zbus::Result<bool>;
 
     /// Get property `State`.
-    #[zbus(property, name = "State")]
+    #[zbus(property(emits_changed_signal = "true"), name = "State")]
     fn state(&self) -> crate::zbus::Result<String>;
 
     /// Get property `IdleHint`.
-    #[zbus(property, name = "IdleHint")]
+    #[zbus(property(emits_changed_signal = "true"), name = "IdleHint")]
     fn idle_hint(&self) -> crate::zbus::Result<bool>;
 
     /// Get property `IdleSinceHint`.
-    #[zbus(property, name = "IdleSinceHint")]
+    #[zbus(property(emits_changed_signal = "true"), name = "IdleSinceHint")]
     fn idle_since_hint(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `IdleSinceHintMonotonic`.
-    #[zbus(property, name = "IdleSinceHintMonotonic")]
+    #[zbus(
+        property(emits_changed_signal = "true"),
+        name = "IdleSinceHintMonotonic"
+    )]
     fn idle_since_hint_monotonic(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `LockedHint`.
-    #[zbus(property, name = "LockedHint")]
+    #[zbus(property(emits_changed_signal = "true"), name = "LockedHint")]
     fn locked_hint(&self) -> crate::zbus::Result<bool>;
 }

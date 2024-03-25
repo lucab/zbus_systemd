@@ -37,30 +37,30 @@ trait Localed {
     ) -> crate::zbus::Result<()>;
 
     /// Get property `Locale`.
-    #[zbus(property, name = "Locale")]
+    #[zbus(property(emits_changed_signal = "true"), name = "Locale")]
     fn locale(&self) -> crate::zbus::Result<Vec<String>>;
 
     /// Get property `X11Layout`.
-    #[zbus(property, name = "X11Layout")]
+    #[zbus(property(emits_changed_signal = "true"), name = "X11Layout")]
     fn x11_layout(&self) -> crate::zbus::Result<String>;
 
     /// Get property `X11Model`.
-    #[zbus(property, name = "X11Model")]
+    #[zbus(property(emits_changed_signal = "true"), name = "X11Model")]
     fn x11_model(&self) -> crate::zbus::Result<String>;
 
     /// Get property `X11Variant`.
-    #[zbus(property, name = "X11Variant")]
+    #[zbus(property(emits_changed_signal = "true"), name = "X11Variant")]
     fn x11_variant(&self) -> crate::zbus::Result<String>;
 
     /// Get property `X11Options`.
-    #[zbus(property, name = "X11Options")]
+    #[zbus(property(emits_changed_signal = "true"), name = "X11Options")]
     fn x11_options(&self) -> crate::zbus::Result<String>;
 
     /// Get property `VConsoleKeymap`.
-    #[zbus(property, name = "VConsoleKeymap")]
+    #[zbus(property(emits_changed_signal = "true"), name = "VConsoleKeymap")]
     fn v_console_keymap(&self) -> crate::zbus::Result<String>;
 
     /// Get property `VConsoleKeymapToggle`.
-    #[zbus(property, name = "VConsoleKeymapToggle")]
+    #[zbus(property(emits_changed_signal = "true"), name = "VConsoleKeymapToggle")]
     fn v_console_keymap_toggle(&self) -> crate::zbus::Result<String>;
 }

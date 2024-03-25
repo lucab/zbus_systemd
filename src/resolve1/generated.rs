@@ -150,79 +150,85 @@ trait Manager {
     fn reset_server_features(&self) -> crate::zbus::Result<()>;
 
     /// Get property `LLMNRHostname`.
-    #[zbus(property, name = "LLMNRHostname")]
+    #[zbus(property(emits_changed_signal = "true"), name = "LLMNRHostname")]
     fn llmnr_hostname(&self) -> crate::zbus::Result<String>;
 
     /// Get property `LLMNR`.
-    #[zbus(property, name = "LLMNR")]
+    #[zbus(property(emits_changed_signal = "false"), name = "LLMNR")]
     fn llmnr(&self) -> crate::zbus::Result<String>;
 
     /// Get property `MulticastDNS`.
-    #[zbus(property, name = "MulticastDNS")]
+    #[zbus(property(emits_changed_signal = "false"), name = "MulticastDNS")]
     fn multicast_dns(&self) -> crate::zbus::Result<String>;
 
     /// Get property `DNSOverTLS`.
-    #[zbus(property, name = "DNSOverTLS")]
+    #[zbus(property(emits_changed_signal = "false"), name = "DNSOverTLS")]
     fn dns_over_tls(&self) -> crate::zbus::Result<String>;
 
     /// Get property `DNS`.
-    #[zbus(property, name = "DNS")]
+    #[zbus(property(emits_changed_signal = "true"), name = "DNS")]
     fn dns(&self) -> crate::zbus::Result<Vec<(i32, i32, Vec<u8>)>>;
 
     /// Get property `DNSEx`.
-    #[zbus(property, name = "DNSEx")]
+    #[zbus(property(emits_changed_signal = "true"), name = "DNSEx")]
     fn dns_ex(&self) -> crate::zbus::Result<Vec<(i32, i32, Vec<u8>, u16, String)>>;
 
     /// Get property `FallbackDNS`.
-    #[zbus(property, name = "FallbackDNS")]
+    #[zbus(property(emits_changed_signal = "const"), name = "FallbackDNS")]
     fn fallback_dns(&self) -> crate::zbus::Result<Vec<(i32, i32, Vec<u8>)>>;
 
     /// Get property `FallbackDNSEx`.
-    #[zbus(property, name = "FallbackDNSEx")]
+    #[zbus(property(emits_changed_signal = "const"), name = "FallbackDNSEx")]
     fn fallback_dns_ex(&self) -> crate::zbus::Result<Vec<(i32, i32, Vec<u8>, u16, String)>>;
 
     /// Get property `CurrentDNSServer`.
-    #[zbus(property, name = "CurrentDNSServer")]
+    #[zbus(property(emits_changed_signal = "true"), name = "CurrentDNSServer")]
     fn current_dns_server(&self) -> crate::zbus::Result<(i32, i32, Vec<u8>)>;
 
     /// Get property `CurrentDNSServerEx`.
-    #[zbus(property, name = "CurrentDNSServerEx")]
+    #[zbus(property(emits_changed_signal = "true"), name = "CurrentDNSServerEx")]
     fn current_dns_server_ex(&self) -> crate::zbus::Result<(i32, i32, Vec<u8>, u16, String)>;
 
     /// Get property `Domains`.
-    #[zbus(property, name = "Domains")]
+    #[zbus(property(emits_changed_signal = "false"), name = "Domains")]
     fn domains(&self) -> crate::zbus::Result<Vec<(i32, String, bool)>>;
 
     /// Get property `TransactionStatistics`.
-    #[zbus(property, name = "TransactionStatistics")]
+    #[zbus(
+        property(emits_changed_signal = "false"),
+        name = "TransactionStatistics"
+    )]
     fn transaction_statistics(&self) -> crate::zbus::Result<(u64, u64)>;
 
     /// Get property `CacheStatistics`.
-    #[zbus(property, name = "CacheStatistics")]
+    #[zbus(property(emits_changed_signal = "false"), name = "CacheStatistics")]
     fn cache_statistics(&self) -> crate::zbus::Result<(u64, u64, u64)>;
 
     /// Get property `DNSSEC`.
-    #[zbus(property, name = "DNSSEC")]
+    #[zbus(property(emits_changed_signal = "false"), name = "DNSSEC")]
     fn dnssec(&self) -> crate::zbus::Result<String>;
 
     /// Get property `DNSSECStatistics`.
-    #[zbus(property, name = "DNSSECStatistics")]
+    #[zbus(property(emits_changed_signal = "false"), name = "DNSSECStatistics")]
     fn dnssec_statistics(&self) -> crate::zbus::Result<(u64, u64, u64, u64)>;
 
     /// Get property `DNSSECSupported`.
-    #[zbus(property, name = "DNSSECSupported")]
+    #[zbus(property(emits_changed_signal = "false"), name = "DNSSECSupported")]
     fn dnssec_supported(&self) -> crate::zbus::Result<bool>;
 
     /// Get property `DNSSECNegativeTrustAnchors`.
-    #[zbus(property, name = "DNSSECNegativeTrustAnchors")]
+    #[zbus(
+        property(emits_changed_signal = "false"),
+        name = "DNSSECNegativeTrustAnchors"
+    )]
     fn dnssec_negative_trust_anchors(&self) -> crate::zbus::Result<Vec<String>>;
 
     /// Get property `DNSStubListener`.
-    #[zbus(property, name = "DNSStubListener")]
+    #[zbus(property(emits_changed_signal = "false"), name = "DNSStubListener")]
     fn dns_stub_listener(&self) -> crate::zbus::Result<String>;
 
     /// Get property `ResolvConfMode`.
-    #[zbus(property, name = "ResolvConfMode")]
+    #[zbus(property(emits_changed_signal = "false"), name = "ResolvConfMode")]
     fn resolv_conf_mode(&self) -> crate::zbus::Result<String>;
 }
 
@@ -275,54 +281,57 @@ trait Link {
     fn revert(&self) -> crate::zbus::Result<()>;
 
     /// Get property `ScopesMask`.
-    #[zbus(property, name = "ScopesMask")]
+    #[zbus(property(emits_changed_signal = "false"), name = "ScopesMask")]
     fn scopes_mask(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `DNS`.
-    #[zbus(property, name = "DNS")]
+    #[zbus(property(emits_changed_signal = "false"), name = "DNS")]
     fn dns(&self) -> crate::zbus::Result<Vec<(i32, Vec<u8>)>>;
 
     /// Get property `DNSEx`.
-    #[zbus(property, name = "DNSEx")]
+    #[zbus(property(emits_changed_signal = "false"), name = "DNSEx")]
     fn dns_ex(&self) -> crate::zbus::Result<Vec<(i32, Vec<u8>, u16, String)>>;
 
     /// Get property `CurrentDNSServer`.
-    #[zbus(property, name = "CurrentDNSServer")]
+    #[zbus(property(emits_changed_signal = "false"), name = "CurrentDNSServer")]
     fn current_dns_server(&self) -> crate::zbus::Result<(i32, Vec<u8>)>;
 
     /// Get property `CurrentDNSServerEx`.
-    #[zbus(property, name = "CurrentDNSServerEx")]
+    #[zbus(property(emits_changed_signal = "false"), name = "CurrentDNSServerEx")]
     fn current_dns_server_ex(&self) -> crate::zbus::Result<(i32, Vec<u8>, u16, String)>;
 
     /// Get property `Domains`.
-    #[zbus(property, name = "Domains")]
+    #[zbus(property(emits_changed_signal = "false"), name = "Domains")]
     fn domains(&self) -> crate::zbus::Result<Vec<(String, bool)>>;
 
     /// Get property `DefaultRoute`.
-    #[zbus(property, name = "DefaultRoute")]
+    #[zbus(property(emits_changed_signal = "false"), name = "DefaultRoute")]
     fn default_route(&self) -> crate::zbus::Result<bool>;
 
     /// Get property `LLMNR`.
-    #[zbus(property, name = "LLMNR")]
+    #[zbus(property(emits_changed_signal = "false"), name = "LLMNR")]
     fn llmnr(&self) -> crate::zbus::Result<String>;
 
     /// Get property `MulticastDNS`.
-    #[zbus(property, name = "MulticastDNS")]
+    #[zbus(property(emits_changed_signal = "false"), name = "MulticastDNS")]
     fn multicast_dns(&self) -> crate::zbus::Result<String>;
 
     /// Get property `DNSOverTLS`.
-    #[zbus(property, name = "DNSOverTLS")]
+    #[zbus(property(emits_changed_signal = "false"), name = "DNSOverTLS")]
     fn dns_over_tls(&self) -> crate::zbus::Result<String>;
 
     /// Get property `DNSSEC`.
-    #[zbus(property, name = "DNSSEC")]
+    #[zbus(property(emits_changed_signal = "false"), name = "DNSSEC")]
     fn dnssec(&self) -> crate::zbus::Result<String>;
 
     /// Get property `DNSSECNegativeTrustAnchors`.
-    #[zbus(property, name = "DNSSECNegativeTrustAnchors")]
+    #[zbus(
+        property(emits_changed_signal = "false"),
+        name = "DNSSECNegativeTrustAnchors"
+    )]
     fn dnssec_negative_trust_anchors(&self) -> crate::zbus::Result<Vec<String>>;
 
     /// Get property `DNSSECSupported`.
-    #[zbus(property, name = "DNSSECSupported")]
+    #[zbus(property(emits_changed_signal = "false"), name = "DNSSECSupported")]
     fn dnssec_supported(&self) -> crate::zbus::Result<bool>;
 }

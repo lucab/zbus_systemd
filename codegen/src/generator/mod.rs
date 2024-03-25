@@ -175,7 +175,11 @@ fn emit_properties(
         })?;
 
         writeln!(output, "/// Get property `{}`.", entry.name)?;
-        writeln!(output, r#"#[zbus(property, name = "{}")]"#, entry.name)?;
+        writeln!(
+            output,
+            r#"#[zbus(property(emits_changed_signal = "{}"), name = "{}")]"#,
+            entry.emits_changed_signal, entry.name,
+        )?;
         writeln!(
             output,
             "fn {}(&self) -> crate::zbus::Result<{}>;",

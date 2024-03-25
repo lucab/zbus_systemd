@@ -699,183 +699,279 @@ trait Manager {
     fn reloading(&self, active: bool) -> crate::zbus::Result<()>;
 
     /// Get property `Version`.
-    #[zbus(property, name = "Version")]
+    #[zbus(property(emits_changed_signal = "const"), name = "Version")]
     fn version(&self) -> crate::zbus::Result<String>;
 
     /// Get property `Features`.
-    #[zbus(property, name = "Features")]
+    #[zbus(property(emits_changed_signal = "const"), name = "Features")]
     fn features(&self) -> crate::zbus::Result<String>;
 
     /// Get property `Virtualization`.
-    #[zbus(property, name = "Virtualization")]
+    #[zbus(property(emits_changed_signal = "const"), name = "Virtualization")]
     fn virtualization(&self) -> crate::zbus::Result<String>;
 
     /// Get property `ConfidentialVirtualization`.
-    #[zbus(property, name = "ConfidentialVirtualization")]
+    #[zbus(
+        property(emits_changed_signal = "const"),
+        name = "ConfidentialVirtualization"
+    )]
     fn confidential_virtualization(&self) -> crate::zbus::Result<String>;
 
     /// Get property `Architecture`.
-    #[zbus(property, name = "Architecture")]
+    #[zbus(property(emits_changed_signal = "const"), name = "Architecture")]
     fn architecture(&self) -> crate::zbus::Result<String>;
 
     /// Get property `Tainted`.
-    #[zbus(property, name = "Tainted")]
+    #[zbus(property(emits_changed_signal = "const"), name = "Tainted")]
     fn tainted(&self) -> crate::zbus::Result<String>;
 
     /// Get property `FirmwareTimestamp`.
-    #[zbus(property, name = "FirmwareTimestamp")]
+    #[zbus(property(emits_changed_signal = "const"), name = "FirmwareTimestamp")]
     fn firmware_timestamp(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `FirmwareTimestampMonotonic`.
-    #[zbus(property, name = "FirmwareTimestampMonotonic")]
+    #[zbus(
+        property(emits_changed_signal = "const"),
+        name = "FirmwareTimestampMonotonic"
+    )]
     fn firmware_timestamp_monotonic(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `LoaderTimestamp`.
-    #[zbus(property, name = "LoaderTimestamp")]
+    #[zbus(property(emits_changed_signal = "const"), name = "LoaderTimestamp")]
     fn loader_timestamp(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `LoaderTimestampMonotonic`.
-    #[zbus(property, name = "LoaderTimestampMonotonic")]
+    #[zbus(
+        property(emits_changed_signal = "const"),
+        name = "LoaderTimestampMonotonic"
+    )]
     fn loader_timestamp_monotonic(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `KernelTimestamp`.
-    #[zbus(property, name = "KernelTimestamp")]
+    #[zbus(property(emits_changed_signal = "const"), name = "KernelTimestamp")]
     fn kernel_timestamp(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `KernelTimestampMonotonic`.
-    #[zbus(property, name = "KernelTimestampMonotonic")]
+    #[zbus(
+        property(emits_changed_signal = "const"),
+        name = "KernelTimestampMonotonic"
+    )]
     fn kernel_timestamp_monotonic(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `InitRDTimestamp`.
-    #[zbus(property, name = "InitRDTimestamp")]
+    #[zbus(property(emits_changed_signal = "const"), name = "InitRDTimestamp")]
     fn init_rd_timestamp(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `InitRDTimestampMonotonic`.
-    #[zbus(property, name = "InitRDTimestampMonotonic")]
+    #[zbus(
+        property(emits_changed_signal = "const"),
+        name = "InitRDTimestampMonotonic"
+    )]
     fn init_rd_timestamp_monotonic(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `UserspaceTimestamp`.
-    #[zbus(property, name = "UserspaceTimestamp")]
+    #[zbus(property(emits_changed_signal = "const"), name = "UserspaceTimestamp")]
     fn userspace_timestamp(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `UserspaceTimestampMonotonic`.
-    #[zbus(property, name = "UserspaceTimestampMonotonic")]
+    #[zbus(
+        property(emits_changed_signal = "const"),
+        name = "UserspaceTimestampMonotonic"
+    )]
     fn userspace_timestamp_monotonic(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `FinishTimestamp`.
-    #[zbus(property, name = "FinishTimestamp")]
+    #[zbus(property(emits_changed_signal = "const"), name = "FinishTimestamp")]
     fn finish_timestamp(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `FinishTimestampMonotonic`.
-    #[zbus(property, name = "FinishTimestampMonotonic")]
+    #[zbus(
+        property(emits_changed_signal = "const"),
+        name = "FinishTimestampMonotonic"
+    )]
     fn finish_timestamp_monotonic(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `SecurityStartTimestamp`.
-    #[zbus(property, name = "SecurityStartTimestamp")]
+    #[zbus(
+        property(emits_changed_signal = "const"),
+        name = "SecurityStartTimestamp"
+    )]
     fn security_start_timestamp(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `SecurityStartTimestampMonotonic`.
-    #[zbus(property, name = "SecurityStartTimestampMonotonic")]
+    #[zbus(
+        property(emits_changed_signal = "const"),
+        name = "SecurityStartTimestampMonotonic"
+    )]
     fn security_start_timestamp_monotonic(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `SecurityFinishTimestamp`.
-    #[zbus(property, name = "SecurityFinishTimestamp")]
+    #[zbus(
+        property(emits_changed_signal = "const"),
+        name = "SecurityFinishTimestamp"
+    )]
     fn security_finish_timestamp(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `SecurityFinishTimestampMonotonic`.
-    #[zbus(property, name = "SecurityFinishTimestampMonotonic")]
+    #[zbus(
+        property(emits_changed_signal = "const"),
+        name = "SecurityFinishTimestampMonotonic"
+    )]
     fn security_finish_timestamp_monotonic(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `GeneratorsStartTimestamp`.
-    #[zbus(property, name = "GeneratorsStartTimestamp")]
+    #[zbus(
+        property(emits_changed_signal = "const"),
+        name = "GeneratorsStartTimestamp"
+    )]
     fn generators_start_timestamp(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `GeneratorsStartTimestampMonotonic`.
-    #[zbus(property, name = "GeneratorsStartTimestampMonotonic")]
+    #[zbus(
+        property(emits_changed_signal = "const"),
+        name = "GeneratorsStartTimestampMonotonic"
+    )]
     fn generators_start_timestamp_monotonic(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `GeneratorsFinishTimestamp`.
-    #[zbus(property, name = "GeneratorsFinishTimestamp")]
+    #[zbus(
+        property(emits_changed_signal = "const"),
+        name = "GeneratorsFinishTimestamp"
+    )]
     fn generators_finish_timestamp(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `GeneratorsFinishTimestampMonotonic`.
-    #[zbus(property, name = "GeneratorsFinishTimestampMonotonic")]
+    #[zbus(
+        property(emits_changed_signal = "const"),
+        name = "GeneratorsFinishTimestampMonotonic"
+    )]
     fn generators_finish_timestamp_monotonic(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `UnitsLoadStartTimestamp`.
-    #[zbus(property, name = "UnitsLoadStartTimestamp")]
+    #[zbus(
+        property(emits_changed_signal = "const"),
+        name = "UnitsLoadStartTimestamp"
+    )]
     fn units_load_start_timestamp(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `UnitsLoadStartTimestampMonotonic`.
-    #[zbus(property, name = "UnitsLoadStartTimestampMonotonic")]
+    #[zbus(
+        property(emits_changed_signal = "const"),
+        name = "UnitsLoadStartTimestampMonotonic"
+    )]
     fn units_load_start_timestamp_monotonic(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `UnitsLoadFinishTimestamp`.
-    #[zbus(property, name = "UnitsLoadFinishTimestamp")]
+    #[zbus(
+        property(emits_changed_signal = "const"),
+        name = "UnitsLoadFinishTimestamp"
+    )]
     fn units_load_finish_timestamp(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `UnitsLoadFinishTimestampMonotonic`.
-    #[zbus(property, name = "UnitsLoadFinishTimestampMonotonic")]
+    #[zbus(
+        property(emits_changed_signal = "const"),
+        name = "UnitsLoadFinishTimestampMonotonic"
+    )]
     fn units_load_finish_timestamp_monotonic(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `UnitsLoadTimestamp`.
-    #[zbus(property, name = "UnitsLoadTimestamp")]
+    #[zbus(property(emits_changed_signal = "const"), name = "UnitsLoadTimestamp")]
     fn units_load_timestamp(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `UnitsLoadTimestampMonotonic`.
-    #[zbus(property, name = "UnitsLoadTimestampMonotonic")]
+    #[zbus(
+        property(emits_changed_signal = "const"),
+        name = "UnitsLoadTimestampMonotonic"
+    )]
     fn units_load_timestamp_monotonic(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `InitRDSecurityStartTimestamp`.
-    #[zbus(property, name = "InitRDSecurityStartTimestamp")]
+    #[zbus(
+        property(emits_changed_signal = "const"),
+        name = "InitRDSecurityStartTimestamp"
+    )]
     fn init_rd_security_start_timestamp(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `InitRDSecurityStartTimestampMonotonic`.
-    #[zbus(property, name = "InitRDSecurityStartTimestampMonotonic")]
+    #[zbus(
+        property(emits_changed_signal = "const"),
+        name = "InitRDSecurityStartTimestampMonotonic"
+    )]
     fn init_rd_security_start_timestamp_monotonic(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `InitRDSecurityFinishTimestamp`.
-    #[zbus(property, name = "InitRDSecurityFinishTimestamp")]
+    #[zbus(
+        property(emits_changed_signal = "const"),
+        name = "InitRDSecurityFinishTimestamp"
+    )]
     fn init_rd_security_finish_timestamp(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `InitRDSecurityFinishTimestampMonotonic`.
-    #[zbus(property, name = "InitRDSecurityFinishTimestampMonotonic")]
+    #[zbus(
+        property(emits_changed_signal = "const"),
+        name = "InitRDSecurityFinishTimestampMonotonic"
+    )]
     fn init_rd_security_finish_timestamp_monotonic(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `InitRDGeneratorsStartTimestamp`.
-    #[zbus(property, name = "InitRDGeneratorsStartTimestamp")]
+    #[zbus(
+        property(emits_changed_signal = "const"),
+        name = "InitRDGeneratorsStartTimestamp"
+    )]
     fn init_rd_generators_start_timestamp(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `InitRDGeneratorsStartTimestampMonotonic`.
-    #[zbus(property, name = "InitRDGeneratorsStartTimestampMonotonic")]
+    #[zbus(
+        property(emits_changed_signal = "const"),
+        name = "InitRDGeneratorsStartTimestampMonotonic"
+    )]
     fn init_rd_generators_start_timestamp_monotonic(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `InitRDGeneratorsFinishTimestamp`.
-    #[zbus(property, name = "InitRDGeneratorsFinishTimestamp")]
+    #[zbus(
+        property(emits_changed_signal = "const"),
+        name = "InitRDGeneratorsFinishTimestamp"
+    )]
     fn init_rd_generators_finish_timestamp(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `InitRDGeneratorsFinishTimestampMonotonic`.
-    #[zbus(property, name = "InitRDGeneratorsFinishTimestampMonotonic")]
+    #[zbus(
+        property(emits_changed_signal = "const"),
+        name = "InitRDGeneratorsFinishTimestampMonotonic"
+    )]
     fn init_rd_generators_finish_timestamp_monotonic(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `InitRDUnitsLoadStartTimestamp`.
-    #[zbus(property, name = "InitRDUnitsLoadStartTimestamp")]
+    #[zbus(
+        property(emits_changed_signal = "const"),
+        name = "InitRDUnitsLoadStartTimestamp"
+    )]
     fn init_rd_units_load_start_timestamp(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `InitRDUnitsLoadStartTimestampMonotonic`.
-    #[zbus(property, name = "InitRDUnitsLoadStartTimestampMonotonic")]
+    #[zbus(
+        property(emits_changed_signal = "const"),
+        name = "InitRDUnitsLoadStartTimestampMonotonic"
+    )]
     fn init_rd_units_load_start_timestamp_monotonic(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `InitRDUnitsLoadFinishTimestamp`.
-    #[zbus(property, name = "InitRDUnitsLoadFinishTimestamp")]
+    #[zbus(
+        property(emits_changed_signal = "const"),
+        name = "InitRDUnitsLoadFinishTimestamp"
+    )]
     fn init_rd_units_load_finish_timestamp(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `InitRDUnitsLoadFinishTimestampMonotonic`.
-    #[zbus(property, name = "InitRDUnitsLoadFinishTimestampMonotonic")]
+    #[zbus(
+        property(emits_changed_signal = "const"),
+        name = "InitRDUnitsLoadFinishTimestampMonotonic"
+    )]
     fn init_rd_units_load_finish_timestamp_monotonic(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `LogLevel`.
-    #[zbus(property, name = "LogLevel")]
+    #[zbus(property(emits_changed_signal = "false"), name = "LogLevel")]
     fn log_level(&self) -> crate::zbus::Result<String>;
 
     /// Set property `LogLevel`.
@@ -883,7 +979,7 @@ trait Manager {
     fn set_property_log_level(&self, new_value: String) -> crate::zbus::Result<()>;
 
     /// Get property `LogTarget`.
-    #[zbus(property, name = "LogTarget")]
+    #[zbus(property(emits_changed_signal = "false"), name = "LogTarget")]
     fn log_target(&self) -> crate::zbus::Result<String>;
 
     /// Set property `LogTarget`.
@@ -891,67 +987,79 @@ trait Manager {
     fn set_property_log_target(&self, new_value: String) -> crate::zbus::Result<()>;
 
     /// Get property `NNames`.
-    #[zbus(property, name = "NNames")]
+    #[zbus(property(emits_changed_signal = "false"), name = "NNames")]
     fn n_names(&self) -> crate::zbus::Result<u32>;
 
     /// Get property `NFailedUnits`.
-    #[zbus(property, name = "NFailedUnits")]
+    #[zbus(property(emits_changed_signal = "true"), name = "NFailedUnits")]
     fn n_failed_units(&self) -> crate::zbus::Result<u32>;
 
     /// Get property `NJobs`.
-    #[zbus(property, name = "NJobs")]
+    #[zbus(property(emits_changed_signal = "false"), name = "NJobs")]
     fn n_jobs(&self) -> crate::zbus::Result<u32>;
 
     /// Get property `NInstalledJobs`.
-    #[zbus(property, name = "NInstalledJobs")]
+    #[zbus(property(emits_changed_signal = "false"), name = "NInstalledJobs")]
     fn n_installed_jobs(&self) -> crate::zbus::Result<u32>;
 
     /// Get property `NFailedJobs`.
-    #[zbus(property, name = "NFailedJobs")]
+    #[zbus(property(emits_changed_signal = "false"), name = "NFailedJobs")]
     fn n_failed_jobs(&self) -> crate::zbus::Result<u32>;
 
     /// Get property `Progress`.
-    #[zbus(property, name = "Progress")]
+    #[zbus(property(emits_changed_signal = "false"), name = "Progress")]
     fn progress(&self) -> crate::zbus::Result<f64>;
 
     /// Get property `Environment`.
-    #[zbus(property, name = "Environment")]
+    #[zbus(property(emits_changed_signal = "false"), name = "Environment")]
     fn environment(&self) -> crate::zbus::Result<Vec<String>>;
 
     /// Get property `ConfirmSpawn`.
-    #[zbus(property, name = "ConfirmSpawn")]
+    #[zbus(property(emits_changed_signal = "const"), name = "ConfirmSpawn")]
     fn confirm_spawn(&self) -> crate::zbus::Result<bool>;
 
     /// Get property `ShowStatus`.
-    #[zbus(property, name = "ShowStatus")]
+    #[zbus(property(emits_changed_signal = "false"), name = "ShowStatus")]
     fn show_status(&self) -> crate::zbus::Result<bool>;
 
     /// Get property `UnitPath`.
-    #[zbus(property, name = "UnitPath")]
+    #[zbus(property(emits_changed_signal = "const"), name = "UnitPath")]
     fn unit_path(&self) -> crate::zbus::Result<Vec<String>>;
 
     /// Get property `DefaultStandardOutput`.
-    #[zbus(property, name = "DefaultStandardOutput")]
+    #[zbus(
+        property(emits_changed_signal = "const"),
+        name = "DefaultStandardOutput"
+    )]
     fn default_standard_output(&self) -> crate::zbus::Result<String>;
 
     /// Get property `DefaultStandardError`.
-    #[zbus(property, name = "DefaultStandardError")]
+    #[zbus(
+        property(emits_changed_signal = "const"),
+        name = "DefaultStandardError"
+    )]
     fn default_standard_error(&self) -> crate::zbus::Result<String>;
 
     /// Get property `WatchdogDevice`.
-    #[zbus(property, name = "WatchdogDevice")]
+    #[zbus(property(emits_changed_signal = "const"), name = "WatchdogDevice")]
     fn watchdog_device(&self) -> crate::zbus::Result<String>;
 
     /// Get property `WatchdogLastPingTimestamp`.
-    #[zbus(property, name = "WatchdogLastPingTimestamp")]
+    #[zbus(
+        property(emits_changed_signal = "false"),
+        name = "WatchdogLastPingTimestamp"
+    )]
     fn watchdog_last_ping_timestamp(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `WatchdogLastPingTimestampMonotonic`.
-    #[zbus(property, name = "WatchdogLastPingTimestampMonotonic")]
+    #[zbus(
+        property(emits_changed_signal = "false"),
+        name = "WatchdogLastPingTimestampMonotonic"
+    )]
     fn watchdog_last_ping_timestamp_monotonic(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `RuntimeWatchdogUSec`.
-    #[zbus(property, name = "RuntimeWatchdogUSec")]
+    #[zbus(property(emits_changed_signal = "false"), name = "RuntimeWatchdogUSec")]
     fn runtime_watchdog_u_sec(&self) -> crate::zbus::Result<u64>;
 
     /// Set property `RuntimeWatchdogUSec`.
@@ -959,7 +1067,10 @@ trait Manager {
     fn set_property_runtime_watchdog_u_sec(&self, new_value: u64) -> crate::zbus::Result<()>;
 
     /// Get property `RuntimeWatchdogPreUSec`.
-    #[zbus(property, name = "RuntimeWatchdogPreUSec")]
+    #[zbus(
+        property(emits_changed_signal = "false"),
+        name = "RuntimeWatchdogPreUSec"
+    )]
     fn runtime_watchdog_pre_u_sec(&self) -> crate::zbus::Result<u64>;
 
     /// Set property `RuntimeWatchdogPreUSec`.
@@ -967,7 +1078,10 @@ trait Manager {
     fn set_property_runtime_watchdog_pre_u_sec(&self, new_value: u64) -> crate::zbus::Result<()>;
 
     /// Get property `RuntimeWatchdogPreGovernor`.
-    #[zbus(property, name = "RuntimeWatchdogPreGovernor")]
+    #[zbus(
+        property(emits_changed_signal = "false"),
+        name = "RuntimeWatchdogPreGovernor"
+    )]
     fn runtime_watchdog_pre_governor(&self) -> crate::zbus::Result<String>;
 
     /// Set property `RuntimeWatchdogPreGovernor`.
@@ -978,7 +1092,7 @@ trait Manager {
     ) -> crate::zbus::Result<()>;
 
     /// Get property `RebootWatchdogUSec`.
-    #[zbus(property, name = "RebootWatchdogUSec")]
+    #[zbus(property(emits_changed_signal = "false"), name = "RebootWatchdogUSec")]
     fn reboot_watchdog_u_sec(&self) -> crate::zbus::Result<u64>;
 
     /// Set property `RebootWatchdogUSec`.
@@ -986,7 +1100,7 @@ trait Manager {
     fn set_property_reboot_watchdog_u_sec(&self, new_value: u64) -> crate::zbus::Result<()>;
 
     /// Get property `KExecWatchdogUSec`.
-    #[zbus(property, name = "KExecWatchdogUSec")]
+    #[zbus(property(emits_changed_signal = "false"), name = "KExecWatchdogUSec")]
     fn k_exec_watchdog_u_sec(&self) -> crate::zbus::Result<u64>;
 
     /// Set property `KExecWatchdogUSec`.
@@ -994,7 +1108,7 @@ trait Manager {
     fn set_property_k_exec_watchdog_u_sec(&self, new_value: u64) -> crate::zbus::Result<()>;
 
     /// Get property `ServiceWatchdogs`.
-    #[zbus(property, name = "ServiceWatchdogs")]
+    #[zbus(property(emits_changed_signal = "false"), name = "ServiceWatchdogs")]
     fn service_watchdogs(&self) -> crate::zbus::Result<bool>;
 
     /// Set property `ServiceWatchdogs`.
@@ -1002,227 +1116,317 @@ trait Manager {
     fn set_property_service_watchdogs(&self, new_value: bool) -> crate::zbus::Result<()>;
 
     /// Get property `ControlGroup`.
-    #[zbus(property, name = "ControlGroup")]
+    #[zbus(property(emits_changed_signal = "false"), name = "ControlGroup")]
     fn control_group(&self) -> crate::zbus::Result<String>;
 
     /// Get property `SystemState`.
-    #[zbus(property, name = "SystemState")]
+    #[zbus(property(emits_changed_signal = "false"), name = "SystemState")]
     fn system_state(&self) -> crate::zbus::Result<String>;
 
     /// Get property `ExitCode`.
-    #[zbus(property, name = "ExitCode")]
+    #[zbus(property(emits_changed_signal = "false"), name = "ExitCode")]
     fn exit_code(&self) -> crate::zbus::Result<u8>;
 
     /// Get property `DefaultTimerAccuracyUSec`.
-    #[zbus(property, name = "DefaultTimerAccuracyUSec")]
+    #[zbus(
+        property(emits_changed_signal = "const"),
+        name = "DefaultTimerAccuracyUSec"
+    )]
     fn default_timer_accuracy_u_sec(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `DefaultTimeoutStartUSec`.
-    #[zbus(property, name = "DefaultTimeoutStartUSec")]
+    #[zbus(
+        property(emits_changed_signal = "const"),
+        name = "DefaultTimeoutStartUSec"
+    )]
     fn default_timeout_start_u_sec(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `DefaultTimeoutStopUSec`.
-    #[zbus(property, name = "DefaultTimeoutStopUSec")]
+    #[zbus(
+        property(emits_changed_signal = "const"),
+        name = "DefaultTimeoutStopUSec"
+    )]
     fn default_timeout_stop_u_sec(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `DefaultTimeoutAbortUSec`.
-    #[zbus(property, name = "DefaultTimeoutAbortUSec")]
+    #[zbus(
+        property(emits_changed_signal = "false"),
+        name = "DefaultTimeoutAbortUSec"
+    )]
     fn default_timeout_abort_u_sec(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `DefaultDeviceTimeoutUSec`.
-    #[zbus(property, name = "DefaultDeviceTimeoutUSec")]
+    #[zbus(
+        property(emits_changed_signal = "const"),
+        name = "DefaultDeviceTimeoutUSec"
+    )]
     fn default_device_timeout_u_sec(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `DefaultRestartUSec`.
-    #[zbus(property, name = "DefaultRestartUSec")]
+    #[zbus(property(emits_changed_signal = "const"), name = "DefaultRestartUSec")]
     fn default_restart_u_sec(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `DefaultStartLimitIntervalUSec`.
-    #[zbus(property, name = "DefaultStartLimitIntervalUSec")]
+    #[zbus(
+        property(emits_changed_signal = "const"),
+        name = "DefaultStartLimitIntervalUSec"
+    )]
     fn default_start_limit_interval_u_sec(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `DefaultStartLimitBurst`.
-    #[zbus(property, name = "DefaultStartLimitBurst")]
+    #[zbus(
+        property(emits_changed_signal = "const"),
+        name = "DefaultStartLimitBurst"
+    )]
     fn default_start_limit_burst(&self) -> crate::zbus::Result<u32>;
 
     /// Get property `DefaultCPUAccounting`.
-    #[zbus(property, name = "DefaultCPUAccounting")]
+    #[zbus(
+        property(emits_changed_signal = "const"),
+        name = "DefaultCPUAccounting"
+    )]
     fn default_cpu_accounting(&self) -> crate::zbus::Result<bool>;
 
     /// Get property `DefaultBlockIOAccounting`.
-    #[zbus(property, name = "DefaultBlockIOAccounting")]
+    #[zbus(
+        property(emits_changed_signal = "const"),
+        name = "DefaultBlockIOAccounting"
+    )]
     fn default_block_io_accounting(&self) -> crate::zbus::Result<bool>;
 
     /// Get property `DefaultIOAccounting`.
-    #[zbus(property, name = "DefaultIOAccounting")]
+    #[zbus(property(emits_changed_signal = "const"), name = "DefaultIOAccounting")]
     fn default_io_accounting(&self) -> crate::zbus::Result<bool>;
 
     /// Get property `DefaultIPAccounting`.
-    #[zbus(property, name = "DefaultIPAccounting")]
+    #[zbus(property(emits_changed_signal = "const"), name = "DefaultIPAccounting")]
     fn default_ip_accounting(&self) -> crate::zbus::Result<bool>;
 
     /// Get property `DefaultMemoryAccounting`.
-    #[zbus(property, name = "DefaultMemoryAccounting")]
+    #[zbus(
+        property(emits_changed_signal = "const"),
+        name = "DefaultMemoryAccounting"
+    )]
     fn default_memory_accounting(&self) -> crate::zbus::Result<bool>;
 
     /// Get property `DefaultTasksAccounting`.
-    #[zbus(property, name = "DefaultTasksAccounting")]
+    #[zbus(
+        property(emits_changed_signal = "const"),
+        name = "DefaultTasksAccounting"
+    )]
     fn default_tasks_accounting(&self) -> crate::zbus::Result<bool>;
 
     /// Get property `DefaultLimitCPU`.
-    #[zbus(property, name = "DefaultLimitCPU")]
+    #[zbus(property(emits_changed_signal = "const"), name = "DefaultLimitCPU")]
     fn default_limit_cpu(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `DefaultLimitCPUSoft`.
-    #[zbus(property, name = "DefaultLimitCPUSoft")]
+    #[zbus(property(emits_changed_signal = "const"), name = "DefaultLimitCPUSoft")]
     fn default_limit_cpu_soft(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `DefaultLimitFSIZE`.
-    #[zbus(property, name = "DefaultLimitFSIZE")]
+    #[zbus(property(emits_changed_signal = "const"), name = "DefaultLimitFSIZE")]
     fn default_limit_fsize(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `DefaultLimitFSIZESoft`.
-    #[zbus(property, name = "DefaultLimitFSIZESoft")]
+    #[zbus(
+        property(emits_changed_signal = "const"),
+        name = "DefaultLimitFSIZESoft"
+    )]
     fn default_limit_fsize_soft(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `DefaultLimitDATA`.
-    #[zbus(property, name = "DefaultLimitDATA")]
+    #[zbus(property(emits_changed_signal = "const"), name = "DefaultLimitDATA")]
     fn default_limit_data(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `DefaultLimitDATASoft`.
-    #[zbus(property, name = "DefaultLimitDATASoft")]
+    #[zbus(
+        property(emits_changed_signal = "const"),
+        name = "DefaultLimitDATASoft"
+    )]
     fn default_limit_data_soft(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `DefaultLimitSTACK`.
-    #[zbus(property, name = "DefaultLimitSTACK")]
+    #[zbus(property(emits_changed_signal = "const"), name = "DefaultLimitSTACK")]
     fn default_limit_stack(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `DefaultLimitSTACKSoft`.
-    #[zbus(property, name = "DefaultLimitSTACKSoft")]
+    #[zbus(
+        property(emits_changed_signal = "const"),
+        name = "DefaultLimitSTACKSoft"
+    )]
     fn default_limit_stack_soft(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `DefaultLimitCORE`.
-    #[zbus(property, name = "DefaultLimitCORE")]
+    #[zbus(property(emits_changed_signal = "const"), name = "DefaultLimitCORE")]
     fn default_limit_core(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `DefaultLimitCORESoft`.
-    #[zbus(property, name = "DefaultLimitCORESoft")]
+    #[zbus(
+        property(emits_changed_signal = "const"),
+        name = "DefaultLimitCORESoft"
+    )]
     fn default_limit_core_soft(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `DefaultLimitRSS`.
-    #[zbus(property, name = "DefaultLimitRSS")]
+    #[zbus(property(emits_changed_signal = "const"), name = "DefaultLimitRSS")]
     fn default_limit_rss(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `DefaultLimitRSSSoft`.
-    #[zbus(property, name = "DefaultLimitRSSSoft")]
+    #[zbus(property(emits_changed_signal = "const"), name = "DefaultLimitRSSSoft")]
     fn default_limit_rss_soft(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `DefaultLimitNOFILE`.
-    #[zbus(property, name = "DefaultLimitNOFILE")]
+    #[zbus(property(emits_changed_signal = "const"), name = "DefaultLimitNOFILE")]
     fn default_limit_nofile(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `DefaultLimitNOFILESoft`.
-    #[zbus(property, name = "DefaultLimitNOFILESoft")]
+    #[zbus(
+        property(emits_changed_signal = "const"),
+        name = "DefaultLimitNOFILESoft"
+    )]
     fn default_limit_nofile_soft(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `DefaultLimitAS`.
-    #[zbus(property, name = "DefaultLimitAS")]
+    #[zbus(property(emits_changed_signal = "const"), name = "DefaultLimitAS")]
     fn default_limit_as(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `DefaultLimitASSoft`.
-    #[zbus(property, name = "DefaultLimitASSoft")]
+    #[zbus(property(emits_changed_signal = "const"), name = "DefaultLimitASSoft")]
     fn default_limit_as_soft(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `DefaultLimitNPROC`.
-    #[zbus(property, name = "DefaultLimitNPROC")]
+    #[zbus(property(emits_changed_signal = "const"), name = "DefaultLimitNPROC")]
     fn default_limit_nproc(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `DefaultLimitNPROCSoft`.
-    #[zbus(property, name = "DefaultLimitNPROCSoft")]
+    #[zbus(
+        property(emits_changed_signal = "const"),
+        name = "DefaultLimitNPROCSoft"
+    )]
     fn default_limit_nproc_soft(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `DefaultLimitMEMLOCK`.
-    #[zbus(property, name = "DefaultLimitMEMLOCK")]
+    #[zbus(property(emits_changed_signal = "const"), name = "DefaultLimitMEMLOCK")]
     fn default_limit_memlock(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `DefaultLimitMEMLOCKSoft`.
-    #[zbus(property, name = "DefaultLimitMEMLOCKSoft")]
+    #[zbus(
+        property(emits_changed_signal = "const"),
+        name = "DefaultLimitMEMLOCKSoft"
+    )]
     fn default_limit_memlock_soft(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `DefaultLimitLOCKS`.
-    #[zbus(property, name = "DefaultLimitLOCKS")]
+    #[zbus(property(emits_changed_signal = "const"), name = "DefaultLimitLOCKS")]
     fn default_limit_locks(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `DefaultLimitLOCKSSoft`.
-    #[zbus(property, name = "DefaultLimitLOCKSSoft")]
+    #[zbus(
+        property(emits_changed_signal = "const"),
+        name = "DefaultLimitLOCKSSoft"
+    )]
     fn default_limit_locks_soft(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `DefaultLimitSIGPENDING`.
-    #[zbus(property, name = "DefaultLimitSIGPENDING")]
+    #[zbus(
+        property(emits_changed_signal = "const"),
+        name = "DefaultLimitSIGPENDING"
+    )]
     fn default_limit_sigpending(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `DefaultLimitSIGPENDINGSoft`.
-    #[zbus(property, name = "DefaultLimitSIGPENDINGSoft")]
+    #[zbus(
+        property(emits_changed_signal = "const"),
+        name = "DefaultLimitSIGPENDINGSoft"
+    )]
     fn default_limit_sigpending_soft(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `DefaultLimitMSGQUEUE`.
-    #[zbus(property, name = "DefaultLimitMSGQUEUE")]
+    #[zbus(
+        property(emits_changed_signal = "const"),
+        name = "DefaultLimitMSGQUEUE"
+    )]
     fn default_limit_msgqueue(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `DefaultLimitMSGQUEUESoft`.
-    #[zbus(property, name = "DefaultLimitMSGQUEUESoft")]
+    #[zbus(
+        property(emits_changed_signal = "const"),
+        name = "DefaultLimitMSGQUEUESoft"
+    )]
     fn default_limit_msgqueue_soft(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `DefaultLimitNICE`.
-    #[zbus(property, name = "DefaultLimitNICE")]
+    #[zbus(property(emits_changed_signal = "const"), name = "DefaultLimitNICE")]
     fn default_limit_nice(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `DefaultLimitNICESoft`.
-    #[zbus(property, name = "DefaultLimitNICESoft")]
+    #[zbus(
+        property(emits_changed_signal = "const"),
+        name = "DefaultLimitNICESoft"
+    )]
     fn default_limit_nice_soft(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `DefaultLimitRTPRIO`.
-    #[zbus(property, name = "DefaultLimitRTPRIO")]
+    #[zbus(property(emits_changed_signal = "const"), name = "DefaultLimitRTPRIO")]
     fn default_limit_rtprio(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `DefaultLimitRTPRIOSoft`.
-    #[zbus(property, name = "DefaultLimitRTPRIOSoft")]
+    #[zbus(
+        property(emits_changed_signal = "const"),
+        name = "DefaultLimitRTPRIOSoft"
+    )]
     fn default_limit_rtprio_soft(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `DefaultLimitRTTIME`.
-    #[zbus(property, name = "DefaultLimitRTTIME")]
+    #[zbus(property(emits_changed_signal = "const"), name = "DefaultLimitRTTIME")]
     fn default_limit_rttime(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `DefaultLimitRTTIMESoft`.
-    #[zbus(property, name = "DefaultLimitRTTIMESoft")]
+    #[zbus(
+        property(emits_changed_signal = "const"),
+        name = "DefaultLimitRTTIMESoft"
+    )]
     fn default_limit_rttime_soft(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `DefaultTasksMax`.
-    #[zbus(property, name = "DefaultTasksMax")]
+    #[zbus(property(emits_changed_signal = "false"), name = "DefaultTasksMax")]
     fn default_tasks_max(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `DefaultMemoryPressureThresholdUSec`.
-    #[zbus(property, name = "DefaultMemoryPressureThresholdUSec")]
+    #[zbus(
+        property(emits_changed_signal = "false"),
+        name = "DefaultMemoryPressureThresholdUSec"
+    )]
     fn default_memory_pressure_threshold_u_sec(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `DefaultMemoryPressureWatch`.
-    #[zbus(property, name = "DefaultMemoryPressureWatch")]
+    #[zbus(
+        property(emits_changed_signal = "false"),
+        name = "DefaultMemoryPressureWatch"
+    )]
     fn default_memory_pressure_watch(&self) -> crate::zbus::Result<String>;
 
     /// Get property `TimerSlackNSec`.
-    #[zbus(property, name = "TimerSlackNSec")]
+    #[zbus(property(emits_changed_signal = "const"), name = "TimerSlackNSec")]
     fn timer_slack_n_sec(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `DefaultOOMPolicy`.
-    #[zbus(property, name = "DefaultOOMPolicy")]
+    #[zbus(property(emits_changed_signal = "const"), name = "DefaultOOMPolicy")]
     fn default_oom_policy(&self) -> crate::zbus::Result<String>;
 
     /// Get property `DefaultOOMScoreAdjust`.
-    #[zbus(property, name = "DefaultOOMScoreAdjust")]
+    #[zbus(
+        property(emits_changed_signal = "const"),
+        name = "DefaultOOMScoreAdjust"
+    )]
     fn default_oom_score_adjust(&self) -> crate::zbus::Result<i32>;
 
     /// Get property `CtrlAltDelBurstAction`.
-    #[zbus(property, name = "CtrlAltDelBurstAction")]
+    #[zbus(
+        property(emits_changed_signal = "const"),
+        name = "CtrlAltDelBurstAction"
+    )]
     fn ctrl_alt_del_burst_action(&self) -> crate::zbus::Result<String>;
 }
 
@@ -1330,399 +1534,450 @@ trait Unit {
     fn thaw(&self) -> crate::zbus::Result<()>;
 
     /// Get property `Id`.
-    #[zbus(property, name = "Id")]
+    #[zbus(property(emits_changed_signal = "const"), name = "Id")]
     fn id(&self) -> crate::zbus::Result<String>;
 
     /// Get property `Names`.
-    #[zbus(property, name = "Names")]
+    #[zbus(property(emits_changed_signal = "const"), name = "Names")]
     fn names(&self) -> crate::zbus::Result<Vec<String>>;
 
     /// Get property `Following`.
-    #[zbus(property, name = "Following")]
+    #[zbus(property(emits_changed_signal = "false"), name = "Following")]
     fn following(&self) -> crate::zbus::Result<String>;
 
     /// Get property `Requires`.
-    #[zbus(property, name = "Requires")]
+    #[zbus(property(emits_changed_signal = "const"), name = "Requires")]
     fn requires(&self) -> crate::zbus::Result<Vec<String>>;
 
     /// Get property `Requisite`.
-    #[zbus(property, name = "Requisite")]
+    #[zbus(property(emits_changed_signal = "const"), name = "Requisite")]
     fn requisite(&self) -> crate::zbus::Result<Vec<String>>;
 
     /// Get property `Wants`.
-    #[zbus(property, name = "Wants")]
+    #[zbus(property(emits_changed_signal = "const"), name = "Wants")]
     fn wants(&self) -> crate::zbus::Result<Vec<String>>;
 
     /// Get property `BindsTo`.
-    #[zbus(property, name = "BindsTo")]
+    #[zbus(property(emits_changed_signal = "const"), name = "BindsTo")]
     fn binds_to(&self) -> crate::zbus::Result<Vec<String>>;
 
     /// Get property `PartOf`.
-    #[zbus(property, name = "PartOf")]
+    #[zbus(property(emits_changed_signal = "const"), name = "PartOf")]
     fn part_of(&self) -> crate::zbus::Result<Vec<String>>;
 
     /// Get property `Upholds`.
-    #[zbus(property, name = "Upholds")]
+    #[zbus(property(emits_changed_signal = "const"), name = "Upholds")]
     fn upholds(&self) -> crate::zbus::Result<Vec<String>>;
 
     /// Get property `RequiredBy`.
-    #[zbus(property, name = "RequiredBy")]
+    #[zbus(property(emits_changed_signal = "const"), name = "RequiredBy")]
     fn required_by(&self) -> crate::zbus::Result<Vec<String>>;
 
     /// Get property `RequisiteOf`.
-    #[zbus(property, name = "RequisiteOf")]
+    #[zbus(property(emits_changed_signal = "const"), name = "RequisiteOf")]
     fn requisite_of(&self) -> crate::zbus::Result<Vec<String>>;
 
     /// Get property `WantedBy`.
-    #[zbus(property, name = "WantedBy")]
+    #[zbus(property(emits_changed_signal = "const"), name = "WantedBy")]
     fn wanted_by(&self) -> crate::zbus::Result<Vec<String>>;
 
     /// Get property `BoundBy`.
-    #[zbus(property, name = "BoundBy")]
+    #[zbus(property(emits_changed_signal = "const"), name = "BoundBy")]
     fn bound_by(&self) -> crate::zbus::Result<Vec<String>>;
 
     /// Get property `UpheldBy`.
-    #[zbus(property, name = "UpheldBy")]
+    #[zbus(property(emits_changed_signal = "const"), name = "UpheldBy")]
     fn upheld_by(&self) -> crate::zbus::Result<Vec<String>>;
 
     /// Get property `ConsistsOf`.
-    #[zbus(property, name = "ConsistsOf")]
+    #[zbus(property(emits_changed_signal = "const"), name = "ConsistsOf")]
     fn consists_of(&self) -> crate::zbus::Result<Vec<String>>;
 
     /// Get property `Conflicts`.
-    #[zbus(property, name = "Conflicts")]
+    #[zbus(property(emits_changed_signal = "const"), name = "Conflicts")]
     fn conflicts(&self) -> crate::zbus::Result<Vec<String>>;
 
     /// Get property `ConflictedBy`.
-    #[zbus(property, name = "ConflictedBy")]
+    #[zbus(property(emits_changed_signal = "const"), name = "ConflictedBy")]
     fn conflicted_by(&self) -> crate::zbus::Result<Vec<String>>;
 
     /// Get property `Before`.
-    #[zbus(property, name = "Before")]
+    #[zbus(property(emits_changed_signal = "const"), name = "Before")]
     fn before(&self) -> crate::zbus::Result<Vec<String>>;
 
     /// Get property `After`.
-    #[zbus(property, name = "After")]
+    #[zbus(property(emits_changed_signal = "const"), name = "After")]
     fn after(&self) -> crate::zbus::Result<Vec<String>>;
 
     /// Get property `OnSuccess`.
-    #[zbus(property, name = "OnSuccess")]
+    #[zbus(property(emits_changed_signal = "const"), name = "OnSuccess")]
     fn on_success(&self) -> crate::zbus::Result<Vec<String>>;
 
     /// Get property `OnSuccessOf`.
-    #[zbus(property, name = "OnSuccessOf")]
+    #[zbus(property(emits_changed_signal = "const"), name = "OnSuccessOf")]
     fn on_success_of(&self) -> crate::zbus::Result<Vec<String>>;
 
     /// Get property `OnFailure`.
-    #[zbus(property, name = "OnFailure")]
+    #[zbus(property(emits_changed_signal = "const"), name = "OnFailure")]
     fn on_failure(&self) -> crate::zbus::Result<Vec<String>>;
 
     /// Get property `OnFailureOf`.
-    #[zbus(property, name = "OnFailureOf")]
+    #[zbus(property(emits_changed_signal = "const"), name = "OnFailureOf")]
     fn on_failure_of(&self) -> crate::zbus::Result<Vec<String>>;
 
     /// Get property `Triggers`.
-    #[zbus(property, name = "Triggers")]
+    #[zbus(property(emits_changed_signal = "const"), name = "Triggers")]
     fn triggers(&self) -> crate::zbus::Result<Vec<String>>;
 
     /// Get property `TriggeredBy`.
-    #[zbus(property, name = "TriggeredBy")]
+    #[zbus(property(emits_changed_signal = "const"), name = "TriggeredBy")]
     fn triggered_by(&self) -> crate::zbus::Result<Vec<String>>;
 
     /// Get property `PropagatesReloadTo`.
-    #[zbus(property, name = "PropagatesReloadTo")]
+    #[zbus(property(emits_changed_signal = "const"), name = "PropagatesReloadTo")]
     fn propagates_reload_to(&self) -> crate::zbus::Result<Vec<String>>;
 
     /// Get property `ReloadPropagatedFrom`.
-    #[zbus(property, name = "ReloadPropagatedFrom")]
+    #[zbus(
+        property(emits_changed_signal = "const"),
+        name = "ReloadPropagatedFrom"
+    )]
     fn reload_propagated_from(&self) -> crate::zbus::Result<Vec<String>>;
 
     /// Get property `PropagatesStopTo`.
-    #[zbus(property, name = "PropagatesStopTo")]
+    #[zbus(property(emits_changed_signal = "const"), name = "PropagatesStopTo")]
     fn propagates_stop_to(&self) -> crate::zbus::Result<Vec<String>>;
 
     /// Get property `StopPropagatedFrom`.
-    #[zbus(property, name = "StopPropagatedFrom")]
+    #[zbus(property(emits_changed_signal = "const"), name = "StopPropagatedFrom")]
     fn stop_propagated_from(&self) -> crate::zbus::Result<Vec<String>>;
 
     /// Get property `JoinsNamespaceOf`.
-    #[zbus(property, name = "JoinsNamespaceOf")]
+    #[zbus(property(emits_changed_signal = "const"), name = "JoinsNamespaceOf")]
     fn joins_namespace_of(&self) -> crate::zbus::Result<Vec<String>>;
 
     /// Get property `SliceOf`.
-    #[zbus(property, name = "SliceOf")]
+    #[zbus(property(emits_changed_signal = "const"), name = "SliceOf")]
     fn slice_of(&self) -> crate::zbus::Result<Vec<String>>;
 
     /// Get property `RequiresMountsFor`.
-    #[zbus(property, name = "RequiresMountsFor")]
+    #[zbus(property(emits_changed_signal = "const"), name = "RequiresMountsFor")]
     fn requires_mounts_for(&self) -> crate::zbus::Result<Vec<String>>;
 
     /// Get property `Documentation`.
-    #[zbus(property, name = "Documentation")]
+    #[zbus(property(emits_changed_signal = "const"), name = "Documentation")]
     fn documentation(&self) -> crate::zbus::Result<Vec<String>>;
 
     /// Get property `Description`.
-    #[zbus(property, name = "Description")]
+    #[zbus(property(emits_changed_signal = "const"), name = "Description")]
     fn description(&self) -> crate::zbus::Result<String>;
 
     /// Get property `AccessSELinuxContext`.
-    #[zbus(property, name = "AccessSELinuxContext")]
+    #[zbus(
+        property(emits_changed_signal = "const"),
+        name = "AccessSELinuxContext"
+    )]
     fn access_se_linux_context(&self) -> crate::zbus::Result<String>;
 
     /// Get property `LoadState`.
-    #[zbus(property, name = "LoadState")]
+    #[zbus(property(emits_changed_signal = "const"), name = "LoadState")]
     fn load_state(&self) -> crate::zbus::Result<String>;
 
     /// Get property `ActiveState`.
-    #[zbus(property, name = "ActiveState")]
+    #[zbus(property(emits_changed_signal = "true"), name = "ActiveState")]
     fn active_state(&self) -> crate::zbus::Result<String>;
 
     /// Get property `FreezerState`.
-    #[zbus(property, name = "FreezerState")]
+    #[zbus(property(emits_changed_signal = "true"), name = "FreezerState")]
     fn freezer_state(&self) -> crate::zbus::Result<String>;
 
     /// Get property `SubState`.
-    #[zbus(property, name = "SubState")]
+    #[zbus(property(emits_changed_signal = "true"), name = "SubState")]
     fn sub_state(&self) -> crate::zbus::Result<String>;
 
     /// Get property `FragmentPath`.
-    #[zbus(property, name = "FragmentPath")]
+    #[zbus(property(emits_changed_signal = "const"), name = "FragmentPath")]
     fn fragment_path(&self) -> crate::zbus::Result<String>;
 
     /// Get property `SourcePath`.
-    #[zbus(property, name = "SourcePath")]
+    #[zbus(property(emits_changed_signal = "const"), name = "SourcePath")]
     fn source_path(&self) -> crate::zbus::Result<String>;
 
     /// Get property `DropInPaths`.
-    #[zbus(property, name = "DropInPaths")]
+    #[zbus(property(emits_changed_signal = "const"), name = "DropInPaths")]
     fn drop_in_paths(&self) -> crate::zbus::Result<Vec<String>>;
 
     /// Get property `UnitFileState`.
-    #[zbus(property, name = "UnitFileState")]
+    #[zbus(property(emits_changed_signal = "false"), name = "UnitFileState")]
     fn unit_file_state(&self) -> crate::zbus::Result<String>;
 
     /// Get property `UnitFilePreset`.
-    #[zbus(property, name = "UnitFilePreset")]
+    #[zbus(property(emits_changed_signal = "false"), name = "UnitFilePreset")]
     fn unit_file_preset(&self) -> crate::zbus::Result<String>;
 
     /// Get property `StateChangeTimestamp`.
-    #[zbus(property, name = "StateChangeTimestamp")]
+    #[zbus(property(emits_changed_signal = "true"), name = "StateChangeTimestamp")]
     fn state_change_timestamp(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `StateChangeTimestampMonotonic`.
-    #[zbus(property, name = "StateChangeTimestampMonotonic")]
+    #[zbus(
+        property(emits_changed_signal = "true"),
+        name = "StateChangeTimestampMonotonic"
+    )]
     fn state_change_timestamp_monotonic(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `InactiveExitTimestamp`.
-    #[zbus(property, name = "InactiveExitTimestamp")]
+    #[zbus(
+        property(emits_changed_signal = "true"),
+        name = "InactiveExitTimestamp"
+    )]
     fn inactive_exit_timestamp(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `InactiveExitTimestampMonotonic`.
-    #[zbus(property, name = "InactiveExitTimestampMonotonic")]
+    #[zbus(
+        property(emits_changed_signal = "true"),
+        name = "InactiveExitTimestampMonotonic"
+    )]
     fn inactive_exit_timestamp_monotonic(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `ActiveEnterTimestamp`.
-    #[zbus(property, name = "ActiveEnterTimestamp")]
+    #[zbus(property(emits_changed_signal = "true"), name = "ActiveEnterTimestamp")]
     fn active_enter_timestamp(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `ActiveEnterTimestampMonotonic`.
-    #[zbus(property, name = "ActiveEnterTimestampMonotonic")]
+    #[zbus(
+        property(emits_changed_signal = "true"),
+        name = "ActiveEnterTimestampMonotonic"
+    )]
     fn active_enter_timestamp_monotonic(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `ActiveExitTimestamp`.
-    #[zbus(property, name = "ActiveExitTimestamp")]
+    #[zbus(property(emits_changed_signal = "true"), name = "ActiveExitTimestamp")]
     fn active_exit_timestamp(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `ActiveExitTimestampMonotonic`.
-    #[zbus(property, name = "ActiveExitTimestampMonotonic")]
+    #[zbus(
+        property(emits_changed_signal = "true"),
+        name = "ActiveExitTimestampMonotonic"
+    )]
     fn active_exit_timestamp_monotonic(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `InactiveEnterTimestamp`.
-    #[zbus(property, name = "InactiveEnterTimestamp")]
+    #[zbus(
+        property(emits_changed_signal = "true"),
+        name = "InactiveEnterTimestamp"
+    )]
     fn inactive_enter_timestamp(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `InactiveEnterTimestampMonotonic`.
-    #[zbus(property, name = "InactiveEnterTimestampMonotonic")]
+    #[zbus(
+        property(emits_changed_signal = "true"),
+        name = "InactiveEnterTimestampMonotonic"
+    )]
     fn inactive_enter_timestamp_monotonic(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `CanStart`.
-    #[zbus(property, name = "CanStart")]
+    #[zbus(property(emits_changed_signal = "const"), name = "CanStart")]
     fn can_start(&self) -> crate::zbus::Result<bool>;
 
     /// Get property `CanStop`.
-    #[zbus(property, name = "CanStop")]
+    #[zbus(property(emits_changed_signal = "const"), name = "CanStop")]
     fn can_stop(&self) -> crate::zbus::Result<bool>;
 
     /// Get property `CanReload`.
-    #[zbus(property, name = "CanReload")]
+    #[zbus(property(emits_changed_signal = "const"), name = "CanReload")]
     fn can_reload(&self) -> crate::zbus::Result<bool>;
 
     /// Get property `CanIsolate`.
-    #[zbus(property, name = "CanIsolate")]
+    #[zbus(property(emits_changed_signal = "const"), name = "CanIsolate")]
     fn can_isolate(&self) -> crate::zbus::Result<bool>;
 
     /// Get property `CanClean`.
-    #[zbus(property, name = "CanClean")]
+    #[zbus(property(emits_changed_signal = "const"), name = "CanClean")]
     fn can_clean(&self) -> crate::zbus::Result<Vec<String>>;
 
     /// Get property `CanFreeze`.
-    #[zbus(property, name = "CanFreeze")]
+    #[zbus(property(emits_changed_signal = "const"), name = "CanFreeze")]
     fn can_freeze(&self) -> crate::zbus::Result<bool>;
 
     /// Get property `Job`.
-    #[zbus(property, name = "Job")]
+    #[zbus(property(emits_changed_signal = "true"), name = "Job")]
     fn job(&self) -> crate::zbus::Result<(u32, crate::zvariant::OwnedObjectPath)>;
 
     /// Get property `StopWhenUnneeded`.
-    #[zbus(property, name = "StopWhenUnneeded")]
+    #[zbus(property(emits_changed_signal = "const"), name = "StopWhenUnneeded")]
     fn stop_when_unneeded(&self) -> crate::zbus::Result<bool>;
 
     /// Get property `RefuseManualStart`.
-    #[zbus(property, name = "RefuseManualStart")]
+    #[zbus(property(emits_changed_signal = "const"), name = "RefuseManualStart")]
     fn refuse_manual_start(&self) -> crate::zbus::Result<bool>;
 
     /// Get property `RefuseManualStop`.
-    #[zbus(property, name = "RefuseManualStop")]
+    #[zbus(property(emits_changed_signal = "const"), name = "RefuseManualStop")]
     fn refuse_manual_stop(&self) -> crate::zbus::Result<bool>;
 
     /// Get property `AllowIsolate`.
-    #[zbus(property, name = "AllowIsolate")]
+    #[zbus(property(emits_changed_signal = "const"), name = "AllowIsolate")]
     fn allow_isolate(&self) -> crate::zbus::Result<bool>;
 
     /// Get property `DefaultDependencies`.
-    #[zbus(property, name = "DefaultDependencies")]
+    #[zbus(property(emits_changed_signal = "const"), name = "DefaultDependencies")]
     fn default_dependencies(&self) -> crate::zbus::Result<bool>;
 
     /// Get property `SurviveFinalKillSignal`.
-    #[zbus(property, name = "SurviveFinalKillSignal")]
+    #[zbus(
+        property(emits_changed_signal = "const"),
+        name = "SurviveFinalKillSignal"
+    )]
     fn survive_final_kill_signal(&self) -> crate::zbus::Result<bool>;
 
     /// Get property `OnSuccessJobMode`.
-    #[zbus(property, name = "OnSuccessJobMode")]
+    #[zbus(property(emits_changed_signal = "const"), name = "OnSuccessJobMode")]
     fn on_success_job_mode(&self) -> crate::zbus::Result<String>;
 
     /// Get property `OnFailureJobMode`.
-    #[zbus(property, name = "OnFailureJobMode")]
+    #[zbus(property(emits_changed_signal = "const"), name = "OnFailureJobMode")]
     fn on_failure_job_mode(&self) -> crate::zbus::Result<String>;
 
     /// Get property `IgnoreOnIsolate`.
-    #[zbus(property, name = "IgnoreOnIsolate")]
+    #[zbus(property(emits_changed_signal = "const"), name = "IgnoreOnIsolate")]
     fn ignore_on_isolate(&self) -> crate::zbus::Result<bool>;
 
     /// Get property `NeedDaemonReload`.
-    #[zbus(property, name = "NeedDaemonReload")]
+    #[zbus(property(emits_changed_signal = "false"), name = "NeedDaemonReload")]
     fn need_daemon_reload(&self) -> crate::zbus::Result<bool>;
 
     /// Get property `Markers`.
-    #[zbus(property, name = "Markers")]
+    #[zbus(property(emits_changed_signal = "false"), name = "Markers")]
     fn markers(&self) -> crate::zbus::Result<Vec<String>>;
 
     /// Get property `JobTimeoutUSec`.
-    #[zbus(property, name = "JobTimeoutUSec")]
+    #[zbus(property(emits_changed_signal = "const"), name = "JobTimeoutUSec")]
     fn job_timeout_u_sec(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `JobRunningTimeoutUSec`.
-    #[zbus(property, name = "JobRunningTimeoutUSec")]
+    #[zbus(
+        property(emits_changed_signal = "const"),
+        name = "JobRunningTimeoutUSec"
+    )]
     fn job_running_timeout_u_sec(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `JobTimeoutAction`.
-    #[zbus(property, name = "JobTimeoutAction")]
+    #[zbus(property(emits_changed_signal = "const"), name = "JobTimeoutAction")]
     fn job_timeout_action(&self) -> crate::zbus::Result<String>;
 
     /// Get property `JobTimeoutRebootArgument`.
-    #[zbus(property, name = "JobTimeoutRebootArgument")]
+    #[zbus(
+        property(emits_changed_signal = "const"),
+        name = "JobTimeoutRebootArgument"
+    )]
     fn job_timeout_reboot_argument(&self) -> crate::zbus::Result<String>;
 
     /// Get property `ConditionResult`.
-    #[zbus(property, name = "ConditionResult")]
+    #[zbus(property(emits_changed_signal = "true"), name = "ConditionResult")]
     fn condition_result(&self) -> crate::zbus::Result<bool>;
 
     /// Get property `AssertResult`.
-    #[zbus(property, name = "AssertResult")]
+    #[zbus(property(emits_changed_signal = "true"), name = "AssertResult")]
     fn assert_result(&self) -> crate::zbus::Result<bool>;
 
     /// Get property `ConditionTimestamp`.
-    #[zbus(property, name = "ConditionTimestamp")]
+    #[zbus(property(emits_changed_signal = "true"), name = "ConditionTimestamp")]
     fn condition_timestamp(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `ConditionTimestampMonotonic`.
-    #[zbus(property, name = "ConditionTimestampMonotonic")]
+    #[zbus(
+        property(emits_changed_signal = "true"),
+        name = "ConditionTimestampMonotonic"
+    )]
     fn condition_timestamp_monotonic(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `AssertTimestamp`.
-    #[zbus(property, name = "AssertTimestamp")]
+    #[zbus(property(emits_changed_signal = "true"), name = "AssertTimestamp")]
     fn assert_timestamp(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `AssertTimestampMonotonic`.
-    #[zbus(property, name = "AssertTimestampMonotonic")]
+    #[zbus(
+        property(emits_changed_signal = "true"),
+        name = "AssertTimestampMonotonic"
+    )]
     fn assert_timestamp_monotonic(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `Conditions`.
-    #[zbus(property, name = "Conditions")]
+    #[zbus(property(emits_changed_signal = "invalidates"), name = "Conditions")]
     fn conditions(&self) -> crate::zbus::Result<Vec<(String, bool, bool, String, i32)>>;
 
     /// Get property `Asserts`.
-    #[zbus(property, name = "Asserts")]
+    #[zbus(property(emits_changed_signal = "invalidates"), name = "Asserts")]
     fn asserts(&self) -> crate::zbus::Result<Vec<(String, bool, bool, String, i32)>>;
 
     /// Get property `LoadError`.
-    #[zbus(property, name = "LoadError")]
+    #[zbus(property(emits_changed_signal = "const"), name = "LoadError")]
     fn load_error(&self) -> crate::zbus::Result<(String, String)>;
 
     /// Get property `Transient`.
-    #[zbus(property, name = "Transient")]
+    #[zbus(property(emits_changed_signal = "const"), name = "Transient")]
     fn transient(&self) -> crate::zbus::Result<bool>;
 
     /// Get property `Perpetual`.
-    #[zbus(property, name = "Perpetual")]
+    #[zbus(property(emits_changed_signal = "const"), name = "Perpetual")]
     fn perpetual(&self) -> crate::zbus::Result<bool>;
 
     /// Get property `StartLimitIntervalUSec`.
-    #[zbus(property, name = "StartLimitIntervalUSec")]
+    #[zbus(
+        property(emits_changed_signal = "const"),
+        name = "StartLimitIntervalUSec"
+    )]
     fn start_limit_interval_u_sec(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `StartLimitBurst`.
-    #[zbus(property, name = "StartLimitBurst")]
+    #[zbus(property(emits_changed_signal = "const"), name = "StartLimitBurst")]
     fn start_limit_burst(&self) -> crate::zbus::Result<u32>;
 
     /// Get property `StartLimitAction`.
-    #[zbus(property, name = "StartLimitAction")]
+    #[zbus(property(emits_changed_signal = "const"), name = "StartLimitAction")]
     fn start_limit_action(&self) -> crate::zbus::Result<String>;
 
     /// Get property `FailureAction`.
-    #[zbus(property, name = "FailureAction")]
+    #[zbus(property(emits_changed_signal = "const"), name = "FailureAction")]
     fn failure_action(&self) -> crate::zbus::Result<String>;
 
     /// Get property `FailureActionExitStatus`.
-    #[zbus(property, name = "FailureActionExitStatus")]
+    #[zbus(
+        property(emits_changed_signal = "const"),
+        name = "FailureActionExitStatus"
+    )]
     fn failure_action_exit_status(&self) -> crate::zbus::Result<i32>;
 
     /// Get property `SuccessAction`.
-    #[zbus(property, name = "SuccessAction")]
+    #[zbus(property(emits_changed_signal = "const"), name = "SuccessAction")]
     fn success_action(&self) -> crate::zbus::Result<String>;
 
     /// Get property `SuccessActionExitStatus`.
-    #[zbus(property, name = "SuccessActionExitStatus")]
+    #[zbus(
+        property(emits_changed_signal = "const"),
+        name = "SuccessActionExitStatus"
+    )]
     fn success_action_exit_status(&self) -> crate::zbus::Result<i32>;
 
     /// Get property `RebootArgument`.
-    #[zbus(property, name = "RebootArgument")]
+    #[zbus(property(emits_changed_signal = "const"), name = "RebootArgument")]
     fn reboot_argument(&self) -> crate::zbus::Result<String>;
 
     /// Get property `InvocationID`.
-    #[zbus(property, name = "InvocationID")]
+    #[zbus(property(emits_changed_signal = "true"), name = "InvocationID")]
     fn invocation_id(&self) -> crate::zbus::Result<Vec<u8>>;
 
     /// Get property `CollectMode`.
-    #[zbus(property, name = "CollectMode")]
+    #[zbus(property(emits_changed_signal = "const"), name = "CollectMode")]
     fn collect_mode(&self) -> crate::zbus::Result<String>;
 
     /// Get property `Refs`.
-    #[zbus(property, name = "Refs")]
+    #[zbus(property(emits_changed_signal = "false"), name = "Refs")]
     fn refs(&self) -> crate::zbus::Result<Vec<String>>;
 
     /// Get property `ActivationDetails`.
-    #[zbus(property, name = "ActivationDetails")]
+    #[zbus(property(emits_changed_signal = "true"), name = "ActivationDetails")]
     fn activation_details(&self) -> crate::zbus::Result<Vec<(String, String)>>;
 }
 
@@ -1770,221 +2025,269 @@ trait Service {
     fn attach_processes(&self, subcgroup: String, pids: Vec<u32>) -> crate::zbus::Result<()>;
 
     /// Get property `Type`.
-    #[zbus(property, name = "Type")]
+    #[zbus(property(emits_changed_signal = "const"), name = "Type")]
     fn type_property(&self) -> crate::zbus::Result<String>;
 
     /// Get property `ExitType`.
-    #[zbus(property, name = "ExitType")]
+    #[zbus(property(emits_changed_signal = "const"), name = "ExitType")]
     fn exit_type(&self) -> crate::zbus::Result<String>;
 
     /// Get property `Restart`.
-    #[zbus(property, name = "Restart")]
+    #[zbus(property(emits_changed_signal = "const"), name = "Restart")]
     fn restart(&self) -> crate::zbus::Result<String>;
 
     /// Get property `RestartMode`.
-    #[zbus(property, name = "RestartMode")]
+    #[zbus(property(emits_changed_signal = "const"), name = "RestartMode")]
     fn restart_mode(&self) -> crate::zbus::Result<String>;
 
     /// Get property `PIDFile`.
-    #[zbus(property, name = "PIDFile")]
+    #[zbus(property(emits_changed_signal = "const"), name = "PIDFile")]
     fn pid_file(&self) -> crate::zbus::Result<String>;
 
     /// Get property `NotifyAccess`.
-    #[zbus(property, name = "NotifyAccess")]
+    #[zbus(property(emits_changed_signal = "true"), name = "NotifyAccess")]
     fn notify_access(&self) -> crate::zbus::Result<String>;
 
     /// Get property `RestartUSec`.
-    #[zbus(property, name = "RestartUSec")]
+    #[zbus(property(emits_changed_signal = "const"), name = "RestartUSec")]
     fn restart_u_sec(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `RestartSteps`.
-    #[zbus(property, name = "RestartSteps")]
+    #[zbus(property(emits_changed_signal = "const"), name = "RestartSteps")]
     fn restart_steps(&self) -> crate::zbus::Result<u32>;
 
     /// Get property `RestartMaxDelayUSec`.
-    #[zbus(property, name = "RestartMaxDelayUSec")]
+    #[zbus(property(emits_changed_signal = "const"), name = "RestartMaxDelayUSec")]
     fn restart_max_delay_u_sec(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `RestartUSecNext`.
-    #[zbus(property, name = "RestartUSecNext")]
+    #[zbus(property(emits_changed_signal = "false"), name = "RestartUSecNext")]
     fn restart_u_sec_next(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `TimeoutStartUSec`.
-    #[zbus(property, name = "TimeoutStartUSec")]
+    #[zbus(property(emits_changed_signal = "const"), name = "TimeoutStartUSec")]
     fn timeout_start_u_sec(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `TimeoutStopUSec`.
-    #[zbus(property, name = "TimeoutStopUSec")]
+    #[zbus(property(emits_changed_signal = "const"), name = "TimeoutStopUSec")]
     fn timeout_stop_u_sec(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `TimeoutAbortUSec`.
-    #[zbus(property, name = "TimeoutAbortUSec")]
+    #[zbus(property(emits_changed_signal = "false"), name = "TimeoutAbortUSec")]
     fn timeout_abort_u_sec(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `TimeoutStartFailureMode`.
-    #[zbus(property, name = "TimeoutStartFailureMode")]
+    #[zbus(
+        property(emits_changed_signal = "const"),
+        name = "TimeoutStartFailureMode"
+    )]
     fn timeout_start_failure_mode(&self) -> crate::zbus::Result<String>;
 
     /// Get property `TimeoutStopFailureMode`.
-    #[zbus(property, name = "TimeoutStopFailureMode")]
+    #[zbus(
+        property(emits_changed_signal = "const"),
+        name = "TimeoutStopFailureMode"
+    )]
     fn timeout_stop_failure_mode(&self) -> crate::zbus::Result<String>;
 
     /// Get property `RuntimeMaxUSec`.
-    #[zbus(property, name = "RuntimeMaxUSec")]
+    #[zbus(property(emits_changed_signal = "const"), name = "RuntimeMaxUSec")]
     fn runtime_max_u_sec(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `RuntimeRandomizedExtraUSec`.
-    #[zbus(property, name = "RuntimeRandomizedExtraUSec")]
+    #[zbus(
+        property(emits_changed_signal = "const"),
+        name = "RuntimeRandomizedExtraUSec"
+    )]
     fn runtime_randomized_extra_u_sec(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `WatchdogUSec`.
-    #[zbus(property, name = "WatchdogUSec")]
+    #[zbus(property(emits_changed_signal = "false"), name = "WatchdogUSec")]
     fn watchdog_u_sec(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `WatchdogTimestamp`.
-    #[zbus(property, name = "WatchdogTimestamp")]
+    #[zbus(property(emits_changed_signal = "false"), name = "WatchdogTimestamp")]
     fn watchdog_timestamp(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `WatchdogTimestampMonotonic`.
-    #[zbus(property, name = "WatchdogTimestampMonotonic")]
+    #[zbus(
+        property(emits_changed_signal = "false"),
+        name = "WatchdogTimestampMonotonic"
+    )]
     fn watchdog_timestamp_monotonic(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `RootDirectoryStartOnly`.
-    #[zbus(property, name = "RootDirectoryStartOnly")]
+    #[zbus(
+        property(emits_changed_signal = "const"),
+        name = "RootDirectoryStartOnly"
+    )]
     fn root_directory_start_only(&self) -> crate::zbus::Result<bool>;
 
     /// Get property `RemainAfterExit`.
-    #[zbus(property, name = "RemainAfterExit")]
+    #[zbus(property(emits_changed_signal = "const"), name = "RemainAfterExit")]
     fn remain_after_exit(&self) -> crate::zbus::Result<bool>;
 
     /// Get property `GuessMainPID`.
-    #[zbus(property, name = "GuessMainPID")]
+    #[zbus(property(emits_changed_signal = "const"), name = "GuessMainPID")]
     fn guess_main_pid(&self) -> crate::zbus::Result<bool>;
 
     /// Get property `RestartPreventExitStatus`.
-    #[zbus(property, name = "RestartPreventExitStatus")]
+    #[zbus(
+        property(emits_changed_signal = "const"),
+        name = "RestartPreventExitStatus"
+    )]
     fn restart_prevent_exit_status(&self) -> crate::zbus::Result<(Vec<i32>, Vec<i32>)>;
 
     /// Get property `RestartForceExitStatus`.
-    #[zbus(property, name = "RestartForceExitStatus")]
+    #[zbus(
+        property(emits_changed_signal = "const"),
+        name = "RestartForceExitStatus"
+    )]
     fn restart_force_exit_status(&self) -> crate::zbus::Result<(Vec<i32>, Vec<i32>)>;
 
     /// Get property `SuccessExitStatus`.
-    #[zbus(property, name = "SuccessExitStatus")]
+    #[zbus(property(emits_changed_signal = "const"), name = "SuccessExitStatus")]
     fn success_exit_status(&self) -> crate::zbus::Result<(Vec<i32>, Vec<i32>)>;
 
     /// Get property `MainPID`.
-    #[zbus(property, name = "MainPID")]
+    #[zbus(property(emits_changed_signal = "true"), name = "MainPID")]
     fn main_pid(&self) -> crate::zbus::Result<u32>;
 
     /// Get property `ControlPID`.
-    #[zbus(property, name = "ControlPID")]
+    #[zbus(property(emits_changed_signal = "true"), name = "ControlPID")]
     fn control_pid(&self) -> crate::zbus::Result<u32>;
 
     /// Get property `BusName`.
-    #[zbus(property, name = "BusName")]
+    #[zbus(property(emits_changed_signal = "const"), name = "BusName")]
     fn bus_name(&self) -> crate::zbus::Result<String>;
 
     /// Get property `FileDescriptorStoreMax`.
-    #[zbus(property, name = "FileDescriptorStoreMax")]
+    #[zbus(
+        property(emits_changed_signal = "const"),
+        name = "FileDescriptorStoreMax"
+    )]
     fn file_descriptor_store_max(&self) -> crate::zbus::Result<u32>;
 
     /// Get property `NFileDescriptorStore`.
-    #[zbus(property, name = "NFileDescriptorStore")]
+    #[zbus(
+        property(emits_changed_signal = "false"),
+        name = "NFileDescriptorStore"
+    )]
     fn n_file_descriptor_store(&self) -> crate::zbus::Result<u32>;
 
     /// Get property `FileDescriptorStorePreserve`.
-    #[zbus(property, name = "FileDescriptorStorePreserve")]
+    #[zbus(
+        property(emits_changed_signal = "false"),
+        name = "FileDescriptorStorePreserve"
+    )]
     fn file_descriptor_store_preserve(&self) -> crate::zbus::Result<String>;
 
     /// Get property `StatusText`.
-    #[zbus(property, name = "StatusText")]
+    #[zbus(property(emits_changed_signal = "true"), name = "StatusText")]
     fn status_text(&self) -> crate::zbus::Result<String>;
 
     /// Get property `StatusErrno`.
-    #[zbus(property, name = "StatusErrno")]
+    #[zbus(property(emits_changed_signal = "true"), name = "StatusErrno")]
     fn status_errno(&self) -> crate::zbus::Result<i32>;
 
     /// Get property `Result`.
-    #[zbus(property, name = "Result")]
+    #[zbus(property(emits_changed_signal = "true"), name = "Result")]
     fn result(&self) -> crate::zbus::Result<String>;
 
     /// Get property `ReloadResult`.
-    #[zbus(property, name = "ReloadResult")]
+    #[zbus(property(emits_changed_signal = "true"), name = "ReloadResult")]
     fn reload_result(&self) -> crate::zbus::Result<String>;
 
     /// Get property `CleanResult`.
-    #[zbus(property, name = "CleanResult")]
+    #[zbus(property(emits_changed_signal = "true"), name = "CleanResult")]
     fn clean_result(&self) -> crate::zbus::Result<String>;
 
     /// Get property `USBFunctionDescriptors`.
-    #[zbus(property, name = "USBFunctionDescriptors")]
+    #[zbus(
+        property(emits_changed_signal = "const"),
+        name = "USBFunctionDescriptors"
+    )]
     fn usb_function_descriptors(&self) -> crate::zbus::Result<String>;
 
     /// Get property `USBFunctionStrings`.
-    #[zbus(property, name = "USBFunctionStrings")]
+    #[zbus(property(emits_changed_signal = "const"), name = "USBFunctionStrings")]
     fn usb_function_strings(&self) -> crate::zbus::Result<String>;
 
     /// Get property `UID`.
-    #[zbus(property, name = "UID")]
+    #[zbus(property(emits_changed_signal = "true"), name = "UID")]
     fn uid(&self) -> crate::zbus::Result<u32>;
 
     /// Get property `GID`.
-    #[zbus(property, name = "GID")]
+    #[zbus(property(emits_changed_signal = "true"), name = "GID")]
     fn gid(&self) -> crate::zbus::Result<u32>;
 
     /// Get property `NRestarts`.
-    #[zbus(property, name = "NRestarts")]
+    #[zbus(property(emits_changed_signal = "true"), name = "NRestarts")]
     fn n_restarts(&self) -> crate::zbus::Result<u32>;
 
     /// Get property `OOMPolicy`.
-    #[zbus(property, name = "OOMPolicy")]
+    #[zbus(property(emits_changed_signal = "const"), name = "OOMPolicy")]
     fn oom_policy(&self) -> crate::zbus::Result<String>;
 
     /// Get property `OpenFile`.
-    #[zbus(property, name = "OpenFile")]
+    #[zbus(property(emits_changed_signal = "const"), name = "OpenFile")]
     fn open_file(&self) -> crate::zbus::Result<Vec<(String, String, u64)>>;
 
     /// Get property `ReloadSignal`.
-    #[zbus(property, name = "ReloadSignal")]
+    #[zbus(property(emits_changed_signal = "const"), name = "ReloadSignal")]
     fn reload_signal(&self) -> crate::zbus::Result<i32>;
 
     /// Get property `ExecMainStartTimestamp`.
-    #[zbus(property, name = "ExecMainStartTimestamp")]
+    #[zbus(
+        property(emits_changed_signal = "true"),
+        name = "ExecMainStartTimestamp"
+    )]
     fn exec_main_start_timestamp(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `ExecMainStartTimestampMonotonic`.
-    #[zbus(property, name = "ExecMainStartTimestampMonotonic")]
+    #[zbus(
+        property(emits_changed_signal = "true"),
+        name = "ExecMainStartTimestampMonotonic"
+    )]
     fn exec_main_start_timestamp_monotonic(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `ExecMainExitTimestamp`.
-    #[zbus(property, name = "ExecMainExitTimestamp")]
+    #[zbus(
+        property(emits_changed_signal = "true"),
+        name = "ExecMainExitTimestamp"
+    )]
     fn exec_main_exit_timestamp(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `ExecMainExitTimestampMonotonic`.
-    #[zbus(property, name = "ExecMainExitTimestampMonotonic")]
+    #[zbus(
+        property(emits_changed_signal = "true"),
+        name = "ExecMainExitTimestampMonotonic"
+    )]
     fn exec_main_exit_timestamp_monotonic(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `ExecMainPID`.
-    #[zbus(property, name = "ExecMainPID")]
+    #[zbus(property(emits_changed_signal = "true"), name = "ExecMainPID")]
     fn exec_main_pid(&self) -> crate::zbus::Result<u32>;
 
     /// Get property `ExecMainCode`.
-    #[zbus(property, name = "ExecMainCode")]
+    #[zbus(property(emits_changed_signal = "true"), name = "ExecMainCode")]
     fn exec_main_code(&self) -> crate::zbus::Result<i32>;
 
     /// Get property `ExecMainStatus`.
-    #[zbus(property, name = "ExecMainStatus")]
+    #[zbus(property(emits_changed_signal = "true"), name = "ExecMainStatus")]
     fn exec_main_status(&self) -> crate::zbus::Result<i32>;
 
     /// Get property `ExecCondition`.
-    #[zbus(property, name = "ExecCondition")]
+    #[zbus(property(emits_changed_signal = "invalidates"), name = "ExecCondition")]
     fn exec_condition(
         &self,
     ) -> crate::zbus::Result<Vec<(String, Vec<String>, bool, u64, u64, u64, u64, u32, i32, i32)>>;
 
     /// Get property `ExecConditionEx`.
-    #[zbus(property, name = "ExecConditionEx")]
+    #[zbus(
+        property(emits_changed_signal = "invalidates"),
+        name = "ExecConditionEx"
+    )]
     fn exec_condition_ex(
         &self,
     ) -> crate::zbus::Result<
@@ -2003,13 +2306,16 @@ trait Service {
     >;
 
     /// Get property `ExecStartPre`.
-    #[zbus(property, name = "ExecStartPre")]
+    #[zbus(property(emits_changed_signal = "invalidates"), name = "ExecStartPre")]
     fn exec_start_pre(
         &self,
     ) -> crate::zbus::Result<Vec<(String, Vec<String>, bool, u64, u64, u64, u64, u32, i32, i32)>>;
 
     /// Get property `ExecStartPreEx`.
-    #[zbus(property, name = "ExecStartPreEx")]
+    #[zbus(
+        property(emits_changed_signal = "invalidates"),
+        name = "ExecStartPreEx"
+    )]
     fn exec_start_pre_ex(
         &self,
     ) -> crate::zbus::Result<
@@ -2028,13 +2334,13 @@ trait Service {
     >;
 
     /// Get property `ExecStart`.
-    #[zbus(property, name = "ExecStart")]
+    #[zbus(property(emits_changed_signal = "invalidates"), name = "ExecStart")]
     fn exec_start(
         &self,
     ) -> crate::zbus::Result<Vec<(String, Vec<String>, bool, u64, u64, u64, u64, u32, i32, i32)>>;
 
     /// Get property `ExecStartEx`.
-    #[zbus(property, name = "ExecStartEx")]
+    #[zbus(property(emits_changed_signal = "invalidates"), name = "ExecStartEx")]
     fn exec_start_ex(
         &self,
     ) -> crate::zbus::Result<
@@ -2053,13 +2359,16 @@ trait Service {
     >;
 
     /// Get property `ExecStartPost`.
-    #[zbus(property, name = "ExecStartPost")]
+    #[zbus(property(emits_changed_signal = "invalidates"), name = "ExecStartPost")]
     fn exec_start_post(
         &self,
     ) -> crate::zbus::Result<Vec<(String, Vec<String>, bool, u64, u64, u64, u64, u32, i32, i32)>>;
 
     /// Get property `ExecStartPostEx`.
-    #[zbus(property, name = "ExecStartPostEx")]
+    #[zbus(
+        property(emits_changed_signal = "invalidates"),
+        name = "ExecStartPostEx"
+    )]
     fn exec_start_post_ex(
         &self,
     ) -> crate::zbus::Result<
@@ -2078,13 +2387,13 @@ trait Service {
     >;
 
     /// Get property `ExecReload`.
-    #[zbus(property, name = "ExecReload")]
+    #[zbus(property(emits_changed_signal = "invalidates"), name = "ExecReload")]
     fn exec_reload(
         &self,
     ) -> crate::zbus::Result<Vec<(String, Vec<String>, bool, u64, u64, u64, u64, u32, i32, i32)>>;
 
     /// Get property `ExecReloadEx`.
-    #[zbus(property, name = "ExecReloadEx")]
+    #[zbus(property(emits_changed_signal = "invalidates"), name = "ExecReloadEx")]
     fn exec_reload_ex(
         &self,
     ) -> crate::zbus::Result<
@@ -2103,13 +2412,13 @@ trait Service {
     >;
 
     /// Get property `ExecStop`.
-    #[zbus(property, name = "ExecStop")]
+    #[zbus(property(emits_changed_signal = "invalidates"), name = "ExecStop")]
     fn exec_stop(
         &self,
     ) -> crate::zbus::Result<Vec<(String, Vec<String>, bool, u64, u64, u64, u64, u32, i32, i32)>>;
 
     /// Get property `ExecStopEx`.
-    #[zbus(property, name = "ExecStopEx")]
+    #[zbus(property(emits_changed_signal = "invalidates"), name = "ExecStopEx")]
     fn exec_stop_ex(
         &self,
     ) -> crate::zbus::Result<
@@ -2128,13 +2437,16 @@ trait Service {
     >;
 
     /// Get property `ExecStopPost`.
-    #[zbus(property, name = "ExecStopPost")]
+    #[zbus(property(emits_changed_signal = "invalidates"), name = "ExecStopPost")]
     fn exec_stop_post(
         &self,
     ) -> crate::zbus::Result<Vec<(String, Vec<String>, bool, u64, u64, u64, u64, u32, i32, i32)>>;
 
     /// Get property `ExecStopPostEx`.
-    #[zbus(property, name = "ExecStopPostEx")]
+    #[zbus(
+        property(emits_changed_signal = "invalidates"),
+        name = "ExecStopPostEx"
+    )]
     fn exec_stop_post_ex(
         &self,
     ) -> crate::zbus::Result<
@@ -2153,1077 +2465,1206 @@ trait Service {
     >;
 
     /// Get property `Slice`.
-    #[zbus(property, name = "Slice")]
+    #[zbus(property(emits_changed_signal = "false"), name = "Slice")]
     fn slice(&self) -> crate::zbus::Result<String>;
 
     /// Get property `ControlGroup`.
-    #[zbus(property, name = "ControlGroup")]
+    #[zbus(property(emits_changed_signal = "false"), name = "ControlGroup")]
     fn control_group(&self) -> crate::zbus::Result<String>;
 
     /// Get property `ControlGroupId`.
-    #[zbus(property, name = "ControlGroupId")]
+    #[zbus(property(emits_changed_signal = "false"), name = "ControlGroupId")]
     fn control_group_id(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `MemoryCurrent`.
-    #[zbus(property, name = "MemoryCurrent")]
+    #[zbus(property(emits_changed_signal = "false"), name = "MemoryCurrent")]
     fn memory_current(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `MemoryPeak`.
-    #[zbus(property, name = "MemoryPeak")]
+    #[zbus(property(emits_changed_signal = "false"), name = "MemoryPeak")]
     fn memory_peak(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `MemorySwapCurrent`.
-    #[zbus(property, name = "MemorySwapCurrent")]
+    #[zbus(property(emits_changed_signal = "false"), name = "MemorySwapCurrent")]
     fn memory_swap_current(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `MemorySwapPeak`.
-    #[zbus(property, name = "MemorySwapPeak")]
+    #[zbus(property(emits_changed_signal = "false"), name = "MemorySwapPeak")]
     fn memory_swap_peak(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `MemoryZSwapCurrent`.
-    #[zbus(property, name = "MemoryZSwapCurrent")]
+    #[zbus(property(emits_changed_signal = "false"), name = "MemoryZSwapCurrent")]
     fn memory_z_swap_current(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `MemoryAvailable`.
-    #[zbus(property, name = "MemoryAvailable")]
+    #[zbus(property(emits_changed_signal = "false"), name = "MemoryAvailable")]
     fn memory_available(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `CPUUsageNSec`.
-    #[zbus(property, name = "CPUUsageNSec")]
+    #[zbus(property(emits_changed_signal = "false"), name = "CPUUsageNSec")]
     fn cpu_usage_n_sec(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `EffectiveCPUs`.
-    #[zbus(property, name = "EffectiveCPUs")]
+    #[zbus(property(emits_changed_signal = "false"), name = "EffectiveCPUs")]
     fn effective_cp_us(&self) -> crate::zbus::Result<Vec<u8>>;
 
     /// Get property `EffectiveMemoryNodes`.
-    #[zbus(property, name = "EffectiveMemoryNodes")]
+    #[zbus(
+        property(emits_changed_signal = "false"),
+        name = "EffectiveMemoryNodes"
+    )]
     fn effective_memory_nodes(&self) -> crate::zbus::Result<Vec<u8>>;
 
     /// Get property `TasksCurrent`.
-    #[zbus(property, name = "TasksCurrent")]
+    #[zbus(property(emits_changed_signal = "false"), name = "TasksCurrent")]
     fn tasks_current(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `IPIngressBytes`.
-    #[zbus(property, name = "IPIngressBytes")]
+    #[zbus(property(emits_changed_signal = "false"), name = "IPIngressBytes")]
     fn ip_ingress_bytes(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `IPIngressPackets`.
-    #[zbus(property, name = "IPIngressPackets")]
+    #[zbus(property(emits_changed_signal = "false"), name = "IPIngressPackets")]
     fn ip_ingress_packets(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `IPEgressBytes`.
-    #[zbus(property, name = "IPEgressBytes")]
+    #[zbus(property(emits_changed_signal = "false"), name = "IPEgressBytes")]
     fn ip_egress_bytes(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `IPEgressPackets`.
-    #[zbus(property, name = "IPEgressPackets")]
+    #[zbus(property(emits_changed_signal = "false"), name = "IPEgressPackets")]
     fn ip_egress_packets(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `IOReadBytes`.
-    #[zbus(property, name = "IOReadBytes")]
+    #[zbus(property(emits_changed_signal = "false"), name = "IOReadBytes")]
     fn io_read_bytes(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `IOReadOperations`.
-    #[zbus(property, name = "IOReadOperations")]
+    #[zbus(property(emits_changed_signal = "false"), name = "IOReadOperations")]
     fn io_read_operations(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `IOWriteBytes`.
-    #[zbus(property, name = "IOWriteBytes")]
+    #[zbus(property(emits_changed_signal = "false"), name = "IOWriteBytes")]
     fn io_write_bytes(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `IOWriteOperations`.
-    #[zbus(property, name = "IOWriteOperations")]
+    #[zbus(property(emits_changed_signal = "false"), name = "IOWriteOperations")]
     fn io_write_operations(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `Delegate`.
-    #[zbus(property, name = "Delegate")]
+    #[zbus(property(emits_changed_signal = "false"), name = "Delegate")]
     fn delegate(&self) -> crate::zbus::Result<bool>;
 
     /// Get property `DelegateControllers`.
-    #[zbus(property, name = "DelegateControllers")]
+    #[zbus(property(emits_changed_signal = "false"), name = "DelegateControllers")]
     fn delegate_controllers(&self) -> crate::zbus::Result<Vec<String>>;
 
     /// Get property `DelegateSubgroup`.
-    #[zbus(property, name = "DelegateSubgroup")]
+    #[zbus(property(emits_changed_signal = "false"), name = "DelegateSubgroup")]
     fn delegate_subgroup(&self) -> crate::zbus::Result<String>;
 
     /// Get property `CPUAccounting`.
-    #[zbus(property, name = "CPUAccounting")]
+    #[zbus(property(emits_changed_signal = "false"), name = "CPUAccounting")]
     fn cpu_accounting(&self) -> crate::zbus::Result<bool>;
 
     /// Get property `CPUWeight`.
-    #[zbus(property, name = "CPUWeight")]
+    #[zbus(property(emits_changed_signal = "false"), name = "CPUWeight")]
     fn cpu_weight(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `StartupCPUWeight`.
-    #[zbus(property, name = "StartupCPUWeight")]
+    #[zbus(property(emits_changed_signal = "false"), name = "StartupCPUWeight")]
     fn startup_cpu_weight(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `CPUShares`.
-    #[zbus(property, name = "CPUShares")]
+    #[zbus(property(emits_changed_signal = "false"), name = "CPUShares")]
     fn cpu_shares(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `StartupCPUShares`.
-    #[zbus(property, name = "StartupCPUShares")]
+    #[zbus(property(emits_changed_signal = "false"), name = "StartupCPUShares")]
     fn startup_cpu_shares(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `CPUQuotaPerSecUSec`.
-    #[zbus(property, name = "CPUQuotaPerSecUSec")]
+    #[zbus(property(emits_changed_signal = "false"), name = "CPUQuotaPerSecUSec")]
     fn cpu_quota_per_sec_u_sec(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `CPUQuotaPeriodUSec`.
-    #[zbus(property, name = "CPUQuotaPeriodUSec")]
+    #[zbus(property(emits_changed_signal = "false"), name = "CPUQuotaPeriodUSec")]
     fn cpu_quota_period_u_sec(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `AllowedCPUs`.
-    #[zbus(property, name = "AllowedCPUs")]
+    #[zbus(property(emits_changed_signal = "false"), name = "AllowedCPUs")]
     fn allowed_cp_us(&self) -> crate::zbus::Result<Vec<u8>>;
 
     /// Get property `StartupAllowedCPUs`.
-    #[zbus(property, name = "StartupAllowedCPUs")]
+    #[zbus(property(emits_changed_signal = "false"), name = "StartupAllowedCPUs")]
     fn startup_allowed_cp_us(&self) -> crate::zbus::Result<Vec<u8>>;
 
     /// Get property `AllowedMemoryNodes`.
-    #[zbus(property, name = "AllowedMemoryNodes")]
+    #[zbus(property(emits_changed_signal = "false"), name = "AllowedMemoryNodes")]
     fn allowed_memory_nodes(&self) -> crate::zbus::Result<Vec<u8>>;
 
     /// Get property `StartupAllowedMemoryNodes`.
-    #[zbus(property, name = "StartupAllowedMemoryNodes")]
+    #[zbus(
+        property(emits_changed_signal = "false"),
+        name = "StartupAllowedMemoryNodes"
+    )]
     fn startup_allowed_memory_nodes(&self) -> crate::zbus::Result<Vec<u8>>;
 
     /// Get property `IOAccounting`.
-    #[zbus(property, name = "IOAccounting")]
+    #[zbus(property(emits_changed_signal = "false"), name = "IOAccounting")]
     fn io_accounting(&self) -> crate::zbus::Result<bool>;
 
     /// Get property `IOWeight`.
-    #[zbus(property, name = "IOWeight")]
+    #[zbus(property(emits_changed_signal = "false"), name = "IOWeight")]
     fn io_weight(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `StartupIOWeight`.
-    #[zbus(property, name = "StartupIOWeight")]
+    #[zbus(property(emits_changed_signal = "false"), name = "StartupIOWeight")]
     fn startup_io_weight(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `IODeviceWeight`.
-    #[zbus(property, name = "IODeviceWeight")]
+    #[zbus(property(emits_changed_signal = "false"), name = "IODeviceWeight")]
     fn io_device_weight(&self) -> crate::zbus::Result<Vec<(String, u64)>>;
 
     /// Get property `IOReadBandwidthMax`.
-    #[zbus(property, name = "IOReadBandwidthMax")]
+    #[zbus(property(emits_changed_signal = "false"), name = "IOReadBandwidthMax")]
     fn io_read_bandwidth_max(&self) -> crate::zbus::Result<Vec<(String, u64)>>;
 
     /// Get property `IOWriteBandwidthMax`.
-    #[zbus(property, name = "IOWriteBandwidthMax")]
+    #[zbus(property(emits_changed_signal = "false"), name = "IOWriteBandwidthMax")]
     fn io_write_bandwidth_max(&self) -> crate::zbus::Result<Vec<(String, u64)>>;
 
     /// Get property `IOReadIOPSMax`.
-    #[zbus(property, name = "IOReadIOPSMax")]
+    #[zbus(property(emits_changed_signal = "false"), name = "IOReadIOPSMax")]
     fn io_read_iops_max(&self) -> crate::zbus::Result<Vec<(String, u64)>>;
 
     /// Get property `IOWriteIOPSMax`.
-    #[zbus(property, name = "IOWriteIOPSMax")]
+    #[zbus(property(emits_changed_signal = "false"), name = "IOWriteIOPSMax")]
     fn io_write_iops_max(&self) -> crate::zbus::Result<Vec<(String, u64)>>;
 
     /// Get property `IODeviceLatencyTargetUSec`.
-    #[zbus(property, name = "IODeviceLatencyTargetUSec")]
+    #[zbus(
+        property(emits_changed_signal = "false"),
+        name = "IODeviceLatencyTargetUSec"
+    )]
     fn io_device_latency_target_u_sec(&self) -> crate::zbus::Result<Vec<(String, u64)>>;
 
     /// Get property `BlockIOAccounting`.
-    #[zbus(property, name = "BlockIOAccounting")]
+    #[zbus(property(emits_changed_signal = "false"), name = "BlockIOAccounting")]
     fn block_io_accounting(&self) -> crate::zbus::Result<bool>;
 
     /// Get property `BlockIOWeight`.
-    #[zbus(property, name = "BlockIOWeight")]
+    #[zbus(property(emits_changed_signal = "false"), name = "BlockIOWeight")]
     fn block_io_weight(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `StartupBlockIOWeight`.
-    #[zbus(property, name = "StartupBlockIOWeight")]
+    #[zbus(
+        property(emits_changed_signal = "false"),
+        name = "StartupBlockIOWeight"
+    )]
     fn startup_block_io_weight(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `BlockIODeviceWeight`.
-    #[zbus(property, name = "BlockIODeviceWeight")]
+    #[zbus(property(emits_changed_signal = "false"), name = "BlockIODeviceWeight")]
     fn block_io_device_weight(&self) -> crate::zbus::Result<Vec<(String, u64)>>;
 
     /// Get property `BlockIOReadBandwidth`.
-    #[zbus(property, name = "BlockIOReadBandwidth")]
+    #[zbus(
+        property(emits_changed_signal = "false"),
+        name = "BlockIOReadBandwidth"
+    )]
     fn block_io_read_bandwidth(&self) -> crate::zbus::Result<Vec<(String, u64)>>;
 
     /// Get property `BlockIOWriteBandwidth`.
-    #[zbus(property, name = "BlockIOWriteBandwidth")]
+    #[zbus(
+        property(emits_changed_signal = "false"),
+        name = "BlockIOWriteBandwidth"
+    )]
     fn block_io_write_bandwidth(&self) -> crate::zbus::Result<Vec<(String, u64)>>;
 
     /// Get property `MemoryAccounting`.
-    #[zbus(property, name = "MemoryAccounting")]
+    #[zbus(property(emits_changed_signal = "false"), name = "MemoryAccounting")]
     fn memory_accounting(&self) -> crate::zbus::Result<bool>;
 
     /// Get property `DefaultMemoryLow`.
-    #[zbus(property, name = "DefaultMemoryLow")]
+    #[zbus(property(emits_changed_signal = "false"), name = "DefaultMemoryLow")]
     fn default_memory_low(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `DefaultStartupMemoryLow`.
-    #[zbus(property, name = "DefaultStartupMemoryLow")]
+    #[zbus(
+        property(emits_changed_signal = "false"),
+        name = "DefaultStartupMemoryLow"
+    )]
     fn default_startup_memory_low(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `DefaultMemoryMin`.
-    #[zbus(property, name = "DefaultMemoryMin")]
+    #[zbus(property(emits_changed_signal = "false"), name = "DefaultMemoryMin")]
     fn default_memory_min(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `MemoryMin`.
-    #[zbus(property, name = "MemoryMin")]
+    #[zbus(property(emits_changed_signal = "false"), name = "MemoryMin")]
     fn memory_min(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `MemoryLow`.
-    #[zbus(property, name = "MemoryLow")]
+    #[zbus(property(emits_changed_signal = "false"), name = "MemoryLow")]
     fn memory_low(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `StartupMemoryLow`.
-    #[zbus(property, name = "StartupMemoryLow")]
+    #[zbus(property(emits_changed_signal = "false"), name = "StartupMemoryLow")]
     fn startup_memory_low(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `MemoryHigh`.
-    #[zbus(property, name = "MemoryHigh")]
+    #[zbus(property(emits_changed_signal = "false"), name = "MemoryHigh")]
     fn memory_high(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `StartupMemoryHigh`.
-    #[zbus(property, name = "StartupMemoryHigh")]
+    #[zbus(property(emits_changed_signal = "false"), name = "StartupMemoryHigh")]
     fn startup_memory_high(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `MemoryMax`.
-    #[zbus(property, name = "MemoryMax")]
+    #[zbus(property(emits_changed_signal = "false"), name = "MemoryMax")]
     fn memory_max(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `StartupMemoryMax`.
-    #[zbus(property, name = "StartupMemoryMax")]
+    #[zbus(property(emits_changed_signal = "false"), name = "StartupMemoryMax")]
     fn startup_memory_max(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `MemorySwapMax`.
-    #[zbus(property, name = "MemorySwapMax")]
+    #[zbus(property(emits_changed_signal = "false"), name = "MemorySwapMax")]
     fn memory_swap_max(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `StartupMemorySwapMax`.
-    #[zbus(property, name = "StartupMemorySwapMax")]
+    #[zbus(
+        property(emits_changed_signal = "false"),
+        name = "StartupMemorySwapMax"
+    )]
     fn startup_memory_swap_max(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `MemoryZSwapMax`.
-    #[zbus(property, name = "MemoryZSwapMax")]
+    #[zbus(property(emits_changed_signal = "false"), name = "MemoryZSwapMax")]
     fn memory_z_swap_max(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `StartupMemoryZSwapMax`.
-    #[zbus(property, name = "StartupMemoryZSwapMax")]
+    #[zbus(
+        property(emits_changed_signal = "false"),
+        name = "StartupMemoryZSwapMax"
+    )]
     fn startup_memory_z_swap_max(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `MemoryLimit`.
-    #[zbus(property, name = "MemoryLimit")]
+    #[zbus(property(emits_changed_signal = "false"), name = "MemoryLimit")]
     fn memory_limit(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `DevicePolicy`.
-    #[zbus(property, name = "DevicePolicy")]
+    #[zbus(property(emits_changed_signal = "false"), name = "DevicePolicy")]
     fn device_policy(&self) -> crate::zbus::Result<String>;
 
     /// Get property `DeviceAllow`.
-    #[zbus(property, name = "DeviceAllow")]
+    #[zbus(property(emits_changed_signal = "false"), name = "DeviceAllow")]
     fn device_allow(&self) -> crate::zbus::Result<Vec<(String, String)>>;
 
     /// Get property `TasksAccounting`.
-    #[zbus(property, name = "TasksAccounting")]
+    #[zbus(property(emits_changed_signal = "false"), name = "TasksAccounting")]
     fn tasks_accounting(&self) -> crate::zbus::Result<bool>;
 
     /// Get property `TasksMax`.
-    #[zbus(property, name = "TasksMax")]
+    #[zbus(property(emits_changed_signal = "false"), name = "TasksMax")]
     fn tasks_max(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `IPAccounting`.
-    #[zbus(property, name = "IPAccounting")]
+    #[zbus(property(emits_changed_signal = "false"), name = "IPAccounting")]
     fn ip_accounting(&self) -> crate::zbus::Result<bool>;
 
     /// Get property `IPAddressAllow`.
-    #[zbus(property, name = "IPAddressAllow")]
+    #[zbus(property(emits_changed_signal = "false"), name = "IPAddressAllow")]
     fn ip_address_allow(&self) -> crate::zbus::Result<Vec<(i32, Vec<u8>, u32)>>;
 
     /// Get property `IPAddressDeny`.
-    #[zbus(property, name = "IPAddressDeny")]
+    #[zbus(property(emits_changed_signal = "false"), name = "IPAddressDeny")]
     fn ip_address_deny(&self) -> crate::zbus::Result<Vec<(i32, Vec<u8>, u32)>>;
 
     /// Get property `IPIngressFilterPath`.
-    #[zbus(property, name = "IPIngressFilterPath")]
+    #[zbus(property(emits_changed_signal = "false"), name = "IPIngressFilterPath")]
     fn ip_ingress_filter_path(&self) -> crate::zbus::Result<Vec<String>>;
 
     /// Get property `IPEgressFilterPath`.
-    #[zbus(property, name = "IPEgressFilterPath")]
+    #[zbus(property(emits_changed_signal = "false"), name = "IPEgressFilterPath")]
     fn ip_egress_filter_path(&self) -> crate::zbus::Result<Vec<String>>;
 
     /// Get property `DisableControllers`.
-    #[zbus(property, name = "DisableControllers")]
+    #[zbus(property(emits_changed_signal = "false"), name = "DisableControllers")]
     fn disable_controllers(&self) -> crate::zbus::Result<Vec<String>>;
 
     /// Get property `ManagedOOMSwap`.
-    #[zbus(property, name = "ManagedOOMSwap")]
+    #[zbus(property(emits_changed_signal = "false"), name = "ManagedOOMSwap")]
     fn managed_oom_swap(&self) -> crate::zbus::Result<String>;
 
     /// Get property `ManagedOOMMemoryPressure`.
-    #[zbus(property, name = "ManagedOOMMemoryPressure")]
+    #[zbus(
+        property(emits_changed_signal = "false"),
+        name = "ManagedOOMMemoryPressure"
+    )]
     fn managed_oom_memory_pressure(&self) -> crate::zbus::Result<String>;
 
     /// Get property `ManagedOOMMemoryPressureLimit`.
-    #[zbus(property, name = "ManagedOOMMemoryPressureLimit")]
+    #[zbus(
+        property(emits_changed_signal = "false"),
+        name = "ManagedOOMMemoryPressureLimit"
+    )]
     fn managed_oom_memory_pressure_limit(&self) -> crate::zbus::Result<u32>;
 
     /// Get property `ManagedOOMPreference`.
-    #[zbus(property, name = "ManagedOOMPreference")]
+    #[zbus(
+        property(emits_changed_signal = "false"),
+        name = "ManagedOOMPreference"
+    )]
     fn managed_oom_preference(&self) -> crate::zbus::Result<String>;
 
     /// Get property `BPFProgram`.
-    #[zbus(property, name = "BPFProgram")]
+    #[zbus(property(emits_changed_signal = "false"), name = "BPFProgram")]
     fn bpf_program(&self) -> crate::zbus::Result<Vec<(String, String)>>;
 
     /// Get property `SocketBindAllow`.
-    #[zbus(property, name = "SocketBindAllow")]
+    #[zbus(property(emits_changed_signal = "false"), name = "SocketBindAllow")]
     fn socket_bind_allow(&self) -> crate::zbus::Result<Vec<(i32, i32, u16, u16)>>;
 
     /// Get property `SocketBindDeny`.
-    #[zbus(property, name = "SocketBindDeny")]
+    #[zbus(property(emits_changed_signal = "false"), name = "SocketBindDeny")]
     fn socket_bind_deny(&self) -> crate::zbus::Result<Vec<(i32, i32, u16, u16)>>;
 
     /// Get property `RestrictNetworkInterfaces`.
-    #[zbus(property, name = "RestrictNetworkInterfaces")]
+    #[zbus(
+        property(emits_changed_signal = "false"),
+        name = "RestrictNetworkInterfaces"
+    )]
     fn restrict_network_interfaces(&self) -> crate::zbus::Result<(bool, Vec<String>)>;
 
     /// Get property `MemoryPressureWatch`.
-    #[zbus(property, name = "MemoryPressureWatch")]
+    #[zbus(property(emits_changed_signal = "false"), name = "MemoryPressureWatch")]
     fn memory_pressure_watch(&self) -> crate::zbus::Result<String>;
 
     /// Get property `MemoryPressureThresholdUSec`.
-    #[zbus(property, name = "MemoryPressureThresholdUSec")]
+    #[zbus(
+        property(emits_changed_signal = "false"),
+        name = "MemoryPressureThresholdUSec"
+    )]
     fn memory_pressure_threshold_u_sec(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `NFTSet`.
-    #[zbus(property, name = "NFTSet")]
+    #[zbus(property(emits_changed_signal = "false"), name = "NFTSet")]
     fn nft_set(&self) -> crate::zbus::Result<Vec<(i32, i32, String, String)>>;
 
     /// Get property `CoredumpReceive`.
-    #[zbus(property, name = "CoredumpReceive")]
+    #[zbus(property(emits_changed_signal = "false"), name = "CoredumpReceive")]
     fn coredump_receive(&self) -> crate::zbus::Result<bool>;
 
     /// Get property `Environment`.
-    #[zbus(property, name = "Environment")]
+    #[zbus(property(emits_changed_signal = "const"), name = "Environment")]
     fn environment(&self) -> crate::zbus::Result<Vec<String>>;
 
     /// Get property `EnvironmentFiles`.
-    #[zbus(property, name = "EnvironmentFiles")]
+    #[zbus(property(emits_changed_signal = "const"), name = "EnvironmentFiles")]
     fn environment_files(&self) -> crate::zbus::Result<Vec<(String, bool)>>;
 
     /// Get property `PassEnvironment`.
-    #[zbus(property, name = "PassEnvironment")]
+    #[zbus(property(emits_changed_signal = "const"), name = "PassEnvironment")]
     fn pass_environment(&self) -> crate::zbus::Result<Vec<String>>;
 
     /// Get property `UnsetEnvironment`.
-    #[zbus(property, name = "UnsetEnvironment")]
+    #[zbus(property(emits_changed_signal = "const"), name = "UnsetEnvironment")]
     fn unset_environment(&self) -> crate::zbus::Result<Vec<String>>;
 
     /// Get property `UMask`.
-    #[zbus(property, name = "UMask")]
+    #[zbus(property(emits_changed_signal = "const"), name = "UMask")]
     fn u_mask(&self) -> crate::zbus::Result<u32>;
 
     /// Get property `LimitCPU`.
-    #[zbus(property, name = "LimitCPU")]
+    #[zbus(property(emits_changed_signal = "const"), name = "LimitCPU")]
     fn limit_cpu(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `LimitCPUSoft`.
-    #[zbus(property, name = "LimitCPUSoft")]
+    #[zbus(property(emits_changed_signal = "const"), name = "LimitCPUSoft")]
     fn limit_cpu_soft(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `LimitFSIZE`.
-    #[zbus(property, name = "LimitFSIZE")]
+    #[zbus(property(emits_changed_signal = "const"), name = "LimitFSIZE")]
     fn limit_fsize(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `LimitFSIZESoft`.
-    #[zbus(property, name = "LimitFSIZESoft")]
+    #[zbus(property(emits_changed_signal = "const"), name = "LimitFSIZESoft")]
     fn limit_fsize_soft(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `LimitDATA`.
-    #[zbus(property, name = "LimitDATA")]
+    #[zbus(property(emits_changed_signal = "const"), name = "LimitDATA")]
     fn limit_data(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `LimitDATASoft`.
-    #[zbus(property, name = "LimitDATASoft")]
+    #[zbus(property(emits_changed_signal = "const"), name = "LimitDATASoft")]
     fn limit_data_soft(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `LimitSTACK`.
-    #[zbus(property, name = "LimitSTACK")]
+    #[zbus(property(emits_changed_signal = "const"), name = "LimitSTACK")]
     fn limit_stack(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `LimitSTACKSoft`.
-    #[zbus(property, name = "LimitSTACKSoft")]
+    #[zbus(property(emits_changed_signal = "const"), name = "LimitSTACKSoft")]
     fn limit_stack_soft(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `LimitCORE`.
-    #[zbus(property, name = "LimitCORE")]
+    #[zbus(property(emits_changed_signal = "const"), name = "LimitCORE")]
     fn limit_core(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `LimitCORESoft`.
-    #[zbus(property, name = "LimitCORESoft")]
+    #[zbus(property(emits_changed_signal = "const"), name = "LimitCORESoft")]
     fn limit_core_soft(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `LimitRSS`.
-    #[zbus(property, name = "LimitRSS")]
+    #[zbus(property(emits_changed_signal = "const"), name = "LimitRSS")]
     fn limit_rss(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `LimitRSSSoft`.
-    #[zbus(property, name = "LimitRSSSoft")]
+    #[zbus(property(emits_changed_signal = "const"), name = "LimitRSSSoft")]
     fn limit_rss_soft(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `LimitNOFILE`.
-    #[zbus(property, name = "LimitNOFILE")]
+    #[zbus(property(emits_changed_signal = "const"), name = "LimitNOFILE")]
     fn limit_nofile(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `LimitNOFILESoft`.
-    #[zbus(property, name = "LimitNOFILESoft")]
+    #[zbus(property(emits_changed_signal = "const"), name = "LimitNOFILESoft")]
     fn limit_nofile_soft(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `LimitAS`.
-    #[zbus(property, name = "LimitAS")]
+    #[zbus(property(emits_changed_signal = "const"), name = "LimitAS")]
     fn limit_as(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `LimitASSoft`.
-    #[zbus(property, name = "LimitASSoft")]
+    #[zbus(property(emits_changed_signal = "const"), name = "LimitASSoft")]
     fn limit_as_soft(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `LimitNPROC`.
-    #[zbus(property, name = "LimitNPROC")]
+    #[zbus(property(emits_changed_signal = "const"), name = "LimitNPROC")]
     fn limit_nproc(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `LimitNPROCSoft`.
-    #[zbus(property, name = "LimitNPROCSoft")]
+    #[zbus(property(emits_changed_signal = "const"), name = "LimitNPROCSoft")]
     fn limit_nproc_soft(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `LimitMEMLOCK`.
-    #[zbus(property, name = "LimitMEMLOCK")]
+    #[zbus(property(emits_changed_signal = "const"), name = "LimitMEMLOCK")]
     fn limit_memlock(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `LimitMEMLOCKSoft`.
-    #[zbus(property, name = "LimitMEMLOCKSoft")]
+    #[zbus(property(emits_changed_signal = "const"), name = "LimitMEMLOCKSoft")]
     fn limit_memlock_soft(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `LimitLOCKS`.
-    #[zbus(property, name = "LimitLOCKS")]
+    #[zbus(property(emits_changed_signal = "const"), name = "LimitLOCKS")]
     fn limit_locks(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `LimitLOCKSSoft`.
-    #[zbus(property, name = "LimitLOCKSSoft")]
+    #[zbus(property(emits_changed_signal = "const"), name = "LimitLOCKSSoft")]
     fn limit_locks_soft(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `LimitSIGPENDING`.
-    #[zbus(property, name = "LimitSIGPENDING")]
+    #[zbus(property(emits_changed_signal = "const"), name = "LimitSIGPENDING")]
     fn limit_sigpending(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `LimitSIGPENDINGSoft`.
-    #[zbus(property, name = "LimitSIGPENDINGSoft")]
+    #[zbus(property(emits_changed_signal = "const"), name = "LimitSIGPENDINGSoft")]
     fn limit_sigpending_soft(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `LimitMSGQUEUE`.
-    #[zbus(property, name = "LimitMSGQUEUE")]
+    #[zbus(property(emits_changed_signal = "const"), name = "LimitMSGQUEUE")]
     fn limit_msgqueue(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `LimitMSGQUEUESoft`.
-    #[zbus(property, name = "LimitMSGQUEUESoft")]
+    #[zbus(property(emits_changed_signal = "const"), name = "LimitMSGQUEUESoft")]
     fn limit_msgqueue_soft(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `LimitNICE`.
-    #[zbus(property, name = "LimitNICE")]
+    #[zbus(property(emits_changed_signal = "const"), name = "LimitNICE")]
     fn limit_nice(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `LimitNICESoft`.
-    #[zbus(property, name = "LimitNICESoft")]
+    #[zbus(property(emits_changed_signal = "const"), name = "LimitNICESoft")]
     fn limit_nice_soft(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `LimitRTPRIO`.
-    #[zbus(property, name = "LimitRTPRIO")]
+    #[zbus(property(emits_changed_signal = "const"), name = "LimitRTPRIO")]
     fn limit_rtprio(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `LimitRTPRIOSoft`.
-    #[zbus(property, name = "LimitRTPRIOSoft")]
+    #[zbus(property(emits_changed_signal = "const"), name = "LimitRTPRIOSoft")]
     fn limit_rtprio_soft(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `LimitRTTIME`.
-    #[zbus(property, name = "LimitRTTIME")]
+    #[zbus(property(emits_changed_signal = "const"), name = "LimitRTTIME")]
     fn limit_rttime(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `LimitRTTIMESoft`.
-    #[zbus(property, name = "LimitRTTIMESoft")]
+    #[zbus(property(emits_changed_signal = "const"), name = "LimitRTTIMESoft")]
     fn limit_rttime_soft(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `WorkingDirectory`.
-    #[zbus(property, name = "WorkingDirectory")]
+    #[zbus(property(emits_changed_signal = "const"), name = "WorkingDirectory")]
     fn working_directory(&self) -> crate::zbus::Result<String>;
 
     /// Get property `RootDirectory`.
-    #[zbus(property, name = "RootDirectory")]
+    #[zbus(property(emits_changed_signal = "const"), name = "RootDirectory")]
     fn root_directory(&self) -> crate::zbus::Result<String>;
 
     /// Get property `RootImage`.
-    #[zbus(property, name = "RootImage")]
+    #[zbus(property(emits_changed_signal = "const"), name = "RootImage")]
     fn root_image(&self) -> crate::zbus::Result<String>;
 
     /// Get property `RootImageOptions`.
-    #[zbus(property, name = "RootImageOptions")]
+    #[zbus(property(emits_changed_signal = "const"), name = "RootImageOptions")]
     fn root_image_options(&self) -> crate::zbus::Result<Vec<(String, String)>>;
 
     /// Get property `RootHash`.
-    #[zbus(property, name = "RootHash")]
+    #[zbus(property(emits_changed_signal = "const"), name = "RootHash")]
     fn root_hash(&self) -> crate::zbus::Result<Vec<u8>>;
 
     /// Get property `RootHashPath`.
-    #[zbus(property, name = "RootHashPath")]
+    #[zbus(property(emits_changed_signal = "const"), name = "RootHashPath")]
     fn root_hash_path(&self) -> crate::zbus::Result<String>;
 
     /// Get property `RootHashSignature`.
-    #[zbus(property, name = "RootHashSignature")]
+    #[zbus(property(emits_changed_signal = "const"), name = "RootHashSignature")]
     fn root_hash_signature(&self) -> crate::zbus::Result<Vec<u8>>;
 
     /// Get property `RootHashSignaturePath`.
-    #[zbus(property, name = "RootHashSignaturePath")]
+    #[zbus(
+        property(emits_changed_signal = "const"),
+        name = "RootHashSignaturePath"
+    )]
     fn root_hash_signature_path(&self) -> crate::zbus::Result<String>;
 
     /// Get property `RootVerity`.
-    #[zbus(property, name = "RootVerity")]
+    #[zbus(property(emits_changed_signal = "const"), name = "RootVerity")]
     fn root_verity(&self) -> crate::zbus::Result<String>;
 
     /// Get property `RootEphemeral`.
-    #[zbus(property, name = "RootEphemeral")]
+    #[zbus(property(emits_changed_signal = "const"), name = "RootEphemeral")]
     fn root_ephemeral(&self) -> crate::zbus::Result<bool>;
 
     /// Get property `ExtensionDirectories`.
-    #[zbus(property, name = "ExtensionDirectories")]
+    #[zbus(
+        property(emits_changed_signal = "const"),
+        name = "ExtensionDirectories"
+    )]
     fn extension_directories(&self) -> crate::zbus::Result<Vec<String>>;
 
     /// Get property `ExtensionImages`.
-    #[zbus(property, name = "ExtensionImages")]
+    #[zbus(property(emits_changed_signal = "const"), name = "ExtensionImages")]
     fn extension_images(&self) -> crate::zbus::Result<Vec<(String, bool, Vec<(String, String)>)>>;
 
     /// Get property `MountImages`.
-    #[zbus(property, name = "MountImages")]
+    #[zbus(property(emits_changed_signal = "const"), name = "MountImages")]
     fn mount_images(
         &self,
     ) -> crate::zbus::Result<Vec<(String, String, bool, Vec<(String, String)>)>>;
 
     /// Get property `OOMScoreAdjust`.
-    #[zbus(property, name = "OOMScoreAdjust")]
+    #[zbus(property(emits_changed_signal = "const"), name = "OOMScoreAdjust")]
     fn oom_score_adjust(&self) -> crate::zbus::Result<i32>;
 
     /// Get property `CoredumpFilter`.
-    #[zbus(property, name = "CoredumpFilter")]
+    #[zbus(property(emits_changed_signal = "const"), name = "CoredumpFilter")]
     fn coredump_filter(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `Nice`.
-    #[zbus(property, name = "Nice")]
+    #[zbus(property(emits_changed_signal = "const"), name = "Nice")]
     fn nice(&self) -> crate::zbus::Result<i32>;
 
     /// Get property `IOSchedulingClass`.
-    #[zbus(property, name = "IOSchedulingClass")]
+    #[zbus(property(emits_changed_signal = "const"), name = "IOSchedulingClass")]
     fn io_scheduling_class(&self) -> crate::zbus::Result<i32>;
 
     /// Get property `IOSchedulingPriority`.
-    #[zbus(property, name = "IOSchedulingPriority")]
+    #[zbus(
+        property(emits_changed_signal = "const"),
+        name = "IOSchedulingPriority"
+    )]
     fn io_scheduling_priority(&self) -> crate::zbus::Result<i32>;
 
     /// Get property `CPUSchedulingPolicy`.
-    #[zbus(property, name = "CPUSchedulingPolicy")]
+    #[zbus(property(emits_changed_signal = "const"), name = "CPUSchedulingPolicy")]
     fn cpu_scheduling_policy(&self) -> crate::zbus::Result<i32>;
 
     /// Get property `CPUSchedulingPriority`.
-    #[zbus(property, name = "CPUSchedulingPriority")]
+    #[zbus(
+        property(emits_changed_signal = "const"),
+        name = "CPUSchedulingPriority"
+    )]
     fn cpu_scheduling_priority(&self) -> crate::zbus::Result<i32>;
 
     /// Get property `CPUAffinity`.
-    #[zbus(property, name = "CPUAffinity")]
+    #[zbus(property(emits_changed_signal = "const"), name = "CPUAffinity")]
     fn cpu_affinity(&self) -> crate::zbus::Result<Vec<u8>>;
 
     /// Get property `CPUAffinityFromNUMA`.
-    #[zbus(property, name = "CPUAffinityFromNUMA")]
+    #[zbus(property(emits_changed_signal = "const"), name = "CPUAffinityFromNUMA")]
     fn cpu_affinity_from_numa(&self) -> crate::zbus::Result<bool>;
 
     /// Get property `NUMAPolicy`.
-    #[zbus(property, name = "NUMAPolicy")]
+    #[zbus(property(emits_changed_signal = "const"), name = "NUMAPolicy")]
     fn numa_policy(&self) -> crate::zbus::Result<i32>;
 
     /// Get property `NUMAMask`.
-    #[zbus(property, name = "NUMAMask")]
+    #[zbus(property(emits_changed_signal = "const"), name = "NUMAMask")]
     fn numa_mask(&self) -> crate::zbus::Result<Vec<u8>>;
 
     /// Get property `TimerSlackNSec`.
-    #[zbus(property, name = "TimerSlackNSec")]
+    #[zbus(property(emits_changed_signal = "const"), name = "TimerSlackNSec")]
     fn timer_slack_n_sec(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `CPUSchedulingResetOnFork`.
-    #[zbus(property, name = "CPUSchedulingResetOnFork")]
+    #[zbus(
+        property(emits_changed_signal = "const"),
+        name = "CPUSchedulingResetOnFork"
+    )]
     fn cpu_scheduling_reset_on_fork(&self) -> crate::zbus::Result<bool>;
 
     /// Get property `NonBlocking`.
-    #[zbus(property, name = "NonBlocking")]
+    #[zbus(property(emits_changed_signal = "const"), name = "NonBlocking")]
     fn non_blocking(&self) -> crate::zbus::Result<bool>;
 
     /// Get property `StandardInput`.
-    #[zbus(property, name = "StandardInput")]
+    #[zbus(property(emits_changed_signal = "const"), name = "StandardInput")]
     fn standard_input(&self) -> crate::zbus::Result<String>;
 
     /// Get property `StandardInputFileDescriptorName`.
-    #[zbus(property, name = "StandardInputFileDescriptorName")]
+    #[zbus(
+        property(emits_changed_signal = "const"),
+        name = "StandardInputFileDescriptorName"
+    )]
     fn standard_input_file_descriptor_name(&self) -> crate::zbus::Result<String>;
 
     /// Get property `StandardInputData`.
-    #[zbus(property, name = "StandardInputData")]
+    #[zbus(property(emits_changed_signal = "const"), name = "StandardInputData")]
     fn standard_input_data(&self) -> crate::zbus::Result<Vec<u8>>;
 
     /// Get property `StandardOutput`.
-    #[zbus(property, name = "StandardOutput")]
+    #[zbus(property(emits_changed_signal = "const"), name = "StandardOutput")]
     fn standard_output(&self) -> crate::zbus::Result<String>;
 
     /// Get property `StandardOutputFileDescriptorName`.
-    #[zbus(property, name = "StandardOutputFileDescriptorName")]
+    #[zbus(
+        property(emits_changed_signal = "const"),
+        name = "StandardOutputFileDescriptorName"
+    )]
     fn standard_output_file_descriptor_name(&self) -> crate::zbus::Result<String>;
 
     /// Get property `StandardError`.
-    #[zbus(property, name = "StandardError")]
+    #[zbus(property(emits_changed_signal = "const"), name = "StandardError")]
     fn standard_error(&self) -> crate::zbus::Result<String>;
 
     /// Get property `StandardErrorFileDescriptorName`.
-    #[zbus(property, name = "StandardErrorFileDescriptorName")]
+    #[zbus(
+        property(emits_changed_signal = "const"),
+        name = "StandardErrorFileDescriptorName"
+    )]
     fn standard_error_file_descriptor_name(&self) -> crate::zbus::Result<String>;
 
     /// Get property `TTYPath`.
-    #[zbus(property, name = "TTYPath")]
+    #[zbus(property(emits_changed_signal = "const"), name = "TTYPath")]
     fn tty_path(&self) -> crate::zbus::Result<String>;
 
     /// Get property `TTYReset`.
-    #[zbus(property, name = "TTYReset")]
+    #[zbus(property(emits_changed_signal = "const"), name = "TTYReset")]
     fn tty_reset(&self) -> crate::zbus::Result<bool>;
 
     /// Get property `TTYVHangup`.
-    #[zbus(property, name = "TTYVHangup")]
+    #[zbus(property(emits_changed_signal = "const"), name = "TTYVHangup")]
     fn ttyv_hangup(&self) -> crate::zbus::Result<bool>;
 
     /// Get property `TTYVTDisallocate`.
-    #[zbus(property, name = "TTYVTDisallocate")]
+    #[zbus(property(emits_changed_signal = "const"), name = "TTYVTDisallocate")]
     fn ttyvt_disallocate(&self) -> crate::zbus::Result<bool>;
 
     /// Get property `TTYRows`.
-    #[zbus(property, name = "TTYRows")]
+    #[zbus(property(emits_changed_signal = "const"), name = "TTYRows")]
     fn tty_rows(&self) -> crate::zbus::Result<u16>;
 
     /// Get property `TTYColumns`.
-    #[zbus(property, name = "TTYColumns")]
+    #[zbus(property(emits_changed_signal = "const"), name = "TTYColumns")]
     fn tty_columns(&self) -> crate::zbus::Result<u16>;
 
     /// Get property `SyslogPriority`.
-    #[zbus(property, name = "SyslogPriority")]
+    #[zbus(property(emits_changed_signal = "const"), name = "SyslogPriority")]
     fn syslog_priority(&self) -> crate::zbus::Result<i32>;
 
     /// Get property `SyslogIdentifier`.
-    #[zbus(property, name = "SyslogIdentifier")]
+    #[zbus(property(emits_changed_signal = "const"), name = "SyslogIdentifier")]
     fn syslog_identifier(&self) -> crate::zbus::Result<String>;
 
     /// Get property `SyslogLevelPrefix`.
-    #[zbus(property, name = "SyslogLevelPrefix")]
+    #[zbus(property(emits_changed_signal = "const"), name = "SyslogLevelPrefix")]
     fn syslog_level_prefix(&self) -> crate::zbus::Result<bool>;
 
     /// Get property `SyslogLevel`.
-    #[zbus(property, name = "SyslogLevel")]
+    #[zbus(property(emits_changed_signal = "const"), name = "SyslogLevel")]
     fn syslog_level(&self) -> crate::zbus::Result<i32>;
 
     /// Get property `SyslogFacility`.
-    #[zbus(property, name = "SyslogFacility")]
+    #[zbus(property(emits_changed_signal = "const"), name = "SyslogFacility")]
     fn syslog_facility(&self) -> crate::zbus::Result<i32>;
 
     /// Get property `LogLevelMax`.
-    #[zbus(property, name = "LogLevelMax")]
+    #[zbus(property(emits_changed_signal = "const"), name = "LogLevelMax")]
     fn log_level_max(&self) -> crate::zbus::Result<i32>;
 
     /// Get property `LogRateLimitIntervalUSec`.
-    #[zbus(property, name = "LogRateLimitIntervalUSec")]
+    #[zbus(
+        property(emits_changed_signal = "const"),
+        name = "LogRateLimitIntervalUSec"
+    )]
     fn log_rate_limit_interval_u_sec(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `LogRateLimitBurst`.
-    #[zbus(property, name = "LogRateLimitBurst")]
+    #[zbus(property(emits_changed_signal = "const"), name = "LogRateLimitBurst")]
     fn log_rate_limit_burst(&self) -> crate::zbus::Result<u32>;
 
     /// Get property `LogExtraFields`.
-    #[zbus(property, name = "LogExtraFields")]
+    #[zbus(property(emits_changed_signal = "const"), name = "LogExtraFields")]
     fn log_extra_fields(&self) -> crate::zbus::Result<Vec<Vec<u8>>>;
 
     /// Get property `LogFilterPatterns`.
-    #[zbus(property, name = "LogFilterPatterns")]
+    #[zbus(property(emits_changed_signal = "const"), name = "LogFilterPatterns")]
     fn log_filter_patterns(&self) -> crate::zbus::Result<Vec<(bool, String)>>;
 
     /// Get property `LogNamespace`.
-    #[zbus(property, name = "LogNamespace")]
+    #[zbus(property(emits_changed_signal = "const"), name = "LogNamespace")]
     fn log_namespace(&self) -> crate::zbus::Result<String>;
 
     /// Get property `SecureBits`.
-    #[zbus(property, name = "SecureBits")]
+    #[zbus(property(emits_changed_signal = "const"), name = "SecureBits")]
     fn secure_bits(&self) -> crate::zbus::Result<i32>;
 
     /// Get property `CapabilityBoundingSet`.
-    #[zbus(property, name = "CapabilityBoundingSet")]
+    #[zbus(
+        property(emits_changed_signal = "const"),
+        name = "CapabilityBoundingSet"
+    )]
     fn capability_bounding_set(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `AmbientCapabilities`.
-    #[zbus(property, name = "AmbientCapabilities")]
+    #[zbus(property(emits_changed_signal = "const"), name = "AmbientCapabilities")]
     fn ambient_capabilities(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `User`.
-    #[zbus(property, name = "User")]
+    #[zbus(property(emits_changed_signal = "const"), name = "User")]
     fn user(&self) -> crate::zbus::Result<String>;
 
     /// Get property `Group`.
-    #[zbus(property, name = "Group")]
+    #[zbus(property(emits_changed_signal = "const"), name = "Group")]
     fn group(&self) -> crate::zbus::Result<String>;
 
     /// Get property `DynamicUser`.
-    #[zbus(property, name = "DynamicUser")]
+    #[zbus(property(emits_changed_signal = "const"), name = "DynamicUser")]
     fn dynamic_user(&self) -> crate::zbus::Result<bool>;
 
     /// Get property `SetLoginEnvironment`.
-    #[zbus(property, name = "SetLoginEnvironment")]
+    #[zbus(property(emits_changed_signal = "const"), name = "SetLoginEnvironment")]
     fn set_login_environment(&self) -> crate::zbus::Result<bool>;
 
     /// Get property `RemoveIPC`.
-    #[zbus(property, name = "RemoveIPC")]
+    #[zbus(property(emits_changed_signal = "const"), name = "RemoveIPC")]
     fn remove_ipc(&self) -> crate::zbus::Result<bool>;
 
     /// Get property `SetCredential`.
-    #[zbus(property, name = "SetCredential")]
+    #[zbus(property(emits_changed_signal = "const"), name = "SetCredential")]
     fn set_credential(&self) -> crate::zbus::Result<Vec<(String, Vec<u8>)>>;
 
     /// Get property `SetCredentialEncrypted`.
-    #[zbus(property, name = "SetCredentialEncrypted")]
+    #[zbus(
+        property(emits_changed_signal = "const"),
+        name = "SetCredentialEncrypted"
+    )]
     fn set_credential_encrypted(&self) -> crate::zbus::Result<Vec<(String, Vec<u8>)>>;
 
     /// Get property `LoadCredential`.
-    #[zbus(property, name = "LoadCredential")]
+    #[zbus(property(emits_changed_signal = "const"), name = "LoadCredential")]
     fn load_credential(&self) -> crate::zbus::Result<Vec<(String, String)>>;
 
     /// Get property `LoadCredentialEncrypted`.
-    #[zbus(property, name = "LoadCredentialEncrypted")]
+    #[zbus(
+        property(emits_changed_signal = "const"),
+        name = "LoadCredentialEncrypted"
+    )]
     fn load_credential_encrypted(&self) -> crate::zbus::Result<Vec<(String, String)>>;
 
     /// Get property `ImportCredential`.
-    #[zbus(property, name = "ImportCredential")]
+    #[zbus(property(emits_changed_signal = "const"), name = "ImportCredential")]
     fn import_credential(&self) -> crate::zbus::Result<Vec<String>>;
 
     /// Get property `SupplementaryGroups`.
-    #[zbus(property, name = "SupplementaryGroups")]
+    #[zbus(property(emits_changed_signal = "const"), name = "SupplementaryGroups")]
     fn supplementary_groups(&self) -> crate::zbus::Result<Vec<String>>;
 
     /// Get property `PAMName`.
-    #[zbus(property, name = "PAMName")]
+    #[zbus(property(emits_changed_signal = "const"), name = "PAMName")]
     fn pam_name(&self) -> crate::zbus::Result<String>;
 
     /// Get property `ReadWritePaths`.
-    #[zbus(property, name = "ReadWritePaths")]
+    #[zbus(property(emits_changed_signal = "const"), name = "ReadWritePaths")]
     fn read_write_paths(&self) -> crate::zbus::Result<Vec<String>>;
 
     /// Get property `ReadOnlyPaths`.
-    #[zbus(property, name = "ReadOnlyPaths")]
+    #[zbus(property(emits_changed_signal = "const"), name = "ReadOnlyPaths")]
     fn read_only_paths(&self) -> crate::zbus::Result<Vec<String>>;
 
     /// Get property `InaccessiblePaths`.
-    #[zbus(property, name = "InaccessiblePaths")]
+    #[zbus(property(emits_changed_signal = "const"), name = "InaccessiblePaths")]
     fn inaccessible_paths(&self) -> crate::zbus::Result<Vec<String>>;
 
     /// Get property `ExecPaths`.
-    #[zbus(property, name = "ExecPaths")]
+    #[zbus(property(emits_changed_signal = "const"), name = "ExecPaths")]
     fn exec_paths(&self) -> crate::zbus::Result<Vec<String>>;
 
     /// Get property `NoExecPaths`.
-    #[zbus(property, name = "NoExecPaths")]
+    #[zbus(property(emits_changed_signal = "const"), name = "NoExecPaths")]
     fn no_exec_paths(&self) -> crate::zbus::Result<Vec<String>>;
 
     /// Get property `ExecSearchPath`.
-    #[zbus(property, name = "ExecSearchPath")]
+    #[zbus(property(emits_changed_signal = "const"), name = "ExecSearchPath")]
     fn exec_search_path(&self) -> crate::zbus::Result<Vec<String>>;
 
     /// Get property `MountFlags`.
-    #[zbus(property, name = "MountFlags")]
+    #[zbus(property(emits_changed_signal = "const"), name = "MountFlags")]
     fn mount_flags(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `PrivateTmp`.
-    #[zbus(property, name = "PrivateTmp")]
+    #[zbus(property(emits_changed_signal = "const"), name = "PrivateTmp")]
     fn private_tmp(&self) -> crate::zbus::Result<bool>;
 
     /// Get property `PrivateDevices`.
-    #[zbus(property, name = "PrivateDevices")]
+    #[zbus(property(emits_changed_signal = "const"), name = "PrivateDevices")]
     fn private_devices(&self) -> crate::zbus::Result<bool>;
 
     /// Get property `ProtectClock`.
-    #[zbus(property, name = "ProtectClock")]
+    #[zbus(property(emits_changed_signal = "const"), name = "ProtectClock")]
     fn protect_clock(&self) -> crate::zbus::Result<bool>;
 
     /// Get property `ProtectKernelTunables`.
-    #[zbus(property, name = "ProtectKernelTunables")]
+    #[zbus(
+        property(emits_changed_signal = "const"),
+        name = "ProtectKernelTunables"
+    )]
     fn protect_kernel_tunables(&self) -> crate::zbus::Result<bool>;
 
     /// Get property `ProtectKernelModules`.
-    #[zbus(property, name = "ProtectKernelModules")]
+    #[zbus(
+        property(emits_changed_signal = "const"),
+        name = "ProtectKernelModules"
+    )]
     fn protect_kernel_modules(&self) -> crate::zbus::Result<bool>;
 
     /// Get property `ProtectKernelLogs`.
-    #[zbus(property, name = "ProtectKernelLogs")]
+    #[zbus(property(emits_changed_signal = "const"), name = "ProtectKernelLogs")]
     fn protect_kernel_logs(&self) -> crate::zbus::Result<bool>;
 
     /// Get property `ProtectControlGroups`.
-    #[zbus(property, name = "ProtectControlGroups")]
+    #[zbus(
+        property(emits_changed_signal = "const"),
+        name = "ProtectControlGroups"
+    )]
     fn protect_control_groups(&self) -> crate::zbus::Result<bool>;
 
     /// Get property `PrivateNetwork`.
-    #[zbus(property, name = "PrivateNetwork")]
+    #[zbus(property(emits_changed_signal = "const"), name = "PrivateNetwork")]
     fn private_network(&self) -> crate::zbus::Result<bool>;
 
     /// Get property `PrivateUsers`.
-    #[zbus(property, name = "PrivateUsers")]
+    #[zbus(property(emits_changed_signal = "const"), name = "PrivateUsers")]
     fn private_users(&self) -> crate::zbus::Result<bool>;
 
     /// Get property `PrivateMounts`.
-    #[zbus(property, name = "PrivateMounts")]
+    #[zbus(property(emits_changed_signal = "const"), name = "PrivateMounts")]
     fn private_mounts(&self) -> crate::zbus::Result<bool>;
 
     /// Get property `PrivateIPC`.
-    #[zbus(property, name = "PrivateIPC")]
+    #[zbus(property(emits_changed_signal = "const"), name = "PrivateIPC")]
     fn private_ipc(&self) -> crate::zbus::Result<bool>;
 
     /// Get property `ProtectHome`.
-    #[zbus(property, name = "ProtectHome")]
+    #[zbus(property(emits_changed_signal = "const"), name = "ProtectHome")]
     fn protect_home(&self) -> crate::zbus::Result<String>;
 
     /// Get property `ProtectSystem`.
-    #[zbus(property, name = "ProtectSystem")]
+    #[zbus(property(emits_changed_signal = "const"), name = "ProtectSystem")]
     fn protect_system(&self) -> crate::zbus::Result<String>;
 
     /// Get property `SameProcessGroup`.
-    #[zbus(property, name = "SameProcessGroup")]
+    #[zbus(property(emits_changed_signal = "const"), name = "SameProcessGroup")]
     fn same_process_group(&self) -> crate::zbus::Result<bool>;
 
     /// Get property `UtmpIdentifier`.
-    #[zbus(property, name = "UtmpIdentifier")]
+    #[zbus(property(emits_changed_signal = "const"), name = "UtmpIdentifier")]
     fn utmp_identifier(&self) -> crate::zbus::Result<String>;
 
     /// Get property `UtmpMode`.
-    #[zbus(property, name = "UtmpMode")]
+    #[zbus(property(emits_changed_signal = "const"), name = "UtmpMode")]
     fn utmp_mode(&self) -> crate::zbus::Result<String>;
 
     /// Get property `SELinuxContext`.
-    #[zbus(property, name = "SELinuxContext")]
+    #[zbus(property(emits_changed_signal = "const"), name = "SELinuxContext")]
     fn se_linux_context(&self) -> crate::zbus::Result<(bool, String)>;
 
     /// Get property `AppArmorProfile`.
-    #[zbus(property, name = "AppArmorProfile")]
+    #[zbus(property(emits_changed_signal = "const"), name = "AppArmorProfile")]
     fn app_armor_profile(&self) -> crate::zbus::Result<(bool, String)>;
 
     /// Get property `SmackProcessLabel`.
-    #[zbus(property, name = "SmackProcessLabel")]
+    #[zbus(property(emits_changed_signal = "const"), name = "SmackProcessLabel")]
     fn smack_process_label(&self) -> crate::zbus::Result<(bool, String)>;
 
     /// Get property `IgnoreSIGPIPE`.
-    #[zbus(property, name = "IgnoreSIGPIPE")]
+    #[zbus(property(emits_changed_signal = "const"), name = "IgnoreSIGPIPE")]
     fn ignore_sigpipe(&self) -> crate::zbus::Result<bool>;
 
     /// Get property `NoNewPrivileges`.
-    #[zbus(property, name = "NoNewPrivileges")]
+    #[zbus(property(emits_changed_signal = "const"), name = "NoNewPrivileges")]
     fn no_new_privileges(&self) -> crate::zbus::Result<bool>;
 
     /// Get property `SystemCallFilter`.
-    #[zbus(property, name = "SystemCallFilter")]
+    #[zbus(property(emits_changed_signal = "const"), name = "SystemCallFilter")]
     fn system_call_filter(&self) -> crate::zbus::Result<(bool, Vec<String>)>;
 
     /// Get property `SystemCallArchitectures`.
-    #[zbus(property, name = "SystemCallArchitectures")]
+    #[zbus(
+        property(emits_changed_signal = "const"),
+        name = "SystemCallArchitectures"
+    )]
     fn system_call_architectures(&self) -> crate::zbus::Result<Vec<String>>;
 
     /// Get property `SystemCallErrorNumber`.
-    #[zbus(property, name = "SystemCallErrorNumber")]
+    #[zbus(
+        property(emits_changed_signal = "const"),
+        name = "SystemCallErrorNumber"
+    )]
     fn system_call_error_number(&self) -> crate::zbus::Result<i32>;
 
     /// Get property `SystemCallLog`.
-    #[zbus(property, name = "SystemCallLog")]
+    #[zbus(property(emits_changed_signal = "const"), name = "SystemCallLog")]
     fn system_call_log(&self) -> crate::zbus::Result<(bool, Vec<String>)>;
 
     /// Get property `Personality`.
-    #[zbus(property, name = "Personality")]
+    #[zbus(property(emits_changed_signal = "const"), name = "Personality")]
     fn personality(&self) -> crate::zbus::Result<String>;
 
     /// Get property `LockPersonality`.
-    #[zbus(property, name = "LockPersonality")]
+    #[zbus(property(emits_changed_signal = "const"), name = "LockPersonality")]
     fn lock_personality(&self) -> crate::zbus::Result<bool>;
 
     /// Get property `RestrictAddressFamilies`.
-    #[zbus(property, name = "RestrictAddressFamilies")]
+    #[zbus(
+        property(emits_changed_signal = "const"),
+        name = "RestrictAddressFamilies"
+    )]
     fn restrict_address_families(&self) -> crate::zbus::Result<(bool, Vec<String>)>;
 
     /// Get property `RuntimeDirectorySymlink`.
-    #[zbus(property, name = "RuntimeDirectorySymlink")]
+    #[zbus(
+        property(emits_changed_signal = "const"),
+        name = "RuntimeDirectorySymlink"
+    )]
     fn runtime_directory_symlink(&self) -> crate::zbus::Result<Vec<(String, String, u64)>>;
 
     /// Get property `RuntimeDirectoryPreserve`.
-    #[zbus(property, name = "RuntimeDirectoryPreserve")]
+    #[zbus(
+        property(emits_changed_signal = "const"),
+        name = "RuntimeDirectoryPreserve"
+    )]
     fn runtime_directory_preserve(&self) -> crate::zbus::Result<String>;
 
     /// Get property `RuntimeDirectoryMode`.
-    #[zbus(property, name = "RuntimeDirectoryMode")]
+    #[zbus(
+        property(emits_changed_signal = "const"),
+        name = "RuntimeDirectoryMode"
+    )]
     fn runtime_directory_mode(&self) -> crate::zbus::Result<u32>;
 
     /// Get property `RuntimeDirectory`.
-    #[zbus(property, name = "RuntimeDirectory")]
+    #[zbus(property(emits_changed_signal = "const"), name = "RuntimeDirectory")]
     fn runtime_directory(&self) -> crate::zbus::Result<Vec<String>>;
 
     /// Get property `StateDirectorySymlink`.
-    #[zbus(property, name = "StateDirectorySymlink")]
+    #[zbus(
+        property(emits_changed_signal = "const"),
+        name = "StateDirectorySymlink"
+    )]
     fn state_directory_symlink(&self) -> crate::zbus::Result<Vec<(String, String, u64)>>;
 
     /// Get property `StateDirectoryMode`.
-    #[zbus(property, name = "StateDirectoryMode")]
+    #[zbus(property(emits_changed_signal = "const"), name = "StateDirectoryMode")]
     fn state_directory_mode(&self) -> crate::zbus::Result<u32>;
 
     /// Get property `StateDirectory`.
-    #[zbus(property, name = "StateDirectory")]
+    #[zbus(property(emits_changed_signal = "const"), name = "StateDirectory")]
     fn state_directory(&self) -> crate::zbus::Result<Vec<String>>;
 
     /// Get property `CacheDirectorySymlink`.
-    #[zbus(property, name = "CacheDirectorySymlink")]
+    #[zbus(
+        property(emits_changed_signal = "const"),
+        name = "CacheDirectorySymlink"
+    )]
     fn cache_directory_symlink(&self) -> crate::zbus::Result<Vec<(String, String, u64)>>;
 
     /// Get property `CacheDirectoryMode`.
-    #[zbus(property, name = "CacheDirectoryMode")]
+    #[zbus(property(emits_changed_signal = "const"), name = "CacheDirectoryMode")]
     fn cache_directory_mode(&self) -> crate::zbus::Result<u32>;
 
     /// Get property `CacheDirectory`.
-    #[zbus(property, name = "CacheDirectory")]
+    #[zbus(property(emits_changed_signal = "const"), name = "CacheDirectory")]
     fn cache_directory(&self) -> crate::zbus::Result<Vec<String>>;
 
     /// Get property `LogsDirectorySymlink`.
-    #[zbus(property, name = "LogsDirectorySymlink")]
+    #[zbus(
+        property(emits_changed_signal = "const"),
+        name = "LogsDirectorySymlink"
+    )]
     fn logs_directory_symlink(&self) -> crate::zbus::Result<Vec<(String, String, u64)>>;
 
     /// Get property `LogsDirectoryMode`.
-    #[zbus(property, name = "LogsDirectoryMode")]
+    #[zbus(property(emits_changed_signal = "const"), name = "LogsDirectoryMode")]
     fn logs_directory_mode(&self) -> crate::zbus::Result<u32>;
 
     /// Get property `LogsDirectory`.
-    #[zbus(property, name = "LogsDirectory")]
+    #[zbus(property(emits_changed_signal = "const"), name = "LogsDirectory")]
     fn logs_directory(&self) -> crate::zbus::Result<Vec<String>>;
 
     /// Get property `ConfigurationDirectoryMode`.
-    #[zbus(property, name = "ConfigurationDirectoryMode")]
+    #[zbus(
+        property(emits_changed_signal = "const"),
+        name = "ConfigurationDirectoryMode"
+    )]
     fn configuration_directory_mode(&self) -> crate::zbus::Result<u32>;
 
     /// Get property `ConfigurationDirectory`.
-    #[zbus(property, name = "ConfigurationDirectory")]
+    #[zbus(
+        property(emits_changed_signal = "const"),
+        name = "ConfigurationDirectory"
+    )]
     fn configuration_directory(&self) -> crate::zbus::Result<Vec<String>>;
 
     /// Get property `TimeoutCleanUSec`.
-    #[zbus(property, name = "TimeoutCleanUSec")]
+    #[zbus(property(emits_changed_signal = "const"), name = "TimeoutCleanUSec")]
     fn timeout_clean_u_sec(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `MemoryDenyWriteExecute`.
-    #[zbus(property, name = "MemoryDenyWriteExecute")]
+    #[zbus(
+        property(emits_changed_signal = "const"),
+        name = "MemoryDenyWriteExecute"
+    )]
     fn memory_deny_write_execute(&self) -> crate::zbus::Result<bool>;
 
     /// Get property `RestrictRealtime`.
-    #[zbus(property, name = "RestrictRealtime")]
+    #[zbus(property(emits_changed_signal = "const"), name = "RestrictRealtime")]
     fn restrict_realtime(&self) -> crate::zbus::Result<bool>;
 
     /// Get property `RestrictSUIDSGID`.
-    #[zbus(property, name = "RestrictSUIDSGID")]
+    #[zbus(property(emits_changed_signal = "const"), name = "RestrictSUIDSGID")]
     fn restrict_suidsgid(&self) -> crate::zbus::Result<bool>;
 
     /// Get property `RestrictNamespaces`.
-    #[zbus(property, name = "RestrictNamespaces")]
+    #[zbus(property(emits_changed_signal = "const"), name = "RestrictNamespaces")]
     fn restrict_namespaces(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `RestrictFileSystems`.
-    #[zbus(property, name = "RestrictFileSystems")]
+    #[zbus(property(emits_changed_signal = "const"), name = "RestrictFileSystems")]
     fn restrict_file_systems(&self) -> crate::zbus::Result<(bool, Vec<String>)>;
 
     /// Get property `BindPaths`.
-    #[zbus(property, name = "BindPaths")]
+    #[zbus(property(emits_changed_signal = "const"), name = "BindPaths")]
     fn bind_paths(&self) -> crate::zbus::Result<Vec<(String, String, bool, u64)>>;
 
     /// Get property `BindReadOnlyPaths`.
-    #[zbus(property, name = "BindReadOnlyPaths")]
+    #[zbus(property(emits_changed_signal = "const"), name = "BindReadOnlyPaths")]
     fn bind_read_only_paths(&self) -> crate::zbus::Result<Vec<(String, String, bool, u64)>>;
 
     /// Get property `TemporaryFileSystem`.
-    #[zbus(property, name = "TemporaryFileSystem")]
+    #[zbus(property(emits_changed_signal = "const"), name = "TemporaryFileSystem")]
     fn temporary_file_system(&self) -> crate::zbus::Result<Vec<(String, String)>>;
 
     /// Get property `MountAPIVFS`.
-    #[zbus(property, name = "MountAPIVFS")]
+    #[zbus(property(emits_changed_signal = "const"), name = "MountAPIVFS")]
     fn mount_apivfs(&self) -> crate::zbus::Result<bool>;
 
     /// Get property `KeyringMode`.
-    #[zbus(property, name = "KeyringMode")]
+    #[zbus(property(emits_changed_signal = "const"), name = "KeyringMode")]
     fn keyring_mode(&self) -> crate::zbus::Result<String>;
 
     /// Get property `ProtectProc`.
-    #[zbus(property, name = "ProtectProc")]
+    #[zbus(property(emits_changed_signal = "const"), name = "ProtectProc")]
     fn protect_proc(&self) -> crate::zbus::Result<String>;
 
     /// Get property `ProcSubset`.
-    #[zbus(property, name = "ProcSubset")]
+    #[zbus(property(emits_changed_signal = "const"), name = "ProcSubset")]
     fn proc_subset(&self) -> crate::zbus::Result<String>;
 
     /// Get property `ProtectHostname`.
-    #[zbus(property, name = "ProtectHostname")]
+    #[zbus(property(emits_changed_signal = "const"), name = "ProtectHostname")]
     fn protect_hostname(&self) -> crate::zbus::Result<bool>;
 
     /// Get property `MemoryKSM`.
-    #[zbus(property, name = "MemoryKSM")]
+    #[zbus(property(emits_changed_signal = "const"), name = "MemoryKSM")]
     fn memory_ksm(&self) -> crate::zbus::Result<bool>;
 
     /// Get property `NetworkNamespacePath`.
-    #[zbus(property, name = "NetworkNamespacePath")]
+    #[zbus(
+        property(emits_changed_signal = "const"),
+        name = "NetworkNamespacePath"
+    )]
     fn network_namespace_path(&self) -> crate::zbus::Result<String>;
 
     /// Get property `IPCNamespacePath`.
-    #[zbus(property, name = "IPCNamespacePath")]
+    #[zbus(property(emits_changed_signal = "const"), name = "IPCNamespacePath")]
     fn ipc_namespace_path(&self) -> crate::zbus::Result<String>;
 
     /// Get property `RootImagePolicy`.
-    #[zbus(property, name = "RootImagePolicy")]
+    #[zbus(property(emits_changed_signal = "const"), name = "RootImagePolicy")]
     fn root_image_policy(&self) -> crate::zbus::Result<String>;
 
     /// Get property `MountImagePolicy`.
-    #[zbus(property, name = "MountImagePolicy")]
+    #[zbus(property(emits_changed_signal = "const"), name = "MountImagePolicy")]
     fn mount_image_policy(&self) -> crate::zbus::Result<String>;
 
     /// Get property `ExtensionImagePolicy`.
-    #[zbus(property, name = "ExtensionImagePolicy")]
+    #[zbus(
+        property(emits_changed_signal = "const"),
+        name = "ExtensionImagePolicy"
+    )]
     fn extension_image_policy(&self) -> crate::zbus::Result<String>;
 
     /// Get property `KillMode`.
-    #[zbus(property, name = "KillMode")]
+    #[zbus(property(emits_changed_signal = "const"), name = "KillMode")]
     fn kill_mode(&self) -> crate::zbus::Result<String>;
 
     /// Get property `KillSignal`.
-    #[zbus(property, name = "KillSignal")]
+    #[zbus(property(emits_changed_signal = "const"), name = "KillSignal")]
     fn kill_signal(&self) -> crate::zbus::Result<i32>;
 
     /// Get property `RestartKillSignal`.
-    #[zbus(property, name = "RestartKillSignal")]
+    #[zbus(property(emits_changed_signal = "const"), name = "RestartKillSignal")]
     fn restart_kill_signal(&self) -> crate::zbus::Result<i32>;
 
     /// Get property `FinalKillSignal`.
-    #[zbus(property, name = "FinalKillSignal")]
+    #[zbus(property(emits_changed_signal = "const"), name = "FinalKillSignal")]
     fn final_kill_signal(&self) -> crate::zbus::Result<i32>;
 
     /// Get property `SendSIGKILL`.
-    #[zbus(property, name = "SendSIGKILL")]
+    #[zbus(property(emits_changed_signal = "const"), name = "SendSIGKILL")]
     fn send_sigkill(&self) -> crate::zbus::Result<bool>;
 
     /// Get property `SendSIGHUP`.
-    #[zbus(property, name = "SendSIGHUP")]
+    #[zbus(property(emits_changed_signal = "const"), name = "SendSIGHUP")]
     fn send_sighup(&self) -> crate::zbus::Result<bool>;
 
     /// Get property `WatchdogSignal`.
-    #[zbus(property, name = "WatchdogSignal")]
+    #[zbus(property(emits_changed_signal = "const"), name = "WatchdogSignal")]
     fn watchdog_signal(&self) -> crate::zbus::Result<i32>;
 }
 
@@ -3244,1325 +3685,1472 @@ trait Socket {
     fn attach_processes(&self, subcgroup: String, pids: Vec<u32>) -> crate::zbus::Result<()>;
 
     /// Get property `BindIPv6Only`.
-    #[zbus(property, name = "BindIPv6Only")]
+    #[zbus(property(emits_changed_signal = "const"), name = "BindIPv6Only")]
     fn bind_i_pv6_only(&self) -> crate::zbus::Result<String>;
 
     /// Get property `Backlog`.
-    #[zbus(property, name = "Backlog")]
+    #[zbus(property(emits_changed_signal = "const"), name = "Backlog")]
     fn backlog(&self) -> crate::zbus::Result<u32>;
 
     /// Get property `TimeoutUSec`.
-    #[zbus(property, name = "TimeoutUSec")]
+    #[zbus(property(emits_changed_signal = "const"), name = "TimeoutUSec")]
     fn timeout_u_sec(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `BindToDevice`.
-    #[zbus(property, name = "BindToDevice")]
+    #[zbus(property(emits_changed_signal = "const"), name = "BindToDevice")]
     fn bind_to_device(&self) -> crate::zbus::Result<String>;
 
     /// Get property `SocketUser`.
-    #[zbus(property, name = "SocketUser")]
+    #[zbus(property(emits_changed_signal = "const"), name = "SocketUser")]
     fn socket_user(&self) -> crate::zbus::Result<String>;
 
     /// Get property `SocketGroup`.
-    #[zbus(property, name = "SocketGroup")]
+    #[zbus(property(emits_changed_signal = "const"), name = "SocketGroup")]
     fn socket_group(&self) -> crate::zbus::Result<String>;
 
     /// Get property `SocketMode`.
-    #[zbus(property, name = "SocketMode")]
+    #[zbus(property(emits_changed_signal = "const"), name = "SocketMode")]
     fn socket_mode(&self) -> crate::zbus::Result<u32>;
 
     /// Get property `DirectoryMode`.
-    #[zbus(property, name = "DirectoryMode")]
+    #[zbus(property(emits_changed_signal = "const"), name = "DirectoryMode")]
     fn directory_mode(&self) -> crate::zbus::Result<u32>;
 
     /// Get property `Accept`.
-    #[zbus(property, name = "Accept")]
+    #[zbus(property(emits_changed_signal = "const"), name = "Accept")]
     fn accept(&self) -> crate::zbus::Result<bool>;
 
     /// Get property `FlushPending`.
-    #[zbus(property, name = "FlushPending")]
+    #[zbus(property(emits_changed_signal = "const"), name = "FlushPending")]
     fn flush_pending(&self) -> crate::zbus::Result<bool>;
 
     /// Get property `Writable`.
-    #[zbus(property, name = "Writable")]
+    #[zbus(property(emits_changed_signal = "const"), name = "Writable")]
     fn writable(&self) -> crate::zbus::Result<bool>;
 
     /// Get property `KeepAlive`.
-    #[zbus(property, name = "KeepAlive")]
+    #[zbus(property(emits_changed_signal = "const"), name = "KeepAlive")]
     fn keep_alive(&self) -> crate::zbus::Result<bool>;
 
     /// Get property `KeepAliveTimeUSec`.
-    #[zbus(property, name = "KeepAliveTimeUSec")]
+    #[zbus(property(emits_changed_signal = "const"), name = "KeepAliveTimeUSec")]
     fn keep_alive_time_u_sec(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `KeepAliveIntervalUSec`.
-    #[zbus(property, name = "KeepAliveIntervalUSec")]
+    #[zbus(
+        property(emits_changed_signal = "const"),
+        name = "KeepAliveIntervalUSec"
+    )]
     fn keep_alive_interval_u_sec(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `KeepAliveProbes`.
-    #[zbus(property, name = "KeepAliveProbes")]
+    #[zbus(property(emits_changed_signal = "const"), name = "KeepAliveProbes")]
     fn keep_alive_probes(&self) -> crate::zbus::Result<u32>;
 
     /// Get property `DeferAcceptUSec`.
-    #[zbus(property, name = "DeferAcceptUSec")]
+    #[zbus(property(emits_changed_signal = "const"), name = "DeferAcceptUSec")]
     fn defer_accept_u_sec(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `NoDelay`.
-    #[zbus(property, name = "NoDelay")]
+    #[zbus(property(emits_changed_signal = "const"), name = "NoDelay")]
     fn no_delay(&self) -> crate::zbus::Result<bool>;
 
     /// Get property `Priority`.
-    #[zbus(property, name = "Priority")]
+    #[zbus(property(emits_changed_signal = "const"), name = "Priority")]
     fn priority(&self) -> crate::zbus::Result<i32>;
 
     /// Get property `ReceiveBuffer`.
-    #[zbus(property, name = "ReceiveBuffer")]
+    #[zbus(property(emits_changed_signal = "const"), name = "ReceiveBuffer")]
     fn receive_buffer(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `SendBuffer`.
-    #[zbus(property, name = "SendBuffer")]
+    #[zbus(property(emits_changed_signal = "const"), name = "SendBuffer")]
     fn send_buffer(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `IPTOS`.
-    #[zbus(property, name = "IPTOS")]
+    #[zbus(property(emits_changed_signal = "const"), name = "IPTOS")]
     fn iptos(&self) -> crate::zbus::Result<i32>;
 
     /// Get property `IPTTL`.
-    #[zbus(property, name = "IPTTL")]
+    #[zbus(property(emits_changed_signal = "const"), name = "IPTTL")]
     fn ipttl(&self) -> crate::zbus::Result<i32>;
 
     /// Get property `PipeSize`.
-    #[zbus(property, name = "PipeSize")]
+    #[zbus(property(emits_changed_signal = "const"), name = "PipeSize")]
     fn pipe_size(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `FreeBind`.
-    #[zbus(property, name = "FreeBind")]
+    #[zbus(property(emits_changed_signal = "const"), name = "FreeBind")]
     fn free_bind(&self) -> crate::zbus::Result<bool>;
 
     /// Get property `Transparent`.
-    #[zbus(property, name = "Transparent")]
+    #[zbus(property(emits_changed_signal = "const"), name = "Transparent")]
     fn transparent(&self) -> crate::zbus::Result<bool>;
 
     /// Get property `Broadcast`.
-    #[zbus(property, name = "Broadcast")]
+    #[zbus(property(emits_changed_signal = "const"), name = "Broadcast")]
     fn broadcast(&self) -> crate::zbus::Result<bool>;
 
     /// Get property `PassCredentials`.
-    #[zbus(property, name = "PassCredentials")]
+    #[zbus(property(emits_changed_signal = "const"), name = "PassCredentials")]
     fn pass_credentials(&self) -> crate::zbus::Result<bool>;
 
     /// Get property `PassSecurity`.
-    #[zbus(property, name = "PassSecurity")]
+    #[zbus(property(emits_changed_signal = "const"), name = "PassSecurity")]
     fn pass_security(&self) -> crate::zbus::Result<bool>;
 
     /// Get property `PassPacketInfo`.
-    #[zbus(property, name = "PassPacketInfo")]
+    #[zbus(property(emits_changed_signal = "const"), name = "PassPacketInfo")]
     fn pass_packet_info(&self) -> crate::zbus::Result<bool>;
 
     /// Get property `Timestamping`.
-    #[zbus(property, name = "Timestamping")]
+    #[zbus(property(emits_changed_signal = "const"), name = "Timestamping")]
     fn timestamping(&self) -> crate::zbus::Result<String>;
 
     /// Get property `RemoveOnStop`.
-    #[zbus(property, name = "RemoveOnStop")]
+    #[zbus(property(emits_changed_signal = "const"), name = "RemoveOnStop")]
     fn remove_on_stop(&self) -> crate::zbus::Result<bool>;
 
     /// Get property `Listen`.
-    #[zbus(property, name = "Listen")]
+    #[zbus(property(emits_changed_signal = "const"), name = "Listen")]
     fn listen(&self) -> crate::zbus::Result<Vec<(String, String)>>;
 
     /// Get property `Symlinks`.
-    #[zbus(property, name = "Symlinks")]
+    #[zbus(property(emits_changed_signal = "const"), name = "Symlinks")]
     fn symlinks(&self) -> crate::zbus::Result<Vec<String>>;
 
     /// Get property `Mark`.
-    #[zbus(property, name = "Mark")]
+    #[zbus(property(emits_changed_signal = "const"), name = "Mark")]
     fn mark(&self) -> crate::zbus::Result<i32>;
 
     /// Get property `MaxConnections`.
-    #[zbus(property, name = "MaxConnections")]
+    #[zbus(property(emits_changed_signal = "const"), name = "MaxConnections")]
     fn max_connections(&self) -> crate::zbus::Result<u32>;
 
     /// Get property `MaxConnectionsPerSource`.
-    #[zbus(property, name = "MaxConnectionsPerSource")]
+    #[zbus(
+        property(emits_changed_signal = "const"),
+        name = "MaxConnectionsPerSource"
+    )]
     fn max_connections_per_source(&self) -> crate::zbus::Result<u32>;
 
     /// Get property `MessageQueueMaxMessages`.
-    #[zbus(property, name = "MessageQueueMaxMessages")]
+    #[zbus(
+        property(emits_changed_signal = "const"),
+        name = "MessageQueueMaxMessages"
+    )]
     fn message_queue_max_messages(&self) -> crate::zbus::Result<i64>;
 
     /// Get property `MessageQueueMessageSize`.
-    #[zbus(property, name = "MessageQueueMessageSize")]
+    #[zbus(
+        property(emits_changed_signal = "const"),
+        name = "MessageQueueMessageSize"
+    )]
     fn message_queue_message_size(&self) -> crate::zbus::Result<i64>;
 
     /// Get property `TCPCongestion`.
-    #[zbus(property, name = "TCPCongestion")]
+    #[zbus(property(emits_changed_signal = "const"), name = "TCPCongestion")]
     fn tcp_congestion(&self) -> crate::zbus::Result<String>;
 
     /// Get property `ReusePort`.
-    #[zbus(property, name = "ReusePort")]
+    #[zbus(property(emits_changed_signal = "const"), name = "ReusePort")]
     fn reuse_port(&self) -> crate::zbus::Result<bool>;
 
     /// Get property `SmackLabel`.
-    #[zbus(property, name = "SmackLabel")]
+    #[zbus(property(emits_changed_signal = "const"), name = "SmackLabel")]
     fn smack_label(&self) -> crate::zbus::Result<String>;
 
     /// Get property `SmackLabelIPIn`.
-    #[zbus(property, name = "SmackLabelIPIn")]
+    #[zbus(property(emits_changed_signal = "const"), name = "SmackLabelIPIn")]
     fn smack_label_ip_in(&self) -> crate::zbus::Result<String>;
 
     /// Get property `SmackLabelIPOut`.
-    #[zbus(property, name = "SmackLabelIPOut")]
+    #[zbus(property(emits_changed_signal = "const"), name = "SmackLabelIPOut")]
     fn smack_label_ip_out(&self) -> crate::zbus::Result<String>;
 
     /// Get property `ControlPID`.
-    #[zbus(property, name = "ControlPID")]
+    #[zbus(property(emits_changed_signal = "true"), name = "ControlPID")]
     fn control_pid(&self) -> crate::zbus::Result<u32>;
 
     /// Get property `Result`.
-    #[zbus(property, name = "Result")]
+    #[zbus(property(emits_changed_signal = "true"), name = "Result")]
     fn result(&self) -> crate::zbus::Result<String>;
 
     /// Get property `NConnections`.
-    #[zbus(property, name = "NConnections")]
+    #[zbus(property(emits_changed_signal = "false"), name = "NConnections")]
     fn n_connections(&self) -> crate::zbus::Result<u32>;
 
     /// Get property `NAccepted`.
-    #[zbus(property, name = "NAccepted")]
+    #[zbus(property(emits_changed_signal = "false"), name = "NAccepted")]
     fn n_accepted(&self) -> crate::zbus::Result<u32>;
 
     /// Get property `NRefused`.
-    #[zbus(property, name = "NRefused")]
+    #[zbus(property(emits_changed_signal = "false"), name = "NRefused")]
     fn n_refused(&self) -> crate::zbus::Result<u32>;
 
     /// Get property `FileDescriptorName`.
-    #[zbus(property, name = "FileDescriptorName")]
+    #[zbus(property(emits_changed_signal = "false"), name = "FileDescriptorName")]
     fn file_descriptor_name(&self) -> crate::zbus::Result<String>;
 
     /// Get property `SocketProtocol`.
-    #[zbus(property, name = "SocketProtocol")]
+    #[zbus(property(emits_changed_signal = "const"), name = "SocketProtocol")]
     fn socket_protocol(&self) -> crate::zbus::Result<i32>;
 
     /// Get property `TriggerLimitIntervalUSec`.
-    #[zbus(property, name = "TriggerLimitIntervalUSec")]
+    #[zbus(
+        property(emits_changed_signal = "const"),
+        name = "TriggerLimitIntervalUSec"
+    )]
     fn trigger_limit_interval_u_sec(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `TriggerLimitBurst`.
-    #[zbus(property, name = "TriggerLimitBurst")]
+    #[zbus(property(emits_changed_signal = "const"), name = "TriggerLimitBurst")]
     fn trigger_limit_burst(&self) -> crate::zbus::Result<u32>;
 
     /// Get property `PollLimitIntervalUSec`.
-    #[zbus(property, name = "PollLimitIntervalUSec")]
+    #[zbus(
+        property(emits_changed_signal = "const"),
+        name = "PollLimitIntervalUSec"
+    )]
     fn poll_limit_interval_u_sec(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `PollLimitBurst`.
-    #[zbus(property, name = "PollLimitBurst")]
+    #[zbus(property(emits_changed_signal = "const"), name = "PollLimitBurst")]
     fn poll_limit_burst(&self) -> crate::zbus::Result<u32>;
 
     /// Get property `UID`.
-    #[zbus(property, name = "UID")]
+    #[zbus(property(emits_changed_signal = "true"), name = "UID")]
     fn uid(&self) -> crate::zbus::Result<u32>;
 
     /// Get property `GID`.
-    #[zbus(property, name = "GID")]
+    #[zbus(property(emits_changed_signal = "true"), name = "GID")]
     fn gid(&self) -> crate::zbus::Result<u32>;
 
     /// Get property `ExecStartPre`.
-    #[zbus(property, name = "ExecStartPre")]
+    #[zbus(property(emits_changed_signal = "invalidates"), name = "ExecStartPre")]
     fn exec_start_pre(
         &self,
     ) -> crate::zbus::Result<Vec<(String, Vec<String>, bool, u64, u64, u64, u64, u32, i32, i32)>>;
 
     /// Get property `ExecStartPost`.
-    #[zbus(property, name = "ExecStartPost")]
+    #[zbus(property(emits_changed_signal = "invalidates"), name = "ExecStartPost")]
     fn exec_start_post(
         &self,
     ) -> crate::zbus::Result<Vec<(String, Vec<String>, bool, u64, u64, u64, u64, u32, i32, i32)>>;
 
     /// Get property `ExecStopPre`.
-    #[zbus(property, name = "ExecStopPre")]
+    #[zbus(property(emits_changed_signal = "invalidates"), name = "ExecStopPre")]
     fn exec_stop_pre(
         &self,
     ) -> crate::zbus::Result<Vec<(String, Vec<String>, bool, u64, u64, u64, u64, u32, i32, i32)>>;
 
     /// Get property `ExecStopPost`.
-    #[zbus(property, name = "ExecStopPost")]
+    #[zbus(property(emits_changed_signal = "invalidates"), name = "ExecStopPost")]
     fn exec_stop_post(
         &self,
     ) -> crate::zbus::Result<Vec<(String, Vec<String>, bool, u64, u64, u64, u64, u32, i32, i32)>>;
 
     /// Get property `Slice`.
-    #[zbus(property, name = "Slice")]
+    #[zbus(property(emits_changed_signal = "false"), name = "Slice")]
     fn slice(&self) -> crate::zbus::Result<String>;
 
     /// Get property `ControlGroup`.
-    #[zbus(property, name = "ControlGroup")]
+    #[zbus(property(emits_changed_signal = "false"), name = "ControlGroup")]
     fn control_group(&self) -> crate::zbus::Result<String>;
 
     /// Get property `ControlGroupId`.
-    #[zbus(property, name = "ControlGroupId")]
+    #[zbus(property(emits_changed_signal = "false"), name = "ControlGroupId")]
     fn control_group_id(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `MemoryCurrent`.
-    #[zbus(property, name = "MemoryCurrent")]
+    #[zbus(property(emits_changed_signal = "false"), name = "MemoryCurrent")]
     fn memory_current(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `MemoryPeak`.
-    #[zbus(property, name = "MemoryPeak")]
+    #[zbus(property(emits_changed_signal = "false"), name = "MemoryPeak")]
     fn memory_peak(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `MemorySwapCurrent`.
-    #[zbus(property, name = "MemorySwapCurrent")]
+    #[zbus(property(emits_changed_signal = "false"), name = "MemorySwapCurrent")]
     fn memory_swap_current(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `MemorySwapPeak`.
-    #[zbus(property, name = "MemorySwapPeak")]
+    #[zbus(property(emits_changed_signal = "false"), name = "MemorySwapPeak")]
     fn memory_swap_peak(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `MemoryZSwapCurrent`.
-    #[zbus(property, name = "MemoryZSwapCurrent")]
+    #[zbus(property(emits_changed_signal = "false"), name = "MemoryZSwapCurrent")]
     fn memory_z_swap_current(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `MemoryAvailable`.
-    #[zbus(property, name = "MemoryAvailable")]
+    #[zbus(property(emits_changed_signal = "false"), name = "MemoryAvailable")]
     fn memory_available(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `CPUUsageNSec`.
-    #[zbus(property, name = "CPUUsageNSec")]
+    #[zbus(property(emits_changed_signal = "false"), name = "CPUUsageNSec")]
     fn cpu_usage_n_sec(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `EffectiveCPUs`.
-    #[zbus(property, name = "EffectiveCPUs")]
+    #[zbus(property(emits_changed_signal = "false"), name = "EffectiveCPUs")]
     fn effective_cp_us(&self) -> crate::zbus::Result<Vec<u8>>;
 
     /// Get property `EffectiveMemoryNodes`.
-    #[zbus(property, name = "EffectiveMemoryNodes")]
+    #[zbus(
+        property(emits_changed_signal = "false"),
+        name = "EffectiveMemoryNodes"
+    )]
     fn effective_memory_nodes(&self) -> crate::zbus::Result<Vec<u8>>;
 
     /// Get property `TasksCurrent`.
-    #[zbus(property, name = "TasksCurrent")]
+    #[zbus(property(emits_changed_signal = "false"), name = "TasksCurrent")]
     fn tasks_current(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `IPIngressBytes`.
-    #[zbus(property, name = "IPIngressBytes")]
+    #[zbus(property(emits_changed_signal = "false"), name = "IPIngressBytes")]
     fn ip_ingress_bytes(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `IPIngressPackets`.
-    #[zbus(property, name = "IPIngressPackets")]
+    #[zbus(property(emits_changed_signal = "false"), name = "IPIngressPackets")]
     fn ip_ingress_packets(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `IPEgressBytes`.
-    #[zbus(property, name = "IPEgressBytes")]
+    #[zbus(property(emits_changed_signal = "false"), name = "IPEgressBytes")]
     fn ip_egress_bytes(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `IPEgressPackets`.
-    #[zbus(property, name = "IPEgressPackets")]
+    #[zbus(property(emits_changed_signal = "false"), name = "IPEgressPackets")]
     fn ip_egress_packets(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `IOReadBytes`.
-    #[zbus(property, name = "IOReadBytes")]
+    #[zbus(property(emits_changed_signal = "false"), name = "IOReadBytes")]
     fn io_read_bytes(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `IOReadOperations`.
-    #[zbus(property, name = "IOReadOperations")]
+    #[zbus(property(emits_changed_signal = "false"), name = "IOReadOperations")]
     fn io_read_operations(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `IOWriteBytes`.
-    #[zbus(property, name = "IOWriteBytes")]
+    #[zbus(property(emits_changed_signal = "false"), name = "IOWriteBytes")]
     fn io_write_bytes(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `IOWriteOperations`.
-    #[zbus(property, name = "IOWriteOperations")]
+    #[zbus(property(emits_changed_signal = "false"), name = "IOWriteOperations")]
     fn io_write_operations(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `Delegate`.
-    #[zbus(property, name = "Delegate")]
+    #[zbus(property(emits_changed_signal = "false"), name = "Delegate")]
     fn delegate(&self) -> crate::zbus::Result<bool>;
 
     /// Get property `DelegateControllers`.
-    #[zbus(property, name = "DelegateControllers")]
+    #[zbus(property(emits_changed_signal = "false"), name = "DelegateControllers")]
     fn delegate_controllers(&self) -> crate::zbus::Result<Vec<String>>;
 
     /// Get property `DelegateSubgroup`.
-    #[zbus(property, name = "DelegateSubgroup")]
+    #[zbus(property(emits_changed_signal = "false"), name = "DelegateSubgroup")]
     fn delegate_subgroup(&self) -> crate::zbus::Result<String>;
 
     /// Get property `CPUAccounting`.
-    #[zbus(property, name = "CPUAccounting")]
+    #[zbus(property(emits_changed_signal = "false"), name = "CPUAccounting")]
     fn cpu_accounting(&self) -> crate::zbus::Result<bool>;
 
     /// Get property `CPUWeight`.
-    #[zbus(property, name = "CPUWeight")]
+    #[zbus(property(emits_changed_signal = "false"), name = "CPUWeight")]
     fn cpu_weight(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `StartupCPUWeight`.
-    #[zbus(property, name = "StartupCPUWeight")]
+    #[zbus(property(emits_changed_signal = "false"), name = "StartupCPUWeight")]
     fn startup_cpu_weight(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `CPUShares`.
-    #[zbus(property, name = "CPUShares")]
+    #[zbus(property(emits_changed_signal = "false"), name = "CPUShares")]
     fn cpu_shares(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `StartupCPUShares`.
-    #[zbus(property, name = "StartupCPUShares")]
+    #[zbus(property(emits_changed_signal = "false"), name = "StartupCPUShares")]
     fn startup_cpu_shares(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `CPUQuotaPerSecUSec`.
-    #[zbus(property, name = "CPUQuotaPerSecUSec")]
+    #[zbus(property(emits_changed_signal = "false"), name = "CPUQuotaPerSecUSec")]
     fn cpu_quota_per_sec_u_sec(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `CPUQuotaPeriodUSec`.
-    #[zbus(property, name = "CPUQuotaPeriodUSec")]
+    #[zbus(property(emits_changed_signal = "false"), name = "CPUQuotaPeriodUSec")]
     fn cpu_quota_period_u_sec(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `AllowedCPUs`.
-    #[zbus(property, name = "AllowedCPUs")]
+    #[zbus(property(emits_changed_signal = "false"), name = "AllowedCPUs")]
     fn allowed_cp_us(&self) -> crate::zbus::Result<Vec<u8>>;
 
     /// Get property `StartupAllowedCPUs`.
-    #[zbus(property, name = "StartupAllowedCPUs")]
+    #[zbus(property(emits_changed_signal = "false"), name = "StartupAllowedCPUs")]
     fn startup_allowed_cp_us(&self) -> crate::zbus::Result<Vec<u8>>;
 
     /// Get property `AllowedMemoryNodes`.
-    #[zbus(property, name = "AllowedMemoryNodes")]
+    #[zbus(property(emits_changed_signal = "false"), name = "AllowedMemoryNodes")]
     fn allowed_memory_nodes(&self) -> crate::zbus::Result<Vec<u8>>;
 
     /// Get property `StartupAllowedMemoryNodes`.
-    #[zbus(property, name = "StartupAllowedMemoryNodes")]
+    #[zbus(
+        property(emits_changed_signal = "false"),
+        name = "StartupAllowedMemoryNodes"
+    )]
     fn startup_allowed_memory_nodes(&self) -> crate::zbus::Result<Vec<u8>>;
 
     /// Get property `IOAccounting`.
-    #[zbus(property, name = "IOAccounting")]
+    #[zbus(property(emits_changed_signal = "false"), name = "IOAccounting")]
     fn io_accounting(&self) -> crate::zbus::Result<bool>;
 
     /// Get property `IOWeight`.
-    #[zbus(property, name = "IOWeight")]
+    #[zbus(property(emits_changed_signal = "false"), name = "IOWeight")]
     fn io_weight(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `StartupIOWeight`.
-    #[zbus(property, name = "StartupIOWeight")]
+    #[zbus(property(emits_changed_signal = "false"), name = "StartupIOWeight")]
     fn startup_io_weight(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `IODeviceWeight`.
-    #[zbus(property, name = "IODeviceWeight")]
+    #[zbus(property(emits_changed_signal = "false"), name = "IODeviceWeight")]
     fn io_device_weight(&self) -> crate::zbus::Result<Vec<(String, u64)>>;
 
     /// Get property `IOReadBandwidthMax`.
-    #[zbus(property, name = "IOReadBandwidthMax")]
+    #[zbus(property(emits_changed_signal = "false"), name = "IOReadBandwidthMax")]
     fn io_read_bandwidth_max(&self) -> crate::zbus::Result<Vec<(String, u64)>>;
 
     /// Get property `IOWriteBandwidthMax`.
-    #[zbus(property, name = "IOWriteBandwidthMax")]
+    #[zbus(property(emits_changed_signal = "false"), name = "IOWriteBandwidthMax")]
     fn io_write_bandwidth_max(&self) -> crate::zbus::Result<Vec<(String, u64)>>;
 
     /// Get property `IOReadIOPSMax`.
-    #[zbus(property, name = "IOReadIOPSMax")]
+    #[zbus(property(emits_changed_signal = "false"), name = "IOReadIOPSMax")]
     fn io_read_iops_max(&self) -> crate::zbus::Result<Vec<(String, u64)>>;
 
     /// Get property `IOWriteIOPSMax`.
-    #[zbus(property, name = "IOWriteIOPSMax")]
+    #[zbus(property(emits_changed_signal = "false"), name = "IOWriteIOPSMax")]
     fn io_write_iops_max(&self) -> crate::zbus::Result<Vec<(String, u64)>>;
 
     /// Get property `IODeviceLatencyTargetUSec`.
-    #[zbus(property, name = "IODeviceLatencyTargetUSec")]
+    #[zbus(
+        property(emits_changed_signal = "false"),
+        name = "IODeviceLatencyTargetUSec"
+    )]
     fn io_device_latency_target_u_sec(&self) -> crate::zbus::Result<Vec<(String, u64)>>;
 
     /// Get property `BlockIOAccounting`.
-    #[zbus(property, name = "BlockIOAccounting")]
+    #[zbus(property(emits_changed_signal = "false"), name = "BlockIOAccounting")]
     fn block_io_accounting(&self) -> crate::zbus::Result<bool>;
 
     /// Get property `BlockIOWeight`.
-    #[zbus(property, name = "BlockIOWeight")]
+    #[zbus(property(emits_changed_signal = "false"), name = "BlockIOWeight")]
     fn block_io_weight(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `StartupBlockIOWeight`.
-    #[zbus(property, name = "StartupBlockIOWeight")]
+    #[zbus(
+        property(emits_changed_signal = "false"),
+        name = "StartupBlockIOWeight"
+    )]
     fn startup_block_io_weight(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `BlockIODeviceWeight`.
-    #[zbus(property, name = "BlockIODeviceWeight")]
+    #[zbus(property(emits_changed_signal = "false"), name = "BlockIODeviceWeight")]
     fn block_io_device_weight(&self) -> crate::zbus::Result<Vec<(String, u64)>>;
 
     /// Get property `BlockIOReadBandwidth`.
-    #[zbus(property, name = "BlockIOReadBandwidth")]
+    #[zbus(
+        property(emits_changed_signal = "false"),
+        name = "BlockIOReadBandwidth"
+    )]
     fn block_io_read_bandwidth(&self) -> crate::zbus::Result<Vec<(String, u64)>>;
 
     /// Get property `BlockIOWriteBandwidth`.
-    #[zbus(property, name = "BlockIOWriteBandwidth")]
+    #[zbus(
+        property(emits_changed_signal = "false"),
+        name = "BlockIOWriteBandwidth"
+    )]
     fn block_io_write_bandwidth(&self) -> crate::zbus::Result<Vec<(String, u64)>>;
 
     /// Get property `MemoryAccounting`.
-    #[zbus(property, name = "MemoryAccounting")]
+    #[zbus(property(emits_changed_signal = "false"), name = "MemoryAccounting")]
     fn memory_accounting(&self) -> crate::zbus::Result<bool>;
 
     /// Get property `DefaultMemoryLow`.
-    #[zbus(property, name = "DefaultMemoryLow")]
+    #[zbus(property(emits_changed_signal = "false"), name = "DefaultMemoryLow")]
     fn default_memory_low(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `DefaultStartupMemoryLow`.
-    #[zbus(property, name = "DefaultStartupMemoryLow")]
+    #[zbus(
+        property(emits_changed_signal = "false"),
+        name = "DefaultStartupMemoryLow"
+    )]
     fn default_startup_memory_low(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `DefaultMemoryMin`.
-    #[zbus(property, name = "DefaultMemoryMin")]
+    #[zbus(property(emits_changed_signal = "false"), name = "DefaultMemoryMin")]
     fn default_memory_min(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `MemoryMin`.
-    #[zbus(property, name = "MemoryMin")]
+    #[zbus(property(emits_changed_signal = "false"), name = "MemoryMin")]
     fn memory_min(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `MemoryLow`.
-    #[zbus(property, name = "MemoryLow")]
+    #[zbus(property(emits_changed_signal = "false"), name = "MemoryLow")]
     fn memory_low(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `StartupMemoryLow`.
-    #[zbus(property, name = "StartupMemoryLow")]
+    #[zbus(property(emits_changed_signal = "false"), name = "StartupMemoryLow")]
     fn startup_memory_low(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `MemoryHigh`.
-    #[zbus(property, name = "MemoryHigh")]
+    #[zbus(property(emits_changed_signal = "false"), name = "MemoryHigh")]
     fn memory_high(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `StartupMemoryHigh`.
-    #[zbus(property, name = "StartupMemoryHigh")]
+    #[zbus(property(emits_changed_signal = "false"), name = "StartupMemoryHigh")]
     fn startup_memory_high(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `MemoryMax`.
-    #[zbus(property, name = "MemoryMax")]
+    #[zbus(property(emits_changed_signal = "false"), name = "MemoryMax")]
     fn memory_max(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `StartupMemoryMax`.
-    #[zbus(property, name = "StartupMemoryMax")]
+    #[zbus(property(emits_changed_signal = "false"), name = "StartupMemoryMax")]
     fn startup_memory_max(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `MemorySwapMax`.
-    #[zbus(property, name = "MemorySwapMax")]
+    #[zbus(property(emits_changed_signal = "false"), name = "MemorySwapMax")]
     fn memory_swap_max(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `StartupMemorySwapMax`.
-    #[zbus(property, name = "StartupMemorySwapMax")]
+    #[zbus(
+        property(emits_changed_signal = "false"),
+        name = "StartupMemorySwapMax"
+    )]
     fn startup_memory_swap_max(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `MemoryZSwapMax`.
-    #[zbus(property, name = "MemoryZSwapMax")]
+    #[zbus(property(emits_changed_signal = "false"), name = "MemoryZSwapMax")]
     fn memory_z_swap_max(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `StartupMemoryZSwapMax`.
-    #[zbus(property, name = "StartupMemoryZSwapMax")]
+    #[zbus(
+        property(emits_changed_signal = "false"),
+        name = "StartupMemoryZSwapMax"
+    )]
     fn startup_memory_z_swap_max(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `MemoryLimit`.
-    #[zbus(property, name = "MemoryLimit")]
+    #[zbus(property(emits_changed_signal = "false"), name = "MemoryLimit")]
     fn memory_limit(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `DevicePolicy`.
-    #[zbus(property, name = "DevicePolicy")]
+    #[zbus(property(emits_changed_signal = "false"), name = "DevicePolicy")]
     fn device_policy(&self) -> crate::zbus::Result<String>;
 
     /// Get property `DeviceAllow`.
-    #[zbus(property, name = "DeviceAllow")]
+    #[zbus(property(emits_changed_signal = "false"), name = "DeviceAllow")]
     fn device_allow(&self) -> crate::zbus::Result<Vec<(String, String)>>;
 
     /// Get property `TasksAccounting`.
-    #[zbus(property, name = "TasksAccounting")]
+    #[zbus(property(emits_changed_signal = "false"), name = "TasksAccounting")]
     fn tasks_accounting(&self) -> crate::zbus::Result<bool>;
 
     /// Get property `TasksMax`.
-    #[zbus(property, name = "TasksMax")]
+    #[zbus(property(emits_changed_signal = "false"), name = "TasksMax")]
     fn tasks_max(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `IPAccounting`.
-    #[zbus(property, name = "IPAccounting")]
+    #[zbus(property(emits_changed_signal = "false"), name = "IPAccounting")]
     fn ip_accounting(&self) -> crate::zbus::Result<bool>;
 
     /// Get property `IPAddressAllow`.
-    #[zbus(property, name = "IPAddressAllow")]
+    #[zbus(property(emits_changed_signal = "false"), name = "IPAddressAllow")]
     fn ip_address_allow(&self) -> crate::zbus::Result<Vec<(i32, Vec<u8>, u32)>>;
 
     /// Get property `IPAddressDeny`.
-    #[zbus(property, name = "IPAddressDeny")]
+    #[zbus(property(emits_changed_signal = "false"), name = "IPAddressDeny")]
     fn ip_address_deny(&self) -> crate::zbus::Result<Vec<(i32, Vec<u8>, u32)>>;
 
     /// Get property `IPIngressFilterPath`.
-    #[zbus(property, name = "IPIngressFilterPath")]
+    #[zbus(property(emits_changed_signal = "false"), name = "IPIngressFilterPath")]
     fn ip_ingress_filter_path(&self) -> crate::zbus::Result<Vec<String>>;
 
     /// Get property `IPEgressFilterPath`.
-    #[zbus(property, name = "IPEgressFilterPath")]
+    #[zbus(property(emits_changed_signal = "false"), name = "IPEgressFilterPath")]
     fn ip_egress_filter_path(&self) -> crate::zbus::Result<Vec<String>>;
 
     /// Get property `DisableControllers`.
-    #[zbus(property, name = "DisableControllers")]
+    #[zbus(property(emits_changed_signal = "false"), name = "DisableControllers")]
     fn disable_controllers(&self) -> crate::zbus::Result<Vec<String>>;
 
     /// Get property `ManagedOOMSwap`.
-    #[zbus(property, name = "ManagedOOMSwap")]
+    #[zbus(property(emits_changed_signal = "false"), name = "ManagedOOMSwap")]
     fn managed_oom_swap(&self) -> crate::zbus::Result<String>;
 
     /// Get property `ManagedOOMMemoryPressure`.
-    #[zbus(property, name = "ManagedOOMMemoryPressure")]
+    #[zbus(
+        property(emits_changed_signal = "false"),
+        name = "ManagedOOMMemoryPressure"
+    )]
     fn managed_oom_memory_pressure(&self) -> crate::zbus::Result<String>;
 
     /// Get property `ManagedOOMMemoryPressureLimit`.
-    #[zbus(property, name = "ManagedOOMMemoryPressureLimit")]
+    #[zbus(
+        property(emits_changed_signal = "false"),
+        name = "ManagedOOMMemoryPressureLimit"
+    )]
     fn managed_oom_memory_pressure_limit(&self) -> crate::zbus::Result<u32>;
 
     /// Get property `ManagedOOMPreference`.
-    #[zbus(property, name = "ManagedOOMPreference")]
+    #[zbus(
+        property(emits_changed_signal = "false"),
+        name = "ManagedOOMPreference"
+    )]
     fn managed_oom_preference(&self) -> crate::zbus::Result<String>;
 
     /// Get property `BPFProgram`.
-    #[zbus(property, name = "BPFProgram")]
+    #[zbus(property(emits_changed_signal = "false"), name = "BPFProgram")]
     fn bpf_program(&self) -> crate::zbus::Result<Vec<(String, String)>>;
 
     /// Get property `SocketBindAllow`.
-    #[zbus(property, name = "SocketBindAllow")]
+    #[zbus(property(emits_changed_signal = "false"), name = "SocketBindAllow")]
     fn socket_bind_allow(&self) -> crate::zbus::Result<Vec<(i32, i32, u16, u16)>>;
 
     /// Get property `SocketBindDeny`.
-    #[zbus(property, name = "SocketBindDeny")]
+    #[zbus(property(emits_changed_signal = "false"), name = "SocketBindDeny")]
     fn socket_bind_deny(&self) -> crate::zbus::Result<Vec<(i32, i32, u16, u16)>>;
 
     /// Get property `RestrictNetworkInterfaces`.
-    #[zbus(property, name = "RestrictNetworkInterfaces")]
+    #[zbus(
+        property(emits_changed_signal = "false"),
+        name = "RestrictNetworkInterfaces"
+    )]
     fn restrict_network_interfaces(&self) -> crate::zbus::Result<(bool, Vec<String>)>;
 
     /// Get property `MemoryPressureWatch`.
-    #[zbus(property, name = "MemoryPressureWatch")]
+    #[zbus(property(emits_changed_signal = "false"), name = "MemoryPressureWatch")]
     fn memory_pressure_watch(&self) -> crate::zbus::Result<String>;
 
     /// Get property `MemoryPressureThresholdUSec`.
-    #[zbus(property, name = "MemoryPressureThresholdUSec")]
+    #[zbus(
+        property(emits_changed_signal = "false"),
+        name = "MemoryPressureThresholdUSec"
+    )]
     fn memory_pressure_threshold_u_sec(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `NFTSet`.
-    #[zbus(property, name = "NFTSet")]
+    #[zbus(property(emits_changed_signal = "false"), name = "NFTSet")]
     fn nft_set(&self) -> crate::zbus::Result<Vec<(i32, i32, String, String)>>;
 
     /// Get property `CoredumpReceive`.
-    #[zbus(property, name = "CoredumpReceive")]
+    #[zbus(property(emits_changed_signal = "false"), name = "CoredumpReceive")]
     fn coredump_receive(&self) -> crate::zbus::Result<bool>;
 
     /// Get property `Environment`.
-    #[zbus(property, name = "Environment")]
+    #[zbus(property(emits_changed_signal = "const"), name = "Environment")]
     fn environment(&self) -> crate::zbus::Result<Vec<String>>;
 
     /// Get property `EnvironmentFiles`.
-    #[zbus(property, name = "EnvironmentFiles")]
+    #[zbus(property(emits_changed_signal = "const"), name = "EnvironmentFiles")]
     fn environment_files(&self) -> crate::zbus::Result<Vec<(String, bool)>>;
 
     /// Get property `PassEnvironment`.
-    #[zbus(property, name = "PassEnvironment")]
+    #[zbus(property(emits_changed_signal = "const"), name = "PassEnvironment")]
     fn pass_environment(&self) -> crate::zbus::Result<Vec<String>>;
 
     /// Get property `UnsetEnvironment`.
-    #[zbus(property, name = "UnsetEnvironment")]
+    #[zbus(property(emits_changed_signal = "const"), name = "UnsetEnvironment")]
     fn unset_environment(&self) -> crate::zbus::Result<Vec<String>>;
 
     /// Get property `UMask`.
-    #[zbus(property, name = "UMask")]
+    #[zbus(property(emits_changed_signal = "const"), name = "UMask")]
     fn u_mask(&self) -> crate::zbus::Result<u32>;
 
     /// Get property `LimitCPU`.
-    #[zbus(property, name = "LimitCPU")]
+    #[zbus(property(emits_changed_signal = "const"), name = "LimitCPU")]
     fn limit_cpu(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `LimitCPUSoft`.
-    #[zbus(property, name = "LimitCPUSoft")]
+    #[zbus(property(emits_changed_signal = "const"), name = "LimitCPUSoft")]
     fn limit_cpu_soft(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `LimitFSIZE`.
-    #[zbus(property, name = "LimitFSIZE")]
+    #[zbus(property(emits_changed_signal = "const"), name = "LimitFSIZE")]
     fn limit_fsize(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `LimitFSIZESoft`.
-    #[zbus(property, name = "LimitFSIZESoft")]
+    #[zbus(property(emits_changed_signal = "const"), name = "LimitFSIZESoft")]
     fn limit_fsize_soft(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `LimitDATA`.
-    #[zbus(property, name = "LimitDATA")]
+    #[zbus(property(emits_changed_signal = "const"), name = "LimitDATA")]
     fn limit_data(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `LimitDATASoft`.
-    #[zbus(property, name = "LimitDATASoft")]
+    #[zbus(property(emits_changed_signal = "const"), name = "LimitDATASoft")]
     fn limit_data_soft(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `LimitSTACK`.
-    #[zbus(property, name = "LimitSTACK")]
+    #[zbus(property(emits_changed_signal = "const"), name = "LimitSTACK")]
     fn limit_stack(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `LimitSTACKSoft`.
-    #[zbus(property, name = "LimitSTACKSoft")]
+    #[zbus(property(emits_changed_signal = "const"), name = "LimitSTACKSoft")]
     fn limit_stack_soft(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `LimitCORE`.
-    #[zbus(property, name = "LimitCORE")]
+    #[zbus(property(emits_changed_signal = "const"), name = "LimitCORE")]
     fn limit_core(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `LimitCORESoft`.
-    #[zbus(property, name = "LimitCORESoft")]
+    #[zbus(property(emits_changed_signal = "const"), name = "LimitCORESoft")]
     fn limit_core_soft(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `LimitRSS`.
-    #[zbus(property, name = "LimitRSS")]
+    #[zbus(property(emits_changed_signal = "const"), name = "LimitRSS")]
     fn limit_rss(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `LimitRSSSoft`.
-    #[zbus(property, name = "LimitRSSSoft")]
+    #[zbus(property(emits_changed_signal = "const"), name = "LimitRSSSoft")]
     fn limit_rss_soft(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `LimitNOFILE`.
-    #[zbus(property, name = "LimitNOFILE")]
+    #[zbus(property(emits_changed_signal = "const"), name = "LimitNOFILE")]
     fn limit_nofile(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `LimitNOFILESoft`.
-    #[zbus(property, name = "LimitNOFILESoft")]
+    #[zbus(property(emits_changed_signal = "const"), name = "LimitNOFILESoft")]
     fn limit_nofile_soft(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `LimitAS`.
-    #[zbus(property, name = "LimitAS")]
+    #[zbus(property(emits_changed_signal = "const"), name = "LimitAS")]
     fn limit_as(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `LimitASSoft`.
-    #[zbus(property, name = "LimitASSoft")]
+    #[zbus(property(emits_changed_signal = "const"), name = "LimitASSoft")]
     fn limit_as_soft(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `LimitNPROC`.
-    #[zbus(property, name = "LimitNPROC")]
+    #[zbus(property(emits_changed_signal = "const"), name = "LimitNPROC")]
     fn limit_nproc(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `LimitNPROCSoft`.
-    #[zbus(property, name = "LimitNPROCSoft")]
+    #[zbus(property(emits_changed_signal = "const"), name = "LimitNPROCSoft")]
     fn limit_nproc_soft(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `LimitMEMLOCK`.
-    #[zbus(property, name = "LimitMEMLOCK")]
+    #[zbus(property(emits_changed_signal = "const"), name = "LimitMEMLOCK")]
     fn limit_memlock(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `LimitMEMLOCKSoft`.
-    #[zbus(property, name = "LimitMEMLOCKSoft")]
+    #[zbus(property(emits_changed_signal = "const"), name = "LimitMEMLOCKSoft")]
     fn limit_memlock_soft(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `LimitLOCKS`.
-    #[zbus(property, name = "LimitLOCKS")]
+    #[zbus(property(emits_changed_signal = "const"), name = "LimitLOCKS")]
     fn limit_locks(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `LimitLOCKSSoft`.
-    #[zbus(property, name = "LimitLOCKSSoft")]
+    #[zbus(property(emits_changed_signal = "const"), name = "LimitLOCKSSoft")]
     fn limit_locks_soft(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `LimitSIGPENDING`.
-    #[zbus(property, name = "LimitSIGPENDING")]
+    #[zbus(property(emits_changed_signal = "const"), name = "LimitSIGPENDING")]
     fn limit_sigpending(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `LimitSIGPENDINGSoft`.
-    #[zbus(property, name = "LimitSIGPENDINGSoft")]
+    #[zbus(property(emits_changed_signal = "const"), name = "LimitSIGPENDINGSoft")]
     fn limit_sigpending_soft(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `LimitMSGQUEUE`.
-    #[zbus(property, name = "LimitMSGQUEUE")]
+    #[zbus(property(emits_changed_signal = "const"), name = "LimitMSGQUEUE")]
     fn limit_msgqueue(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `LimitMSGQUEUESoft`.
-    #[zbus(property, name = "LimitMSGQUEUESoft")]
+    #[zbus(property(emits_changed_signal = "const"), name = "LimitMSGQUEUESoft")]
     fn limit_msgqueue_soft(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `LimitNICE`.
-    #[zbus(property, name = "LimitNICE")]
+    #[zbus(property(emits_changed_signal = "const"), name = "LimitNICE")]
     fn limit_nice(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `LimitNICESoft`.
-    #[zbus(property, name = "LimitNICESoft")]
+    #[zbus(property(emits_changed_signal = "const"), name = "LimitNICESoft")]
     fn limit_nice_soft(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `LimitRTPRIO`.
-    #[zbus(property, name = "LimitRTPRIO")]
+    #[zbus(property(emits_changed_signal = "const"), name = "LimitRTPRIO")]
     fn limit_rtprio(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `LimitRTPRIOSoft`.
-    #[zbus(property, name = "LimitRTPRIOSoft")]
+    #[zbus(property(emits_changed_signal = "const"), name = "LimitRTPRIOSoft")]
     fn limit_rtprio_soft(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `LimitRTTIME`.
-    #[zbus(property, name = "LimitRTTIME")]
+    #[zbus(property(emits_changed_signal = "const"), name = "LimitRTTIME")]
     fn limit_rttime(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `LimitRTTIMESoft`.
-    #[zbus(property, name = "LimitRTTIMESoft")]
+    #[zbus(property(emits_changed_signal = "const"), name = "LimitRTTIMESoft")]
     fn limit_rttime_soft(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `WorkingDirectory`.
-    #[zbus(property, name = "WorkingDirectory")]
+    #[zbus(property(emits_changed_signal = "const"), name = "WorkingDirectory")]
     fn working_directory(&self) -> crate::zbus::Result<String>;
 
     /// Get property `RootDirectory`.
-    #[zbus(property, name = "RootDirectory")]
+    #[zbus(property(emits_changed_signal = "const"), name = "RootDirectory")]
     fn root_directory(&self) -> crate::zbus::Result<String>;
 
     /// Get property `RootImage`.
-    #[zbus(property, name = "RootImage")]
+    #[zbus(property(emits_changed_signal = "const"), name = "RootImage")]
     fn root_image(&self) -> crate::zbus::Result<String>;
 
     /// Get property `RootImageOptions`.
-    #[zbus(property, name = "RootImageOptions")]
+    #[zbus(property(emits_changed_signal = "const"), name = "RootImageOptions")]
     fn root_image_options(&self) -> crate::zbus::Result<Vec<(String, String)>>;
 
     /// Get property `RootHash`.
-    #[zbus(property, name = "RootHash")]
+    #[zbus(property(emits_changed_signal = "const"), name = "RootHash")]
     fn root_hash(&self) -> crate::zbus::Result<Vec<u8>>;
 
     /// Get property `RootHashPath`.
-    #[zbus(property, name = "RootHashPath")]
+    #[zbus(property(emits_changed_signal = "const"), name = "RootHashPath")]
     fn root_hash_path(&self) -> crate::zbus::Result<String>;
 
     /// Get property `RootHashSignature`.
-    #[zbus(property, name = "RootHashSignature")]
+    #[zbus(property(emits_changed_signal = "const"), name = "RootHashSignature")]
     fn root_hash_signature(&self) -> crate::zbus::Result<Vec<u8>>;
 
     /// Get property `RootHashSignaturePath`.
-    #[zbus(property, name = "RootHashSignaturePath")]
+    #[zbus(
+        property(emits_changed_signal = "const"),
+        name = "RootHashSignaturePath"
+    )]
     fn root_hash_signature_path(&self) -> crate::zbus::Result<String>;
 
     /// Get property `RootVerity`.
-    #[zbus(property, name = "RootVerity")]
+    #[zbus(property(emits_changed_signal = "const"), name = "RootVerity")]
     fn root_verity(&self) -> crate::zbus::Result<String>;
 
     /// Get property `RootEphemeral`.
-    #[zbus(property, name = "RootEphemeral")]
+    #[zbus(property(emits_changed_signal = "const"), name = "RootEphemeral")]
     fn root_ephemeral(&self) -> crate::zbus::Result<bool>;
 
     /// Get property `ExtensionDirectories`.
-    #[zbus(property, name = "ExtensionDirectories")]
+    #[zbus(
+        property(emits_changed_signal = "const"),
+        name = "ExtensionDirectories"
+    )]
     fn extension_directories(&self) -> crate::zbus::Result<Vec<String>>;
 
     /// Get property `ExtensionImages`.
-    #[zbus(property, name = "ExtensionImages")]
+    #[zbus(property(emits_changed_signal = "const"), name = "ExtensionImages")]
     fn extension_images(&self) -> crate::zbus::Result<Vec<(String, bool, Vec<(String, String)>)>>;
 
     /// Get property `MountImages`.
-    #[zbus(property, name = "MountImages")]
+    #[zbus(property(emits_changed_signal = "const"), name = "MountImages")]
     fn mount_images(
         &self,
     ) -> crate::zbus::Result<Vec<(String, String, bool, Vec<(String, String)>)>>;
 
     /// Get property `OOMScoreAdjust`.
-    #[zbus(property, name = "OOMScoreAdjust")]
+    #[zbus(property(emits_changed_signal = "const"), name = "OOMScoreAdjust")]
     fn oom_score_adjust(&self) -> crate::zbus::Result<i32>;
 
     /// Get property `CoredumpFilter`.
-    #[zbus(property, name = "CoredumpFilter")]
+    #[zbus(property(emits_changed_signal = "const"), name = "CoredumpFilter")]
     fn coredump_filter(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `Nice`.
-    #[zbus(property, name = "Nice")]
+    #[zbus(property(emits_changed_signal = "const"), name = "Nice")]
     fn nice(&self) -> crate::zbus::Result<i32>;
 
     /// Get property `IOSchedulingClass`.
-    #[zbus(property, name = "IOSchedulingClass")]
+    #[zbus(property(emits_changed_signal = "const"), name = "IOSchedulingClass")]
     fn io_scheduling_class(&self) -> crate::zbus::Result<i32>;
 
     /// Get property `IOSchedulingPriority`.
-    #[zbus(property, name = "IOSchedulingPriority")]
+    #[zbus(
+        property(emits_changed_signal = "const"),
+        name = "IOSchedulingPriority"
+    )]
     fn io_scheduling_priority(&self) -> crate::zbus::Result<i32>;
 
     /// Get property `CPUSchedulingPolicy`.
-    #[zbus(property, name = "CPUSchedulingPolicy")]
+    #[zbus(property(emits_changed_signal = "const"), name = "CPUSchedulingPolicy")]
     fn cpu_scheduling_policy(&self) -> crate::zbus::Result<i32>;
 
     /// Get property `CPUSchedulingPriority`.
-    #[zbus(property, name = "CPUSchedulingPriority")]
+    #[zbus(
+        property(emits_changed_signal = "const"),
+        name = "CPUSchedulingPriority"
+    )]
     fn cpu_scheduling_priority(&self) -> crate::zbus::Result<i32>;
 
     /// Get property `CPUAffinity`.
-    #[zbus(property, name = "CPUAffinity")]
+    #[zbus(property(emits_changed_signal = "const"), name = "CPUAffinity")]
     fn cpu_affinity(&self) -> crate::zbus::Result<Vec<u8>>;
 
     /// Get property `CPUAffinityFromNUMA`.
-    #[zbus(property, name = "CPUAffinityFromNUMA")]
+    #[zbus(property(emits_changed_signal = "const"), name = "CPUAffinityFromNUMA")]
     fn cpu_affinity_from_numa(&self) -> crate::zbus::Result<bool>;
 
     /// Get property `NUMAPolicy`.
-    #[zbus(property, name = "NUMAPolicy")]
+    #[zbus(property(emits_changed_signal = "const"), name = "NUMAPolicy")]
     fn numa_policy(&self) -> crate::zbus::Result<i32>;
 
     /// Get property `NUMAMask`.
-    #[zbus(property, name = "NUMAMask")]
+    #[zbus(property(emits_changed_signal = "const"), name = "NUMAMask")]
     fn numa_mask(&self) -> crate::zbus::Result<Vec<u8>>;
 
     /// Get property `TimerSlackNSec`.
-    #[zbus(property, name = "TimerSlackNSec")]
+    #[zbus(property(emits_changed_signal = "const"), name = "TimerSlackNSec")]
     fn timer_slack_n_sec(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `CPUSchedulingResetOnFork`.
-    #[zbus(property, name = "CPUSchedulingResetOnFork")]
+    #[zbus(
+        property(emits_changed_signal = "const"),
+        name = "CPUSchedulingResetOnFork"
+    )]
     fn cpu_scheduling_reset_on_fork(&self) -> crate::zbus::Result<bool>;
 
     /// Get property `NonBlocking`.
-    #[zbus(property, name = "NonBlocking")]
+    #[zbus(property(emits_changed_signal = "const"), name = "NonBlocking")]
     fn non_blocking(&self) -> crate::zbus::Result<bool>;
 
     /// Get property `StandardInput`.
-    #[zbus(property, name = "StandardInput")]
+    #[zbus(property(emits_changed_signal = "const"), name = "StandardInput")]
     fn standard_input(&self) -> crate::zbus::Result<String>;
 
     /// Get property `StandardInputFileDescriptorName`.
-    #[zbus(property, name = "StandardInputFileDescriptorName")]
+    #[zbus(
+        property(emits_changed_signal = "const"),
+        name = "StandardInputFileDescriptorName"
+    )]
     fn standard_input_file_descriptor_name(&self) -> crate::zbus::Result<String>;
 
     /// Get property `StandardInputData`.
-    #[zbus(property, name = "StandardInputData")]
+    #[zbus(property(emits_changed_signal = "const"), name = "StandardInputData")]
     fn standard_input_data(&self) -> crate::zbus::Result<Vec<u8>>;
 
     /// Get property `StandardOutput`.
-    #[zbus(property, name = "StandardOutput")]
+    #[zbus(property(emits_changed_signal = "const"), name = "StandardOutput")]
     fn standard_output(&self) -> crate::zbus::Result<String>;
 
     /// Get property `StandardOutputFileDescriptorName`.
-    #[zbus(property, name = "StandardOutputFileDescriptorName")]
+    #[zbus(
+        property(emits_changed_signal = "const"),
+        name = "StandardOutputFileDescriptorName"
+    )]
     fn standard_output_file_descriptor_name(&self) -> crate::zbus::Result<String>;
 
     /// Get property `StandardError`.
-    #[zbus(property, name = "StandardError")]
+    #[zbus(property(emits_changed_signal = "const"), name = "StandardError")]
     fn standard_error(&self) -> crate::zbus::Result<String>;
 
     /// Get property `StandardErrorFileDescriptorName`.
-    #[zbus(property, name = "StandardErrorFileDescriptorName")]
+    #[zbus(
+        property(emits_changed_signal = "const"),
+        name = "StandardErrorFileDescriptorName"
+    )]
     fn standard_error_file_descriptor_name(&self) -> crate::zbus::Result<String>;
 
     /// Get property `TTYPath`.
-    #[zbus(property, name = "TTYPath")]
+    #[zbus(property(emits_changed_signal = "const"), name = "TTYPath")]
     fn tty_path(&self) -> crate::zbus::Result<String>;
 
     /// Get property `TTYReset`.
-    #[zbus(property, name = "TTYReset")]
+    #[zbus(property(emits_changed_signal = "const"), name = "TTYReset")]
     fn tty_reset(&self) -> crate::zbus::Result<bool>;
 
     /// Get property `TTYVHangup`.
-    #[zbus(property, name = "TTYVHangup")]
+    #[zbus(property(emits_changed_signal = "const"), name = "TTYVHangup")]
     fn ttyv_hangup(&self) -> crate::zbus::Result<bool>;
 
     /// Get property `TTYVTDisallocate`.
-    #[zbus(property, name = "TTYVTDisallocate")]
+    #[zbus(property(emits_changed_signal = "const"), name = "TTYVTDisallocate")]
     fn ttyvt_disallocate(&self) -> crate::zbus::Result<bool>;
 
     /// Get property `TTYRows`.
-    #[zbus(property, name = "TTYRows")]
+    #[zbus(property(emits_changed_signal = "const"), name = "TTYRows")]
     fn tty_rows(&self) -> crate::zbus::Result<u16>;
 
     /// Get property `TTYColumns`.
-    #[zbus(property, name = "TTYColumns")]
+    #[zbus(property(emits_changed_signal = "const"), name = "TTYColumns")]
     fn tty_columns(&self) -> crate::zbus::Result<u16>;
 
     /// Get property `SyslogPriority`.
-    #[zbus(property, name = "SyslogPriority")]
+    #[zbus(property(emits_changed_signal = "const"), name = "SyslogPriority")]
     fn syslog_priority(&self) -> crate::zbus::Result<i32>;
 
     /// Get property `SyslogIdentifier`.
-    #[zbus(property, name = "SyslogIdentifier")]
+    #[zbus(property(emits_changed_signal = "const"), name = "SyslogIdentifier")]
     fn syslog_identifier(&self) -> crate::zbus::Result<String>;
 
     /// Get property `SyslogLevelPrefix`.
-    #[zbus(property, name = "SyslogLevelPrefix")]
+    #[zbus(property(emits_changed_signal = "const"), name = "SyslogLevelPrefix")]
     fn syslog_level_prefix(&self) -> crate::zbus::Result<bool>;
 
     /// Get property `SyslogLevel`.
-    #[zbus(property, name = "SyslogLevel")]
+    #[zbus(property(emits_changed_signal = "const"), name = "SyslogLevel")]
     fn syslog_level(&self) -> crate::zbus::Result<i32>;
 
     /// Get property `SyslogFacility`.
-    #[zbus(property, name = "SyslogFacility")]
+    #[zbus(property(emits_changed_signal = "const"), name = "SyslogFacility")]
     fn syslog_facility(&self) -> crate::zbus::Result<i32>;
 
     /// Get property `LogLevelMax`.
-    #[zbus(property, name = "LogLevelMax")]
+    #[zbus(property(emits_changed_signal = "const"), name = "LogLevelMax")]
     fn log_level_max(&self) -> crate::zbus::Result<i32>;
 
     /// Get property `LogRateLimitIntervalUSec`.
-    #[zbus(property, name = "LogRateLimitIntervalUSec")]
+    #[zbus(
+        property(emits_changed_signal = "const"),
+        name = "LogRateLimitIntervalUSec"
+    )]
     fn log_rate_limit_interval_u_sec(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `LogRateLimitBurst`.
-    #[zbus(property, name = "LogRateLimitBurst")]
+    #[zbus(property(emits_changed_signal = "const"), name = "LogRateLimitBurst")]
     fn log_rate_limit_burst(&self) -> crate::zbus::Result<u32>;
 
     /// Get property `LogExtraFields`.
-    #[zbus(property, name = "LogExtraFields")]
+    #[zbus(property(emits_changed_signal = "const"), name = "LogExtraFields")]
     fn log_extra_fields(&self) -> crate::zbus::Result<Vec<Vec<u8>>>;
 
     /// Get property `LogFilterPatterns`.
-    #[zbus(property, name = "LogFilterPatterns")]
+    #[zbus(property(emits_changed_signal = "const"), name = "LogFilterPatterns")]
     fn log_filter_patterns(&self) -> crate::zbus::Result<Vec<(bool, String)>>;
 
     /// Get property `LogNamespace`.
-    #[zbus(property, name = "LogNamespace")]
+    #[zbus(property(emits_changed_signal = "const"), name = "LogNamespace")]
     fn log_namespace(&self) -> crate::zbus::Result<String>;
 
     /// Get property `SecureBits`.
-    #[zbus(property, name = "SecureBits")]
+    #[zbus(property(emits_changed_signal = "const"), name = "SecureBits")]
     fn secure_bits(&self) -> crate::zbus::Result<i32>;
 
     /// Get property `CapabilityBoundingSet`.
-    #[zbus(property, name = "CapabilityBoundingSet")]
+    #[zbus(
+        property(emits_changed_signal = "const"),
+        name = "CapabilityBoundingSet"
+    )]
     fn capability_bounding_set(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `AmbientCapabilities`.
-    #[zbus(property, name = "AmbientCapabilities")]
+    #[zbus(property(emits_changed_signal = "const"), name = "AmbientCapabilities")]
     fn ambient_capabilities(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `User`.
-    #[zbus(property, name = "User")]
+    #[zbus(property(emits_changed_signal = "const"), name = "User")]
     fn user(&self) -> crate::zbus::Result<String>;
 
     /// Get property `Group`.
-    #[zbus(property, name = "Group")]
+    #[zbus(property(emits_changed_signal = "const"), name = "Group")]
     fn group(&self) -> crate::zbus::Result<String>;
 
     /// Get property `DynamicUser`.
-    #[zbus(property, name = "DynamicUser")]
+    #[zbus(property(emits_changed_signal = "const"), name = "DynamicUser")]
     fn dynamic_user(&self) -> crate::zbus::Result<bool>;
 
     /// Get property `SetLoginEnvironment`.
-    #[zbus(property, name = "SetLoginEnvironment")]
+    #[zbus(property(emits_changed_signal = "const"), name = "SetLoginEnvironment")]
     fn set_login_environment(&self) -> crate::zbus::Result<bool>;
 
     /// Get property `RemoveIPC`.
-    #[zbus(property, name = "RemoveIPC")]
+    #[zbus(property(emits_changed_signal = "const"), name = "RemoveIPC")]
     fn remove_ipc(&self) -> crate::zbus::Result<bool>;
 
     /// Get property `SetCredential`.
-    #[zbus(property, name = "SetCredential")]
+    #[zbus(property(emits_changed_signal = "const"), name = "SetCredential")]
     fn set_credential(&self) -> crate::zbus::Result<Vec<(String, Vec<u8>)>>;
 
     /// Get property `SetCredentialEncrypted`.
-    #[zbus(property, name = "SetCredentialEncrypted")]
+    #[zbus(
+        property(emits_changed_signal = "const"),
+        name = "SetCredentialEncrypted"
+    )]
     fn set_credential_encrypted(&self) -> crate::zbus::Result<Vec<(String, Vec<u8>)>>;
 
     /// Get property `LoadCredential`.
-    #[zbus(property, name = "LoadCredential")]
+    #[zbus(property(emits_changed_signal = "const"), name = "LoadCredential")]
     fn load_credential(&self) -> crate::zbus::Result<Vec<(String, String)>>;
 
     /// Get property `LoadCredentialEncrypted`.
-    #[zbus(property, name = "LoadCredentialEncrypted")]
+    #[zbus(
+        property(emits_changed_signal = "const"),
+        name = "LoadCredentialEncrypted"
+    )]
     fn load_credential_encrypted(&self) -> crate::zbus::Result<Vec<(String, String)>>;
 
     /// Get property `ImportCredential`.
-    #[zbus(property, name = "ImportCredential")]
+    #[zbus(property(emits_changed_signal = "const"), name = "ImportCredential")]
     fn import_credential(&self) -> crate::zbus::Result<Vec<String>>;
 
     /// Get property `SupplementaryGroups`.
-    #[zbus(property, name = "SupplementaryGroups")]
+    #[zbus(property(emits_changed_signal = "const"), name = "SupplementaryGroups")]
     fn supplementary_groups(&self) -> crate::zbus::Result<Vec<String>>;
 
     /// Get property `PAMName`.
-    #[zbus(property, name = "PAMName")]
+    #[zbus(property(emits_changed_signal = "const"), name = "PAMName")]
     fn pam_name(&self) -> crate::zbus::Result<String>;
 
     /// Get property `ReadWritePaths`.
-    #[zbus(property, name = "ReadWritePaths")]
+    #[zbus(property(emits_changed_signal = "const"), name = "ReadWritePaths")]
     fn read_write_paths(&self) -> crate::zbus::Result<Vec<String>>;
 
     /// Get property `ReadOnlyPaths`.
-    #[zbus(property, name = "ReadOnlyPaths")]
+    #[zbus(property(emits_changed_signal = "const"), name = "ReadOnlyPaths")]
     fn read_only_paths(&self) -> crate::zbus::Result<Vec<String>>;
 
     /// Get property `InaccessiblePaths`.
-    #[zbus(property, name = "InaccessiblePaths")]
+    #[zbus(property(emits_changed_signal = "const"), name = "InaccessiblePaths")]
     fn inaccessible_paths(&self) -> crate::zbus::Result<Vec<String>>;
 
     /// Get property `ExecPaths`.
-    #[zbus(property, name = "ExecPaths")]
+    #[zbus(property(emits_changed_signal = "const"), name = "ExecPaths")]
     fn exec_paths(&self) -> crate::zbus::Result<Vec<String>>;
 
     /// Get property `NoExecPaths`.
-    #[zbus(property, name = "NoExecPaths")]
+    #[zbus(property(emits_changed_signal = "const"), name = "NoExecPaths")]
     fn no_exec_paths(&self) -> crate::zbus::Result<Vec<String>>;
 
     /// Get property `ExecSearchPath`.
-    #[zbus(property, name = "ExecSearchPath")]
+    #[zbus(property(emits_changed_signal = "const"), name = "ExecSearchPath")]
     fn exec_search_path(&self) -> crate::zbus::Result<Vec<String>>;
 
     /// Get property `MountFlags`.
-    #[zbus(property, name = "MountFlags")]
+    #[zbus(property(emits_changed_signal = "const"), name = "MountFlags")]
     fn mount_flags(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `PrivateTmp`.
-    #[zbus(property, name = "PrivateTmp")]
+    #[zbus(property(emits_changed_signal = "const"), name = "PrivateTmp")]
     fn private_tmp(&self) -> crate::zbus::Result<bool>;
 
     /// Get property `PrivateDevices`.
-    #[zbus(property, name = "PrivateDevices")]
+    #[zbus(property(emits_changed_signal = "const"), name = "PrivateDevices")]
     fn private_devices(&self) -> crate::zbus::Result<bool>;
 
     /// Get property `ProtectClock`.
-    #[zbus(property, name = "ProtectClock")]
+    #[zbus(property(emits_changed_signal = "const"), name = "ProtectClock")]
     fn protect_clock(&self) -> crate::zbus::Result<bool>;
 
     /// Get property `ProtectKernelTunables`.
-    #[zbus(property, name = "ProtectKernelTunables")]
+    #[zbus(
+        property(emits_changed_signal = "const"),
+        name = "ProtectKernelTunables"
+    )]
     fn protect_kernel_tunables(&self) -> crate::zbus::Result<bool>;
 
     /// Get property `ProtectKernelModules`.
-    #[zbus(property, name = "ProtectKernelModules")]
+    #[zbus(
+        property(emits_changed_signal = "const"),
+        name = "ProtectKernelModules"
+    )]
     fn protect_kernel_modules(&self) -> crate::zbus::Result<bool>;
 
     /// Get property `ProtectKernelLogs`.
-    #[zbus(property, name = "ProtectKernelLogs")]
+    #[zbus(property(emits_changed_signal = "const"), name = "ProtectKernelLogs")]
     fn protect_kernel_logs(&self) -> crate::zbus::Result<bool>;
 
     /// Get property `ProtectControlGroups`.
-    #[zbus(property, name = "ProtectControlGroups")]
+    #[zbus(
+        property(emits_changed_signal = "const"),
+        name = "ProtectControlGroups"
+    )]
     fn protect_control_groups(&self) -> crate::zbus::Result<bool>;
 
     /// Get property `PrivateNetwork`.
-    #[zbus(property, name = "PrivateNetwork")]
+    #[zbus(property(emits_changed_signal = "const"), name = "PrivateNetwork")]
     fn private_network(&self) -> crate::zbus::Result<bool>;
 
     /// Get property `PrivateUsers`.
-    #[zbus(property, name = "PrivateUsers")]
+    #[zbus(property(emits_changed_signal = "const"), name = "PrivateUsers")]
     fn private_users(&self) -> crate::zbus::Result<bool>;
 
     /// Get property `PrivateMounts`.
-    #[zbus(property, name = "PrivateMounts")]
+    #[zbus(property(emits_changed_signal = "const"), name = "PrivateMounts")]
     fn private_mounts(&self) -> crate::zbus::Result<bool>;
 
     /// Get property `PrivateIPC`.
-    #[zbus(property, name = "PrivateIPC")]
+    #[zbus(property(emits_changed_signal = "const"), name = "PrivateIPC")]
     fn private_ipc(&self) -> crate::zbus::Result<bool>;
 
     /// Get property `ProtectHome`.
-    #[zbus(property, name = "ProtectHome")]
+    #[zbus(property(emits_changed_signal = "const"), name = "ProtectHome")]
     fn protect_home(&self) -> crate::zbus::Result<String>;
 
     /// Get property `ProtectSystem`.
-    #[zbus(property, name = "ProtectSystem")]
+    #[zbus(property(emits_changed_signal = "const"), name = "ProtectSystem")]
     fn protect_system(&self) -> crate::zbus::Result<String>;
 
     /// Get property `SameProcessGroup`.
-    #[zbus(property, name = "SameProcessGroup")]
+    #[zbus(property(emits_changed_signal = "const"), name = "SameProcessGroup")]
     fn same_process_group(&self) -> crate::zbus::Result<bool>;
 
     /// Get property `UtmpIdentifier`.
-    #[zbus(property, name = "UtmpIdentifier")]
+    #[zbus(property(emits_changed_signal = "const"), name = "UtmpIdentifier")]
     fn utmp_identifier(&self) -> crate::zbus::Result<String>;
 
     /// Get property `UtmpMode`.
-    #[zbus(property, name = "UtmpMode")]
+    #[zbus(property(emits_changed_signal = "const"), name = "UtmpMode")]
     fn utmp_mode(&self) -> crate::zbus::Result<String>;
 
     /// Get property `SELinuxContext`.
-    #[zbus(property, name = "SELinuxContext")]
+    #[zbus(property(emits_changed_signal = "const"), name = "SELinuxContext")]
     fn se_linux_context(&self) -> crate::zbus::Result<(bool, String)>;
 
     /// Get property `AppArmorProfile`.
-    #[zbus(property, name = "AppArmorProfile")]
+    #[zbus(property(emits_changed_signal = "const"), name = "AppArmorProfile")]
     fn app_armor_profile(&self) -> crate::zbus::Result<(bool, String)>;
 
     /// Get property `SmackProcessLabel`.
-    #[zbus(property, name = "SmackProcessLabel")]
+    #[zbus(property(emits_changed_signal = "const"), name = "SmackProcessLabel")]
     fn smack_process_label(&self) -> crate::zbus::Result<(bool, String)>;
 
     /// Get property `IgnoreSIGPIPE`.
-    #[zbus(property, name = "IgnoreSIGPIPE")]
+    #[zbus(property(emits_changed_signal = "const"), name = "IgnoreSIGPIPE")]
     fn ignore_sigpipe(&self) -> crate::zbus::Result<bool>;
 
     /// Get property `NoNewPrivileges`.
-    #[zbus(property, name = "NoNewPrivileges")]
+    #[zbus(property(emits_changed_signal = "const"), name = "NoNewPrivileges")]
     fn no_new_privileges(&self) -> crate::zbus::Result<bool>;
 
     /// Get property `SystemCallFilter`.
-    #[zbus(property, name = "SystemCallFilter")]
+    #[zbus(property(emits_changed_signal = "const"), name = "SystemCallFilter")]
     fn system_call_filter(&self) -> crate::zbus::Result<(bool, Vec<String>)>;
 
     /// Get property `SystemCallArchitectures`.
-    #[zbus(property, name = "SystemCallArchitectures")]
+    #[zbus(
+        property(emits_changed_signal = "const"),
+        name = "SystemCallArchitectures"
+    )]
     fn system_call_architectures(&self) -> crate::zbus::Result<Vec<String>>;
 
     /// Get property `SystemCallErrorNumber`.
-    #[zbus(property, name = "SystemCallErrorNumber")]
+    #[zbus(
+        property(emits_changed_signal = "const"),
+        name = "SystemCallErrorNumber"
+    )]
     fn system_call_error_number(&self) -> crate::zbus::Result<i32>;
 
     /// Get property `SystemCallLog`.
-    #[zbus(property, name = "SystemCallLog")]
+    #[zbus(property(emits_changed_signal = "const"), name = "SystemCallLog")]
     fn system_call_log(&self) -> crate::zbus::Result<(bool, Vec<String>)>;
 
     /// Get property `Personality`.
-    #[zbus(property, name = "Personality")]
+    #[zbus(property(emits_changed_signal = "const"), name = "Personality")]
     fn personality(&self) -> crate::zbus::Result<String>;
 
     /// Get property `LockPersonality`.
-    #[zbus(property, name = "LockPersonality")]
+    #[zbus(property(emits_changed_signal = "const"), name = "LockPersonality")]
     fn lock_personality(&self) -> crate::zbus::Result<bool>;
 
     /// Get property `RestrictAddressFamilies`.
-    #[zbus(property, name = "RestrictAddressFamilies")]
+    #[zbus(
+        property(emits_changed_signal = "const"),
+        name = "RestrictAddressFamilies"
+    )]
     fn restrict_address_families(&self) -> crate::zbus::Result<(bool, Vec<String>)>;
 
     /// Get property `RuntimeDirectorySymlink`.
-    #[zbus(property, name = "RuntimeDirectorySymlink")]
+    #[zbus(
+        property(emits_changed_signal = "const"),
+        name = "RuntimeDirectorySymlink"
+    )]
     fn runtime_directory_symlink(&self) -> crate::zbus::Result<Vec<(String, String, u64)>>;
 
     /// Get property `RuntimeDirectoryPreserve`.
-    #[zbus(property, name = "RuntimeDirectoryPreserve")]
+    #[zbus(
+        property(emits_changed_signal = "const"),
+        name = "RuntimeDirectoryPreserve"
+    )]
     fn runtime_directory_preserve(&self) -> crate::zbus::Result<String>;
 
     /// Get property `RuntimeDirectoryMode`.
-    #[zbus(property, name = "RuntimeDirectoryMode")]
+    #[zbus(
+        property(emits_changed_signal = "const"),
+        name = "RuntimeDirectoryMode"
+    )]
     fn runtime_directory_mode(&self) -> crate::zbus::Result<u32>;
 
     /// Get property `RuntimeDirectory`.
-    #[zbus(property, name = "RuntimeDirectory")]
+    #[zbus(property(emits_changed_signal = "const"), name = "RuntimeDirectory")]
     fn runtime_directory(&self) -> crate::zbus::Result<Vec<String>>;
 
     /// Get property `StateDirectorySymlink`.
-    #[zbus(property, name = "StateDirectorySymlink")]
+    #[zbus(
+        property(emits_changed_signal = "const"),
+        name = "StateDirectorySymlink"
+    )]
     fn state_directory_symlink(&self) -> crate::zbus::Result<Vec<(String, String, u64)>>;
 
     /// Get property `StateDirectoryMode`.
-    #[zbus(property, name = "StateDirectoryMode")]
+    #[zbus(property(emits_changed_signal = "const"), name = "StateDirectoryMode")]
     fn state_directory_mode(&self) -> crate::zbus::Result<u32>;
 
     /// Get property `StateDirectory`.
-    #[zbus(property, name = "StateDirectory")]
+    #[zbus(property(emits_changed_signal = "const"), name = "StateDirectory")]
     fn state_directory(&self) -> crate::zbus::Result<Vec<String>>;
 
     /// Get property `CacheDirectorySymlink`.
-    #[zbus(property, name = "CacheDirectorySymlink")]
+    #[zbus(
+        property(emits_changed_signal = "const"),
+        name = "CacheDirectorySymlink"
+    )]
     fn cache_directory_symlink(&self) -> crate::zbus::Result<Vec<(String, String, u64)>>;
 
     /// Get property `CacheDirectoryMode`.
-    #[zbus(property, name = "CacheDirectoryMode")]
+    #[zbus(property(emits_changed_signal = "const"), name = "CacheDirectoryMode")]
     fn cache_directory_mode(&self) -> crate::zbus::Result<u32>;
 
     /// Get property `CacheDirectory`.
-    #[zbus(property, name = "CacheDirectory")]
+    #[zbus(property(emits_changed_signal = "const"), name = "CacheDirectory")]
     fn cache_directory(&self) -> crate::zbus::Result<Vec<String>>;
 
     /// Get property `LogsDirectorySymlink`.
-    #[zbus(property, name = "LogsDirectorySymlink")]
+    #[zbus(
+        property(emits_changed_signal = "const"),
+        name = "LogsDirectorySymlink"
+    )]
     fn logs_directory_symlink(&self) -> crate::zbus::Result<Vec<(String, String, u64)>>;
 
     /// Get property `LogsDirectoryMode`.
-    #[zbus(property, name = "LogsDirectoryMode")]
+    #[zbus(property(emits_changed_signal = "const"), name = "LogsDirectoryMode")]
     fn logs_directory_mode(&self) -> crate::zbus::Result<u32>;
 
     /// Get property `LogsDirectory`.
-    #[zbus(property, name = "LogsDirectory")]
+    #[zbus(property(emits_changed_signal = "const"), name = "LogsDirectory")]
     fn logs_directory(&self) -> crate::zbus::Result<Vec<String>>;
 
     /// Get property `ConfigurationDirectoryMode`.
-    #[zbus(property, name = "ConfigurationDirectoryMode")]
+    #[zbus(
+        property(emits_changed_signal = "const"),
+        name = "ConfigurationDirectoryMode"
+    )]
     fn configuration_directory_mode(&self) -> crate::zbus::Result<u32>;
 
     /// Get property `ConfigurationDirectory`.
-    #[zbus(property, name = "ConfigurationDirectory")]
+    #[zbus(
+        property(emits_changed_signal = "const"),
+        name = "ConfigurationDirectory"
+    )]
     fn configuration_directory(&self) -> crate::zbus::Result<Vec<String>>;
 
     /// Get property `TimeoutCleanUSec`.
-    #[zbus(property, name = "TimeoutCleanUSec")]
+    #[zbus(property(emits_changed_signal = "const"), name = "TimeoutCleanUSec")]
     fn timeout_clean_u_sec(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `MemoryDenyWriteExecute`.
-    #[zbus(property, name = "MemoryDenyWriteExecute")]
+    #[zbus(
+        property(emits_changed_signal = "const"),
+        name = "MemoryDenyWriteExecute"
+    )]
     fn memory_deny_write_execute(&self) -> crate::zbus::Result<bool>;
 
     /// Get property `RestrictRealtime`.
-    #[zbus(property, name = "RestrictRealtime")]
+    #[zbus(property(emits_changed_signal = "const"), name = "RestrictRealtime")]
     fn restrict_realtime(&self) -> crate::zbus::Result<bool>;
 
     /// Get property `RestrictSUIDSGID`.
-    #[zbus(property, name = "RestrictSUIDSGID")]
+    #[zbus(property(emits_changed_signal = "const"), name = "RestrictSUIDSGID")]
     fn restrict_suidsgid(&self) -> crate::zbus::Result<bool>;
 
     /// Get property `RestrictNamespaces`.
-    #[zbus(property, name = "RestrictNamespaces")]
+    #[zbus(property(emits_changed_signal = "const"), name = "RestrictNamespaces")]
     fn restrict_namespaces(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `RestrictFileSystems`.
-    #[zbus(property, name = "RestrictFileSystems")]
+    #[zbus(property(emits_changed_signal = "const"), name = "RestrictFileSystems")]
     fn restrict_file_systems(&self) -> crate::zbus::Result<(bool, Vec<String>)>;
 
     /// Get property `BindPaths`.
-    #[zbus(property, name = "BindPaths")]
+    #[zbus(property(emits_changed_signal = "const"), name = "BindPaths")]
     fn bind_paths(&self) -> crate::zbus::Result<Vec<(String, String, bool, u64)>>;
 
     /// Get property `BindReadOnlyPaths`.
-    #[zbus(property, name = "BindReadOnlyPaths")]
+    #[zbus(property(emits_changed_signal = "const"), name = "BindReadOnlyPaths")]
     fn bind_read_only_paths(&self) -> crate::zbus::Result<Vec<(String, String, bool, u64)>>;
 
     /// Get property `TemporaryFileSystem`.
-    #[zbus(property, name = "TemporaryFileSystem")]
+    #[zbus(property(emits_changed_signal = "const"), name = "TemporaryFileSystem")]
     fn temporary_file_system(&self) -> crate::zbus::Result<Vec<(String, String)>>;
 
     /// Get property `MountAPIVFS`.
-    #[zbus(property, name = "MountAPIVFS")]
+    #[zbus(property(emits_changed_signal = "const"), name = "MountAPIVFS")]
     fn mount_apivfs(&self) -> crate::zbus::Result<bool>;
 
     /// Get property `KeyringMode`.
-    #[zbus(property, name = "KeyringMode")]
+    #[zbus(property(emits_changed_signal = "const"), name = "KeyringMode")]
     fn keyring_mode(&self) -> crate::zbus::Result<String>;
 
     /// Get property `ProtectProc`.
-    #[zbus(property, name = "ProtectProc")]
+    #[zbus(property(emits_changed_signal = "const"), name = "ProtectProc")]
     fn protect_proc(&self) -> crate::zbus::Result<String>;
 
     /// Get property `ProcSubset`.
-    #[zbus(property, name = "ProcSubset")]
+    #[zbus(property(emits_changed_signal = "const"), name = "ProcSubset")]
     fn proc_subset(&self) -> crate::zbus::Result<String>;
 
     /// Get property `ProtectHostname`.
-    #[zbus(property, name = "ProtectHostname")]
+    #[zbus(property(emits_changed_signal = "const"), name = "ProtectHostname")]
     fn protect_hostname(&self) -> crate::zbus::Result<bool>;
 
     /// Get property `MemoryKSM`.
-    #[zbus(property, name = "MemoryKSM")]
+    #[zbus(property(emits_changed_signal = "const"), name = "MemoryKSM")]
     fn memory_ksm(&self) -> crate::zbus::Result<bool>;
 
     /// Get property `NetworkNamespacePath`.
-    #[zbus(property, name = "NetworkNamespacePath")]
+    #[zbus(
+        property(emits_changed_signal = "const"),
+        name = "NetworkNamespacePath"
+    )]
     fn network_namespace_path(&self) -> crate::zbus::Result<String>;
 
     /// Get property `IPCNamespacePath`.
-    #[zbus(property, name = "IPCNamespacePath")]
+    #[zbus(property(emits_changed_signal = "const"), name = "IPCNamespacePath")]
     fn ipc_namespace_path(&self) -> crate::zbus::Result<String>;
 
     /// Get property `RootImagePolicy`.
-    #[zbus(property, name = "RootImagePolicy")]
+    #[zbus(property(emits_changed_signal = "const"), name = "RootImagePolicy")]
     fn root_image_policy(&self) -> crate::zbus::Result<String>;
 
     /// Get property `MountImagePolicy`.
-    #[zbus(property, name = "MountImagePolicy")]
+    #[zbus(property(emits_changed_signal = "const"), name = "MountImagePolicy")]
     fn mount_image_policy(&self) -> crate::zbus::Result<String>;
 
     /// Get property `ExtensionImagePolicy`.
-    #[zbus(property, name = "ExtensionImagePolicy")]
+    #[zbus(
+        property(emits_changed_signal = "const"),
+        name = "ExtensionImagePolicy"
+    )]
     fn extension_image_policy(&self) -> crate::zbus::Result<String>;
 
     /// Get property `KillMode`.
-    #[zbus(property, name = "KillMode")]
+    #[zbus(property(emits_changed_signal = "const"), name = "KillMode")]
     fn kill_mode(&self) -> crate::zbus::Result<String>;
 
     /// Get property `KillSignal`.
-    #[zbus(property, name = "KillSignal")]
+    #[zbus(property(emits_changed_signal = "const"), name = "KillSignal")]
     fn kill_signal(&self) -> crate::zbus::Result<i32>;
 
     /// Get property `RestartKillSignal`.
-    #[zbus(property, name = "RestartKillSignal")]
+    #[zbus(property(emits_changed_signal = "const"), name = "RestartKillSignal")]
     fn restart_kill_signal(&self) -> crate::zbus::Result<i32>;
 
     /// Get property `FinalKillSignal`.
-    #[zbus(property, name = "FinalKillSignal")]
+    #[zbus(property(emits_changed_signal = "const"), name = "FinalKillSignal")]
     fn final_kill_signal(&self) -> crate::zbus::Result<i32>;
 
     /// Get property `SendSIGKILL`.
-    #[zbus(property, name = "SendSIGKILL")]
+    #[zbus(property(emits_changed_signal = "const"), name = "SendSIGKILL")]
     fn send_sigkill(&self) -> crate::zbus::Result<bool>;
 
     /// Get property `SendSIGHUP`.
-    #[zbus(property, name = "SendSIGHUP")]
+    #[zbus(property(emits_changed_signal = "const"), name = "SendSIGHUP")]
     fn send_sighup(&self) -> crate::zbus::Result<bool>;
 
     /// Get property `WatchdogSignal`.
-    #[zbus(property, name = "WatchdogSignal")]
+    #[zbus(property(emits_changed_signal = "const"), name = "WatchdogSignal")]
     fn watchdog_signal(&self) -> crate::zbus::Result<i32>;
 }
 
@@ -4584,7 +5172,7 @@ trait Target {}
 )]
 trait Device {
     /// Get property `SysFSPath`.
-    #[zbus(property, name = "SysFSPath")]
+    #[zbus(property(emits_changed_signal = "true"), name = "SysFSPath")]
     fn sys_fs_path(&self) -> crate::zbus::Result<String>;
 }
 
@@ -4605,1151 +5193,1280 @@ trait Mount {
     fn attach_processes(&self, subcgroup: String, pids: Vec<u32>) -> crate::zbus::Result<()>;
 
     /// Get property `Where`.
-    #[zbus(property, name = "Where")]
+    #[zbus(property(emits_changed_signal = "const"), name = "Where")]
     fn where_property(&self) -> crate::zbus::Result<String>;
 
     /// Get property `What`.
-    #[zbus(property, name = "What")]
+    #[zbus(property(emits_changed_signal = "true"), name = "What")]
     fn what(&self) -> crate::zbus::Result<String>;
 
     /// Get property `Options`.
-    #[zbus(property, name = "Options")]
+    #[zbus(property(emits_changed_signal = "true"), name = "Options")]
     fn options(&self) -> crate::zbus::Result<String>;
 
     /// Get property `Type`.
-    #[zbus(property, name = "Type")]
+    #[zbus(property(emits_changed_signal = "true"), name = "Type")]
     fn type_property(&self) -> crate::zbus::Result<String>;
 
     /// Get property `TimeoutUSec`.
-    #[zbus(property, name = "TimeoutUSec")]
+    #[zbus(property(emits_changed_signal = "const"), name = "TimeoutUSec")]
     fn timeout_u_sec(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `ControlPID`.
-    #[zbus(property, name = "ControlPID")]
+    #[zbus(property(emits_changed_signal = "true"), name = "ControlPID")]
     fn control_pid(&self) -> crate::zbus::Result<u32>;
 
     /// Get property `DirectoryMode`.
-    #[zbus(property, name = "DirectoryMode")]
+    #[zbus(property(emits_changed_signal = "const"), name = "DirectoryMode")]
     fn directory_mode(&self) -> crate::zbus::Result<u32>;
 
     /// Get property `SloppyOptions`.
-    #[zbus(property, name = "SloppyOptions")]
+    #[zbus(property(emits_changed_signal = "const"), name = "SloppyOptions")]
     fn sloppy_options(&self) -> crate::zbus::Result<bool>;
 
     /// Get property `LazyUnmount`.
-    #[zbus(property, name = "LazyUnmount")]
+    #[zbus(property(emits_changed_signal = "const"), name = "LazyUnmount")]
     fn lazy_unmount(&self) -> crate::zbus::Result<bool>;
 
     /// Get property `ForceUnmount`.
-    #[zbus(property, name = "ForceUnmount")]
+    #[zbus(property(emits_changed_signal = "const"), name = "ForceUnmount")]
     fn force_unmount(&self) -> crate::zbus::Result<bool>;
 
     /// Get property `ReadWriteOnly`.
-    #[zbus(property, name = "ReadWriteOnly")]
+    #[zbus(property(emits_changed_signal = "const"), name = "ReadWriteOnly")]
     fn read_write_only(&self) -> crate::zbus::Result<bool>;
 
     /// Get property `Result`.
-    #[zbus(property, name = "Result")]
+    #[zbus(property(emits_changed_signal = "true"), name = "Result")]
     fn result(&self) -> crate::zbus::Result<String>;
 
     /// Get property `UID`.
-    #[zbus(property, name = "UID")]
+    #[zbus(property(emits_changed_signal = "true"), name = "UID")]
     fn uid(&self) -> crate::zbus::Result<u32>;
 
     /// Get property `GID`.
-    #[zbus(property, name = "GID")]
+    #[zbus(property(emits_changed_signal = "true"), name = "GID")]
     fn gid(&self) -> crate::zbus::Result<u32>;
 
     /// Get property `ExecMount`.
-    #[zbus(property, name = "ExecMount")]
+    #[zbus(property(emits_changed_signal = "invalidates"), name = "ExecMount")]
     fn exec_mount(
         &self,
     ) -> crate::zbus::Result<Vec<(String, Vec<String>, bool, u64, u64, u64, u64, u32, i32, i32)>>;
 
     /// Get property `ExecUnmount`.
-    #[zbus(property, name = "ExecUnmount")]
+    #[zbus(property(emits_changed_signal = "invalidates"), name = "ExecUnmount")]
     fn exec_unmount(
         &self,
     ) -> crate::zbus::Result<Vec<(String, Vec<String>, bool, u64, u64, u64, u64, u32, i32, i32)>>;
 
     /// Get property `ExecRemount`.
-    #[zbus(property, name = "ExecRemount")]
+    #[zbus(property(emits_changed_signal = "invalidates"), name = "ExecRemount")]
     fn exec_remount(
         &self,
     ) -> crate::zbus::Result<Vec<(String, Vec<String>, bool, u64, u64, u64, u64, u32, i32, i32)>>;
 
     /// Get property `Slice`.
-    #[zbus(property, name = "Slice")]
+    #[zbus(property(emits_changed_signal = "false"), name = "Slice")]
     fn slice(&self) -> crate::zbus::Result<String>;
 
     /// Get property `ControlGroup`.
-    #[zbus(property, name = "ControlGroup")]
+    #[zbus(property(emits_changed_signal = "false"), name = "ControlGroup")]
     fn control_group(&self) -> crate::zbus::Result<String>;
 
     /// Get property `ControlGroupId`.
-    #[zbus(property, name = "ControlGroupId")]
+    #[zbus(property(emits_changed_signal = "false"), name = "ControlGroupId")]
     fn control_group_id(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `MemoryCurrent`.
-    #[zbus(property, name = "MemoryCurrent")]
+    #[zbus(property(emits_changed_signal = "false"), name = "MemoryCurrent")]
     fn memory_current(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `MemoryPeak`.
-    #[zbus(property, name = "MemoryPeak")]
+    #[zbus(property(emits_changed_signal = "false"), name = "MemoryPeak")]
     fn memory_peak(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `MemorySwapCurrent`.
-    #[zbus(property, name = "MemorySwapCurrent")]
+    #[zbus(property(emits_changed_signal = "false"), name = "MemorySwapCurrent")]
     fn memory_swap_current(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `MemorySwapPeak`.
-    #[zbus(property, name = "MemorySwapPeak")]
+    #[zbus(property(emits_changed_signal = "false"), name = "MemorySwapPeak")]
     fn memory_swap_peak(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `MemoryZSwapCurrent`.
-    #[zbus(property, name = "MemoryZSwapCurrent")]
+    #[zbus(property(emits_changed_signal = "false"), name = "MemoryZSwapCurrent")]
     fn memory_z_swap_current(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `MemoryAvailable`.
-    #[zbus(property, name = "MemoryAvailable")]
+    #[zbus(property(emits_changed_signal = "false"), name = "MemoryAvailable")]
     fn memory_available(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `CPUUsageNSec`.
-    #[zbus(property, name = "CPUUsageNSec")]
+    #[zbus(property(emits_changed_signal = "false"), name = "CPUUsageNSec")]
     fn cpu_usage_n_sec(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `EffectiveCPUs`.
-    #[zbus(property, name = "EffectiveCPUs")]
+    #[zbus(property(emits_changed_signal = "false"), name = "EffectiveCPUs")]
     fn effective_cp_us(&self) -> crate::zbus::Result<Vec<u8>>;
 
     /// Get property `EffectiveMemoryNodes`.
-    #[zbus(property, name = "EffectiveMemoryNodes")]
+    #[zbus(
+        property(emits_changed_signal = "false"),
+        name = "EffectiveMemoryNodes"
+    )]
     fn effective_memory_nodes(&self) -> crate::zbus::Result<Vec<u8>>;
 
     /// Get property `TasksCurrent`.
-    #[zbus(property, name = "TasksCurrent")]
+    #[zbus(property(emits_changed_signal = "false"), name = "TasksCurrent")]
     fn tasks_current(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `IPIngressBytes`.
-    #[zbus(property, name = "IPIngressBytes")]
+    #[zbus(property(emits_changed_signal = "false"), name = "IPIngressBytes")]
     fn ip_ingress_bytes(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `IPIngressPackets`.
-    #[zbus(property, name = "IPIngressPackets")]
+    #[zbus(property(emits_changed_signal = "false"), name = "IPIngressPackets")]
     fn ip_ingress_packets(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `IPEgressBytes`.
-    #[zbus(property, name = "IPEgressBytes")]
+    #[zbus(property(emits_changed_signal = "false"), name = "IPEgressBytes")]
     fn ip_egress_bytes(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `IPEgressPackets`.
-    #[zbus(property, name = "IPEgressPackets")]
+    #[zbus(property(emits_changed_signal = "false"), name = "IPEgressPackets")]
     fn ip_egress_packets(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `IOReadBytes`.
-    #[zbus(property, name = "IOReadBytes")]
+    #[zbus(property(emits_changed_signal = "false"), name = "IOReadBytes")]
     fn io_read_bytes(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `IOReadOperations`.
-    #[zbus(property, name = "IOReadOperations")]
+    #[zbus(property(emits_changed_signal = "false"), name = "IOReadOperations")]
     fn io_read_operations(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `IOWriteBytes`.
-    #[zbus(property, name = "IOWriteBytes")]
+    #[zbus(property(emits_changed_signal = "false"), name = "IOWriteBytes")]
     fn io_write_bytes(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `IOWriteOperations`.
-    #[zbus(property, name = "IOWriteOperations")]
+    #[zbus(property(emits_changed_signal = "false"), name = "IOWriteOperations")]
     fn io_write_operations(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `Delegate`.
-    #[zbus(property, name = "Delegate")]
+    #[zbus(property(emits_changed_signal = "false"), name = "Delegate")]
     fn delegate(&self) -> crate::zbus::Result<bool>;
 
     /// Get property `DelegateControllers`.
-    #[zbus(property, name = "DelegateControllers")]
+    #[zbus(property(emits_changed_signal = "false"), name = "DelegateControllers")]
     fn delegate_controllers(&self) -> crate::zbus::Result<Vec<String>>;
 
     /// Get property `DelegateSubgroup`.
-    #[zbus(property, name = "DelegateSubgroup")]
+    #[zbus(property(emits_changed_signal = "false"), name = "DelegateSubgroup")]
     fn delegate_subgroup(&self) -> crate::zbus::Result<String>;
 
     /// Get property `CPUAccounting`.
-    #[zbus(property, name = "CPUAccounting")]
+    #[zbus(property(emits_changed_signal = "false"), name = "CPUAccounting")]
     fn cpu_accounting(&self) -> crate::zbus::Result<bool>;
 
     /// Get property `CPUWeight`.
-    #[zbus(property, name = "CPUWeight")]
+    #[zbus(property(emits_changed_signal = "false"), name = "CPUWeight")]
     fn cpu_weight(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `StartupCPUWeight`.
-    #[zbus(property, name = "StartupCPUWeight")]
+    #[zbus(property(emits_changed_signal = "false"), name = "StartupCPUWeight")]
     fn startup_cpu_weight(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `CPUShares`.
-    #[zbus(property, name = "CPUShares")]
+    #[zbus(property(emits_changed_signal = "false"), name = "CPUShares")]
     fn cpu_shares(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `StartupCPUShares`.
-    #[zbus(property, name = "StartupCPUShares")]
+    #[zbus(property(emits_changed_signal = "false"), name = "StartupCPUShares")]
     fn startup_cpu_shares(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `CPUQuotaPerSecUSec`.
-    #[zbus(property, name = "CPUQuotaPerSecUSec")]
+    #[zbus(property(emits_changed_signal = "false"), name = "CPUQuotaPerSecUSec")]
     fn cpu_quota_per_sec_u_sec(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `CPUQuotaPeriodUSec`.
-    #[zbus(property, name = "CPUQuotaPeriodUSec")]
+    #[zbus(property(emits_changed_signal = "false"), name = "CPUQuotaPeriodUSec")]
     fn cpu_quota_period_u_sec(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `AllowedCPUs`.
-    #[zbus(property, name = "AllowedCPUs")]
+    #[zbus(property(emits_changed_signal = "false"), name = "AllowedCPUs")]
     fn allowed_cp_us(&self) -> crate::zbus::Result<Vec<u8>>;
 
     /// Get property `StartupAllowedCPUs`.
-    #[zbus(property, name = "StartupAllowedCPUs")]
+    #[zbus(property(emits_changed_signal = "false"), name = "StartupAllowedCPUs")]
     fn startup_allowed_cp_us(&self) -> crate::zbus::Result<Vec<u8>>;
 
     /// Get property `AllowedMemoryNodes`.
-    #[zbus(property, name = "AllowedMemoryNodes")]
+    #[zbus(property(emits_changed_signal = "false"), name = "AllowedMemoryNodes")]
     fn allowed_memory_nodes(&self) -> crate::zbus::Result<Vec<u8>>;
 
     /// Get property `StartupAllowedMemoryNodes`.
-    #[zbus(property, name = "StartupAllowedMemoryNodes")]
+    #[zbus(
+        property(emits_changed_signal = "false"),
+        name = "StartupAllowedMemoryNodes"
+    )]
     fn startup_allowed_memory_nodes(&self) -> crate::zbus::Result<Vec<u8>>;
 
     /// Get property `IOAccounting`.
-    #[zbus(property, name = "IOAccounting")]
+    #[zbus(property(emits_changed_signal = "false"), name = "IOAccounting")]
     fn io_accounting(&self) -> crate::zbus::Result<bool>;
 
     /// Get property `IOWeight`.
-    #[zbus(property, name = "IOWeight")]
+    #[zbus(property(emits_changed_signal = "false"), name = "IOWeight")]
     fn io_weight(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `StartupIOWeight`.
-    #[zbus(property, name = "StartupIOWeight")]
+    #[zbus(property(emits_changed_signal = "false"), name = "StartupIOWeight")]
     fn startup_io_weight(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `IODeviceWeight`.
-    #[zbus(property, name = "IODeviceWeight")]
+    #[zbus(property(emits_changed_signal = "false"), name = "IODeviceWeight")]
     fn io_device_weight(&self) -> crate::zbus::Result<Vec<(String, u64)>>;
 
     /// Get property `IOReadBandwidthMax`.
-    #[zbus(property, name = "IOReadBandwidthMax")]
+    #[zbus(property(emits_changed_signal = "false"), name = "IOReadBandwidthMax")]
     fn io_read_bandwidth_max(&self) -> crate::zbus::Result<Vec<(String, u64)>>;
 
     /// Get property `IOWriteBandwidthMax`.
-    #[zbus(property, name = "IOWriteBandwidthMax")]
+    #[zbus(property(emits_changed_signal = "false"), name = "IOWriteBandwidthMax")]
     fn io_write_bandwidth_max(&self) -> crate::zbus::Result<Vec<(String, u64)>>;
 
     /// Get property `IOReadIOPSMax`.
-    #[zbus(property, name = "IOReadIOPSMax")]
+    #[zbus(property(emits_changed_signal = "false"), name = "IOReadIOPSMax")]
     fn io_read_iops_max(&self) -> crate::zbus::Result<Vec<(String, u64)>>;
 
     /// Get property `IOWriteIOPSMax`.
-    #[zbus(property, name = "IOWriteIOPSMax")]
+    #[zbus(property(emits_changed_signal = "false"), name = "IOWriteIOPSMax")]
     fn io_write_iops_max(&self) -> crate::zbus::Result<Vec<(String, u64)>>;
 
     /// Get property `IODeviceLatencyTargetUSec`.
-    #[zbus(property, name = "IODeviceLatencyTargetUSec")]
+    #[zbus(
+        property(emits_changed_signal = "false"),
+        name = "IODeviceLatencyTargetUSec"
+    )]
     fn io_device_latency_target_u_sec(&self) -> crate::zbus::Result<Vec<(String, u64)>>;
 
     /// Get property `BlockIOAccounting`.
-    #[zbus(property, name = "BlockIOAccounting")]
+    #[zbus(property(emits_changed_signal = "false"), name = "BlockIOAccounting")]
     fn block_io_accounting(&self) -> crate::zbus::Result<bool>;
 
     /// Get property `BlockIOWeight`.
-    #[zbus(property, name = "BlockIOWeight")]
+    #[zbus(property(emits_changed_signal = "false"), name = "BlockIOWeight")]
     fn block_io_weight(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `StartupBlockIOWeight`.
-    #[zbus(property, name = "StartupBlockIOWeight")]
+    #[zbus(
+        property(emits_changed_signal = "false"),
+        name = "StartupBlockIOWeight"
+    )]
     fn startup_block_io_weight(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `BlockIODeviceWeight`.
-    #[zbus(property, name = "BlockIODeviceWeight")]
+    #[zbus(property(emits_changed_signal = "false"), name = "BlockIODeviceWeight")]
     fn block_io_device_weight(&self) -> crate::zbus::Result<Vec<(String, u64)>>;
 
     /// Get property `BlockIOReadBandwidth`.
-    #[zbus(property, name = "BlockIOReadBandwidth")]
+    #[zbus(
+        property(emits_changed_signal = "false"),
+        name = "BlockIOReadBandwidth"
+    )]
     fn block_io_read_bandwidth(&self) -> crate::zbus::Result<Vec<(String, u64)>>;
 
     /// Get property `BlockIOWriteBandwidth`.
-    #[zbus(property, name = "BlockIOWriteBandwidth")]
+    #[zbus(
+        property(emits_changed_signal = "false"),
+        name = "BlockIOWriteBandwidth"
+    )]
     fn block_io_write_bandwidth(&self) -> crate::zbus::Result<Vec<(String, u64)>>;
 
     /// Get property `MemoryAccounting`.
-    #[zbus(property, name = "MemoryAccounting")]
+    #[zbus(property(emits_changed_signal = "false"), name = "MemoryAccounting")]
     fn memory_accounting(&self) -> crate::zbus::Result<bool>;
 
     /// Get property `DefaultMemoryLow`.
-    #[zbus(property, name = "DefaultMemoryLow")]
+    #[zbus(property(emits_changed_signal = "false"), name = "DefaultMemoryLow")]
     fn default_memory_low(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `DefaultStartupMemoryLow`.
-    #[zbus(property, name = "DefaultStartupMemoryLow")]
+    #[zbus(
+        property(emits_changed_signal = "false"),
+        name = "DefaultStartupMemoryLow"
+    )]
     fn default_startup_memory_low(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `DefaultMemoryMin`.
-    #[zbus(property, name = "DefaultMemoryMin")]
+    #[zbus(property(emits_changed_signal = "false"), name = "DefaultMemoryMin")]
     fn default_memory_min(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `MemoryMin`.
-    #[zbus(property, name = "MemoryMin")]
+    #[zbus(property(emits_changed_signal = "false"), name = "MemoryMin")]
     fn memory_min(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `MemoryLow`.
-    #[zbus(property, name = "MemoryLow")]
+    #[zbus(property(emits_changed_signal = "false"), name = "MemoryLow")]
     fn memory_low(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `StartupMemoryLow`.
-    #[zbus(property, name = "StartupMemoryLow")]
+    #[zbus(property(emits_changed_signal = "false"), name = "StartupMemoryLow")]
     fn startup_memory_low(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `MemoryHigh`.
-    #[zbus(property, name = "MemoryHigh")]
+    #[zbus(property(emits_changed_signal = "false"), name = "MemoryHigh")]
     fn memory_high(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `StartupMemoryHigh`.
-    #[zbus(property, name = "StartupMemoryHigh")]
+    #[zbus(property(emits_changed_signal = "false"), name = "StartupMemoryHigh")]
     fn startup_memory_high(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `MemoryMax`.
-    #[zbus(property, name = "MemoryMax")]
+    #[zbus(property(emits_changed_signal = "false"), name = "MemoryMax")]
     fn memory_max(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `StartupMemoryMax`.
-    #[zbus(property, name = "StartupMemoryMax")]
+    #[zbus(property(emits_changed_signal = "false"), name = "StartupMemoryMax")]
     fn startup_memory_max(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `MemorySwapMax`.
-    #[zbus(property, name = "MemorySwapMax")]
+    #[zbus(property(emits_changed_signal = "false"), name = "MemorySwapMax")]
     fn memory_swap_max(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `StartupMemorySwapMax`.
-    #[zbus(property, name = "StartupMemorySwapMax")]
+    #[zbus(
+        property(emits_changed_signal = "false"),
+        name = "StartupMemorySwapMax"
+    )]
     fn startup_memory_swap_max(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `MemoryZSwapMax`.
-    #[zbus(property, name = "MemoryZSwapMax")]
+    #[zbus(property(emits_changed_signal = "false"), name = "MemoryZSwapMax")]
     fn memory_z_swap_max(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `StartupMemoryZSwapMax`.
-    #[zbus(property, name = "StartupMemoryZSwapMax")]
+    #[zbus(
+        property(emits_changed_signal = "false"),
+        name = "StartupMemoryZSwapMax"
+    )]
     fn startup_memory_z_swap_max(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `MemoryLimit`.
-    #[zbus(property, name = "MemoryLimit")]
+    #[zbus(property(emits_changed_signal = "false"), name = "MemoryLimit")]
     fn memory_limit(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `DevicePolicy`.
-    #[zbus(property, name = "DevicePolicy")]
+    #[zbus(property(emits_changed_signal = "false"), name = "DevicePolicy")]
     fn device_policy(&self) -> crate::zbus::Result<String>;
 
     /// Get property `DeviceAllow`.
-    #[zbus(property, name = "DeviceAllow")]
+    #[zbus(property(emits_changed_signal = "false"), name = "DeviceAllow")]
     fn device_allow(&self) -> crate::zbus::Result<Vec<(String, String)>>;
 
     /// Get property `TasksAccounting`.
-    #[zbus(property, name = "TasksAccounting")]
+    #[zbus(property(emits_changed_signal = "false"), name = "TasksAccounting")]
     fn tasks_accounting(&self) -> crate::zbus::Result<bool>;
 
     /// Get property `TasksMax`.
-    #[zbus(property, name = "TasksMax")]
+    #[zbus(property(emits_changed_signal = "false"), name = "TasksMax")]
     fn tasks_max(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `IPAccounting`.
-    #[zbus(property, name = "IPAccounting")]
+    #[zbus(property(emits_changed_signal = "false"), name = "IPAccounting")]
     fn ip_accounting(&self) -> crate::zbus::Result<bool>;
 
     /// Get property `IPAddressAllow`.
-    #[zbus(property, name = "IPAddressAllow")]
+    #[zbus(property(emits_changed_signal = "false"), name = "IPAddressAllow")]
     fn ip_address_allow(&self) -> crate::zbus::Result<Vec<(i32, Vec<u8>, u32)>>;
 
     /// Get property `IPAddressDeny`.
-    #[zbus(property, name = "IPAddressDeny")]
+    #[zbus(property(emits_changed_signal = "false"), name = "IPAddressDeny")]
     fn ip_address_deny(&self) -> crate::zbus::Result<Vec<(i32, Vec<u8>, u32)>>;
 
     /// Get property `IPIngressFilterPath`.
-    #[zbus(property, name = "IPIngressFilterPath")]
+    #[zbus(property(emits_changed_signal = "false"), name = "IPIngressFilterPath")]
     fn ip_ingress_filter_path(&self) -> crate::zbus::Result<Vec<String>>;
 
     /// Get property `IPEgressFilterPath`.
-    #[zbus(property, name = "IPEgressFilterPath")]
+    #[zbus(property(emits_changed_signal = "false"), name = "IPEgressFilterPath")]
     fn ip_egress_filter_path(&self) -> crate::zbus::Result<Vec<String>>;
 
     /// Get property `DisableControllers`.
-    #[zbus(property, name = "DisableControllers")]
+    #[zbus(property(emits_changed_signal = "false"), name = "DisableControllers")]
     fn disable_controllers(&self) -> crate::zbus::Result<Vec<String>>;
 
     /// Get property `ManagedOOMSwap`.
-    #[zbus(property, name = "ManagedOOMSwap")]
+    #[zbus(property(emits_changed_signal = "false"), name = "ManagedOOMSwap")]
     fn managed_oom_swap(&self) -> crate::zbus::Result<String>;
 
     /// Get property `ManagedOOMMemoryPressure`.
-    #[zbus(property, name = "ManagedOOMMemoryPressure")]
+    #[zbus(
+        property(emits_changed_signal = "false"),
+        name = "ManagedOOMMemoryPressure"
+    )]
     fn managed_oom_memory_pressure(&self) -> crate::zbus::Result<String>;
 
     /// Get property `ManagedOOMMemoryPressureLimit`.
-    #[zbus(property, name = "ManagedOOMMemoryPressureLimit")]
+    #[zbus(
+        property(emits_changed_signal = "false"),
+        name = "ManagedOOMMemoryPressureLimit"
+    )]
     fn managed_oom_memory_pressure_limit(&self) -> crate::zbus::Result<u32>;
 
     /// Get property `ManagedOOMPreference`.
-    #[zbus(property, name = "ManagedOOMPreference")]
+    #[zbus(
+        property(emits_changed_signal = "false"),
+        name = "ManagedOOMPreference"
+    )]
     fn managed_oom_preference(&self) -> crate::zbus::Result<String>;
 
     /// Get property `BPFProgram`.
-    #[zbus(property, name = "BPFProgram")]
+    #[zbus(property(emits_changed_signal = "false"), name = "BPFProgram")]
     fn bpf_program(&self) -> crate::zbus::Result<Vec<(String, String)>>;
 
     /// Get property `SocketBindAllow`.
-    #[zbus(property, name = "SocketBindAllow")]
+    #[zbus(property(emits_changed_signal = "false"), name = "SocketBindAllow")]
     fn socket_bind_allow(&self) -> crate::zbus::Result<Vec<(i32, i32, u16, u16)>>;
 
     /// Get property `SocketBindDeny`.
-    #[zbus(property, name = "SocketBindDeny")]
+    #[zbus(property(emits_changed_signal = "false"), name = "SocketBindDeny")]
     fn socket_bind_deny(&self) -> crate::zbus::Result<Vec<(i32, i32, u16, u16)>>;
 
     /// Get property `RestrictNetworkInterfaces`.
-    #[zbus(property, name = "RestrictNetworkInterfaces")]
+    #[zbus(
+        property(emits_changed_signal = "false"),
+        name = "RestrictNetworkInterfaces"
+    )]
     fn restrict_network_interfaces(&self) -> crate::zbus::Result<(bool, Vec<String>)>;
 
     /// Get property `MemoryPressureWatch`.
-    #[zbus(property, name = "MemoryPressureWatch")]
+    #[zbus(property(emits_changed_signal = "false"), name = "MemoryPressureWatch")]
     fn memory_pressure_watch(&self) -> crate::zbus::Result<String>;
 
     /// Get property `MemoryPressureThresholdUSec`.
-    #[zbus(property, name = "MemoryPressureThresholdUSec")]
+    #[zbus(
+        property(emits_changed_signal = "false"),
+        name = "MemoryPressureThresholdUSec"
+    )]
     fn memory_pressure_threshold_u_sec(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `NFTSet`.
-    #[zbus(property, name = "NFTSet")]
+    #[zbus(property(emits_changed_signal = "false"), name = "NFTSet")]
     fn nft_set(&self) -> crate::zbus::Result<Vec<(i32, i32, String, String)>>;
 
     /// Get property `CoredumpReceive`.
-    #[zbus(property, name = "CoredumpReceive")]
+    #[zbus(property(emits_changed_signal = "false"), name = "CoredumpReceive")]
     fn coredump_receive(&self) -> crate::zbus::Result<bool>;
 
     /// Get property `Environment`.
-    #[zbus(property, name = "Environment")]
+    #[zbus(property(emits_changed_signal = "const"), name = "Environment")]
     fn environment(&self) -> crate::zbus::Result<Vec<String>>;
 
     /// Get property `EnvironmentFiles`.
-    #[zbus(property, name = "EnvironmentFiles")]
+    #[zbus(property(emits_changed_signal = "const"), name = "EnvironmentFiles")]
     fn environment_files(&self) -> crate::zbus::Result<Vec<(String, bool)>>;
 
     /// Get property `PassEnvironment`.
-    #[zbus(property, name = "PassEnvironment")]
+    #[zbus(property(emits_changed_signal = "const"), name = "PassEnvironment")]
     fn pass_environment(&self) -> crate::zbus::Result<Vec<String>>;
 
     /// Get property `UnsetEnvironment`.
-    #[zbus(property, name = "UnsetEnvironment")]
+    #[zbus(property(emits_changed_signal = "const"), name = "UnsetEnvironment")]
     fn unset_environment(&self) -> crate::zbus::Result<Vec<String>>;
 
     /// Get property `UMask`.
-    #[zbus(property, name = "UMask")]
+    #[zbus(property(emits_changed_signal = "const"), name = "UMask")]
     fn u_mask(&self) -> crate::zbus::Result<u32>;
 
     /// Get property `LimitCPU`.
-    #[zbus(property, name = "LimitCPU")]
+    #[zbus(property(emits_changed_signal = "const"), name = "LimitCPU")]
     fn limit_cpu(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `LimitCPUSoft`.
-    #[zbus(property, name = "LimitCPUSoft")]
+    #[zbus(property(emits_changed_signal = "const"), name = "LimitCPUSoft")]
     fn limit_cpu_soft(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `LimitFSIZE`.
-    #[zbus(property, name = "LimitFSIZE")]
+    #[zbus(property(emits_changed_signal = "const"), name = "LimitFSIZE")]
     fn limit_fsize(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `LimitFSIZESoft`.
-    #[zbus(property, name = "LimitFSIZESoft")]
+    #[zbus(property(emits_changed_signal = "const"), name = "LimitFSIZESoft")]
     fn limit_fsize_soft(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `LimitDATA`.
-    #[zbus(property, name = "LimitDATA")]
+    #[zbus(property(emits_changed_signal = "const"), name = "LimitDATA")]
     fn limit_data(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `LimitDATASoft`.
-    #[zbus(property, name = "LimitDATASoft")]
+    #[zbus(property(emits_changed_signal = "const"), name = "LimitDATASoft")]
     fn limit_data_soft(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `LimitSTACK`.
-    #[zbus(property, name = "LimitSTACK")]
+    #[zbus(property(emits_changed_signal = "const"), name = "LimitSTACK")]
     fn limit_stack(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `LimitSTACKSoft`.
-    #[zbus(property, name = "LimitSTACKSoft")]
+    #[zbus(property(emits_changed_signal = "const"), name = "LimitSTACKSoft")]
     fn limit_stack_soft(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `LimitCORE`.
-    #[zbus(property, name = "LimitCORE")]
+    #[zbus(property(emits_changed_signal = "const"), name = "LimitCORE")]
     fn limit_core(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `LimitCORESoft`.
-    #[zbus(property, name = "LimitCORESoft")]
+    #[zbus(property(emits_changed_signal = "const"), name = "LimitCORESoft")]
     fn limit_core_soft(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `LimitRSS`.
-    #[zbus(property, name = "LimitRSS")]
+    #[zbus(property(emits_changed_signal = "const"), name = "LimitRSS")]
     fn limit_rss(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `LimitRSSSoft`.
-    #[zbus(property, name = "LimitRSSSoft")]
+    #[zbus(property(emits_changed_signal = "const"), name = "LimitRSSSoft")]
     fn limit_rss_soft(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `LimitNOFILE`.
-    #[zbus(property, name = "LimitNOFILE")]
+    #[zbus(property(emits_changed_signal = "const"), name = "LimitNOFILE")]
     fn limit_nofile(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `LimitNOFILESoft`.
-    #[zbus(property, name = "LimitNOFILESoft")]
+    #[zbus(property(emits_changed_signal = "const"), name = "LimitNOFILESoft")]
     fn limit_nofile_soft(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `LimitAS`.
-    #[zbus(property, name = "LimitAS")]
+    #[zbus(property(emits_changed_signal = "const"), name = "LimitAS")]
     fn limit_as(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `LimitASSoft`.
-    #[zbus(property, name = "LimitASSoft")]
+    #[zbus(property(emits_changed_signal = "const"), name = "LimitASSoft")]
     fn limit_as_soft(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `LimitNPROC`.
-    #[zbus(property, name = "LimitNPROC")]
+    #[zbus(property(emits_changed_signal = "const"), name = "LimitNPROC")]
     fn limit_nproc(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `LimitNPROCSoft`.
-    #[zbus(property, name = "LimitNPROCSoft")]
+    #[zbus(property(emits_changed_signal = "const"), name = "LimitNPROCSoft")]
     fn limit_nproc_soft(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `LimitMEMLOCK`.
-    #[zbus(property, name = "LimitMEMLOCK")]
+    #[zbus(property(emits_changed_signal = "const"), name = "LimitMEMLOCK")]
     fn limit_memlock(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `LimitMEMLOCKSoft`.
-    #[zbus(property, name = "LimitMEMLOCKSoft")]
+    #[zbus(property(emits_changed_signal = "const"), name = "LimitMEMLOCKSoft")]
     fn limit_memlock_soft(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `LimitLOCKS`.
-    #[zbus(property, name = "LimitLOCKS")]
+    #[zbus(property(emits_changed_signal = "const"), name = "LimitLOCKS")]
     fn limit_locks(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `LimitLOCKSSoft`.
-    #[zbus(property, name = "LimitLOCKSSoft")]
+    #[zbus(property(emits_changed_signal = "const"), name = "LimitLOCKSSoft")]
     fn limit_locks_soft(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `LimitSIGPENDING`.
-    #[zbus(property, name = "LimitSIGPENDING")]
+    #[zbus(property(emits_changed_signal = "const"), name = "LimitSIGPENDING")]
     fn limit_sigpending(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `LimitSIGPENDINGSoft`.
-    #[zbus(property, name = "LimitSIGPENDINGSoft")]
+    #[zbus(property(emits_changed_signal = "const"), name = "LimitSIGPENDINGSoft")]
     fn limit_sigpending_soft(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `LimitMSGQUEUE`.
-    #[zbus(property, name = "LimitMSGQUEUE")]
+    #[zbus(property(emits_changed_signal = "const"), name = "LimitMSGQUEUE")]
     fn limit_msgqueue(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `LimitMSGQUEUESoft`.
-    #[zbus(property, name = "LimitMSGQUEUESoft")]
+    #[zbus(property(emits_changed_signal = "const"), name = "LimitMSGQUEUESoft")]
     fn limit_msgqueue_soft(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `LimitNICE`.
-    #[zbus(property, name = "LimitNICE")]
+    #[zbus(property(emits_changed_signal = "const"), name = "LimitNICE")]
     fn limit_nice(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `LimitNICESoft`.
-    #[zbus(property, name = "LimitNICESoft")]
+    #[zbus(property(emits_changed_signal = "const"), name = "LimitNICESoft")]
     fn limit_nice_soft(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `LimitRTPRIO`.
-    #[zbus(property, name = "LimitRTPRIO")]
+    #[zbus(property(emits_changed_signal = "const"), name = "LimitRTPRIO")]
     fn limit_rtprio(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `LimitRTPRIOSoft`.
-    #[zbus(property, name = "LimitRTPRIOSoft")]
+    #[zbus(property(emits_changed_signal = "const"), name = "LimitRTPRIOSoft")]
     fn limit_rtprio_soft(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `LimitRTTIME`.
-    #[zbus(property, name = "LimitRTTIME")]
+    #[zbus(property(emits_changed_signal = "const"), name = "LimitRTTIME")]
     fn limit_rttime(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `LimitRTTIMESoft`.
-    #[zbus(property, name = "LimitRTTIMESoft")]
+    #[zbus(property(emits_changed_signal = "const"), name = "LimitRTTIMESoft")]
     fn limit_rttime_soft(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `WorkingDirectory`.
-    #[zbus(property, name = "WorkingDirectory")]
+    #[zbus(property(emits_changed_signal = "const"), name = "WorkingDirectory")]
     fn working_directory(&self) -> crate::zbus::Result<String>;
 
     /// Get property `RootDirectory`.
-    #[zbus(property, name = "RootDirectory")]
+    #[zbus(property(emits_changed_signal = "const"), name = "RootDirectory")]
     fn root_directory(&self) -> crate::zbus::Result<String>;
 
     /// Get property `RootImage`.
-    #[zbus(property, name = "RootImage")]
+    #[zbus(property(emits_changed_signal = "const"), name = "RootImage")]
     fn root_image(&self) -> crate::zbus::Result<String>;
 
     /// Get property `RootImageOptions`.
-    #[zbus(property, name = "RootImageOptions")]
+    #[zbus(property(emits_changed_signal = "const"), name = "RootImageOptions")]
     fn root_image_options(&self) -> crate::zbus::Result<Vec<(String, String)>>;
 
     /// Get property `RootHash`.
-    #[zbus(property, name = "RootHash")]
+    #[zbus(property(emits_changed_signal = "const"), name = "RootHash")]
     fn root_hash(&self) -> crate::zbus::Result<Vec<u8>>;
 
     /// Get property `RootHashPath`.
-    #[zbus(property, name = "RootHashPath")]
+    #[zbus(property(emits_changed_signal = "const"), name = "RootHashPath")]
     fn root_hash_path(&self) -> crate::zbus::Result<String>;
 
     /// Get property `RootHashSignature`.
-    #[zbus(property, name = "RootHashSignature")]
+    #[zbus(property(emits_changed_signal = "const"), name = "RootHashSignature")]
     fn root_hash_signature(&self) -> crate::zbus::Result<Vec<u8>>;
 
     /// Get property `RootHashSignaturePath`.
-    #[zbus(property, name = "RootHashSignaturePath")]
+    #[zbus(
+        property(emits_changed_signal = "const"),
+        name = "RootHashSignaturePath"
+    )]
     fn root_hash_signature_path(&self) -> crate::zbus::Result<String>;
 
     /// Get property `RootVerity`.
-    #[zbus(property, name = "RootVerity")]
+    #[zbus(property(emits_changed_signal = "const"), name = "RootVerity")]
     fn root_verity(&self) -> crate::zbus::Result<String>;
 
     /// Get property `RootEphemeral`.
-    #[zbus(property, name = "RootEphemeral")]
+    #[zbus(property(emits_changed_signal = "const"), name = "RootEphemeral")]
     fn root_ephemeral(&self) -> crate::zbus::Result<bool>;
 
     /// Get property `ExtensionDirectories`.
-    #[zbus(property, name = "ExtensionDirectories")]
+    #[zbus(
+        property(emits_changed_signal = "const"),
+        name = "ExtensionDirectories"
+    )]
     fn extension_directories(&self) -> crate::zbus::Result<Vec<String>>;
 
     /// Get property `ExtensionImages`.
-    #[zbus(property, name = "ExtensionImages")]
+    #[zbus(property(emits_changed_signal = "const"), name = "ExtensionImages")]
     fn extension_images(&self) -> crate::zbus::Result<Vec<(String, bool, Vec<(String, String)>)>>;
 
     /// Get property `MountImages`.
-    #[zbus(property, name = "MountImages")]
+    #[zbus(property(emits_changed_signal = "const"), name = "MountImages")]
     fn mount_images(
         &self,
     ) -> crate::zbus::Result<Vec<(String, String, bool, Vec<(String, String)>)>>;
 
     /// Get property `OOMScoreAdjust`.
-    #[zbus(property, name = "OOMScoreAdjust")]
+    #[zbus(property(emits_changed_signal = "const"), name = "OOMScoreAdjust")]
     fn oom_score_adjust(&self) -> crate::zbus::Result<i32>;
 
     /// Get property `CoredumpFilter`.
-    #[zbus(property, name = "CoredumpFilter")]
+    #[zbus(property(emits_changed_signal = "const"), name = "CoredumpFilter")]
     fn coredump_filter(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `Nice`.
-    #[zbus(property, name = "Nice")]
+    #[zbus(property(emits_changed_signal = "const"), name = "Nice")]
     fn nice(&self) -> crate::zbus::Result<i32>;
 
     /// Get property `IOSchedulingClass`.
-    #[zbus(property, name = "IOSchedulingClass")]
+    #[zbus(property(emits_changed_signal = "const"), name = "IOSchedulingClass")]
     fn io_scheduling_class(&self) -> crate::zbus::Result<i32>;
 
     /// Get property `IOSchedulingPriority`.
-    #[zbus(property, name = "IOSchedulingPriority")]
+    #[zbus(
+        property(emits_changed_signal = "const"),
+        name = "IOSchedulingPriority"
+    )]
     fn io_scheduling_priority(&self) -> crate::zbus::Result<i32>;
 
     /// Get property `CPUSchedulingPolicy`.
-    #[zbus(property, name = "CPUSchedulingPolicy")]
+    #[zbus(property(emits_changed_signal = "const"), name = "CPUSchedulingPolicy")]
     fn cpu_scheduling_policy(&self) -> crate::zbus::Result<i32>;
 
     /// Get property `CPUSchedulingPriority`.
-    #[zbus(property, name = "CPUSchedulingPriority")]
+    #[zbus(
+        property(emits_changed_signal = "const"),
+        name = "CPUSchedulingPriority"
+    )]
     fn cpu_scheduling_priority(&self) -> crate::zbus::Result<i32>;
 
     /// Get property `CPUAffinity`.
-    #[zbus(property, name = "CPUAffinity")]
+    #[zbus(property(emits_changed_signal = "const"), name = "CPUAffinity")]
     fn cpu_affinity(&self) -> crate::zbus::Result<Vec<u8>>;
 
     /// Get property `CPUAffinityFromNUMA`.
-    #[zbus(property, name = "CPUAffinityFromNUMA")]
+    #[zbus(property(emits_changed_signal = "const"), name = "CPUAffinityFromNUMA")]
     fn cpu_affinity_from_numa(&self) -> crate::zbus::Result<bool>;
 
     /// Get property `NUMAPolicy`.
-    #[zbus(property, name = "NUMAPolicy")]
+    #[zbus(property(emits_changed_signal = "const"), name = "NUMAPolicy")]
     fn numa_policy(&self) -> crate::zbus::Result<i32>;
 
     /// Get property `NUMAMask`.
-    #[zbus(property, name = "NUMAMask")]
+    #[zbus(property(emits_changed_signal = "const"), name = "NUMAMask")]
     fn numa_mask(&self) -> crate::zbus::Result<Vec<u8>>;
 
     /// Get property `TimerSlackNSec`.
-    #[zbus(property, name = "TimerSlackNSec")]
+    #[zbus(property(emits_changed_signal = "const"), name = "TimerSlackNSec")]
     fn timer_slack_n_sec(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `CPUSchedulingResetOnFork`.
-    #[zbus(property, name = "CPUSchedulingResetOnFork")]
+    #[zbus(
+        property(emits_changed_signal = "const"),
+        name = "CPUSchedulingResetOnFork"
+    )]
     fn cpu_scheduling_reset_on_fork(&self) -> crate::zbus::Result<bool>;
 
     /// Get property `NonBlocking`.
-    #[zbus(property, name = "NonBlocking")]
+    #[zbus(property(emits_changed_signal = "const"), name = "NonBlocking")]
     fn non_blocking(&self) -> crate::zbus::Result<bool>;
 
     /// Get property `StandardInput`.
-    #[zbus(property, name = "StandardInput")]
+    #[zbus(property(emits_changed_signal = "const"), name = "StandardInput")]
     fn standard_input(&self) -> crate::zbus::Result<String>;
 
     /// Get property `StandardInputFileDescriptorName`.
-    #[zbus(property, name = "StandardInputFileDescriptorName")]
+    #[zbus(
+        property(emits_changed_signal = "const"),
+        name = "StandardInputFileDescriptorName"
+    )]
     fn standard_input_file_descriptor_name(&self) -> crate::zbus::Result<String>;
 
     /// Get property `StandardInputData`.
-    #[zbus(property, name = "StandardInputData")]
+    #[zbus(property(emits_changed_signal = "const"), name = "StandardInputData")]
     fn standard_input_data(&self) -> crate::zbus::Result<Vec<u8>>;
 
     /// Get property `StandardOutput`.
-    #[zbus(property, name = "StandardOutput")]
+    #[zbus(property(emits_changed_signal = "const"), name = "StandardOutput")]
     fn standard_output(&self) -> crate::zbus::Result<String>;
 
     /// Get property `StandardOutputFileDescriptorName`.
-    #[zbus(property, name = "StandardOutputFileDescriptorName")]
+    #[zbus(
+        property(emits_changed_signal = "const"),
+        name = "StandardOutputFileDescriptorName"
+    )]
     fn standard_output_file_descriptor_name(&self) -> crate::zbus::Result<String>;
 
     /// Get property `StandardError`.
-    #[zbus(property, name = "StandardError")]
+    #[zbus(property(emits_changed_signal = "const"), name = "StandardError")]
     fn standard_error(&self) -> crate::zbus::Result<String>;
 
     /// Get property `StandardErrorFileDescriptorName`.
-    #[zbus(property, name = "StandardErrorFileDescriptorName")]
+    #[zbus(
+        property(emits_changed_signal = "const"),
+        name = "StandardErrorFileDescriptorName"
+    )]
     fn standard_error_file_descriptor_name(&self) -> crate::zbus::Result<String>;
 
     /// Get property `TTYPath`.
-    #[zbus(property, name = "TTYPath")]
+    #[zbus(property(emits_changed_signal = "const"), name = "TTYPath")]
     fn tty_path(&self) -> crate::zbus::Result<String>;
 
     /// Get property `TTYReset`.
-    #[zbus(property, name = "TTYReset")]
+    #[zbus(property(emits_changed_signal = "const"), name = "TTYReset")]
     fn tty_reset(&self) -> crate::zbus::Result<bool>;
 
     /// Get property `TTYVHangup`.
-    #[zbus(property, name = "TTYVHangup")]
+    #[zbus(property(emits_changed_signal = "const"), name = "TTYVHangup")]
     fn ttyv_hangup(&self) -> crate::zbus::Result<bool>;
 
     /// Get property `TTYVTDisallocate`.
-    #[zbus(property, name = "TTYVTDisallocate")]
+    #[zbus(property(emits_changed_signal = "const"), name = "TTYVTDisallocate")]
     fn ttyvt_disallocate(&self) -> crate::zbus::Result<bool>;
 
     /// Get property `TTYRows`.
-    #[zbus(property, name = "TTYRows")]
+    #[zbus(property(emits_changed_signal = "const"), name = "TTYRows")]
     fn tty_rows(&self) -> crate::zbus::Result<u16>;
 
     /// Get property `TTYColumns`.
-    #[zbus(property, name = "TTYColumns")]
+    #[zbus(property(emits_changed_signal = "const"), name = "TTYColumns")]
     fn tty_columns(&self) -> crate::zbus::Result<u16>;
 
     /// Get property `SyslogPriority`.
-    #[zbus(property, name = "SyslogPriority")]
+    #[zbus(property(emits_changed_signal = "const"), name = "SyslogPriority")]
     fn syslog_priority(&self) -> crate::zbus::Result<i32>;
 
     /// Get property `SyslogIdentifier`.
-    #[zbus(property, name = "SyslogIdentifier")]
+    #[zbus(property(emits_changed_signal = "const"), name = "SyslogIdentifier")]
     fn syslog_identifier(&self) -> crate::zbus::Result<String>;
 
     /// Get property `SyslogLevelPrefix`.
-    #[zbus(property, name = "SyslogLevelPrefix")]
+    #[zbus(property(emits_changed_signal = "const"), name = "SyslogLevelPrefix")]
     fn syslog_level_prefix(&self) -> crate::zbus::Result<bool>;
 
     /// Get property `SyslogLevel`.
-    #[zbus(property, name = "SyslogLevel")]
+    #[zbus(property(emits_changed_signal = "const"), name = "SyslogLevel")]
     fn syslog_level(&self) -> crate::zbus::Result<i32>;
 
     /// Get property `SyslogFacility`.
-    #[zbus(property, name = "SyslogFacility")]
+    #[zbus(property(emits_changed_signal = "const"), name = "SyslogFacility")]
     fn syslog_facility(&self) -> crate::zbus::Result<i32>;
 
     /// Get property `LogLevelMax`.
-    #[zbus(property, name = "LogLevelMax")]
+    #[zbus(property(emits_changed_signal = "const"), name = "LogLevelMax")]
     fn log_level_max(&self) -> crate::zbus::Result<i32>;
 
     /// Get property `LogRateLimitIntervalUSec`.
-    #[zbus(property, name = "LogRateLimitIntervalUSec")]
+    #[zbus(
+        property(emits_changed_signal = "const"),
+        name = "LogRateLimitIntervalUSec"
+    )]
     fn log_rate_limit_interval_u_sec(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `LogRateLimitBurst`.
-    #[zbus(property, name = "LogRateLimitBurst")]
+    #[zbus(property(emits_changed_signal = "const"), name = "LogRateLimitBurst")]
     fn log_rate_limit_burst(&self) -> crate::zbus::Result<u32>;
 
     /// Get property `LogExtraFields`.
-    #[zbus(property, name = "LogExtraFields")]
+    #[zbus(property(emits_changed_signal = "const"), name = "LogExtraFields")]
     fn log_extra_fields(&self) -> crate::zbus::Result<Vec<Vec<u8>>>;
 
     /// Get property `LogFilterPatterns`.
-    #[zbus(property, name = "LogFilterPatterns")]
+    #[zbus(property(emits_changed_signal = "const"), name = "LogFilterPatterns")]
     fn log_filter_patterns(&self) -> crate::zbus::Result<Vec<(bool, String)>>;
 
     /// Get property `LogNamespace`.
-    #[zbus(property, name = "LogNamespace")]
+    #[zbus(property(emits_changed_signal = "const"), name = "LogNamespace")]
     fn log_namespace(&self) -> crate::zbus::Result<String>;
 
     /// Get property `SecureBits`.
-    #[zbus(property, name = "SecureBits")]
+    #[zbus(property(emits_changed_signal = "const"), name = "SecureBits")]
     fn secure_bits(&self) -> crate::zbus::Result<i32>;
 
     /// Get property `CapabilityBoundingSet`.
-    #[zbus(property, name = "CapabilityBoundingSet")]
+    #[zbus(
+        property(emits_changed_signal = "const"),
+        name = "CapabilityBoundingSet"
+    )]
     fn capability_bounding_set(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `AmbientCapabilities`.
-    #[zbus(property, name = "AmbientCapabilities")]
+    #[zbus(property(emits_changed_signal = "const"), name = "AmbientCapabilities")]
     fn ambient_capabilities(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `User`.
-    #[zbus(property, name = "User")]
+    #[zbus(property(emits_changed_signal = "const"), name = "User")]
     fn user(&self) -> crate::zbus::Result<String>;
 
     /// Get property `Group`.
-    #[zbus(property, name = "Group")]
+    #[zbus(property(emits_changed_signal = "const"), name = "Group")]
     fn group(&self) -> crate::zbus::Result<String>;
 
     /// Get property `DynamicUser`.
-    #[zbus(property, name = "DynamicUser")]
+    #[zbus(property(emits_changed_signal = "const"), name = "DynamicUser")]
     fn dynamic_user(&self) -> crate::zbus::Result<bool>;
 
     /// Get property `SetLoginEnvironment`.
-    #[zbus(property, name = "SetLoginEnvironment")]
+    #[zbus(property(emits_changed_signal = "const"), name = "SetLoginEnvironment")]
     fn set_login_environment(&self) -> crate::zbus::Result<bool>;
 
     /// Get property `RemoveIPC`.
-    #[zbus(property, name = "RemoveIPC")]
+    #[zbus(property(emits_changed_signal = "const"), name = "RemoveIPC")]
     fn remove_ipc(&self) -> crate::zbus::Result<bool>;
 
     /// Get property `SetCredential`.
-    #[zbus(property, name = "SetCredential")]
+    #[zbus(property(emits_changed_signal = "const"), name = "SetCredential")]
     fn set_credential(&self) -> crate::zbus::Result<Vec<(String, Vec<u8>)>>;
 
     /// Get property `SetCredentialEncrypted`.
-    #[zbus(property, name = "SetCredentialEncrypted")]
+    #[zbus(
+        property(emits_changed_signal = "const"),
+        name = "SetCredentialEncrypted"
+    )]
     fn set_credential_encrypted(&self) -> crate::zbus::Result<Vec<(String, Vec<u8>)>>;
 
     /// Get property `LoadCredential`.
-    #[zbus(property, name = "LoadCredential")]
+    #[zbus(property(emits_changed_signal = "const"), name = "LoadCredential")]
     fn load_credential(&self) -> crate::zbus::Result<Vec<(String, String)>>;
 
     /// Get property `LoadCredentialEncrypted`.
-    #[zbus(property, name = "LoadCredentialEncrypted")]
+    #[zbus(
+        property(emits_changed_signal = "const"),
+        name = "LoadCredentialEncrypted"
+    )]
     fn load_credential_encrypted(&self) -> crate::zbus::Result<Vec<(String, String)>>;
 
     /// Get property `ImportCredential`.
-    #[zbus(property, name = "ImportCredential")]
+    #[zbus(property(emits_changed_signal = "const"), name = "ImportCredential")]
     fn import_credential(&self) -> crate::zbus::Result<Vec<String>>;
 
     /// Get property `SupplementaryGroups`.
-    #[zbus(property, name = "SupplementaryGroups")]
+    #[zbus(property(emits_changed_signal = "const"), name = "SupplementaryGroups")]
     fn supplementary_groups(&self) -> crate::zbus::Result<Vec<String>>;
 
     /// Get property `PAMName`.
-    #[zbus(property, name = "PAMName")]
+    #[zbus(property(emits_changed_signal = "const"), name = "PAMName")]
     fn pam_name(&self) -> crate::zbus::Result<String>;
 
     /// Get property `ReadWritePaths`.
-    #[zbus(property, name = "ReadWritePaths")]
+    #[zbus(property(emits_changed_signal = "const"), name = "ReadWritePaths")]
     fn read_write_paths(&self) -> crate::zbus::Result<Vec<String>>;
 
     /// Get property `ReadOnlyPaths`.
-    #[zbus(property, name = "ReadOnlyPaths")]
+    #[zbus(property(emits_changed_signal = "const"), name = "ReadOnlyPaths")]
     fn read_only_paths(&self) -> crate::zbus::Result<Vec<String>>;
 
     /// Get property `InaccessiblePaths`.
-    #[zbus(property, name = "InaccessiblePaths")]
+    #[zbus(property(emits_changed_signal = "const"), name = "InaccessiblePaths")]
     fn inaccessible_paths(&self) -> crate::zbus::Result<Vec<String>>;
 
     /// Get property `ExecPaths`.
-    #[zbus(property, name = "ExecPaths")]
+    #[zbus(property(emits_changed_signal = "const"), name = "ExecPaths")]
     fn exec_paths(&self) -> crate::zbus::Result<Vec<String>>;
 
     /// Get property `NoExecPaths`.
-    #[zbus(property, name = "NoExecPaths")]
+    #[zbus(property(emits_changed_signal = "const"), name = "NoExecPaths")]
     fn no_exec_paths(&self) -> crate::zbus::Result<Vec<String>>;
 
     /// Get property `ExecSearchPath`.
-    #[zbus(property, name = "ExecSearchPath")]
+    #[zbus(property(emits_changed_signal = "const"), name = "ExecSearchPath")]
     fn exec_search_path(&self) -> crate::zbus::Result<Vec<String>>;
 
     /// Get property `MountFlags`.
-    #[zbus(property, name = "MountFlags")]
+    #[zbus(property(emits_changed_signal = "const"), name = "MountFlags")]
     fn mount_flags(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `PrivateTmp`.
-    #[zbus(property, name = "PrivateTmp")]
+    #[zbus(property(emits_changed_signal = "const"), name = "PrivateTmp")]
     fn private_tmp(&self) -> crate::zbus::Result<bool>;
 
     /// Get property `PrivateDevices`.
-    #[zbus(property, name = "PrivateDevices")]
+    #[zbus(property(emits_changed_signal = "const"), name = "PrivateDevices")]
     fn private_devices(&self) -> crate::zbus::Result<bool>;
 
     /// Get property `ProtectClock`.
-    #[zbus(property, name = "ProtectClock")]
+    #[zbus(property(emits_changed_signal = "const"), name = "ProtectClock")]
     fn protect_clock(&self) -> crate::zbus::Result<bool>;
 
     /// Get property `ProtectKernelTunables`.
-    #[zbus(property, name = "ProtectKernelTunables")]
+    #[zbus(
+        property(emits_changed_signal = "const"),
+        name = "ProtectKernelTunables"
+    )]
     fn protect_kernel_tunables(&self) -> crate::zbus::Result<bool>;
 
     /// Get property `ProtectKernelModules`.
-    #[zbus(property, name = "ProtectKernelModules")]
+    #[zbus(
+        property(emits_changed_signal = "const"),
+        name = "ProtectKernelModules"
+    )]
     fn protect_kernel_modules(&self) -> crate::zbus::Result<bool>;
 
     /// Get property `ProtectKernelLogs`.
-    #[zbus(property, name = "ProtectKernelLogs")]
+    #[zbus(property(emits_changed_signal = "const"), name = "ProtectKernelLogs")]
     fn protect_kernel_logs(&self) -> crate::zbus::Result<bool>;
 
     /// Get property `ProtectControlGroups`.
-    #[zbus(property, name = "ProtectControlGroups")]
+    #[zbus(
+        property(emits_changed_signal = "const"),
+        name = "ProtectControlGroups"
+    )]
     fn protect_control_groups(&self) -> crate::zbus::Result<bool>;
 
     /// Get property `PrivateNetwork`.
-    #[zbus(property, name = "PrivateNetwork")]
+    #[zbus(property(emits_changed_signal = "const"), name = "PrivateNetwork")]
     fn private_network(&self) -> crate::zbus::Result<bool>;
 
     /// Get property `PrivateUsers`.
-    #[zbus(property, name = "PrivateUsers")]
+    #[zbus(property(emits_changed_signal = "const"), name = "PrivateUsers")]
     fn private_users(&self) -> crate::zbus::Result<bool>;
 
     /// Get property `PrivateMounts`.
-    #[zbus(property, name = "PrivateMounts")]
+    #[zbus(property(emits_changed_signal = "const"), name = "PrivateMounts")]
     fn private_mounts(&self) -> crate::zbus::Result<bool>;
 
     /// Get property `PrivateIPC`.
-    #[zbus(property, name = "PrivateIPC")]
+    #[zbus(property(emits_changed_signal = "const"), name = "PrivateIPC")]
     fn private_ipc(&self) -> crate::zbus::Result<bool>;
 
     /// Get property `ProtectHome`.
-    #[zbus(property, name = "ProtectHome")]
+    #[zbus(property(emits_changed_signal = "const"), name = "ProtectHome")]
     fn protect_home(&self) -> crate::zbus::Result<String>;
 
     /// Get property `ProtectSystem`.
-    #[zbus(property, name = "ProtectSystem")]
+    #[zbus(property(emits_changed_signal = "const"), name = "ProtectSystem")]
     fn protect_system(&self) -> crate::zbus::Result<String>;
 
     /// Get property `SameProcessGroup`.
-    #[zbus(property, name = "SameProcessGroup")]
+    #[zbus(property(emits_changed_signal = "const"), name = "SameProcessGroup")]
     fn same_process_group(&self) -> crate::zbus::Result<bool>;
 
     /// Get property `UtmpIdentifier`.
-    #[zbus(property, name = "UtmpIdentifier")]
+    #[zbus(property(emits_changed_signal = "const"), name = "UtmpIdentifier")]
     fn utmp_identifier(&self) -> crate::zbus::Result<String>;
 
     /// Get property `UtmpMode`.
-    #[zbus(property, name = "UtmpMode")]
+    #[zbus(property(emits_changed_signal = "const"), name = "UtmpMode")]
     fn utmp_mode(&self) -> crate::zbus::Result<String>;
 
     /// Get property `SELinuxContext`.
-    #[zbus(property, name = "SELinuxContext")]
+    #[zbus(property(emits_changed_signal = "const"), name = "SELinuxContext")]
     fn se_linux_context(&self) -> crate::zbus::Result<(bool, String)>;
 
     /// Get property `AppArmorProfile`.
-    #[zbus(property, name = "AppArmorProfile")]
+    #[zbus(property(emits_changed_signal = "const"), name = "AppArmorProfile")]
     fn app_armor_profile(&self) -> crate::zbus::Result<(bool, String)>;
 
     /// Get property `SmackProcessLabel`.
-    #[zbus(property, name = "SmackProcessLabel")]
+    #[zbus(property(emits_changed_signal = "const"), name = "SmackProcessLabel")]
     fn smack_process_label(&self) -> crate::zbus::Result<(bool, String)>;
 
     /// Get property `IgnoreSIGPIPE`.
-    #[zbus(property, name = "IgnoreSIGPIPE")]
+    #[zbus(property(emits_changed_signal = "const"), name = "IgnoreSIGPIPE")]
     fn ignore_sigpipe(&self) -> crate::zbus::Result<bool>;
 
     /// Get property `NoNewPrivileges`.
-    #[zbus(property, name = "NoNewPrivileges")]
+    #[zbus(property(emits_changed_signal = "const"), name = "NoNewPrivileges")]
     fn no_new_privileges(&self) -> crate::zbus::Result<bool>;
 
     /// Get property `SystemCallFilter`.
-    #[zbus(property, name = "SystemCallFilter")]
+    #[zbus(property(emits_changed_signal = "const"), name = "SystemCallFilter")]
     fn system_call_filter(&self) -> crate::zbus::Result<(bool, Vec<String>)>;
 
     /// Get property `SystemCallArchitectures`.
-    #[zbus(property, name = "SystemCallArchitectures")]
+    #[zbus(
+        property(emits_changed_signal = "const"),
+        name = "SystemCallArchitectures"
+    )]
     fn system_call_architectures(&self) -> crate::zbus::Result<Vec<String>>;
 
     /// Get property `SystemCallErrorNumber`.
-    #[zbus(property, name = "SystemCallErrorNumber")]
+    #[zbus(
+        property(emits_changed_signal = "const"),
+        name = "SystemCallErrorNumber"
+    )]
     fn system_call_error_number(&self) -> crate::zbus::Result<i32>;
 
     /// Get property `SystemCallLog`.
-    #[zbus(property, name = "SystemCallLog")]
+    #[zbus(property(emits_changed_signal = "const"), name = "SystemCallLog")]
     fn system_call_log(&self) -> crate::zbus::Result<(bool, Vec<String>)>;
 
     /// Get property `Personality`.
-    #[zbus(property, name = "Personality")]
+    #[zbus(property(emits_changed_signal = "const"), name = "Personality")]
     fn personality(&self) -> crate::zbus::Result<String>;
 
     /// Get property `LockPersonality`.
-    #[zbus(property, name = "LockPersonality")]
+    #[zbus(property(emits_changed_signal = "const"), name = "LockPersonality")]
     fn lock_personality(&self) -> crate::zbus::Result<bool>;
 
     /// Get property `RestrictAddressFamilies`.
-    #[zbus(property, name = "RestrictAddressFamilies")]
+    #[zbus(
+        property(emits_changed_signal = "const"),
+        name = "RestrictAddressFamilies"
+    )]
     fn restrict_address_families(&self) -> crate::zbus::Result<(bool, Vec<String>)>;
 
     /// Get property `RuntimeDirectorySymlink`.
-    #[zbus(property, name = "RuntimeDirectorySymlink")]
+    #[zbus(
+        property(emits_changed_signal = "const"),
+        name = "RuntimeDirectorySymlink"
+    )]
     fn runtime_directory_symlink(&self) -> crate::zbus::Result<Vec<(String, String, u64)>>;
 
     /// Get property `RuntimeDirectoryPreserve`.
-    #[zbus(property, name = "RuntimeDirectoryPreserve")]
+    #[zbus(
+        property(emits_changed_signal = "const"),
+        name = "RuntimeDirectoryPreserve"
+    )]
     fn runtime_directory_preserve(&self) -> crate::zbus::Result<String>;
 
     /// Get property `RuntimeDirectoryMode`.
-    #[zbus(property, name = "RuntimeDirectoryMode")]
+    #[zbus(
+        property(emits_changed_signal = "const"),
+        name = "RuntimeDirectoryMode"
+    )]
     fn runtime_directory_mode(&self) -> crate::zbus::Result<u32>;
 
     /// Get property `RuntimeDirectory`.
-    #[zbus(property, name = "RuntimeDirectory")]
+    #[zbus(property(emits_changed_signal = "const"), name = "RuntimeDirectory")]
     fn runtime_directory(&self) -> crate::zbus::Result<Vec<String>>;
 
     /// Get property `StateDirectorySymlink`.
-    #[zbus(property, name = "StateDirectorySymlink")]
+    #[zbus(
+        property(emits_changed_signal = "const"),
+        name = "StateDirectorySymlink"
+    )]
     fn state_directory_symlink(&self) -> crate::zbus::Result<Vec<(String, String, u64)>>;
 
     /// Get property `StateDirectoryMode`.
-    #[zbus(property, name = "StateDirectoryMode")]
+    #[zbus(property(emits_changed_signal = "const"), name = "StateDirectoryMode")]
     fn state_directory_mode(&self) -> crate::zbus::Result<u32>;
 
     /// Get property `StateDirectory`.
-    #[zbus(property, name = "StateDirectory")]
+    #[zbus(property(emits_changed_signal = "const"), name = "StateDirectory")]
     fn state_directory(&self) -> crate::zbus::Result<Vec<String>>;
 
     /// Get property `CacheDirectorySymlink`.
-    #[zbus(property, name = "CacheDirectorySymlink")]
+    #[zbus(
+        property(emits_changed_signal = "const"),
+        name = "CacheDirectorySymlink"
+    )]
     fn cache_directory_symlink(&self) -> crate::zbus::Result<Vec<(String, String, u64)>>;
 
     /// Get property `CacheDirectoryMode`.
-    #[zbus(property, name = "CacheDirectoryMode")]
+    #[zbus(property(emits_changed_signal = "const"), name = "CacheDirectoryMode")]
     fn cache_directory_mode(&self) -> crate::zbus::Result<u32>;
 
     /// Get property `CacheDirectory`.
-    #[zbus(property, name = "CacheDirectory")]
+    #[zbus(property(emits_changed_signal = "const"), name = "CacheDirectory")]
     fn cache_directory(&self) -> crate::zbus::Result<Vec<String>>;
 
     /// Get property `LogsDirectorySymlink`.
-    #[zbus(property, name = "LogsDirectorySymlink")]
+    #[zbus(
+        property(emits_changed_signal = "const"),
+        name = "LogsDirectorySymlink"
+    )]
     fn logs_directory_symlink(&self) -> crate::zbus::Result<Vec<(String, String, u64)>>;
 
     /// Get property `LogsDirectoryMode`.
-    #[zbus(property, name = "LogsDirectoryMode")]
+    #[zbus(property(emits_changed_signal = "const"), name = "LogsDirectoryMode")]
     fn logs_directory_mode(&self) -> crate::zbus::Result<u32>;
 
     /// Get property `LogsDirectory`.
-    #[zbus(property, name = "LogsDirectory")]
+    #[zbus(property(emits_changed_signal = "const"), name = "LogsDirectory")]
     fn logs_directory(&self) -> crate::zbus::Result<Vec<String>>;
 
     /// Get property `ConfigurationDirectoryMode`.
-    #[zbus(property, name = "ConfigurationDirectoryMode")]
+    #[zbus(
+        property(emits_changed_signal = "const"),
+        name = "ConfigurationDirectoryMode"
+    )]
     fn configuration_directory_mode(&self) -> crate::zbus::Result<u32>;
 
     /// Get property `ConfigurationDirectory`.
-    #[zbus(property, name = "ConfigurationDirectory")]
+    #[zbus(
+        property(emits_changed_signal = "const"),
+        name = "ConfigurationDirectory"
+    )]
     fn configuration_directory(&self) -> crate::zbus::Result<Vec<String>>;
 
     /// Get property `TimeoutCleanUSec`.
-    #[zbus(property, name = "TimeoutCleanUSec")]
+    #[zbus(property(emits_changed_signal = "const"), name = "TimeoutCleanUSec")]
     fn timeout_clean_u_sec(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `MemoryDenyWriteExecute`.
-    #[zbus(property, name = "MemoryDenyWriteExecute")]
+    #[zbus(
+        property(emits_changed_signal = "const"),
+        name = "MemoryDenyWriteExecute"
+    )]
     fn memory_deny_write_execute(&self) -> crate::zbus::Result<bool>;
 
     /// Get property `RestrictRealtime`.
-    #[zbus(property, name = "RestrictRealtime")]
+    #[zbus(property(emits_changed_signal = "const"), name = "RestrictRealtime")]
     fn restrict_realtime(&self) -> crate::zbus::Result<bool>;
 
     /// Get property `RestrictSUIDSGID`.
-    #[zbus(property, name = "RestrictSUIDSGID")]
+    #[zbus(property(emits_changed_signal = "const"), name = "RestrictSUIDSGID")]
     fn restrict_suidsgid(&self) -> crate::zbus::Result<bool>;
 
     /// Get property `RestrictNamespaces`.
-    #[zbus(property, name = "RestrictNamespaces")]
+    #[zbus(property(emits_changed_signal = "const"), name = "RestrictNamespaces")]
     fn restrict_namespaces(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `RestrictFileSystems`.
-    #[zbus(property, name = "RestrictFileSystems")]
+    #[zbus(property(emits_changed_signal = "const"), name = "RestrictFileSystems")]
     fn restrict_file_systems(&self) -> crate::zbus::Result<(bool, Vec<String>)>;
 
     /// Get property `BindPaths`.
-    #[zbus(property, name = "BindPaths")]
+    #[zbus(property(emits_changed_signal = "const"), name = "BindPaths")]
     fn bind_paths(&self) -> crate::zbus::Result<Vec<(String, String, bool, u64)>>;
 
     /// Get property `BindReadOnlyPaths`.
-    #[zbus(property, name = "BindReadOnlyPaths")]
+    #[zbus(property(emits_changed_signal = "const"), name = "BindReadOnlyPaths")]
     fn bind_read_only_paths(&self) -> crate::zbus::Result<Vec<(String, String, bool, u64)>>;
 
     /// Get property `TemporaryFileSystem`.
-    #[zbus(property, name = "TemporaryFileSystem")]
+    #[zbus(property(emits_changed_signal = "const"), name = "TemporaryFileSystem")]
     fn temporary_file_system(&self) -> crate::zbus::Result<Vec<(String, String)>>;
 
     /// Get property `MountAPIVFS`.
-    #[zbus(property, name = "MountAPIVFS")]
+    #[zbus(property(emits_changed_signal = "const"), name = "MountAPIVFS")]
     fn mount_apivfs(&self) -> crate::zbus::Result<bool>;
 
     /// Get property `KeyringMode`.
-    #[zbus(property, name = "KeyringMode")]
+    #[zbus(property(emits_changed_signal = "const"), name = "KeyringMode")]
     fn keyring_mode(&self) -> crate::zbus::Result<String>;
 
     /// Get property `ProtectProc`.
-    #[zbus(property, name = "ProtectProc")]
+    #[zbus(property(emits_changed_signal = "const"), name = "ProtectProc")]
     fn protect_proc(&self) -> crate::zbus::Result<String>;
 
     /// Get property `ProcSubset`.
-    #[zbus(property, name = "ProcSubset")]
+    #[zbus(property(emits_changed_signal = "const"), name = "ProcSubset")]
     fn proc_subset(&self) -> crate::zbus::Result<String>;
 
     /// Get property `ProtectHostname`.
-    #[zbus(property, name = "ProtectHostname")]
+    #[zbus(property(emits_changed_signal = "const"), name = "ProtectHostname")]
     fn protect_hostname(&self) -> crate::zbus::Result<bool>;
 
     /// Get property `MemoryKSM`.
-    #[zbus(property, name = "MemoryKSM")]
+    #[zbus(property(emits_changed_signal = "const"), name = "MemoryKSM")]
     fn memory_ksm(&self) -> crate::zbus::Result<bool>;
 
     /// Get property `NetworkNamespacePath`.
-    #[zbus(property, name = "NetworkNamespacePath")]
+    #[zbus(
+        property(emits_changed_signal = "const"),
+        name = "NetworkNamespacePath"
+    )]
     fn network_namespace_path(&self) -> crate::zbus::Result<String>;
 
     /// Get property `IPCNamespacePath`.
-    #[zbus(property, name = "IPCNamespacePath")]
+    #[zbus(property(emits_changed_signal = "const"), name = "IPCNamespacePath")]
     fn ipc_namespace_path(&self) -> crate::zbus::Result<String>;
 
     /// Get property `RootImagePolicy`.
-    #[zbus(property, name = "RootImagePolicy")]
+    #[zbus(property(emits_changed_signal = "const"), name = "RootImagePolicy")]
     fn root_image_policy(&self) -> crate::zbus::Result<String>;
 
     /// Get property `MountImagePolicy`.
-    #[zbus(property, name = "MountImagePolicy")]
+    #[zbus(property(emits_changed_signal = "const"), name = "MountImagePolicy")]
     fn mount_image_policy(&self) -> crate::zbus::Result<String>;
 
     /// Get property `ExtensionImagePolicy`.
-    #[zbus(property, name = "ExtensionImagePolicy")]
+    #[zbus(
+        property(emits_changed_signal = "const"),
+        name = "ExtensionImagePolicy"
+    )]
     fn extension_image_policy(&self) -> crate::zbus::Result<String>;
 
     /// Get property `KillMode`.
-    #[zbus(property, name = "KillMode")]
+    #[zbus(property(emits_changed_signal = "const"), name = "KillMode")]
     fn kill_mode(&self) -> crate::zbus::Result<String>;
 
     /// Get property `KillSignal`.
-    #[zbus(property, name = "KillSignal")]
+    #[zbus(property(emits_changed_signal = "const"), name = "KillSignal")]
     fn kill_signal(&self) -> crate::zbus::Result<i32>;
 
     /// Get property `RestartKillSignal`.
-    #[zbus(property, name = "RestartKillSignal")]
+    #[zbus(property(emits_changed_signal = "const"), name = "RestartKillSignal")]
     fn restart_kill_signal(&self) -> crate::zbus::Result<i32>;
 
     /// Get property `FinalKillSignal`.
-    #[zbus(property, name = "FinalKillSignal")]
+    #[zbus(property(emits_changed_signal = "const"), name = "FinalKillSignal")]
     fn final_kill_signal(&self) -> crate::zbus::Result<i32>;
 
     /// Get property `SendSIGKILL`.
-    #[zbus(property, name = "SendSIGKILL")]
+    #[zbus(property(emits_changed_signal = "const"), name = "SendSIGKILL")]
     fn send_sigkill(&self) -> crate::zbus::Result<bool>;
 
     /// Get property `SendSIGHUP`.
-    #[zbus(property, name = "SendSIGHUP")]
+    #[zbus(property(emits_changed_signal = "const"), name = "SendSIGHUP")]
     fn send_sighup(&self) -> crate::zbus::Result<bool>;
 
     /// Get property `WatchdogSignal`.
-    #[zbus(property, name = "WatchdogSignal")]
+    #[zbus(property(emits_changed_signal = "const"), name = "WatchdogSignal")]
     fn watchdog_signal(&self) -> crate::zbus::Result<i32>;
 }
 
@@ -5762,23 +6479,23 @@ trait Mount {
 )]
 trait Automount {
     /// Get property `Where`.
-    #[zbus(property, name = "Where")]
+    #[zbus(property(emits_changed_signal = "const"), name = "Where")]
     fn where_property(&self) -> crate::zbus::Result<String>;
 
     /// Get property `ExtraOptions`.
-    #[zbus(property, name = "ExtraOptions")]
+    #[zbus(property(emits_changed_signal = "const"), name = "ExtraOptions")]
     fn extra_options(&self) -> crate::zbus::Result<String>;
 
     /// Get property `DirectoryMode`.
-    #[zbus(property, name = "DirectoryMode")]
+    #[zbus(property(emits_changed_signal = "const"), name = "DirectoryMode")]
     fn directory_mode(&self) -> crate::zbus::Result<u32>;
 
     /// Get property `Result`.
-    #[zbus(property, name = "Result")]
+    #[zbus(property(emits_changed_signal = "true"), name = "Result")]
     fn result(&self) -> crate::zbus::Result<String>;
 
     /// Get property `TimeoutIdleUSec`.
-    #[zbus(property, name = "TimeoutIdleUSec")]
+    #[zbus(property(emits_changed_signal = "const"), name = "TimeoutIdleUSec")]
     fn timeout_idle_u_sec(&self) -> crate::zbus::Result<u64>;
 }
 
@@ -5791,67 +6508,82 @@ trait Automount {
 )]
 trait Timer {
     /// Get property `Unit`.
-    #[zbus(property, name = "Unit")]
+    #[zbus(property(emits_changed_signal = "const"), name = "Unit")]
     fn unit(&self) -> crate::zbus::Result<String>;
 
     /// Get property `TimersMonotonic`.
-    #[zbus(property, name = "TimersMonotonic")]
+    #[zbus(
+        property(emits_changed_signal = "invalidates"),
+        name = "TimersMonotonic"
+    )]
     fn timers_monotonic(&self) -> crate::zbus::Result<Vec<(String, u64, u64)>>;
 
     /// Get property `TimersCalendar`.
-    #[zbus(property, name = "TimersCalendar")]
+    #[zbus(
+        property(emits_changed_signal = "invalidates"),
+        name = "TimersCalendar"
+    )]
     fn timers_calendar(&self) -> crate::zbus::Result<Vec<(String, String, u64)>>;
 
     /// Get property `OnClockChange`.
-    #[zbus(property, name = "OnClockChange")]
+    #[zbus(property(emits_changed_signal = "const"), name = "OnClockChange")]
     fn on_clock_change(&self) -> crate::zbus::Result<bool>;
 
     /// Get property `OnTimezoneChange`.
-    #[zbus(property, name = "OnTimezoneChange")]
+    #[zbus(property(emits_changed_signal = "const"), name = "OnTimezoneChange")]
     fn on_timezone_change(&self) -> crate::zbus::Result<bool>;
 
     /// Get property `NextElapseUSecRealtime`.
-    #[zbus(property, name = "NextElapseUSecRealtime")]
+    #[zbus(
+        property(emits_changed_signal = "true"),
+        name = "NextElapseUSecRealtime"
+    )]
     fn next_elapse_u_sec_realtime(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `NextElapseUSecMonotonic`.
-    #[zbus(property, name = "NextElapseUSecMonotonic")]
+    #[zbus(
+        property(emits_changed_signal = "true"),
+        name = "NextElapseUSecMonotonic"
+    )]
     fn next_elapse_u_sec_monotonic(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `LastTriggerUSec`.
-    #[zbus(property, name = "LastTriggerUSec")]
+    #[zbus(property(emits_changed_signal = "true"), name = "LastTriggerUSec")]
     fn last_trigger_u_sec(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `LastTriggerUSecMonotonic`.
-    #[zbus(property, name = "LastTriggerUSecMonotonic")]
+    #[zbus(
+        property(emits_changed_signal = "true"),
+        name = "LastTriggerUSecMonotonic"
+    )]
     fn last_trigger_u_sec_monotonic(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `Result`.
-    #[zbus(property, name = "Result")]
+    #[zbus(property(emits_changed_signal = "true"), name = "Result")]
     fn result(&self) -> crate::zbus::Result<String>;
 
     /// Get property `AccuracyUSec`.
-    #[zbus(property, name = "AccuracyUSec")]
+    #[zbus(property(emits_changed_signal = "const"), name = "AccuracyUSec")]
     fn accuracy_u_sec(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `RandomizedDelayUSec`.
-    #[zbus(property, name = "RandomizedDelayUSec")]
+    #[zbus(property(emits_changed_signal = "const"), name = "RandomizedDelayUSec")]
     fn randomized_delay_u_sec(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `FixedRandomDelay`.
-    #[zbus(property, name = "FixedRandomDelay")]
+    #[zbus(property(emits_changed_signal = "const"), name = "FixedRandomDelay")]
     fn fixed_random_delay(&self) -> crate::zbus::Result<bool>;
 
     /// Get property `Persistent`.
-    #[zbus(property, name = "Persistent")]
+    #[zbus(property(emits_changed_signal = "const"), name = "Persistent")]
     fn persistent(&self) -> crate::zbus::Result<bool>;
 
     /// Get property `WakeSystem`.
-    #[zbus(property, name = "WakeSystem")]
+    #[zbus(property(emits_changed_signal = "const"), name = "WakeSystem")]
     fn wake_system(&self) -> crate::zbus::Result<bool>;
 
     /// Get property `RemainAfterElapse`.
-    #[zbus(property, name = "RemainAfterElapse")]
+    #[zbus(property(emits_changed_signal = "const"), name = "RemainAfterElapse")]
     fn remain_after_elapse(&self) -> crate::zbus::Result<bool>;
 }
 
@@ -5872,1121 +6604,1253 @@ trait Swap {
     fn attach_processes(&self, subcgroup: String, pids: Vec<u32>) -> crate::zbus::Result<()>;
 
     /// Get property `What`.
-    #[zbus(property, name = "What")]
+    #[zbus(property(emits_changed_signal = "true"), name = "What")]
     fn what(&self) -> crate::zbus::Result<String>;
 
     /// Get property `Priority`.
-    #[zbus(property, name = "Priority")]
+    #[zbus(property(emits_changed_signal = "true"), name = "Priority")]
     fn priority(&self) -> crate::zbus::Result<i32>;
 
     /// Get property `Options`.
-    #[zbus(property, name = "Options")]
+    #[zbus(property(emits_changed_signal = "true"), name = "Options")]
     fn options(&self) -> crate::zbus::Result<String>;
 
     /// Get property `TimeoutUSec`.
-    #[zbus(property, name = "TimeoutUSec")]
+    #[zbus(property(emits_changed_signal = "const"), name = "TimeoutUSec")]
     fn timeout_u_sec(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `ControlPID`.
-    #[zbus(property, name = "ControlPID")]
+    #[zbus(property(emits_changed_signal = "true"), name = "ControlPID")]
     fn control_pid(&self) -> crate::zbus::Result<u32>;
 
     /// Get property `Result`.
-    #[zbus(property, name = "Result")]
+    #[zbus(property(emits_changed_signal = "true"), name = "Result")]
     fn result(&self) -> crate::zbus::Result<String>;
 
     /// Get property `UID`.
-    #[zbus(property, name = "UID")]
+    #[zbus(property(emits_changed_signal = "true"), name = "UID")]
     fn uid(&self) -> crate::zbus::Result<u32>;
 
     /// Get property `GID`.
-    #[zbus(property, name = "GID")]
+    #[zbus(property(emits_changed_signal = "true"), name = "GID")]
     fn gid(&self) -> crate::zbus::Result<u32>;
 
     /// Get property `ExecActivate`.
-    #[zbus(property, name = "ExecActivate")]
+    #[zbus(property(emits_changed_signal = "invalidates"), name = "ExecActivate")]
     fn exec_activate(
         &self,
     ) -> crate::zbus::Result<Vec<(String, Vec<String>, bool, u64, u64, u64, u64, u32, i32, i32)>>;
 
     /// Get property `ExecDeactivate`.
-    #[zbus(property, name = "ExecDeactivate")]
+    #[zbus(
+        property(emits_changed_signal = "invalidates"),
+        name = "ExecDeactivate"
+    )]
     fn exec_deactivate(
         &self,
     ) -> crate::zbus::Result<Vec<(String, Vec<String>, bool, u64, u64, u64, u64, u32, i32, i32)>>;
 
     /// Get property `Slice`.
-    #[zbus(property, name = "Slice")]
+    #[zbus(property(emits_changed_signal = "false"), name = "Slice")]
     fn slice(&self) -> crate::zbus::Result<String>;
 
     /// Get property `ControlGroup`.
-    #[zbus(property, name = "ControlGroup")]
+    #[zbus(property(emits_changed_signal = "false"), name = "ControlGroup")]
     fn control_group(&self) -> crate::zbus::Result<String>;
 
     /// Get property `ControlGroupId`.
-    #[zbus(property, name = "ControlGroupId")]
+    #[zbus(property(emits_changed_signal = "false"), name = "ControlGroupId")]
     fn control_group_id(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `MemoryCurrent`.
-    #[zbus(property, name = "MemoryCurrent")]
+    #[zbus(property(emits_changed_signal = "false"), name = "MemoryCurrent")]
     fn memory_current(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `MemoryPeak`.
-    #[zbus(property, name = "MemoryPeak")]
+    #[zbus(property(emits_changed_signal = "false"), name = "MemoryPeak")]
     fn memory_peak(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `MemorySwapCurrent`.
-    #[zbus(property, name = "MemorySwapCurrent")]
+    #[zbus(property(emits_changed_signal = "false"), name = "MemorySwapCurrent")]
     fn memory_swap_current(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `MemorySwapPeak`.
-    #[zbus(property, name = "MemorySwapPeak")]
+    #[zbus(property(emits_changed_signal = "false"), name = "MemorySwapPeak")]
     fn memory_swap_peak(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `MemoryZSwapCurrent`.
-    #[zbus(property, name = "MemoryZSwapCurrent")]
+    #[zbus(property(emits_changed_signal = "false"), name = "MemoryZSwapCurrent")]
     fn memory_z_swap_current(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `MemoryAvailable`.
-    #[zbus(property, name = "MemoryAvailable")]
+    #[zbus(property(emits_changed_signal = "false"), name = "MemoryAvailable")]
     fn memory_available(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `CPUUsageNSec`.
-    #[zbus(property, name = "CPUUsageNSec")]
+    #[zbus(property(emits_changed_signal = "false"), name = "CPUUsageNSec")]
     fn cpu_usage_n_sec(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `EffectiveCPUs`.
-    #[zbus(property, name = "EffectiveCPUs")]
+    #[zbus(property(emits_changed_signal = "false"), name = "EffectiveCPUs")]
     fn effective_cp_us(&self) -> crate::zbus::Result<Vec<u8>>;
 
     /// Get property `EffectiveMemoryNodes`.
-    #[zbus(property, name = "EffectiveMemoryNodes")]
+    #[zbus(
+        property(emits_changed_signal = "false"),
+        name = "EffectiveMemoryNodes"
+    )]
     fn effective_memory_nodes(&self) -> crate::zbus::Result<Vec<u8>>;
 
     /// Get property `TasksCurrent`.
-    #[zbus(property, name = "TasksCurrent")]
+    #[zbus(property(emits_changed_signal = "false"), name = "TasksCurrent")]
     fn tasks_current(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `IPIngressBytes`.
-    #[zbus(property, name = "IPIngressBytes")]
+    #[zbus(property(emits_changed_signal = "false"), name = "IPIngressBytes")]
     fn ip_ingress_bytes(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `IPIngressPackets`.
-    #[zbus(property, name = "IPIngressPackets")]
+    #[zbus(property(emits_changed_signal = "false"), name = "IPIngressPackets")]
     fn ip_ingress_packets(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `IPEgressBytes`.
-    #[zbus(property, name = "IPEgressBytes")]
+    #[zbus(property(emits_changed_signal = "false"), name = "IPEgressBytes")]
     fn ip_egress_bytes(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `IPEgressPackets`.
-    #[zbus(property, name = "IPEgressPackets")]
+    #[zbus(property(emits_changed_signal = "false"), name = "IPEgressPackets")]
     fn ip_egress_packets(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `IOReadBytes`.
-    #[zbus(property, name = "IOReadBytes")]
+    #[zbus(property(emits_changed_signal = "false"), name = "IOReadBytes")]
     fn io_read_bytes(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `IOReadOperations`.
-    #[zbus(property, name = "IOReadOperations")]
+    #[zbus(property(emits_changed_signal = "false"), name = "IOReadOperations")]
     fn io_read_operations(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `IOWriteBytes`.
-    #[zbus(property, name = "IOWriteBytes")]
+    #[zbus(property(emits_changed_signal = "false"), name = "IOWriteBytes")]
     fn io_write_bytes(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `IOWriteOperations`.
-    #[zbus(property, name = "IOWriteOperations")]
+    #[zbus(property(emits_changed_signal = "false"), name = "IOWriteOperations")]
     fn io_write_operations(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `Delegate`.
-    #[zbus(property, name = "Delegate")]
+    #[zbus(property(emits_changed_signal = "false"), name = "Delegate")]
     fn delegate(&self) -> crate::zbus::Result<bool>;
 
     /// Get property `DelegateControllers`.
-    #[zbus(property, name = "DelegateControllers")]
+    #[zbus(property(emits_changed_signal = "false"), name = "DelegateControllers")]
     fn delegate_controllers(&self) -> crate::zbus::Result<Vec<String>>;
 
     /// Get property `DelegateSubgroup`.
-    #[zbus(property, name = "DelegateSubgroup")]
+    #[zbus(property(emits_changed_signal = "false"), name = "DelegateSubgroup")]
     fn delegate_subgroup(&self) -> crate::zbus::Result<String>;
 
     /// Get property `CPUAccounting`.
-    #[zbus(property, name = "CPUAccounting")]
+    #[zbus(property(emits_changed_signal = "false"), name = "CPUAccounting")]
     fn cpu_accounting(&self) -> crate::zbus::Result<bool>;
 
     /// Get property `CPUWeight`.
-    #[zbus(property, name = "CPUWeight")]
+    #[zbus(property(emits_changed_signal = "false"), name = "CPUWeight")]
     fn cpu_weight(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `StartupCPUWeight`.
-    #[zbus(property, name = "StartupCPUWeight")]
+    #[zbus(property(emits_changed_signal = "false"), name = "StartupCPUWeight")]
     fn startup_cpu_weight(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `CPUShares`.
-    #[zbus(property, name = "CPUShares")]
+    #[zbus(property(emits_changed_signal = "false"), name = "CPUShares")]
     fn cpu_shares(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `StartupCPUShares`.
-    #[zbus(property, name = "StartupCPUShares")]
+    #[zbus(property(emits_changed_signal = "false"), name = "StartupCPUShares")]
     fn startup_cpu_shares(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `CPUQuotaPerSecUSec`.
-    #[zbus(property, name = "CPUQuotaPerSecUSec")]
+    #[zbus(property(emits_changed_signal = "false"), name = "CPUQuotaPerSecUSec")]
     fn cpu_quota_per_sec_u_sec(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `CPUQuotaPeriodUSec`.
-    #[zbus(property, name = "CPUQuotaPeriodUSec")]
+    #[zbus(property(emits_changed_signal = "false"), name = "CPUQuotaPeriodUSec")]
     fn cpu_quota_period_u_sec(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `AllowedCPUs`.
-    #[zbus(property, name = "AllowedCPUs")]
+    #[zbus(property(emits_changed_signal = "false"), name = "AllowedCPUs")]
     fn allowed_cp_us(&self) -> crate::zbus::Result<Vec<u8>>;
 
     /// Get property `StartupAllowedCPUs`.
-    #[zbus(property, name = "StartupAllowedCPUs")]
+    #[zbus(property(emits_changed_signal = "false"), name = "StartupAllowedCPUs")]
     fn startup_allowed_cp_us(&self) -> crate::zbus::Result<Vec<u8>>;
 
     /// Get property `AllowedMemoryNodes`.
-    #[zbus(property, name = "AllowedMemoryNodes")]
+    #[zbus(property(emits_changed_signal = "false"), name = "AllowedMemoryNodes")]
     fn allowed_memory_nodes(&self) -> crate::zbus::Result<Vec<u8>>;
 
     /// Get property `StartupAllowedMemoryNodes`.
-    #[zbus(property, name = "StartupAllowedMemoryNodes")]
+    #[zbus(
+        property(emits_changed_signal = "false"),
+        name = "StartupAllowedMemoryNodes"
+    )]
     fn startup_allowed_memory_nodes(&self) -> crate::zbus::Result<Vec<u8>>;
 
     /// Get property `IOAccounting`.
-    #[zbus(property, name = "IOAccounting")]
+    #[zbus(property(emits_changed_signal = "false"), name = "IOAccounting")]
     fn io_accounting(&self) -> crate::zbus::Result<bool>;
 
     /// Get property `IOWeight`.
-    #[zbus(property, name = "IOWeight")]
+    #[zbus(property(emits_changed_signal = "false"), name = "IOWeight")]
     fn io_weight(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `StartupIOWeight`.
-    #[zbus(property, name = "StartupIOWeight")]
+    #[zbus(property(emits_changed_signal = "false"), name = "StartupIOWeight")]
     fn startup_io_weight(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `IODeviceWeight`.
-    #[zbus(property, name = "IODeviceWeight")]
+    #[zbus(property(emits_changed_signal = "false"), name = "IODeviceWeight")]
     fn io_device_weight(&self) -> crate::zbus::Result<Vec<(String, u64)>>;
 
     /// Get property `IOReadBandwidthMax`.
-    #[zbus(property, name = "IOReadBandwidthMax")]
+    #[zbus(property(emits_changed_signal = "false"), name = "IOReadBandwidthMax")]
     fn io_read_bandwidth_max(&self) -> crate::zbus::Result<Vec<(String, u64)>>;
 
     /// Get property `IOWriteBandwidthMax`.
-    #[zbus(property, name = "IOWriteBandwidthMax")]
+    #[zbus(property(emits_changed_signal = "false"), name = "IOWriteBandwidthMax")]
     fn io_write_bandwidth_max(&self) -> crate::zbus::Result<Vec<(String, u64)>>;
 
     /// Get property `IOReadIOPSMax`.
-    #[zbus(property, name = "IOReadIOPSMax")]
+    #[zbus(property(emits_changed_signal = "false"), name = "IOReadIOPSMax")]
     fn io_read_iops_max(&self) -> crate::zbus::Result<Vec<(String, u64)>>;
 
     /// Get property `IOWriteIOPSMax`.
-    #[zbus(property, name = "IOWriteIOPSMax")]
+    #[zbus(property(emits_changed_signal = "false"), name = "IOWriteIOPSMax")]
     fn io_write_iops_max(&self) -> crate::zbus::Result<Vec<(String, u64)>>;
 
     /// Get property `IODeviceLatencyTargetUSec`.
-    #[zbus(property, name = "IODeviceLatencyTargetUSec")]
+    #[zbus(
+        property(emits_changed_signal = "false"),
+        name = "IODeviceLatencyTargetUSec"
+    )]
     fn io_device_latency_target_u_sec(&self) -> crate::zbus::Result<Vec<(String, u64)>>;
 
     /// Get property `BlockIOAccounting`.
-    #[zbus(property, name = "BlockIOAccounting")]
+    #[zbus(property(emits_changed_signal = "false"), name = "BlockIOAccounting")]
     fn block_io_accounting(&self) -> crate::zbus::Result<bool>;
 
     /// Get property `BlockIOWeight`.
-    #[zbus(property, name = "BlockIOWeight")]
+    #[zbus(property(emits_changed_signal = "false"), name = "BlockIOWeight")]
     fn block_io_weight(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `StartupBlockIOWeight`.
-    #[zbus(property, name = "StartupBlockIOWeight")]
+    #[zbus(
+        property(emits_changed_signal = "false"),
+        name = "StartupBlockIOWeight"
+    )]
     fn startup_block_io_weight(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `BlockIODeviceWeight`.
-    #[zbus(property, name = "BlockIODeviceWeight")]
+    #[zbus(property(emits_changed_signal = "false"), name = "BlockIODeviceWeight")]
     fn block_io_device_weight(&self) -> crate::zbus::Result<Vec<(String, u64)>>;
 
     /// Get property `BlockIOReadBandwidth`.
-    #[zbus(property, name = "BlockIOReadBandwidth")]
+    #[zbus(
+        property(emits_changed_signal = "false"),
+        name = "BlockIOReadBandwidth"
+    )]
     fn block_io_read_bandwidth(&self) -> crate::zbus::Result<Vec<(String, u64)>>;
 
     /// Get property `BlockIOWriteBandwidth`.
-    #[zbus(property, name = "BlockIOWriteBandwidth")]
+    #[zbus(
+        property(emits_changed_signal = "false"),
+        name = "BlockIOWriteBandwidth"
+    )]
     fn block_io_write_bandwidth(&self) -> crate::zbus::Result<Vec<(String, u64)>>;
 
     /// Get property `MemoryAccounting`.
-    #[zbus(property, name = "MemoryAccounting")]
+    #[zbus(property(emits_changed_signal = "false"), name = "MemoryAccounting")]
     fn memory_accounting(&self) -> crate::zbus::Result<bool>;
 
     /// Get property `DefaultMemoryLow`.
-    #[zbus(property, name = "DefaultMemoryLow")]
+    #[zbus(property(emits_changed_signal = "false"), name = "DefaultMemoryLow")]
     fn default_memory_low(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `DefaultStartupMemoryLow`.
-    #[zbus(property, name = "DefaultStartupMemoryLow")]
+    #[zbus(
+        property(emits_changed_signal = "false"),
+        name = "DefaultStartupMemoryLow"
+    )]
     fn default_startup_memory_low(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `DefaultMemoryMin`.
-    #[zbus(property, name = "DefaultMemoryMin")]
+    #[zbus(property(emits_changed_signal = "false"), name = "DefaultMemoryMin")]
     fn default_memory_min(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `MemoryMin`.
-    #[zbus(property, name = "MemoryMin")]
+    #[zbus(property(emits_changed_signal = "false"), name = "MemoryMin")]
     fn memory_min(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `MemoryLow`.
-    #[zbus(property, name = "MemoryLow")]
+    #[zbus(property(emits_changed_signal = "false"), name = "MemoryLow")]
     fn memory_low(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `StartupMemoryLow`.
-    #[zbus(property, name = "StartupMemoryLow")]
+    #[zbus(property(emits_changed_signal = "false"), name = "StartupMemoryLow")]
     fn startup_memory_low(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `MemoryHigh`.
-    #[zbus(property, name = "MemoryHigh")]
+    #[zbus(property(emits_changed_signal = "false"), name = "MemoryHigh")]
     fn memory_high(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `StartupMemoryHigh`.
-    #[zbus(property, name = "StartupMemoryHigh")]
+    #[zbus(property(emits_changed_signal = "false"), name = "StartupMemoryHigh")]
     fn startup_memory_high(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `MemoryMax`.
-    #[zbus(property, name = "MemoryMax")]
+    #[zbus(property(emits_changed_signal = "false"), name = "MemoryMax")]
     fn memory_max(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `StartupMemoryMax`.
-    #[zbus(property, name = "StartupMemoryMax")]
+    #[zbus(property(emits_changed_signal = "false"), name = "StartupMemoryMax")]
     fn startup_memory_max(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `MemorySwapMax`.
-    #[zbus(property, name = "MemorySwapMax")]
+    #[zbus(property(emits_changed_signal = "false"), name = "MemorySwapMax")]
     fn memory_swap_max(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `StartupMemorySwapMax`.
-    #[zbus(property, name = "StartupMemorySwapMax")]
+    #[zbus(
+        property(emits_changed_signal = "false"),
+        name = "StartupMemorySwapMax"
+    )]
     fn startup_memory_swap_max(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `MemoryZSwapMax`.
-    #[zbus(property, name = "MemoryZSwapMax")]
+    #[zbus(property(emits_changed_signal = "false"), name = "MemoryZSwapMax")]
     fn memory_z_swap_max(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `StartupMemoryZSwapMax`.
-    #[zbus(property, name = "StartupMemoryZSwapMax")]
+    #[zbus(
+        property(emits_changed_signal = "false"),
+        name = "StartupMemoryZSwapMax"
+    )]
     fn startup_memory_z_swap_max(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `MemoryLimit`.
-    #[zbus(property, name = "MemoryLimit")]
+    #[zbus(property(emits_changed_signal = "false"), name = "MemoryLimit")]
     fn memory_limit(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `DevicePolicy`.
-    #[zbus(property, name = "DevicePolicy")]
+    #[zbus(property(emits_changed_signal = "false"), name = "DevicePolicy")]
     fn device_policy(&self) -> crate::zbus::Result<String>;
 
     /// Get property `DeviceAllow`.
-    #[zbus(property, name = "DeviceAllow")]
+    #[zbus(property(emits_changed_signal = "false"), name = "DeviceAllow")]
     fn device_allow(&self) -> crate::zbus::Result<Vec<(String, String)>>;
 
     /// Get property `TasksAccounting`.
-    #[zbus(property, name = "TasksAccounting")]
+    #[zbus(property(emits_changed_signal = "false"), name = "TasksAccounting")]
     fn tasks_accounting(&self) -> crate::zbus::Result<bool>;
 
     /// Get property `TasksMax`.
-    #[zbus(property, name = "TasksMax")]
+    #[zbus(property(emits_changed_signal = "false"), name = "TasksMax")]
     fn tasks_max(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `IPAccounting`.
-    #[zbus(property, name = "IPAccounting")]
+    #[zbus(property(emits_changed_signal = "false"), name = "IPAccounting")]
     fn ip_accounting(&self) -> crate::zbus::Result<bool>;
 
     /// Get property `IPAddressAllow`.
-    #[zbus(property, name = "IPAddressAllow")]
+    #[zbus(property(emits_changed_signal = "false"), name = "IPAddressAllow")]
     fn ip_address_allow(&self) -> crate::zbus::Result<Vec<(i32, Vec<u8>, u32)>>;
 
     /// Get property `IPAddressDeny`.
-    #[zbus(property, name = "IPAddressDeny")]
+    #[zbus(property(emits_changed_signal = "false"), name = "IPAddressDeny")]
     fn ip_address_deny(&self) -> crate::zbus::Result<Vec<(i32, Vec<u8>, u32)>>;
 
     /// Get property `IPIngressFilterPath`.
-    #[zbus(property, name = "IPIngressFilterPath")]
+    #[zbus(property(emits_changed_signal = "false"), name = "IPIngressFilterPath")]
     fn ip_ingress_filter_path(&self) -> crate::zbus::Result<Vec<String>>;
 
     /// Get property `IPEgressFilterPath`.
-    #[zbus(property, name = "IPEgressFilterPath")]
+    #[zbus(property(emits_changed_signal = "false"), name = "IPEgressFilterPath")]
     fn ip_egress_filter_path(&self) -> crate::zbus::Result<Vec<String>>;
 
     /// Get property `DisableControllers`.
-    #[zbus(property, name = "DisableControllers")]
+    #[zbus(property(emits_changed_signal = "false"), name = "DisableControllers")]
     fn disable_controllers(&self) -> crate::zbus::Result<Vec<String>>;
 
     /// Get property `ManagedOOMSwap`.
-    #[zbus(property, name = "ManagedOOMSwap")]
+    #[zbus(property(emits_changed_signal = "false"), name = "ManagedOOMSwap")]
     fn managed_oom_swap(&self) -> crate::zbus::Result<String>;
 
     /// Get property `ManagedOOMMemoryPressure`.
-    #[zbus(property, name = "ManagedOOMMemoryPressure")]
+    #[zbus(
+        property(emits_changed_signal = "false"),
+        name = "ManagedOOMMemoryPressure"
+    )]
     fn managed_oom_memory_pressure(&self) -> crate::zbus::Result<String>;
 
     /// Get property `ManagedOOMMemoryPressureLimit`.
-    #[zbus(property, name = "ManagedOOMMemoryPressureLimit")]
+    #[zbus(
+        property(emits_changed_signal = "false"),
+        name = "ManagedOOMMemoryPressureLimit"
+    )]
     fn managed_oom_memory_pressure_limit(&self) -> crate::zbus::Result<u32>;
 
     /// Get property `ManagedOOMPreference`.
-    #[zbus(property, name = "ManagedOOMPreference")]
+    #[zbus(
+        property(emits_changed_signal = "false"),
+        name = "ManagedOOMPreference"
+    )]
     fn managed_oom_preference(&self) -> crate::zbus::Result<String>;
 
     /// Get property `BPFProgram`.
-    #[zbus(property, name = "BPFProgram")]
+    #[zbus(property(emits_changed_signal = "false"), name = "BPFProgram")]
     fn bpf_program(&self) -> crate::zbus::Result<Vec<(String, String)>>;
 
     /// Get property `SocketBindAllow`.
-    #[zbus(property, name = "SocketBindAllow")]
+    #[zbus(property(emits_changed_signal = "false"), name = "SocketBindAllow")]
     fn socket_bind_allow(&self) -> crate::zbus::Result<Vec<(i32, i32, u16, u16)>>;
 
     /// Get property `SocketBindDeny`.
-    #[zbus(property, name = "SocketBindDeny")]
+    #[zbus(property(emits_changed_signal = "false"), name = "SocketBindDeny")]
     fn socket_bind_deny(&self) -> crate::zbus::Result<Vec<(i32, i32, u16, u16)>>;
 
     /// Get property `RestrictNetworkInterfaces`.
-    #[zbus(property, name = "RestrictNetworkInterfaces")]
+    #[zbus(
+        property(emits_changed_signal = "false"),
+        name = "RestrictNetworkInterfaces"
+    )]
     fn restrict_network_interfaces(&self) -> crate::zbus::Result<(bool, Vec<String>)>;
 
     /// Get property `MemoryPressureWatch`.
-    #[zbus(property, name = "MemoryPressureWatch")]
+    #[zbus(property(emits_changed_signal = "false"), name = "MemoryPressureWatch")]
     fn memory_pressure_watch(&self) -> crate::zbus::Result<String>;
 
     /// Get property `MemoryPressureThresholdUSec`.
-    #[zbus(property, name = "MemoryPressureThresholdUSec")]
+    #[zbus(
+        property(emits_changed_signal = "false"),
+        name = "MemoryPressureThresholdUSec"
+    )]
     fn memory_pressure_threshold_u_sec(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `NFTSet`.
-    #[zbus(property, name = "NFTSet")]
+    #[zbus(property(emits_changed_signal = "false"), name = "NFTSet")]
     fn nft_set(&self) -> crate::zbus::Result<Vec<(i32, i32, String, String)>>;
 
     /// Get property `CoredumpReceive`.
-    #[zbus(property, name = "CoredumpReceive")]
+    #[zbus(property(emits_changed_signal = "false"), name = "CoredumpReceive")]
     fn coredump_receive(&self) -> crate::zbus::Result<bool>;
 
     /// Get property `Environment`.
-    #[zbus(property, name = "Environment")]
+    #[zbus(property(emits_changed_signal = "const"), name = "Environment")]
     fn environment(&self) -> crate::zbus::Result<Vec<String>>;
 
     /// Get property `EnvironmentFiles`.
-    #[zbus(property, name = "EnvironmentFiles")]
+    #[zbus(property(emits_changed_signal = "const"), name = "EnvironmentFiles")]
     fn environment_files(&self) -> crate::zbus::Result<Vec<(String, bool)>>;
 
     /// Get property `PassEnvironment`.
-    #[zbus(property, name = "PassEnvironment")]
+    #[zbus(property(emits_changed_signal = "const"), name = "PassEnvironment")]
     fn pass_environment(&self) -> crate::zbus::Result<Vec<String>>;
 
     /// Get property `UnsetEnvironment`.
-    #[zbus(property, name = "UnsetEnvironment")]
+    #[zbus(property(emits_changed_signal = "const"), name = "UnsetEnvironment")]
     fn unset_environment(&self) -> crate::zbus::Result<Vec<String>>;
 
     /// Get property `UMask`.
-    #[zbus(property, name = "UMask")]
+    #[zbus(property(emits_changed_signal = "const"), name = "UMask")]
     fn u_mask(&self) -> crate::zbus::Result<u32>;
 
     /// Get property `LimitCPU`.
-    #[zbus(property, name = "LimitCPU")]
+    #[zbus(property(emits_changed_signal = "const"), name = "LimitCPU")]
     fn limit_cpu(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `LimitCPUSoft`.
-    #[zbus(property, name = "LimitCPUSoft")]
+    #[zbus(property(emits_changed_signal = "const"), name = "LimitCPUSoft")]
     fn limit_cpu_soft(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `LimitFSIZE`.
-    #[zbus(property, name = "LimitFSIZE")]
+    #[zbus(property(emits_changed_signal = "const"), name = "LimitFSIZE")]
     fn limit_fsize(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `LimitFSIZESoft`.
-    #[zbus(property, name = "LimitFSIZESoft")]
+    #[zbus(property(emits_changed_signal = "const"), name = "LimitFSIZESoft")]
     fn limit_fsize_soft(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `LimitDATA`.
-    #[zbus(property, name = "LimitDATA")]
+    #[zbus(property(emits_changed_signal = "const"), name = "LimitDATA")]
     fn limit_data(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `LimitDATASoft`.
-    #[zbus(property, name = "LimitDATASoft")]
+    #[zbus(property(emits_changed_signal = "const"), name = "LimitDATASoft")]
     fn limit_data_soft(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `LimitSTACK`.
-    #[zbus(property, name = "LimitSTACK")]
+    #[zbus(property(emits_changed_signal = "const"), name = "LimitSTACK")]
     fn limit_stack(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `LimitSTACKSoft`.
-    #[zbus(property, name = "LimitSTACKSoft")]
+    #[zbus(property(emits_changed_signal = "const"), name = "LimitSTACKSoft")]
     fn limit_stack_soft(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `LimitCORE`.
-    #[zbus(property, name = "LimitCORE")]
+    #[zbus(property(emits_changed_signal = "const"), name = "LimitCORE")]
     fn limit_core(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `LimitCORESoft`.
-    #[zbus(property, name = "LimitCORESoft")]
+    #[zbus(property(emits_changed_signal = "const"), name = "LimitCORESoft")]
     fn limit_core_soft(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `LimitRSS`.
-    #[zbus(property, name = "LimitRSS")]
+    #[zbus(property(emits_changed_signal = "const"), name = "LimitRSS")]
     fn limit_rss(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `LimitRSSSoft`.
-    #[zbus(property, name = "LimitRSSSoft")]
+    #[zbus(property(emits_changed_signal = "const"), name = "LimitRSSSoft")]
     fn limit_rss_soft(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `LimitNOFILE`.
-    #[zbus(property, name = "LimitNOFILE")]
+    #[zbus(property(emits_changed_signal = "const"), name = "LimitNOFILE")]
     fn limit_nofile(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `LimitNOFILESoft`.
-    #[zbus(property, name = "LimitNOFILESoft")]
+    #[zbus(property(emits_changed_signal = "const"), name = "LimitNOFILESoft")]
     fn limit_nofile_soft(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `LimitAS`.
-    #[zbus(property, name = "LimitAS")]
+    #[zbus(property(emits_changed_signal = "const"), name = "LimitAS")]
     fn limit_as(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `LimitASSoft`.
-    #[zbus(property, name = "LimitASSoft")]
+    #[zbus(property(emits_changed_signal = "const"), name = "LimitASSoft")]
     fn limit_as_soft(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `LimitNPROC`.
-    #[zbus(property, name = "LimitNPROC")]
+    #[zbus(property(emits_changed_signal = "const"), name = "LimitNPROC")]
     fn limit_nproc(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `LimitNPROCSoft`.
-    #[zbus(property, name = "LimitNPROCSoft")]
+    #[zbus(property(emits_changed_signal = "const"), name = "LimitNPROCSoft")]
     fn limit_nproc_soft(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `LimitMEMLOCK`.
-    #[zbus(property, name = "LimitMEMLOCK")]
+    #[zbus(property(emits_changed_signal = "const"), name = "LimitMEMLOCK")]
     fn limit_memlock(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `LimitMEMLOCKSoft`.
-    #[zbus(property, name = "LimitMEMLOCKSoft")]
+    #[zbus(property(emits_changed_signal = "const"), name = "LimitMEMLOCKSoft")]
     fn limit_memlock_soft(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `LimitLOCKS`.
-    #[zbus(property, name = "LimitLOCKS")]
+    #[zbus(property(emits_changed_signal = "const"), name = "LimitLOCKS")]
     fn limit_locks(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `LimitLOCKSSoft`.
-    #[zbus(property, name = "LimitLOCKSSoft")]
+    #[zbus(property(emits_changed_signal = "const"), name = "LimitLOCKSSoft")]
     fn limit_locks_soft(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `LimitSIGPENDING`.
-    #[zbus(property, name = "LimitSIGPENDING")]
+    #[zbus(property(emits_changed_signal = "const"), name = "LimitSIGPENDING")]
     fn limit_sigpending(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `LimitSIGPENDINGSoft`.
-    #[zbus(property, name = "LimitSIGPENDINGSoft")]
+    #[zbus(property(emits_changed_signal = "const"), name = "LimitSIGPENDINGSoft")]
     fn limit_sigpending_soft(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `LimitMSGQUEUE`.
-    #[zbus(property, name = "LimitMSGQUEUE")]
+    #[zbus(property(emits_changed_signal = "const"), name = "LimitMSGQUEUE")]
     fn limit_msgqueue(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `LimitMSGQUEUESoft`.
-    #[zbus(property, name = "LimitMSGQUEUESoft")]
+    #[zbus(property(emits_changed_signal = "const"), name = "LimitMSGQUEUESoft")]
     fn limit_msgqueue_soft(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `LimitNICE`.
-    #[zbus(property, name = "LimitNICE")]
+    #[zbus(property(emits_changed_signal = "const"), name = "LimitNICE")]
     fn limit_nice(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `LimitNICESoft`.
-    #[zbus(property, name = "LimitNICESoft")]
+    #[zbus(property(emits_changed_signal = "const"), name = "LimitNICESoft")]
     fn limit_nice_soft(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `LimitRTPRIO`.
-    #[zbus(property, name = "LimitRTPRIO")]
+    #[zbus(property(emits_changed_signal = "const"), name = "LimitRTPRIO")]
     fn limit_rtprio(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `LimitRTPRIOSoft`.
-    #[zbus(property, name = "LimitRTPRIOSoft")]
+    #[zbus(property(emits_changed_signal = "const"), name = "LimitRTPRIOSoft")]
     fn limit_rtprio_soft(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `LimitRTTIME`.
-    #[zbus(property, name = "LimitRTTIME")]
+    #[zbus(property(emits_changed_signal = "const"), name = "LimitRTTIME")]
     fn limit_rttime(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `LimitRTTIMESoft`.
-    #[zbus(property, name = "LimitRTTIMESoft")]
+    #[zbus(property(emits_changed_signal = "const"), name = "LimitRTTIMESoft")]
     fn limit_rttime_soft(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `WorkingDirectory`.
-    #[zbus(property, name = "WorkingDirectory")]
+    #[zbus(property(emits_changed_signal = "const"), name = "WorkingDirectory")]
     fn working_directory(&self) -> crate::zbus::Result<String>;
 
     /// Get property `RootDirectory`.
-    #[zbus(property, name = "RootDirectory")]
+    #[zbus(property(emits_changed_signal = "const"), name = "RootDirectory")]
     fn root_directory(&self) -> crate::zbus::Result<String>;
 
     /// Get property `RootImage`.
-    #[zbus(property, name = "RootImage")]
+    #[zbus(property(emits_changed_signal = "const"), name = "RootImage")]
     fn root_image(&self) -> crate::zbus::Result<String>;
 
     /// Get property `RootImageOptions`.
-    #[zbus(property, name = "RootImageOptions")]
+    #[zbus(property(emits_changed_signal = "const"), name = "RootImageOptions")]
     fn root_image_options(&self) -> crate::zbus::Result<Vec<(String, String)>>;
 
     /// Get property `RootHash`.
-    #[zbus(property, name = "RootHash")]
+    #[zbus(property(emits_changed_signal = "const"), name = "RootHash")]
     fn root_hash(&self) -> crate::zbus::Result<Vec<u8>>;
 
     /// Get property `RootHashPath`.
-    #[zbus(property, name = "RootHashPath")]
+    #[zbus(property(emits_changed_signal = "const"), name = "RootHashPath")]
     fn root_hash_path(&self) -> crate::zbus::Result<String>;
 
     /// Get property `RootHashSignature`.
-    #[zbus(property, name = "RootHashSignature")]
+    #[zbus(property(emits_changed_signal = "const"), name = "RootHashSignature")]
     fn root_hash_signature(&self) -> crate::zbus::Result<Vec<u8>>;
 
     /// Get property `RootHashSignaturePath`.
-    #[zbus(property, name = "RootHashSignaturePath")]
+    #[zbus(
+        property(emits_changed_signal = "const"),
+        name = "RootHashSignaturePath"
+    )]
     fn root_hash_signature_path(&self) -> crate::zbus::Result<String>;
 
     /// Get property `RootVerity`.
-    #[zbus(property, name = "RootVerity")]
+    #[zbus(property(emits_changed_signal = "const"), name = "RootVerity")]
     fn root_verity(&self) -> crate::zbus::Result<String>;
 
     /// Get property `RootEphemeral`.
-    #[zbus(property, name = "RootEphemeral")]
+    #[zbus(property(emits_changed_signal = "const"), name = "RootEphemeral")]
     fn root_ephemeral(&self) -> crate::zbus::Result<bool>;
 
     /// Get property `ExtensionDirectories`.
-    #[zbus(property, name = "ExtensionDirectories")]
+    #[zbus(
+        property(emits_changed_signal = "const"),
+        name = "ExtensionDirectories"
+    )]
     fn extension_directories(&self) -> crate::zbus::Result<Vec<String>>;
 
     /// Get property `ExtensionImages`.
-    #[zbus(property, name = "ExtensionImages")]
+    #[zbus(property(emits_changed_signal = "const"), name = "ExtensionImages")]
     fn extension_images(&self) -> crate::zbus::Result<Vec<(String, bool, Vec<(String, String)>)>>;
 
     /// Get property `MountImages`.
-    #[zbus(property, name = "MountImages")]
+    #[zbus(property(emits_changed_signal = "const"), name = "MountImages")]
     fn mount_images(
         &self,
     ) -> crate::zbus::Result<Vec<(String, String, bool, Vec<(String, String)>)>>;
 
     /// Get property `OOMScoreAdjust`.
-    #[zbus(property, name = "OOMScoreAdjust")]
+    #[zbus(property(emits_changed_signal = "const"), name = "OOMScoreAdjust")]
     fn oom_score_adjust(&self) -> crate::zbus::Result<i32>;
 
     /// Get property `CoredumpFilter`.
-    #[zbus(property, name = "CoredumpFilter")]
+    #[zbus(property(emits_changed_signal = "const"), name = "CoredumpFilter")]
     fn coredump_filter(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `Nice`.
-    #[zbus(property, name = "Nice")]
+    #[zbus(property(emits_changed_signal = "const"), name = "Nice")]
     fn nice(&self) -> crate::zbus::Result<i32>;
 
     /// Get property `IOSchedulingClass`.
-    #[zbus(property, name = "IOSchedulingClass")]
+    #[zbus(property(emits_changed_signal = "const"), name = "IOSchedulingClass")]
     fn io_scheduling_class(&self) -> crate::zbus::Result<i32>;
 
     /// Get property `IOSchedulingPriority`.
-    #[zbus(property, name = "IOSchedulingPriority")]
+    #[zbus(
+        property(emits_changed_signal = "const"),
+        name = "IOSchedulingPriority"
+    )]
     fn io_scheduling_priority(&self) -> crate::zbus::Result<i32>;
 
     /// Get property `CPUSchedulingPolicy`.
-    #[zbus(property, name = "CPUSchedulingPolicy")]
+    #[zbus(property(emits_changed_signal = "const"), name = "CPUSchedulingPolicy")]
     fn cpu_scheduling_policy(&self) -> crate::zbus::Result<i32>;
 
     /// Get property `CPUSchedulingPriority`.
-    #[zbus(property, name = "CPUSchedulingPriority")]
+    #[zbus(
+        property(emits_changed_signal = "const"),
+        name = "CPUSchedulingPriority"
+    )]
     fn cpu_scheduling_priority(&self) -> crate::zbus::Result<i32>;
 
     /// Get property `CPUAffinity`.
-    #[zbus(property, name = "CPUAffinity")]
+    #[zbus(property(emits_changed_signal = "const"), name = "CPUAffinity")]
     fn cpu_affinity(&self) -> crate::zbus::Result<Vec<u8>>;
 
     /// Get property `CPUAffinityFromNUMA`.
-    #[zbus(property, name = "CPUAffinityFromNUMA")]
+    #[zbus(property(emits_changed_signal = "const"), name = "CPUAffinityFromNUMA")]
     fn cpu_affinity_from_numa(&self) -> crate::zbus::Result<bool>;
 
     /// Get property `NUMAPolicy`.
-    #[zbus(property, name = "NUMAPolicy")]
+    #[zbus(property(emits_changed_signal = "const"), name = "NUMAPolicy")]
     fn numa_policy(&self) -> crate::zbus::Result<i32>;
 
     /// Get property `NUMAMask`.
-    #[zbus(property, name = "NUMAMask")]
+    #[zbus(property(emits_changed_signal = "const"), name = "NUMAMask")]
     fn numa_mask(&self) -> crate::zbus::Result<Vec<u8>>;
 
     /// Get property `TimerSlackNSec`.
-    #[zbus(property, name = "TimerSlackNSec")]
+    #[zbus(property(emits_changed_signal = "const"), name = "TimerSlackNSec")]
     fn timer_slack_n_sec(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `CPUSchedulingResetOnFork`.
-    #[zbus(property, name = "CPUSchedulingResetOnFork")]
+    #[zbus(
+        property(emits_changed_signal = "const"),
+        name = "CPUSchedulingResetOnFork"
+    )]
     fn cpu_scheduling_reset_on_fork(&self) -> crate::zbus::Result<bool>;
 
     /// Get property `NonBlocking`.
-    #[zbus(property, name = "NonBlocking")]
+    #[zbus(property(emits_changed_signal = "const"), name = "NonBlocking")]
     fn non_blocking(&self) -> crate::zbus::Result<bool>;
 
     /// Get property `StandardInput`.
-    #[zbus(property, name = "StandardInput")]
+    #[zbus(property(emits_changed_signal = "const"), name = "StandardInput")]
     fn standard_input(&self) -> crate::zbus::Result<String>;
 
     /// Get property `StandardInputFileDescriptorName`.
-    #[zbus(property, name = "StandardInputFileDescriptorName")]
+    #[zbus(
+        property(emits_changed_signal = "const"),
+        name = "StandardInputFileDescriptorName"
+    )]
     fn standard_input_file_descriptor_name(&self) -> crate::zbus::Result<String>;
 
     /// Get property `StandardInputData`.
-    #[zbus(property, name = "StandardInputData")]
+    #[zbus(property(emits_changed_signal = "const"), name = "StandardInputData")]
     fn standard_input_data(&self) -> crate::zbus::Result<Vec<u8>>;
 
     /// Get property `StandardOutput`.
-    #[zbus(property, name = "StandardOutput")]
+    #[zbus(property(emits_changed_signal = "const"), name = "StandardOutput")]
     fn standard_output(&self) -> crate::zbus::Result<String>;
 
     /// Get property `StandardOutputFileDescriptorName`.
-    #[zbus(property, name = "StandardOutputFileDescriptorName")]
+    #[zbus(
+        property(emits_changed_signal = "const"),
+        name = "StandardOutputFileDescriptorName"
+    )]
     fn standard_output_file_descriptor_name(&self) -> crate::zbus::Result<String>;
 
     /// Get property `StandardError`.
-    #[zbus(property, name = "StandardError")]
+    #[zbus(property(emits_changed_signal = "const"), name = "StandardError")]
     fn standard_error(&self) -> crate::zbus::Result<String>;
 
     /// Get property `StandardErrorFileDescriptorName`.
-    #[zbus(property, name = "StandardErrorFileDescriptorName")]
+    #[zbus(
+        property(emits_changed_signal = "const"),
+        name = "StandardErrorFileDescriptorName"
+    )]
     fn standard_error_file_descriptor_name(&self) -> crate::zbus::Result<String>;
 
     /// Get property `TTYPath`.
-    #[zbus(property, name = "TTYPath")]
+    #[zbus(property(emits_changed_signal = "const"), name = "TTYPath")]
     fn tty_path(&self) -> crate::zbus::Result<String>;
 
     /// Get property `TTYReset`.
-    #[zbus(property, name = "TTYReset")]
+    #[zbus(property(emits_changed_signal = "const"), name = "TTYReset")]
     fn tty_reset(&self) -> crate::zbus::Result<bool>;
 
     /// Get property `TTYVHangup`.
-    #[zbus(property, name = "TTYVHangup")]
+    #[zbus(property(emits_changed_signal = "const"), name = "TTYVHangup")]
     fn ttyv_hangup(&self) -> crate::zbus::Result<bool>;
 
     /// Get property `TTYVTDisallocate`.
-    #[zbus(property, name = "TTYVTDisallocate")]
+    #[zbus(property(emits_changed_signal = "const"), name = "TTYVTDisallocate")]
     fn ttyvt_disallocate(&self) -> crate::zbus::Result<bool>;
 
     /// Get property `TTYRows`.
-    #[zbus(property, name = "TTYRows")]
+    #[zbus(property(emits_changed_signal = "const"), name = "TTYRows")]
     fn tty_rows(&self) -> crate::zbus::Result<u16>;
 
     /// Get property `TTYColumns`.
-    #[zbus(property, name = "TTYColumns")]
+    #[zbus(property(emits_changed_signal = "const"), name = "TTYColumns")]
     fn tty_columns(&self) -> crate::zbus::Result<u16>;
 
     /// Get property `SyslogPriority`.
-    #[zbus(property, name = "SyslogPriority")]
+    #[zbus(property(emits_changed_signal = "const"), name = "SyslogPriority")]
     fn syslog_priority(&self) -> crate::zbus::Result<i32>;
 
     /// Get property `SyslogIdentifier`.
-    #[zbus(property, name = "SyslogIdentifier")]
+    #[zbus(property(emits_changed_signal = "const"), name = "SyslogIdentifier")]
     fn syslog_identifier(&self) -> crate::zbus::Result<String>;
 
     /// Get property `SyslogLevelPrefix`.
-    #[zbus(property, name = "SyslogLevelPrefix")]
+    #[zbus(property(emits_changed_signal = "const"), name = "SyslogLevelPrefix")]
     fn syslog_level_prefix(&self) -> crate::zbus::Result<bool>;
 
     /// Get property `SyslogLevel`.
-    #[zbus(property, name = "SyslogLevel")]
+    #[zbus(property(emits_changed_signal = "const"), name = "SyslogLevel")]
     fn syslog_level(&self) -> crate::zbus::Result<i32>;
 
     /// Get property `SyslogFacility`.
-    #[zbus(property, name = "SyslogFacility")]
+    #[zbus(property(emits_changed_signal = "const"), name = "SyslogFacility")]
     fn syslog_facility(&self) -> crate::zbus::Result<i32>;
 
     /// Get property `LogLevelMax`.
-    #[zbus(property, name = "LogLevelMax")]
+    #[zbus(property(emits_changed_signal = "const"), name = "LogLevelMax")]
     fn log_level_max(&self) -> crate::zbus::Result<i32>;
 
     /// Get property `LogRateLimitIntervalUSec`.
-    #[zbus(property, name = "LogRateLimitIntervalUSec")]
+    #[zbus(
+        property(emits_changed_signal = "const"),
+        name = "LogRateLimitIntervalUSec"
+    )]
     fn log_rate_limit_interval_u_sec(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `LogRateLimitBurst`.
-    #[zbus(property, name = "LogRateLimitBurst")]
+    #[zbus(property(emits_changed_signal = "const"), name = "LogRateLimitBurst")]
     fn log_rate_limit_burst(&self) -> crate::zbus::Result<u32>;
 
     /// Get property `LogExtraFields`.
-    #[zbus(property, name = "LogExtraFields")]
+    #[zbus(property(emits_changed_signal = "const"), name = "LogExtraFields")]
     fn log_extra_fields(&self) -> crate::zbus::Result<Vec<Vec<u8>>>;
 
     /// Get property `LogFilterPatterns`.
-    #[zbus(property, name = "LogFilterPatterns")]
+    #[zbus(property(emits_changed_signal = "const"), name = "LogFilterPatterns")]
     fn log_filter_patterns(&self) -> crate::zbus::Result<Vec<(bool, String)>>;
 
     /// Get property `LogNamespace`.
-    #[zbus(property, name = "LogNamespace")]
+    #[zbus(property(emits_changed_signal = "const"), name = "LogNamespace")]
     fn log_namespace(&self) -> crate::zbus::Result<String>;
 
     /// Get property `SecureBits`.
-    #[zbus(property, name = "SecureBits")]
+    #[zbus(property(emits_changed_signal = "const"), name = "SecureBits")]
     fn secure_bits(&self) -> crate::zbus::Result<i32>;
 
     /// Get property `CapabilityBoundingSet`.
-    #[zbus(property, name = "CapabilityBoundingSet")]
+    #[zbus(
+        property(emits_changed_signal = "const"),
+        name = "CapabilityBoundingSet"
+    )]
     fn capability_bounding_set(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `AmbientCapabilities`.
-    #[zbus(property, name = "AmbientCapabilities")]
+    #[zbus(property(emits_changed_signal = "const"), name = "AmbientCapabilities")]
     fn ambient_capabilities(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `User`.
-    #[zbus(property, name = "User")]
+    #[zbus(property(emits_changed_signal = "const"), name = "User")]
     fn user(&self) -> crate::zbus::Result<String>;
 
     /// Get property `Group`.
-    #[zbus(property, name = "Group")]
+    #[zbus(property(emits_changed_signal = "const"), name = "Group")]
     fn group(&self) -> crate::zbus::Result<String>;
 
     /// Get property `DynamicUser`.
-    #[zbus(property, name = "DynamicUser")]
+    #[zbus(property(emits_changed_signal = "const"), name = "DynamicUser")]
     fn dynamic_user(&self) -> crate::zbus::Result<bool>;
 
     /// Get property `SetLoginEnvironment`.
-    #[zbus(property, name = "SetLoginEnvironment")]
+    #[zbus(property(emits_changed_signal = "const"), name = "SetLoginEnvironment")]
     fn set_login_environment(&self) -> crate::zbus::Result<bool>;
 
     /// Get property `RemoveIPC`.
-    #[zbus(property, name = "RemoveIPC")]
+    #[zbus(property(emits_changed_signal = "const"), name = "RemoveIPC")]
     fn remove_ipc(&self) -> crate::zbus::Result<bool>;
 
     /// Get property `SetCredential`.
-    #[zbus(property, name = "SetCredential")]
+    #[zbus(property(emits_changed_signal = "const"), name = "SetCredential")]
     fn set_credential(&self) -> crate::zbus::Result<Vec<(String, Vec<u8>)>>;
 
     /// Get property `SetCredentialEncrypted`.
-    #[zbus(property, name = "SetCredentialEncrypted")]
+    #[zbus(
+        property(emits_changed_signal = "const"),
+        name = "SetCredentialEncrypted"
+    )]
     fn set_credential_encrypted(&self) -> crate::zbus::Result<Vec<(String, Vec<u8>)>>;
 
     /// Get property `LoadCredential`.
-    #[zbus(property, name = "LoadCredential")]
+    #[zbus(property(emits_changed_signal = "const"), name = "LoadCredential")]
     fn load_credential(&self) -> crate::zbus::Result<Vec<(String, String)>>;
 
     /// Get property `LoadCredentialEncrypted`.
-    #[zbus(property, name = "LoadCredentialEncrypted")]
+    #[zbus(
+        property(emits_changed_signal = "const"),
+        name = "LoadCredentialEncrypted"
+    )]
     fn load_credential_encrypted(&self) -> crate::zbus::Result<Vec<(String, String)>>;
 
     /// Get property `ImportCredential`.
-    #[zbus(property, name = "ImportCredential")]
+    #[zbus(property(emits_changed_signal = "const"), name = "ImportCredential")]
     fn import_credential(&self) -> crate::zbus::Result<Vec<String>>;
 
     /// Get property `SupplementaryGroups`.
-    #[zbus(property, name = "SupplementaryGroups")]
+    #[zbus(property(emits_changed_signal = "const"), name = "SupplementaryGroups")]
     fn supplementary_groups(&self) -> crate::zbus::Result<Vec<String>>;
 
     /// Get property `PAMName`.
-    #[zbus(property, name = "PAMName")]
+    #[zbus(property(emits_changed_signal = "const"), name = "PAMName")]
     fn pam_name(&self) -> crate::zbus::Result<String>;
 
     /// Get property `ReadWritePaths`.
-    #[zbus(property, name = "ReadWritePaths")]
+    #[zbus(property(emits_changed_signal = "const"), name = "ReadWritePaths")]
     fn read_write_paths(&self) -> crate::zbus::Result<Vec<String>>;
 
     /// Get property `ReadOnlyPaths`.
-    #[zbus(property, name = "ReadOnlyPaths")]
+    #[zbus(property(emits_changed_signal = "const"), name = "ReadOnlyPaths")]
     fn read_only_paths(&self) -> crate::zbus::Result<Vec<String>>;
 
     /// Get property `InaccessiblePaths`.
-    #[zbus(property, name = "InaccessiblePaths")]
+    #[zbus(property(emits_changed_signal = "const"), name = "InaccessiblePaths")]
     fn inaccessible_paths(&self) -> crate::zbus::Result<Vec<String>>;
 
     /// Get property `ExecPaths`.
-    #[zbus(property, name = "ExecPaths")]
+    #[zbus(property(emits_changed_signal = "const"), name = "ExecPaths")]
     fn exec_paths(&self) -> crate::zbus::Result<Vec<String>>;
 
     /// Get property `NoExecPaths`.
-    #[zbus(property, name = "NoExecPaths")]
+    #[zbus(property(emits_changed_signal = "const"), name = "NoExecPaths")]
     fn no_exec_paths(&self) -> crate::zbus::Result<Vec<String>>;
 
     /// Get property `ExecSearchPath`.
-    #[zbus(property, name = "ExecSearchPath")]
+    #[zbus(property(emits_changed_signal = "const"), name = "ExecSearchPath")]
     fn exec_search_path(&self) -> crate::zbus::Result<Vec<String>>;
 
     /// Get property `MountFlags`.
-    #[zbus(property, name = "MountFlags")]
+    #[zbus(property(emits_changed_signal = "const"), name = "MountFlags")]
     fn mount_flags(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `PrivateTmp`.
-    #[zbus(property, name = "PrivateTmp")]
+    #[zbus(property(emits_changed_signal = "const"), name = "PrivateTmp")]
     fn private_tmp(&self) -> crate::zbus::Result<bool>;
 
     /// Get property `PrivateDevices`.
-    #[zbus(property, name = "PrivateDevices")]
+    #[zbus(property(emits_changed_signal = "const"), name = "PrivateDevices")]
     fn private_devices(&self) -> crate::zbus::Result<bool>;
 
     /// Get property `ProtectClock`.
-    #[zbus(property, name = "ProtectClock")]
+    #[zbus(property(emits_changed_signal = "const"), name = "ProtectClock")]
     fn protect_clock(&self) -> crate::zbus::Result<bool>;
 
     /// Get property `ProtectKernelTunables`.
-    #[zbus(property, name = "ProtectKernelTunables")]
+    #[zbus(
+        property(emits_changed_signal = "const"),
+        name = "ProtectKernelTunables"
+    )]
     fn protect_kernel_tunables(&self) -> crate::zbus::Result<bool>;
 
     /// Get property `ProtectKernelModules`.
-    #[zbus(property, name = "ProtectKernelModules")]
+    #[zbus(
+        property(emits_changed_signal = "const"),
+        name = "ProtectKernelModules"
+    )]
     fn protect_kernel_modules(&self) -> crate::zbus::Result<bool>;
 
     /// Get property `ProtectKernelLogs`.
-    #[zbus(property, name = "ProtectKernelLogs")]
+    #[zbus(property(emits_changed_signal = "const"), name = "ProtectKernelLogs")]
     fn protect_kernel_logs(&self) -> crate::zbus::Result<bool>;
 
     /// Get property `ProtectControlGroups`.
-    #[zbus(property, name = "ProtectControlGroups")]
+    #[zbus(
+        property(emits_changed_signal = "const"),
+        name = "ProtectControlGroups"
+    )]
     fn protect_control_groups(&self) -> crate::zbus::Result<bool>;
 
     /// Get property `PrivateNetwork`.
-    #[zbus(property, name = "PrivateNetwork")]
+    #[zbus(property(emits_changed_signal = "const"), name = "PrivateNetwork")]
     fn private_network(&self) -> crate::zbus::Result<bool>;
 
     /// Get property `PrivateUsers`.
-    #[zbus(property, name = "PrivateUsers")]
+    #[zbus(property(emits_changed_signal = "const"), name = "PrivateUsers")]
     fn private_users(&self) -> crate::zbus::Result<bool>;
 
     /// Get property `PrivateMounts`.
-    #[zbus(property, name = "PrivateMounts")]
+    #[zbus(property(emits_changed_signal = "const"), name = "PrivateMounts")]
     fn private_mounts(&self) -> crate::zbus::Result<bool>;
 
     /// Get property `PrivateIPC`.
-    #[zbus(property, name = "PrivateIPC")]
+    #[zbus(property(emits_changed_signal = "const"), name = "PrivateIPC")]
     fn private_ipc(&self) -> crate::zbus::Result<bool>;
 
     /// Get property `ProtectHome`.
-    #[zbus(property, name = "ProtectHome")]
+    #[zbus(property(emits_changed_signal = "const"), name = "ProtectHome")]
     fn protect_home(&self) -> crate::zbus::Result<String>;
 
     /// Get property `ProtectSystem`.
-    #[zbus(property, name = "ProtectSystem")]
+    #[zbus(property(emits_changed_signal = "const"), name = "ProtectSystem")]
     fn protect_system(&self) -> crate::zbus::Result<String>;
 
     /// Get property `SameProcessGroup`.
-    #[zbus(property, name = "SameProcessGroup")]
+    #[zbus(property(emits_changed_signal = "const"), name = "SameProcessGroup")]
     fn same_process_group(&self) -> crate::zbus::Result<bool>;
 
     /// Get property `UtmpIdentifier`.
-    #[zbus(property, name = "UtmpIdentifier")]
+    #[zbus(property(emits_changed_signal = "const"), name = "UtmpIdentifier")]
     fn utmp_identifier(&self) -> crate::zbus::Result<String>;
 
     /// Get property `UtmpMode`.
-    #[zbus(property, name = "UtmpMode")]
+    #[zbus(property(emits_changed_signal = "const"), name = "UtmpMode")]
     fn utmp_mode(&self) -> crate::zbus::Result<String>;
 
     /// Get property `SELinuxContext`.
-    #[zbus(property, name = "SELinuxContext")]
+    #[zbus(property(emits_changed_signal = "const"), name = "SELinuxContext")]
     fn se_linux_context(&self) -> crate::zbus::Result<(bool, String)>;
 
     /// Get property `AppArmorProfile`.
-    #[zbus(property, name = "AppArmorProfile")]
+    #[zbus(property(emits_changed_signal = "const"), name = "AppArmorProfile")]
     fn app_armor_profile(&self) -> crate::zbus::Result<(bool, String)>;
 
     /// Get property `SmackProcessLabel`.
-    #[zbus(property, name = "SmackProcessLabel")]
+    #[zbus(property(emits_changed_signal = "const"), name = "SmackProcessLabel")]
     fn smack_process_label(&self) -> crate::zbus::Result<(bool, String)>;
 
     /// Get property `IgnoreSIGPIPE`.
-    #[zbus(property, name = "IgnoreSIGPIPE")]
+    #[zbus(property(emits_changed_signal = "const"), name = "IgnoreSIGPIPE")]
     fn ignore_sigpipe(&self) -> crate::zbus::Result<bool>;
 
     /// Get property `NoNewPrivileges`.
-    #[zbus(property, name = "NoNewPrivileges")]
+    #[zbus(property(emits_changed_signal = "const"), name = "NoNewPrivileges")]
     fn no_new_privileges(&self) -> crate::zbus::Result<bool>;
 
     /// Get property `SystemCallFilter`.
-    #[zbus(property, name = "SystemCallFilter")]
+    #[zbus(property(emits_changed_signal = "const"), name = "SystemCallFilter")]
     fn system_call_filter(&self) -> crate::zbus::Result<(bool, Vec<String>)>;
 
     /// Get property `SystemCallArchitectures`.
-    #[zbus(property, name = "SystemCallArchitectures")]
+    #[zbus(
+        property(emits_changed_signal = "const"),
+        name = "SystemCallArchitectures"
+    )]
     fn system_call_architectures(&self) -> crate::zbus::Result<Vec<String>>;
 
     /// Get property `SystemCallErrorNumber`.
-    #[zbus(property, name = "SystemCallErrorNumber")]
+    #[zbus(
+        property(emits_changed_signal = "const"),
+        name = "SystemCallErrorNumber"
+    )]
     fn system_call_error_number(&self) -> crate::zbus::Result<i32>;
 
     /// Get property `SystemCallLog`.
-    #[zbus(property, name = "SystemCallLog")]
+    #[zbus(property(emits_changed_signal = "const"), name = "SystemCallLog")]
     fn system_call_log(&self) -> crate::zbus::Result<(bool, Vec<String>)>;
 
     /// Get property `Personality`.
-    #[zbus(property, name = "Personality")]
+    #[zbus(property(emits_changed_signal = "const"), name = "Personality")]
     fn personality(&self) -> crate::zbus::Result<String>;
 
     /// Get property `LockPersonality`.
-    #[zbus(property, name = "LockPersonality")]
+    #[zbus(property(emits_changed_signal = "const"), name = "LockPersonality")]
     fn lock_personality(&self) -> crate::zbus::Result<bool>;
 
     /// Get property `RestrictAddressFamilies`.
-    #[zbus(property, name = "RestrictAddressFamilies")]
+    #[zbus(
+        property(emits_changed_signal = "const"),
+        name = "RestrictAddressFamilies"
+    )]
     fn restrict_address_families(&self) -> crate::zbus::Result<(bool, Vec<String>)>;
 
     /// Get property `RuntimeDirectorySymlink`.
-    #[zbus(property, name = "RuntimeDirectorySymlink")]
+    #[zbus(
+        property(emits_changed_signal = "const"),
+        name = "RuntimeDirectorySymlink"
+    )]
     fn runtime_directory_symlink(&self) -> crate::zbus::Result<Vec<(String, String, u64)>>;
 
     /// Get property `RuntimeDirectoryPreserve`.
-    #[zbus(property, name = "RuntimeDirectoryPreserve")]
+    #[zbus(
+        property(emits_changed_signal = "const"),
+        name = "RuntimeDirectoryPreserve"
+    )]
     fn runtime_directory_preserve(&self) -> crate::zbus::Result<String>;
 
     /// Get property `RuntimeDirectoryMode`.
-    #[zbus(property, name = "RuntimeDirectoryMode")]
+    #[zbus(
+        property(emits_changed_signal = "const"),
+        name = "RuntimeDirectoryMode"
+    )]
     fn runtime_directory_mode(&self) -> crate::zbus::Result<u32>;
 
     /// Get property `RuntimeDirectory`.
-    #[zbus(property, name = "RuntimeDirectory")]
+    #[zbus(property(emits_changed_signal = "const"), name = "RuntimeDirectory")]
     fn runtime_directory(&self) -> crate::zbus::Result<Vec<String>>;
 
     /// Get property `StateDirectorySymlink`.
-    #[zbus(property, name = "StateDirectorySymlink")]
+    #[zbus(
+        property(emits_changed_signal = "const"),
+        name = "StateDirectorySymlink"
+    )]
     fn state_directory_symlink(&self) -> crate::zbus::Result<Vec<(String, String, u64)>>;
 
     /// Get property `StateDirectoryMode`.
-    #[zbus(property, name = "StateDirectoryMode")]
+    #[zbus(property(emits_changed_signal = "const"), name = "StateDirectoryMode")]
     fn state_directory_mode(&self) -> crate::zbus::Result<u32>;
 
     /// Get property `StateDirectory`.
-    #[zbus(property, name = "StateDirectory")]
+    #[zbus(property(emits_changed_signal = "const"), name = "StateDirectory")]
     fn state_directory(&self) -> crate::zbus::Result<Vec<String>>;
 
     /// Get property `CacheDirectorySymlink`.
-    #[zbus(property, name = "CacheDirectorySymlink")]
+    #[zbus(
+        property(emits_changed_signal = "const"),
+        name = "CacheDirectorySymlink"
+    )]
     fn cache_directory_symlink(&self) -> crate::zbus::Result<Vec<(String, String, u64)>>;
 
     /// Get property `CacheDirectoryMode`.
-    #[zbus(property, name = "CacheDirectoryMode")]
+    #[zbus(property(emits_changed_signal = "const"), name = "CacheDirectoryMode")]
     fn cache_directory_mode(&self) -> crate::zbus::Result<u32>;
 
     /// Get property `CacheDirectory`.
-    #[zbus(property, name = "CacheDirectory")]
+    #[zbus(property(emits_changed_signal = "const"), name = "CacheDirectory")]
     fn cache_directory(&self) -> crate::zbus::Result<Vec<String>>;
 
     /// Get property `LogsDirectorySymlink`.
-    #[zbus(property, name = "LogsDirectorySymlink")]
+    #[zbus(
+        property(emits_changed_signal = "const"),
+        name = "LogsDirectorySymlink"
+    )]
     fn logs_directory_symlink(&self) -> crate::zbus::Result<Vec<(String, String, u64)>>;
 
     /// Get property `LogsDirectoryMode`.
-    #[zbus(property, name = "LogsDirectoryMode")]
+    #[zbus(property(emits_changed_signal = "const"), name = "LogsDirectoryMode")]
     fn logs_directory_mode(&self) -> crate::zbus::Result<u32>;
 
     /// Get property `LogsDirectory`.
-    #[zbus(property, name = "LogsDirectory")]
+    #[zbus(property(emits_changed_signal = "const"), name = "LogsDirectory")]
     fn logs_directory(&self) -> crate::zbus::Result<Vec<String>>;
 
     /// Get property `ConfigurationDirectoryMode`.
-    #[zbus(property, name = "ConfigurationDirectoryMode")]
+    #[zbus(
+        property(emits_changed_signal = "const"),
+        name = "ConfigurationDirectoryMode"
+    )]
     fn configuration_directory_mode(&self) -> crate::zbus::Result<u32>;
 
     /// Get property `ConfigurationDirectory`.
-    #[zbus(property, name = "ConfigurationDirectory")]
+    #[zbus(
+        property(emits_changed_signal = "const"),
+        name = "ConfigurationDirectory"
+    )]
     fn configuration_directory(&self) -> crate::zbus::Result<Vec<String>>;
 
     /// Get property `TimeoutCleanUSec`.
-    #[zbus(property, name = "TimeoutCleanUSec")]
+    #[zbus(property(emits_changed_signal = "const"), name = "TimeoutCleanUSec")]
     fn timeout_clean_u_sec(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `MemoryDenyWriteExecute`.
-    #[zbus(property, name = "MemoryDenyWriteExecute")]
+    #[zbus(
+        property(emits_changed_signal = "const"),
+        name = "MemoryDenyWriteExecute"
+    )]
     fn memory_deny_write_execute(&self) -> crate::zbus::Result<bool>;
 
     /// Get property `RestrictRealtime`.
-    #[zbus(property, name = "RestrictRealtime")]
+    #[zbus(property(emits_changed_signal = "const"), name = "RestrictRealtime")]
     fn restrict_realtime(&self) -> crate::zbus::Result<bool>;
 
     /// Get property `RestrictSUIDSGID`.
-    #[zbus(property, name = "RestrictSUIDSGID")]
+    #[zbus(property(emits_changed_signal = "const"), name = "RestrictSUIDSGID")]
     fn restrict_suidsgid(&self) -> crate::zbus::Result<bool>;
 
     /// Get property `RestrictNamespaces`.
-    #[zbus(property, name = "RestrictNamespaces")]
+    #[zbus(property(emits_changed_signal = "const"), name = "RestrictNamespaces")]
     fn restrict_namespaces(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `RestrictFileSystems`.
-    #[zbus(property, name = "RestrictFileSystems")]
+    #[zbus(property(emits_changed_signal = "const"), name = "RestrictFileSystems")]
     fn restrict_file_systems(&self) -> crate::zbus::Result<(bool, Vec<String>)>;
 
     /// Get property `BindPaths`.
-    #[zbus(property, name = "BindPaths")]
+    #[zbus(property(emits_changed_signal = "const"), name = "BindPaths")]
     fn bind_paths(&self) -> crate::zbus::Result<Vec<(String, String, bool, u64)>>;
 
     /// Get property `BindReadOnlyPaths`.
-    #[zbus(property, name = "BindReadOnlyPaths")]
+    #[zbus(property(emits_changed_signal = "const"), name = "BindReadOnlyPaths")]
     fn bind_read_only_paths(&self) -> crate::zbus::Result<Vec<(String, String, bool, u64)>>;
 
     /// Get property `TemporaryFileSystem`.
-    #[zbus(property, name = "TemporaryFileSystem")]
+    #[zbus(property(emits_changed_signal = "const"), name = "TemporaryFileSystem")]
     fn temporary_file_system(&self) -> crate::zbus::Result<Vec<(String, String)>>;
 
     /// Get property `MountAPIVFS`.
-    #[zbus(property, name = "MountAPIVFS")]
+    #[zbus(property(emits_changed_signal = "const"), name = "MountAPIVFS")]
     fn mount_apivfs(&self) -> crate::zbus::Result<bool>;
 
     /// Get property `KeyringMode`.
-    #[zbus(property, name = "KeyringMode")]
+    #[zbus(property(emits_changed_signal = "const"), name = "KeyringMode")]
     fn keyring_mode(&self) -> crate::zbus::Result<String>;
 
     /// Get property `ProtectProc`.
-    #[zbus(property, name = "ProtectProc")]
+    #[zbus(property(emits_changed_signal = "const"), name = "ProtectProc")]
     fn protect_proc(&self) -> crate::zbus::Result<String>;
 
     /// Get property `ProcSubset`.
-    #[zbus(property, name = "ProcSubset")]
+    #[zbus(property(emits_changed_signal = "const"), name = "ProcSubset")]
     fn proc_subset(&self) -> crate::zbus::Result<String>;
 
     /// Get property `ProtectHostname`.
-    #[zbus(property, name = "ProtectHostname")]
+    #[zbus(property(emits_changed_signal = "const"), name = "ProtectHostname")]
     fn protect_hostname(&self) -> crate::zbus::Result<bool>;
 
     /// Get property `MemoryKSM`.
-    #[zbus(property, name = "MemoryKSM")]
+    #[zbus(property(emits_changed_signal = "const"), name = "MemoryKSM")]
     fn memory_ksm(&self) -> crate::zbus::Result<bool>;
 
     /// Get property `NetworkNamespacePath`.
-    #[zbus(property, name = "NetworkNamespacePath")]
+    #[zbus(
+        property(emits_changed_signal = "const"),
+        name = "NetworkNamespacePath"
+    )]
     fn network_namespace_path(&self) -> crate::zbus::Result<String>;
 
     /// Get property `IPCNamespacePath`.
-    #[zbus(property, name = "IPCNamespacePath")]
+    #[zbus(property(emits_changed_signal = "const"), name = "IPCNamespacePath")]
     fn ipc_namespace_path(&self) -> crate::zbus::Result<String>;
 
     /// Get property `RootImagePolicy`.
-    #[zbus(property, name = "RootImagePolicy")]
+    #[zbus(property(emits_changed_signal = "const"), name = "RootImagePolicy")]
     fn root_image_policy(&self) -> crate::zbus::Result<String>;
 
     /// Get property `MountImagePolicy`.
-    #[zbus(property, name = "MountImagePolicy")]
+    #[zbus(property(emits_changed_signal = "const"), name = "MountImagePolicy")]
     fn mount_image_policy(&self) -> crate::zbus::Result<String>;
 
     /// Get property `ExtensionImagePolicy`.
-    #[zbus(property, name = "ExtensionImagePolicy")]
+    #[zbus(
+        property(emits_changed_signal = "const"),
+        name = "ExtensionImagePolicy"
+    )]
     fn extension_image_policy(&self) -> crate::zbus::Result<String>;
 
     /// Get property `KillMode`.
-    #[zbus(property, name = "KillMode")]
+    #[zbus(property(emits_changed_signal = "const"), name = "KillMode")]
     fn kill_mode(&self) -> crate::zbus::Result<String>;
 
     /// Get property `KillSignal`.
-    #[zbus(property, name = "KillSignal")]
+    #[zbus(property(emits_changed_signal = "const"), name = "KillSignal")]
     fn kill_signal(&self) -> crate::zbus::Result<i32>;
 
     /// Get property `RestartKillSignal`.
-    #[zbus(property, name = "RestartKillSignal")]
+    #[zbus(property(emits_changed_signal = "const"), name = "RestartKillSignal")]
     fn restart_kill_signal(&self) -> crate::zbus::Result<i32>;
 
     /// Get property `FinalKillSignal`.
-    #[zbus(property, name = "FinalKillSignal")]
+    #[zbus(property(emits_changed_signal = "const"), name = "FinalKillSignal")]
     fn final_kill_signal(&self) -> crate::zbus::Result<i32>;
 
     /// Get property `SendSIGKILL`.
-    #[zbus(property, name = "SendSIGKILL")]
+    #[zbus(property(emits_changed_signal = "const"), name = "SendSIGKILL")]
     fn send_sigkill(&self) -> crate::zbus::Result<bool>;
 
     /// Get property `SendSIGHUP`.
-    #[zbus(property, name = "SendSIGHUP")]
+    #[zbus(property(emits_changed_signal = "const"), name = "SendSIGHUP")]
     fn send_sighup(&self) -> crate::zbus::Result<bool>;
 
     /// Get property `WatchdogSignal`.
-    #[zbus(property, name = "WatchdogSignal")]
+    #[zbus(property(emits_changed_signal = "const"), name = "WatchdogSignal")]
     fn watchdog_signal(&self) -> crate::zbus::Result<i32>;
 }
 
@@ -6999,31 +7863,34 @@ trait Swap {
 )]
 trait Path {
     /// Get property `Unit`.
-    #[zbus(property, name = "Unit")]
+    #[zbus(property(emits_changed_signal = "const"), name = "Unit")]
     fn unit(&self) -> crate::zbus::Result<String>;
 
     /// Get property `Paths`.
-    #[zbus(property, name = "Paths")]
+    #[zbus(property(emits_changed_signal = "const"), name = "Paths")]
     fn paths(&self) -> crate::zbus::Result<Vec<(String, String)>>;
 
     /// Get property `MakeDirectory`.
-    #[zbus(property, name = "MakeDirectory")]
+    #[zbus(property(emits_changed_signal = "const"), name = "MakeDirectory")]
     fn make_directory(&self) -> crate::zbus::Result<bool>;
 
     /// Get property `DirectoryMode`.
-    #[zbus(property, name = "DirectoryMode")]
+    #[zbus(property(emits_changed_signal = "const"), name = "DirectoryMode")]
     fn directory_mode(&self) -> crate::zbus::Result<u32>;
 
     /// Get property `Result`.
-    #[zbus(property, name = "Result")]
+    #[zbus(property(emits_changed_signal = "true"), name = "Result")]
     fn result(&self) -> crate::zbus::Result<String>;
 
     /// Get property `TriggerLimitIntervalUSec`.
-    #[zbus(property, name = "TriggerLimitIntervalUSec")]
+    #[zbus(
+        property(emits_changed_signal = "const"),
+        name = "TriggerLimitIntervalUSec"
+    )]
     fn trigger_limit_interval_u_sec(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `TriggerLimitBurst`.
-    #[zbus(property, name = "TriggerLimitBurst")]
+    #[zbus(property(emits_changed_signal = "const"), name = "TriggerLimitBurst")]
     fn trigger_limit_burst(&self) -> crate::zbus::Result<u32>;
 }
 
@@ -7044,355 +7911,397 @@ trait Slice {
     fn attach_processes(&self, subcgroup: String, pids: Vec<u32>) -> crate::zbus::Result<()>;
 
     /// Get property `Slice`.
-    #[zbus(property, name = "Slice")]
+    #[zbus(property(emits_changed_signal = "false"), name = "Slice")]
     fn slice(&self) -> crate::zbus::Result<String>;
 
     /// Get property `ControlGroup`.
-    #[zbus(property, name = "ControlGroup")]
+    #[zbus(property(emits_changed_signal = "false"), name = "ControlGroup")]
     fn control_group(&self) -> crate::zbus::Result<String>;
 
     /// Get property `ControlGroupId`.
-    #[zbus(property, name = "ControlGroupId")]
+    #[zbus(property(emits_changed_signal = "false"), name = "ControlGroupId")]
     fn control_group_id(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `MemoryCurrent`.
-    #[zbus(property, name = "MemoryCurrent")]
+    #[zbus(property(emits_changed_signal = "false"), name = "MemoryCurrent")]
     fn memory_current(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `MemoryPeak`.
-    #[zbus(property, name = "MemoryPeak")]
+    #[zbus(property(emits_changed_signal = "false"), name = "MemoryPeak")]
     fn memory_peak(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `MemorySwapCurrent`.
-    #[zbus(property, name = "MemorySwapCurrent")]
+    #[zbus(property(emits_changed_signal = "false"), name = "MemorySwapCurrent")]
     fn memory_swap_current(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `MemorySwapPeak`.
-    #[zbus(property, name = "MemorySwapPeak")]
+    #[zbus(property(emits_changed_signal = "false"), name = "MemorySwapPeak")]
     fn memory_swap_peak(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `MemoryZSwapCurrent`.
-    #[zbus(property, name = "MemoryZSwapCurrent")]
+    #[zbus(property(emits_changed_signal = "false"), name = "MemoryZSwapCurrent")]
     fn memory_z_swap_current(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `MemoryAvailable`.
-    #[zbus(property, name = "MemoryAvailable")]
+    #[zbus(property(emits_changed_signal = "false"), name = "MemoryAvailable")]
     fn memory_available(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `CPUUsageNSec`.
-    #[zbus(property, name = "CPUUsageNSec")]
+    #[zbus(property(emits_changed_signal = "false"), name = "CPUUsageNSec")]
     fn cpu_usage_n_sec(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `EffectiveCPUs`.
-    #[zbus(property, name = "EffectiveCPUs")]
+    #[zbus(property(emits_changed_signal = "false"), name = "EffectiveCPUs")]
     fn effective_cp_us(&self) -> crate::zbus::Result<Vec<u8>>;
 
     /// Get property `EffectiveMemoryNodes`.
-    #[zbus(property, name = "EffectiveMemoryNodes")]
+    #[zbus(
+        property(emits_changed_signal = "false"),
+        name = "EffectiveMemoryNodes"
+    )]
     fn effective_memory_nodes(&self) -> crate::zbus::Result<Vec<u8>>;
 
     /// Get property `TasksCurrent`.
-    #[zbus(property, name = "TasksCurrent")]
+    #[zbus(property(emits_changed_signal = "false"), name = "TasksCurrent")]
     fn tasks_current(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `IPIngressBytes`.
-    #[zbus(property, name = "IPIngressBytes")]
+    #[zbus(property(emits_changed_signal = "false"), name = "IPIngressBytes")]
     fn ip_ingress_bytes(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `IPIngressPackets`.
-    #[zbus(property, name = "IPIngressPackets")]
+    #[zbus(property(emits_changed_signal = "false"), name = "IPIngressPackets")]
     fn ip_ingress_packets(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `IPEgressBytes`.
-    #[zbus(property, name = "IPEgressBytes")]
+    #[zbus(property(emits_changed_signal = "false"), name = "IPEgressBytes")]
     fn ip_egress_bytes(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `IPEgressPackets`.
-    #[zbus(property, name = "IPEgressPackets")]
+    #[zbus(property(emits_changed_signal = "false"), name = "IPEgressPackets")]
     fn ip_egress_packets(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `IOReadBytes`.
-    #[zbus(property, name = "IOReadBytes")]
+    #[zbus(property(emits_changed_signal = "false"), name = "IOReadBytes")]
     fn io_read_bytes(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `IOReadOperations`.
-    #[zbus(property, name = "IOReadOperations")]
+    #[zbus(property(emits_changed_signal = "false"), name = "IOReadOperations")]
     fn io_read_operations(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `IOWriteBytes`.
-    #[zbus(property, name = "IOWriteBytes")]
+    #[zbus(property(emits_changed_signal = "false"), name = "IOWriteBytes")]
     fn io_write_bytes(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `IOWriteOperations`.
-    #[zbus(property, name = "IOWriteOperations")]
+    #[zbus(property(emits_changed_signal = "false"), name = "IOWriteOperations")]
     fn io_write_operations(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `Delegate`.
-    #[zbus(property, name = "Delegate")]
+    #[zbus(property(emits_changed_signal = "false"), name = "Delegate")]
     fn delegate(&self) -> crate::zbus::Result<bool>;
 
     /// Get property `DelegateControllers`.
-    #[zbus(property, name = "DelegateControllers")]
+    #[zbus(property(emits_changed_signal = "false"), name = "DelegateControllers")]
     fn delegate_controllers(&self) -> crate::zbus::Result<Vec<String>>;
 
     /// Get property `DelegateSubgroup`.
-    #[zbus(property, name = "DelegateSubgroup")]
+    #[zbus(property(emits_changed_signal = "false"), name = "DelegateSubgroup")]
     fn delegate_subgroup(&self) -> crate::zbus::Result<String>;
 
     /// Get property `CPUAccounting`.
-    #[zbus(property, name = "CPUAccounting")]
+    #[zbus(property(emits_changed_signal = "false"), name = "CPUAccounting")]
     fn cpu_accounting(&self) -> crate::zbus::Result<bool>;
 
     /// Get property `CPUWeight`.
-    #[zbus(property, name = "CPUWeight")]
+    #[zbus(property(emits_changed_signal = "false"), name = "CPUWeight")]
     fn cpu_weight(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `StartupCPUWeight`.
-    #[zbus(property, name = "StartupCPUWeight")]
+    #[zbus(property(emits_changed_signal = "false"), name = "StartupCPUWeight")]
     fn startup_cpu_weight(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `CPUShares`.
-    #[zbus(property, name = "CPUShares")]
+    #[zbus(property(emits_changed_signal = "false"), name = "CPUShares")]
     fn cpu_shares(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `StartupCPUShares`.
-    #[zbus(property, name = "StartupCPUShares")]
+    #[zbus(property(emits_changed_signal = "false"), name = "StartupCPUShares")]
     fn startup_cpu_shares(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `CPUQuotaPerSecUSec`.
-    #[zbus(property, name = "CPUQuotaPerSecUSec")]
+    #[zbus(property(emits_changed_signal = "false"), name = "CPUQuotaPerSecUSec")]
     fn cpu_quota_per_sec_u_sec(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `CPUQuotaPeriodUSec`.
-    #[zbus(property, name = "CPUQuotaPeriodUSec")]
+    #[zbus(property(emits_changed_signal = "false"), name = "CPUQuotaPeriodUSec")]
     fn cpu_quota_period_u_sec(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `AllowedCPUs`.
-    #[zbus(property, name = "AllowedCPUs")]
+    #[zbus(property(emits_changed_signal = "false"), name = "AllowedCPUs")]
     fn allowed_cp_us(&self) -> crate::zbus::Result<Vec<u8>>;
 
     /// Get property `StartupAllowedCPUs`.
-    #[zbus(property, name = "StartupAllowedCPUs")]
+    #[zbus(property(emits_changed_signal = "false"), name = "StartupAllowedCPUs")]
     fn startup_allowed_cp_us(&self) -> crate::zbus::Result<Vec<u8>>;
 
     /// Get property `AllowedMemoryNodes`.
-    #[zbus(property, name = "AllowedMemoryNodes")]
+    #[zbus(property(emits_changed_signal = "false"), name = "AllowedMemoryNodes")]
     fn allowed_memory_nodes(&self) -> crate::zbus::Result<Vec<u8>>;
 
     /// Get property `StartupAllowedMemoryNodes`.
-    #[zbus(property, name = "StartupAllowedMemoryNodes")]
+    #[zbus(
+        property(emits_changed_signal = "false"),
+        name = "StartupAllowedMemoryNodes"
+    )]
     fn startup_allowed_memory_nodes(&self) -> crate::zbus::Result<Vec<u8>>;
 
     /// Get property `IOAccounting`.
-    #[zbus(property, name = "IOAccounting")]
+    #[zbus(property(emits_changed_signal = "false"), name = "IOAccounting")]
     fn io_accounting(&self) -> crate::zbus::Result<bool>;
 
     /// Get property `IOWeight`.
-    #[zbus(property, name = "IOWeight")]
+    #[zbus(property(emits_changed_signal = "false"), name = "IOWeight")]
     fn io_weight(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `StartupIOWeight`.
-    #[zbus(property, name = "StartupIOWeight")]
+    #[zbus(property(emits_changed_signal = "false"), name = "StartupIOWeight")]
     fn startup_io_weight(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `IODeviceWeight`.
-    #[zbus(property, name = "IODeviceWeight")]
+    #[zbus(property(emits_changed_signal = "false"), name = "IODeviceWeight")]
     fn io_device_weight(&self) -> crate::zbus::Result<Vec<(String, u64)>>;
 
     /// Get property `IOReadBandwidthMax`.
-    #[zbus(property, name = "IOReadBandwidthMax")]
+    #[zbus(property(emits_changed_signal = "false"), name = "IOReadBandwidthMax")]
     fn io_read_bandwidth_max(&self) -> crate::zbus::Result<Vec<(String, u64)>>;
 
     /// Get property `IOWriteBandwidthMax`.
-    #[zbus(property, name = "IOWriteBandwidthMax")]
+    #[zbus(property(emits_changed_signal = "false"), name = "IOWriteBandwidthMax")]
     fn io_write_bandwidth_max(&self) -> crate::zbus::Result<Vec<(String, u64)>>;
 
     /// Get property `IOReadIOPSMax`.
-    #[zbus(property, name = "IOReadIOPSMax")]
+    #[zbus(property(emits_changed_signal = "false"), name = "IOReadIOPSMax")]
     fn io_read_iops_max(&self) -> crate::zbus::Result<Vec<(String, u64)>>;
 
     /// Get property `IOWriteIOPSMax`.
-    #[zbus(property, name = "IOWriteIOPSMax")]
+    #[zbus(property(emits_changed_signal = "false"), name = "IOWriteIOPSMax")]
     fn io_write_iops_max(&self) -> crate::zbus::Result<Vec<(String, u64)>>;
 
     /// Get property `IODeviceLatencyTargetUSec`.
-    #[zbus(property, name = "IODeviceLatencyTargetUSec")]
+    #[zbus(
+        property(emits_changed_signal = "false"),
+        name = "IODeviceLatencyTargetUSec"
+    )]
     fn io_device_latency_target_u_sec(&self) -> crate::zbus::Result<Vec<(String, u64)>>;
 
     /// Get property `BlockIOAccounting`.
-    #[zbus(property, name = "BlockIOAccounting")]
+    #[zbus(property(emits_changed_signal = "false"), name = "BlockIOAccounting")]
     fn block_io_accounting(&self) -> crate::zbus::Result<bool>;
 
     /// Get property `BlockIOWeight`.
-    #[zbus(property, name = "BlockIOWeight")]
+    #[zbus(property(emits_changed_signal = "false"), name = "BlockIOWeight")]
     fn block_io_weight(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `StartupBlockIOWeight`.
-    #[zbus(property, name = "StartupBlockIOWeight")]
+    #[zbus(
+        property(emits_changed_signal = "false"),
+        name = "StartupBlockIOWeight"
+    )]
     fn startup_block_io_weight(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `BlockIODeviceWeight`.
-    #[zbus(property, name = "BlockIODeviceWeight")]
+    #[zbus(property(emits_changed_signal = "false"), name = "BlockIODeviceWeight")]
     fn block_io_device_weight(&self) -> crate::zbus::Result<Vec<(String, u64)>>;
 
     /// Get property `BlockIOReadBandwidth`.
-    #[zbus(property, name = "BlockIOReadBandwidth")]
+    #[zbus(
+        property(emits_changed_signal = "false"),
+        name = "BlockIOReadBandwidth"
+    )]
     fn block_io_read_bandwidth(&self) -> crate::zbus::Result<Vec<(String, u64)>>;
 
     /// Get property `BlockIOWriteBandwidth`.
-    #[zbus(property, name = "BlockIOWriteBandwidth")]
+    #[zbus(
+        property(emits_changed_signal = "false"),
+        name = "BlockIOWriteBandwidth"
+    )]
     fn block_io_write_bandwidth(&self) -> crate::zbus::Result<Vec<(String, u64)>>;
 
     /// Get property `MemoryAccounting`.
-    #[zbus(property, name = "MemoryAccounting")]
+    #[zbus(property(emits_changed_signal = "false"), name = "MemoryAccounting")]
     fn memory_accounting(&self) -> crate::zbus::Result<bool>;
 
     /// Get property `DefaultMemoryLow`.
-    #[zbus(property, name = "DefaultMemoryLow")]
+    #[zbus(property(emits_changed_signal = "false"), name = "DefaultMemoryLow")]
     fn default_memory_low(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `DefaultStartupMemoryLow`.
-    #[zbus(property, name = "DefaultStartupMemoryLow")]
+    #[zbus(
+        property(emits_changed_signal = "false"),
+        name = "DefaultStartupMemoryLow"
+    )]
     fn default_startup_memory_low(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `DefaultMemoryMin`.
-    #[zbus(property, name = "DefaultMemoryMin")]
+    #[zbus(property(emits_changed_signal = "false"), name = "DefaultMemoryMin")]
     fn default_memory_min(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `MemoryMin`.
-    #[zbus(property, name = "MemoryMin")]
+    #[zbus(property(emits_changed_signal = "false"), name = "MemoryMin")]
     fn memory_min(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `MemoryLow`.
-    #[zbus(property, name = "MemoryLow")]
+    #[zbus(property(emits_changed_signal = "false"), name = "MemoryLow")]
     fn memory_low(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `StartupMemoryLow`.
-    #[zbus(property, name = "StartupMemoryLow")]
+    #[zbus(property(emits_changed_signal = "false"), name = "StartupMemoryLow")]
     fn startup_memory_low(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `MemoryHigh`.
-    #[zbus(property, name = "MemoryHigh")]
+    #[zbus(property(emits_changed_signal = "false"), name = "MemoryHigh")]
     fn memory_high(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `StartupMemoryHigh`.
-    #[zbus(property, name = "StartupMemoryHigh")]
+    #[zbus(property(emits_changed_signal = "false"), name = "StartupMemoryHigh")]
     fn startup_memory_high(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `MemoryMax`.
-    #[zbus(property, name = "MemoryMax")]
+    #[zbus(property(emits_changed_signal = "false"), name = "MemoryMax")]
     fn memory_max(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `StartupMemoryMax`.
-    #[zbus(property, name = "StartupMemoryMax")]
+    #[zbus(property(emits_changed_signal = "false"), name = "StartupMemoryMax")]
     fn startup_memory_max(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `MemorySwapMax`.
-    #[zbus(property, name = "MemorySwapMax")]
+    #[zbus(property(emits_changed_signal = "false"), name = "MemorySwapMax")]
     fn memory_swap_max(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `StartupMemorySwapMax`.
-    #[zbus(property, name = "StartupMemorySwapMax")]
+    #[zbus(
+        property(emits_changed_signal = "false"),
+        name = "StartupMemorySwapMax"
+    )]
     fn startup_memory_swap_max(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `MemoryZSwapMax`.
-    #[zbus(property, name = "MemoryZSwapMax")]
+    #[zbus(property(emits_changed_signal = "false"), name = "MemoryZSwapMax")]
     fn memory_z_swap_max(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `StartupMemoryZSwapMax`.
-    #[zbus(property, name = "StartupMemoryZSwapMax")]
+    #[zbus(
+        property(emits_changed_signal = "false"),
+        name = "StartupMemoryZSwapMax"
+    )]
     fn startup_memory_z_swap_max(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `MemoryLimit`.
-    #[zbus(property, name = "MemoryLimit")]
+    #[zbus(property(emits_changed_signal = "false"), name = "MemoryLimit")]
     fn memory_limit(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `DevicePolicy`.
-    #[zbus(property, name = "DevicePolicy")]
+    #[zbus(property(emits_changed_signal = "false"), name = "DevicePolicy")]
     fn device_policy(&self) -> crate::zbus::Result<String>;
 
     /// Get property `DeviceAllow`.
-    #[zbus(property, name = "DeviceAllow")]
+    #[zbus(property(emits_changed_signal = "false"), name = "DeviceAllow")]
     fn device_allow(&self) -> crate::zbus::Result<Vec<(String, String)>>;
 
     /// Get property `TasksAccounting`.
-    #[zbus(property, name = "TasksAccounting")]
+    #[zbus(property(emits_changed_signal = "false"), name = "TasksAccounting")]
     fn tasks_accounting(&self) -> crate::zbus::Result<bool>;
 
     /// Get property `TasksMax`.
-    #[zbus(property, name = "TasksMax")]
+    #[zbus(property(emits_changed_signal = "false"), name = "TasksMax")]
     fn tasks_max(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `IPAccounting`.
-    #[zbus(property, name = "IPAccounting")]
+    #[zbus(property(emits_changed_signal = "false"), name = "IPAccounting")]
     fn ip_accounting(&self) -> crate::zbus::Result<bool>;
 
     /// Get property `IPAddressAllow`.
-    #[zbus(property, name = "IPAddressAllow")]
+    #[zbus(property(emits_changed_signal = "false"), name = "IPAddressAllow")]
     fn ip_address_allow(&self) -> crate::zbus::Result<Vec<(i32, Vec<u8>, u32)>>;
 
     /// Get property `IPAddressDeny`.
-    #[zbus(property, name = "IPAddressDeny")]
+    #[zbus(property(emits_changed_signal = "false"), name = "IPAddressDeny")]
     fn ip_address_deny(&self) -> crate::zbus::Result<Vec<(i32, Vec<u8>, u32)>>;
 
     /// Get property `IPIngressFilterPath`.
-    #[zbus(property, name = "IPIngressFilterPath")]
+    #[zbus(property(emits_changed_signal = "false"), name = "IPIngressFilterPath")]
     fn ip_ingress_filter_path(&self) -> crate::zbus::Result<Vec<String>>;
 
     /// Get property `IPEgressFilterPath`.
-    #[zbus(property, name = "IPEgressFilterPath")]
+    #[zbus(property(emits_changed_signal = "false"), name = "IPEgressFilterPath")]
     fn ip_egress_filter_path(&self) -> crate::zbus::Result<Vec<String>>;
 
     /// Get property `DisableControllers`.
-    #[zbus(property, name = "DisableControllers")]
+    #[zbus(property(emits_changed_signal = "false"), name = "DisableControllers")]
     fn disable_controllers(&self) -> crate::zbus::Result<Vec<String>>;
 
     /// Get property `ManagedOOMSwap`.
-    #[zbus(property, name = "ManagedOOMSwap")]
+    #[zbus(property(emits_changed_signal = "false"), name = "ManagedOOMSwap")]
     fn managed_oom_swap(&self) -> crate::zbus::Result<String>;
 
     /// Get property `ManagedOOMMemoryPressure`.
-    #[zbus(property, name = "ManagedOOMMemoryPressure")]
+    #[zbus(
+        property(emits_changed_signal = "false"),
+        name = "ManagedOOMMemoryPressure"
+    )]
     fn managed_oom_memory_pressure(&self) -> crate::zbus::Result<String>;
 
     /// Get property `ManagedOOMMemoryPressureLimit`.
-    #[zbus(property, name = "ManagedOOMMemoryPressureLimit")]
+    #[zbus(
+        property(emits_changed_signal = "false"),
+        name = "ManagedOOMMemoryPressureLimit"
+    )]
     fn managed_oom_memory_pressure_limit(&self) -> crate::zbus::Result<u32>;
 
     /// Get property `ManagedOOMPreference`.
-    #[zbus(property, name = "ManagedOOMPreference")]
+    #[zbus(
+        property(emits_changed_signal = "false"),
+        name = "ManagedOOMPreference"
+    )]
     fn managed_oom_preference(&self) -> crate::zbus::Result<String>;
 
     /// Get property `BPFProgram`.
-    #[zbus(property, name = "BPFProgram")]
+    #[zbus(property(emits_changed_signal = "false"), name = "BPFProgram")]
     fn bpf_program(&self) -> crate::zbus::Result<Vec<(String, String)>>;
 
     /// Get property `SocketBindAllow`.
-    #[zbus(property, name = "SocketBindAllow")]
+    #[zbus(property(emits_changed_signal = "false"), name = "SocketBindAllow")]
     fn socket_bind_allow(&self) -> crate::zbus::Result<Vec<(i32, i32, u16, u16)>>;
 
     /// Get property `SocketBindDeny`.
-    #[zbus(property, name = "SocketBindDeny")]
+    #[zbus(property(emits_changed_signal = "false"), name = "SocketBindDeny")]
     fn socket_bind_deny(&self) -> crate::zbus::Result<Vec<(i32, i32, u16, u16)>>;
 
     /// Get property `RestrictNetworkInterfaces`.
-    #[zbus(property, name = "RestrictNetworkInterfaces")]
+    #[zbus(
+        property(emits_changed_signal = "false"),
+        name = "RestrictNetworkInterfaces"
+    )]
     fn restrict_network_interfaces(&self) -> crate::zbus::Result<(bool, Vec<String>)>;
 
     /// Get property `MemoryPressureWatch`.
-    #[zbus(property, name = "MemoryPressureWatch")]
+    #[zbus(property(emits_changed_signal = "false"), name = "MemoryPressureWatch")]
     fn memory_pressure_watch(&self) -> crate::zbus::Result<String>;
 
     /// Get property `MemoryPressureThresholdUSec`.
-    #[zbus(property, name = "MemoryPressureThresholdUSec")]
+    #[zbus(
+        property(emits_changed_signal = "false"),
+        name = "MemoryPressureThresholdUSec"
+    )]
     fn memory_pressure_threshold_u_sec(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `NFTSet`.
-    #[zbus(property, name = "NFTSet")]
+    #[zbus(property(emits_changed_signal = "false"), name = "NFTSet")]
     fn nft_set(&self) -> crate::zbus::Result<Vec<(i32, i32, String, String)>>;
 
     /// Get property `CoredumpReceive`.
-    #[zbus(property, name = "CoredumpReceive")]
+    #[zbus(property(emits_changed_signal = "false"), name = "CoredumpReceive")]
     fn coredump_receive(&self) -> crate::zbus::Result<bool>;
 }
 
@@ -7421,407 +8330,452 @@ trait Scope {
     fn request_stop(&self) -> crate::zbus::Result<()>;
 
     /// Get property `Controller`.
-    #[zbus(property, name = "Controller")]
+    #[zbus(property(emits_changed_signal = "true"), name = "Controller")]
     fn controller(&self) -> crate::zbus::Result<String>;
 
     /// Get property `TimeoutStopUSec`.
-    #[zbus(property, name = "TimeoutStopUSec")]
+    #[zbus(property(emits_changed_signal = "const"), name = "TimeoutStopUSec")]
     fn timeout_stop_u_sec(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `Result`.
-    #[zbus(property, name = "Result")]
+    #[zbus(property(emits_changed_signal = "true"), name = "Result")]
     fn result(&self) -> crate::zbus::Result<String>;
 
     /// Get property `RuntimeMaxUSec`.
-    #[zbus(property, name = "RuntimeMaxUSec")]
+    #[zbus(property(emits_changed_signal = "const"), name = "RuntimeMaxUSec")]
     fn runtime_max_u_sec(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `RuntimeRandomizedExtraUSec`.
-    #[zbus(property, name = "RuntimeRandomizedExtraUSec")]
+    #[zbus(
+        property(emits_changed_signal = "const"),
+        name = "RuntimeRandomizedExtraUSec"
+    )]
     fn runtime_randomized_extra_u_sec(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `OOMPolicy`.
-    #[zbus(property, name = "OOMPolicy")]
+    #[zbus(property(emits_changed_signal = "const"), name = "OOMPolicy")]
     fn oom_policy(&self) -> crate::zbus::Result<String>;
 
     /// Get property `Slice`.
-    #[zbus(property, name = "Slice")]
+    #[zbus(property(emits_changed_signal = "false"), name = "Slice")]
     fn slice(&self) -> crate::zbus::Result<String>;
 
     /// Get property `ControlGroup`.
-    #[zbus(property, name = "ControlGroup")]
+    #[zbus(property(emits_changed_signal = "false"), name = "ControlGroup")]
     fn control_group(&self) -> crate::zbus::Result<String>;
 
     /// Get property `ControlGroupId`.
-    #[zbus(property, name = "ControlGroupId")]
+    #[zbus(property(emits_changed_signal = "false"), name = "ControlGroupId")]
     fn control_group_id(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `MemoryCurrent`.
-    #[zbus(property, name = "MemoryCurrent")]
+    #[zbus(property(emits_changed_signal = "false"), name = "MemoryCurrent")]
     fn memory_current(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `MemoryPeak`.
-    #[zbus(property, name = "MemoryPeak")]
+    #[zbus(property(emits_changed_signal = "false"), name = "MemoryPeak")]
     fn memory_peak(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `MemorySwapCurrent`.
-    #[zbus(property, name = "MemorySwapCurrent")]
+    #[zbus(property(emits_changed_signal = "false"), name = "MemorySwapCurrent")]
     fn memory_swap_current(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `MemorySwapPeak`.
-    #[zbus(property, name = "MemorySwapPeak")]
+    #[zbus(property(emits_changed_signal = "false"), name = "MemorySwapPeak")]
     fn memory_swap_peak(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `MemoryZSwapCurrent`.
-    #[zbus(property, name = "MemoryZSwapCurrent")]
+    #[zbus(property(emits_changed_signal = "false"), name = "MemoryZSwapCurrent")]
     fn memory_z_swap_current(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `MemoryAvailable`.
-    #[zbus(property, name = "MemoryAvailable")]
+    #[zbus(property(emits_changed_signal = "false"), name = "MemoryAvailable")]
     fn memory_available(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `CPUUsageNSec`.
-    #[zbus(property, name = "CPUUsageNSec")]
+    #[zbus(property(emits_changed_signal = "false"), name = "CPUUsageNSec")]
     fn cpu_usage_n_sec(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `EffectiveCPUs`.
-    #[zbus(property, name = "EffectiveCPUs")]
+    #[zbus(property(emits_changed_signal = "false"), name = "EffectiveCPUs")]
     fn effective_cp_us(&self) -> crate::zbus::Result<Vec<u8>>;
 
     /// Get property `EffectiveMemoryNodes`.
-    #[zbus(property, name = "EffectiveMemoryNodes")]
+    #[zbus(
+        property(emits_changed_signal = "false"),
+        name = "EffectiveMemoryNodes"
+    )]
     fn effective_memory_nodes(&self) -> crate::zbus::Result<Vec<u8>>;
 
     /// Get property `TasksCurrent`.
-    #[zbus(property, name = "TasksCurrent")]
+    #[zbus(property(emits_changed_signal = "false"), name = "TasksCurrent")]
     fn tasks_current(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `IPIngressBytes`.
-    #[zbus(property, name = "IPIngressBytes")]
+    #[zbus(property(emits_changed_signal = "false"), name = "IPIngressBytes")]
     fn ip_ingress_bytes(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `IPIngressPackets`.
-    #[zbus(property, name = "IPIngressPackets")]
+    #[zbus(property(emits_changed_signal = "false"), name = "IPIngressPackets")]
     fn ip_ingress_packets(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `IPEgressBytes`.
-    #[zbus(property, name = "IPEgressBytes")]
+    #[zbus(property(emits_changed_signal = "false"), name = "IPEgressBytes")]
     fn ip_egress_bytes(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `IPEgressPackets`.
-    #[zbus(property, name = "IPEgressPackets")]
+    #[zbus(property(emits_changed_signal = "false"), name = "IPEgressPackets")]
     fn ip_egress_packets(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `IOReadBytes`.
-    #[zbus(property, name = "IOReadBytes")]
+    #[zbus(property(emits_changed_signal = "false"), name = "IOReadBytes")]
     fn io_read_bytes(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `IOReadOperations`.
-    #[zbus(property, name = "IOReadOperations")]
+    #[zbus(property(emits_changed_signal = "false"), name = "IOReadOperations")]
     fn io_read_operations(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `IOWriteBytes`.
-    #[zbus(property, name = "IOWriteBytes")]
+    #[zbus(property(emits_changed_signal = "false"), name = "IOWriteBytes")]
     fn io_write_bytes(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `IOWriteOperations`.
-    #[zbus(property, name = "IOWriteOperations")]
+    #[zbus(property(emits_changed_signal = "false"), name = "IOWriteOperations")]
     fn io_write_operations(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `Delegate`.
-    #[zbus(property, name = "Delegate")]
+    #[zbus(property(emits_changed_signal = "false"), name = "Delegate")]
     fn delegate(&self) -> crate::zbus::Result<bool>;
 
     /// Get property `DelegateControllers`.
-    #[zbus(property, name = "DelegateControllers")]
+    #[zbus(property(emits_changed_signal = "false"), name = "DelegateControllers")]
     fn delegate_controllers(&self) -> crate::zbus::Result<Vec<String>>;
 
     /// Get property `DelegateSubgroup`.
-    #[zbus(property, name = "DelegateSubgroup")]
+    #[zbus(property(emits_changed_signal = "false"), name = "DelegateSubgroup")]
     fn delegate_subgroup(&self) -> crate::zbus::Result<String>;
 
     /// Get property `CPUAccounting`.
-    #[zbus(property, name = "CPUAccounting")]
+    #[zbus(property(emits_changed_signal = "false"), name = "CPUAccounting")]
     fn cpu_accounting(&self) -> crate::zbus::Result<bool>;
 
     /// Get property `CPUWeight`.
-    #[zbus(property, name = "CPUWeight")]
+    #[zbus(property(emits_changed_signal = "false"), name = "CPUWeight")]
     fn cpu_weight(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `StartupCPUWeight`.
-    #[zbus(property, name = "StartupCPUWeight")]
+    #[zbus(property(emits_changed_signal = "false"), name = "StartupCPUWeight")]
     fn startup_cpu_weight(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `CPUShares`.
-    #[zbus(property, name = "CPUShares")]
+    #[zbus(property(emits_changed_signal = "false"), name = "CPUShares")]
     fn cpu_shares(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `StartupCPUShares`.
-    #[zbus(property, name = "StartupCPUShares")]
+    #[zbus(property(emits_changed_signal = "false"), name = "StartupCPUShares")]
     fn startup_cpu_shares(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `CPUQuotaPerSecUSec`.
-    #[zbus(property, name = "CPUQuotaPerSecUSec")]
+    #[zbus(property(emits_changed_signal = "false"), name = "CPUQuotaPerSecUSec")]
     fn cpu_quota_per_sec_u_sec(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `CPUQuotaPeriodUSec`.
-    #[zbus(property, name = "CPUQuotaPeriodUSec")]
+    #[zbus(property(emits_changed_signal = "false"), name = "CPUQuotaPeriodUSec")]
     fn cpu_quota_period_u_sec(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `AllowedCPUs`.
-    #[zbus(property, name = "AllowedCPUs")]
+    #[zbus(property(emits_changed_signal = "false"), name = "AllowedCPUs")]
     fn allowed_cp_us(&self) -> crate::zbus::Result<Vec<u8>>;
 
     /// Get property `StartupAllowedCPUs`.
-    #[zbus(property, name = "StartupAllowedCPUs")]
+    #[zbus(property(emits_changed_signal = "false"), name = "StartupAllowedCPUs")]
     fn startup_allowed_cp_us(&self) -> crate::zbus::Result<Vec<u8>>;
 
     /// Get property `AllowedMemoryNodes`.
-    #[zbus(property, name = "AllowedMemoryNodes")]
+    #[zbus(property(emits_changed_signal = "false"), name = "AllowedMemoryNodes")]
     fn allowed_memory_nodes(&self) -> crate::zbus::Result<Vec<u8>>;
 
     /// Get property `StartupAllowedMemoryNodes`.
-    #[zbus(property, name = "StartupAllowedMemoryNodes")]
+    #[zbus(
+        property(emits_changed_signal = "false"),
+        name = "StartupAllowedMemoryNodes"
+    )]
     fn startup_allowed_memory_nodes(&self) -> crate::zbus::Result<Vec<u8>>;
 
     /// Get property `IOAccounting`.
-    #[zbus(property, name = "IOAccounting")]
+    #[zbus(property(emits_changed_signal = "false"), name = "IOAccounting")]
     fn io_accounting(&self) -> crate::zbus::Result<bool>;
 
     /// Get property `IOWeight`.
-    #[zbus(property, name = "IOWeight")]
+    #[zbus(property(emits_changed_signal = "false"), name = "IOWeight")]
     fn io_weight(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `StartupIOWeight`.
-    #[zbus(property, name = "StartupIOWeight")]
+    #[zbus(property(emits_changed_signal = "false"), name = "StartupIOWeight")]
     fn startup_io_weight(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `IODeviceWeight`.
-    #[zbus(property, name = "IODeviceWeight")]
+    #[zbus(property(emits_changed_signal = "false"), name = "IODeviceWeight")]
     fn io_device_weight(&self) -> crate::zbus::Result<Vec<(String, u64)>>;
 
     /// Get property `IOReadBandwidthMax`.
-    #[zbus(property, name = "IOReadBandwidthMax")]
+    #[zbus(property(emits_changed_signal = "false"), name = "IOReadBandwidthMax")]
     fn io_read_bandwidth_max(&self) -> crate::zbus::Result<Vec<(String, u64)>>;
 
     /// Get property `IOWriteBandwidthMax`.
-    #[zbus(property, name = "IOWriteBandwidthMax")]
+    #[zbus(property(emits_changed_signal = "false"), name = "IOWriteBandwidthMax")]
     fn io_write_bandwidth_max(&self) -> crate::zbus::Result<Vec<(String, u64)>>;
 
     /// Get property `IOReadIOPSMax`.
-    #[zbus(property, name = "IOReadIOPSMax")]
+    #[zbus(property(emits_changed_signal = "false"), name = "IOReadIOPSMax")]
     fn io_read_iops_max(&self) -> crate::zbus::Result<Vec<(String, u64)>>;
 
     /// Get property `IOWriteIOPSMax`.
-    #[zbus(property, name = "IOWriteIOPSMax")]
+    #[zbus(property(emits_changed_signal = "false"), name = "IOWriteIOPSMax")]
     fn io_write_iops_max(&self) -> crate::zbus::Result<Vec<(String, u64)>>;
 
     /// Get property `IODeviceLatencyTargetUSec`.
-    #[zbus(property, name = "IODeviceLatencyTargetUSec")]
+    #[zbus(
+        property(emits_changed_signal = "false"),
+        name = "IODeviceLatencyTargetUSec"
+    )]
     fn io_device_latency_target_u_sec(&self) -> crate::zbus::Result<Vec<(String, u64)>>;
 
     /// Get property `BlockIOAccounting`.
-    #[zbus(property, name = "BlockIOAccounting")]
+    #[zbus(property(emits_changed_signal = "false"), name = "BlockIOAccounting")]
     fn block_io_accounting(&self) -> crate::zbus::Result<bool>;
 
     /// Get property `BlockIOWeight`.
-    #[zbus(property, name = "BlockIOWeight")]
+    #[zbus(property(emits_changed_signal = "false"), name = "BlockIOWeight")]
     fn block_io_weight(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `StartupBlockIOWeight`.
-    #[zbus(property, name = "StartupBlockIOWeight")]
+    #[zbus(
+        property(emits_changed_signal = "false"),
+        name = "StartupBlockIOWeight"
+    )]
     fn startup_block_io_weight(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `BlockIODeviceWeight`.
-    #[zbus(property, name = "BlockIODeviceWeight")]
+    #[zbus(property(emits_changed_signal = "false"), name = "BlockIODeviceWeight")]
     fn block_io_device_weight(&self) -> crate::zbus::Result<Vec<(String, u64)>>;
 
     /// Get property `BlockIOReadBandwidth`.
-    #[zbus(property, name = "BlockIOReadBandwidth")]
+    #[zbus(
+        property(emits_changed_signal = "false"),
+        name = "BlockIOReadBandwidth"
+    )]
     fn block_io_read_bandwidth(&self) -> crate::zbus::Result<Vec<(String, u64)>>;
 
     /// Get property `BlockIOWriteBandwidth`.
-    #[zbus(property, name = "BlockIOWriteBandwidth")]
+    #[zbus(
+        property(emits_changed_signal = "false"),
+        name = "BlockIOWriteBandwidth"
+    )]
     fn block_io_write_bandwidth(&self) -> crate::zbus::Result<Vec<(String, u64)>>;
 
     /// Get property `MemoryAccounting`.
-    #[zbus(property, name = "MemoryAccounting")]
+    #[zbus(property(emits_changed_signal = "false"), name = "MemoryAccounting")]
     fn memory_accounting(&self) -> crate::zbus::Result<bool>;
 
     /// Get property `DefaultMemoryLow`.
-    #[zbus(property, name = "DefaultMemoryLow")]
+    #[zbus(property(emits_changed_signal = "false"), name = "DefaultMemoryLow")]
     fn default_memory_low(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `DefaultStartupMemoryLow`.
-    #[zbus(property, name = "DefaultStartupMemoryLow")]
+    #[zbus(
+        property(emits_changed_signal = "false"),
+        name = "DefaultStartupMemoryLow"
+    )]
     fn default_startup_memory_low(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `DefaultMemoryMin`.
-    #[zbus(property, name = "DefaultMemoryMin")]
+    #[zbus(property(emits_changed_signal = "false"), name = "DefaultMemoryMin")]
     fn default_memory_min(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `MemoryMin`.
-    #[zbus(property, name = "MemoryMin")]
+    #[zbus(property(emits_changed_signal = "false"), name = "MemoryMin")]
     fn memory_min(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `MemoryLow`.
-    #[zbus(property, name = "MemoryLow")]
+    #[zbus(property(emits_changed_signal = "false"), name = "MemoryLow")]
     fn memory_low(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `StartupMemoryLow`.
-    #[zbus(property, name = "StartupMemoryLow")]
+    #[zbus(property(emits_changed_signal = "false"), name = "StartupMemoryLow")]
     fn startup_memory_low(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `MemoryHigh`.
-    #[zbus(property, name = "MemoryHigh")]
+    #[zbus(property(emits_changed_signal = "false"), name = "MemoryHigh")]
     fn memory_high(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `StartupMemoryHigh`.
-    #[zbus(property, name = "StartupMemoryHigh")]
+    #[zbus(property(emits_changed_signal = "false"), name = "StartupMemoryHigh")]
     fn startup_memory_high(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `MemoryMax`.
-    #[zbus(property, name = "MemoryMax")]
+    #[zbus(property(emits_changed_signal = "false"), name = "MemoryMax")]
     fn memory_max(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `StartupMemoryMax`.
-    #[zbus(property, name = "StartupMemoryMax")]
+    #[zbus(property(emits_changed_signal = "false"), name = "StartupMemoryMax")]
     fn startup_memory_max(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `MemorySwapMax`.
-    #[zbus(property, name = "MemorySwapMax")]
+    #[zbus(property(emits_changed_signal = "false"), name = "MemorySwapMax")]
     fn memory_swap_max(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `StartupMemorySwapMax`.
-    #[zbus(property, name = "StartupMemorySwapMax")]
+    #[zbus(
+        property(emits_changed_signal = "false"),
+        name = "StartupMemorySwapMax"
+    )]
     fn startup_memory_swap_max(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `MemoryZSwapMax`.
-    #[zbus(property, name = "MemoryZSwapMax")]
+    #[zbus(property(emits_changed_signal = "false"), name = "MemoryZSwapMax")]
     fn memory_z_swap_max(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `StartupMemoryZSwapMax`.
-    #[zbus(property, name = "StartupMemoryZSwapMax")]
+    #[zbus(
+        property(emits_changed_signal = "false"),
+        name = "StartupMemoryZSwapMax"
+    )]
     fn startup_memory_z_swap_max(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `MemoryLimit`.
-    #[zbus(property, name = "MemoryLimit")]
+    #[zbus(property(emits_changed_signal = "false"), name = "MemoryLimit")]
     fn memory_limit(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `DevicePolicy`.
-    #[zbus(property, name = "DevicePolicy")]
+    #[zbus(property(emits_changed_signal = "false"), name = "DevicePolicy")]
     fn device_policy(&self) -> crate::zbus::Result<String>;
 
     /// Get property `DeviceAllow`.
-    #[zbus(property, name = "DeviceAllow")]
+    #[zbus(property(emits_changed_signal = "false"), name = "DeviceAllow")]
     fn device_allow(&self) -> crate::zbus::Result<Vec<(String, String)>>;
 
     /// Get property `TasksAccounting`.
-    #[zbus(property, name = "TasksAccounting")]
+    #[zbus(property(emits_changed_signal = "false"), name = "TasksAccounting")]
     fn tasks_accounting(&self) -> crate::zbus::Result<bool>;
 
     /// Get property `TasksMax`.
-    #[zbus(property, name = "TasksMax")]
+    #[zbus(property(emits_changed_signal = "false"), name = "TasksMax")]
     fn tasks_max(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `IPAccounting`.
-    #[zbus(property, name = "IPAccounting")]
+    #[zbus(property(emits_changed_signal = "false"), name = "IPAccounting")]
     fn ip_accounting(&self) -> crate::zbus::Result<bool>;
 
     /// Get property `IPAddressAllow`.
-    #[zbus(property, name = "IPAddressAllow")]
+    #[zbus(property(emits_changed_signal = "false"), name = "IPAddressAllow")]
     fn ip_address_allow(&self) -> crate::zbus::Result<Vec<(i32, Vec<u8>, u32)>>;
 
     /// Get property `IPAddressDeny`.
-    #[zbus(property, name = "IPAddressDeny")]
+    #[zbus(property(emits_changed_signal = "false"), name = "IPAddressDeny")]
     fn ip_address_deny(&self) -> crate::zbus::Result<Vec<(i32, Vec<u8>, u32)>>;
 
     /// Get property `IPIngressFilterPath`.
-    #[zbus(property, name = "IPIngressFilterPath")]
+    #[zbus(property(emits_changed_signal = "false"), name = "IPIngressFilterPath")]
     fn ip_ingress_filter_path(&self) -> crate::zbus::Result<Vec<String>>;
 
     /// Get property `IPEgressFilterPath`.
-    #[zbus(property, name = "IPEgressFilterPath")]
+    #[zbus(property(emits_changed_signal = "false"), name = "IPEgressFilterPath")]
     fn ip_egress_filter_path(&self) -> crate::zbus::Result<Vec<String>>;
 
     /// Get property `DisableControllers`.
-    #[zbus(property, name = "DisableControllers")]
+    #[zbus(property(emits_changed_signal = "false"), name = "DisableControllers")]
     fn disable_controllers(&self) -> crate::zbus::Result<Vec<String>>;
 
     /// Get property `ManagedOOMSwap`.
-    #[zbus(property, name = "ManagedOOMSwap")]
+    #[zbus(property(emits_changed_signal = "false"), name = "ManagedOOMSwap")]
     fn managed_oom_swap(&self) -> crate::zbus::Result<String>;
 
     /// Get property `ManagedOOMMemoryPressure`.
-    #[zbus(property, name = "ManagedOOMMemoryPressure")]
+    #[zbus(
+        property(emits_changed_signal = "false"),
+        name = "ManagedOOMMemoryPressure"
+    )]
     fn managed_oom_memory_pressure(&self) -> crate::zbus::Result<String>;
 
     /// Get property `ManagedOOMMemoryPressureLimit`.
-    #[zbus(property, name = "ManagedOOMMemoryPressureLimit")]
+    #[zbus(
+        property(emits_changed_signal = "false"),
+        name = "ManagedOOMMemoryPressureLimit"
+    )]
     fn managed_oom_memory_pressure_limit(&self) -> crate::zbus::Result<u32>;
 
     /// Get property `ManagedOOMPreference`.
-    #[zbus(property, name = "ManagedOOMPreference")]
+    #[zbus(
+        property(emits_changed_signal = "false"),
+        name = "ManagedOOMPreference"
+    )]
     fn managed_oom_preference(&self) -> crate::zbus::Result<String>;
 
     /// Get property `BPFProgram`.
-    #[zbus(property, name = "BPFProgram")]
+    #[zbus(property(emits_changed_signal = "false"), name = "BPFProgram")]
     fn bpf_program(&self) -> crate::zbus::Result<Vec<(String, String)>>;
 
     /// Get property `SocketBindAllow`.
-    #[zbus(property, name = "SocketBindAllow")]
+    #[zbus(property(emits_changed_signal = "false"), name = "SocketBindAllow")]
     fn socket_bind_allow(&self) -> crate::zbus::Result<Vec<(i32, i32, u16, u16)>>;
 
     /// Get property `SocketBindDeny`.
-    #[zbus(property, name = "SocketBindDeny")]
+    #[zbus(property(emits_changed_signal = "false"), name = "SocketBindDeny")]
     fn socket_bind_deny(&self) -> crate::zbus::Result<Vec<(i32, i32, u16, u16)>>;
 
     /// Get property `RestrictNetworkInterfaces`.
-    #[zbus(property, name = "RestrictNetworkInterfaces")]
+    #[zbus(
+        property(emits_changed_signal = "false"),
+        name = "RestrictNetworkInterfaces"
+    )]
     fn restrict_network_interfaces(&self) -> crate::zbus::Result<(bool, Vec<String>)>;
 
     /// Get property `MemoryPressureWatch`.
-    #[zbus(property, name = "MemoryPressureWatch")]
+    #[zbus(property(emits_changed_signal = "false"), name = "MemoryPressureWatch")]
     fn memory_pressure_watch(&self) -> crate::zbus::Result<String>;
 
     /// Get property `MemoryPressureThresholdUSec`.
-    #[zbus(property, name = "MemoryPressureThresholdUSec")]
+    #[zbus(
+        property(emits_changed_signal = "false"),
+        name = "MemoryPressureThresholdUSec"
+    )]
     fn memory_pressure_threshold_u_sec(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `NFTSet`.
-    #[zbus(property, name = "NFTSet")]
+    #[zbus(property(emits_changed_signal = "false"), name = "NFTSet")]
     fn nft_set(&self) -> crate::zbus::Result<Vec<(i32, i32, String, String)>>;
 
     /// Get property `CoredumpReceive`.
-    #[zbus(property, name = "CoredumpReceive")]
+    #[zbus(property(emits_changed_signal = "false"), name = "CoredumpReceive")]
     fn coredump_receive(&self) -> crate::zbus::Result<bool>;
 
     /// Get property `KillMode`.
-    #[zbus(property, name = "KillMode")]
+    #[zbus(property(emits_changed_signal = "const"), name = "KillMode")]
     fn kill_mode(&self) -> crate::zbus::Result<String>;
 
     /// Get property `KillSignal`.
-    #[zbus(property, name = "KillSignal")]
+    #[zbus(property(emits_changed_signal = "const"), name = "KillSignal")]
     fn kill_signal(&self) -> crate::zbus::Result<i32>;
 
     /// Get property `RestartKillSignal`.
-    #[zbus(property, name = "RestartKillSignal")]
+    #[zbus(property(emits_changed_signal = "const"), name = "RestartKillSignal")]
     fn restart_kill_signal(&self) -> crate::zbus::Result<i32>;
 
     /// Get property `FinalKillSignal`.
-    #[zbus(property, name = "FinalKillSignal")]
+    #[zbus(property(emits_changed_signal = "const"), name = "FinalKillSignal")]
     fn final_kill_signal(&self) -> crate::zbus::Result<i32>;
 
     /// Get property `SendSIGKILL`.
-    #[zbus(property, name = "SendSIGKILL")]
+    #[zbus(property(emits_changed_signal = "const"), name = "SendSIGKILL")]
     fn send_sigkill(&self) -> crate::zbus::Result<bool>;
 
     /// Get property `SendSIGHUP`.
-    #[zbus(property, name = "SendSIGHUP")]
+    #[zbus(property(emits_changed_signal = "const"), name = "SendSIGHUP")]
     fn send_sighup(&self) -> crate::zbus::Result<bool>;
 
     /// Get property `WatchdogSignal`.
-    #[zbus(property, name = "WatchdogSignal")]
+    #[zbus(property(emits_changed_signal = "const"), name = "WatchdogSignal")]
     fn watchdog_signal(&self) -> crate::zbus::Result<i32>;
 }
 
@@ -7868,22 +8822,22 @@ trait Job {
     >;
 
     /// Get property `Id`.
-    #[zbus(property, name = "Id")]
+    #[zbus(property(emits_changed_signal = "const"), name = "Id")]
     fn id(&self) -> crate::zbus::Result<u32>;
 
     /// Get property `Unit`.
-    #[zbus(property, name = "Unit")]
+    #[zbus(property(emits_changed_signal = "const"), name = "Unit")]
     fn unit(&self) -> crate::zbus::Result<(String, crate::zvariant::OwnedObjectPath)>;
 
     /// Get property `JobType`.
-    #[zbus(property, name = "JobType")]
+    #[zbus(property(emits_changed_signal = "const"), name = "JobType")]
     fn job_type(&self) -> crate::zbus::Result<String>;
 
     /// Get property `State`.
-    #[zbus(property, name = "State")]
+    #[zbus(property(emits_changed_signal = "true"), name = "State")]
     fn state(&self) -> crate::zbus::Result<String>;
 
     /// Get property `ActivationDetails`.
-    #[zbus(property, name = "ActivationDetails")]
+    #[zbus(property(emits_changed_signal = "const"), name = "ActivationDetails")]
     fn activation_details(&self) -> crate::zbus::Result<Vec<(String, String)>>;
 }

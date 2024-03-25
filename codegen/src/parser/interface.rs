@@ -4,6 +4,7 @@ use nom::bytes::complete::{tag, take, take_till, take_until};
 use nom::character::complete::{char, multispace0, multispace1};
 use nom::character::is_space;
 use nom::combinator::eof;
+use nom::error::VerboseError;
 use nom::sequence::{delimited, tuple};
 use nom::FindSubstring;
 
@@ -18,6 +19,7 @@ pub(crate) fn parse_single_interface(
         Vec<data::Signal>,
         Vec<data::Property>,
     ),
+    VerboseError<&str>,
 > {
     let (rest, iface_name) = interface_start(rest)?;
 
@@ -33,7 +35,7 @@ pub(crate) fn parse_single_interface(
 }
 
 /// Match interface block start, and return its name.
-fn interface_start(rest: &str) -> nom::IResult<&str, &str> {
+fn interface_start(rest: &str) -> nom::IResult<&str, &str, VerboseError<&str>> {
     let mut parser = tuple((
         multispace0,
         tag("interface"),
@@ -48,7 +50,7 @@ fn interface_start(rest: &str) -> nom::IResult<&str, &str> {
 }
 
 /// Match interface block end.
-fn interface_end(text: &str) -> nom::IResult<&str, ()> {
+fn interface_end(text: &str) -> nom::IResult<&str, (), VerboseError<&str>> {
     let (rest, _) = tuple((char('}'), char(';'), multispace0))(text)?;
     Ok((rest, ()))
 }
@@ -56,7 +58,11 @@ fn interface_end(text: &str) -> nom::IResult<&str, ()> {
 /// Parse a dummy interface block (`[ ... ]`).
 fn parse_dummy_content(
     rest: &str,
-) -> nom::IResult<&str, (Vec<data::Method>, Vec<data::Signal>, Vec<data::Property>)> {
+) -> nom::IResult<
+    &str,
+    (Vec<data::Method>, Vec<data::Signal>, Vec<data::Property>),
+    VerboseError<&str>,
+> {
     let (rest, _) = delimited(multispace0, tag("..."), multispace0)(rest)?;
     let out = (vec![], vec![], vec![]);
     Ok((rest, out))
@@ -69,7 +75,11 @@ fn parse_dummy_content(
 ///  3. properties (optional)
 fn parse_interface_content(
     text: &str,
-) -> nom::IResult<&str, (Vec<data::Method>, Vec<data::Signal>, Vec<data::Property>)> {
+) -> nom::IResult<
+    &str,
+    (Vec<data::Method>, Vec<data::Signal>, Vec<data::Property>),
+    VerboseError<&str>,
+> {
     let block_end = text.len();
     let mut rest = text;
 

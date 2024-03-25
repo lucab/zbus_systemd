@@ -132,26 +132,26 @@ trait Transfer {
     fn log_message(&self, priority: u32, line: String) -> crate::zbus::Result<()>;
 
     /// Get property `Id`.
-    #[zbus(property, name = "Id")]
+    #[zbus(property(emits_changed_signal = "const"), name = "Id")]
     fn id(&self) -> crate::zbus::Result<u32>;
 
     /// Get property `Local`.
-    #[zbus(property, name = "Local")]
+    #[zbus(property(emits_changed_signal = "const"), name = "Local")]
     fn local(&self) -> crate::zbus::Result<String>;
 
     /// Get property `Remote`.
-    #[zbus(property, name = "Remote")]
+    #[zbus(property(emits_changed_signal = "const"), name = "Remote")]
     fn remote(&self) -> crate::zbus::Result<String>;
 
     /// Get property `Type`.
-    #[zbus(property, name = "Type")]
+    #[zbus(property(emits_changed_signal = "const"), name = "Type")]
     fn type_property(&self) -> crate::zbus::Result<String>;
 
     /// Get property `Verify`.
-    #[zbus(property, name = "Verify")]
+    #[zbus(property(emits_changed_signal = "const"), name = "Verify")]
     fn verify(&self) -> crate::zbus::Result<String>;
 
     /// Get property `Progress`.
-    #[zbus(property, name = "Progress")]
+    #[zbus(property(emits_changed_signal = "false"), name = "Progress")]
     fn progress(&self) -> crate::zbus::Result<f64>;
 }

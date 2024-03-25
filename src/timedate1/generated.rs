@@ -37,30 +37,30 @@ trait Timedated {
     fn list_timezones(&self) -> crate::zbus::Result<Vec<String>>;
 
     /// Get property `Timezone`.
-    #[zbus(property, name = "Timezone")]
+    #[zbus(property(emits_changed_signal = "true"), name = "Timezone")]
     fn timezone(&self) -> crate::zbus::Result<String>;
 
     /// Get property `LocalRTC`.
-    #[zbus(property, name = "LocalRTC")]
+    #[zbus(property(emits_changed_signal = "true"), name = "LocalRTC")]
     fn local_rtc(&self) -> crate::zbus::Result<bool>;
 
     /// Get property `CanNTP`.
-    #[zbus(property, name = "CanNTP")]
+    #[zbus(property(emits_changed_signal = "false"), name = "CanNTP")]
     fn can_ntp(&self) -> crate::zbus::Result<bool>;
 
     /// Get property `NTP`.
-    #[zbus(property, name = "NTP")]
+    #[zbus(property(emits_changed_signal = "true"), name = "NTP")]
     fn ntp(&self) -> crate::zbus::Result<bool>;
 
     /// Get property `NTPSynchronized`.
-    #[zbus(property, name = "NTPSynchronized")]
+    #[zbus(property(emits_changed_signal = "false"), name = "NTPSynchronized")]
     fn ntp_synchronized(&self) -> crate::zbus::Result<bool>;
 
     /// Get property `TimeUSec`.
-    #[zbus(property, name = "TimeUSec")]
+    #[zbus(property(emits_changed_signal = "false"), name = "TimeUSec")]
     fn time_u_sec(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `RTCTimeUSec`.
-    #[zbus(property, name = "RTCTimeUSec")]
+    #[zbus(property(emits_changed_signal = "false"), name = "RTCTimeUSec")]
     fn rtc_time_u_sec(&self) -> crate::zbus::Result<u64>;
 }
