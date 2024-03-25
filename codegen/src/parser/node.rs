@@ -5,13 +5,14 @@ use nom::bytes::complete::{tag, take_till};
 use nom::character::complete::{char, multispace0, multispace1};
 use nom::character::is_space;
 use nom::combinator::eof;
+use nom::error::VerboseError;
 use nom::multi::many1;
 use nom::sequence::tuple;
 
 pub(crate) fn parse_single_node<'a>(
     text: &'a str,
     service: &Service,
-) -> nom::IResult<&'a str, data::Node> {
+) -> nom::IResult<&'a str, data::Node, VerboseError<&'a str>> {
     let (path, interfaces) = {
         let mut parser = tuple((node_start, many1(parse_single_interface), node_end, eof));
         let (_, out) = parser(text)?;
@@ -39,7 +40,7 @@ pub(crate) fn parse_single_node<'a>(
 }
 
 /// Match node start and return its name.
-fn node_start(text: &str) -> nom::IResult<&str, &str> {
+fn node_start(text: &str) -> nom::IResult<&str, &str, VerboseError<&str>> {
     let (rest, out) = tuple((
         multispace0,
         tag("node"),
@@ -52,7 +53,7 @@ fn node_start(text: &str) -> nom::IResult<&str, &str> {
     Ok((rest, out.3))
 }
 
-fn node_end(text: &str) -> nom::IResult<&str, ()> {
+fn node_end(text: &str) -> nom::IResult<&str, (), VerboseError<&str>> {
     let (rest, _) = tuple((multispace0, char('}'), multispace0, char(';'), multispace0))(text)?;
     Ok((rest, ()))
 }

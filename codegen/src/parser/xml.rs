@@ -1,7 +1,7 @@
 use super::{data, node};
 use crate::config;
 use anyhow::{bail, format_err, Context, Result};
-use nom::Finish;
+use nom::{error::convert_error, Finish};
 use std::io::BufRead;
 
 /// Parse the XML docs for systemd DBus services.
@@ -48,7 +48,12 @@ pub(crate) fn parse_docxml(
 fn parse_dbus_block(text: &str, service: &config::Service) -> Result<data::Node> {
     let (rest, node) = node::parse_single_node(text, service)
         .finish()
-        .map_err(|e| format_err!("failed to parse DBus description: {}", e))?;
+        .map_err(|e| {
+            format_err!(
+                "failed to parse DBus description, parsing error:\n{}",
+                convert_error(text, e)
+            )
+        })?;
 
     if !rest.is_empty() {
         bail!("unparsed trailing data: {}", rest);

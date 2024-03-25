@@ -4,11 +4,14 @@ use nom::bytes::complete::{tag, take, take_till, take_while};
 use nom::character::complete::{multispace0, multispace1};
 use nom::character::is_space;
 use nom::combinator::eof;
+use nom::error::VerboseError;
 use nom::multi::{separated_list0, separated_list1};
 use nom::sequence::{delimited, tuple};
 
 // Parse the 'methods:' section of an interface.
-pub(crate) fn parse_interface_methods(input: &str) -> nom::IResult<&str, Vec<data::Method>> {
+pub(crate) fn parse_interface_methods(
+    input: &str,
+) -> nom::IResult<&str, Vec<data::Method>, VerboseError<&str>> {
     // Ensure this is a 'methods' section.
     let (rest, _) = delimited(multispace0, tag("methods:"), multispace0)(input)?;
 
@@ -33,7 +36,7 @@ pub(crate) fn parse_interface_methods(input: &str) -> nom::IResult<&str, Vec<dat
 }
 
 // Parse a single method.
-fn parse_single_method(input: &str) -> nom::IResult<&str, data::Method> {
+fn parse_single_method(input: &str) -> nom::IResult<&str, data::Method, VerboseError<&str>> {
     let mut rest = input;
 
     // Handle annotations.
@@ -87,7 +90,9 @@ fn parse_single_method(input: &str) -> nom::IResult<&str, data::Method> {
     Ok((rest, method))
 }
 
-fn interface_method_args(text: &str) -> nom::IResult<&str, Vec<(&str, &str, &str)>> {
+fn interface_method_args(
+    text: &str,
+) -> nom::IResult<&str, Vec<(&str, &str, &str)>, VerboseError<&str>> {
     let (rest, out) = separated_list0(tag(","), take_till(|b| b == ','))(text)?;
     eof(rest)?;
 
