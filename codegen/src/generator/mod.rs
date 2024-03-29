@@ -107,10 +107,18 @@ fn emit_methods(
             "/// [📖]({}) Call interface method `{}`.",
             directive_link, method.name,
         )?;
+        let fn_name = match method.name.as_str() {
+            "Ref" => "reference".to_string(),
+            x => x.to_snake_case(),
+        };
         writeln!(output, r#"#[zbus(name = "{}")]"#, method.name)?;
-        writeln!(output, "fn {}(&self,", method.name.to_snake_case())?;
+        writeln!(output, "fn {}(&self,", fn_name)?;
         for arg in inputs {
-            writeln!(output, "  {}: {},", arg.0, arg.1)?;
+            let mangled_name = match arg.0.as_str() {
+                "type" => "typelabel",
+                x => x,
+            };
+            writeln!(output, "  {}: {},", mangled_name, arg.1)?;
         }
         writeln!(output, ") ")?;
         writeln!(output, "-> crate::zbus::Result<{}>;", translated_sig)?;

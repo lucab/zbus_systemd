@@ -19,7 +19,7 @@ pub(crate) fn parse_interface_methods(
     let (rest, blocks) = separated_list1(tag(";"), take_till(|b| b == ';'))(rest)?;
     eof(rest)?;
 
-    let mut methods = vec![];
+    let mut methods = Vec::with_capacity(blocks.len());
     for entry in blocks {
         let trimmed = entry.trim();
         if trimmed.is_empty() {
@@ -31,6 +31,7 @@ pub(crate) fn parse_interface_methods(
 
         methods.push(m);
     }
+    methods.shrink_to_fit();
 
     Ok((rest, methods))
 }
@@ -58,34 +59,22 @@ fn parse_single_method(input: &str) -> nom::IResult<&str, data::Method, VerboseE
     // Parse arguments.
     let (_, args) = interface_method_args(args_body)?;
 
-    // FIXME(lucab): this results in the wrong DBus call.
-    //  Push the workaround to the generator instead.
-    let name = match method_name {
-        "Ref" => "Reference",
-        x => x,
-    }
-    .to_string();
-
     let mut method = data::Method {
-        name,
-        inputs: vec![],
-        outputs: vec![],
+        name: method_name.to_string(),
+        inputs: Vec::with_capacity(args.len()),
+        outputs: Vec::with_capacity(args.len()),
     };
-
     for entry in args {
-        // 'type' is a reserved Rust keyword. We substitute that with 'typelabel' instead.
-        let arg_name = match entry.2 {
-            "type" => "typelabel",
-            x => x,
-        }
-        .to_string();
+        let arg_name = entry.2.to_string();
         let signature = entry.1.to_string();
-        if entry.0 == "in" {
-            method.inputs.push((arg_name, signature))
-        } else if entry.0 == "out" {
-            method.outputs.push((arg_name, signature))
+        match entry.0 {
+            "in" => method.inputs.push((arg_name, signature)),
+            "out" => method.outputs.push((arg_name, signature)),
+            x => unreachable!("{}", x),
         };
     }
+    method.inputs.shrink_to_fit();
+    method.outputs.shrink_to_fit();
 
     Ok((rest, method))
 }
@@ -96,7 +85,7 @@ fn interface_method_args(
     let (rest, out) = separated_list0(tag(","), take_till(|b| b == ','))(text)?;
     eof(rest)?;
 
-    let mut result = vec![];
+    let mut result = Vec::with_capacity(out.len());
     for line in out {
         let trimmed = line.trim();
         if trimmed.is_empty() {
@@ -114,6 +103,7 @@ fn interface_method_args(
         let entry = (arg.1, arg.3, arg.5);
         result.push(entry);
     }
+    result.shrink_to_fit();
 
     Ok((rest, result))
 }

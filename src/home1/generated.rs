@@ -236,8 +236,8 @@ trait Home {
         please_suspend: bool,
     ) -> crate::zbus::Result<crate::zvariant::OwnedFd>;
 
-    /// [📖](https://www.freedesktop.org/software/systemd/man/systemd.directives.html#Reference()) Call interface method `Reference`.
-    #[zbus(name = "Reference")]
+    /// [📖](https://www.freedesktop.org/software/systemd/man/systemd.directives.html#Ref()) Call interface method `Ref`.
+    #[zbus(name = "Ref")]
     fn reference(&self, please_suspend: bool) -> crate::zbus::Result<crate::zvariant::OwnedFd>;
 
     /// [📖](https://www.freedesktop.org/software/systemd/man/systemd.directives.html#Release()) Call interface method `Release`.
