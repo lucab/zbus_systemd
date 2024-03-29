@@ -1513,8 +1513,8 @@ trait Unit {
         properties: Vec<(String, crate::zvariant::OwnedValue)>,
     ) -> crate::zbus::Result<()>;
 
-    /// [📖](https://www.freedesktop.org/software/systemd/man/systemd.directives.html#Reference()) Call interface method `Reference`.
-    #[zbus(name = "Reference")]
+    /// [📖](https://www.freedesktop.org/software/systemd/man/systemd.directives.html#Ref()) Call interface method `Ref`.
+    #[zbus(name = "Ref")]
     fn reference(&self) -> crate::zbus::Result<()>;
 
     /// [📖](https://www.freedesktop.org/software/systemd/man/systemd.directives.html#Unref()) Call interface method `Unref`.
