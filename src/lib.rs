@@ -1,5 +1,3 @@
-//! ⚠️ This is an in-progress `v0.0` Proof-of-Concept, do not rely on it.
-//!
 //! A pure-Rust library to interact with systemd DBus services.
 
 #![cfg_attr(docsrs, feature(doc_cfg))]
