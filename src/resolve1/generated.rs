@@ -121,7 +121,7 @@ trait Manager {
     #[zbus(name = "RegisterService")]
     fn register_service(
         &self,
-        name: String,
+        id: String,
         name_template: String,
         typelabel: String,
         service_port: u16,

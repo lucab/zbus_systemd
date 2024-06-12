@@ -48,6 +48,25 @@ trait Manager {
         )>,
     >;
 
+    /// [📖](https://www.freedesktop.org/software/systemd/man/systemd.directives.html#ListSessionsEx()) Call interface method `ListSessionsEx`.
+    #[zbus(name = "ListSessionsEx")]
+    fn list_sessions_ex(
+        &self,
+    ) -> crate::zbus::Result<
+        Vec<(
+            String,
+            u32,
+            String,
+            String,
+            u32,
+            String,
+            String,
+            bool,
+            u64,
+            crate::zvariant::OwnedObjectPath,
+        )>,
+    >;
+
     /// [📖](https://www.freedesktop.org/software/systemd/man/systemd.directives.html#ListUsers()) Call interface method `ListUsers`.
     #[zbus(name = "ListUsers")]
     fn list_users(
@@ -254,6 +273,10 @@ trait Manager {
     #[zbus(name = "SuspendThenHibernateWithFlags")]
     fn suspend_then_hibernate_with_flags(&self, flags: u64) -> crate::zbus::Result<()>;
 
+    /// [📖](https://www.freedesktop.org/software/systemd/man/systemd.directives.html#Sleep()) Call interface method `Sleep`.
+    #[zbus(name = "Sleep")]
+    fn sleep(&self, flags: u64) -> crate::zbus::Result<()>;
+
     /// [📖](https://www.freedesktop.org/software/systemd/man/systemd.directives.html#CanPowerOff()) Call interface method `CanPowerOff`.
     #[zbus(name = "CanPowerOff")]
     fn can_power_off(&self) -> crate::zbus::Result<String>;
@@ -281,6 +304,10 @@ trait Manager {
     /// [📖](https://www.freedesktop.org/software/systemd/man/systemd.directives.html#CanSuspendThenHibernate()) Call interface method `CanSuspendThenHibernate`.
     #[zbus(name = "CanSuspendThenHibernate")]
     fn can_suspend_then_hibernate(&self) -> crate::zbus::Result<String>;
+
+    /// [📖](https://www.freedesktop.org/software/systemd/man/systemd.directives.html#CanSleep()) Call interface method `CanSleep`.
+    #[zbus(name = "CanSleep")]
+    fn can_sleep(&self) -> crate::zbus::Result<String>;
 
     /// [📖](https://www.freedesktop.org/software/systemd/man/systemd.directives.html#ScheduleShutdown()) Call interface method `ScheduleShutdown`.
     #[zbus(name = "ScheduleShutdown")]
@@ -493,6 +520,10 @@ trait Manager {
     #[zbus(property(emits_changed_signal = "const"), name = "UserStopDelayUSec")]
     fn user_stop_delay_u_sec(&self) -> crate::zbus::Result<u64>;
 
+    /// Get property `SleepOperation`.
+    #[zbus(property(emits_changed_signal = "const"), name = "SleepOperation")]
+    fn sleep_operation(&self) -> crate::zbus::Result<Vec<String>>;
+
     /// Get property `HandlePowerKey`.
     #[zbus(property(emits_changed_signal = "const"), name = "HandlePowerKey")]
     fn handle_power_key(&self) -> crate::zbus::Result<String>;
@@ -587,7 +618,7 @@ trait Manager {
     fn docked(&self) -> crate::zbus::Result<bool>;
 
     /// Get property `LidClosed`.
-    #[zbus(property(emits_changed_signal = "false"), name = "LidClosed")]
+    #[zbus(property(emits_changed_signal = "true"), name = "LidClosed")]
     fn lid_closed(&self) -> crate::zbus::Result<bool>;
 
     /// Get property `OnExternalPower`.
@@ -825,6 +856,10 @@ trait Session {
     #[zbus(name = "SetType")]
     fn set_type(&self, typelabel: String) -> crate::zbus::Result<()>;
 
+    /// [📖](https://www.freedesktop.org/software/systemd/man/systemd.directives.html#SetClass()) Call interface method `SetClass`.
+    #[zbus(name = "SetClass")]
+    fn set_class(&self, class: String) -> crate::zbus::Result<()>;
+
     /// [📖](https://www.freedesktop.org/software/systemd/man/systemd.directives.html#SetDisplay()) Call interface method `SetDisplay`.
     #[zbus(name = "SetDisplay")]
     fn set_display(&self, display: String) -> crate::zbus::Result<()>;
@@ -952,7 +987,7 @@ trait Session {
     fn type_property(&self) -> crate::zbus::Result<String>;
 
     /// Get property `Class`.
-    #[zbus(property(emits_changed_signal = "const"), name = "Class")]
+    #[zbus(property(emits_changed_signal = "true"), name = "Class")]
     fn class(&self) -> crate::zbus::Result<String>;
 
     /// Get property `Active`.

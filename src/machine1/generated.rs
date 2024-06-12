@@ -113,6 +113,10 @@ trait Manager {
     #[zbus(name = "GetMachineAddresses")]
     fn get_machine_addresses(&self, name: String) -> crate::zbus::Result<Vec<(i32, Vec<u8>)>>;
 
+    /// [📖](https://www.freedesktop.org/software/systemd/man/systemd.directives.html#GetMachineSSHInfo()) Call interface method `GetMachineSSHInfo`.
+    #[zbus(name = "GetMachineSSHInfo")]
+    fn get_machine_ssh_info(&self, name: String) -> crate::zbus::Result<(String, String)>;
+
     /// [📖](https://www.freedesktop.org/software/systemd/man/systemd.directives.html#GetMachineOSRelease()) Call interface method `GetMachineOSRelease`.
     #[zbus(name = "GetMachineOSRelease")]
     fn get_machine_os_release(
@@ -331,6 +335,10 @@ trait Machine {
     #[zbus(name = "GetAddresses")]
     fn get_addresses(&self) -> crate::zbus::Result<Vec<(i32, Vec<u8>)>>;
 
+    /// [📖](https://www.freedesktop.org/software/systemd/man/systemd.directives.html#GetSSHInfo()) Call interface method `GetSSHInfo`.
+    #[zbus(name = "GetSSHInfo")]
+    fn get_ssh_info(&self) -> crate::zbus::Result<(String, String)>;
+
     /// [📖](https://www.freedesktop.org/software/systemd/man/systemd.directives.html#GetOSRelease()) Call interface method `GetOSRelease`.
     #[zbus(name = "GetOSRelease")]
     fn get_os_release(&self) -> crate::zbus::Result<::std::collections::HashMap<String, String>>;
@@ -436,6 +444,18 @@ trait Machine {
     /// Get property `NetworkInterfaces`.
     #[zbus(property(emits_changed_signal = "const"), name = "NetworkInterfaces")]
     fn network_interfaces(&self) -> crate::zbus::Result<Vec<i32>>;
+
+    /// Get property `VSockCID`.
+    #[zbus(property(emits_changed_signal = "const"), name = "VSockCID")]
+    fn v_sock_cid(&self) -> crate::zbus::Result<u32>;
+
+    /// Get property `SSHAddress`.
+    #[zbus(property(emits_changed_signal = "const"), name = "SSHAddress")]
+    fn ssh_address(&self) -> crate::zbus::Result<String>;
+
+    /// Get property `SSHPrivateKeyPath`.
+    #[zbus(property(emits_changed_signal = "const"), name = "SSHPrivateKeyPath")]
+    fn ssh_private_key_path(&self) -> crate::zbus::Result<String>;
 
     /// Get property `State`.
     #[zbus(property(emits_changed_signal = "false"), name = "State")]

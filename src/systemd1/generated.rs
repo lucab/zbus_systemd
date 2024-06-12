@@ -643,6 +643,16 @@ trait Manager {
         name: String,
     ) -> crate::zbus::Result<Vec<(String, u32, u32, u32, u64, u32, u32, String, u32)>>;
 
+    /// [📖](https://www.freedesktop.org/software/systemd/man/systemd.directives.html#StartAuxiliaryScope()) Call interface method `StartAuxiliaryScope`.
+    #[zbus(name = "StartAuxiliaryScope")]
+    fn start_auxiliary_scope(
+        &self,
+        name: String,
+        pidfds: Vec<crate::zvariant::OwnedFd>,
+        flags: u64,
+        properties: Vec<(String, crate::zvariant::OwnedValue)>,
+    ) -> crate::zbus::Result<crate::zvariant::OwnedObjectPath>;
+
     /// Receive `UnitNew` signal.
     #[zbus(signal, name = "UnitNew")]
     fn unit_new(
@@ -790,6 +800,20 @@ trait Manager {
         name = "FinishTimestampMonotonic"
     )]
     fn finish_timestamp_monotonic(&self) -> crate::zbus::Result<u64>;
+
+    /// Get property `ShutdownStartTimestamp`.
+    #[zbus(
+        property(emits_changed_signal = "const"),
+        name = "ShutdownStartTimestamp"
+    )]
+    fn shutdown_start_timestamp(&self) -> crate::zbus::Result<u64>;
+
+    /// Get property `ShutdownStartTimestampMonotonic`.
+    #[zbus(
+        property(emits_changed_signal = "const"),
+        name = "ShutdownStartTimestampMonotonic"
+    )]
+    fn shutdown_start_timestamp_monotonic(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `SecurityStartTimestamp`.
     #[zbus(
@@ -1428,6 +1452,10 @@ trait Manager {
         name = "CtrlAltDelBurstAction"
     )]
     fn ctrl_alt_del_burst_action(&self) -> crate::zbus::Result<String>;
+
+    /// Get property `SoftRebootsCount`.
+    #[zbus(property(emits_changed_signal = "const"), name = "SoftRebootsCount")]
+    fn soft_reboots_count(&self) -> crate::zbus::Result<u32>;
 }
 
 /// Proxy object for `org.freedesktop.systemd1.Unit`.
@@ -1663,6 +1691,10 @@ trait Unit {
     /// Get property `RequiresMountsFor`.
     #[zbus(property(emits_changed_signal = "const"), name = "RequiresMountsFor")]
     fn requires_mounts_for(&self) -> crate::zbus::Result<Vec<String>>;
+
+    /// Get property `WantsMountsFor`.
+    #[zbus(property(emits_changed_signal = "const"), name = "WantsMountsFor")]
+    fn wants_mounts_for(&self) -> crate::zbus::Result<Vec<String>>;
 
     /// Get property `Documentation`.
     #[zbus(property(emits_changed_signal = "const"), name = "Documentation")]
@@ -2265,6 +2297,20 @@ trait Service {
     )]
     fn exec_main_exit_timestamp_monotonic(&self) -> crate::zbus::Result<u64>;
 
+    /// Get property `ExecMainHandoffTimestamp`.
+    #[zbus(
+        property(emits_changed_signal = "true"),
+        name = "ExecMainHandoffTimestamp"
+    )]
+    fn exec_main_handoff_timestamp(&self) -> crate::zbus::Result<u64>;
+
+    /// Get property `ExecMainHandoffTimestampMonotonic`.
+    #[zbus(
+        property(emits_changed_signal = "true"),
+        name = "ExecMainHandoffTimestampMonotonic"
+    )]
+    fn exec_main_handoff_timestamp_monotonic(&self) -> crate::zbus::Result<u64>;
+
     /// Get property `ExecMainPID`.
     #[zbus(property(emits_changed_signal = "true"), name = "ExecMainPID")]
     fn exec_main_pid(&self) -> crate::zbus::Result<u32>;
@@ -2500,6 +2546,14 @@ trait Service {
     #[zbus(property(emits_changed_signal = "false"), name = "MemoryAvailable")]
     fn memory_available(&self) -> crate::zbus::Result<u64>;
 
+    /// Get property `EffectiveMemoryMax`.
+    #[zbus(property(emits_changed_signal = "false"), name = "EffectiveMemoryMax")]
+    fn effective_memory_max(&self) -> crate::zbus::Result<u64>;
+
+    /// Get property `EffectiveMemoryHigh`.
+    #[zbus(property(emits_changed_signal = "false"), name = "EffectiveMemoryHigh")]
+    fn effective_memory_high(&self) -> crate::zbus::Result<u64>;
+
     /// Get property `CPUUsageNSec`.
     #[zbus(property(emits_changed_signal = "false"), name = "CPUUsageNSec")]
     fn cpu_usage_n_sec(&self) -> crate::zbus::Result<u64>;
@@ -2518,6 +2572,10 @@ trait Service {
     /// Get property `TasksCurrent`.
     #[zbus(property(emits_changed_signal = "false"), name = "TasksCurrent")]
     fn tasks_current(&self) -> crate::zbus::Result<u64>;
+
+    /// Get property `EffectiveTasksMax`.
+    #[zbus(property(emits_changed_signal = "false"), name = "EffectiveTasksMax")]
+    fn effective_tasks_max(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `IPIngressBytes`.
     #[zbus(property(emits_changed_signal = "false"), name = "IPIngressBytes")]
@@ -2750,6 +2808,13 @@ trait Service {
         name = "StartupMemoryZSwapMax"
     )]
     fn startup_memory_z_swap_max(&self) -> crate::zbus::Result<u64>;
+
+    /// Get property `MemoryZSwapWriteback`.
+    #[zbus(
+        property(emits_changed_signal = "false"),
+        name = "MemoryZSwapWriteback"
+    )]
+    fn memory_z_swap_writeback(&self) -> crate::zbus::Result<bool>;
 
     /// Get property `MemoryLimit`.
     #[zbus(property(emits_changed_signal = "false"), name = "MemoryLimit")]
@@ -3795,6 +3860,13 @@ trait Socket {
     #[zbus(property(emits_changed_signal = "const"), name = "PassCredentials")]
     fn pass_credentials(&self) -> crate::zbus::Result<bool>;
 
+    /// Get property `PassFileDescriptorsToExec`.
+    #[zbus(
+        property(emits_changed_signal = "const"),
+        name = "PassFileDescriptorsToExec"
+    )]
+    fn pass_file_descriptors_to_exec(&self) -> crate::zbus::Result<bool>;
+
     /// Get property `PassSecurity`.
     #[zbus(property(emits_changed_signal = "const"), name = "PassSecurity")]
     fn pass_security(&self) -> crate::zbus::Result<bool>;
@@ -3986,6 +4058,14 @@ trait Socket {
     #[zbus(property(emits_changed_signal = "false"), name = "MemoryAvailable")]
     fn memory_available(&self) -> crate::zbus::Result<u64>;
 
+    /// Get property `EffectiveMemoryMax`.
+    #[zbus(property(emits_changed_signal = "false"), name = "EffectiveMemoryMax")]
+    fn effective_memory_max(&self) -> crate::zbus::Result<u64>;
+
+    /// Get property `EffectiveMemoryHigh`.
+    #[zbus(property(emits_changed_signal = "false"), name = "EffectiveMemoryHigh")]
+    fn effective_memory_high(&self) -> crate::zbus::Result<u64>;
+
     /// Get property `CPUUsageNSec`.
     #[zbus(property(emits_changed_signal = "false"), name = "CPUUsageNSec")]
     fn cpu_usage_n_sec(&self) -> crate::zbus::Result<u64>;
@@ -4004,6 +4084,10 @@ trait Socket {
     /// Get property `TasksCurrent`.
     #[zbus(property(emits_changed_signal = "false"), name = "TasksCurrent")]
     fn tasks_current(&self) -> crate::zbus::Result<u64>;
+
+    /// Get property `EffectiveTasksMax`.
+    #[zbus(property(emits_changed_signal = "false"), name = "EffectiveTasksMax")]
+    fn effective_tasks_max(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `IPIngressBytes`.
     #[zbus(property(emits_changed_signal = "false"), name = "IPIngressBytes")]
@@ -4236,6 +4320,13 @@ trait Socket {
         name = "StartupMemoryZSwapMax"
     )]
     fn startup_memory_z_swap_max(&self) -> crate::zbus::Result<u64>;
+
+    /// Get property `MemoryZSwapWriteback`.
+    #[zbus(
+        property(emits_changed_signal = "false"),
+        name = "MemoryZSwapWriteback"
+    )]
+    fn memory_z_swap_writeback(&self) -> crate::zbus::Result<bool>;
 
     /// Get property `MemoryLimit`.
     #[zbus(property(emits_changed_signal = "false"), name = "MemoryLimit")]
@@ -5302,6 +5393,14 @@ trait Mount {
     #[zbus(property(emits_changed_signal = "false"), name = "MemoryAvailable")]
     fn memory_available(&self) -> crate::zbus::Result<u64>;
 
+    /// Get property `EffectiveMemoryMax`.
+    #[zbus(property(emits_changed_signal = "false"), name = "EffectiveMemoryMax")]
+    fn effective_memory_max(&self) -> crate::zbus::Result<u64>;
+
+    /// Get property `EffectiveMemoryHigh`.
+    #[zbus(property(emits_changed_signal = "false"), name = "EffectiveMemoryHigh")]
+    fn effective_memory_high(&self) -> crate::zbus::Result<u64>;
+
     /// Get property `CPUUsageNSec`.
     #[zbus(property(emits_changed_signal = "false"), name = "CPUUsageNSec")]
     fn cpu_usage_n_sec(&self) -> crate::zbus::Result<u64>;
@@ -5320,6 +5419,10 @@ trait Mount {
     /// Get property `TasksCurrent`.
     #[zbus(property(emits_changed_signal = "false"), name = "TasksCurrent")]
     fn tasks_current(&self) -> crate::zbus::Result<u64>;
+
+    /// Get property `EffectiveTasksMax`.
+    #[zbus(property(emits_changed_signal = "false"), name = "EffectiveTasksMax")]
+    fn effective_tasks_max(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `IPIngressBytes`.
     #[zbus(property(emits_changed_signal = "false"), name = "IPIngressBytes")]
@@ -5552,6 +5655,13 @@ trait Mount {
         name = "StartupMemoryZSwapMax"
     )]
     fn startup_memory_z_swap_max(&self) -> crate::zbus::Result<u64>;
+
+    /// Get property `MemoryZSwapWriteback`.
+    #[zbus(
+        property(emits_changed_signal = "false"),
+        name = "MemoryZSwapWriteback"
+    )]
+    fn memory_z_swap_writeback(&self) -> crate::zbus::Result<bool>;
 
     /// Get property `MemoryLimit`.
     #[zbus(property(emits_changed_signal = "false"), name = "MemoryLimit")]
@@ -6686,6 +6796,14 @@ trait Swap {
     #[zbus(property(emits_changed_signal = "false"), name = "MemoryAvailable")]
     fn memory_available(&self) -> crate::zbus::Result<u64>;
 
+    /// Get property `EffectiveMemoryMax`.
+    #[zbus(property(emits_changed_signal = "false"), name = "EffectiveMemoryMax")]
+    fn effective_memory_max(&self) -> crate::zbus::Result<u64>;
+
+    /// Get property `EffectiveMemoryHigh`.
+    #[zbus(property(emits_changed_signal = "false"), name = "EffectiveMemoryHigh")]
+    fn effective_memory_high(&self) -> crate::zbus::Result<u64>;
+
     /// Get property `CPUUsageNSec`.
     #[zbus(property(emits_changed_signal = "false"), name = "CPUUsageNSec")]
     fn cpu_usage_n_sec(&self) -> crate::zbus::Result<u64>;
@@ -6704,6 +6822,10 @@ trait Swap {
     /// Get property `TasksCurrent`.
     #[zbus(property(emits_changed_signal = "false"), name = "TasksCurrent")]
     fn tasks_current(&self) -> crate::zbus::Result<u64>;
+
+    /// Get property `EffectiveTasksMax`.
+    #[zbus(property(emits_changed_signal = "false"), name = "EffectiveTasksMax")]
+    fn effective_tasks_max(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `IPIngressBytes`.
     #[zbus(property(emits_changed_signal = "false"), name = "IPIngressBytes")]
@@ -6936,6 +7058,13 @@ trait Swap {
         name = "StartupMemoryZSwapMax"
     )]
     fn startup_memory_z_swap_max(&self) -> crate::zbus::Result<u64>;
+
+    /// Get property `MemoryZSwapWriteback`.
+    #[zbus(
+        property(emits_changed_signal = "false"),
+        name = "MemoryZSwapWriteback"
+    )]
+    fn memory_z_swap_writeback(&self) -> crate::zbus::Result<bool>;
 
     /// Get property `MemoryLimit`.
     #[zbus(property(emits_changed_signal = "false"), name = "MemoryLimit")]
@@ -7946,6 +8075,14 @@ trait Slice {
     #[zbus(property(emits_changed_signal = "false"), name = "MemoryAvailable")]
     fn memory_available(&self) -> crate::zbus::Result<u64>;
 
+    /// Get property `EffectiveMemoryMax`.
+    #[zbus(property(emits_changed_signal = "false"), name = "EffectiveMemoryMax")]
+    fn effective_memory_max(&self) -> crate::zbus::Result<u64>;
+
+    /// Get property `EffectiveMemoryHigh`.
+    #[zbus(property(emits_changed_signal = "false"), name = "EffectiveMemoryHigh")]
+    fn effective_memory_high(&self) -> crate::zbus::Result<u64>;
+
     /// Get property `CPUUsageNSec`.
     #[zbus(property(emits_changed_signal = "false"), name = "CPUUsageNSec")]
     fn cpu_usage_n_sec(&self) -> crate::zbus::Result<u64>;
@@ -7964,6 +8101,10 @@ trait Slice {
     /// Get property `TasksCurrent`.
     #[zbus(property(emits_changed_signal = "false"), name = "TasksCurrent")]
     fn tasks_current(&self) -> crate::zbus::Result<u64>;
+
+    /// Get property `EffectiveTasksMax`.
+    #[zbus(property(emits_changed_signal = "false"), name = "EffectiveTasksMax")]
+    fn effective_tasks_max(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `IPIngressBytes`.
     #[zbus(property(emits_changed_signal = "false"), name = "IPIngressBytes")]
@@ -8196,6 +8337,13 @@ trait Slice {
         name = "StartupMemoryZSwapMax"
     )]
     fn startup_memory_z_swap_max(&self) -> crate::zbus::Result<u64>;
+
+    /// Get property `MemoryZSwapWriteback`.
+    #[zbus(
+        property(emits_changed_signal = "false"),
+        name = "MemoryZSwapWriteback"
+    )]
+    fn memory_z_swap_writeback(&self) -> crate::zbus::Result<bool>;
 
     /// Get property `MemoryLimit`.
     #[zbus(property(emits_changed_signal = "false"), name = "MemoryLimit")]
@@ -8392,6 +8540,14 @@ trait Scope {
     #[zbus(property(emits_changed_signal = "false"), name = "MemoryAvailable")]
     fn memory_available(&self) -> crate::zbus::Result<u64>;
 
+    /// Get property `EffectiveMemoryMax`.
+    #[zbus(property(emits_changed_signal = "false"), name = "EffectiveMemoryMax")]
+    fn effective_memory_max(&self) -> crate::zbus::Result<u64>;
+
+    /// Get property `EffectiveMemoryHigh`.
+    #[zbus(property(emits_changed_signal = "false"), name = "EffectiveMemoryHigh")]
+    fn effective_memory_high(&self) -> crate::zbus::Result<u64>;
+
     /// Get property `CPUUsageNSec`.
     #[zbus(property(emits_changed_signal = "false"), name = "CPUUsageNSec")]
     fn cpu_usage_n_sec(&self) -> crate::zbus::Result<u64>;
@@ -8410,6 +8566,10 @@ trait Scope {
     /// Get property `TasksCurrent`.
     #[zbus(property(emits_changed_signal = "false"), name = "TasksCurrent")]
     fn tasks_current(&self) -> crate::zbus::Result<u64>;
+
+    /// Get property `EffectiveTasksMax`.
+    #[zbus(property(emits_changed_signal = "false"), name = "EffectiveTasksMax")]
+    fn effective_tasks_max(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `IPIngressBytes`.
     #[zbus(property(emits_changed_signal = "false"), name = "IPIngressBytes")]
@@ -8642,6 +8802,13 @@ trait Scope {
         name = "StartupMemoryZSwapMax"
     )]
     fn startup_memory_z_swap_max(&self) -> crate::zbus::Result<u64>;
+
+    /// Get property `MemoryZSwapWriteback`.
+    #[zbus(
+        property(emits_changed_signal = "false"),
+        name = "MemoryZSwapWriteback"
+    )]
+    fn memory_z_swap_writeback(&self) -> crate::zbus::Result<bool>;
 
     /// Get property `MemoryLimit`.
     #[zbus(property(emits_changed_signal = "false"), name = "MemoryLimit")]
