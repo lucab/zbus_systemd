@@ -142,6 +142,10 @@ trait Manager {
     /// Get property `NamespaceId`.
     #[zbus(property(emits_changed_signal = "const"), name = "NamespaceId")]
     fn namespace_id(&self) -> crate::zbus::Result<u64>;
+
+    /// Get property `NamespaceNSID`.
+    #[zbus(property(emits_changed_signal = "false"), name = "NamespaceNSID")]
+    fn namespace_nsid(&self) -> crate::zbus::Result<u32>;
 }
 
 /// Proxy object for `org.freedesktop.network1.Link`.

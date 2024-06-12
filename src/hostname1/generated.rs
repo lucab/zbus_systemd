@@ -142,4 +142,16 @@ trait Hostnamed {
     /// Get property `FirmwareDate`.
     #[zbus(property(emits_changed_signal = "const"), name = "FirmwareDate")]
     fn firmware_date(&self) -> crate::zbus::Result<u64>;
+
+    /// Get property `MachineID`.
+    #[zbus(property(emits_changed_signal = "const"), name = "MachineID")]
+    fn machine_id(&self) -> crate::zbus::Result<Vec<u8>>;
+
+    /// Get property `BootID`.
+    #[zbus(property(emits_changed_signal = "const"), name = "BootID")]
+    fn boot_id(&self) -> crate::zbus::Result<Vec<u8>>;
+
+    /// Get property `VSockCID`.
+    #[zbus(property(emits_changed_signal = "const"), name = "VSockCID")]
+    fn v_sock_cid(&self) -> crate::zbus::Result<u32>;
 }

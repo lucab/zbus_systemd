@@ -20,6 +20,16 @@ trait Manager {
         read_only: bool,
     ) -> crate::zbus::Result<(u32, crate::zvariant::OwnedObjectPath)>;
 
+    /// [📖](https://www.freedesktop.org/software/systemd/man/systemd.directives.html#ImportTarEx()) Call interface method `ImportTarEx`.
+    #[zbus(name = "ImportTarEx")]
+    fn import_tar_ex(
+        &self,
+        fd: crate::zvariant::OwnedFd,
+        local_name: String,
+        class: String,
+        flags: u64,
+    ) -> crate::zbus::Result<(u32, crate::zvariant::OwnedObjectPath)>;
+
     /// [📖](https://www.freedesktop.org/software/systemd/man/systemd.directives.html#ImportRaw()) Call interface method `ImportRaw`.
     #[zbus(name = "ImportRaw")]
     fn import_raw(
@@ -28,6 +38,16 @@ trait Manager {
         local_name: String,
         force: bool,
         read_only: bool,
+    ) -> crate::zbus::Result<(u32, crate::zvariant::OwnedObjectPath)>;
+
+    /// [📖](https://www.freedesktop.org/software/systemd/man/systemd.directives.html#ImportRawEx()) Call interface method `ImportRawEx`.
+    #[zbus(name = "ImportRawEx")]
+    fn import_raw_ex(
+        &self,
+        fd: crate::zvariant::OwnedFd,
+        local_name: String,
+        class: String,
+        flags: u64,
     ) -> crate::zbus::Result<(u32, crate::zvariant::OwnedObjectPath)>;
 
     /// [📖](https://www.freedesktop.org/software/systemd/man/systemd.directives.html#ImportFileSystem()) Call interface method `ImportFileSystem`.
@@ -40,6 +60,16 @@ trait Manager {
         read_only: bool,
     ) -> crate::zbus::Result<(u32, crate::zvariant::OwnedObjectPath)>;
 
+    /// [📖](https://www.freedesktop.org/software/systemd/man/systemd.directives.html#ImportFileSystemEx()) Call interface method `ImportFileSystemEx`.
+    #[zbus(name = "ImportFileSystemEx")]
+    fn import_file_system_ex(
+        &self,
+        fd: crate::zvariant::OwnedFd,
+        local_name: String,
+        class: String,
+        flags: u64,
+    ) -> crate::zbus::Result<(u32, crate::zvariant::OwnedObjectPath)>;
+
     /// [📖](https://www.freedesktop.org/software/systemd/man/systemd.directives.html#ExportTar()) Call interface method `ExportTar`.
     #[zbus(name = "ExportTar")]
     fn export_tar(
@@ -49,6 +79,17 @@ trait Manager {
         format: String,
     ) -> crate::zbus::Result<(u32, crate::zvariant::OwnedObjectPath)>;
 
+    /// [📖](https://www.freedesktop.org/software/systemd/man/systemd.directives.html#ExportTarEx()) Call interface method `ExportTarEx`.
+    #[zbus(name = "ExportTarEx")]
+    fn export_tar_ex(
+        &self,
+        local_name: String,
+        class: String,
+        fd: crate::zvariant::OwnedFd,
+        format: String,
+        flags: u64,
+    ) -> crate::zbus::Result<(u32, crate::zvariant::OwnedObjectPath)>;
+
     /// [📖](https://www.freedesktop.org/software/systemd/man/systemd.directives.html#ExportRaw()) Call interface method `ExportRaw`.
     #[zbus(name = "ExportRaw")]
     fn export_raw(
@@ -56,6 +97,17 @@ trait Manager {
         local_name: String,
         fd: crate::zvariant::OwnedFd,
         format: String,
+    ) -> crate::zbus::Result<(u32, crate::zvariant::OwnedObjectPath)>;
+
+    /// [📖](https://www.freedesktop.org/software/systemd/man/systemd.directives.html#ExportRawEx()) Call interface method `ExportRawEx`.
+    #[zbus(name = "ExportRawEx")]
+    fn export_raw_ex(
+        &self,
+        local_name: String,
+        class: String,
+        fd: crate::zvariant::OwnedFd,
+        format: String,
+        flags: u64,
     ) -> crate::zbus::Result<(u32, crate::zvariant::OwnedObjectPath)>;
 
     /// [📖](https://www.freedesktop.org/software/systemd/man/systemd.directives.html#PullTar()) Call interface method `PullTar`.
@@ -68,6 +120,17 @@ trait Manager {
         force: bool,
     ) -> crate::zbus::Result<(u32, crate::zvariant::OwnedObjectPath)>;
 
+    /// [📖](https://www.freedesktop.org/software/systemd/man/systemd.directives.html#PullTarEx()) Call interface method `PullTarEx`.
+    #[zbus(name = "PullTarEx")]
+    fn pull_tar_ex(
+        &self,
+        url: String,
+        local_name: String,
+        class: String,
+        verify_mode: String,
+        flags: u64,
+    ) -> crate::zbus::Result<(u32, crate::zvariant::OwnedObjectPath)>;
+
     /// [📖](https://www.freedesktop.org/software/systemd/man/systemd.directives.html#PullRaw()) Call interface method `PullRaw`.
     #[zbus(name = "PullRaw")]
     fn pull_raw(
@@ -76,6 +139,17 @@ trait Manager {
         local_name: String,
         verify_mode: String,
         force: bool,
+    ) -> crate::zbus::Result<(u32, crate::zvariant::OwnedObjectPath)>;
+
+    /// [📖](https://www.freedesktop.org/software/systemd/man/systemd.directives.html#PullRawEx()) Call interface method `PullRawEx`.
+    #[zbus(name = "PullRawEx")]
+    fn pull_raw_ex(
+        &self,
+        url: String,
+        local_name: String,
+        class: String,
+        verify_mode: String,
+        flags: u64,
     ) -> crate::zbus::Result<(u32, crate::zvariant::OwnedObjectPath)>;
 
     /// [📖](https://www.freedesktop.org/software/systemd/man/systemd.directives.html#ListTransfers()) Call interface method `ListTransfers`.
@@ -93,9 +167,49 @@ trait Manager {
         )>,
     >;
 
+    /// [📖](https://www.freedesktop.org/software/systemd/man/systemd.directives.html#ListTransfersEx()) Call interface method `ListTransfersEx`.
+    #[zbus(name = "ListTransfersEx")]
+    fn list_transfers_ex(
+        &self,
+        class: String,
+        flags: u64,
+    ) -> crate::zbus::Result<
+        Vec<(
+            u32,
+            String,
+            String,
+            String,
+            String,
+            f64,
+            crate::zvariant::OwnedObjectPath,
+        )>,
+    >;
+
     /// [📖](https://www.freedesktop.org/software/systemd/man/systemd.directives.html#CancelTransfer()) Call interface method `CancelTransfer`.
     #[zbus(name = "CancelTransfer")]
     fn cancel_transfer(&self, transfer_id: u32) -> crate::zbus::Result<()>;
+
+    /// [📖](https://www.freedesktop.org/software/systemd/man/systemd.directives.html#ListImages()) Call interface method `ListImages`.
+    #[zbus(name = "ListImages")]
+    fn list_images(
+        &self,
+        class: String,
+        flags: u64,
+    ) -> crate::zbus::Result<
+        Vec<(
+            String,
+            String,
+            String,
+            String,
+            bool,
+            u64,
+            u64,
+            u64,
+            u64,
+            u64,
+            u64,
+        )>,
+    >;
 
     /// Receive `TransferNew` signal.
     #[zbus(signal, name = "TransferNew")]
@@ -130,6 +244,10 @@ trait Transfer {
     /// Receive `LogMessage` signal.
     #[zbus(signal, name = "LogMessage")]
     fn log_message(&self, priority: u32, line: String) -> crate::zbus::Result<()>;
+
+    /// Receive `ProgressUpdate` signal.
+    #[zbus(signal, name = "ProgressUpdate")]
+    fn progress_update(&self, progress: f64) -> crate::zbus::Result<()>;
 
     /// Get property `Id`.
     #[zbus(property(emits_changed_signal = "const"), name = "Id")]

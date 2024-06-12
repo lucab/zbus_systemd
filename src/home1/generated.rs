@@ -75,6 +75,14 @@ trait Manager {
     #[zbus(name = "ActivateHome")]
     fn activate_home(&self, user_name: String, secret: String) -> crate::zbus::Result<()>;
 
+    /// [📖](https://www.freedesktop.org/software/systemd/man/systemd.directives.html#ActivateHomeIfReferenced()) Call interface method `ActivateHomeIfReferenced`.
+    #[zbus(name = "ActivateHomeIfReferenced")]
+    fn activate_home_if_referenced(
+        &self,
+        user_name: String,
+        secret: String,
+    ) -> crate::zbus::Result<()>;
+
     /// [📖](https://www.freedesktop.org/software/systemd/man/systemd.directives.html#DeactivateHome()) Call interface method `DeactivateHome`.
     #[zbus(name = "DeactivateHome")]
     fn deactivate_home(&self, user_name: String) -> crate::zbus::Result<()>;
@@ -90,6 +98,15 @@ trait Manager {
     /// [📖](https://www.freedesktop.org/software/systemd/man/systemd.directives.html#CreateHome()) Call interface method `CreateHome`.
     #[zbus(name = "CreateHome")]
     fn create_home(&self, user_record: String) -> crate::zbus::Result<()>;
+
+    /// [📖](https://www.freedesktop.org/software/systemd/man/systemd.directives.html#CreateHomeEx()) Call interface method `CreateHomeEx`.
+    #[zbus(name = "CreateHomeEx")]
+    fn create_home_ex(
+        &self,
+        user_record: String,
+        blobs: ::std::collections::HashMap<String, crate::zvariant::OwnedFd>,
+        flags: u64,
+    ) -> crate::zbus::Result<()>;
 
     /// [📖](https://www.freedesktop.org/software/systemd/man/systemd.directives.html#RealizeHome()) Call interface method `RealizeHome`.
     #[zbus(name = "RealizeHome")]
@@ -110,6 +127,15 @@ trait Manager {
     /// [📖](https://www.freedesktop.org/software/systemd/man/systemd.directives.html#UpdateHome()) Call interface method `UpdateHome`.
     #[zbus(name = "UpdateHome")]
     fn update_home(&self, user_record: String) -> crate::zbus::Result<()>;
+
+    /// [📖](https://www.freedesktop.org/software/systemd/man/systemd.directives.html#UpdateHomeEx()) Call interface method `UpdateHomeEx`.
+    #[zbus(name = "UpdateHomeEx")]
+    fn update_home_ex(
+        &self,
+        user_record: String,
+        blobs: ::std::collections::HashMap<String, crate::zvariant::OwnedFd>,
+        flags: u64,
+    ) -> crate::zbus::Result<()>;
 
     /// [📖](https://www.freedesktop.org/software/systemd/man/systemd.directives.html#ResizeHome()) Call interface method `ResizeHome`.
     #[zbus(name = "ResizeHome")]
@@ -144,6 +170,14 @@ trait Manager {
     /// [📖](https://www.freedesktop.org/software/systemd/man/systemd.directives.html#RefHome()) Call interface method `RefHome`.
     #[zbus(name = "RefHome")]
     fn ref_home(
+        &self,
+        user_name: String,
+        please_suspend: bool,
+    ) -> crate::zbus::Result<crate::zvariant::OwnedFd>;
+
+    /// [📖](https://www.freedesktop.org/software/systemd/man/systemd.directives.html#RefHomeUnrestricted()) Call interface method `RefHomeUnrestricted`.
+    #[zbus(name = "RefHomeUnrestricted")]
+    fn ref_home_unrestricted(
         &self,
         user_name: String,
         please_suspend: bool,
@@ -184,6 +218,10 @@ trait Home {
     #[zbus(name = "Activate")]
     fn activate(&self, secret: String) -> crate::zbus::Result<()>;
 
+    /// [📖](https://www.freedesktop.org/software/systemd/man/systemd.directives.html#ActivateIfReferenced()) Call interface method `ActivateIfReferenced`.
+    #[zbus(name = "ActivateIfReferenced")]
+    fn activate_if_referenced(&self, secret: String) -> crate::zbus::Result<()>;
+
     /// [📖](https://www.freedesktop.org/software/systemd/man/systemd.directives.html#Deactivate()) Call interface method `Deactivate`.
     #[zbus(name = "Deactivate")]
     fn deactivate(&self) -> crate::zbus::Result<()>;
@@ -212,6 +250,15 @@ trait Home {
     #[zbus(name = "Update")]
     fn update(&self, user_record: String) -> crate::zbus::Result<()>;
 
+    /// [📖](https://www.freedesktop.org/software/systemd/man/systemd.directives.html#UpdateEx()) Call interface method `UpdateEx`.
+    #[zbus(name = "UpdateEx")]
+    fn update_ex(
+        &self,
+        user_record: String,
+        blobs: ::std::collections::HashMap<String, crate::zvariant::OwnedFd>,
+        flags: u64,
+    ) -> crate::zbus::Result<()>;
+
     /// [📖](https://www.freedesktop.org/software/systemd/man/systemd.directives.html#Resize()) Call interface method `Resize`.
     #[zbus(name = "Resize")]
     fn resize(&self, size: u64, secret: String) -> crate::zbus::Result<()>;
@@ -239,6 +286,13 @@ trait Home {
     /// [📖](https://www.freedesktop.org/software/systemd/man/systemd.directives.html#Ref()) Call interface method `Ref`.
     #[zbus(name = "Ref")]
     fn reference(&self, please_suspend: bool) -> crate::zbus::Result<crate::zvariant::OwnedFd>;
+
+    /// [📖](https://www.freedesktop.org/software/systemd/man/systemd.directives.html#RefUnrestricted()) Call interface method `RefUnrestricted`.
+    #[zbus(name = "RefUnrestricted")]
+    fn ref_unrestricted(
+        &self,
+        please_suspend: bool,
+    ) -> crate::zbus::Result<crate::zvariant::OwnedFd>;
 
     /// [📖](https://www.freedesktop.org/software/systemd/man/systemd.directives.html#Release()) Call interface method `Release`.
     #[zbus(name = "Release")]
