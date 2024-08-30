@@ -98,15 +98,13 @@ pub fn bus_path_decode<'a>(
 pub fn unit_name_escape(input: &str) -> Cow<'_, str> {
     const VALID_CHARS: &str = r"0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz:_.";
 
-    if input.chars().next() != Some('.') && input.chars().all(|c| VALID_CHARS.contains(c)) {
+    if !input.starts_with('.') && input.chars().all(|c| VALID_CHARS.contains(c)) {
         return Cow::Borrowed(input);
     }
 
     let mut result = String::with_capacity(input.len());
 
     let escape_char = |c: char, result: &mut String| {
-        use std::fmt::Write;
-
         result.push('\\');
         result.push('x');
         _ = write!(result, "{:02x}", c as u8);
