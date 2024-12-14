@@ -55,6 +55,11 @@ hierarchy = "/org/freedesktop/systemd1"
 id = "org.freedesktop.systemd1"
 module = "systemd1"
 
+[service.sysupdate1]
+hierarchy = "/org/freedesktop/sysupdate1"
+id = "org.freedesktop.sysupdate1"
+module = "sysupdate1"
+
 [service.timedate1]
 default_object = "Timedated"
 hierarchy = "/org/freedesktop/timedate1"
