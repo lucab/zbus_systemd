@@ -56,3 +56,7 @@ pub mod systemd1;
 #[cfg_attr(docsrs, doc(cfg(feature = "timedate1")))]
 #[cfg(feature = "timedate1")]
 pub mod timedate1;
+
+#[cfg_attr(docsrs, doc(cfg(feature = "timesync1")))]
+#[cfg(feature = "timesync1")]
+pub mod timesync1;

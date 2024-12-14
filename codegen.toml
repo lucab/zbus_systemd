@@ -60,3 +60,8 @@ default_object = "Timedated"
 hierarchy = "/org/freedesktop/timedate1"
 id = "org.freedesktop.timedate1"
 module = "timedate1"
+
+[service.timesync1]
+hierarchy = "/org/freedesktop/timesync1"
+id = "org.freedesktop.timesync1"
+module = "timesync1"
