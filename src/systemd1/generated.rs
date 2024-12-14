@@ -1832,6 +1832,10 @@ trait Unit {
     #[zbus(property(emits_changed_signal = "const"), name = "CanFreeze")]
     fn can_freeze(&self) -> crate::zbus::Result<bool>;
 
+    /// Get property `CanLiveMount`.
+    #[zbus(property(emits_changed_signal = "const"), name = "CanLiveMount")]
+    fn can_live_mount(&self) -> crate::zbus::Result<bool>;
+
     /// Get property `Job`.
     #[zbus(property(emits_changed_signal = "true"), name = "Job")]
     fn job(&self) -> crate::zbus::Result<(u32, crate::zvariant::OwnedObjectPath)>;
@@ -2011,6 +2015,10 @@ trait Unit {
     /// Get property `ActivationDetails`.
     #[zbus(property(emits_changed_signal = "true"), name = "ActivationDetails")]
     fn activation_details(&self) -> crate::zbus::Result<Vec<(String, String)>>;
+
+    /// Get property `DebugInvocation`.
+    #[zbus(property(emits_changed_signal = "false"), name = "DebugInvocation")]
+    fn debug_invocation(&self) -> crate::zbus::Result<bool>;
 }
 
 /// Proxy object for `org.freedesktop.systemd1.Service`.
@@ -2222,6 +2230,14 @@ trait Service {
     #[zbus(property(emits_changed_signal = "true"), name = "StatusErrno")]
     fn status_errno(&self) -> crate::zbus::Result<i32>;
 
+    /// Get property `StatusBusError`.
+    #[zbus(property(emits_changed_signal = "true"), name = "StatusBusError")]
+    fn status_bus_error(&self) -> crate::zbus::Result<String>;
+
+    /// Get property `StatusVarlinkError`.
+    #[zbus(property(emits_changed_signal = "true"), name = "StatusVarlinkError")]
+    fn status_varlink_error(&self) -> crate::zbus::Result<String>;
+
     /// Get property `Result`.
     #[zbus(property(emits_changed_signal = "true"), name = "Result")]
     fn result(&self) -> crate::zbus::Result<String>;
@@ -2233,6 +2249,10 @@ trait Service {
     /// Get property `CleanResult`.
     #[zbus(property(emits_changed_signal = "true"), name = "CleanResult")]
     fn clean_result(&self) -> crate::zbus::Result<String>;
+
+    /// Get property `LiveMountResult`.
+    #[zbus(property(emits_changed_signal = "true"), name = "LiveMountResult")]
+    fn live_mount_result(&self) -> crate::zbus::Result<String>;
 
     /// Get property `USBFunctionDescriptors`.
     #[zbus(
@@ -2264,6 +2284,13 @@ trait Service {
     /// Get property `OpenFile`.
     #[zbus(property(emits_changed_signal = "const"), name = "OpenFile")]
     fn open_file(&self) -> crate::zbus::Result<Vec<(String, String, u64)>>;
+
+    /// Get property `ExtraFileDescriptorNames`.
+    #[zbus(
+        property(emits_changed_signal = "const"),
+        name = "ExtraFileDescriptorNames"
+    )]
+    fn extra_file_descriptor_names(&self) -> crate::zbus::Result<Vec<String>>;
 
     /// Get property `ReloadSignal`.
     #[zbus(property(emits_changed_signal = "const"), name = "ReloadSignal")]
@@ -2878,6 +2905,13 @@ trait Service {
     )]
     fn managed_oom_memory_pressure_limit(&self) -> crate::zbus::Result<u32>;
 
+    /// Get property `ManagedOOMMemoryPressureDurationUSec`.
+    #[zbus(
+        property(emits_changed_signal = "false"),
+        name = "ManagedOOMMemoryPressureDurationUSec"
+    )]
+    fn managed_oom_memory_pressure_duration_u_sec(&self) -> crate::zbus::Result<u64>;
+
     /// Get property `ManagedOOMPreference`.
     #[zbus(
         property(emits_changed_signal = "false"),
@@ -3365,6 +3399,10 @@ trait Service {
     #[zbus(property(emits_changed_signal = "const"), name = "ImportCredential")]
     fn import_credential(&self) -> crate::zbus::Result<Vec<String>>;
 
+    /// Get property `ImportCredentialEx`.
+    #[zbus(property(emits_changed_signal = "const"), name = "ImportCredentialEx")]
+    fn import_credential_ex(&self) -> crate::zbus::Result<Vec<(String, String)>>;
+
     /// Get property `SupplementaryGroups`.
     #[zbus(property(emits_changed_signal = "const"), name = "SupplementaryGroups")]
     fn supplementary_groups(&self) -> crate::zbus::Result<Vec<String>>;
@@ -3405,6 +3443,10 @@ trait Service {
     #[zbus(property(emits_changed_signal = "const"), name = "PrivateTmp")]
     fn private_tmp(&self) -> crate::zbus::Result<bool>;
 
+    /// Get property `PrivateTmpEx`.
+    #[zbus(property(emits_changed_signal = "const"), name = "PrivateTmpEx")]
+    fn private_tmp_ex(&self) -> crate::zbus::Result<String>;
+
     /// Get property `PrivateDevices`.
     #[zbus(property(emits_changed_signal = "const"), name = "PrivateDevices")]
     fn private_devices(&self) -> crate::zbus::Result<bool>;
@@ -3438,6 +3480,13 @@ trait Service {
     )]
     fn protect_control_groups(&self) -> crate::zbus::Result<bool>;
 
+    /// Get property `ProtectControlGroupsEx`.
+    #[zbus(
+        property(emits_changed_signal = "const"),
+        name = "ProtectControlGroupsEx"
+    )]
+    fn protect_control_groups_ex(&self) -> crate::zbus::Result<String>;
+
     /// Get property `PrivateNetwork`.
     #[zbus(property(emits_changed_signal = "const"), name = "PrivateNetwork")]
     fn private_network(&self) -> crate::zbus::Result<bool>;
@@ -3446,6 +3495,10 @@ trait Service {
     #[zbus(property(emits_changed_signal = "const"), name = "PrivateUsers")]
     fn private_users(&self) -> crate::zbus::Result<bool>;
 
+    /// Get property `PrivateUsersEx`.
+    #[zbus(property(emits_changed_signal = "const"), name = "PrivateUsersEx")]
+    fn private_users_ex(&self) -> crate::zbus::Result<String>;
+
     /// Get property `PrivateMounts`.
     #[zbus(property(emits_changed_signal = "const"), name = "PrivateMounts")]
     fn private_mounts(&self) -> crate::zbus::Result<bool>;
@@ -3453,6 +3506,10 @@ trait Service {
     /// Get property `PrivateIPC`.
     #[zbus(property(emits_changed_signal = "const"), name = "PrivateIPC")]
     fn private_ipc(&self) -> crate::zbus::Result<bool>;
+
+    /// Get property `PrivatePIDs`.
+    #[zbus(property(emits_changed_signal = "const"), name = "PrivatePIDs")]
+    fn private_pi_ds(&self) -> crate::zbus::Result<String>;
 
     /// Get property `ProtectHome`.
     #[zbus(property(emits_changed_signal = "const"), name = "ProtectHome")]
@@ -3657,6 +3714,10 @@ trait Service {
     /// Get property `MountAPIVFS`.
     #[zbus(property(emits_changed_signal = "const"), name = "MountAPIVFS")]
     fn mount_apivfs(&self) -> crate::zbus::Result<bool>;
+
+    /// Get property `BindLogSockets`.
+    #[zbus(property(emits_changed_signal = "const"), name = "BindLogSockets")]
+    fn bind_log_sockets(&self) -> crate::zbus::Result<bool>;
 
     /// Get property `KeyringMode`.
     #[zbus(property(emits_changed_signal = "const"), name = "KeyringMode")]
@@ -4390,6 +4451,13 @@ trait Socket {
     )]
     fn managed_oom_memory_pressure_limit(&self) -> crate::zbus::Result<u32>;
 
+    /// Get property `ManagedOOMMemoryPressureDurationUSec`.
+    #[zbus(
+        property(emits_changed_signal = "false"),
+        name = "ManagedOOMMemoryPressureDurationUSec"
+    )]
+    fn managed_oom_memory_pressure_duration_u_sec(&self) -> crate::zbus::Result<u64>;
+
     /// Get property `ManagedOOMPreference`.
     #[zbus(
         property(emits_changed_signal = "false"),
@@ -4877,6 +4945,10 @@ trait Socket {
     #[zbus(property(emits_changed_signal = "const"), name = "ImportCredential")]
     fn import_credential(&self) -> crate::zbus::Result<Vec<String>>;
 
+    /// Get property `ImportCredentialEx`.
+    #[zbus(property(emits_changed_signal = "const"), name = "ImportCredentialEx")]
+    fn import_credential_ex(&self) -> crate::zbus::Result<Vec<(String, String)>>;
+
     /// Get property `SupplementaryGroups`.
     #[zbus(property(emits_changed_signal = "const"), name = "SupplementaryGroups")]
     fn supplementary_groups(&self) -> crate::zbus::Result<Vec<String>>;
@@ -4917,6 +4989,10 @@ trait Socket {
     #[zbus(property(emits_changed_signal = "const"), name = "PrivateTmp")]
     fn private_tmp(&self) -> crate::zbus::Result<bool>;
 
+    /// Get property `PrivateTmpEx`.
+    #[zbus(property(emits_changed_signal = "const"), name = "PrivateTmpEx")]
+    fn private_tmp_ex(&self) -> crate::zbus::Result<String>;
+
     /// Get property `PrivateDevices`.
     #[zbus(property(emits_changed_signal = "const"), name = "PrivateDevices")]
     fn private_devices(&self) -> crate::zbus::Result<bool>;
@@ -4950,6 +5026,13 @@ trait Socket {
     )]
     fn protect_control_groups(&self) -> crate::zbus::Result<bool>;
 
+    /// Get property `ProtectControlGroupsEx`.
+    #[zbus(
+        property(emits_changed_signal = "const"),
+        name = "ProtectControlGroupsEx"
+    )]
+    fn protect_control_groups_ex(&self) -> crate::zbus::Result<String>;
+
     /// Get property `PrivateNetwork`.
     #[zbus(property(emits_changed_signal = "const"), name = "PrivateNetwork")]
     fn private_network(&self) -> crate::zbus::Result<bool>;
@@ -4958,6 +5041,10 @@ trait Socket {
     #[zbus(property(emits_changed_signal = "const"), name = "PrivateUsers")]
     fn private_users(&self) -> crate::zbus::Result<bool>;
 
+    /// Get property `PrivateUsersEx`.
+    #[zbus(property(emits_changed_signal = "const"), name = "PrivateUsersEx")]
+    fn private_users_ex(&self) -> crate::zbus::Result<String>;
+
     /// Get property `PrivateMounts`.
     #[zbus(property(emits_changed_signal = "const"), name = "PrivateMounts")]
     fn private_mounts(&self) -> crate::zbus::Result<bool>;
@@ -4965,6 +5052,10 @@ trait Socket {
     /// Get property `PrivateIPC`.
     #[zbus(property(emits_changed_signal = "const"), name = "PrivateIPC")]
     fn private_ipc(&self) -> crate::zbus::Result<bool>;
+
+    /// Get property `PrivatePIDs`.
+    #[zbus(property(emits_changed_signal = "const"), name = "PrivatePIDs")]
+    fn private_pi_ds(&self) -> crate::zbus::Result<String>;
 
     /// Get property `ProtectHome`.
     #[zbus(property(emits_changed_signal = "const"), name = "ProtectHome")]
@@ -5169,6 +5260,10 @@ trait Socket {
     /// Get property `MountAPIVFS`.
     #[zbus(property(emits_changed_signal = "const"), name = "MountAPIVFS")]
     fn mount_apivfs(&self) -> crate::zbus::Result<bool>;
+
+    /// Get property `BindLogSockets`.
+    #[zbus(property(emits_changed_signal = "const"), name = "BindLogSockets")]
+    fn bind_log_sockets(&self) -> crate::zbus::Result<bool>;
 
     /// Get property `KeyringMode`.
     #[zbus(property(emits_changed_signal = "const"), name = "KeyringMode")]
@@ -5725,6 +5820,13 @@ trait Mount {
     )]
     fn managed_oom_memory_pressure_limit(&self) -> crate::zbus::Result<u32>;
 
+    /// Get property `ManagedOOMMemoryPressureDurationUSec`.
+    #[zbus(
+        property(emits_changed_signal = "false"),
+        name = "ManagedOOMMemoryPressureDurationUSec"
+    )]
+    fn managed_oom_memory_pressure_duration_u_sec(&self) -> crate::zbus::Result<u64>;
+
     /// Get property `ManagedOOMPreference`.
     #[zbus(
         property(emits_changed_signal = "false"),
@@ -6212,6 +6314,10 @@ trait Mount {
     #[zbus(property(emits_changed_signal = "const"), name = "ImportCredential")]
     fn import_credential(&self) -> crate::zbus::Result<Vec<String>>;
 
+    /// Get property `ImportCredentialEx`.
+    #[zbus(property(emits_changed_signal = "const"), name = "ImportCredentialEx")]
+    fn import_credential_ex(&self) -> crate::zbus::Result<Vec<(String, String)>>;
+
     /// Get property `SupplementaryGroups`.
     #[zbus(property(emits_changed_signal = "const"), name = "SupplementaryGroups")]
     fn supplementary_groups(&self) -> crate::zbus::Result<Vec<String>>;
@@ -6252,6 +6358,10 @@ trait Mount {
     #[zbus(property(emits_changed_signal = "const"), name = "PrivateTmp")]
     fn private_tmp(&self) -> crate::zbus::Result<bool>;
 
+    /// Get property `PrivateTmpEx`.
+    #[zbus(property(emits_changed_signal = "const"), name = "PrivateTmpEx")]
+    fn private_tmp_ex(&self) -> crate::zbus::Result<String>;
+
     /// Get property `PrivateDevices`.
     #[zbus(property(emits_changed_signal = "const"), name = "PrivateDevices")]
     fn private_devices(&self) -> crate::zbus::Result<bool>;
@@ -6285,6 +6395,13 @@ trait Mount {
     )]
     fn protect_control_groups(&self) -> crate::zbus::Result<bool>;
 
+    /// Get property `ProtectControlGroupsEx`.
+    #[zbus(
+        property(emits_changed_signal = "const"),
+        name = "ProtectControlGroupsEx"
+    )]
+    fn protect_control_groups_ex(&self) -> crate::zbus::Result<String>;
+
     /// Get property `PrivateNetwork`.
     #[zbus(property(emits_changed_signal = "const"), name = "PrivateNetwork")]
     fn private_network(&self) -> crate::zbus::Result<bool>;
@@ -6293,6 +6410,10 @@ trait Mount {
     #[zbus(property(emits_changed_signal = "const"), name = "PrivateUsers")]
     fn private_users(&self) -> crate::zbus::Result<bool>;
 
+    /// Get property `PrivateUsersEx`.
+    #[zbus(property(emits_changed_signal = "const"), name = "PrivateUsersEx")]
+    fn private_users_ex(&self) -> crate::zbus::Result<String>;
+
     /// Get property `PrivateMounts`.
     #[zbus(property(emits_changed_signal = "const"), name = "PrivateMounts")]
     fn private_mounts(&self) -> crate::zbus::Result<bool>;
@@ -6300,6 +6421,10 @@ trait Mount {
     /// Get property `PrivateIPC`.
     #[zbus(property(emits_changed_signal = "const"), name = "PrivateIPC")]
     fn private_ipc(&self) -> crate::zbus::Result<bool>;
+
+    /// Get property `PrivatePIDs`.
+    #[zbus(property(emits_changed_signal = "const"), name = "PrivatePIDs")]
+    fn private_pi_ds(&self) -> crate::zbus::Result<String>;
 
     /// Get property `ProtectHome`.
     #[zbus(property(emits_changed_signal = "const"), name = "ProtectHome")]
@@ -6505,6 +6630,10 @@ trait Mount {
     #[zbus(property(emits_changed_signal = "const"), name = "MountAPIVFS")]
     fn mount_apivfs(&self) -> crate::zbus::Result<bool>;
 
+    /// Get property `BindLogSockets`.
+    #[zbus(property(emits_changed_signal = "const"), name = "BindLogSockets")]
+    fn bind_log_sockets(&self) -> crate::zbus::Result<bool>;
+
     /// Get property `KeyringMode`.
     #[zbus(property(emits_changed_signal = "const"), name = "KeyringMode")]
     fn keyring_mode(&self) -> crate::zbus::Result<String>;
@@ -6695,6 +6824,10 @@ trait Timer {
     /// Get property `RemainAfterElapse`.
     #[zbus(property(emits_changed_signal = "const"), name = "RemainAfterElapse")]
     fn remain_after_elapse(&self) -> crate::zbus::Result<bool>;
+
+    /// Get property `DeferReactivation`.
+    #[zbus(property(emits_changed_signal = "const"), name = "DeferReactivation")]
+    fn defer_reactivation(&self) -> crate::zbus::Result<bool>;
 }
 
 /// Proxy object for `org.freedesktop.systemd1.Swap`.
@@ -7128,6 +7261,13 @@ trait Swap {
     )]
     fn managed_oom_memory_pressure_limit(&self) -> crate::zbus::Result<u32>;
 
+    /// Get property `ManagedOOMMemoryPressureDurationUSec`.
+    #[zbus(
+        property(emits_changed_signal = "false"),
+        name = "ManagedOOMMemoryPressureDurationUSec"
+    )]
+    fn managed_oom_memory_pressure_duration_u_sec(&self) -> crate::zbus::Result<u64>;
+
     /// Get property `ManagedOOMPreference`.
     #[zbus(
         property(emits_changed_signal = "false"),
@@ -7615,6 +7755,10 @@ trait Swap {
     #[zbus(property(emits_changed_signal = "const"), name = "ImportCredential")]
     fn import_credential(&self) -> crate::zbus::Result<Vec<String>>;
 
+    /// Get property `ImportCredentialEx`.
+    #[zbus(property(emits_changed_signal = "const"), name = "ImportCredentialEx")]
+    fn import_credential_ex(&self) -> crate::zbus::Result<Vec<(String, String)>>;
+
     /// Get property `SupplementaryGroups`.
     #[zbus(property(emits_changed_signal = "const"), name = "SupplementaryGroups")]
     fn supplementary_groups(&self) -> crate::zbus::Result<Vec<String>>;
@@ -7655,6 +7799,10 @@ trait Swap {
     #[zbus(property(emits_changed_signal = "const"), name = "PrivateTmp")]
     fn private_tmp(&self) -> crate::zbus::Result<bool>;
 
+    /// Get property `PrivateTmpEx`.
+    #[zbus(property(emits_changed_signal = "const"), name = "PrivateTmpEx")]
+    fn private_tmp_ex(&self) -> crate::zbus::Result<String>;
+
     /// Get property `PrivateDevices`.
     #[zbus(property(emits_changed_signal = "const"), name = "PrivateDevices")]
     fn private_devices(&self) -> crate::zbus::Result<bool>;
@@ -7688,6 +7836,13 @@ trait Swap {
     )]
     fn protect_control_groups(&self) -> crate::zbus::Result<bool>;
 
+    /// Get property `ProtectControlGroupsEx`.
+    #[zbus(
+        property(emits_changed_signal = "const"),
+        name = "ProtectControlGroupsEx"
+    )]
+    fn protect_control_groups_ex(&self) -> crate::zbus::Result<String>;
+
     /// Get property `PrivateNetwork`.
     #[zbus(property(emits_changed_signal = "const"), name = "PrivateNetwork")]
     fn private_network(&self) -> crate::zbus::Result<bool>;
@@ -7696,6 +7851,10 @@ trait Swap {
     #[zbus(property(emits_changed_signal = "const"), name = "PrivateUsers")]
     fn private_users(&self) -> crate::zbus::Result<bool>;
 
+    /// Get property `PrivateUsersEx`.
+    #[zbus(property(emits_changed_signal = "const"), name = "PrivateUsersEx")]
+    fn private_users_ex(&self) -> crate::zbus::Result<String>;
+
     /// Get property `PrivateMounts`.
     #[zbus(property(emits_changed_signal = "const"), name = "PrivateMounts")]
     fn private_mounts(&self) -> crate::zbus::Result<bool>;
@@ -7703,6 +7862,10 @@ trait Swap {
     /// Get property `PrivateIPC`.
     #[zbus(property(emits_changed_signal = "const"), name = "PrivateIPC")]
     fn private_ipc(&self) -> crate::zbus::Result<bool>;
+
+    /// Get property `PrivatePIDs`.
+    #[zbus(property(emits_changed_signal = "const"), name = "PrivatePIDs")]
+    fn private_pi_ds(&self) -> crate::zbus::Result<String>;
 
     /// Get property `ProtectHome`.
     #[zbus(property(emits_changed_signal = "const"), name = "ProtectHome")]
@@ -7907,6 +8070,10 @@ trait Swap {
     /// Get property `MountAPIVFS`.
     #[zbus(property(emits_changed_signal = "const"), name = "MountAPIVFS")]
     fn mount_apivfs(&self) -> crate::zbus::Result<bool>;
+
+    /// Get property `BindLogSockets`.
+    #[zbus(property(emits_changed_signal = "const"), name = "BindLogSockets")]
+    fn bind_log_sockets(&self) -> crate::zbus::Result<bool>;
 
     /// Get property `KeyringMode`.
     #[zbus(property(emits_changed_signal = "const"), name = "KeyringMode")]
@@ -8407,6 +8574,13 @@ trait Slice {
     )]
     fn managed_oom_memory_pressure_limit(&self) -> crate::zbus::Result<u32>;
 
+    /// Get property `ManagedOOMMemoryPressureDurationUSec`.
+    #[zbus(
+        property(emits_changed_signal = "false"),
+        name = "ManagedOOMMemoryPressureDurationUSec"
+    )]
+    fn managed_oom_memory_pressure_duration_u_sec(&self) -> crate::zbus::Result<u64>;
+
     /// Get property `ManagedOOMPreference`.
     #[zbus(
         property(emits_changed_signal = "false"),
@@ -8871,6 +9045,13 @@ trait Scope {
         name = "ManagedOOMMemoryPressureLimit"
     )]
     fn managed_oom_memory_pressure_limit(&self) -> crate::zbus::Result<u32>;
+
+    /// Get property `ManagedOOMMemoryPressureDurationUSec`.
+    #[zbus(
+        property(emits_changed_signal = "false"),
+        name = "ManagedOOMMemoryPressureDurationUSec"
+    )]
+    fn managed_oom_memory_pressure_duration_u_sec(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `ManagedOOMPreference`.
     #[zbus(

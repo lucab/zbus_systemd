@@ -179,7 +179,7 @@ trait Manager {
     fn kill_session(
         &self,
         session_id: String,
-        who: String,
+        whom: String,
         signal_number: i32,
     ) -> crate::zbus::Result<()>;
 
@@ -364,6 +364,14 @@ trait Manager {
     #[zbus(name = "SetWallMessage")]
     fn set_wall_message(&self, wall_message: String, enable: bool) -> crate::zbus::Result<()>;
 
+    /// Receive `SecureAttentionKey` signal.
+    #[zbus(signal, name = "SecureAttentionKey")]
+    fn secure_attention_key(
+        &self,
+        seat_id: String,
+        object_path: crate::zvariant::OwnedObjectPath,
+    ) -> crate::zbus::Result<()>;
+
     /// Receive `SessionNew` signal.
     #[zbus(signal, name = "SessionNew")]
     fn session_new(
@@ -508,6 +516,10 @@ trait Manager {
     #[zbus(property(emits_changed_signal = "true"), name = "BlockInhibited")]
     fn block_inhibited(&self) -> crate::zbus::Result<String>;
 
+    /// Get property `BlockWeakInhibited`.
+    #[zbus(property(emits_changed_signal = "true"), name = "BlockWeakInhibited")]
+    fn block_weak_inhibited(&self) -> crate::zbus::Result<String>;
+
     /// Get property `DelayInhibited`.
     #[zbus(property(emits_changed_signal = "true"), name = "DelayInhibited")]
     fn delay_inhibited(&self) -> crate::zbus::Result<String>;
@@ -586,6 +598,13 @@ trait Manager {
     )]
     fn handle_lid_switch_docked(&self) -> crate::zbus::Result<String>;
 
+    /// Get property `HandleSecureAttentionKey`.
+    #[zbus(
+        property(emits_changed_signal = "const"),
+        name = "HandleSecureAttentionKey"
+    )]
+    fn handle_secure_attention_key(&self) -> crate::zbus::Result<String>;
+
     /// Get property `HoldoffTimeoutUSec`.
     #[zbus(property(emits_changed_signal = "const"), name = "HoldoffTimeoutUSec")]
     fn holdoff_timeout_u_sec(&self) -> crate::zbus::Result<u64>;
@@ -605,13 +624,29 @@ trait Manager {
     )]
     fn preparing_for_shutdown(&self) -> crate::zbus::Result<bool>;
 
+    /// Get property `PreparingForShutdownWithMetadata`.
+    #[zbus(
+        property(emits_changed_signal = "false"),
+        name = "PreparingForShutdownWithMetadata"
+    )]
+    fn preparing_for_shutdown_with_metadata(
+        &self,
+    ) -> crate::zbus::Result<::std::collections::HashMap<String, crate::zvariant::OwnedValue>>;
+
     /// Get property `PreparingForSleep`.
     #[zbus(property(emits_changed_signal = "false"), name = "PreparingForSleep")]
     fn preparing_for_sleep(&self) -> crate::zbus::Result<bool>;
 
     /// Get property `ScheduledShutdown`.
-    #[zbus(property(emits_changed_signal = "false"), name = "ScheduledShutdown")]
+    #[zbus(property(emits_changed_signal = "true"), name = "ScheduledShutdown")]
     fn scheduled_shutdown(&self) -> crate::zbus::Result<(String, u64)>;
+
+    /// Get property `DesignatedMaintenanceTime`.
+    #[zbus(
+        property(emits_changed_signal = "const"),
+        name = "DesignatedMaintenanceTime"
+    )]
+    fn designated_maintenance_time(&self) -> crate::zbus::Result<String>;
 
     /// Get property `Docked`.
     #[zbus(property(emits_changed_signal = "false"), name = "Docked")]
@@ -842,7 +877,7 @@ trait Session {
 
     /// [📖](https://www.freedesktop.org/software/systemd/man/systemd.directives.html#Kill()) Call interface method `Kill`.
     #[zbus(name = "Kill")]
-    fn kill(&self, who: String, signal_number: i32) -> crate::zbus::Result<()>;
+    fn kill(&self, whom: String, signal_number: i32) -> crate::zbus::Result<()>;
 
     /// [📖](https://www.freedesktop.org/software/systemd/man/systemd.directives.html#TakeControl()) Call interface method `TakeControl`.
     #[zbus(name = "TakeControl")]
@@ -1012,6 +1047,14 @@ trait Session {
         name = "IdleSinceHintMonotonic"
     )]
     fn idle_since_hint_monotonic(&self) -> crate::zbus::Result<u64>;
+
+    /// Get property `CanIdle`.
+    #[zbus(property(emits_changed_signal = "const"), name = "CanIdle")]
+    fn can_idle(&self) -> crate::zbus::Result<bool>;
+
+    /// Get property `CanLock`.
+    #[zbus(property(emits_changed_signal = "const"), name = "CanLock")]
+    fn can_lock(&self) -> crate::zbus::Result<bool>;
 
     /// Get property `LockedHint`.
     #[zbus(property(emits_changed_signal = "true"), name = "LockedHint")]
