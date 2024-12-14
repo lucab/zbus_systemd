@@ -32,6 +32,7 @@ portable1 = []
 resolve1 = []
 systemd1 = []
 timedate1 = []
+timesync1 = []
 
 [package.metadata.docs.rs]
 all-features = true
