@@ -107,7 +107,7 @@ trait Manager {
 
     /// [📖](https://www.freedesktop.org/software/systemd/man/systemd.directives.html#KillMachine()) Call interface method `KillMachine`.
     #[zbus(name = "KillMachine")]
-    fn kill_machine(&self, name: String, who: String, signal: i32) -> crate::zbus::Result<()>;
+    fn kill_machine(&self, name: String, whom: String, signal: i32) -> crate::zbus::Result<()>;
 
     /// [📖](https://www.freedesktop.org/software/systemd/man/systemd.directives.html#GetMachineAddresses()) Call interface method `GetMachineAddresses`.
     #[zbus(name = "GetMachineAddresses")]
@@ -329,7 +329,7 @@ trait Machine {
 
     /// [📖](https://www.freedesktop.org/software/systemd/man/systemd.directives.html#Kill()) Call interface method `Kill`.
     #[zbus(name = "Kill")]
-    fn kill(&self, who: String, signal: i32) -> crate::zbus::Result<()>;
+    fn kill(&self, whom: String, signal: i32) -> crate::zbus::Result<()>;
 
     /// [📖](https://www.freedesktop.org/software/systemd/man/systemd.directives.html#GetAddresses()) Call interface method `GetAddresses`.
     #[zbus(name = "GetAddresses")]
