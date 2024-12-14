@@ -31,6 +31,7 @@ oom1 = []
 portable1 = []
 resolve1 = []
 systemd1 = []
+sysupdate1 = []
 timedate1 = []
 timesync1 = []
 

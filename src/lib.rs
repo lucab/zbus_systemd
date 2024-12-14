@@ -53,6 +53,10 @@ pub mod resolve1;
 #[cfg(feature = "systemd1")]
 pub mod systemd1;
 
+#[cfg_attr(docsrs, doc(cfg(feature = "sysupdate1")))]
+#[cfg(feature = "sysupdate1")]
+pub mod sysupdate1;
+
 #[cfg_attr(docsrs, doc(cfg(feature = "timedate1")))]
 #[cfg(feature = "timedate1")]
 pub mod timedate1;
