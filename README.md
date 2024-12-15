@@ -23,7 +23,9 @@ systemd definitions and can be activated through the corresponding Cargo feature
  * `portable1`: systemd-portabled interfaces (org.freedesktop.portable1)
  * `resolve1`: systemd-resolved interfaces (org.freedesktop.resolve1)
  * `systemd1`: systemd interfaces (org.freedesktop.systemd1)
+ * `sysupdate1`: systemd-sysupdated interfaces (org.freedesktop.sysupdated1)
  * `timedate1`: systemd-timedated interfaces (org.freedesktop.timedate1)
+ * `timesync1`: systemd-timesyncd interfaces (org.freedesktop.timesync1)
 
 For a quickstart on how to use those interfaces, see the [examples](https://github.com/lucab/zbus_systemd/tree/main/examples).
 
