@@ -9,7 +9,7 @@ use crate::zbus::proxy;
     default_service = "org.freedesktop.oom1",
     default_path = "/org/freedesktop/oom1"
 )]
-trait Manager {
+pub trait Manager {
     /// [📖](https://www.freedesktop.org/software/systemd/man/systemd.directives.html#DumpByFileDescriptor()) Call interface method `DumpByFileDescriptor`.
     #[zbus(name = "DumpByFileDescriptor")]
     fn dump_by_file_descriptor(&self) -> crate::zbus::Result<crate::zvariant::OwnedFd>;

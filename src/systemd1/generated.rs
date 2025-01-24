@@ -9,7 +9,7 @@ use crate::zbus::proxy;
     default_service = "org.freedesktop.systemd1",
     default_path = "/org/freedesktop/systemd1"
 )]
-trait Manager {
+pub trait Manager {
     /// [📖](https://www.freedesktop.org/software/systemd/man/systemd.directives.html#GetUnit()) Call interface method `GetUnit`.
     #[zbus(name = "GetUnit")]
     fn get_unit(&self, name: String) -> crate::zbus::Result<crate::zvariant::OwnedObjectPath>;
@@ -1465,7 +1465,7 @@ trait Manager {
     default_service = "org.freedesktop.systemd1",
     assume_defaults = false
 )]
-trait Unit {
+pub trait Unit {
     /// [📖](https://www.freedesktop.org/software/systemd/man/systemd.directives.html#Start()) Call interface method `Start`.
     #[zbus(name = "Start")]
     fn start(&self, mode: String) -> crate::zbus::Result<crate::zvariant::OwnedObjectPath>;
@@ -2028,7 +2028,7 @@ trait Unit {
     default_service = "org.freedesktop.systemd1",
     assume_defaults = false
 )]
-trait Service {
+pub trait Service {
     /// [📖](https://www.freedesktop.org/software/systemd/man/systemd.directives.html#BindMount()) Call interface method `BindMount`.
     #[zbus(name = "BindMount")]
     fn bind_mount(
@@ -3801,7 +3801,7 @@ trait Service {
     default_service = "org.freedesktop.systemd1",
     assume_defaults = false
 )]
-trait Socket {
+pub trait Socket {
     /// [📖](https://www.freedesktop.org/software/systemd/man/systemd.directives.html#GetProcesses()) Call interface method `GetProcesses`.
     #[zbus(name = "GetProcesses")]
     fn get_processes(&self) -> crate::zbus::Result<Vec<(String, u32, String)>>;
@@ -5347,7 +5347,7 @@ trait Socket {
     default_service = "org.freedesktop.systemd1",
     assume_defaults = false
 )]
-trait Target {}
+pub trait Target {}
 
 /// Proxy object for `org.freedesktop.systemd1.Device`.
 #[proxy(
@@ -5356,7 +5356,7 @@ trait Target {}
     default_service = "org.freedesktop.systemd1",
     assume_defaults = false
 )]
-trait Device {
+pub trait Device {
     /// Get property `SysFSPath`.
     #[zbus(property(emits_changed_signal = "true"), name = "SysFSPath")]
     fn sys_fs_path(&self) -> crate::zbus::Result<String>;
@@ -5369,7 +5369,7 @@ trait Device {
     default_service = "org.freedesktop.systemd1",
     assume_defaults = false
 )]
-trait Mount {
+pub trait Mount {
     /// [📖](https://www.freedesktop.org/software/systemd/man/systemd.directives.html#GetProcesses()) Call interface method `GetProcesses`.
     #[zbus(name = "GetProcesses")]
     fn get_processes(&self) -> crate::zbus::Result<Vec<(String, u32, String)>>;
@@ -6716,7 +6716,7 @@ trait Mount {
     default_service = "org.freedesktop.systemd1",
     assume_defaults = false
 )]
-trait Automount {
+pub trait Automount {
     /// Get property `Where`.
     #[zbus(property(emits_changed_signal = "const"), name = "Where")]
     fn where_property(&self) -> crate::zbus::Result<String>;
@@ -6745,7 +6745,7 @@ trait Automount {
     default_service = "org.freedesktop.systemd1",
     assume_defaults = false
 )]
-trait Timer {
+pub trait Timer {
     /// Get property `Unit`.
     #[zbus(property(emits_changed_signal = "const"), name = "Unit")]
     fn unit(&self) -> crate::zbus::Result<String>;
@@ -6837,7 +6837,7 @@ trait Timer {
     default_service = "org.freedesktop.systemd1",
     assume_defaults = false
 )]
-trait Swap {
+pub trait Swap {
     /// [📖](https://www.freedesktop.org/software/systemd/man/systemd.directives.html#GetProcesses()) Call interface method `GetProcesses`.
     #[zbus(name = "GetProcesses")]
     fn get_processes(&self) -> crate::zbus::Result<Vec<(String, u32, String)>>;
@@ -8157,7 +8157,7 @@ trait Swap {
     default_service = "org.freedesktop.systemd1",
     assume_defaults = false
 )]
-trait Path {
+pub trait Path {
     /// Get property `Unit`.
     #[zbus(property(emits_changed_signal = "const"), name = "Unit")]
     fn unit(&self) -> crate::zbus::Result<String>;
@@ -8197,7 +8197,7 @@ trait Path {
     default_service = "org.freedesktop.systemd1",
     assume_defaults = false
 )]
-trait Slice {
+pub trait Slice {
     /// [📖](https://www.freedesktop.org/software/systemd/man/systemd.directives.html#GetProcesses()) Call interface method `GetProcesses`.
     #[zbus(name = "GetProcesses")]
     fn get_processes(&self) -> crate::zbus::Result<Vec<(String, u32, String)>>;
@@ -8634,7 +8634,7 @@ trait Slice {
     default_service = "org.freedesktop.systemd1",
     assume_defaults = false
 )]
-trait Scope {
+pub trait Scope {
     /// [📖](https://www.freedesktop.org/software/systemd/man/systemd.directives.html#Abandon()) Call interface method `Abandon`.
     #[zbus(name = "Abandon")]
     fn abandon(&self) -> crate::zbus::Result<()>;
@@ -9134,7 +9134,7 @@ trait Scope {
     default_service = "org.freedesktop.systemd1",
     assume_defaults = false
 )]
-trait Job {
+pub trait Job {
     /// [📖](https://www.freedesktop.org/software/systemd/man/systemd.directives.html#Cancel()) Call interface method `Cancel`.
     #[zbus(name = "Cancel")]
     fn cancel(&self) -> crate::zbus::Result<()>;

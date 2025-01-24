@@ -9,7 +9,7 @@ use crate::zbus::proxy;
     default_service = "org.freedesktop.import1",
     default_path = "/org/freedesktop/import1"
 )]
-trait Manager {
+pub trait Manager {
     /// [📖](https://www.freedesktop.org/software/systemd/man/systemd.directives.html#ImportTar()) Call interface method `ImportTar`.
     #[zbus(name = "ImportTar")]
     fn import_tar(
@@ -236,7 +236,7 @@ trait Manager {
     default_service = "org.freedesktop.import1",
     assume_defaults = false
 )]
-trait Transfer {
+pub trait Transfer {
     /// [📖](https://www.freedesktop.org/software/systemd/man/systemd.directives.html#Cancel()) Call interface method `Cancel`.
     #[zbus(name = "Cancel")]
     fn cancel(&self) -> crate::zbus::Result<()>;

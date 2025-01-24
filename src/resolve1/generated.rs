@@ -9,7 +9,7 @@ use crate::zbus::proxy;
     default_service = "org.freedesktop.resolve1",
     default_path = "/org/freedesktop/resolve1"
 )]
-trait Manager {
+pub trait Manager {
     /// [📖](https://www.freedesktop.org/software/systemd/man/systemd.directives.html#ResolveHostname()) Call interface method `ResolveHostname`.
     #[zbus(name = "ResolveHostname")]
     fn resolve_hostname(
@@ -239,7 +239,7 @@ trait Manager {
     default_service = "org.freedesktop.resolve1",
     assume_defaults = false
 )]
-trait Link {
+pub trait Link {
     /// [📖](https://www.freedesktop.org/software/systemd/man/systemd.directives.html#SetDNS()) Call interface method `SetDNS`.
     #[zbus(name = "SetDNS")]
     fn set_dns(&self, addresses: Vec<(i32, Vec<u8>)>) -> crate::zbus::Result<()>;

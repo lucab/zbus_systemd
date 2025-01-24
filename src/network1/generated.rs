@@ -9,7 +9,7 @@ use crate::zbus::proxy;
     default_service = "org.freedesktop.network1",
     default_path = "/org/freedesktop/network1"
 )]
-trait Manager {
+pub trait Manager {
     /// [📖](https://www.freedesktop.org/software/systemd/man/systemd.directives.html#ListLinks()) Call interface method `ListLinks`.
     #[zbus(name = "ListLinks")]
     fn list_links(
@@ -155,7 +155,7 @@ trait Manager {
     default_service = "org.freedesktop.network1",
     assume_defaults = false
 )]
-trait Link {
+pub trait Link {
     /// [📖](https://www.freedesktop.org/software/systemd/man/systemd.directives.html#SetNTP()) Call interface method `SetNTP`.
     #[zbus(name = "SetNTP")]
     fn set_ntp(&self, servers: Vec<String>) -> crate::zbus::Result<()>;
@@ -260,7 +260,7 @@ trait Link {
     default_service = "org.freedesktop.network1",
     assume_defaults = false
 )]
-trait Network {
+pub trait Network {
     /// Get property `Description`.
     #[zbus(property(emits_changed_signal = "const"), name = "Description")]
     fn description(&self) -> crate::zbus::Result<String>;
@@ -297,7 +297,7 @@ trait Network {
     default_service = "org.freedesktop.network1",
     assume_defaults = false
 )]
-trait DHCPServer {
+pub trait DHCPServer {
     /// Get property `Leases`.
     #[zbus(property(emits_changed_signal = "true"), name = "Leases")]
     fn leases(&self) -> crate::zbus::Result<Vec<(u32, Vec<u8>, Vec<u8>, Vec<u8>, Vec<u8>, u64)>>;
@@ -310,7 +310,7 @@ trait DHCPServer {
     default_service = "org.freedesktop.network1",
     assume_defaults = false
 )]
-trait DHCPv4Client {
+pub trait DHCPv4Client {
     /// Get property `State`.
     #[zbus(property(emits_changed_signal = "true"), name = "State")]
     fn state(&self) -> crate::zbus::Result<String>;
@@ -323,7 +323,7 @@ trait DHCPv4Client {
     default_service = "org.freedesktop.network1",
     assume_defaults = false
 )]
-trait DHCPv6Client {
+pub trait DHCPv6Client {
     /// Get property `State`.
     #[zbus(property(emits_changed_signal = "true"), name = "State")]
     fn state(&self) -> crate::zbus::Result<String>;

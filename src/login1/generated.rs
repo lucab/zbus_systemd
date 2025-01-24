@@ -9,7 +9,7 @@ use crate::zbus::proxy;
     default_service = "org.freedesktop.login1",
     default_path = "/org/freedesktop/login1"
 )]
-trait Manager {
+pub trait Manager {
     /// [📖](https://www.freedesktop.org/software/systemd/man/systemd.directives.html#GetSession()) Call interface method `GetSession`.
     #[zbus(name = "GetSession")]
     fn get_session(
@@ -706,7 +706,7 @@ trait Manager {
     default_service = "org.freedesktop.login1",
     assume_defaults = false
 )]
-trait Seat {
+pub trait Seat {
     /// [📖](https://www.freedesktop.org/software/systemd/man/systemd.directives.html#Terminate()) Call interface method `Terminate`.
     #[zbus(name = "Terminate")]
     fn terminate(&self) -> crate::zbus::Result<()>;
@@ -770,7 +770,7 @@ trait Seat {
     default_service = "org.freedesktop.login1",
     assume_defaults = false
 )]
-trait User {
+pub trait User {
     /// [📖](https://www.freedesktop.org/software/systemd/man/systemd.directives.html#Terminate()) Call interface method `Terminate`.
     #[zbus(name = "Terminate")]
     fn terminate(&self) -> crate::zbus::Result<()>;
@@ -850,7 +850,7 @@ trait User {
     default_service = "org.freedesktop.login1",
     assume_defaults = false
 )]
-trait Session {
+pub trait Session {
     /// [📖](https://www.freedesktop.org/software/systemd/man/systemd.directives.html#Terminate()) Call interface method `Terminate`.
     #[zbus(name = "Terminate")]
     fn terminate(&self) -> crate::zbus::Result<()>;

@@ -9,7 +9,7 @@ use crate::zbus::proxy;
     default_service = "org.freedesktop.hostname1",
     default_path = "/org/freedesktop/hostname1"
 )]
-trait Hostnamed {
+pub trait Hostnamed {
     /// [📖](https://www.freedesktop.org/software/systemd/man/systemd.directives.html#SetHostname()) Call interface method `SetHostname`.
     #[zbus(name = "SetHostname")]
     fn set_hostname(&self, hostname: String, interactive: bool) -> crate::zbus::Result<()>;

@@ -9,7 +9,7 @@ use crate::zbus::proxy;
     default_service = "org.freedesktop.timedate1",
     default_path = "/org/freedesktop/timedate1"
 )]
-trait Timedated {
+pub trait Timedated {
     /// [📖](https://www.freedesktop.org/software/systemd/man/systemd.directives.html#SetTime()) Call interface method `SetTime`.
     #[zbus(name = "SetTime")]
     fn set_time(&self, usec_utc: i64, relative: bool, interactive: bool)

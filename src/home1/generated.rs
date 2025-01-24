@@ -9,7 +9,7 @@ use crate::zbus::proxy;
     default_service = "org.freedesktop.home1",
     default_path = "/org/freedesktop/home1"
 )]
-trait Manager {
+pub trait Manager {
     /// [📖](https://www.freedesktop.org/software/systemd/man/systemd.directives.html#GetHomeByName()) Call interface method `GetHomeByName`.
     #[zbus(name = "GetHomeByName")]
     fn get_home_by_name(
@@ -213,7 +213,7 @@ trait Manager {
     default_service = "org.freedesktop.home1",
     assume_defaults = false
 )]
-trait Home {
+pub trait Home {
     /// [📖](https://www.freedesktop.org/software/systemd/man/systemd.directives.html#Activate()) Call interface method `Activate`.
     #[zbus(name = "Activate")]
     fn activate(&self, secret: String) -> crate::zbus::Result<()>;
