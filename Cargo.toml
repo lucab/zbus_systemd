@@ -14,7 +14,7 @@ rust-version = "1.75.0"
 [dependencies]
 futures = "0.3"
 serde = "1"
-zbus = "4.0"
+zbus = "5.3"
 
 [dev-dependencies]
 tokio = {version = "1", features = ["full"]}
