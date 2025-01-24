@@ -9,7 +9,7 @@ use crate::zbus::proxy;
     default_service = "org.freedesktop.timesync1",
     default_path = "/org/freedesktop/timesync1"
 )]
-trait Manager {
+pub trait Manager {
     /// [📖](https://www.freedesktop.org/software/systemd/man/systemd.directives.html#SetRuntimeNTPServers()) Call interface method `SetRuntimeNTPServers`.
     #[zbus(name = "SetRuntimeNTPServers")]
     fn set_runtime_ntp_servers(&self, runtime_servers: Vec<String>) -> crate::zbus::Result<()>;

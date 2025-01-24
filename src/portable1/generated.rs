@@ -9,7 +9,7 @@ use crate::zbus::proxy;
     default_service = "org.freedesktop.portable1",
     default_path = "/org/freedesktop/portable1"
 )]
-trait Manager {
+pub trait Manager {
     /// [📖](https://www.freedesktop.org/software/systemd/man/systemd.directives.html#GetImage()) Call interface method `GetImage`.
     #[zbus(name = "GetImage")]
     fn get_image(&self, image: String) -> crate::zbus::Result<crate::zvariant::OwnedObjectPath>;
@@ -181,7 +181,7 @@ trait Manager {
     default_service = "org.freedesktop.portable1",
     default_path = "/org/freedesktop/portable1"
 )]
-trait Image {
+pub trait Image {
     /// [📖](https://www.freedesktop.org/software/systemd/man/systemd.directives.html#GetOSRelease()) Call interface method `GetOSRelease`.
     #[zbus(name = "GetOSRelease")]
     fn get_os_release(&self) -> crate::zbus::Result<::std::collections::HashMap<String, String>>;

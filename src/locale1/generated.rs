@@ -9,7 +9,7 @@ use crate::zbus::proxy;
     default_service = "org.freedesktop.locale1",
     default_path = "/org/freedesktop/locale1"
 )]
-trait Localed {
+pub trait Localed {
     /// [📖](https://www.freedesktop.org/software/systemd/man/systemd.directives.html#SetLocale()) Call interface method `SetLocale`.
     #[zbus(name = "SetLocale")]
     fn set_locale(&self, locale: Vec<String>, interactive: bool) -> crate::zbus::Result<()>;

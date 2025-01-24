@@ -9,7 +9,7 @@ use crate::zbus::proxy;
     default_service = "org.freedesktop.sysupdate1",
     default_path = "/org/freedesktop/sysupdate1"
 )]
-trait Manager {
+pub trait Manager {
     /// [📖](https://www.freedesktop.org/software/systemd/man/systemd.directives.html#ListTargets()) Call interface method `ListTargets`.
     #[zbus(name = "ListTargets")]
     fn list_targets(
@@ -43,7 +43,7 @@ trait Manager {
     default_service = "org.freedesktop.sysupdate1",
     assume_defaults = false
 )]
-trait Target {
+pub trait Target {
     /// [📖](https://www.freedesktop.org/software/systemd/man/systemd.directives.html#List()) Call interface method `List`.
     #[zbus(name = "List")]
     fn list(&self, flags: u64) -> crate::zbus::Result<Vec<String>>;
@@ -113,7 +113,7 @@ trait Target {
     default_service = "org.freedesktop.sysupdate1",
     assume_defaults = false
 )]
-trait Job {
+pub trait Job {
     /// [📖](https://www.freedesktop.org/software/systemd/man/systemd.directives.html#Cancel()) Call interface method `Cancel`.
     #[zbus(name = "Cancel")]
     fn cancel(&self) -> crate::zbus::Result<()>;

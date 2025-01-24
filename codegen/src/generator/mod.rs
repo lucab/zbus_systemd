@@ -45,7 +45,7 @@ fn generate_single_object(file: &mut impl Write, node: Node, service: &Service) 
     writeln!(file, ")]")?;
 
     let struct_name = node.struct_name(service);
-    writeln!(file, "trait {} {{", struct_name,)?;
+    writeln!(file, "pub trait {} {{", struct_name,)?;
 
     if !node.methods.is_empty() {
         let overrides = service.method_overrides();

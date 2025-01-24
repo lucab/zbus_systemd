@@ -9,7 +9,7 @@ use crate::zbus::proxy;
     default_service = "org.freedesktop.machine1",
     default_path = "/org/freedesktop/machine1"
 )]
-trait Manager {
+pub trait Manager {
     /// [📖](https://www.freedesktop.org/software/systemd/man/systemd.directives.html#GetMachine()) Call interface method `GetMachine`.
     #[zbus(name = "GetMachine")]
     fn get_machine(&self, name: String) -> crate::zbus::Result<crate::zvariant::OwnedObjectPath>;
@@ -322,7 +322,7 @@ trait Manager {
     default_service = "org.freedesktop.machine1",
     assume_defaults = false
 )]
-trait Machine {
+pub trait Machine {
     /// [📖](https://www.freedesktop.org/software/systemd/man/systemd.directives.html#Terminate()) Call interface method `Terminate`.
     #[zbus(name = "Terminate")]
     fn terminate(&self) -> crate::zbus::Result<()>;
