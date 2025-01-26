@@ -12,4 +12,4 @@ heck = "0.5"
 nom = "7"
 serde = { version = "1", features = ["derive"] }
 toml = "0.8"
-xmltree = "0.10"
+xmltree = "0.11"
