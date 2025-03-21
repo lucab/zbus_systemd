@@ -1,10 +1,9 @@
 use super::data;
 use nom::bytes::complete::{tag, take, take_till, take_while};
 use nom::character::complete::{multispace0, multispace1};
-use nom::character::is_space;
 use nom::combinator::eof;
 use nom::multi::{separated_list0, separated_list1};
-use nom::sequence::{delimited, tuple};
+use nom::sequence::delimited;
 use nom::Parser;
 use nom_language::error::VerboseError;
 
@@ -69,12 +68,13 @@ fn parse_signal_args(input: &str) -> nom::IResult<&str, Vec<(String, String)>, V
             continue;
         }
 
-        let (empty, arg) = tuple((
+        let (empty, arg) = (
             multispace0,
-            take_till(|b| is_space(b as u8)),
+            take_till(|b: char| b.is_ascii_whitespace()),
             multispace1,
             take_while(|_| true),
-        ))(line)?;
+        )
+            .parse(line)?;
         eof(empty)?;
 
         let entry = (arg.1.to_string(), arg.3.to_string());

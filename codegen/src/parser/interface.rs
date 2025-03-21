@@ -2,9 +2,8 @@ use super::{data, methods, properties, signals};
 use nom::branch::alt;
 use nom::bytes::complete::{tag, take, take_till, take_until};
 use nom::character::complete::{char, multispace0, multispace1};
-use nom::character::is_space;
 use nom::combinator::eof;
-use nom::sequence::{delimited, tuple};
+use nom::sequence::delimited;
 use nom::FindSubstring;
 use nom::Parser;
 use nom_language::error::VerboseError;
@@ -37,22 +36,22 @@ pub(crate) fn parse_single_interface(
 
 /// Match interface block start, and return its name.
 fn interface_start(rest: &str) -> nom::IResult<&str, &str, VerboseError<&str>> {
-    let mut parser = tuple((
+    let mut parser = (
         multispace0,
         tag("interface"),
         multispace1,
-        take_till(|b| is_space(b as u8)),
+        take_till(|b: char| b.is_ascii_whitespace()),
         multispace0,
         char('{'),
         multispace0,
-    ));
-    let (rest, out) = parser(rest)?;
+    );
+    let (rest, out) = parser.parse(rest)?;
     Ok((rest, out.3))
 }
 
 /// Match interface block end.
 fn interface_end(text: &str) -> nom::IResult<&str, (), VerboseError<&str>> {
-    let (rest, _) = tuple((char('}'), char(';'), multispace0))(text)?;
+    let (rest, _) = (char('}'), char(';'), multispace0).parse(text)?;
     Ok((rest, ()))
 }
 

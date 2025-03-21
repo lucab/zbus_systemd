@@ -2,10 +2,9 @@ use super::data;
 use nom::branch::alt;
 use nom::bytes::complete::{tag, take, take_till, take_while};
 use nom::character::complete::{multispace0, multispace1};
-use nom::character::is_space;
 use nom::combinator::eof;
 use nom::multi::{separated_list0, separated_list1};
-use nom::sequence::{delimited, tuple};
+use nom::sequence::delimited;
 use nom::Parser;
 use nom_language::error::VerboseError;
 
@@ -93,14 +92,15 @@ fn interface_method_args(
             continue;
         }
 
-        let (_, arg) = tuple((
+        let (_, arg) = (
             multispace0,
             alt((tag("in"), tag("out"))),
             multispace1,
-            take_till(|b| is_space(b as u8)),
+            take_till(|b: char| b.is_ascii_whitespace()),
             multispace1,
             take_while(|_| true),
-        ))(line)?;
+        )
+            .parse(line)?;
         let entry = (arg.1, arg.3, arg.5);
         result.push(entry);
     }
