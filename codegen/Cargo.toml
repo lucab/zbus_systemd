@@ -9,7 +9,7 @@ publish = false
 anyhow = "1"
 fn-error-context = "0.2"
 heck = "0.5"
-nom = "7"
+nom = "8"
 serde = { version = "1", features = ["derive"] }
 toml = "0.8"
 xmltree = "0.11"
