@@ -5,9 +5,9 @@ use nom::bytes::complete::{tag, take_till};
 use nom::character::complete::{char, multispace0, multispace1};
 use nom::character::is_space;
 use nom::combinator::eof;
-use nom::error::VerboseError;
 use nom::multi::many1;
 use nom::sequence::tuple;
+use nom_language::error::VerboseError;
 
 pub(crate) fn parse_single_node<'a>(
     text: &'a str,

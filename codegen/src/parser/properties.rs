@@ -4,9 +4,10 @@ use nom::bytes::complete::{tag, take_till, take_while};
 use nom::character::complete::{multispace0, multispace1};
 use nom::character::is_space;
 use nom::combinator::eof;
-use nom::error::VerboseError;
 use nom::multi::separated_list1;
 use nom::sequence::delimited;
+use nom::Parser;
+use nom_language::error::VerboseError;
 
 /// Parse the 'properties:' section of an interface.
 pub(crate) fn parse_interface_properties(
@@ -14,10 +15,10 @@ pub(crate) fn parse_interface_properties(
 ) -> nom::IResult<&str, Vec<data::Property>, VerboseError<&str>> {
     let rest = input;
     // Ensure this is a 'properties:' section.
-    let (rest, _) = delimited(multispace0, tag("properties:"), multispace0)(rest)?;
+    let (rest, _) = delimited(multispace0, tag("properties:"), multispace0).parse(rest)?;
 
     // Split each property apart.
-    let (rest, props) = separated_list1(tag(";"), take_till(|b| b == ';'))(rest)?;
+    let (rest, props) = separated_list1(tag(";"), take_till(|b| b == ';')).parse(rest)?;
     eof(rest)?;
 
     let mut properties = Vec::with_capacity(props.len());
@@ -55,7 +56,7 @@ fn parse_single_property(input: &str) -> nom::IResult<&str, data::Property, Verb
         let (rest, _) = tag("@org.freedesktop.DBus.Property.EmitsChangedSignal")(rest)?;
         let (rest, _) = tag("(\"")(rest)?;
         let (rest, value) =
-            alt((tag("const"), tag("false"), tag("invalidates"), tag("true")))(rest)?;
+            alt((tag("const"), tag("false"), tag("invalidates"), tag("true"))).parse(rest)?;
         let (rest, _) = tag("\")")(rest)?;
         eof(rest)?;
 
@@ -71,7 +72,7 @@ fn parse_property_definition(
 ) -> nom::IResult<&str, data::Property, VerboseError<&str>> {
     let rest = input;
     let (rest, _) = multispace0(rest)?;
-    let (rest, rw_label) = alt((tag("readonly"), tag("readwrite")))(rest)?;
+    let (rest, rw_label) = alt((tag("readonly"), tag("readwrite"))).parse(rest)?;
     let (rest, _) = multispace1(rest)?;
     let (rest, type_label) = take_till(|b| is_space(b as u8))(rest)?;
     let (rest, _) = multispace1(rest)?;
@@ -99,7 +100,8 @@ fn parse_property_definition(
 #[cfg(test)]
 mod tests {
     use super::*;
-    use nom::{error::convert_error, Finish};
+    use nom::Finish;
+    use nom_language::error::convert_error;
 
     #[test]
     fn test_parse_property_definition() {

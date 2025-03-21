@@ -4,9 +4,10 @@ use nom::bytes::complete::{tag, take, take_till, take_until};
 use nom::character::complete::{char, multispace0, multispace1};
 use nom::character::is_space;
 use nom::combinator::eof;
-use nom::error::VerboseError;
 use nom::sequence::{delimited, tuple};
 use nom::FindSubstring;
+use nom::Parser;
+use nom_language::error::VerboseError;
 
 /// Parse a single interface and return its name and methods/properties/signals.
 pub(crate) fn parse_single_interface(
@@ -25,7 +26,7 @@ pub(crate) fn parse_single_interface(
 
     let (rest, methods, signals, properties) = {
         let (rest, content) = take_until("};")(rest)?;
-        let (_, out) = alt((parse_dummy_content, parse_interface_content))(content)?;
+        let (_, out) = alt((parse_dummy_content, parse_interface_content)).parse(content)?;
         (rest, out.0, out.1, out.2)
     };
 
@@ -63,7 +64,7 @@ fn parse_dummy_content(
     (Vec<data::Method>, Vec<data::Signal>, Vec<data::Property>),
     VerboseError<&str>,
 > {
-    let (rest, _) = delimited(multispace0, tag("..."), multispace0)(rest)?;
+    let (rest, _) = delimited(multispace0, tag("..."), multispace0).parse(rest)?;
     let out = (vec![], vec![], vec![]);
     Ok((rest, out))
 }

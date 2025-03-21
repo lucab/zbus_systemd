@@ -3,19 +3,20 @@ use nom::bytes::complete::{tag, take, take_till, take_while};
 use nom::character::complete::{multispace0, multispace1};
 use nom::character::is_space;
 use nom::combinator::eof;
-use nom::error::VerboseError;
 use nom::multi::{separated_list0, separated_list1};
 use nom::sequence::{delimited, tuple};
+use nom::Parser;
+use nom_language::error::VerboseError;
 
 // Parse the 'signal:' section of an interface.
 pub(crate) fn parse_interface_signals(
     input: &str,
 ) -> nom::IResult<&str, Vec<data::Signal>, VerboseError<&str>> {
     // Ensure this is a 'signals' section.
-    let (rest, _) = delimited(multispace0, tag("signals:"), multispace0)(input)?;
+    let (rest, _) = delimited(multispace0, tag("signals:"), multispace0).parse(input)?;
 
     // Split each signal apart.
-    let (rest, out) = separated_list1(tag(";"), take_till(|b| b == ';'))(rest)?;
+    let (rest, out) = separated_list1(tag(";"), take_till(|b| b == ';')).parse(rest)?;
     eof(rest)?;
 
     let mut signals = Vec::with_capacity(out.len());
@@ -58,7 +59,7 @@ fn parse_single_signal(rest: &str) -> nom::IResult<&str, data::Signal, VerboseEr
 
 // Parse signal arguments.
 fn parse_signal_args(input: &str) -> nom::IResult<&str, Vec<(String, String)>, VerboseError<&str>> {
-    let (rest, out) = separated_list0(tag(","), take_till(|b| b == ','))(input)?;
+    let (rest, out) = separated_list0(tag(","), take_till(|b| b == ',')).parse(input)?;
     eof(rest)?;
 
     let mut result = Vec::with_capacity(out.len());
