@@ -2,21 +2,21 @@ use super::data;
 use nom::branch::alt;
 use nom::bytes::complete::{tag, take, take_till, take_while};
 use nom::character::complete::{multispace0, multispace1};
-use nom::character::is_space;
 use nom::combinator::eof;
-use nom::error::VerboseError;
 use nom::multi::{separated_list0, separated_list1};
-use nom::sequence::{delimited, tuple};
+use nom::sequence::delimited;
+use nom::Parser;
+use nom_language::error::VerboseError;
 
 // Parse the 'methods:' section of an interface.
 pub(crate) fn parse_interface_methods(
     input: &str,
 ) -> nom::IResult<&str, Vec<data::Method>, VerboseError<&str>> {
     // Ensure this is a 'methods' section.
-    let (rest, _) = delimited(multispace0, tag("methods:"), multispace0)(input)?;
+    let (rest, _) = delimited(multispace0, tag("methods:"), multispace0).parse(input)?;
 
     // Split method blocks apart.
-    let (rest, blocks) = separated_list1(tag(";"), take_till(|b| b == ';'))(rest)?;
+    let (rest, blocks) = separated_list1(tag(";"), take_till(|b| b == ';')).parse(rest)?;
     eof(rest)?;
 
     let mut methods = Vec::with_capacity(blocks.len());
@@ -82,7 +82,7 @@ fn parse_single_method(input: &str) -> nom::IResult<&str, data::Method, VerboseE
 fn interface_method_args(
     text: &str,
 ) -> nom::IResult<&str, Vec<(&str, &str, &str)>, VerboseError<&str>> {
-    let (rest, out) = separated_list0(tag(","), take_till(|b| b == ','))(text)?;
+    let (rest, out) = separated_list0(tag(","), take_till(|b| b == ',')).parse(text)?;
     eof(rest)?;
 
     let mut result = Vec::with_capacity(out.len());
@@ -92,14 +92,15 @@ fn interface_method_args(
             continue;
         }
 
-        let (_, arg) = tuple((
+        let (_, arg) = (
             multispace0,
             alt((tag("in"), tag("out"))),
             multispace1,
-            take_till(|b| is_space(b as u8)),
+            take_till(|b: char| b.is_ascii_whitespace()),
             multispace1,
             take_while(|_| true),
-        ))(line)?;
+        )
+            .parse(line)?;
         let entry = (arg.1, arg.3, arg.5);
         result.push(entry);
     }

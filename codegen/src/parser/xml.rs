@@ -1,7 +1,8 @@
 use super::{data, node};
 use crate::config;
 use anyhow::{bail, format_err, Context, Result};
-use nom::{error::convert_error, Finish};
+use nom::Finish;
+use nom_language::error::convert_error;
 use std::io::BufRead;
 
 /// Parse the XML docs for systemd DBus services.
