@@ -14,12 +14,13 @@ rust-version = "1.77.0"
 [dependencies]
 futures = "0.3"
 serde = "1"
-zbus = "5.3"
+zbus = { version = "5.3", default-features = false }
 
 [dev-dependencies]
 tokio = {version = "1", features = ["full"]}
 
 [features]
+default = ["zbus_default_features"]
 home1 = []
 hostname1 = []
 import1 = []
@@ -34,6 +35,7 @@ systemd1 = []
 sysupdate1 = []
 timedate1 = []
 timesync1 = []
+zbus_default_features = ["zbus/default"]
 
 [package.metadata.docs.rs]
 all-features = true
