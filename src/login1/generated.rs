@@ -1013,6 +1013,10 @@ pub trait Session {
     #[zbus(property(emits_changed_signal = "const"), name = "Leader")]
     fn leader(&self) -> crate::zbus::Result<u32>;
 
+    /// Get property `LeaderPIDFDId`.
+    #[zbus(property(emits_changed_signal = "const"), name = "LeaderPIDFDId")]
+    fn leader_pidfd_id(&self) -> crate::zbus::Result<u64>;
+
     /// Get property `Audit`.
     #[zbus(property(emits_changed_signal = "const"), name = "Audit")]
     fn audit(&self) -> crate::zbus::Result<u32>;
