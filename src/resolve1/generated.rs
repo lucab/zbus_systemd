@@ -149,6 +149,16 @@ pub trait Manager {
     #[zbus(name = "ResetServerFeatures")]
     fn reset_server_features(&self) -> crate::zbus::Result<()>;
 
+    /// [📖](https://www.freedesktop.org/software/systemd/man/systemd.directives.html#GetDelegate()) Call interface method `GetDelegate`.
+    #[zbus(name = "GetDelegate")]
+    fn get_delegate(&self, id: String) -> crate::zbus::Result<crate::zvariant::OwnedObjectPath>;
+
+    /// [📖](https://www.freedesktop.org/software/systemd/man/systemd.directives.html#ListDelegates()) Call interface method `ListDelegates`.
+    #[zbus(name = "ListDelegates")]
+    fn list_delegates(
+        &self,
+    ) -> crate::zbus::Result<Vec<(String, crate::zvariant::OwnedObjectPath)>>;
+
     /// Get property `LLMNRHostname`.
     #[zbus(property(emits_changed_signal = "true"), name = "LLMNRHostname")]
     fn llmnr_hostname(&self) -> crate::zbus::Result<String>;

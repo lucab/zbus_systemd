@@ -91,6 +91,10 @@ pub trait Manager {
     #[zbus(name = "RegisterHome")]
     fn register_home(&self, user_record: String) -> crate::zbus::Result<()>;
 
+    /// [📖](https://www.freedesktop.org/software/systemd/man/systemd.directives.html#AdoptHome()) Call interface method `AdoptHome`.
+    #[zbus(name = "AdoptHome")]
+    fn adopt_home(&self, image_path: String, flags: u64) -> crate::zbus::Result<()>;
+
     /// [📖](https://www.freedesktop.org/software/systemd/man/systemd.directives.html#UnregisterHome()) Call interface method `UnregisterHome`.
     #[zbus(name = "UnregisterHome")]
     fn unregister_home(&self, user_name: String) -> crate::zbus::Result<()>;
@@ -186,6 +190,22 @@ pub trait Manager {
     /// [📖](https://www.freedesktop.org/software/systemd/man/systemd.directives.html#ReleaseHome()) Call interface method `ReleaseHome`.
     #[zbus(name = "ReleaseHome")]
     fn release_home(&self, user_name: String) -> crate::zbus::Result<()>;
+
+    /// [📖](https://www.freedesktop.org/software/systemd/man/systemd.directives.html#ListSigningKeys()) Call interface method `ListSigningKeys`.
+    #[zbus(name = "ListSigningKeys")]
+    fn list_signing_keys(&self) -> crate::zbus::Result<Vec<(String, String, u64)>>;
+
+    /// [📖](https://www.freedesktop.org/software/systemd/man/systemd.directives.html#GetSigningKey()) Call interface method `GetSigningKey`.
+    #[zbus(name = "GetSigningKey")]
+    fn get_signing_key(&self, name: String) -> crate::zbus::Result<(String, u64)>;
+
+    /// [📖](https://www.freedesktop.org/software/systemd/man/systemd.directives.html#AddSigningKey()) Call interface method `AddSigningKey`.
+    #[zbus(name = "AddSigningKey")]
+    fn add_signing_key(&self, name: String, pem: String, flags: u64) -> crate::zbus::Result<()>;
+
+    /// [📖](https://www.freedesktop.org/software/systemd/man/systemd.directives.html#RemoveSigningKey()) Call interface method `RemoveSigningKey`.
+    #[zbus(name = "RemoveSigningKey")]
+    fn remove_signing_key(&self, name: String, flags: u64) -> crate::zbus::Result<()>;
 
     /// [📖](https://www.freedesktop.org/software/systemd/man/systemd.directives.html#LockAllHomes()) Call interface method `LockAllHomes`.
     #[zbus(name = "LockAllHomes")]

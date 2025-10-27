@@ -123,6 +123,20 @@ pub trait Hostnamed {
     #[zbus(property(emits_changed_signal = "const"), name = "HomeURL")]
     fn home_url(&self) -> crate::zbus::Result<String>;
 
+    /// Get property `OperatingSystemImageID`.
+    #[zbus(
+        property(emits_changed_signal = "const"),
+        name = "OperatingSystemImageID"
+    )]
+    fn operating_system_image_id(&self) -> crate::zbus::Result<String>;
+
+    /// Get property `OperatingSystemImageVersion`.
+    #[zbus(
+        property(emits_changed_signal = "const"),
+        name = "OperatingSystemImageVersion"
+    )]
+    fn operating_system_image_version(&self) -> crate::zbus::Result<String>;
+
     /// Get property `HardwareVendor`.
     #[zbus(property(emits_changed_signal = "const"), name = "HardwareVendor")]
     fn hardware_vendor(&self) -> crate::zbus::Result<String>;
@@ -130,6 +144,14 @@ pub trait Hostnamed {
     /// Get property `HardwareModel`.
     #[zbus(property(emits_changed_signal = "const"), name = "HardwareModel")]
     fn hardware_model(&self) -> crate::zbus::Result<String>;
+
+    /// Get property `HardwareSKU`.
+    #[zbus(property(emits_changed_signal = "const"), name = "HardwareSKU")]
+    fn hardware_sku(&self) -> crate::zbus::Result<String>;
+
+    /// Get property `HardwareVersion`.
+    #[zbus(property(emits_changed_signal = "const"), name = "HardwareVersion")]
+    fn hardware_version(&self) -> crate::zbus::Result<String>;
 
     /// Get property `FirmwareVersion`.
     #[zbus(property(emits_changed_signal = "const"), name = "FirmwareVersion")]
@@ -154,4 +176,8 @@ pub trait Hostnamed {
     /// Get property `VSockCID`.
     #[zbus(property(emits_changed_signal = "const"), name = "VSockCID")]
     fn v_sock_cid(&self) -> crate::zbus::Result<u32>;
+
+    /// Get property `ChassisAssetTag`.
+    #[zbus(property(emits_changed_signal = "const"), name = "ChassisAssetTag")]
+    fn chassis_asset_tag(&self) -> crate::zbus::Result<String>;
 }

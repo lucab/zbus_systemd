@@ -143,6 +143,16 @@ pub trait Manager {
     #[zbus(name = "KillUnit")]
     fn kill_unit(&self, name: String, whom: String, signal: i32) -> crate::zbus::Result<()>;
 
+    /// [📖](https://www.freedesktop.org/software/systemd/man/systemd.directives.html#KillUnitSubgroup()) Call interface method `KillUnitSubgroup`.
+    #[zbus(name = "KillUnitSubgroup")]
+    fn kill_unit_subgroup(
+        &self,
+        name: String,
+        whom: String,
+        subgroup: String,
+        signal: i32,
+    ) -> crate::zbus::Result<()>;
+
     /// [📖](https://www.freedesktop.org/software/systemd/man/systemd.directives.html#QueueSignalUnit()) Call interface method `QueueSignalUnit`.
     #[zbus(name = "QueueSignalUnit")]
     fn queue_signal_unit(
@@ -230,6 +240,15 @@ pub trait Manager {
         unit_name: String,
         subcgroup: String,
         pids: Vec<u32>,
+    ) -> crate::zbus::Result<()>;
+
+    /// [📖](https://www.freedesktop.org/software/systemd/man/systemd.directives.html#RemoveSubgroupFromUnit()) Call interface method `RemoveSubgroupFromUnit`.
+    #[zbus(name = "RemoveSubgroupFromUnit")]
+    fn remove_subgroup_from_unit(
+        &self,
+        unit_name: String,
+        subcgroup: String,
+        flags: u64,
     ) -> crate::zbus::Result<()>;
 
     /// [📖](https://www.freedesktop.org/software/systemd/man/systemd.directives.html#AbandonScope()) Call interface method `AbandonScope`.
@@ -642,16 +661,6 @@ pub trait Manager {
         &self,
         name: String,
     ) -> crate::zbus::Result<Vec<(String, u32, u32, u32, u64, u32, u32, String, u32)>>;
-
-    /// [📖](https://www.freedesktop.org/software/systemd/man/systemd.directives.html#StartAuxiliaryScope()) Call interface method `StartAuxiliaryScope`.
-    #[zbus(name = "StartAuxiliaryScope")]
-    fn start_auxiliary_scope(
-        &self,
-        name: String,
-        pidfds: Vec<crate::zvariant::OwnedFd>,
-        flags: u64,
-        properties: Vec<(String, crate::zvariant::OwnedValue)>,
-    ) -> crate::zbus::Result<crate::zvariant::OwnedObjectPath>;
 
     /// Receive `UnitNew` signal.
     #[zbus(signal, name = "UnitNew")]
@@ -1204,20 +1213,6 @@ pub trait Manager {
     )]
     fn default_start_limit_burst(&self) -> crate::zbus::Result<u32>;
 
-    /// Get property `DefaultCPUAccounting`.
-    #[zbus(
-        property(emits_changed_signal = "const"),
-        name = "DefaultCPUAccounting"
-    )]
-    fn default_cpu_accounting(&self) -> crate::zbus::Result<bool>;
-
-    /// Get property `DefaultBlockIOAccounting`.
-    #[zbus(
-        property(emits_changed_signal = "const"),
-        name = "DefaultBlockIOAccounting"
-    )]
-    fn default_block_io_accounting(&self) -> crate::zbus::Result<bool>;
-
     /// Get property `DefaultIOAccounting`.
     #[zbus(property(emits_changed_signal = "const"), name = "DefaultIOAccounting")]
     fn default_io_accounting(&self) -> crate::zbus::Result<bool>;
@@ -1446,6 +1441,13 @@ pub trait Manager {
     )]
     fn default_oom_score_adjust(&self) -> crate::zbus::Result<i32>;
 
+    /// Get property `DefaultRestrictSUIDSGID`.
+    #[zbus(
+        property(emits_changed_signal = "const"),
+        name = "DefaultRestrictSUIDSGID"
+    )]
+    fn default_restrict_suidsgid(&self) -> crate::zbus::Result<bool>;
+
     /// Get property `CtrlAltDelBurstAction`.
     #[zbus(
         property(emits_changed_signal = "const"),
@@ -1524,6 +1526,10 @@ pub trait Unit {
     /// [📖](https://www.freedesktop.org/software/systemd/man/systemd.directives.html#Kill()) Call interface method `Kill`.
     #[zbus(name = "Kill")]
     fn kill(&self, whom: String, signal: i32) -> crate::zbus::Result<()>;
+
+    /// [📖](https://www.freedesktop.org/software/systemd/man/systemd.directives.html#KillSubgroup()) Call interface method `KillSubgroup`.
+    #[zbus(name = "KillSubgroup")]
+    fn kill_subgroup(&self, subgroup: String, signal: i32) -> crate::zbus::Result<()>;
 
     /// [📖](https://www.freedesktop.org/software/systemd/man/systemd.directives.html#QueueSignal()) Call interface method `QueueSignal`.
     #[zbus(name = "QueueSignal")]
@@ -2063,6 +2069,10 @@ pub trait Service {
     /// [📖](https://www.freedesktop.org/software/systemd/man/systemd.directives.html#AttachProcesses()) Call interface method `AttachProcesses`.
     #[zbus(name = "AttachProcesses")]
     fn attach_processes(&self, subcgroup: String, pids: Vec<u32>) -> crate::zbus::Result<()>;
+
+    /// [📖](https://www.freedesktop.org/software/systemd/man/systemd.directives.html#RemoveSubgroup()) Call interface method `RemoveSubgroup`.
+    #[zbus(name = "RemoveSubgroup")]
+    fn remove_subgroup(&self, subcgroup: String, flags: u64) -> crate::zbus::Result<()>;
 
     /// Get property `Type`.
     #[zbus(property(emits_changed_signal = "const"), name = "Type")]
@@ -2648,10 +2658,6 @@ pub trait Service {
     #[zbus(property(emits_changed_signal = "false"), name = "DelegateSubgroup")]
     fn delegate_subgroup(&self) -> crate::zbus::Result<String>;
 
-    /// Get property `CPUAccounting`.
-    #[zbus(property(emits_changed_signal = "false"), name = "CPUAccounting")]
-    fn cpu_accounting(&self) -> crate::zbus::Result<bool>;
-
     /// Get property `CPUWeight`.
     #[zbus(property(emits_changed_signal = "false"), name = "CPUWeight")]
     fn cpu_weight(&self) -> crate::zbus::Result<u64>;
@@ -2659,14 +2665,6 @@ pub trait Service {
     /// Get property `StartupCPUWeight`.
     #[zbus(property(emits_changed_signal = "false"), name = "StartupCPUWeight")]
     fn startup_cpu_weight(&self) -> crate::zbus::Result<u64>;
-
-    /// Get property `CPUShares`.
-    #[zbus(property(emits_changed_signal = "false"), name = "CPUShares")]
-    fn cpu_shares(&self) -> crate::zbus::Result<u64>;
-
-    /// Get property `StartupCPUShares`.
-    #[zbus(property(emits_changed_signal = "false"), name = "StartupCPUShares")]
-    fn startup_cpu_shares(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `CPUQuotaPerSecUSec`.
     #[zbus(property(emits_changed_signal = "false"), name = "CPUQuotaPerSecUSec")]
@@ -2733,39 +2731,6 @@ pub trait Service {
         name = "IODeviceLatencyTargetUSec"
     )]
     fn io_device_latency_target_u_sec(&self) -> crate::zbus::Result<Vec<(String, u64)>>;
-
-    /// Get property `BlockIOAccounting`.
-    #[zbus(property(emits_changed_signal = "false"), name = "BlockIOAccounting")]
-    fn block_io_accounting(&self) -> crate::zbus::Result<bool>;
-
-    /// Get property `BlockIOWeight`.
-    #[zbus(property(emits_changed_signal = "false"), name = "BlockIOWeight")]
-    fn block_io_weight(&self) -> crate::zbus::Result<u64>;
-
-    /// Get property `StartupBlockIOWeight`.
-    #[zbus(
-        property(emits_changed_signal = "false"),
-        name = "StartupBlockIOWeight"
-    )]
-    fn startup_block_io_weight(&self) -> crate::zbus::Result<u64>;
-
-    /// Get property `BlockIODeviceWeight`.
-    #[zbus(property(emits_changed_signal = "false"), name = "BlockIODeviceWeight")]
-    fn block_io_device_weight(&self) -> crate::zbus::Result<Vec<(String, u64)>>;
-
-    /// Get property `BlockIOReadBandwidth`.
-    #[zbus(
-        property(emits_changed_signal = "false"),
-        name = "BlockIOReadBandwidth"
-    )]
-    fn block_io_read_bandwidth(&self) -> crate::zbus::Result<Vec<(String, u64)>>;
-
-    /// Get property `BlockIOWriteBandwidth`.
-    #[zbus(
-        property(emits_changed_signal = "false"),
-        name = "BlockIOWriteBandwidth"
-    )]
-    fn block_io_write_bandwidth(&self) -> crate::zbus::Result<Vec<(String, u64)>>;
 
     /// Get property `MemoryAccounting`.
     #[zbus(property(emits_changed_signal = "false"), name = "MemoryAccounting")]
@@ -2842,10 +2807,6 @@ pub trait Service {
         name = "MemoryZSwapWriteback"
     )]
     fn memory_z_swap_writeback(&self) -> crate::zbus::Result<bool>;
-
-    /// Get property `MemoryLimit`.
-    #[zbus(property(emits_changed_signal = "false"), name = "MemoryLimit")]
-    fn memory_limit(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `DevicePolicy`.
     #[zbus(property(emits_changed_signal = "false"), name = "DevicePolicy")]
@@ -3624,6 +3585,17 @@ pub trait Service {
     #[zbus(property(emits_changed_signal = "const"), name = "StateDirectoryMode")]
     fn state_directory_mode(&self) -> crate::zbus::Result<u32>;
 
+    /// Get property `StateDirectoryAccounting`.
+    #[zbus(
+        property(emits_changed_signal = "const"),
+        name = "StateDirectoryAccounting"
+    )]
+    fn state_directory_accounting(&self) -> crate::zbus::Result<bool>;
+
+    /// Get property `StateDirectoryQuota`.
+    #[zbus(property(emits_changed_signal = "const"), name = "StateDirectoryQuota")]
+    fn state_directory_quota(&self) -> crate::zbus::Result<(u64, u32, String)>;
+
     /// Get property `StateDirectory`.
     #[zbus(property(emits_changed_signal = "const"), name = "StateDirectory")]
     fn state_directory(&self) -> crate::zbus::Result<Vec<String>>;
@@ -3639,6 +3611,17 @@ pub trait Service {
     #[zbus(property(emits_changed_signal = "const"), name = "CacheDirectoryMode")]
     fn cache_directory_mode(&self) -> crate::zbus::Result<u32>;
 
+    /// Get property `CacheDirectoryAccounting`.
+    #[zbus(
+        property(emits_changed_signal = "const"),
+        name = "CacheDirectoryAccounting"
+    )]
+    fn cache_directory_accounting(&self) -> crate::zbus::Result<bool>;
+
+    /// Get property `CacheDirectoryQuota`.
+    #[zbus(property(emits_changed_signal = "const"), name = "CacheDirectoryQuota")]
+    fn cache_directory_quota(&self) -> crate::zbus::Result<(u64, u32, String)>;
+
     /// Get property `CacheDirectory`.
     #[zbus(property(emits_changed_signal = "const"), name = "CacheDirectory")]
     fn cache_directory(&self) -> crate::zbus::Result<Vec<String>>;
@@ -3653,6 +3636,17 @@ pub trait Service {
     /// Get property `LogsDirectoryMode`.
     #[zbus(property(emits_changed_signal = "const"), name = "LogsDirectoryMode")]
     fn logs_directory_mode(&self) -> crate::zbus::Result<u32>;
+
+    /// Get property `LogsDirectoryAccounting`.
+    #[zbus(
+        property(emits_changed_signal = "const"),
+        name = "LogsDirectoryAccounting"
+    )]
+    fn logs_directory_accounting(&self) -> crate::zbus::Result<bool>;
+
+    /// Get property `LogsDirectoryQuota`.
+    #[zbus(property(emits_changed_signal = "const"), name = "LogsDirectoryQuota")]
+    fn logs_directory_quota(&self) -> crate::zbus::Result<(u64, u32, String)>;
 
     /// Get property `LogsDirectory`.
     #[zbus(property(emits_changed_signal = "const"), name = "LogsDirectory")]
@@ -3695,6 +3689,10 @@ pub trait Service {
     #[zbus(property(emits_changed_signal = "const"), name = "RestrictNamespaces")]
     fn restrict_namespaces(&self) -> crate::zbus::Result<u64>;
 
+    /// Get property `DelegateNamespaces`.
+    #[zbus(property(emits_changed_signal = "const"), name = "DelegateNamespaces")]
+    fn delegate_namespaces(&self) -> crate::zbus::Result<u64>;
+
     /// Get property `RestrictFileSystems`.
     #[zbus(property(emits_changed_signal = "const"), name = "RestrictFileSystems")]
     fn restrict_file_systems(&self) -> crate::zbus::Result<(bool, Vec<String>)>;
@@ -3735,6 +3733,33 @@ pub trait Service {
     #[zbus(property(emits_changed_signal = "const"), name = "ProtectHostname")]
     fn protect_hostname(&self) -> crate::zbus::Result<bool>;
 
+    /// Get property `ProtectHostnameEx`.
+    #[zbus(property(emits_changed_signal = "const"), name = "ProtectHostnameEx")]
+    fn protect_hostname_ex(&self) -> crate::zbus::Result<(String, String)>;
+
+    /// Get property `PrivateBPF`.
+    #[zbus(property(emits_changed_signal = "const"), name = "PrivateBPF")]
+    fn private_bpf(&self) -> crate::zbus::Result<String>;
+
+    /// Get property `BPFDelegateCommands`.
+    #[zbus(property(emits_changed_signal = "const"), name = "BPFDelegateCommands")]
+    fn bpf_delegate_commands(&self) -> crate::zbus::Result<String>;
+
+    /// Get property `BPFDelegateMaps`.
+    #[zbus(property(emits_changed_signal = "const"), name = "BPFDelegateMaps")]
+    fn bpf_delegate_maps(&self) -> crate::zbus::Result<String>;
+
+    /// Get property `BPFDelegatePrograms`.
+    #[zbus(property(emits_changed_signal = "const"), name = "BPFDelegatePrograms")]
+    fn bpf_delegate_programs(&self) -> crate::zbus::Result<String>;
+
+    /// Get property `BPFDelegateAttachments`.
+    #[zbus(
+        property(emits_changed_signal = "const"),
+        name = "BPFDelegateAttachments"
+    )]
+    fn bpf_delegate_attachments(&self) -> crate::zbus::Result<String>;
+
     /// Get property `MemoryKSM`.
     #[zbus(property(emits_changed_signal = "const"), name = "MemoryKSM")]
     fn memory_ksm(&self) -> crate::zbus::Result<bool>;
@@ -3764,6 +3789,27 @@ pub trait Service {
         name = "ExtensionImagePolicy"
     )]
     fn extension_image_policy(&self) -> crate::zbus::Result<String>;
+
+    /// Get property `StateDirectoryQuotaUsage`.
+    #[zbus(
+        property(emits_changed_signal = "false"),
+        name = "StateDirectoryQuotaUsage"
+    )]
+    fn state_directory_quota_usage(&self) -> crate::zbus::Result<(u64, u64)>;
+
+    /// Get property `CacheDirectoryQuotaUsage`.
+    #[zbus(
+        property(emits_changed_signal = "false"),
+        name = "CacheDirectoryQuotaUsage"
+    )]
+    fn cache_directory_quota_usage(&self) -> crate::zbus::Result<(u64, u64)>;
+
+    /// Get property `LogsDirectoryQuotaUsage`.
+    #[zbus(
+        property(emits_changed_signal = "false"),
+        name = "LogsDirectoryQuotaUsage"
+    )]
+    fn logs_directory_quota_usage(&self) -> crate::zbus::Result<(u64, u64)>;
 
     /// Get property `KillMode`.
     #[zbus(property(emits_changed_signal = "const"), name = "KillMode")]
@@ -3809,6 +3855,10 @@ pub trait Socket {
     /// [📖](https://www.freedesktop.org/software/systemd/man/systemd.directives.html#AttachProcesses()) Call interface method `AttachProcesses`.
     #[zbus(name = "AttachProcesses")]
     fn attach_processes(&self, subcgroup: String, pids: Vec<u32>) -> crate::zbus::Result<()>;
+
+    /// [📖](https://www.freedesktop.org/software/systemd/man/systemd.directives.html#RemoveSubgroup()) Call interface method `RemoveSubgroup`.
+    #[zbus(name = "RemoveSubgroup")]
+    fn remove_subgroup(&self, subcgroup: String, flags: u64) -> crate::zbus::Result<()>;
 
     /// Get property `BindIPv6Only`.
     #[zbus(property(emits_changed_signal = "const"), name = "BindIPv6Only")]
@@ -3921,12 +3971,9 @@ pub trait Socket {
     #[zbus(property(emits_changed_signal = "const"), name = "PassCredentials")]
     fn pass_credentials(&self) -> crate::zbus::Result<bool>;
 
-    /// Get property `PassFileDescriptorsToExec`.
-    #[zbus(
-        property(emits_changed_signal = "const"),
-        name = "PassFileDescriptorsToExec"
-    )]
-    fn pass_file_descriptors_to_exec(&self) -> crate::zbus::Result<bool>;
+    /// Get property `PassPIDFD`.
+    #[zbus(property(emits_changed_signal = "const"), name = "PassPIDFD")]
+    fn pass_pidfd(&self) -> crate::zbus::Result<bool>;
 
     /// Get property `PassSecurity`.
     #[zbus(property(emits_changed_signal = "const"), name = "PassSecurity")]
@@ -3935,6 +3982,13 @@ pub trait Socket {
     /// Get property `PassPacketInfo`.
     #[zbus(property(emits_changed_signal = "const"), name = "PassPacketInfo")]
     fn pass_packet_info(&self) -> crate::zbus::Result<bool>;
+
+    /// Get property `AcceptFileDescriptors`.
+    #[zbus(
+        property(emits_changed_signal = "const"),
+        name = "AcceptFileDescriptors"
+    )]
+    fn accept_file_descriptors(&self) -> crate::zbus::Result<bool>;
 
     /// Get property `Timestamping`.
     #[zbus(property(emits_changed_signal = "const"), name = "Timestamping")]
@@ -4051,6 +4105,14 @@ pub trait Socket {
     #[zbus(property(emits_changed_signal = "const"), name = "PollLimitBurst")]
     fn poll_limit_burst(&self) -> crate::zbus::Result<u32>;
 
+    /// Get property `DeferTrigger`.
+    #[zbus(property(emits_changed_signal = "const"), name = "DeferTrigger")]
+    fn defer_trigger(&self) -> crate::zbus::Result<String>;
+
+    /// Get property `DeferTriggerMaxUSec`.
+    #[zbus(property(emits_changed_signal = "const"), name = "DeferTriggerMaxUSec")]
+    fn defer_trigger_max_u_sec(&self) -> crate::zbus::Result<u64>;
+
     /// Get property `UID`.
     #[zbus(property(emits_changed_signal = "true"), name = "UID")]
     fn uid(&self) -> crate::zbus::Result<u32>;
@@ -4058,6 +4120,13 @@ pub trait Socket {
     /// Get property `GID`.
     #[zbus(property(emits_changed_signal = "true"), name = "GID")]
     fn gid(&self) -> crate::zbus::Result<u32>;
+
+    /// Get property `PassFileDescriptorsToExec`.
+    #[zbus(
+        property(emits_changed_signal = "const"),
+        name = "PassFileDescriptorsToExec"
+    )]
+    fn pass_file_descriptors_to_exec(&self) -> crate::zbus::Result<bool>;
 
     /// Get property `ExecStartPre`.
     #[zbus(property(emits_changed_signal = "invalidates"), name = "ExecStartPre")]
@@ -4194,10 +4263,6 @@ pub trait Socket {
     #[zbus(property(emits_changed_signal = "false"), name = "DelegateSubgroup")]
     fn delegate_subgroup(&self) -> crate::zbus::Result<String>;
 
-    /// Get property `CPUAccounting`.
-    #[zbus(property(emits_changed_signal = "false"), name = "CPUAccounting")]
-    fn cpu_accounting(&self) -> crate::zbus::Result<bool>;
-
     /// Get property `CPUWeight`.
     #[zbus(property(emits_changed_signal = "false"), name = "CPUWeight")]
     fn cpu_weight(&self) -> crate::zbus::Result<u64>;
@@ -4205,14 +4270,6 @@ pub trait Socket {
     /// Get property `StartupCPUWeight`.
     #[zbus(property(emits_changed_signal = "false"), name = "StartupCPUWeight")]
     fn startup_cpu_weight(&self) -> crate::zbus::Result<u64>;
-
-    /// Get property `CPUShares`.
-    #[zbus(property(emits_changed_signal = "false"), name = "CPUShares")]
-    fn cpu_shares(&self) -> crate::zbus::Result<u64>;
-
-    /// Get property `StartupCPUShares`.
-    #[zbus(property(emits_changed_signal = "false"), name = "StartupCPUShares")]
-    fn startup_cpu_shares(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `CPUQuotaPerSecUSec`.
     #[zbus(property(emits_changed_signal = "false"), name = "CPUQuotaPerSecUSec")]
@@ -4279,39 +4336,6 @@ pub trait Socket {
         name = "IODeviceLatencyTargetUSec"
     )]
     fn io_device_latency_target_u_sec(&self) -> crate::zbus::Result<Vec<(String, u64)>>;
-
-    /// Get property `BlockIOAccounting`.
-    #[zbus(property(emits_changed_signal = "false"), name = "BlockIOAccounting")]
-    fn block_io_accounting(&self) -> crate::zbus::Result<bool>;
-
-    /// Get property `BlockIOWeight`.
-    #[zbus(property(emits_changed_signal = "false"), name = "BlockIOWeight")]
-    fn block_io_weight(&self) -> crate::zbus::Result<u64>;
-
-    /// Get property `StartupBlockIOWeight`.
-    #[zbus(
-        property(emits_changed_signal = "false"),
-        name = "StartupBlockIOWeight"
-    )]
-    fn startup_block_io_weight(&self) -> crate::zbus::Result<u64>;
-
-    /// Get property `BlockIODeviceWeight`.
-    #[zbus(property(emits_changed_signal = "false"), name = "BlockIODeviceWeight")]
-    fn block_io_device_weight(&self) -> crate::zbus::Result<Vec<(String, u64)>>;
-
-    /// Get property `BlockIOReadBandwidth`.
-    #[zbus(
-        property(emits_changed_signal = "false"),
-        name = "BlockIOReadBandwidth"
-    )]
-    fn block_io_read_bandwidth(&self) -> crate::zbus::Result<Vec<(String, u64)>>;
-
-    /// Get property `BlockIOWriteBandwidth`.
-    #[zbus(
-        property(emits_changed_signal = "false"),
-        name = "BlockIOWriteBandwidth"
-    )]
-    fn block_io_write_bandwidth(&self) -> crate::zbus::Result<Vec<(String, u64)>>;
 
     /// Get property `MemoryAccounting`.
     #[zbus(property(emits_changed_signal = "false"), name = "MemoryAccounting")]
@@ -4388,10 +4412,6 @@ pub trait Socket {
         name = "MemoryZSwapWriteback"
     )]
     fn memory_z_swap_writeback(&self) -> crate::zbus::Result<bool>;
-
-    /// Get property `MemoryLimit`.
-    #[zbus(property(emits_changed_signal = "false"), name = "MemoryLimit")]
-    fn memory_limit(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `DevicePolicy`.
     #[zbus(property(emits_changed_signal = "false"), name = "DevicePolicy")]
@@ -5170,6 +5190,17 @@ pub trait Socket {
     #[zbus(property(emits_changed_signal = "const"), name = "StateDirectoryMode")]
     fn state_directory_mode(&self) -> crate::zbus::Result<u32>;
 
+    /// Get property `StateDirectoryAccounting`.
+    #[zbus(
+        property(emits_changed_signal = "const"),
+        name = "StateDirectoryAccounting"
+    )]
+    fn state_directory_accounting(&self) -> crate::zbus::Result<bool>;
+
+    /// Get property `StateDirectoryQuota`.
+    #[zbus(property(emits_changed_signal = "const"), name = "StateDirectoryQuota")]
+    fn state_directory_quota(&self) -> crate::zbus::Result<(u64, u32, String)>;
+
     /// Get property `StateDirectory`.
     #[zbus(property(emits_changed_signal = "const"), name = "StateDirectory")]
     fn state_directory(&self) -> crate::zbus::Result<Vec<String>>;
@@ -5185,6 +5216,17 @@ pub trait Socket {
     #[zbus(property(emits_changed_signal = "const"), name = "CacheDirectoryMode")]
     fn cache_directory_mode(&self) -> crate::zbus::Result<u32>;
 
+    /// Get property `CacheDirectoryAccounting`.
+    #[zbus(
+        property(emits_changed_signal = "const"),
+        name = "CacheDirectoryAccounting"
+    )]
+    fn cache_directory_accounting(&self) -> crate::zbus::Result<bool>;
+
+    /// Get property `CacheDirectoryQuota`.
+    #[zbus(property(emits_changed_signal = "const"), name = "CacheDirectoryQuota")]
+    fn cache_directory_quota(&self) -> crate::zbus::Result<(u64, u32, String)>;
+
     /// Get property `CacheDirectory`.
     #[zbus(property(emits_changed_signal = "const"), name = "CacheDirectory")]
     fn cache_directory(&self) -> crate::zbus::Result<Vec<String>>;
@@ -5199,6 +5241,17 @@ pub trait Socket {
     /// Get property `LogsDirectoryMode`.
     #[zbus(property(emits_changed_signal = "const"), name = "LogsDirectoryMode")]
     fn logs_directory_mode(&self) -> crate::zbus::Result<u32>;
+
+    /// Get property `LogsDirectoryAccounting`.
+    #[zbus(
+        property(emits_changed_signal = "const"),
+        name = "LogsDirectoryAccounting"
+    )]
+    fn logs_directory_accounting(&self) -> crate::zbus::Result<bool>;
+
+    /// Get property `LogsDirectoryQuota`.
+    #[zbus(property(emits_changed_signal = "const"), name = "LogsDirectoryQuota")]
+    fn logs_directory_quota(&self) -> crate::zbus::Result<(u64, u32, String)>;
 
     /// Get property `LogsDirectory`.
     #[zbus(property(emits_changed_signal = "const"), name = "LogsDirectory")]
@@ -5241,6 +5294,10 @@ pub trait Socket {
     #[zbus(property(emits_changed_signal = "const"), name = "RestrictNamespaces")]
     fn restrict_namespaces(&self) -> crate::zbus::Result<u64>;
 
+    /// Get property `DelegateNamespaces`.
+    #[zbus(property(emits_changed_signal = "const"), name = "DelegateNamespaces")]
+    fn delegate_namespaces(&self) -> crate::zbus::Result<u64>;
+
     /// Get property `RestrictFileSystems`.
     #[zbus(property(emits_changed_signal = "const"), name = "RestrictFileSystems")]
     fn restrict_file_systems(&self) -> crate::zbus::Result<(bool, Vec<String>)>;
@@ -5281,6 +5338,33 @@ pub trait Socket {
     #[zbus(property(emits_changed_signal = "const"), name = "ProtectHostname")]
     fn protect_hostname(&self) -> crate::zbus::Result<bool>;
 
+    /// Get property `ProtectHostnameEx`.
+    #[zbus(property(emits_changed_signal = "const"), name = "ProtectHostnameEx")]
+    fn protect_hostname_ex(&self) -> crate::zbus::Result<(String, String)>;
+
+    /// Get property `PrivateBPF`.
+    #[zbus(property(emits_changed_signal = "const"), name = "PrivateBPF")]
+    fn private_bpf(&self) -> crate::zbus::Result<String>;
+
+    /// Get property `BPFDelegateCommands`.
+    #[zbus(property(emits_changed_signal = "const"), name = "BPFDelegateCommands")]
+    fn bpf_delegate_commands(&self) -> crate::zbus::Result<String>;
+
+    /// Get property `BPFDelegateMaps`.
+    #[zbus(property(emits_changed_signal = "const"), name = "BPFDelegateMaps")]
+    fn bpf_delegate_maps(&self) -> crate::zbus::Result<String>;
+
+    /// Get property `BPFDelegatePrograms`.
+    #[zbus(property(emits_changed_signal = "const"), name = "BPFDelegatePrograms")]
+    fn bpf_delegate_programs(&self) -> crate::zbus::Result<String>;
+
+    /// Get property `BPFDelegateAttachments`.
+    #[zbus(
+        property(emits_changed_signal = "const"),
+        name = "BPFDelegateAttachments"
+    )]
+    fn bpf_delegate_attachments(&self) -> crate::zbus::Result<String>;
+
     /// Get property `MemoryKSM`.
     #[zbus(property(emits_changed_signal = "const"), name = "MemoryKSM")]
     fn memory_ksm(&self) -> crate::zbus::Result<bool>;
@@ -5310,6 +5394,27 @@ pub trait Socket {
         name = "ExtensionImagePolicy"
     )]
     fn extension_image_policy(&self) -> crate::zbus::Result<String>;
+
+    /// Get property `StateDirectoryQuotaUsage`.
+    #[zbus(
+        property(emits_changed_signal = "false"),
+        name = "StateDirectoryQuotaUsage"
+    )]
+    fn state_directory_quota_usage(&self) -> crate::zbus::Result<(u64, u64)>;
+
+    /// Get property `CacheDirectoryQuotaUsage`.
+    #[zbus(
+        property(emits_changed_signal = "false"),
+        name = "CacheDirectoryQuotaUsage"
+    )]
+    fn cache_directory_quota_usage(&self) -> crate::zbus::Result<(u64, u64)>;
+
+    /// Get property `LogsDirectoryQuotaUsage`.
+    #[zbus(
+        property(emits_changed_signal = "false"),
+        name = "LogsDirectoryQuotaUsage"
+    )]
+    fn logs_directory_quota_usage(&self) -> crate::zbus::Result<(u64, u64)>;
 
     /// Get property `KillMode`.
     #[zbus(property(emits_changed_signal = "const"), name = "KillMode")]
@@ -5378,6 +5483,10 @@ pub trait Mount {
     #[zbus(name = "AttachProcesses")]
     fn attach_processes(&self, subcgroup: String, pids: Vec<u32>) -> crate::zbus::Result<()>;
 
+    /// [📖](https://www.freedesktop.org/software/systemd/man/systemd.directives.html#RemoveSubgroup()) Call interface method `RemoveSubgroup`.
+    #[zbus(name = "RemoveSubgroup")]
+    fn remove_subgroup(&self, subcgroup: String, flags: u64) -> crate::zbus::Result<()>;
+
     /// Get property `Where`.
     #[zbus(property(emits_changed_signal = "const"), name = "Where")]
     fn where_property(&self) -> crate::zbus::Result<String>;
@@ -5425,6 +5534,14 @@ pub trait Mount {
     /// Get property `Result`.
     #[zbus(property(emits_changed_signal = "true"), name = "Result")]
     fn result(&self) -> crate::zbus::Result<String>;
+
+    /// Get property `ReloadResult`.
+    #[zbus(property(emits_changed_signal = "true"), name = "ReloadResult")]
+    fn reload_result(&self) -> crate::zbus::Result<String>;
+
+    /// Get property `CleanResult`.
+    #[zbus(property(emits_changed_signal = "true"), name = "CleanResult")]
+    fn clean_result(&self) -> crate::zbus::Result<String>;
 
     /// Get property `UID`.
     #[zbus(property(emits_changed_signal = "true"), name = "UID")]
@@ -5563,10 +5680,6 @@ pub trait Mount {
     #[zbus(property(emits_changed_signal = "false"), name = "DelegateSubgroup")]
     fn delegate_subgroup(&self) -> crate::zbus::Result<String>;
 
-    /// Get property `CPUAccounting`.
-    #[zbus(property(emits_changed_signal = "false"), name = "CPUAccounting")]
-    fn cpu_accounting(&self) -> crate::zbus::Result<bool>;
-
     /// Get property `CPUWeight`.
     #[zbus(property(emits_changed_signal = "false"), name = "CPUWeight")]
     fn cpu_weight(&self) -> crate::zbus::Result<u64>;
@@ -5574,14 +5687,6 @@ pub trait Mount {
     /// Get property `StartupCPUWeight`.
     #[zbus(property(emits_changed_signal = "false"), name = "StartupCPUWeight")]
     fn startup_cpu_weight(&self) -> crate::zbus::Result<u64>;
-
-    /// Get property `CPUShares`.
-    #[zbus(property(emits_changed_signal = "false"), name = "CPUShares")]
-    fn cpu_shares(&self) -> crate::zbus::Result<u64>;
-
-    /// Get property `StartupCPUShares`.
-    #[zbus(property(emits_changed_signal = "false"), name = "StartupCPUShares")]
-    fn startup_cpu_shares(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `CPUQuotaPerSecUSec`.
     #[zbus(property(emits_changed_signal = "false"), name = "CPUQuotaPerSecUSec")]
@@ -5648,39 +5753,6 @@ pub trait Mount {
         name = "IODeviceLatencyTargetUSec"
     )]
     fn io_device_latency_target_u_sec(&self) -> crate::zbus::Result<Vec<(String, u64)>>;
-
-    /// Get property `BlockIOAccounting`.
-    #[zbus(property(emits_changed_signal = "false"), name = "BlockIOAccounting")]
-    fn block_io_accounting(&self) -> crate::zbus::Result<bool>;
-
-    /// Get property `BlockIOWeight`.
-    #[zbus(property(emits_changed_signal = "false"), name = "BlockIOWeight")]
-    fn block_io_weight(&self) -> crate::zbus::Result<u64>;
-
-    /// Get property `StartupBlockIOWeight`.
-    #[zbus(
-        property(emits_changed_signal = "false"),
-        name = "StartupBlockIOWeight"
-    )]
-    fn startup_block_io_weight(&self) -> crate::zbus::Result<u64>;
-
-    /// Get property `BlockIODeviceWeight`.
-    #[zbus(property(emits_changed_signal = "false"), name = "BlockIODeviceWeight")]
-    fn block_io_device_weight(&self) -> crate::zbus::Result<Vec<(String, u64)>>;
-
-    /// Get property `BlockIOReadBandwidth`.
-    #[zbus(
-        property(emits_changed_signal = "false"),
-        name = "BlockIOReadBandwidth"
-    )]
-    fn block_io_read_bandwidth(&self) -> crate::zbus::Result<Vec<(String, u64)>>;
-
-    /// Get property `BlockIOWriteBandwidth`.
-    #[zbus(
-        property(emits_changed_signal = "false"),
-        name = "BlockIOWriteBandwidth"
-    )]
-    fn block_io_write_bandwidth(&self) -> crate::zbus::Result<Vec<(String, u64)>>;
 
     /// Get property `MemoryAccounting`.
     #[zbus(property(emits_changed_signal = "false"), name = "MemoryAccounting")]
@@ -5757,10 +5829,6 @@ pub trait Mount {
         name = "MemoryZSwapWriteback"
     )]
     fn memory_z_swap_writeback(&self) -> crate::zbus::Result<bool>;
-
-    /// Get property `MemoryLimit`.
-    #[zbus(property(emits_changed_signal = "false"), name = "MemoryLimit")]
-    fn memory_limit(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `DevicePolicy`.
     #[zbus(property(emits_changed_signal = "false"), name = "DevicePolicy")]
@@ -6539,6 +6607,17 @@ pub trait Mount {
     #[zbus(property(emits_changed_signal = "const"), name = "StateDirectoryMode")]
     fn state_directory_mode(&self) -> crate::zbus::Result<u32>;
 
+    /// Get property `StateDirectoryAccounting`.
+    #[zbus(
+        property(emits_changed_signal = "const"),
+        name = "StateDirectoryAccounting"
+    )]
+    fn state_directory_accounting(&self) -> crate::zbus::Result<bool>;
+
+    /// Get property `StateDirectoryQuota`.
+    #[zbus(property(emits_changed_signal = "const"), name = "StateDirectoryQuota")]
+    fn state_directory_quota(&self) -> crate::zbus::Result<(u64, u32, String)>;
+
     /// Get property `StateDirectory`.
     #[zbus(property(emits_changed_signal = "const"), name = "StateDirectory")]
     fn state_directory(&self) -> crate::zbus::Result<Vec<String>>;
@@ -6554,6 +6633,17 @@ pub trait Mount {
     #[zbus(property(emits_changed_signal = "const"), name = "CacheDirectoryMode")]
     fn cache_directory_mode(&self) -> crate::zbus::Result<u32>;
 
+    /// Get property `CacheDirectoryAccounting`.
+    #[zbus(
+        property(emits_changed_signal = "const"),
+        name = "CacheDirectoryAccounting"
+    )]
+    fn cache_directory_accounting(&self) -> crate::zbus::Result<bool>;
+
+    /// Get property `CacheDirectoryQuota`.
+    #[zbus(property(emits_changed_signal = "const"), name = "CacheDirectoryQuota")]
+    fn cache_directory_quota(&self) -> crate::zbus::Result<(u64, u32, String)>;
+
     /// Get property `CacheDirectory`.
     #[zbus(property(emits_changed_signal = "const"), name = "CacheDirectory")]
     fn cache_directory(&self) -> crate::zbus::Result<Vec<String>>;
@@ -6568,6 +6658,17 @@ pub trait Mount {
     /// Get property `LogsDirectoryMode`.
     #[zbus(property(emits_changed_signal = "const"), name = "LogsDirectoryMode")]
     fn logs_directory_mode(&self) -> crate::zbus::Result<u32>;
+
+    /// Get property `LogsDirectoryAccounting`.
+    #[zbus(
+        property(emits_changed_signal = "const"),
+        name = "LogsDirectoryAccounting"
+    )]
+    fn logs_directory_accounting(&self) -> crate::zbus::Result<bool>;
+
+    /// Get property `LogsDirectoryQuota`.
+    #[zbus(property(emits_changed_signal = "const"), name = "LogsDirectoryQuota")]
+    fn logs_directory_quota(&self) -> crate::zbus::Result<(u64, u32, String)>;
 
     /// Get property `LogsDirectory`.
     #[zbus(property(emits_changed_signal = "const"), name = "LogsDirectory")]
@@ -6610,6 +6711,10 @@ pub trait Mount {
     #[zbus(property(emits_changed_signal = "const"), name = "RestrictNamespaces")]
     fn restrict_namespaces(&self) -> crate::zbus::Result<u64>;
 
+    /// Get property `DelegateNamespaces`.
+    #[zbus(property(emits_changed_signal = "const"), name = "DelegateNamespaces")]
+    fn delegate_namespaces(&self) -> crate::zbus::Result<u64>;
+
     /// Get property `RestrictFileSystems`.
     #[zbus(property(emits_changed_signal = "const"), name = "RestrictFileSystems")]
     fn restrict_file_systems(&self) -> crate::zbus::Result<(bool, Vec<String>)>;
@@ -6650,6 +6755,33 @@ pub trait Mount {
     #[zbus(property(emits_changed_signal = "const"), name = "ProtectHostname")]
     fn protect_hostname(&self) -> crate::zbus::Result<bool>;
 
+    /// Get property `ProtectHostnameEx`.
+    #[zbus(property(emits_changed_signal = "const"), name = "ProtectHostnameEx")]
+    fn protect_hostname_ex(&self) -> crate::zbus::Result<(String, String)>;
+
+    /// Get property `PrivateBPF`.
+    #[zbus(property(emits_changed_signal = "const"), name = "PrivateBPF")]
+    fn private_bpf(&self) -> crate::zbus::Result<String>;
+
+    /// Get property `BPFDelegateCommands`.
+    #[zbus(property(emits_changed_signal = "const"), name = "BPFDelegateCommands")]
+    fn bpf_delegate_commands(&self) -> crate::zbus::Result<String>;
+
+    /// Get property `BPFDelegateMaps`.
+    #[zbus(property(emits_changed_signal = "const"), name = "BPFDelegateMaps")]
+    fn bpf_delegate_maps(&self) -> crate::zbus::Result<String>;
+
+    /// Get property `BPFDelegatePrograms`.
+    #[zbus(property(emits_changed_signal = "const"), name = "BPFDelegatePrograms")]
+    fn bpf_delegate_programs(&self) -> crate::zbus::Result<String>;
+
+    /// Get property `BPFDelegateAttachments`.
+    #[zbus(
+        property(emits_changed_signal = "const"),
+        name = "BPFDelegateAttachments"
+    )]
+    fn bpf_delegate_attachments(&self) -> crate::zbus::Result<String>;
+
     /// Get property `MemoryKSM`.
     #[zbus(property(emits_changed_signal = "const"), name = "MemoryKSM")]
     fn memory_ksm(&self) -> crate::zbus::Result<bool>;
@@ -6679,6 +6811,27 @@ pub trait Mount {
         name = "ExtensionImagePolicy"
     )]
     fn extension_image_policy(&self) -> crate::zbus::Result<String>;
+
+    /// Get property `StateDirectoryQuotaUsage`.
+    #[zbus(
+        property(emits_changed_signal = "false"),
+        name = "StateDirectoryQuotaUsage"
+    )]
+    fn state_directory_quota_usage(&self) -> crate::zbus::Result<(u64, u64)>;
+
+    /// Get property `CacheDirectoryQuotaUsage`.
+    #[zbus(
+        property(emits_changed_signal = "false"),
+        name = "CacheDirectoryQuotaUsage"
+    )]
+    fn cache_directory_quota_usage(&self) -> crate::zbus::Result<(u64, u64)>;
+
+    /// Get property `LogsDirectoryQuotaUsage`.
+    #[zbus(
+        property(emits_changed_signal = "false"),
+        name = "LogsDirectoryQuotaUsage"
+    )]
+    fn logs_directory_quota_usage(&self) -> crate::zbus::Result<(u64, u64)>;
 
     /// Get property `KillMode`.
     #[zbus(property(emits_changed_signal = "const"), name = "KillMode")]
@@ -6809,6 +6962,13 @@ pub trait Timer {
     #[zbus(property(emits_changed_signal = "const"), name = "RandomizedDelayUSec")]
     fn randomized_delay_u_sec(&self) -> crate::zbus::Result<u64>;
 
+    /// Get property `RandomizedOffsetUSec`.
+    #[zbus(
+        property(emits_changed_signal = "const"),
+        name = "RandomizedOffsetUSec"
+    )]
+    fn randomized_offset_u_sec(&self) -> crate::zbus::Result<u64>;
+
     /// Get property `FixedRandomDelay`.
     #[zbus(property(emits_changed_signal = "const"), name = "FixedRandomDelay")]
     fn fixed_random_delay(&self) -> crate::zbus::Result<bool>;
@@ -6845,6 +7005,10 @@ pub trait Swap {
     /// [📖](https://www.freedesktop.org/software/systemd/man/systemd.directives.html#AttachProcesses()) Call interface method `AttachProcesses`.
     #[zbus(name = "AttachProcesses")]
     fn attach_processes(&self, subcgroup: String, pids: Vec<u32>) -> crate::zbus::Result<()>;
+
+    /// [📖](https://www.freedesktop.org/software/systemd/man/systemd.directives.html#RemoveSubgroup()) Call interface method `RemoveSubgroup`.
+    #[zbus(name = "RemoveSubgroup")]
+    fn remove_subgroup(&self, subcgroup: String, flags: u64) -> crate::zbus::Result<()>;
 
     /// Get property `What`.
     #[zbus(property(emits_changed_signal = "true"), name = "What")]
@@ -7004,10 +7168,6 @@ pub trait Swap {
     #[zbus(property(emits_changed_signal = "false"), name = "DelegateSubgroup")]
     fn delegate_subgroup(&self) -> crate::zbus::Result<String>;
 
-    /// Get property `CPUAccounting`.
-    #[zbus(property(emits_changed_signal = "false"), name = "CPUAccounting")]
-    fn cpu_accounting(&self) -> crate::zbus::Result<bool>;
-
     /// Get property `CPUWeight`.
     #[zbus(property(emits_changed_signal = "false"), name = "CPUWeight")]
     fn cpu_weight(&self) -> crate::zbus::Result<u64>;
@@ -7015,14 +7175,6 @@ pub trait Swap {
     /// Get property `StartupCPUWeight`.
     #[zbus(property(emits_changed_signal = "false"), name = "StartupCPUWeight")]
     fn startup_cpu_weight(&self) -> crate::zbus::Result<u64>;
-
-    /// Get property `CPUShares`.
-    #[zbus(property(emits_changed_signal = "false"), name = "CPUShares")]
-    fn cpu_shares(&self) -> crate::zbus::Result<u64>;
-
-    /// Get property `StartupCPUShares`.
-    #[zbus(property(emits_changed_signal = "false"), name = "StartupCPUShares")]
-    fn startup_cpu_shares(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `CPUQuotaPerSecUSec`.
     #[zbus(property(emits_changed_signal = "false"), name = "CPUQuotaPerSecUSec")]
@@ -7089,39 +7241,6 @@ pub trait Swap {
         name = "IODeviceLatencyTargetUSec"
     )]
     fn io_device_latency_target_u_sec(&self) -> crate::zbus::Result<Vec<(String, u64)>>;
-
-    /// Get property `BlockIOAccounting`.
-    #[zbus(property(emits_changed_signal = "false"), name = "BlockIOAccounting")]
-    fn block_io_accounting(&self) -> crate::zbus::Result<bool>;
-
-    /// Get property `BlockIOWeight`.
-    #[zbus(property(emits_changed_signal = "false"), name = "BlockIOWeight")]
-    fn block_io_weight(&self) -> crate::zbus::Result<u64>;
-
-    /// Get property `StartupBlockIOWeight`.
-    #[zbus(
-        property(emits_changed_signal = "false"),
-        name = "StartupBlockIOWeight"
-    )]
-    fn startup_block_io_weight(&self) -> crate::zbus::Result<u64>;
-
-    /// Get property `BlockIODeviceWeight`.
-    #[zbus(property(emits_changed_signal = "false"), name = "BlockIODeviceWeight")]
-    fn block_io_device_weight(&self) -> crate::zbus::Result<Vec<(String, u64)>>;
-
-    /// Get property `BlockIOReadBandwidth`.
-    #[zbus(
-        property(emits_changed_signal = "false"),
-        name = "BlockIOReadBandwidth"
-    )]
-    fn block_io_read_bandwidth(&self) -> crate::zbus::Result<Vec<(String, u64)>>;
-
-    /// Get property `BlockIOWriteBandwidth`.
-    #[zbus(
-        property(emits_changed_signal = "false"),
-        name = "BlockIOWriteBandwidth"
-    )]
-    fn block_io_write_bandwidth(&self) -> crate::zbus::Result<Vec<(String, u64)>>;
 
     /// Get property `MemoryAccounting`.
     #[zbus(property(emits_changed_signal = "false"), name = "MemoryAccounting")]
@@ -7198,10 +7317,6 @@ pub trait Swap {
         name = "MemoryZSwapWriteback"
     )]
     fn memory_z_swap_writeback(&self) -> crate::zbus::Result<bool>;
-
-    /// Get property `MemoryLimit`.
-    #[zbus(property(emits_changed_signal = "false"), name = "MemoryLimit")]
-    fn memory_limit(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `DevicePolicy`.
     #[zbus(property(emits_changed_signal = "false"), name = "DevicePolicy")]
@@ -7980,6 +8095,17 @@ pub trait Swap {
     #[zbus(property(emits_changed_signal = "const"), name = "StateDirectoryMode")]
     fn state_directory_mode(&self) -> crate::zbus::Result<u32>;
 
+    /// Get property `StateDirectoryAccounting`.
+    #[zbus(
+        property(emits_changed_signal = "const"),
+        name = "StateDirectoryAccounting"
+    )]
+    fn state_directory_accounting(&self) -> crate::zbus::Result<bool>;
+
+    /// Get property `StateDirectoryQuota`.
+    #[zbus(property(emits_changed_signal = "const"), name = "StateDirectoryQuota")]
+    fn state_directory_quota(&self) -> crate::zbus::Result<(u64, u32, String)>;
+
     /// Get property `StateDirectory`.
     #[zbus(property(emits_changed_signal = "const"), name = "StateDirectory")]
     fn state_directory(&self) -> crate::zbus::Result<Vec<String>>;
@@ -7995,6 +8121,17 @@ pub trait Swap {
     #[zbus(property(emits_changed_signal = "const"), name = "CacheDirectoryMode")]
     fn cache_directory_mode(&self) -> crate::zbus::Result<u32>;
 
+    /// Get property `CacheDirectoryAccounting`.
+    #[zbus(
+        property(emits_changed_signal = "const"),
+        name = "CacheDirectoryAccounting"
+    )]
+    fn cache_directory_accounting(&self) -> crate::zbus::Result<bool>;
+
+    /// Get property `CacheDirectoryQuota`.
+    #[zbus(property(emits_changed_signal = "const"), name = "CacheDirectoryQuota")]
+    fn cache_directory_quota(&self) -> crate::zbus::Result<(u64, u32, String)>;
+
     /// Get property `CacheDirectory`.
     #[zbus(property(emits_changed_signal = "const"), name = "CacheDirectory")]
     fn cache_directory(&self) -> crate::zbus::Result<Vec<String>>;
@@ -8009,6 +8146,17 @@ pub trait Swap {
     /// Get property `LogsDirectoryMode`.
     #[zbus(property(emits_changed_signal = "const"), name = "LogsDirectoryMode")]
     fn logs_directory_mode(&self) -> crate::zbus::Result<u32>;
+
+    /// Get property `LogsDirectoryAccounting`.
+    #[zbus(
+        property(emits_changed_signal = "const"),
+        name = "LogsDirectoryAccounting"
+    )]
+    fn logs_directory_accounting(&self) -> crate::zbus::Result<bool>;
+
+    /// Get property `LogsDirectoryQuota`.
+    #[zbus(property(emits_changed_signal = "const"), name = "LogsDirectoryQuota")]
+    fn logs_directory_quota(&self) -> crate::zbus::Result<(u64, u32, String)>;
 
     /// Get property `LogsDirectory`.
     #[zbus(property(emits_changed_signal = "const"), name = "LogsDirectory")]
@@ -8051,6 +8199,10 @@ pub trait Swap {
     #[zbus(property(emits_changed_signal = "const"), name = "RestrictNamespaces")]
     fn restrict_namespaces(&self) -> crate::zbus::Result<u64>;
 
+    /// Get property `DelegateNamespaces`.
+    #[zbus(property(emits_changed_signal = "const"), name = "DelegateNamespaces")]
+    fn delegate_namespaces(&self) -> crate::zbus::Result<u64>;
+
     /// Get property `RestrictFileSystems`.
     #[zbus(property(emits_changed_signal = "const"), name = "RestrictFileSystems")]
     fn restrict_file_systems(&self) -> crate::zbus::Result<(bool, Vec<String>)>;
@@ -8091,6 +8243,33 @@ pub trait Swap {
     #[zbus(property(emits_changed_signal = "const"), name = "ProtectHostname")]
     fn protect_hostname(&self) -> crate::zbus::Result<bool>;
 
+    /// Get property `ProtectHostnameEx`.
+    #[zbus(property(emits_changed_signal = "const"), name = "ProtectHostnameEx")]
+    fn protect_hostname_ex(&self) -> crate::zbus::Result<(String, String)>;
+
+    /// Get property `PrivateBPF`.
+    #[zbus(property(emits_changed_signal = "const"), name = "PrivateBPF")]
+    fn private_bpf(&self) -> crate::zbus::Result<String>;
+
+    /// Get property `BPFDelegateCommands`.
+    #[zbus(property(emits_changed_signal = "const"), name = "BPFDelegateCommands")]
+    fn bpf_delegate_commands(&self) -> crate::zbus::Result<String>;
+
+    /// Get property `BPFDelegateMaps`.
+    #[zbus(property(emits_changed_signal = "const"), name = "BPFDelegateMaps")]
+    fn bpf_delegate_maps(&self) -> crate::zbus::Result<String>;
+
+    /// Get property `BPFDelegatePrograms`.
+    #[zbus(property(emits_changed_signal = "const"), name = "BPFDelegatePrograms")]
+    fn bpf_delegate_programs(&self) -> crate::zbus::Result<String>;
+
+    /// Get property `BPFDelegateAttachments`.
+    #[zbus(
+        property(emits_changed_signal = "const"),
+        name = "BPFDelegateAttachments"
+    )]
+    fn bpf_delegate_attachments(&self) -> crate::zbus::Result<String>;
+
     /// Get property `MemoryKSM`.
     #[zbus(property(emits_changed_signal = "const"), name = "MemoryKSM")]
     fn memory_ksm(&self) -> crate::zbus::Result<bool>;
@@ -8120,6 +8299,27 @@ pub trait Swap {
         name = "ExtensionImagePolicy"
     )]
     fn extension_image_policy(&self) -> crate::zbus::Result<String>;
+
+    /// Get property `StateDirectoryQuotaUsage`.
+    #[zbus(
+        property(emits_changed_signal = "false"),
+        name = "StateDirectoryQuotaUsage"
+    )]
+    fn state_directory_quota_usage(&self) -> crate::zbus::Result<(u64, u64)>;
+
+    /// Get property `CacheDirectoryQuotaUsage`.
+    #[zbus(
+        property(emits_changed_signal = "false"),
+        name = "CacheDirectoryQuotaUsage"
+    )]
+    fn cache_directory_quota_usage(&self) -> crate::zbus::Result<(u64, u64)>;
+
+    /// Get property `LogsDirectoryQuotaUsage`.
+    #[zbus(
+        property(emits_changed_signal = "false"),
+        name = "LogsDirectoryQuotaUsage"
+    )]
+    fn logs_directory_quota_usage(&self) -> crate::zbus::Result<(u64, u64)>;
 
     /// Get property `KillMode`.
     #[zbus(property(emits_changed_signal = "const"), name = "KillMode")]
@@ -8205,6 +8405,22 @@ pub trait Slice {
     /// [📖](https://www.freedesktop.org/software/systemd/man/systemd.directives.html#AttachProcesses()) Call interface method `AttachProcesses`.
     #[zbus(name = "AttachProcesses")]
     fn attach_processes(&self, subcgroup: String, pids: Vec<u32>) -> crate::zbus::Result<()>;
+
+    /// [📖](https://www.freedesktop.org/software/systemd/man/systemd.directives.html#RemoveSubgroup()) Call interface method `RemoveSubgroup`.
+    #[zbus(name = "RemoveSubgroup")]
+    fn remove_subgroup(&self, subcgroup: String, flags: u64) -> crate::zbus::Result<()>;
+
+    /// Get property `ConcurrencyHardMax`.
+    #[zbus(property(emits_changed_signal = "false"), name = "ConcurrencyHardMax")]
+    fn concurrency_hard_max(&self) -> crate::zbus::Result<u32>;
+
+    /// Get property `ConcurrencySoftMax`.
+    #[zbus(property(emits_changed_signal = "false"), name = "ConcurrencySoftMax")]
+    fn concurrency_soft_max(&self) -> crate::zbus::Result<u32>;
+
+    /// Get property `NCurrentlyActive`.
+    #[zbus(property(emits_changed_signal = "false"), name = "NCurrentlyActive")]
+    fn n_currently_active(&self) -> crate::zbus::Result<u32>;
 
     /// Get property `Slice`.
     #[zbus(property(emits_changed_signal = "false"), name = "Slice")]
@@ -8317,10 +8533,6 @@ pub trait Slice {
     #[zbus(property(emits_changed_signal = "false"), name = "DelegateSubgroup")]
     fn delegate_subgroup(&self) -> crate::zbus::Result<String>;
 
-    /// Get property `CPUAccounting`.
-    #[zbus(property(emits_changed_signal = "false"), name = "CPUAccounting")]
-    fn cpu_accounting(&self) -> crate::zbus::Result<bool>;
-
     /// Get property `CPUWeight`.
     #[zbus(property(emits_changed_signal = "false"), name = "CPUWeight")]
     fn cpu_weight(&self) -> crate::zbus::Result<u64>;
@@ -8328,14 +8540,6 @@ pub trait Slice {
     /// Get property `StartupCPUWeight`.
     #[zbus(property(emits_changed_signal = "false"), name = "StartupCPUWeight")]
     fn startup_cpu_weight(&self) -> crate::zbus::Result<u64>;
-
-    /// Get property `CPUShares`.
-    #[zbus(property(emits_changed_signal = "false"), name = "CPUShares")]
-    fn cpu_shares(&self) -> crate::zbus::Result<u64>;
-
-    /// Get property `StartupCPUShares`.
-    #[zbus(property(emits_changed_signal = "false"), name = "StartupCPUShares")]
-    fn startup_cpu_shares(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `CPUQuotaPerSecUSec`.
     #[zbus(property(emits_changed_signal = "false"), name = "CPUQuotaPerSecUSec")]
@@ -8402,39 +8606,6 @@ pub trait Slice {
         name = "IODeviceLatencyTargetUSec"
     )]
     fn io_device_latency_target_u_sec(&self) -> crate::zbus::Result<Vec<(String, u64)>>;
-
-    /// Get property `BlockIOAccounting`.
-    #[zbus(property(emits_changed_signal = "false"), name = "BlockIOAccounting")]
-    fn block_io_accounting(&self) -> crate::zbus::Result<bool>;
-
-    /// Get property `BlockIOWeight`.
-    #[zbus(property(emits_changed_signal = "false"), name = "BlockIOWeight")]
-    fn block_io_weight(&self) -> crate::zbus::Result<u64>;
-
-    /// Get property `StartupBlockIOWeight`.
-    #[zbus(
-        property(emits_changed_signal = "false"),
-        name = "StartupBlockIOWeight"
-    )]
-    fn startup_block_io_weight(&self) -> crate::zbus::Result<u64>;
-
-    /// Get property `BlockIODeviceWeight`.
-    #[zbus(property(emits_changed_signal = "false"), name = "BlockIODeviceWeight")]
-    fn block_io_device_weight(&self) -> crate::zbus::Result<Vec<(String, u64)>>;
-
-    /// Get property `BlockIOReadBandwidth`.
-    #[zbus(
-        property(emits_changed_signal = "false"),
-        name = "BlockIOReadBandwidth"
-    )]
-    fn block_io_read_bandwidth(&self) -> crate::zbus::Result<Vec<(String, u64)>>;
-
-    /// Get property `BlockIOWriteBandwidth`.
-    #[zbus(
-        property(emits_changed_signal = "false"),
-        name = "BlockIOWriteBandwidth"
-    )]
-    fn block_io_write_bandwidth(&self) -> crate::zbus::Result<Vec<(String, u64)>>;
 
     /// Get property `MemoryAccounting`.
     #[zbus(property(emits_changed_signal = "false"), name = "MemoryAccounting")]
@@ -8511,10 +8682,6 @@ pub trait Slice {
         name = "MemoryZSwapWriteback"
     )]
     fn memory_z_swap_writeback(&self) -> crate::zbus::Result<bool>;
-
-    /// Get property `MemoryLimit`.
-    #[zbus(property(emits_changed_signal = "false"), name = "MemoryLimit")]
-    fn memory_limit(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `DevicePolicy`.
     #[zbus(property(emits_changed_signal = "false"), name = "DevicePolicy")]
@@ -8646,6 +8813,10 @@ pub trait Scope {
     /// [📖](https://www.freedesktop.org/software/systemd/man/systemd.directives.html#AttachProcesses()) Call interface method `AttachProcesses`.
     #[zbus(name = "AttachProcesses")]
     fn attach_processes(&self, subcgroup: String, pids: Vec<u32>) -> crate::zbus::Result<()>;
+
+    /// [📖](https://www.freedesktop.org/software/systemd/man/systemd.directives.html#RemoveSubgroup()) Call interface method `RemoveSubgroup`.
+    #[zbus(name = "RemoveSubgroup")]
+    fn remove_subgroup(&self, subcgroup: String, flags: u64) -> crate::zbus::Result<()>;
 
     /// Receive `RequestStop` signal.
     #[zbus(signal, name = "RequestStop")]
@@ -8789,10 +8960,6 @@ pub trait Scope {
     #[zbus(property(emits_changed_signal = "false"), name = "DelegateSubgroup")]
     fn delegate_subgroup(&self) -> crate::zbus::Result<String>;
 
-    /// Get property `CPUAccounting`.
-    #[zbus(property(emits_changed_signal = "false"), name = "CPUAccounting")]
-    fn cpu_accounting(&self) -> crate::zbus::Result<bool>;
-
     /// Get property `CPUWeight`.
     #[zbus(property(emits_changed_signal = "false"), name = "CPUWeight")]
     fn cpu_weight(&self) -> crate::zbus::Result<u64>;
@@ -8800,14 +8967,6 @@ pub trait Scope {
     /// Get property `StartupCPUWeight`.
     #[zbus(property(emits_changed_signal = "false"), name = "StartupCPUWeight")]
     fn startup_cpu_weight(&self) -> crate::zbus::Result<u64>;
-
-    /// Get property `CPUShares`.
-    #[zbus(property(emits_changed_signal = "false"), name = "CPUShares")]
-    fn cpu_shares(&self) -> crate::zbus::Result<u64>;
-
-    /// Get property `StartupCPUShares`.
-    #[zbus(property(emits_changed_signal = "false"), name = "StartupCPUShares")]
-    fn startup_cpu_shares(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `CPUQuotaPerSecUSec`.
     #[zbus(property(emits_changed_signal = "false"), name = "CPUQuotaPerSecUSec")]
@@ -8874,39 +9033,6 @@ pub trait Scope {
         name = "IODeviceLatencyTargetUSec"
     )]
     fn io_device_latency_target_u_sec(&self) -> crate::zbus::Result<Vec<(String, u64)>>;
-
-    /// Get property `BlockIOAccounting`.
-    #[zbus(property(emits_changed_signal = "false"), name = "BlockIOAccounting")]
-    fn block_io_accounting(&self) -> crate::zbus::Result<bool>;
-
-    /// Get property `BlockIOWeight`.
-    #[zbus(property(emits_changed_signal = "false"), name = "BlockIOWeight")]
-    fn block_io_weight(&self) -> crate::zbus::Result<u64>;
-
-    /// Get property `StartupBlockIOWeight`.
-    #[zbus(
-        property(emits_changed_signal = "false"),
-        name = "StartupBlockIOWeight"
-    )]
-    fn startup_block_io_weight(&self) -> crate::zbus::Result<u64>;
-
-    /// Get property `BlockIODeviceWeight`.
-    #[zbus(property(emits_changed_signal = "false"), name = "BlockIODeviceWeight")]
-    fn block_io_device_weight(&self) -> crate::zbus::Result<Vec<(String, u64)>>;
-
-    /// Get property `BlockIOReadBandwidth`.
-    #[zbus(
-        property(emits_changed_signal = "false"),
-        name = "BlockIOReadBandwidth"
-    )]
-    fn block_io_read_bandwidth(&self) -> crate::zbus::Result<Vec<(String, u64)>>;
-
-    /// Get property `BlockIOWriteBandwidth`.
-    #[zbus(
-        property(emits_changed_signal = "false"),
-        name = "BlockIOWriteBandwidth"
-    )]
-    fn block_io_write_bandwidth(&self) -> crate::zbus::Result<Vec<(String, u64)>>;
 
     /// Get property `MemoryAccounting`.
     #[zbus(property(emits_changed_signal = "false"), name = "MemoryAccounting")]
@@ -8983,10 +9109,6 @@ pub trait Scope {
         name = "MemoryZSwapWriteback"
     )]
     fn memory_z_swap_writeback(&self) -> crate::zbus::Result<bool>;
-
-    /// Get property `MemoryLimit`.
-    #[zbus(property(emits_changed_signal = "false"), name = "MemoryLimit")]
-    fn memory_limit(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `DevicePolicy`.
     #[zbus(property(emits_changed_signal = "false"), name = "DevicePolicy")]

@@ -12,7 +12,7 @@ fmt:
 generate:
   cargo run --manifest-path ./codegen/Cargo.toml --locked
 
-current_sd_tag := 'v257'
+current_sd_tag := 'v258'
 bump-systemd sd_tag=current_sd_tag:
   #!/usr/bin/env bash
   set -euo pipefail

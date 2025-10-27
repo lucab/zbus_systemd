@@ -429,9 +429,25 @@ pub trait Machine {
     #[zbus(property(emits_changed_signal = "const"), name = "Unit")]
     fn unit(&self) -> crate::zbus::Result<String>;
 
+    /// Get property `Subgroup`.
+    #[zbus(property(emits_changed_signal = "const"), name = "Subgroup")]
+    fn subgroup(&self) -> crate::zbus::Result<String>;
+
     /// Get property `Leader`.
     #[zbus(property(emits_changed_signal = "const"), name = "Leader")]
     fn leader(&self) -> crate::zbus::Result<u32>;
+
+    /// Get property `LeaderPIDFDId`.
+    #[zbus(property(emits_changed_signal = "const"), name = "LeaderPIDFDId")]
+    fn leader_pidfd_id(&self) -> crate::zbus::Result<u64>;
+
+    /// Get property `Supervisor`.
+    #[zbus(property(emits_changed_signal = "const"), name = "Supervisor")]
+    fn supervisor(&self) -> crate::zbus::Result<u32>;
+
+    /// Get property `SupervisorPIDFDId`.
+    #[zbus(property(emits_changed_signal = "const"), name = "SupervisorPIDFDId")]
+    fn supervisor_pidfd_id(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `Class`.
     #[zbus(property(emits_changed_signal = "const"), name = "Class")]
@@ -460,4 +476,8 @@ pub trait Machine {
     /// Get property `State`.
     #[zbus(property(emits_changed_signal = "false"), name = "State")]
     fn state(&self) -> crate::zbus::Result<String>;
+
+    /// Get property `UID`.
+    #[zbus(property(emits_changed_signal = "const"), name = "UID")]
+    fn uid(&self) -> crate::zbus::Result<u32>;
 }
