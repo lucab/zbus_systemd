@@ -72,6 +72,15 @@ pub trait Manager {
         scope_properties: Vec<(String, crate::zvariant::OwnedValue)>,
     ) -> crate::zbus::Result<crate::zvariant::OwnedObjectPath>;
 
+    /// [📖](https://www.freedesktop.org/software/systemd/man/systemd.directives.html#CreateMachineEx()) Call interface method `CreateMachineEx`.
+    #[zbus(name = "CreateMachineEx")]
+    fn create_machine_ex(
+        &self,
+        name: String,
+        properties: Vec<(String, crate::zvariant::OwnedValue)>,
+        scope_properties: Vec<(String, crate::zvariant::OwnedValue)>,
+    ) -> crate::zbus::Result<crate::zvariant::OwnedObjectPath>;
+
     /// [📖](https://www.freedesktop.org/software/systemd/man/systemd.directives.html#RegisterMachine()) Call interface method `RegisterMachine`.
     #[zbus(name = "RegisterMachine")]
     fn register_machine(
@@ -95,6 +104,14 @@ pub trait Manager {
         leader: u32,
         root_directory: String,
         ifindices: Vec<i32>,
+    ) -> crate::zbus::Result<crate::zvariant::OwnedObjectPath>;
+
+    /// [📖](https://www.freedesktop.org/software/systemd/man/systemd.directives.html#RegisterMachineEx()) Call interface method `RegisterMachineEx`.
+    #[zbus(name = "RegisterMachineEx")]
+    fn register_machine_ex(
+        &self,
+        name: String,
+        properties: Vec<(String, crate::zvariant::OwnedValue)>,
     ) -> crate::zbus::Result<crate::zvariant::OwnedObjectPath>;
 
     /// [📖](https://www.freedesktop.org/software/systemd/man/systemd.directives.html#UnregisterMachine()) Call interface method `UnregisterMachine`.

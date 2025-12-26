@@ -1039,6 +1039,13 @@ pub trait Manager {
     #[zbus(property(emits_changed_signal = "false"), name = "NFailedJobs")]
     fn n_failed_jobs(&self) -> crate::zbus::Result<u32>;
 
+    /// Get property `TransactionsWithOrderingCycle`.
+    #[zbus(
+        property(emits_changed_signal = "false"),
+        name = "TransactionsWithOrderingCycle"
+    )]
+    fn transactions_with_ordering_cycle(&self) -> crate::zbus::Result<Vec<u64>>;
+
     /// Get property `Progress`.
     #[zbus(property(emits_changed_signal = "false"), name = "Progress")]
     fn progress(&self) -> crate::zbus::Result<f64>;
@@ -2494,6 +2501,37 @@ pub trait Service {
         )>,
     >;
 
+    /// Get property `ExecReloadPost`.
+    #[zbus(
+        property(emits_changed_signal = "invalidates"),
+        name = "ExecReloadPost"
+    )]
+    fn exec_reload_post(
+        &self,
+    ) -> crate::zbus::Result<Vec<(String, Vec<String>, bool, u64, u64, u64, u64, u32, i32, i32)>>;
+
+    /// Get property `ExecReloadPostEx`.
+    #[zbus(
+        property(emits_changed_signal = "invalidates"),
+        name = "ExecReloadPostEx"
+    )]
+    fn exec_reload_post_ex(
+        &self,
+    ) -> crate::zbus::Result<
+        Vec<(
+            String,
+            Vec<String>,
+            Vec<String>,
+            u64,
+            u64,
+            u64,
+            u64,
+            u32,
+            i32,
+            i32,
+        )>,
+    >;
+
     /// Get property `ExecStop`.
     #[zbus(property(emits_changed_signal = "invalidates"), name = "ExecStop")]
     fn exec_stop(
@@ -2645,6 +2683,14 @@ pub trait Service {
     /// Get property `IOWriteOperations`.
     #[zbus(property(emits_changed_signal = "false"), name = "IOWriteOperations")]
     fn io_write_operations(&self) -> crate::zbus::Result<u64>;
+
+    /// Get property `OOMKills`.
+    #[zbus(property(emits_changed_signal = "false"), name = "OOMKills")]
+    fn oom_kills(&self) -> crate::zbus::Result<u64>;
+
+    /// Get property `ManagedOOMKills`.
+    #[zbus(property(emits_changed_signal = "false"), name = "ManagedOOMKills")]
+    fn managed_oom_kills(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `Delegate`.
     #[zbus(property(emits_changed_signal = "false"), name = "Delegate")]
@@ -3763,6 +3809,10 @@ pub trait Service {
     /// Get property `MemoryKSM`.
     #[zbus(property(emits_changed_signal = "const"), name = "MemoryKSM")]
     fn memory_ksm(&self) -> crate::zbus::Result<bool>;
+
+    /// Get property `UserNamespacePath`.
+    #[zbus(property(emits_changed_signal = "const"), name = "UserNamespacePath")]
+    fn user_namespace_path(&self) -> crate::zbus::Result<String>;
 
     /// Get property `NetworkNamespacePath`.
     #[zbus(
@@ -4251,6 +4301,14 @@ pub trait Socket {
     #[zbus(property(emits_changed_signal = "false"), name = "IOWriteOperations")]
     fn io_write_operations(&self) -> crate::zbus::Result<u64>;
 
+    /// Get property `OOMKills`.
+    #[zbus(property(emits_changed_signal = "false"), name = "OOMKills")]
+    fn oom_kills(&self) -> crate::zbus::Result<u64>;
+
+    /// Get property `ManagedOOMKills`.
+    #[zbus(property(emits_changed_signal = "false"), name = "ManagedOOMKills")]
+    fn managed_oom_kills(&self) -> crate::zbus::Result<u64>;
+
     /// Get property `Delegate`.
     #[zbus(property(emits_changed_signal = "false"), name = "Delegate")]
     fn delegate(&self) -> crate::zbus::Result<bool>;
@@ -5368,6 +5426,10 @@ pub trait Socket {
     /// Get property `MemoryKSM`.
     #[zbus(property(emits_changed_signal = "const"), name = "MemoryKSM")]
     fn memory_ksm(&self) -> crate::zbus::Result<bool>;
+
+    /// Get property `UserNamespacePath`.
+    #[zbus(property(emits_changed_signal = "const"), name = "UserNamespacePath")]
+    fn user_namespace_path(&self) -> crate::zbus::Result<String>;
 
     /// Get property `NetworkNamespacePath`.
     #[zbus(
@@ -5668,6 +5730,14 @@ pub trait Mount {
     #[zbus(property(emits_changed_signal = "false"), name = "IOWriteOperations")]
     fn io_write_operations(&self) -> crate::zbus::Result<u64>;
 
+    /// Get property `OOMKills`.
+    #[zbus(property(emits_changed_signal = "false"), name = "OOMKills")]
+    fn oom_kills(&self) -> crate::zbus::Result<u64>;
+
+    /// Get property `ManagedOOMKills`.
+    #[zbus(property(emits_changed_signal = "false"), name = "ManagedOOMKills")]
+    fn managed_oom_kills(&self) -> crate::zbus::Result<u64>;
+
     /// Get property `Delegate`.
     #[zbus(property(emits_changed_signal = "false"), name = "Delegate")]
     fn delegate(&self) -> crate::zbus::Result<bool>;
@@ -6785,6 +6855,10 @@ pub trait Mount {
     /// Get property `MemoryKSM`.
     #[zbus(property(emits_changed_signal = "const"), name = "MemoryKSM")]
     fn memory_ksm(&self) -> crate::zbus::Result<bool>;
+
+    /// Get property `UserNamespacePath`.
+    #[zbus(property(emits_changed_signal = "const"), name = "UserNamespacePath")]
+    fn user_namespace_path(&self) -> crate::zbus::Result<String>;
 
     /// Get property `NetworkNamespacePath`.
     #[zbus(
@@ -7156,6 +7230,14 @@ pub trait Swap {
     #[zbus(property(emits_changed_signal = "false"), name = "IOWriteOperations")]
     fn io_write_operations(&self) -> crate::zbus::Result<u64>;
 
+    /// Get property `OOMKills`.
+    #[zbus(property(emits_changed_signal = "false"), name = "OOMKills")]
+    fn oom_kills(&self) -> crate::zbus::Result<u64>;
+
+    /// Get property `ManagedOOMKills`.
+    #[zbus(property(emits_changed_signal = "false"), name = "ManagedOOMKills")]
+    fn managed_oom_kills(&self) -> crate::zbus::Result<u64>;
+
     /// Get property `Delegate`.
     #[zbus(property(emits_changed_signal = "false"), name = "Delegate")]
     fn delegate(&self) -> crate::zbus::Result<bool>;
@@ -8274,6 +8356,10 @@ pub trait Swap {
     #[zbus(property(emits_changed_signal = "const"), name = "MemoryKSM")]
     fn memory_ksm(&self) -> crate::zbus::Result<bool>;
 
+    /// Get property `UserNamespacePath`.
+    #[zbus(property(emits_changed_signal = "const"), name = "UserNamespacePath")]
+    fn user_namespace_path(&self) -> crate::zbus::Result<String>;
+
     /// Get property `NetworkNamespacePath`.
     #[zbus(
         property(emits_changed_signal = "const"),
@@ -8520,6 +8606,14 @@ pub trait Slice {
     /// Get property `IOWriteOperations`.
     #[zbus(property(emits_changed_signal = "false"), name = "IOWriteOperations")]
     fn io_write_operations(&self) -> crate::zbus::Result<u64>;
+
+    /// Get property `OOMKills`.
+    #[zbus(property(emits_changed_signal = "false"), name = "OOMKills")]
+    fn oom_kills(&self) -> crate::zbus::Result<u64>;
+
+    /// Get property `ManagedOOMKills`.
+    #[zbus(property(emits_changed_signal = "false"), name = "ManagedOOMKills")]
+    fn managed_oom_kills(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `Delegate`.
     #[zbus(property(emits_changed_signal = "false"), name = "Delegate")]
@@ -8947,6 +9041,14 @@ pub trait Scope {
     /// Get property `IOWriteOperations`.
     #[zbus(property(emits_changed_signal = "false"), name = "IOWriteOperations")]
     fn io_write_operations(&self) -> crate::zbus::Result<u64>;
+
+    /// Get property `OOMKills`.
+    #[zbus(property(emits_changed_signal = "false"), name = "OOMKills")]
+    fn oom_kills(&self) -> crate::zbus::Result<u64>;
+
+    /// Get property `ManagedOOMKills`.
+    #[zbus(property(emits_changed_signal = "false"), name = "ManagedOOMKills")]
+    fn managed_oom_kills(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `Delegate`.
     #[zbus(property(emits_changed_signal = "false"), name = "Delegate")]

@@ -839,7 +839,7 @@ pub trait User {
     fn idle_since_hint_monotonic(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `Linger`.
-    #[zbus(property(emits_changed_signal = "false"), name = "Linger")]
+    #[zbus(property(emits_changed_signal = "true"), name = "Linger")]
     fn linger(&self) -> crate::zbus::Result<bool>;
 }
 
