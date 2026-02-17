@@ -12,7 +12,6 @@ version = "0.25900.0"
 rust-version = "1.85.0"
 
 [dependencies]
-futures = "0.3"
 serde = "1"
 zbus = "5.3"
 
