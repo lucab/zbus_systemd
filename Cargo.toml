@@ -9,14 +9,14 @@ license = "MIT/Apache-2.0"
 name = "zbus_systemd"
 repository = "https://github.com/lucab/zbus_systemd"
 version = "0.25900.0"
-rust-version = "1.85.0"
+rust-version = "1.87.0"
 
 [dependencies]
 serde = "1"
-zbus = "5.3"
+zbus = { version = "5.3", default-features = false }
 
 [dev-dependencies]
-tokio = {version = "1", features = ["full"]}
+tokio = { version = "1", features = ["full"] }
 
 [features]
 home1 = []
@@ -33,6 +33,24 @@ systemd1 = []
 sysupdate1 = []
 timedate1 = []
 timesync1 = []
+zbus-async-smol = ["zbus/async-io"]
+zbus-async-tokio = ["zbus/tokio"]
+
+[[example]]
+name = "login1-session_lock-unlock"
+required-features = ["login1", "zbus-async-tokio"]
+
+[[example]]
+name = "login1-wall_message"
+required-features = ["login1", "zbus-async-tokio"]
+
+[[example]]
+name = "systemd1-get_default_target"
+required-features = ["systemd1", "zbus-async-tokio"]
+
+[[example]]
+name = "timedate1-list_timezones"
+required-features = ["timedate1", "zbus-async-tokio"]
 
 [package.metadata.docs.rs]
 all-features = true

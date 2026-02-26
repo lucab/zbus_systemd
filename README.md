@@ -9,6 +9,8 @@ A pure-Rust library to interact with systemd DBus services.
 services over DBus. This crate tries to cover all systemd interfaces,
 across all services.
 
+## Auto-generated services
+
 Each service has its own dedicated module, which is auto-generated from current
 systemd definitions and can be activated through the corresponding Cargo feature:
 
@@ -28,6 +30,17 @@ systemd definitions and can be activated through the corresponding Cargo feature
  * `timesync1`: systemd-timesyncd interfaces (org.freedesktop.timesync1)
 
 For a quickstart on how to use those interfaces, see the [examples](https://github.com/lucab/zbus_systemd/tree/main/examples).
+
+## Async executor
+
+This crate internally uses `zbus` without any default Cargo features.
+That means that you have to decide which async executor to use, by enabling one of the following Cargo features:
+ * `zbus-async-smol`: internally uses the `smol` executor (enabling the `async-io` feature in `zbus`).
+ * `zbus-async-tokio`: internally uses the `tokio` executor (enabling the `tokio` feature in `zbus`).
+
+In case that `zbus` is already part of your dependency tree, you may decide to skip this choice and rely on [Cargo features unification mechanism](https://doc.rust-lang.org/cargo/reference/features.html#feature-unification) instead.
+
+Otherwise, if you aren't already depending on `zbus` and you don't enable any of the async features above, you will likely get a build error.
 
 ## License
 
