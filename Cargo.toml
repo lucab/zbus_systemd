@@ -8,7 +8,7 @@ keywords = ["dbus", "systemd", "Linux", "zbus", "async"]
 license = "MIT/Apache-2.0"
 name = "zbus_systemd"
 repository = "https://github.com/lucab/zbus_systemd"
-version = "0.25900.0"
+version = "0.25901.0"
 rust-version = "1.87.0"
 
 [dependencies]
