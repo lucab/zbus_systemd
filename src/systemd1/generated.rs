@@ -630,7 +630,7 @@ pub trait Manager {
         &self,
         files: Vec<String>,
         target: String,
-        typelabel: String,
+        arg_type: String,
         runtime: bool,
         force: bool,
     ) -> crate::zbus::Result<Vec<(String, String, String)>>;

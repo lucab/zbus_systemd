@@ -37,7 +37,7 @@ pub trait Manager {
         ifindex: i32,
         name: String,
         class: u16,
-        typelabel: u16,
+        arg_type: u16,
         flags: u64,
     ) -> crate::zbus::Result<(Vec<(i32, u16, u16, Vec<u8>)>, u64)>;
 
@@ -47,7 +47,7 @@ pub trait Manager {
         &self,
         ifindex: i32,
         name: String,
-        typelabel: String,
+        arg_type: String,
         domain: String,
         family: i32,
         flags: u64,
@@ -123,7 +123,7 @@ pub trait Manager {
         &self,
         id: String,
         name_template: String,
-        typelabel: String,
+        arg_type: String,
         service_port: u16,
         service_priority: u16,
         service_weight: u16,
