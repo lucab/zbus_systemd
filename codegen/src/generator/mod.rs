@@ -107,18 +107,12 @@ fn emit_methods(
             "/// [📖]({}) Call interface method `{}`.",
             directive_link, method.name,
         )?;
-        let fn_name = match method.name.as_str() {
-            "Ref" => "reference".to_string(),
-            x => x.to_snake_case(),
-        };
+        let mangled_fn_name = mangle_fn_name(method.name.to_snake_case());
         writeln!(output, r#"#[zbus(name = "{}")]"#, method.name)?;
-        writeln!(output, "fn {}(&self,", fn_name)?;
-        for arg in inputs {
-            let mangled_name = match arg.0.as_str() {
-                "type" => "typelabel",
-                x => x,
-            };
-            writeln!(output, "  {}: {},", mangled_name, arg.1)?;
+        writeln!(output, "fn {}(&self,", mangled_fn_name)?;
+        for (arg_name, arg_type) in inputs {
+            let mangled_arg_name = mangle_input_arg_name(&arg_name);
+            writeln!(output, "  {}: {},", mangled_arg_name, arg_type)?;
         }
         writeln!(output, ") ")?;
         writeln!(output, "-> crate::zbus::Result<{}>;", translated_sig)?;
@@ -145,12 +139,9 @@ fn emit_signals(output: &mut impl Write, signals: &[data::Signal]) -> Result<()>
         writeln!(output, "/// Receive `{}` signal.", entry.name)?;
         writeln!(output, r#"#[zbus(signal, name = "{}")]"#, entry.name)?;
         writeln!(output, "fn {}(&self,", fn_name,)?;
-        for (name, rtype) in args {
-            let mangled_name = match name.as_str() {
-                "type" => "typelabel",
-                x => x,
-            };
-            writeln!(output, "  {}: {},", mangled_name, rtype)?;
+        for (arg_name, arg_type) in args {
+            let mangled_arg_name = mangle_input_arg_name(arg_name);
+            writeln!(output, "  {}: {},", mangled_arg_name, arg_type)?;
         }
         writeln!(output, ") -> crate::zbus::Result<()>;")?;
         writeln!(output)?;
@@ -231,4 +222,29 @@ fn translate_sig_output(outputs: &Vec<(String, String)>) -> Result<String> {
         res.push_str(&rtype);
     }
     Ok(format!("({})", res))
+}
+
+/// Rename input argument names that are reserved keywords in Rust.
+///
+/// This arbitrary renaming is ok for the DBus protocol, as the argument
+/// **names** are not sent as part of method calls. Only type-signatures
+/// matter.
+fn mangle_input_arg_name(arg_name: &str) -> String {
+    match arg_name {
+        "ref" => "arg_ref".to_string(),
+        "type" => "arg_type".to_string(),
+        x => x.to_string(),
+    }
+}
+
+/// Rename method names that are reserved keywords in Rust.
+///
+/// This only affects the (snake_cased) Rust functions name;
+/// the original DBus method name needs to be preserved by
+/// the caller and passed to the `#[zbus(name = "...")]` attribute.
+fn mangle_fn_name(fn_name: String) -> String {
+    match fn_name.as_str() {
+        "ref" => "reference".to_string(),
+        _ => fn_name,
+    }
 }
