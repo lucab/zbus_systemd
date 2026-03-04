@@ -90,7 +90,7 @@ pub trait Manager {
         uid: u32,
         pid: u32,
         service: String,
-        typelabel: String,
+        arg_type: String,
         class: String,
         desktop: String,
         seat_id: String,
@@ -119,7 +119,7 @@ pub trait Manager {
         uid: u32,
         pidfd: crate::zvariant::OwnedFd,
         service: String,
-        typelabel: String,
+        arg_type: String,
         class: String,
         desktop: String,
         seat_id: String,
@@ -311,7 +311,7 @@ pub trait Manager {
 
     /// [📖](https://www.freedesktop.org/software/systemd/man/systemd.directives.html#ScheduleShutdown()) Call interface method `ScheduleShutdown`.
     #[zbus(name = "ScheduleShutdown")]
-    fn schedule_shutdown(&self, typelabel: String, usec: u64) -> crate::zbus::Result<()>;
+    fn schedule_shutdown(&self, arg_type: String, usec: u64) -> crate::zbus::Result<()>;
 
     /// [📖](https://www.freedesktop.org/software/systemd/man/systemd.directives.html#CancelScheduledShutdown()) Call interface method `CancelScheduledShutdown`.
     #[zbus(name = "CancelScheduledShutdown")]
@@ -889,7 +889,7 @@ pub trait Session {
 
     /// [📖](https://www.freedesktop.org/software/systemd/man/systemd.directives.html#SetType()) Call interface method `SetType`.
     #[zbus(name = "SetType")]
-    fn set_type(&self, typelabel: String) -> crate::zbus::Result<()>;
+    fn set_type(&self, arg_type: String) -> crate::zbus::Result<()>;
 
     /// [📖](https://www.freedesktop.org/software/systemd/man/systemd.directives.html#SetClass()) Call interface method `SetClass`.
     #[zbus(name = "SetClass")]
@@ -930,7 +930,7 @@ pub trait Session {
 
     /// Receive `PauseDevice` signal.
     #[zbus(signal, name = "PauseDevice")]
-    fn pause_device(&self, major: u32, minor: u32, typelabel: String) -> crate::zbus::Result<()>;
+    fn pause_device(&self, major: u32, minor: u32, arg_type: String) -> crate::zbus::Result<()>;
 
     /// Receive `ResumeDevice` signal.
     #[zbus(signal, name = "ResumeDevice")]
