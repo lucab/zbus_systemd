@@ -105,6 +105,13 @@ pub trait Hostnamed {
     )]
     fn operating_system_pretty_name(&self) -> crate::zbus::Result<String>;
 
+    /// Get property `OperatingSystemFancyName`.
+    #[zbus(
+        property(emits_changed_signal = "const"),
+        name = "OperatingSystemFancyName"
+    )]
+    fn operating_system_fancy_name(&self) -> crate::zbus::Result<String>;
+
     /// Get property `OperatingSystemCPEName`.
     #[zbus(
         property(emits_changed_signal = "const"),
