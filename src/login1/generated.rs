@@ -683,7 +683,7 @@ pub trait Manager {
     fn inhibitors_max(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `NCurrentInhibitors`.
-    #[zbus(property(emits_changed_signal = "false"), name = "NCurrentInhibitors")]
+    #[zbus(property(emits_changed_signal = "true"), name = "NCurrentInhibitors")]
     fn n_current_inhibitors(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `SessionsMax`.
@@ -996,6 +996,10 @@ pub trait Session {
     /// Get property `RemoteUser`.
     #[zbus(property(emits_changed_signal = "const"), name = "RemoteUser")]
     fn remote_user(&self) -> crate::zbus::Result<String>;
+
+    /// Get property `ExtraDeviceAccess`.
+    #[zbus(property(emits_changed_signal = "const"), name = "ExtraDeviceAccess")]
+    fn extra_device_access(&self) -> crate::zbus::Result<Vec<String>>;
 
     /// Get property `Service`.
     #[zbus(property(emits_changed_signal = "const"), name = "Service")]

@@ -152,6 +152,16 @@ pub trait Manager {
         flags: u64,
     ) -> crate::zbus::Result<(u32, crate::zvariant::OwnedObjectPath)>;
 
+    /// [📖](https://www.freedesktop.org/software/systemd/man/systemd.directives.html#PullOci()) Call interface method `PullOci`.
+    #[zbus(name = "PullOci")]
+    fn pull_oci(
+        &self,
+        arg_ref: String,
+        local_name: String,
+        class: String,
+        flags: u64,
+    ) -> crate::zbus::Result<(u32, crate::zvariant::OwnedObjectPath)>;
+
     /// [📖](https://www.freedesktop.org/software/systemd/man/systemd.directives.html#ListTransfers()) Call interface method `ListTransfers`.
     #[zbus(name = "ListTransfers")]
     fn list_transfers(

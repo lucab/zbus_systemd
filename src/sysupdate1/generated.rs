@@ -56,9 +56,17 @@ pub trait Target {
     #[zbus(name = "CheckNew")]
     fn check_new(&self) -> crate::zbus::Result<String>;
 
-    /// [📖](https://www.freedesktop.org/software/systemd/man/systemd.directives.html#Update()) Call interface method `Update`.
-    #[zbus(name = "Update")]
-    fn update(
+    /// [📖](https://www.freedesktop.org/software/systemd/man/systemd.directives.html#Acquire()) Call interface method `Acquire`.
+    #[zbus(name = "Acquire")]
+    fn acquire(
+        &self,
+        new_version: String,
+        flags: u64,
+    ) -> crate::zbus::Result<(String, u64, crate::zvariant::OwnedObjectPath)>;
+
+    /// [📖](https://www.freedesktop.org/software/systemd/man/systemd.directives.html#Install()) Call interface method `Install`.
+    #[zbus(name = "Install")]
+    fn install(
         &self,
         new_version: String,
         flags: u64,
