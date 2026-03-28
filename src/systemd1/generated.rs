@@ -2313,6 +2313,10 @@ pub trait Service {
     #[zbus(property(emits_changed_signal = "const"), name = "ReloadSignal")]
     fn reload_signal(&self) -> crate::zbus::Result<i32>;
 
+    /// Get property `RefreshOnReload`.
+    #[zbus(property(emits_changed_signal = "const"), name = "RefreshOnReload")]
+    fn refresh_on_reload(&self) -> crate::zbus::Result<Vec<String>>;
+
     /// Get property `ExecMainStartTimestamp`.
     #[zbus(
         property(emits_changed_signal = "true"),
@@ -2782,21 +2786,6 @@ pub trait Service {
     #[zbus(property(emits_changed_signal = "false"), name = "MemoryAccounting")]
     fn memory_accounting(&self) -> crate::zbus::Result<bool>;
 
-    /// Get property `DefaultMemoryLow`.
-    #[zbus(property(emits_changed_signal = "false"), name = "DefaultMemoryLow")]
-    fn default_memory_low(&self) -> crate::zbus::Result<u64>;
-
-    /// Get property `DefaultStartupMemoryLow`.
-    #[zbus(
-        property(emits_changed_signal = "false"),
-        name = "DefaultStartupMemoryLow"
-    )]
-    fn default_startup_memory_low(&self) -> crate::zbus::Result<u64>;
-
-    /// Get property `DefaultMemoryMin`.
-    #[zbus(property(emits_changed_signal = "false"), name = "DefaultMemoryMin")]
-    fn default_memory_min(&self) -> crate::zbus::Result<u64>;
-
     /// Get property `MemoryMin`.
     #[zbus(property(emits_changed_signal = "false"), name = "MemoryMin")]
     fn memory_min(&self) -> crate::zbus::Result<u64>;
@@ -2944,6 +2933,13 @@ pub trait Service {
         name = "RestrictNetworkInterfaces"
     )]
     fn restrict_network_interfaces(&self) -> crate::zbus::Result<(bool, Vec<String>)>;
+
+    /// Get property `BindNetworkInterface`.
+    #[zbus(
+        property(emits_changed_signal = "false"),
+        name = "BindNetworkInterface"
+    )]
+    fn bind_network_interface(&self) -> crate::zbus::Result<String>;
 
     /// Get property `MemoryPressureWatch`.
     #[zbus(property(emits_changed_signal = "false"), name = "MemoryPressureWatch")]
@@ -3154,6 +3150,10 @@ pub trait Service {
     /// Get property `RootEphemeral`.
     #[zbus(property(emits_changed_signal = "const"), name = "RootEphemeral")]
     fn root_ephemeral(&self) -> crate::zbus::Result<bool>;
+
+    /// Get property `RootMStack`.
+    #[zbus(property(emits_changed_signal = "const"), name = "RootMStack")]
+    fn root_m_stack(&self) -> crate::zbus::Result<String>;
 
     /// Get property `ExtensionDirectories`.
     #[zbus(
@@ -3809,6 +3809,10 @@ pub trait Service {
     /// Get property `MemoryKSM`.
     #[zbus(property(emits_changed_signal = "const"), name = "MemoryKSM")]
     fn memory_ksm(&self) -> crate::zbus::Result<bool>;
+
+    /// Get property `MemoryTHP`.
+    #[zbus(property(emits_changed_signal = "const"), name = "MemoryTHP")]
+    fn memory_thp(&self) -> crate::zbus::Result<String>;
 
     /// Get property `UserNamespacePath`.
     #[zbus(property(emits_changed_signal = "const"), name = "UserNamespacePath")]
@@ -4399,21 +4403,6 @@ pub trait Socket {
     #[zbus(property(emits_changed_signal = "false"), name = "MemoryAccounting")]
     fn memory_accounting(&self) -> crate::zbus::Result<bool>;
 
-    /// Get property `DefaultMemoryLow`.
-    #[zbus(property(emits_changed_signal = "false"), name = "DefaultMemoryLow")]
-    fn default_memory_low(&self) -> crate::zbus::Result<u64>;
-
-    /// Get property `DefaultStartupMemoryLow`.
-    #[zbus(
-        property(emits_changed_signal = "false"),
-        name = "DefaultStartupMemoryLow"
-    )]
-    fn default_startup_memory_low(&self) -> crate::zbus::Result<u64>;
-
-    /// Get property `DefaultMemoryMin`.
-    #[zbus(property(emits_changed_signal = "false"), name = "DefaultMemoryMin")]
-    fn default_memory_min(&self) -> crate::zbus::Result<u64>;
-
     /// Get property `MemoryMin`.
     #[zbus(property(emits_changed_signal = "false"), name = "MemoryMin")]
     fn memory_min(&self) -> crate::zbus::Result<u64>;
@@ -4561,6 +4550,13 @@ pub trait Socket {
         name = "RestrictNetworkInterfaces"
     )]
     fn restrict_network_interfaces(&self) -> crate::zbus::Result<(bool, Vec<String>)>;
+
+    /// Get property `BindNetworkInterface`.
+    #[zbus(
+        property(emits_changed_signal = "false"),
+        name = "BindNetworkInterface"
+    )]
+    fn bind_network_interface(&self) -> crate::zbus::Result<String>;
 
     /// Get property `MemoryPressureWatch`.
     #[zbus(property(emits_changed_signal = "false"), name = "MemoryPressureWatch")]
@@ -4771,6 +4767,10 @@ pub trait Socket {
     /// Get property `RootEphemeral`.
     #[zbus(property(emits_changed_signal = "const"), name = "RootEphemeral")]
     fn root_ephemeral(&self) -> crate::zbus::Result<bool>;
+
+    /// Get property `RootMStack`.
+    #[zbus(property(emits_changed_signal = "const"), name = "RootMStack")]
+    fn root_m_stack(&self) -> crate::zbus::Result<String>;
 
     /// Get property `ExtensionDirectories`.
     #[zbus(
@@ -5426,6 +5426,10 @@ pub trait Socket {
     /// Get property `MemoryKSM`.
     #[zbus(property(emits_changed_signal = "const"), name = "MemoryKSM")]
     fn memory_ksm(&self) -> crate::zbus::Result<bool>;
+
+    /// Get property `MemoryTHP`.
+    #[zbus(property(emits_changed_signal = "const"), name = "MemoryTHP")]
+    fn memory_thp(&self) -> crate::zbus::Result<String>;
 
     /// Get property `UserNamespacePath`.
     #[zbus(property(emits_changed_signal = "const"), name = "UserNamespacePath")]
@@ -5828,21 +5832,6 @@ pub trait Mount {
     #[zbus(property(emits_changed_signal = "false"), name = "MemoryAccounting")]
     fn memory_accounting(&self) -> crate::zbus::Result<bool>;
 
-    /// Get property `DefaultMemoryLow`.
-    #[zbus(property(emits_changed_signal = "false"), name = "DefaultMemoryLow")]
-    fn default_memory_low(&self) -> crate::zbus::Result<u64>;
-
-    /// Get property `DefaultStartupMemoryLow`.
-    #[zbus(
-        property(emits_changed_signal = "false"),
-        name = "DefaultStartupMemoryLow"
-    )]
-    fn default_startup_memory_low(&self) -> crate::zbus::Result<u64>;
-
-    /// Get property `DefaultMemoryMin`.
-    #[zbus(property(emits_changed_signal = "false"), name = "DefaultMemoryMin")]
-    fn default_memory_min(&self) -> crate::zbus::Result<u64>;
-
     /// Get property `MemoryMin`.
     #[zbus(property(emits_changed_signal = "false"), name = "MemoryMin")]
     fn memory_min(&self) -> crate::zbus::Result<u64>;
@@ -5990,6 +5979,13 @@ pub trait Mount {
         name = "RestrictNetworkInterfaces"
     )]
     fn restrict_network_interfaces(&self) -> crate::zbus::Result<(bool, Vec<String>)>;
+
+    /// Get property `BindNetworkInterface`.
+    #[zbus(
+        property(emits_changed_signal = "false"),
+        name = "BindNetworkInterface"
+    )]
+    fn bind_network_interface(&self) -> crate::zbus::Result<String>;
 
     /// Get property `MemoryPressureWatch`.
     #[zbus(property(emits_changed_signal = "false"), name = "MemoryPressureWatch")]
@@ -6200,6 +6196,10 @@ pub trait Mount {
     /// Get property `RootEphemeral`.
     #[zbus(property(emits_changed_signal = "const"), name = "RootEphemeral")]
     fn root_ephemeral(&self) -> crate::zbus::Result<bool>;
+
+    /// Get property `RootMStack`.
+    #[zbus(property(emits_changed_signal = "const"), name = "RootMStack")]
+    fn root_m_stack(&self) -> crate::zbus::Result<String>;
 
     /// Get property `ExtensionDirectories`.
     #[zbus(
@@ -6855,6 +6855,10 @@ pub trait Mount {
     /// Get property `MemoryKSM`.
     #[zbus(property(emits_changed_signal = "const"), name = "MemoryKSM")]
     fn memory_ksm(&self) -> crate::zbus::Result<bool>;
+
+    /// Get property `MemoryTHP`.
+    #[zbus(property(emits_changed_signal = "const"), name = "MemoryTHP")]
+    fn memory_thp(&self) -> crate::zbus::Result<String>;
 
     /// Get property `UserNamespacePath`.
     #[zbus(property(emits_changed_signal = "const"), name = "UserNamespacePath")]
@@ -7328,21 +7332,6 @@ pub trait Swap {
     #[zbus(property(emits_changed_signal = "false"), name = "MemoryAccounting")]
     fn memory_accounting(&self) -> crate::zbus::Result<bool>;
 
-    /// Get property `DefaultMemoryLow`.
-    #[zbus(property(emits_changed_signal = "false"), name = "DefaultMemoryLow")]
-    fn default_memory_low(&self) -> crate::zbus::Result<u64>;
-
-    /// Get property `DefaultStartupMemoryLow`.
-    #[zbus(
-        property(emits_changed_signal = "false"),
-        name = "DefaultStartupMemoryLow"
-    )]
-    fn default_startup_memory_low(&self) -> crate::zbus::Result<u64>;
-
-    /// Get property `DefaultMemoryMin`.
-    #[zbus(property(emits_changed_signal = "false"), name = "DefaultMemoryMin")]
-    fn default_memory_min(&self) -> crate::zbus::Result<u64>;
-
     /// Get property `MemoryMin`.
     #[zbus(property(emits_changed_signal = "false"), name = "MemoryMin")]
     fn memory_min(&self) -> crate::zbus::Result<u64>;
@@ -7490,6 +7479,13 @@ pub trait Swap {
         name = "RestrictNetworkInterfaces"
     )]
     fn restrict_network_interfaces(&self) -> crate::zbus::Result<(bool, Vec<String>)>;
+
+    /// Get property `BindNetworkInterface`.
+    #[zbus(
+        property(emits_changed_signal = "false"),
+        name = "BindNetworkInterface"
+    )]
+    fn bind_network_interface(&self) -> crate::zbus::Result<String>;
 
     /// Get property `MemoryPressureWatch`.
     #[zbus(property(emits_changed_signal = "false"), name = "MemoryPressureWatch")]
@@ -7700,6 +7696,10 @@ pub trait Swap {
     /// Get property `RootEphemeral`.
     #[zbus(property(emits_changed_signal = "const"), name = "RootEphemeral")]
     fn root_ephemeral(&self) -> crate::zbus::Result<bool>;
+
+    /// Get property `RootMStack`.
+    #[zbus(property(emits_changed_signal = "const"), name = "RootMStack")]
+    fn root_m_stack(&self) -> crate::zbus::Result<String>;
 
     /// Get property `ExtensionDirectories`.
     #[zbus(
@@ -8356,6 +8356,10 @@ pub trait Swap {
     #[zbus(property(emits_changed_signal = "const"), name = "MemoryKSM")]
     fn memory_ksm(&self) -> crate::zbus::Result<bool>;
 
+    /// Get property `MemoryTHP`.
+    #[zbus(property(emits_changed_signal = "const"), name = "MemoryTHP")]
+    fn memory_thp(&self) -> crate::zbus::Result<String>;
+
     /// Get property `UserNamespacePath`.
     #[zbus(property(emits_changed_signal = "const"), name = "UserNamespacePath")]
     fn user_namespace_path(&self) -> crate::zbus::Result<String>;
@@ -8705,21 +8709,6 @@ pub trait Slice {
     #[zbus(property(emits_changed_signal = "false"), name = "MemoryAccounting")]
     fn memory_accounting(&self) -> crate::zbus::Result<bool>;
 
-    /// Get property `DefaultMemoryLow`.
-    #[zbus(property(emits_changed_signal = "false"), name = "DefaultMemoryLow")]
-    fn default_memory_low(&self) -> crate::zbus::Result<u64>;
-
-    /// Get property `DefaultStartupMemoryLow`.
-    #[zbus(
-        property(emits_changed_signal = "false"),
-        name = "DefaultStartupMemoryLow"
-    )]
-    fn default_startup_memory_low(&self) -> crate::zbus::Result<u64>;
-
-    /// Get property `DefaultMemoryMin`.
-    #[zbus(property(emits_changed_signal = "false"), name = "DefaultMemoryMin")]
-    fn default_memory_min(&self) -> crate::zbus::Result<u64>;
-
     /// Get property `MemoryMin`.
     #[zbus(property(emits_changed_signal = "false"), name = "MemoryMin")]
     fn memory_min(&self) -> crate::zbus::Result<u64>;
@@ -8867,6 +8856,13 @@ pub trait Slice {
         name = "RestrictNetworkInterfaces"
     )]
     fn restrict_network_interfaces(&self) -> crate::zbus::Result<(bool, Vec<String>)>;
+
+    /// Get property `BindNetworkInterface`.
+    #[zbus(
+        property(emits_changed_signal = "false"),
+        name = "BindNetworkInterface"
+    )]
+    fn bind_network_interface(&self) -> crate::zbus::Result<String>;
 
     /// Get property `MemoryPressureWatch`.
     #[zbus(property(emits_changed_signal = "false"), name = "MemoryPressureWatch")]
@@ -9140,21 +9136,6 @@ pub trait Scope {
     #[zbus(property(emits_changed_signal = "false"), name = "MemoryAccounting")]
     fn memory_accounting(&self) -> crate::zbus::Result<bool>;
 
-    /// Get property `DefaultMemoryLow`.
-    #[zbus(property(emits_changed_signal = "false"), name = "DefaultMemoryLow")]
-    fn default_memory_low(&self) -> crate::zbus::Result<u64>;
-
-    /// Get property `DefaultStartupMemoryLow`.
-    #[zbus(
-        property(emits_changed_signal = "false"),
-        name = "DefaultStartupMemoryLow"
-    )]
-    fn default_startup_memory_low(&self) -> crate::zbus::Result<u64>;
-
-    /// Get property `DefaultMemoryMin`.
-    #[zbus(property(emits_changed_signal = "false"), name = "DefaultMemoryMin")]
-    fn default_memory_min(&self) -> crate::zbus::Result<u64>;
-
     /// Get property `MemoryMin`.
     #[zbus(property(emits_changed_signal = "false"), name = "MemoryMin")]
     fn memory_min(&self) -> crate::zbus::Result<u64>;
@@ -9302,6 +9283,13 @@ pub trait Scope {
         name = "RestrictNetworkInterfaces"
     )]
     fn restrict_network_interfaces(&self) -> crate::zbus::Result<(bool, Vec<String>)>;
+
+    /// Get property `BindNetworkInterface`.
+    #[zbus(
+        property(emits_changed_signal = "false"),
+        name = "BindNetworkInterface"
+    )]
+    fn bind_network_interface(&self) -> crate::zbus::Result<String>;
 
     /// Get property `MemoryPressureWatch`.
     #[zbus(property(emits_changed_signal = "false"), name = "MemoryPressureWatch")]
