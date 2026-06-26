@@ -301,6 +301,14 @@ pub trait DHCPServer {
     /// Get property `Leases`.
     #[zbus(property(emits_changed_signal = "true"), name = "Leases")]
     fn leases(&self) -> crate::zbus::Result<Vec<(u32, Vec<u8>, Vec<u8>, Vec<u8>, Vec<u8>, u64)>>;
+
+    /// Get property `PoolSize`.
+    #[zbus(property(emits_changed_signal = "const"), name = "PoolSize")]
+    fn pool_size(&self) -> crate::zbus::Result<u32>;
+
+    /// Get property `PoolOffset`.
+    #[zbus(property(emits_changed_signal = "const"), name = "PoolOffset")]
+    fn pool_offset(&self) -> crate::zbus::Result<u32>;
 }
 
 /// Proxy object for `org.freedesktop.network1.DHCPv4Client`.

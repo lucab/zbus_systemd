@@ -38,6 +38,10 @@ pub trait Hostnamed {
     #[zbus(name = "SetLocation")]
     fn set_location(&self, location: String, interactive: bool) -> crate::zbus::Result<()>;
 
+    /// [📖](https://www.freedesktop.org/software/systemd/man/systemd.directives.html#SetTags()) Call interface method `SetTags`.
+    #[zbus(name = "SetTags")]
+    fn set_tags(&self, tags: Vec<String>) -> crate::zbus::Result<()>;
+
     /// [📖](https://www.freedesktop.org/software/systemd/man/systemd.directives.html#GetProductUUID()) Call interface method `GetProductUUID`.
     #[zbus(name = "GetProductUUID")]
     fn get_product_uuid(&self, interactive: bool) -> crate::zbus::Result<Vec<u8>>;
@@ -49,6 +53,10 @@ pub trait Hostnamed {
     /// [📖](https://www.freedesktop.org/software/systemd/man/systemd.directives.html#Describe()) Call interface method `Describe`.
     #[zbus(name = "Describe")]
     fn describe(&self) -> crate::zbus::Result<String>;
+
+    /// [📖](https://www.freedesktop.org/software/systemd/man/systemd.directives.html#GetMachineInfo()) Call interface method `GetMachineInfo`.
+    #[zbus(name = "GetMachineInfo")]
+    fn get_machine_info(&self, field: String) -> crate::zbus::Result<String>;
 
     /// Get property `Hostname`.
     #[zbus(property(emits_changed_signal = "true"), name = "Hostname")]
@@ -85,6 +93,10 @@ pub trait Hostnamed {
     /// Get property `Location`.
     #[zbus(property(emits_changed_signal = "true"), name = "Location")]
     fn location(&self) -> crate::zbus::Result<String>;
+
+    /// Get property `Tags`.
+    #[zbus(property(emits_changed_signal = "true"), name = "Tags")]
+    fn tags(&self) -> crate::zbus::Result<Vec<String>>;
 
     /// Get property `KernelName`.
     #[zbus(property(emits_changed_signal = "const"), name = "KernelName")]
