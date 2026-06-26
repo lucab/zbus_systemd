@@ -1220,6 +1220,20 @@ pub trait Manager {
     )]
     fn default_start_limit_burst(&self) -> crate::zbus::Result<u32>;
 
+    /// Get property `EventLoopRateLimitIntervalUSec`.
+    #[zbus(
+        property(emits_changed_signal = "const"),
+        name = "EventLoopRateLimitIntervalUSec"
+    )]
+    fn event_loop_rate_limit_interval_u_sec(&self) -> crate::zbus::Result<u64>;
+
+    /// Get property `EventLoopRateLimitBurst`.
+    #[zbus(
+        property(emits_changed_signal = "const"),
+        name = "EventLoopRateLimitBurst"
+    )]
+    fn event_loop_rate_limit_burst(&self) -> crate::zbus::Result<u32>;
+
     /// Get property `DefaultIOAccounting`.
     #[zbus(property(emits_changed_signal = "const"), name = "DefaultIOAccounting")]
     fn default_io_accounting(&self) -> crate::zbus::Result<bool>;
@@ -1433,6 +1447,34 @@ pub trait Manager {
     )]
     fn default_memory_pressure_watch(&self) -> crate::zbus::Result<String>;
 
+    /// Get property `DefaultCPUPressureThresholdUSec`.
+    #[zbus(
+        property(emits_changed_signal = "false"),
+        name = "DefaultCPUPressureThresholdUSec"
+    )]
+    fn default_cpu_pressure_threshold_u_sec(&self) -> crate::zbus::Result<u64>;
+
+    /// Get property `DefaultCPUPressureWatch`.
+    #[zbus(
+        property(emits_changed_signal = "false"),
+        name = "DefaultCPUPressureWatch"
+    )]
+    fn default_cpu_pressure_watch(&self) -> crate::zbus::Result<String>;
+
+    /// Get property `DefaultIOPressureThresholdUSec`.
+    #[zbus(
+        property(emits_changed_signal = "false"),
+        name = "DefaultIOPressureThresholdUSec"
+    )]
+    fn default_io_pressure_threshold_u_sec(&self) -> crate::zbus::Result<u64>;
+
+    /// Get property `DefaultIOPressureWatch`.
+    #[zbus(
+        property(emits_changed_signal = "false"),
+        name = "DefaultIOPressureWatch"
+    )]
+    fn default_io_pressure_watch(&self) -> crate::zbus::Result<String>;
+
     /// Get property `TimerSlackNSec`.
     #[zbus(property(emits_changed_signal = "const"), name = "TimerSlackNSec")]
     fn timer_slack_n_sec(&self) -> crate::zbus::Result<u64>;
@@ -1465,6 +1507,17 @@ pub trait Manager {
     /// Get property `SoftRebootsCount`.
     #[zbus(property(emits_changed_signal = "const"), name = "SoftRebootsCount")]
     fn soft_reboots_count(&self) -> crate::zbus::Result<u32>;
+
+    /// Get property `ReloadCount`.
+    #[zbus(property(emits_changed_signal = "false"), name = "ReloadCount")]
+    fn reload_count(&self) -> crate::zbus::Result<u64>;
+
+    /// Get property `DefaultMemoryZSwapWriteback`.
+    #[zbus(
+        property(emits_changed_signal = "const"),
+        name = "DefaultMemoryZSwapWriteback"
+    )]
+    fn default_memory_z_swap_writeback(&self) -> crate::zbus::Result<bool>;
 }
 
 /// Proxy object for `org.freedesktop.systemd1.Unit`.
@@ -2743,6 +2796,10 @@ pub trait Service {
     )]
     fn startup_allowed_memory_nodes(&self) -> crate::zbus::Result<Vec<u8>>;
 
+    /// Get property `CPUSetPartition`.
+    #[zbus(property(emits_changed_signal = "false"), name = "CPUSetPartition")]
+    fn cpu_set_partition(&self) -> crate::zbus::Result<String>;
+
     /// Get property `IOAccounting`.
     #[zbus(property(emits_changed_signal = "false"), name = "IOAccounting")]
     fn io_accounting(&self) -> crate::zbus::Result<bool>;
@@ -2915,6 +2972,10 @@ pub trait Service {
     )]
     fn managed_oom_preference(&self) -> crate::zbus::Result<String>;
 
+    /// Get property `OOMRules`.
+    #[zbus(property(emits_changed_signal = "false"), name = "OOMRules")]
+    fn oom_rules(&self) -> crate::zbus::Result<Vec<String>>;
+
     /// Get property `BPFProgram`.
     #[zbus(property(emits_changed_signal = "false"), name = "BPFProgram")]
     fn bpf_program(&self) -> crate::zbus::Result<Vec<(String, String)>>;
@@ -2951,6 +3012,28 @@ pub trait Service {
         name = "MemoryPressureThresholdUSec"
     )]
     fn memory_pressure_threshold_u_sec(&self) -> crate::zbus::Result<u64>;
+
+    /// Get property `CPUPressureWatch`.
+    #[zbus(property(emits_changed_signal = "false"), name = "CPUPressureWatch")]
+    fn cpu_pressure_watch(&self) -> crate::zbus::Result<String>;
+
+    /// Get property `CPUPressureThresholdUSec`.
+    #[zbus(
+        property(emits_changed_signal = "false"),
+        name = "CPUPressureThresholdUSec"
+    )]
+    fn cpu_pressure_threshold_u_sec(&self) -> crate::zbus::Result<u64>;
+
+    /// Get property `IOPressureWatch`.
+    #[zbus(property(emits_changed_signal = "false"), name = "IOPressureWatch")]
+    fn io_pressure_watch(&self) -> crate::zbus::Result<String>;
+
+    /// Get property `IOPressureThresholdUSec`.
+    #[zbus(
+        property(emits_changed_signal = "false"),
+        name = "IOPressureThresholdUSec"
+    )]
+    fn io_pressure_threshold_u_sec(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `NFTSet`.
     #[zbus(property(emits_changed_signal = "false"), name = "NFTSet")]
@@ -4360,6 +4443,10 @@ pub trait Socket {
     )]
     fn startup_allowed_memory_nodes(&self) -> crate::zbus::Result<Vec<u8>>;
 
+    /// Get property `CPUSetPartition`.
+    #[zbus(property(emits_changed_signal = "false"), name = "CPUSetPartition")]
+    fn cpu_set_partition(&self) -> crate::zbus::Result<String>;
+
     /// Get property `IOAccounting`.
     #[zbus(property(emits_changed_signal = "false"), name = "IOAccounting")]
     fn io_accounting(&self) -> crate::zbus::Result<bool>;
@@ -4532,6 +4619,10 @@ pub trait Socket {
     )]
     fn managed_oom_preference(&self) -> crate::zbus::Result<String>;
 
+    /// Get property `OOMRules`.
+    #[zbus(property(emits_changed_signal = "false"), name = "OOMRules")]
+    fn oom_rules(&self) -> crate::zbus::Result<Vec<String>>;
+
     /// Get property `BPFProgram`.
     #[zbus(property(emits_changed_signal = "false"), name = "BPFProgram")]
     fn bpf_program(&self) -> crate::zbus::Result<Vec<(String, String)>>;
@@ -4568,6 +4659,28 @@ pub trait Socket {
         name = "MemoryPressureThresholdUSec"
     )]
     fn memory_pressure_threshold_u_sec(&self) -> crate::zbus::Result<u64>;
+
+    /// Get property `CPUPressureWatch`.
+    #[zbus(property(emits_changed_signal = "false"), name = "CPUPressureWatch")]
+    fn cpu_pressure_watch(&self) -> crate::zbus::Result<String>;
+
+    /// Get property `CPUPressureThresholdUSec`.
+    #[zbus(
+        property(emits_changed_signal = "false"),
+        name = "CPUPressureThresholdUSec"
+    )]
+    fn cpu_pressure_threshold_u_sec(&self) -> crate::zbus::Result<u64>;
+
+    /// Get property `IOPressureWatch`.
+    #[zbus(property(emits_changed_signal = "false"), name = "IOPressureWatch")]
+    fn io_pressure_watch(&self) -> crate::zbus::Result<String>;
+
+    /// Get property `IOPressureThresholdUSec`.
+    #[zbus(
+        property(emits_changed_signal = "false"),
+        name = "IOPressureThresholdUSec"
+    )]
+    fn io_pressure_threshold_u_sec(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `NFTSet`.
     #[zbus(property(emits_changed_signal = "false"), name = "NFTSet")]
@@ -5789,6 +5902,10 @@ pub trait Mount {
     )]
     fn startup_allowed_memory_nodes(&self) -> crate::zbus::Result<Vec<u8>>;
 
+    /// Get property `CPUSetPartition`.
+    #[zbus(property(emits_changed_signal = "false"), name = "CPUSetPartition")]
+    fn cpu_set_partition(&self) -> crate::zbus::Result<String>;
+
     /// Get property `IOAccounting`.
     #[zbus(property(emits_changed_signal = "false"), name = "IOAccounting")]
     fn io_accounting(&self) -> crate::zbus::Result<bool>;
@@ -5961,6 +6078,10 @@ pub trait Mount {
     )]
     fn managed_oom_preference(&self) -> crate::zbus::Result<String>;
 
+    /// Get property `OOMRules`.
+    #[zbus(property(emits_changed_signal = "false"), name = "OOMRules")]
+    fn oom_rules(&self) -> crate::zbus::Result<Vec<String>>;
+
     /// Get property `BPFProgram`.
     #[zbus(property(emits_changed_signal = "false"), name = "BPFProgram")]
     fn bpf_program(&self) -> crate::zbus::Result<Vec<(String, String)>>;
@@ -5997,6 +6118,28 @@ pub trait Mount {
         name = "MemoryPressureThresholdUSec"
     )]
     fn memory_pressure_threshold_u_sec(&self) -> crate::zbus::Result<u64>;
+
+    /// Get property `CPUPressureWatch`.
+    #[zbus(property(emits_changed_signal = "false"), name = "CPUPressureWatch")]
+    fn cpu_pressure_watch(&self) -> crate::zbus::Result<String>;
+
+    /// Get property `CPUPressureThresholdUSec`.
+    #[zbus(
+        property(emits_changed_signal = "false"),
+        name = "CPUPressureThresholdUSec"
+    )]
+    fn cpu_pressure_threshold_u_sec(&self) -> crate::zbus::Result<u64>;
+
+    /// Get property `IOPressureWatch`.
+    #[zbus(property(emits_changed_signal = "false"), name = "IOPressureWatch")]
+    fn io_pressure_watch(&self) -> crate::zbus::Result<String>;
+
+    /// Get property `IOPressureThresholdUSec`.
+    #[zbus(
+        property(emits_changed_signal = "false"),
+        name = "IOPressureThresholdUSec"
+    )]
+    fn io_pressure_threshold_u_sec(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `NFTSet`.
     #[zbus(property(emits_changed_signal = "false"), name = "NFTSet")]
@@ -7289,6 +7432,10 @@ pub trait Swap {
     )]
     fn startup_allowed_memory_nodes(&self) -> crate::zbus::Result<Vec<u8>>;
 
+    /// Get property `CPUSetPartition`.
+    #[zbus(property(emits_changed_signal = "false"), name = "CPUSetPartition")]
+    fn cpu_set_partition(&self) -> crate::zbus::Result<String>;
+
     /// Get property `IOAccounting`.
     #[zbus(property(emits_changed_signal = "false"), name = "IOAccounting")]
     fn io_accounting(&self) -> crate::zbus::Result<bool>;
@@ -7461,6 +7608,10 @@ pub trait Swap {
     )]
     fn managed_oom_preference(&self) -> crate::zbus::Result<String>;
 
+    /// Get property `OOMRules`.
+    #[zbus(property(emits_changed_signal = "false"), name = "OOMRules")]
+    fn oom_rules(&self) -> crate::zbus::Result<Vec<String>>;
+
     /// Get property `BPFProgram`.
     #[zbus(property(emits_changed_signal = "false"), name = "BPFProgram")]
     fn bpf_program(&self) -> crate::zbus::Result<Vec<(String, String)>>;
@@ -7497,6 +7648,28 @@ pub trait Swap {
         name = "MemoryPressureThresholdUSec"
     )]
     fn memory_pressure_threshold_u_sec(&self) -> crate::zbus::Result<u64>;
+
+    /// Get property `CPUPressureWatch`.
+    #[zbus(property(emits_changed_signal = "false"), name = "CPUPressureWatch")]
+    fn cpu_pressure_watch(&self) -> crate::zbus::Result<String>;
+
+    /// Get property `CPUPressureThresholdUSec`.
+    #[zbus(
+        property(emits_changed_signal = "false"),
+        name = "CPUPressureThresholdUSec"
+    )]
+    fn cpu_pressure_threshold_u_sec(&self) -> crate::zbus::Result<u64>;
+
+    /// Get property `IOPressureWatch`.
+    #[zbus(property(emits_changed_signal = "false"), name = "IOPressureWatch")]
+    fn io_pressure_watch(&self) -> crate::zbus::Result<String>;
+
+    /// Get property `IOPressureThresholdUSec`.
+    #[zbus(
+        property(emits_changed_signal = "false"),
+        name = "IOPressureThresholdUSec"
+    )]
+    fn io_pressure_threshold_u_sec(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `NFTSet`.
     #[zbus(property(emits_changed_signal = "false"), name = "NFTSet")]
@@ -8666,6 +8839,10 @@ pub trait Slice {
     )]
     fn startup_allowed_memory_nodes(&self) -> crate::zbus::Result<Vec<u8>>;
 
+    /// Get property `CPUSetPartition`.
+    #[zbus(property(emits_changed_signal = "false"), name = "CPUSetPartition")]
+    fn cpu_set_partition(&self) -> crate::zbus::Result<String>;
+
     /// Get property `IOAccounting`.
     #[zbus(property(emits_changed_signal = "false"), name = "IOAccounting")]
     fn io_accounting(&self) -> crate::zbus::Result<bool>;
@@ -8838,6 +9015,10 @@ pub trait Slice {
     )]
     fn managed_oom_preference(&self) -> crate::zbus::Result<String>;
 
+    /// Get property `OOMRules`.
+    #[zbus(property(emits_changed_signal = "false"), name = "OOMRules")]
+    fn oom_rules(&self) -> crate::zbus::Result<Vec<String>>;
+
     /// Get property `BPFProgram`.
     #[zbus(property(emits_changed_signal = "false"), name = "BPFProgram")]
     fn bpf_program(&self) -> crate::zbus::Result<Vec<(String, String)>>;
@@ -8874,6 +9055,28 @@ pub trait Slice {
         name = "MemoryPressureThresholdUSec"
     )]
     fn memory_pressure_threshold_u_sec(&self) -> crate::zbus::Result<u64>;
+
+    /// Get property `CPUPressureWatch`.
+    #[zbus(property(emits_changed_signal = "false"), name = "CPUPressureWatch")]
+    fn cpu_pressure_watch(&self) -> crate::zbus::Result<String>;
+
+    /// Get property `CPUPressureThresholdUSec`.
+    #[zbus(
+        property(emits_changed_signal = "false"),
+        name = "CPUPressureThresholdUSec"
+    )]
+    fn cpu_pressure_threshold_u_sec(&self) -> crate::zbus::Result<u64>;
+
+    /// Get property `IOPressureWatch`.
+    #[zbus(property(emits_changed_signal = "false"), name = "IOPressureWatch")]
+    fn io_pressure_watch(&self) -> crate::zbus::Result<String>;
+
+    /// Get property `IOPressureThresholdUSec`.
+    #[zbus(
+        property(emits_changed_signal = "false"),
+        name = "IOPressureThresholdUSec"
+    )]
+    fn io_pressure_threshold_u_sec(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `NFTSet`.
     #[zbus(property(emits_changed_signal = "false"), name = "NFTSet")]
@@ -9093,6 +9296,10 @@ pub trait Scope {
     )]
     fn startup_allowed_memory_nodes(&self) -> crate::zbus::Result<Vec<u8>>;
 
+    /// Get property `CPUSetPartition`.
+    #[zbus(property(emits_changed_signal = "false"), name = "CPUSetPartition")]
+    fn cpu_set_partition(&self) -> crate::zbus::Result<String>;
+
     /// Get property `IOAccounting`.
     #[zbus(property(emits_changed_signal = "false"), name = "IOAccounting")]
     fn io_accounting(&self) -> crate::zbus::Result<bool>;
@@ -9265,6 +9472,10 @@ pub trait Scope {
     )]
     fn managed_oom_preference(&self) -> crate::zbus::Result<String>;
 
+    /// Get property `OOMRules`.
+    #[zbus(property(emits_changed_signal = "false"), name = "OOMRules")]
+    fn oom_rules(&self) -> crate::zbus::Result<Vec<String>>;
+
     /// Get property `BPFProgram`.
     #[zbus(property(emits_changed_signal = "false"), name = "BPFProgram")]
     fn bpf_program(&self) -> crate::zbus::Result<Vec<(String, String)>>;
@@ -9301,6 +9512,28 @@ pub trait Scope {
         name = "MemoryPressureThresholdUSec"
     )]
     fn memory_pressure_threshold_u_sec(&self) -> crate::zbus::Result<u64>;
+
+    /// Get property `CPUPressureWatch`.
+    #[zbus(property(emits_changed_signal = "false"), name = "CPUPressureWatch")]
+    fn cpu_pressure_watch(&self) -> crate::zbus::Result<String>;
+
+    /// Get property `CPUPressureThresholdUSec`.
+    #[zbus(
+        property(emits_changed_signal = "false"),
+        name = "CPUPressureThresholdUSec"
+    )]
+    fn cpu_pressure_threshold_u_sec(&self) -> crate::zbus::Result<u64>;
+
+    /// Get property `IOPressureWatch`.
+    #[zbus(property(emits_changed_signal = "false"), name = "IOPressureWatch")]
+    fn io_pressure_watch(&self) -> crate::zbus::Result<String>;
+
+    /// Get property `IOPressureThresholdUSec`.
+    #[zbus(
+        property(emits_changed_signal = "false"),
+        name = "IOPressureThresholdUSec"
+    )]
+    fn io_pressure_threshold_u_sec(&self) -> crate::zbus::Result<u64>;
 
     /// Get property `NFTSet`.
     #[zbus(property(emits_changed_signal = "false"), name = "NFTSet")]
