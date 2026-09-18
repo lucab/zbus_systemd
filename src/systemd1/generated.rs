@@ -139,6 +139,24 @@ pub trait Manager {
         )>,
     )>;
 
+    /// [📖](https://www.freedesktop.org/software/systemd/man/systemd.directives.html#EnqueueUnitJobMany()) Call interface method `EnqueueUnitJobMany`.
+    #[zbus(name = "EnqueueUnitJobMany")]
+    fn enqueue_unit_job_many(
+        &self,
+        units: Vec<String>,
+        job_type: String,
+        job_mode: String,
+        flags: u64,
+    ) -> crate::zbus::Result<
+        Vec<(
+            u32,
+            crate::zvariant::OwnedObjectPath,
+            String,
+            crate::zvariant::OwnedObjectPath,
+            String,
+        )>,
+    >;
+
     /// [📖](https://www.freedesktop.org/software/systemd/man/systemd.directives.html#KillUnit()) Call interface method `KillUnit`.
     #[zbus(name = "KillUnit")]
     fn kill_unit(&self, name: String, whom: String, signal: i32) -> crate::zbus::Result<()>;
@@ -824,6 +842,76 @@ pub trait Manager {
     )]
     fn shutdown_start_timestamp_monotonic(&self) -> crate::zbus::Result<u64>;
 
+    /// Get property `ShutdownFinishTimestamp`.
+    #[zbus(
+        property(emits_changed_signal = "const"),
+        name = "ShutdownFinishTimestamp"
+    )]
+    fn shutdown_finish_timestamp(&self) -> crate::zbus::Result<u64>;
+
+    /// Get property `ShutdownFinishTimestampMonotonic`.
+    #[zbus(
+        property(emits_changed_signal = "const"),
+        name = "ShutdownFinishTimestampMonotonic"
+    )]
+    fn shutdown_finish_timestamp_monotonic(&self) -> crate::zbus::Result<u64>;
+
+    /// Get property `PreviousShutdownStartTimestamp`.
+    #[zbus(
+        property(emits_changed_signal = "const"),
+        name = "PreviousShutdownStartTimestamp"
+    )]
+    fn previous_shutdown_start_timestamp(&self) -> crate::zbus::Result<u64>;
+
+    /// Get property `PreviousShutdownStartTimestampMonotonic`.
+    #[zbus(
+        property(emits_changed_signal = "const"),
+        name = "PreviousShutdownStartTimestampMonotonic"
+    )]
+    fn previous_shutdown_start_timestamp_monotonic(&self) -> crate::zbus::Result<u64>;
+
+    /// Get property `PreviousShutdownFinishTimestamp`.
+    #[zbus(
+        property(emits_changed_signal = "const"),
+        name = "PreviousShutdownFinishTimestamp"
+    )]
+    fn previous_shutdown_finish_timestamp(&self) -> crate::zbus::Result<u64>;
+
+    /// Get property `PreviousShutdownFinishTimestampMonotonic`.
+    #[zbus(
+        property(emits_changed_signal = "const"),
+        name = "PreviousShutdownFinishTimestampMonotonic"
+    )]
+    fn previous_shutdown_finish_timestamp_monotonic(&self) -> crate::zbus::Result<u64>;
+
+    /// Get property `PreviousShutdownLateStartTimestamp`.
+    #[zbus(
+        property(emits_changed_signal = "const"),
+        name = "PreviousShutdownLateStartTimestamp"
+    )]
+    fn previous_shutdown_late_start_timestamp(&self) -> crate::zbus::Result<u64>;
+
+    /// Get property `PreviousShutdownLateStartTimestampMonotonic`.
+    #[zbus(
+        property(emits_changed_signal = "const"),
+        name = "PreviousShutdownLateStartTimestampMonotonic"
+    )]
+    fn previous_shutdown_late_start_timestamp_monotonic(&self) -> crate::zbus::Result<u64>;
+
+    /// Get property `PreviousShutdownLateFinishTimestamp`.
+    #[zbus(
+        property(emits_changed_signal = "const"),
+        name = "PreviousShutdownLateFinishTimestamp"
+    )]
+    fn previous_shutdown_late_finish_timestamp(&self) -> crate::zbus::Result<u64>;
+
+    /// Get property `PreviousShutdownLateFinishTimestampMonotonic`.
+    #[zbus(
+        property(emits_changed_signal = "const"),
+        name = "PreviousShutdownLateFinishTimestampMonotonic"
+    )]
+    fn previous_shutdown_late_finish_timestamp_monotonic(&self) -> crate::zbus::Result<u64>;
+
     /// Get property `SecurityStartTimestamp`.
     #[zbus(
         property(emits_changed_signal = "const"),
@@ -1508,6 +1596,10 @@ pub trait Manager {
     #[zbus(property(emits_changed_signal = "const"), name = "SoftRebootsCount")]
     fn soft_reboots_count(&self) -> crate::zbus::Result<u32>;
 
+    /// Get property `KExecCount`.
+    #[zbus(property(emits_changed_signal = "const"), name = "KExecCount")]
+    fn k_exec_count(&self) -> crate::zbus::Result<u32>;
+
     /// Get property `ReloadCount`.
     #[zbus(property(emits_changed_signal = "false"), name = "ReloadCount")]
     fn reload_count(&self) -> crate::zbus::Result<u64>;
@@ -2170,6 +2262,13 @@ pub trait Service {
     #[zbus(property(emits_changed_signal = "const"), name = "RestartMaxDelayUSec")]
     fn restart_max_delay_u_sec(&self) -> crate::zbus::Result<u64>;
 
+    /// Get property `RestartRandomizedDelayUSec`.
+    #[zbus(
+        property(emits_changed_signal = "const"),
+        name = "RestartRandomizedDelayUSec"
+    )]
+    fn restart_randomized_delay_u_sec(&self) -> crate::zbus::Result<u64>;
+
     /// Get property `RestartUSecNext`.
     #[zbus(property(emits_changed_signal = "false"), name = "RestartUSecNext")]
     fn restart_u_sec_next(&self) -> crate::zbus::Result<u64>;
@@ -2291,6 +2390,10 @@ pub trait Service {
         name = "FileDescriptorStorePreserve"
     )]
     fn file_descriptor_store_preserve(&self) -> crate::zbus::Result<String>;
+
+    /// Get property `LUOSession`.
+    #[zbus(property(emits_changed_signal = "const"), name = "LUOSession")]
+    fn luo_session(&self) -> crate::zbus::Result<Vec<String>>;
 
     /// Get property `StatusText`.
     #[zbus(property(emits_changed_signal = "true"), name = "StatusText")]
@@ -4142,6 +4245,18 @@ pub trait Socket {
     /// Get property `Symlinks`.
     #[zbus(property(emits_changed_signal = "const"), name = "Symlinks")]
     fn symlinks(&self) -> crate::zbus::Result<Vec<String>>;
+
+    /// Get property `XAttrEntryPoint`.
+    #[zbus(property(emits_changed_signal = "const"), name = "XAttrEntryPoint")]
+    fn x_attr_entry_point(&self) -> crate::zbus::Result<Vec<(String, String)>>;
+
+    /// Get property `XAttrListen`.
+    #[zbus(property(emits_changed_signal = "const"), name = "XAttrListen")]
+    fn x_attr_listen(&self) -> crate::zbus::Result<Vec<(String, String)>>;
+
+    /// Get property `XAttrAccept`.
+    #[zbus(property(emits_changed_signal = "const"), name = "XAttrAccept")]
+    fn x_attr_accept(&self) -> crate::zbus::Result<Vec<(String, String)>>;
 
     /// Get property `Mark`.
     #[zbus(property(emits_changed_signal = "const"), name = "Mark")]
@@ -8680,6 +8795,13 @@ pub trait Slice {
     /// Get property `ConcurrencySoftMax`.
     #[zbus(property(emits_changed_signal = "false"), name = "ConcurrencySoftMax")]
     fn concurrency_soft_max(&self) -> crate::zbus::Result<u32>;
+
+    /// Get property `ActivatingConcurrencyMax`.
+    #[zbus(
+        property(emits_changed_signal = "false"),
+        name = "ActivatingConcurrencyMax"
+    )]
+    fn activating_concurrency_max(&self) -> crate::zbus::Result<u32>;
 
     /// Get property `NCurrentlyActive`.
     #[zbus(property(emits_changed_signal = "false"), name = "NCurrentlyActive")]
