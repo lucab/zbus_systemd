@@ -42,6 +42,11 @@ pub trait Hostnamed {
     #[zbus(name = "SetTags")]
     fn set_tags(&self, tags: Vec<String>) -> crate::zbus::Result<()>;
 
+    /// [📖](https://www.freedesktop.org/software/systemd/man/systemd.directives.html#AddAndRemoveTags()) Call interface method `AddAndRemoveTags`.
+    #[zbus(name = "AddAndRemoveTags")]
+    fn add_and_remove_tags(&self, add: Vec<String>, remove: Vec<String>)
+        -> crate::zbus::Result<()>;
+
     /// [📖](https://www.freedesktop.org/software/systemd/man/systemd.directives.html#GetProductUUID()) Call interface method `GetProductUUID`.
     #[zbus(name = "GetProductUUID")]
     fn get_product_uuid(&self, interactive: bool) -> crate::zbus::Result<Vec<u8>>;
