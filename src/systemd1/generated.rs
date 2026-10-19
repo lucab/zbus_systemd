@@ -5,43 +5,42 @@ use crate::zbus::proxy;
 /// Proxy object for `org.freedesktop.systemd1.Manager`.
 #[proxy(
     interface = "org.freedesktop.systemd1.Manager",
-    gen_blocking = false,
     default_service = "org.freedesktop.systemd1",
     default_path = "/org/freedesktop/systemd1"
 )]
 pub trait Manager {
     /// [📖](https://www.freedesktop.org/software/systemd/man/systemd.directives.html#GetUnit()) Call interface method `GetUnit`.
     #[zbus(name = "GetUnit")]
-    fn get_unit(&self, name: String) -> crate::zbus::Result<crate::zvariant::OwnedObjectPath>;
+    fn get_unit(&self, name: String) -> crate::zbus::Result<crate::zbus::OwnedObjectPath>;
 
     /// [📖](https://www.freedesktop.org/software/systemd/man/systemd.directives.html#GetUnitByPID()) Call interface method `GetUnitByPID`.
     #[zbus(name = "GetUnitByPID")]
-    fn get_unit_by_pid(&self, pid: u32) -> crate::zbus::Result<crate::zvariant::OwnedObjectPath>;
+    fn get_unit_by_pid(&self, pid: u32) -> crate::zbus::Result<crate::zbus::OwnedObjectPath>;
 
     /// [📖](https://www.freedesktop.org/software/systemd/man/systemd.directives.html#GetUnitByInvocationID()) Call interface method `GetUnitByInvocationID`.
     #[zbus(name = "GetUnitByInvocationID")]
     fn get_unit_by_invocation_id(
         &self,
         invocation_id: Vec<u8>,
-    ) -> crate::zbus::Result<crate::zvariant::OwnedObjectPath>;
+    ) -> crate::zbus::Result<crate::zbus::OwnedObjectPath>;
 
     /// [📖](https://www.freedesktop.org/software/systemd/man/systemd.directives.html#GetUnitByControlGroup()) Call interface method `GetUnitByControlGroup`.
     #[zbus(name = "GetUnitByControlGroup")]
     fn get_unit_by_control_group(
         &self,
         cgroup: String,
-    ) -> crate::zbus::Result<crate::zvariant::OwnedObjectPath>;
+    ) -> crate::zbus::Result<crate::zbus::OwnedObjectPath>;
 
     /// [📖](https://www.freedesktop.org/software/systemd/man/systemd.directives.html#GetUnitByPIDFD()) Call interface method `GetUnitByPIDFD`.
     #[zbus(name = "GetUnitByPIDFD")]
     fn get_unit_by_pidfd(
         &self,
-        pidfd: crate::zvariant::OwnedFd,
-    ) -> crate::zbus::Result<(crate::zvariant::OwnedObjectPath, String, Vec<u8>)>;
+        pidfd: crate::zbus::OwnedFd,
+    ) -> crate::zbus::Result<(crate::zbus::OwnedObjectPath, String, Vec<u8>)>;
 
     /// [📖](https://www.freedesktop.org/software/systemd/man/systemd.directives.html#LoadUnit()) Call interface method `LoadUnit`.
     #[zbus(name = "LoadUnit")]
-    fn load_unit(&self, name: String) -> crate::zbus::Result<crate::zvariant::OwnedObjectPath>;
+    fn load_unit(&self, name: String) -> crate::zbus::Result<crate::zbus::OwnedObjectPath>;
 
     /// [📖](https://www.freedesktop.org/software/systemd/man/systemd.directives.html#StartUnit()) Call interface method `StartUnit`.
     #[zbus(name = "StartUnit")]
@@ -49,7 +48,7 @@ pub trait Manager {
         &self,
         name: String,
         mode: String,
-    ) -> crate::zbus::Result<crate::zvariant::OwnedObjectPath>;
+    ) -> crate::zbus::Result<crate::zbus::OwnedObjectPath>;
 
     /// [📖](https://www.freedesktop.org/software/systemd/man/systemd.directives.html#StartUnitWithFlags()) Call interface method `StartUnitWithFlags`.
     #[zbus(name = "StartUnitWithFlags")]
@@ -58,7 +57,7 @@ pub trait Manager {
         name: String,
         mode: String,
         flags: u64,
-    ) -> crate::zbus::Result<crate::zvariant::OwnedObjectPath>;
+    ) -> crate::zbus::Result<crate::zbus::OwnedObjectPath>;
 
     /// [📖](https://www.freedesktop.org/software/systemd/man/systemd.directives.html#StartUnitReplace()) Call interface method `StartUnitReplace`.
     #[zbus(name = "StartUnitReplace")]
@@ -67,7 +66,7 @@ pub trait Manager {
         old_unit: String,
         new_unit: String,
         mode: String,
-    ) -> crate::zbus::Result<crate::zvariant::OwnedObjectPath>;
+    ) -> crate::zbus::Result<crate::zbus::OwnedObjectPath>;
 
     /// [📖](https://www.freedesktop.org/software/systemd/man/systemd.directives.html#StopUnit()) Call interface method `StopUnit`.
     #[zbus(name = "StopUnit")]
@@ -75,7 +74,7 @@ pub trait Manager {
         &self,
         name: String,
         mode: String,
-    ) -> crate::zbus::Result<crate::zvariant::OwnedObjectPath>;
+    ) -> crate::zbus::Result<crate::zbus::OwnedObjectPath>;
 
     /// [📖](https://www.freedesktop.org/software/systemd/man/systemd.directives.html#ReloadUnit()) Call interface method `ReloadUnit`.
     #[zbus(name = "ReloadUnit")]
@@ -83,7 +82,7 @@ pub trait Manager {
         &self,
         name: String,
         mode: String,
-    ) -> crate::zbus::Result<crate::zvariant::OwnedObjectPath>;
+    ) -> crate::zbus::Result<crate::zbus::OwnedObjectPath>;
 
     /// [📖](https://www.freedesktop.org/software/systemd/man/systemd.directives.html#RestartUnit()) Call interface method `RestartUnit`.
     #[zbus(name = "RestartUnit")]
@@ -91,7 +90,7 @@ pub trait Manager {
         &self,
         name: String,
         mode: String,
-    ) -> crate::zbus::Result<crate::zvariant::OwnedObjectPath>;
+    ) -> crate::zbus::Result<crate::zbus::OwnedObjectPath>;
 
     /// [📖](https://www.freedesktop.org/software/systemd/man/systemd.directives.html#TryRestartUnit()) Call interface method `TryRestartUnit`.
     #[zbus(name = "TryRestartUnit")]
@@ -99,7 +98,7 @@ pub trait Manager {
         &self,
         name: String,
         mode: String,
-    ) -> crate::zbus::Result<crate::zvariant::OwnedObjectPath>;
+    ) -> crate::zbus::Result<crate::zbus::OwnedObjectPath>;
 
     /// [📖](https://www.freedesktop.org/software/systemd/man/systemd.directives.html#ReloadOrRestartUnit()) Call interface method `ReloadOrRestartUnit`.
     #[zbus(name = "ReloadOrRestartUnit")]
@@ -107,7 +106,7 @@ pub trait Manager {
         &self,
         name: String,
         mode: String,
-    ) -> crate::zbus::Result<crate::zvariant::OwnedObjectPath>;
+    ) -> crate::zbus::Result<crate::zbus::OwnedObjectPath>;
 
     /// [📖](https://www.freedesktop.org/software/systemd/man/systemd.directives.html#ReloadOrTryRestartUnit()) Call interface method `ReloadOrTryRestartUnit`.
     #[zbus(name = "ReloadOrTryRestartUnit")]
@@ -115,7 +114,7 @@ pub trait Manager {
         &self,
         name: String,
         mode: String,
-    ) -> crate::zbus::Result<crate::zvariant::OwnedObjectPath>;
+    ) -> crate::zbus::Result<crate::zbus::OwnedObjectPath>;
 
     /// [📖](https://www.freedesktop.org/software/systemd/man/systemd.directives.html#EnqueueUnitJob()) Call interface method `EnqueueUnitJob`.
     #[zbus(name = "EnqueueUnitJob")]
@@ -126,15 +125,15 @@ pub trait Manager {
         job_mode: String,
     ) -> crate::zbus::Result<(
         u32,
-        crate::zvariant::OwnedObjectPath,
+        crate::zbus::OwnedObjectPath,
         String,
-        crate::zvariant::OwnedObjectPath,
+        crate::zbus::OwnedObjectPath,
         String,
         Vec<(
             u32,
-            crate::zvariant::OwnedObjectPath,
+            crate::zbus::OwnedObjectPath,
             String,
-            crate::zvariant::OwnedObjectPath,
+            crate::zbus::OwnedObjectPath,
             String,
         )>,
     )>;
@@ -150,9 +149,9 @@ pub trait Manager {
     ) -> crate::zbus::Result<
         Vec<(
             u32,
-            crate::zvariant::OwnedObjectPath,
+            crate::zbus::OwnedObjectPath,
             String,
-            crate::zvariant::OwnedObjectPath,
+            crate::zbus::OwnedObjectPath,
             String,
         )>,
     >;
@@ -203,7 +202,7 @@ pub trait Manager {
         &self,
         name: String,
         runtime: bool,
-        properties: Vec<(String, crate::zvariant::OwnedValue)>,
+        properties: Vec<(String, crate::zbus::OwnedVariant)>,
     ) -> crate::zbus::Result<()>;
 
     /// [📖](https://www.freedesktop.org/software/systemd/man/systemd.directives.html#BindMountUnit()) Call interface method `BindMountUnit`.
@@ -243,9 +242,9 @@ pub trait Manager {
         &self,
         name: String,
         mode: String,
-        properties: Vec<(String, crate::zvariant::OwnedValue)>,
-        aux: Vec<(String, Vec<(String, crate::zvariant::OwnedValue)>)>,
-    ) -> crate::zbus::Result<crate::zvariant::OwnedObjectPath>;
+        properties: Vec<(String, crate::zbus::OwnedVariant)>,
+        aux: Vec<(String, Vec<(String, crate::zbus::OwnedVariant)>)>,
+    ) -> crate::zbus::Result<crate::zbus::OwnedObjectPath>;
 
     /// [📖](https://www.freedesktop.org/software/systemd/man/systemd.directives.html#GetUnitProcesses()) Call interface method `GetUnitProcesses`.
     #[zbus(name = "GetUnitProcesses")]
@@ -275,7 +274,7 @@ pub trait Manager {
 
     /// [📖](https://www.freedesktop.org/software/systemd/man/systemd.directives.html#GetJob()) Call interface method `GetJob`.
     #[zbus(name = "GetJob")]
-    fn get_job(&self, id: u32) -> crate::zbus::Result<crate::zvariant::OwnedObjectPath>;
+    fn get_job(&self, id: u32) -> crate::zbus::Result<crate::zbus::OwnedObjectPath>;
 
     /// [📖](https://www.freedesktop.org/software/systemd/man/systemd.directives.html#GetJobAfter()) Call interface method `GetJobAfter`.
     #[zbus(name = "GetJobAfter")]
@@ -288,8 +287,8 @@ pub trait Manager {
             String,
             String,
             String,
-            crate::zvariant::OwnedObjectPath,
-            crate::zvariant::OwnedObjectPath,
+            crate::zbus::OwnedObjectPath,
+            crate::zbus::OwnedObjectPath,
         )>,
     >;
 
@@ -304,8 +303,8 @@ pub trait Manager {
             String,
             String,
             String,
-            crate::zvariant::OwnedObjectPath,
-            crate::zvariant::OwnedObjectPath,
+            crate::zbus::OwnedObjectPath,
+            crate::zbus::OwnedObjectPath,
         )>,
     >;
 
@@ -337,10 +336,10 @@ pub trait Manager {
             String,
             String,
             String,
-            crate::zvariant::OwnedObjectPath,
+            crate::zbus::OwnedObjectPath,
             u32,
             String,
-            crate::zvariant::OwnedObjectPath,
+            crate::zbus::OwnedObjectPath,
         )>,
     >;
 
@@ -357,10 +356,10 @@ pub trait Manager {
             String,
             String,
             String,
-            crate::zvariant::OwnedObjectPath,
+            crate::zbus::OwnedObjectPath,
             u32,
             String,
-            crate::zvariant::OwnedObjectPath,
+            crate::zbus::OwnedObjectPath,
         )>,
     >;
 
@@ -378,10 +377,10 @@ pub trait Manager {
             String,
             String,
             String,
-            crate::zvariant::OwnedObjectPath,
+            crate::zbus::OwnedObjectPath,
             u32,
             String,
-            crate::zvariant::OwnedObjectPath,
+            crate::zbus::OwnedObjectPath,
         )>,
     >;
 
@@ -398,10 +397,10 @@ pub trait Manager {
             String,
             String,
             String,
-            crate::zvariant::OwnedObjectPath,
+            crate::zbus::OwnedObjectPath,
             u32,
             String,
-            crate::zvariant::OwnedObjectPath,
+            crate::zbus::OwnedObjectPath,
         )>,
     >;
 
@@ -415,8 +414,8 @@ pub trait Manager {
             String,
             String,
             String,
-            crate::zvariant::OwnedObjectPath,
-            crate::zvariant::OwnedObjectPath,
+            crate::zbus::OwnedObjectPath,
+            crate::zbus::OwnedObjectPath,
         )>,
     >;
 
@@ -438,14 +437,14 @@ pub trait Manager {
 
     /// [📖](https://www.freedesktop.org/software/systemd/man/systemd.directives.html#DumpByFileDescriptor()) Call interface method `DumpByFileDescriptor`.
     #[zbus(name = "DumpByFileDescriptor")]
-    fn dump_by_file_descriptor(&self) -> crate::zbus::Result<crate::zvariant::OwnedFd>;
+    fn dump_by_file_descriptor(&self) -> crate::zbus::Result<crate::zbus::OwnedFd>;
 
     /// [📖](https://www.freedesktop.org/software/systemd/man/systemd.directives.html#DumpUnitsMatchingPatternsByFileDescriptor()) Call interface method `DumpUnitsMatchingPatternsByFileDescriptor`.
     #[zbus(name = "DumpUnitsMatchingPatternsByFileDescriptor")]
     fn dump_units_matching_patterns_by_file_descriptor(
         &self,
         patterns: Vec<String>,
-    ) -> crate::zbus::Result<crate::zvariant::OwnedFd>;
+    ) -> crate::zbus::Result<crate::zbus::OwnedFd>;
 
     /// [📖](https://www.freedesktop.org/software/systemd/man/systemd.directives.html#Reload()) Call interface method `Reload`.
     #[zbus(name = "Reload")]
@@ -501,7 +500,7 @@ pub trait Manager {
 
     /// [📖](https://www.freedesktop.org/software/systemd/man/systemd.directives.html#EnqueueMarkedJobs()) Call interface method `EnqueueMarkedJobs`.
     #[zbus(name = "EnqueueMarkedJobs")]
-    fn enqueue_marked_jobs(&self) -> crate::zbus::Result<Vec<crate::zvariant::OwnedObjectPath>>;
+    fn enqueue_marked_jobs(&self) -> crate::zbus::Result<Vec<crate::zbus::OwnedObjectPath>>;
 
     /// [📖](https://www.freedesktop.org/software/systemd/man/systemd.directives.html#ListUnitFiles()) Call interface method `ListUnitFiles`.
     #[zbus(name = "ListUnitFiles")]
@@ -682,18 +681,14 @@ pub trait Manager {
 
     /// Receive `UnitNew` signal.
     #[zbus(signal, name = "UnitNew")]
-    fn unit_new(
-        &self,
-        id: String,
-        unit: crate::zvariant::OwnedObjectPath,
-    ) -> crate::zbus::Result<()>;
+    fn unit_new(&self, id: String, unit: crate::zbus::OwnedObjectPath) -> crate::zbus::Result<()>;
 
     /// Receive `UnitRemoved` signal.
     #[zbus(signal, name = "UnitRemoved")]
     fn unit_removed(
         &self,
         id: String,
-        unit: crate::zvariant::OwnedObjectPath,
+        unit: crate::zbus::OwnedObjectPath,
     ) -> crate::zbus::Result<()>;
 
     /// Receive `JobNew` signal.
@@ -701,7 +696,7 @@ pub trait Manager {
     fn job_new(
         &self,
         id: u32,
-        job: crate::zvariant::OwnedObjectPath,
+        job: crate::zbus::OwnedObjectPath,
         unit: String,
     ) -> crate::zbus::Result<()>;
 
@@ -710,7 +705,7 @@ pub trait Manager {
     fn job_removed(
         &self,
         id: u32,
-        job: crate::zvariant::OwnedObjectPath,
+        job: crate::zbus::OwnedObjectPath,
         unit: String,
         result: String,
     ) -> crate::zbus::Result<()>;
@@ -1615,44 +1610,40 @@ pub trait Manager {
 /// Proxy object for `org.freedesktop.systemd1.Unit`.
 #[proxy(
     interface = "org.freedesktop.systemd1.Unit",
-    gen_blocking = false,
     default_service = "org.freedesktop.systemd1",
     assume_defaults = false
 )]
 pub trait Unit {
     /// [📖](https://www.freedesktop.org/software/systemd/man/systemd.directives.html#Start()) Call interface method `Start`.
     #[zbus(name = "Start")]
-    fn start(&self, mode: String) -> crate::zbus::Result<crate::zvariant::OwnedObjectPath>;
+    fn start(&self, mode: String) -> crate::zbus::Result<crate::zbus::OwnedObjectPath>;
 
     /// [📖](https://www.freedesktop.org/software/systemd/man/systemd.directives.html#Stop()) Call interface method `Stop`.
     #[zbus(name = "Stop")]
-    fn stop(&self, mode: String) -> crate::zbus::Result<crate::zvariant::OwnedObjectPath>;
+    fn stop(&self, mode: String) -> crate::zbus::Result<crate::zbus::OwnedObjectPath>;
 
     /// [📖](https://www.freedesktop.org/software/systemd/man/systemd.directives.html#Reload()) Call interface method `Reload`.
     #[zbus(name = "Reload")]
-    fn reload(&self, mode: String) -> crate::zbus::Result<crate::zvariant::OwnedObjectPath>;
+    fn reload(&self, mode: String) -> crate::zbus::Result<crate::zbus::OwnedObjectPath>;
 
     /// [📖](https://www.freedesktop.org/software/systemd/man/systemd.directives.html#Restart()) Call interface method `Restart`.
     #[zbus(name = "Restart")]
-    fn restart(&self, mode: String) -> crate::zbus::Result<crate::zvariant::OwnedObjectPath>;
+    fn restart(&self, mode: String) -> crate::zbus::Result<crate::zbus::OwnedObjectPath>;
 
     /// [📖](https://www.freedesktop.org/software/systemd/man/systemd.directives.html#TryRestart()) Call interface method `TryRestart`.
     #[zbus(name = "TryRestart")]
-    fn try_restart(&self, mode: String) -> crate::zbus::Result<crate::zvariant::OwnedObjectPath>;
+    fn try_restart(&self, mode: String) -> crate::zbus::Result<crate::zbus::OwnedObjectPath>;
 
     /// [📖](https://www.freedesktop.org/software/systemd/man/systemd.directives.html#ReloadOrRestart()) Call interface method `ReloadOrRestart`.
     #[zbus(name = "ReloadOrRestart")]
-    fn reload_or_restart(
-        &self,
-        mode: String,
-    ) -> crate::zbus::Result<crate::zvariant::OwnedObjectPath>;
+    fn reload_or_restart(&self, mode: String) -> crate::zbus::Result<crate::zbus::OwnedObjectPath>;
 
     /// [📖](https://www.freedesktop.org/software/systemd/man/systemd.directives.html#ReloadOrTryRestart()) Call interface method `ReloadOrTryRestart`.
     #[zbus(name = "ReloadOrTryRestart")]
     fn reload_or_try_restart(
         &self,
         mode: String,
-    ) -> crate::zbus::Result<crate::zvariant::OwnedObjectPath>;
+    ) -> crate::zbus::Result<crate::zbus::OwnedObjectPath>;
 
     /// [📖](https://www.freedesktop.org/software/systemd/man/systemd.directives.html#EnqueueJob()) Call interface method `EnqueueJob`.
     #[zbus(name = "EnqueueJob")]
@@ -1662,15 +1653,15 @@ pub trait Unit {
         job_mode: String,
     ) -> crate::zbus::Result<(
         u32,
-        crate::zvariant::OwnedObjectPath,
+        crate::zbus::OwnedObjectPath,
         String,
-        crate::zvariant::OwnedObjectPath,
+        crate::zbus::OwnedObjectPath,
         String,
         Vec<(
             u32,
-            crate::zvariant::OwnedObjectPath,
+            crate::zbus::OwnedObjectPath,
             String,
-            crate::zvariant::OwnedObjectPath,
+            crate::zbus::OwnedObjectPath,
             String,
         )>,
     )>;
@@ -1696,7 +1687,7 @@ pub trait Unit {
     fn set_properties(
         &self,
         runtime: bool,
-        properties: Vec<(String, crate::zvariant::OwnedValue)>,
+        properties: Vec<(String, crate::zbus::OwnedVariant)>,
     ) -> crate::zbus::Result<()>;
 
     /// [📖](https://www.freedesktop.org/software/systemd/man/systemd.directives.html#Ref()) Call interface method `Ref`.
@@ -1996,7 +1987,7 @@ pub trait Unit {
 
     /// Get property `Job`.
     #[zbus(property(emits_changed_signal = "true"), name = "Job")]
-    fn job(&self) -> crate::zbus::Result<(u32, crate::zvariant::OwnedObjectPath)>;
+    fn job(&self) -> crate::zbus::Result<(u32, crate::zbus::OwnedObjectPath)>;
 
     /// Get property `StopWhenUnneeded`.
     #[zbus(property(emits_changed_signal = "const"), name = "StopWhenUnneeded")]
@@ -2182,7 +2173,6 @@ pub trait Unit {
 /// Proxy object for `org.freedesktop.systemd1.Service`.
 #[proxy(
     interface = "org.freedesktop.systemd1.Service",
-    gen_blocking = false,
     default_service = "org.freedesktop.systemd1",
     assume_defaults = false
 )]
@@ -4083,7 +4073,6 @@ pub trait Service {
 /// Proxy object for `org.freedesktop.systemd1.Socket`.
 #[proxy(
     interface = "org.freedesktop.systemd1.Socket",
-    gen_blocking = false,
     default_service = "org.freedesktop.systemd1",
     assume_defaults = false
 )]
@@ -5742,7 +5731,6 @@ pub trait Socket {
 /// Proxy object for `org.freedesktop.systemd1.Target`.
 #[proxy(
     interface = "org.freedesktop.systemd1.Target",
-    gen_blocking = false,
     default_service = "org.freedesktop.systemd1",
     assume_defaults = false
 )]
@@ -5751,7 +5739,6 @@ pub trait Target {}
 /// Proxy object for `org.freedesktop.systemd1.Device`.
 #[proxy(
     interface = "org.freedesktop.systemd1.Device",
-    gen_blocking = false,
     default_service = "org.freedesktop.systemd1",
     assume_defaults = false
 )]
@@ -5764,7 +5751,6 @@ pub trait Device {
 /// Proxy object for `org.freedesktop.systemd1.Mount`.
 #[proxy(
     interface = "org.freedesktop.systemd1.Mount",
-    gen_blocking = false,
     default_service = "org.freedesktop.systemd1",
     assume_defaults = false
 )]
@@ -7201,7 +7187,6 @@ pub trait Mount {
 /// Proxy object for `org.freedesktop.systemd1.Automount`.
 #[proxy(
     interface = "org.freedesktop.systemd1.Automount",
-    gen_blocking = false,
     default_service = "org.freedesktop.systemd1",
     assume_defaults = false
 )]
@@ -7230,7 +7215,6 @@ pub trait Automount {
 /// Proxy object for `org.freedesktop.systemd1.Timer`.
 #[proxy(
     interface = "org.freedesktop.systemd1.Timer",
-    gen_blocking = false,
     default_service = "org.freedesktop.systemd1",
     assume_defaults = false
 )]
@@ -7329,7 +7313,6 @@ pub trait Timer {
 /// Proxy object for `org.freedesktop.systemd1.Swap`.
 #[proxy(
     interface = "org.freedesktop.systemd1.Swap",
-    gen_blocking = false,
     default_service = "org.freedesktop.systemd1",
     assume_defaults = false
 )]
@@ -8731,7 +8714,6 @@ pub trait Swap {
 /// Proxy object for `org.freedesktop.systemd1.Path`.
 #[proxy(
     interface = "org.freedesktop.systemd1.Path",
-    gen_blocking = false,
     default_service = "org.freedesktop.systemd1",
     assume_defaults = false
 )]
@@ -8771,7 +8753,6 @@ pub trait Path {
 /// Proxy object for `org.freedesktop.systemd1.Slice`.
 #[proxy(
     interface = "org.freedesktop.systemd1.Slice",
-    gen_blocking = false,
     default_service = "org.freedesktop.systemd1",
     assume_defaults = false
 )]
@@ -9212,7 +9193,6 @@ pub trait Slice {
 /// Proxy object for `org.freedesktop.systemd1.Scope`.
 #[proxy(
     interface = "org.freedesktop.systemd1.Scope",
-    gen_blocking = false,
     default_service = "org.freedesktop.systemd1",
     assume_defaults = false
 )]
@@ -9697,7 +9677,6 @@ pub trait Scope {
 /// Proxy object for `org.freedesktop.systemd1.Job`.
 #[proxy(
     interface = "org.freedesktop.systemd1.Job",
-    gen_blocking = false,
     default_service = "org.freedesktop.systemd1",
     assume_defaults = false
 )]
@@ -9716,8 +9695,8 @@ pub trait Job {
             String,
             String,
             String,
-            crate::zvariant::OwnedObjectPath,
-            crate::zvariant::OwnedObjectPath,
+            crate::zbus::OwnedObjectPath,
+            crate::zbus::OwnedObjectPath,
         )>,
     >;
 
@@ -9731,8 +9710,8 @@ pub trait Job {
             String,
             String,
             String,
-            crate::zvariant::OwnedObjectPath,
-            crate::zvariant::OwnedObjectPath,
+            crate::zbus::OwnedObjectPath,
+            crate::zbus::OwnedObjectPath,
         )>,
     >;
 
@@ -9742,7 +9721,7 @@ pub trait Job {
 
     /// Get property `Unit`.
     #[zbus(property(emits_changed_signal = "const"), name = "Unit")]
-    fn unit(&self) -> crate::zbus::Result<(String, crate::zvariant::OwnedObjectPath)>;
+    fn unit(&self) -> crate::zbus::Result<(String, crate::zbus::OwnedObjectPath)>;
 
     /// Get property `JobType`.
     #[zbus(property(emits_changed_signal = "const"), name = "JobType")]

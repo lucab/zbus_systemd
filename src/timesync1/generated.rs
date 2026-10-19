@@ -5,7 +5,6 @@ use crate::zbus::proxy;
 /// Proxy object for `org.freedesktop.timesync1.Manager`.
 #[proxy(
     interface = "org.freedesktop.timesync1.Manager",
-    gen_blocking = false,
     default_service = "org.freedesktop.timesync1",
     default_path = "/org/freedesktop/timesync1"
 )]

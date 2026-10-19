@@ -34,7 +34,6 @@ fn generate_single_object(file: &mut impl Write, node: Node, service: &Service) 
     writeln!(file, "#[proxy(")?;
     {
         writeln!(file, r#"interface = "{}","#, node.interface)?;
-        writeln!(file, r#"gen_blocking = false,"#)?;
         writeln!(file, r#"default_service = "{}","#, service.id)?;
         if node.path == service.hierarchy {
             writeln!(file, r#"default_path = "{}","#, service.hierarchy)?;

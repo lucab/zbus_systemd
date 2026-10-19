@@ -32,14 +32,14 @@ fn parse_simple(input: &str) -> IResult<&str, String> {
         alt((
             value("bool", tag("b")),
             value("f64", tag("d")),
-            value("crate::zvariant::OwnedFd", tag("h")),
+            value("crate::zbus::OwnedFd", tag("h")),
             value("i32", tag("i")),
-            value("crate::zvariant::OwnedObjectPath", tag("o")),
+            value("crate::zbus::OwnedObjectPath", tag("o")),
             value("u16", tag("q")),
             value("String", tag("s")),
             value("u64", tag("t")),
             value("u32", tag("u")),
-            value("crate::zvariant::OwnedValue", tag("v")),
+            value("crate::zbus::OwnedVariant", tag("v")),
             value("i64", tag("x")),
             value("u8", tag("y")),
         )),
@@ -80,7 +80,7 @@ mod tests {
             ("a(iiayqs)", "Vec<(i32, i32, Vec<u8>, u16, String,)>"),
             (
                 "a(sa(sv))",
-                "Vec<(String, Vec<(String, crate::zvariant::OwnedValue,)>,)>",
+                "Vec<(String, Vec<(String, crate::zbus::OwnedVariant,)>,)>",
             ),
         ];
         for (input, expected) in ok_cases {

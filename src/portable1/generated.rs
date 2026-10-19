@@ -5,14 +5,13 @@ use crate::zbus::proxy;
 /// Proxy object for `org.freedesktop.portable1.Manager`.
 #[proxy(
     interface = "org.freedesktop.portable1.Manager",
-    gen_blocking = false,
     default_service = "org.freedesktop.portable1",
     default_path = "/org/freedesktop/portable1"
 )]
 pub trait Manager {
     /// [📖](https://www.freedesktop.org/software/systemd/man/systemd.directives.html#GetImage()) Call interface method `GetImage`.
     #[zbus(name = "GetImage")]
-    fn get_image(&self, image: String) -> crate::zbus::Result<crate::zvariant::OwnedObjectPath>;
+    fn get_image(&self, image: String) -> crate::zbus::Result<crate::zbus::OwnedObjectPath>;
 
     /// [📖](https://www.freedesktop.org/software/systemd/man/systemd.directives.html#ListImages()) Call interface method `ListImages`.
     #[zbus(name = "ListImages")]
@@ -27,7 +26,7 @@ pub trait Manager {
             u64,
             u64,
             String,
-            crate::zvariant::OwnedObjectPath,
+            crate::zbus::OwnedObjectPath,
         )>,
     >;
 
@@ -177,7 +176,6 @@ pub trait Manager {
 /// Proxy object for `org.freedesktop.portable1.Image`.
 #[proxy(
     interface = "org.freedesktop.portable1.Image",
-    gen_blocking = false,
     default_service = "org.freedesktop.portable1",
     default_path = "/org/freedesktop/portable1"
 )]

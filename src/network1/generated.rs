@@ -5,30 +5,27 @@ use crate::zbus::proxy;
 /// Proxy object for `org.freedesktop.network1.Manager`.
 #[proxy(
     interface = "org.freedesktop.network1.Manager",
-    gen_blocking = false,
     default_service = "org.freedesktop.network1",
     default_path = "/org/freedesktop/network1"
 )]
 pub trait Manager {
     /// [📖](https://www.freedesktop.org/software/systemd/man/systemd.directives.html#ListLinks()) Call interface method `ListLinks`.
     #[zbus(name = "ListLinks")]
-    fn list_links(
-        &self,
-    ) -> crate::zbus::Result<Vec<(i32, String, crate::zvariant::OwnedObjectPath)>>;
+    fn list_links(&self) -> crate::zbus::Result<Vec<(i32, String, crate::zbus::OwnedObjectPath)>>;
 
     /// [📖](https://www.freedesktop.org/software/systemd/man/systemd.directives.html#GetLinkByName()) Call interface method `GetLinkByName`.
     #[zbus(name = "GetLinkByName")]
     fn get_link_by_name(
         &self,
         name: String,
-    ) -> crate::zbus::Result<(i32, crate::zvariant::OwnedObjectPath)>;
+    ) -> crate::zbus::Result<(i32, crate::zbus::OwnedObjectPath)>;
 
     /// [📖](https://www.freedesktop.org/software/systemd/man/systemd.directives.html#GetLinkByIndex()) Call interface method `GetLinkByIndex`.
     #[zbus(name = "GetLinkByIndex")]
     fn get_link_by_index(
         &self,
         ifindex: i32,
-    ) -> crate::zbus::Result<(String, crate::zvariant::OwnedObjectPath)>;
+    ) -> crate::zbus::Result<(String, crate::zbus::OwnedObjectPath)>;
 
     /// [📖](https://www.freedesktop.org/software/systemd/man/systemd.directives.html#SetLinkNTP()) Call interface method `SetLinkNTP`.
     #[zbus(name = "SetLinkNTP")]
@@ -151,7 +148,6 @@ pub trait Manager {
 /// Proxy object for `org.freedesktop.network1.Link`.
 #[proxy(
     interface = "org.freedesktop.network1.Link",
-    gen_blocking = false,
     default_service = "org.freedesktop.network1",
     assume_defaults = false
 )]
@@ -256,7 +252,6 @@ pub trait Link {
 /// Proxy object for `org.freedesktop.network1.Network`.
 #[proxy(
     interface = "org.freedesktop.network1.Network",
-    gen_blocking = false,
     default_service = "org.freedesktop.network1",
     assume_defaults = false
 )]
@@ -293,7 +288,6 @@ pub trait Network {
 /// Proxy object for `org.freedesktop.network1.DHCPServer`.
 #[proxy(
     interface = "org.freedesktop.network1.DHCPServer",
-    gen_blocking = false,
     default_service = "org.freedesktop.network1",
     assume_defaults = false
 )]
@@ -314,7 +308,6 @@ pub trait DHCPServer {
 /// Proxy object for `org.freedesktop.network1.DHCPv4Client`.
 #[proxy(
     interface = "org.freedesktop.network1.DHCPv4Client",
-    gen_blocking = false,
     default_service = "org.freedesktop.network1",
     assume_defaults = false
 )]
@@ -327,7 +320,6 @@ pub trait DHCPv4Client {
 /// Proxy object for `org.freedesktop.network1.DHCPv6Client`.
 #[proxy(
     interface = "org.freedesktop.network1.DHCPv6Client",
-    gen_blocking = false,
     default_service = "org.freedesktop.network1",
     assume_defaults = false
 )]
