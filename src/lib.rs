@@ -5,13 +5,8 @@
 //! This library internally uses `zbus` without any default Cargo features.
 //!
 //! That means that you have to decide which async executor to use, by enabling one of the following Cargo features:
-//! * `zbus-async-zruntime`: uses zbus's built-in ZRuntime (enabling `default-rt`).
 //! * `zbus-async-tokio`: internally uses the `tokio` executor (enabling the `tokio` feature in `zbus`).
-//!
-//! The zbus 6 migration replaces `zbus-async-smol` with `zbus-async-zruntime`;
-//! this changes the executor rather than preserving the former smol backend.
-//! It also replaces the `zvariant` re-export with `wire`: common types such as
-//! `OwnedVariant` are available through `zbus`, and encoding APIs through `wire`.
+//! * `zbus-async-zruntime`: internally uses the `zruntime` executor (enabling the `default-rt` feature in `zbus`).
 //!
 //! ## Auto-generated services
 //!
@@ -41,7 +36,6 @@ pub use helpers::*;
 
 pub use zbus;
 pub use zbus::names as znames;
-pub use zbus::wire;
 
 #[cfg_attr(docsrs, doc(cfg(feature = "home1")))]
 #[cfg(feature = "home1")]

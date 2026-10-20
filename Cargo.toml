@@ -13,12 +13,10 @@ rust-version = "1.89.0"
 
 [dependencies]
 serde = "1"
-zbus = { version = "^6.0.0", default-features = false, features = ["proxy"] }
+zbus = { version = "6", default-features = false, features = ["proxy"] }
 
 [dev-dependencies]
 tokio = { version = "1", features = ["full"] }
-zbus = { version = "^6.0.0", default-features = false, features = ["p2p", "service"] }
-zruntime = { version = "0.2", default-features = false, features = ["helper"] }
 
 [features]
 home1 = []
@@ -35,8 +33,8 @@ systemd1 = []
 sysupdate1 = []
 timedate1 = []
 timesync1 = []
-zbus-async-zruntime = ["zbus/default-rt"]
 zbus-async-tokio = ["zbus/tokio"]
+zbus-async-zruntime = ["zbus/default-rt"]
 
 [[example]]
 name = "login1-session_lock-unlock"

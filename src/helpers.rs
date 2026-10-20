@@ -3,7 +3,8 @@
 
 use std::borrow::Cow;
 use std::fmt::Write;
-use zbus::{ObjectPath, OwnedObjectPath};
+use zbus::ObjectPath;
+use zbus::OwnedObjectPath;
 
 /// Escape a label for use in a D-Bus object path.
 ///
