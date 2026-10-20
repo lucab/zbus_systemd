@@ -22,7 +22,7 @@ async fn run() -> ExResult<()> {
     println!("Session object path: {}", session_obj_path.as_str());
 
     let session = SessionProxy::builder(&conn)
-        .path(session_obj_path)?
+        .path(session_obj_path)
         .build()
         .await?;
 

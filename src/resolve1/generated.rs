@@ -5,7 +5,6 @@ use crate::zbus::proxy;
 /// Proxy object for `org.freedesktop.resolve1.Manager`.
 #[proxy(
     interface = "org.freedesktop.resolve1.Manager",
-    gen_blocking = false,
     default_service = "org.freedesktop.resolve1",
     default_path = "/org/freedesktop/resolve1"
 )]
@@ -62,7 +61,7 @@ pub trait Manager {
 
     /// [📖](https://www.freedesktop.org/software/systemd/man/systemd.directives.html#GetLink()) Call interface method `GetLink`.
     #[zbus(name = "GetLink")]
-    fn get_link(&self, ifindex: i32) -> crate::zbus::Result<crate::zvariant::OwnedObjectPath>;
+    fn get_link(&self, ifindex: i32) -> crate::zbus::Result<crate::zbus::OwnedObjectPath>;
 
     /// [📖](https://www.freedesktop.org/software/systemd/man/systemd.directives.html#SetLinkDNS()) Call interface method `SetLinkDNS`.
     #[zbus(name = "SetLinkDNS")]
@@ -128,13 +127,13 @@ pub trait Manager {
         service_priority: u16,
         service_weight: u16,
         txt_datas: Vec<::std::collections::HashMap<String, Vec<u8>>>,
-    ) -> crate::zbus::Result<crate::zvariant::OwnedObjectPath>;
+    ) -> crate::zbus::Result<crate::zbus::OwnedObjectPath>;
 
     /// [📖](https://www.freedesktop.org/software/systemd/man/systemd.directives.html#UnregisterService()) Call interface method `UnregisterService`.
     #[zbus(name = "UnregisterService")]
     fn unregister_service(
         &self,
-        service_path: crate::zvariant::OwnedObjectPath,
+        service_path: crate::zbus::OwnedObjectPath,
     ) -> crate::zbus::Result<()>;
 
     /// [📖](https://www.freedesktop.org/software/systemd/man/systemd.directives.html#ResetStatistics()) Call interface method `ResetStatistics`.
@@ -151,13 +150,11 @@ pub trait Manager {
 
     /// [📖](https://www.freedesktop.org/software/systemd/man/systemd.directives.html#GetDelegate()) Call interface method `GetDelegate`.
     #[zbus(name = "GetDelegate")]
-    fn get_delegate(&self, id: String) -> crate::zbus::Result<crate::zvariant::OwnedObjectPath>;
+    fn get_delegate(&self, id: String) -> crate::zbus::Result<crate::zbus::OwnedObjectPath>;
 
     /// [📖](https://www.freedesktop.org/software/systemd/man/systemd.directives.html#ListDelegates()) Call interface method `ListDelegates`.
     #[zbus(name = "ListDelegates")]
-    fn list_delegates(
-        &self,
-    ) -> crate::zbus::Result<Vec<(String, crate::zvariant::OwnedObjectPath)>>;
+    fn list_delegates(&self) -> crate::zbus::Result<Vec<(String, crate::zbus::OwnedObjectPath)>>;
 
     /// Get property `LLMNRHostname`.
     #[zbus(property(emits_changed_signal = "true"), name = "LLMNRHostname")]
@@ -245,7 +242,6 @@ pub trait Manager {
 /// Proxy object for `org.freedesktop.resolve1.Link`.
 #[proxy(
     interface = "org.freedesktop.resolve1.Link",
-    gen_blocking = false,
     default_service = "org.freedesktop.resolve1",
     assume_defaults = false
 )]

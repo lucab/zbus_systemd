@@ -5,7 +5,6 @@ use crate::zbus::proxy;
 /// Proxy object for `org.freedesktop.home1.Manager`.
 #[proxy(
     interface = "org.freedesktop.home1.Manager",
-    gen_blocking = false,
     default_service = "org.freedesktop.home1",
     default_path = "/org/freedesktop/home1"
 )]
@@ -22,7 +21,7 @@ pub trait Manager {
         String,
         String,
         String,
-        crate::zvariant::OwnedObjectPath,
+        crate::zbus::OwnedObjectPath,
     )>;
 
     /// [📖](https://www.freedesktop.org/software/systemd/man/systemd.directives.html#GetHomeByUID()) Call interface method `GetHomeByUID`.
@@ -37,7 +36,7 @@ pub trait Manager {
         String,
         String,
         String,
-        crate::zvariant::OwnedObjectPath,
+        crate::zbus::OwnedObjectPath,
     )>;
 
     /// [📖](https://www.freedesktop.org/software/systemd/man/systemd.directives.html#GetUserRecordByName()) Call interface method `GetUserRecordByName`.
@@ -45,14 +44,14 @@ pub trait Manager {
     fn get_user_record_by_name(
         &self,
         user_name: String,
-    ) -> crate::zbus::Result<(String, bool, crate::zvariant::OwnedObjectPath)>;
+    ) -> crate::zbus::Result<(String, bool, crate::zbus::OwnedObjectPath)>;
 
     /// [📖](https://www.freedesktop.org/software/systemd/man/systemd.directives.html#GetUserRecordByUID()) Call interface method `GetUserRecordByUID`.
     #[zbus(name = "GetUserRecordByUID")]
     fn get_user_record_by_uid(
         &self,
         uid: u32,
-    ) -> crate::zbus::Result<(String, bool, crate::zvariant::OwnedObjectPath)>;
+    ) -> crate::zbus::Result<(String, bool, crate::zbus::OwnedObjectPath)>;
 
     /// [📖](https://www.freedesktop.org/software/systemd/man/systemd.directives.html#ListHomes()) Call interface method `ListHomes`.
     #[zbus(name = "ListHomes")]
@@ -67,7 +66,7 @@ pub trait Manager {
             String,
             String,
             String,
-            crate::zvariant::OwnedObjectPath,
+            crate::zbus::OwnedObjectPath,
         )>,
     >;
 
@@ -108,7 +107,7 @@ pub trait Manager {
     fn create_home_ex(
         &self,
         user_record: String,
-        blobs: ::std::collections::HashMap<String, crate::zvariant::OwnedFd>,
+        blobs: ::std::collections::HashMap<String, crate::zbus::OwnedFd>,
         flags: u64,
     ) -> crate::zbus::Result<()>;
 
@@ -137,7 +136,7 @@ pub trait Manager {
     fn update_home_ex(
         &self,
         user_record: String,
-        blobs: ::std::collections::HashMap<String, crate::zvariant::OwnedFd>,
+        blobs: ::std::collections::HashMap<String, crate::zbus::OwnedFd>,
         flags: u64,
     ) -> crate::zbus::Result<()>;
 
@@ -169,7 +168,7 @@ pub trait Manager {
         user_name: String,
         secret: String,
         please_suspend: bool,
-    ) -> crate::zbus::Result<crate::zvariant::OwnedFd>;
+    ) -> crate::zbus::Result<crate::zbus::OwnedFd>;
 
     /// [📖](https://www.freedesktop.org/software/systemd/man/systemd.directives.html#RefHome()) Call interface method `RefHome`.
     #[zbus(name = "RefHome")]
@@ -177,7 +176,7 @@ pub trait Manager {
         &self,
         user_name: String,
         please_suspend: bool,
-    ) -> crate::zbus::Result<crate::zvariant::OwnedFd>;
+    ) -> crate::zbus::Result<crate::zbus::OwnedFd>;
 
     /// [📖](https://www.freedesktop.org/software/systemd/man/systemd.directives.html#RefHomeUnrestricted()) Call interface method `RefHomeUnrestricted`.
     #[zbus(name = "RefHomeUnrestricted")]
@@ -185,7 +184,7 @@ pub trait Manager {
         &self,
         user_name: String,
         please_suspend: bool,
-    ) -> crate::zbus::Result<crate::zvariant::OwnedFd>;
+    ) -> crate::zbus::Result<crate::zbus::OwnedFd>;
 
     /// [📖](https://www.freedesktop.org/software/systemd/man/systemd.directives.html#ReleaseHome()) Call interface method `ReleaseHome`.
     #[zbus(name = "ReleaseHome")]
@@ -223,13 +222,12 @@ pub trait Manager {
     #[zbus(property(emits_changed_signal = "true"), name = "AutoLogin")]
     fn auto_login(
         &self,
-    ) -> crate::zbus::Result<Vec<(String, String, crate::zvariant::OwnedObjectPath)>>;
+    ) -> crate::zbus::Result<Vec<(String, String, crate::zbus::OwnedObjectPath)>>;
 }
 
 /// Proxy object for `org.freedesktop.home1.Home`.
 #[proxy(
     interface = "org.freedesktop.home1.Home",
-    gen_blocking = false,
     default_service = "org.freedesktop.home1",
     assume_defaults = false
 )]
@@ -275,7 +273,7 @@ pub trait Home {
     fn update_ex(
         &self,
         user_record: String,
-        blobs: ::std::collections::HashMap<String, crate::zvariant::OwnedFd>,
+        blobs: ::std::collections::HashMap<String, crate::zbus::OwnedFd>,
         flags: u64,
     ) -> crate::zbus::Result<()>;
 
@@ -301,18 +299,15 @@ pub trait Home {
         &self,
         secret: String,
         please_suspend: bool,
-    ) -> crate::zbus::Result<crate::zvariant::OwnedFd>;
+    ) -> crate::zbus::Result<crate::zbus::OwnedFd>;
 
     /// [📖](https://www.freedesktop.org/software/systemd/man/systemd.directives.html#Ref()) Call interface method `Ref`.
     #[zbus(name = "Ref")]
-    fn reference(&self, please_suspend: bool) -> crate::zbus::Result<crate::zvariant::OwnedFd>;
+    fn reference(&self, please_suspend: bool) -> crate::zbus::Result<crate::zbus::OwnedFd>;
 
     /// [📖](https://www.freedesktop.org/software/systemd/man/systemd.directives.html#RefUnrestricted()) Call interface method `RefUnrestricted`.
     #[zbus(name = "RefUnrestricted")]
-    fn ref_unrestricted(
-        &self,
-        please_suspend: bool,
-    ) -> crate::zbus::Result<crate::zvariant::OwnedFd>;
+    fn ref_unrestricted(&self, please_suspend: bool) -> crate::zbus::Result<crate::zbus::OwnedFd>;
 
     /// [📖](https://www.freedesktop.org/software/systemd/man/systemd.directives.html#Release()) Call interface method `Release`.
     #[zbus(name = "Release")]

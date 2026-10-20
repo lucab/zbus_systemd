@@ -5,7 +5,6 @@ use crate::zbus::proxy;
 /// Proxy object for `org.freedesktop.sysupdate1.Manager`.
 #[proxy(
     interface = "org.freedesktop.sysupdate1.Manager",
-    gen_blocking = false,
     default_service = "org.freedesktop.sysupdate1",
     default_path = "/org/freedesktop/sysupdate1"
 )]
@@ -14,13 +13,13 @@ pub trait Manager {
     #[zbus(name = "ListTargets")]
     fn list_targets(
         &self,
-    ) -> crate::zbus::Result<Vec<(String, String, crate::zvariant::OwnedObjectPath)>>;
+    ) -> crate::zbus::Result<Vec<(String, String, crate::zbus::OwnedObjectPath)>>;
 
     /// [📖](https://www.freedesktop.org/software/systemd/man/systemd.directives.html#ListJobs()) Call interface method `ListJobs`.
     #[zbus(name = "ListJobs")]
     fn list_jobs(
         &self,
-    ) -> crate::zbus::Result<Vec<(u64, String, u32, crate::zvariant::OwnedObjectPath)>>;
+    ) -> crate::zbus::Result<Vec<(u64, String, u32, crate::zbus::OwnedObjectPath)>>;
 
     /// [📖](https://www.freedesktop.org/software/systemd/man/systemd.directives.html#ListAppStream()) Call interface method `ListAppStream`.
     #[zbus(name = "ListAppStream")]
@@ -31,7 +30,7 @@ pub trait Manager {
     fn job_removed(
         &self,
         id: u64,
-        path: crate::zvariant::OwnedObjectPath,
+        path: crate::zbus::OwnedObjectPath,
         status: i32,
     ) -> crate::zbus::Result<()>;
 }
@@ -39,7 +38,6 @@ pub trait Manager {
 /// Proxy object for `org.freedesktop.sysupdate1.Target`.
 #[proxy(
     interface = "org.freedesktop.sysupdate1.Target",
-    gen_blocking = false,
     default_service = "org.freedesktop.sysupdate1",
     assume_defaults = false
 )]
@@ -62,7 +60,7 @@ pub trait Target {
         &self,
         new_version: String,
         flags: u64,
-    ) -> crate::zbus::Result<(String, u64, crate::zvariant::OwnedObjectPath)>;
+    ) -> crate::zbus::Result<(String, u64, crate::zbus::OwnedObjectPath)>;
 
     /// [📖](https://www.freedesktop.org/software/systemd/man/systemd.directives.html#Install()) Call interface method `Install`.
     #[zbus(name = "Install")]
@@ -70,7 +68,7 @@ pub trait Target {
         &self,
         new_version: String,
         flags: u64,
-    ) -> crate::zbus::Result<(String, u64, crate::zvariant::OwnedObjectPath)>;
+    ) -> crate::zbus::Result<(String, u64, crate::zbus::OwnedObjectPath)>;
 
     /// [📖](https://www.freedesktop.org/software/systemd/man/systemd.directives.html#Vacuum()) Call interface method `Vacuum`.
     #[zbus(name = "Vacuum")]
@@ -117,7 +115,6 @@ pub trait Target {
 /// Proxy object for `org.freedesktop.sysupdate1.Job`.
 #[proxy(
     interface = "org.freedesktop.sysupdate1.Job",
-    gen_blocking = false,
     default_service = "org.freedesktop.sysupdate1",
     assume_defaults = false
 )]

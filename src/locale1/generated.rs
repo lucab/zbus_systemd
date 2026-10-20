@@ -5,7 +5,6 @@ use crate::zbus::proxy;
 /// Proxy object for `org.freedesktop.locale1`.
 #[proxy(
     interface = "org.freedesktop.locale1",
-    gen_blocking = false,
     default_service = "org.freedesktop.locale1",
     default_path = "/org/freedesktop/locale1"
 )]

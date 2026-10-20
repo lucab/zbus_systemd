@@ -5,29 +5,27 @@ use crate::zbus::proxy;
 /// Proxy object for `org.freedesktop.machine1.Manager`.
 #[proxy(
     interface = "org.freedesktop.machine1.Manager",
-    gen_blocking = false,
     default_service = "org.freedesktop.machine1",
     default_path = "/org/freedesktop/machine1"
 )]
 pub trait Manager {
     /// [📖](https://www.freedesktop.org/software/systemd/man/systemd.directives.html#GetMachine()) Call interface method `GetMachine`.
     #[zbus(name = "GetMachine")]
-    fn get_machine(&self, name: String) -> crate::zbus::Result<crate::zvariant::OwnedObjectPath>;
+    fn get_machine(&self, name: String) -> crate::zbus::Result<crate::zbus::OwnedObjectPath>;
 
     /// [📖](https://www.freedesktop.org/software/systemd/man/systemd.directives.html#GetImage()) Call interface method `GetImage`.
     #[zbus(name = "GetImage")]
-    fn get_image(&self, name: String) -> crate::zbus::Result<crate::zvariant::OwnedObjectPath>;
+    fn get_image(&self, name: String) -> crate::zbus::Result<crate::zbus::OwnedObjectPath>;
 
     /// [📖](https://www.freedesktop.org/software/systemd/man/systemd.directives.html#GetMachineByPID()) Call interface method `GetMachineByPID`.
     #[zbus(name = "GetMachineByPID")]
-    fn get_machine_by_pid(&self, pid: u32)
-        -> crate::zbus::Result<crate::zvariant::OwnedObjectPath>;
+    fn get_machine_by_pid(&self, pid: u32) -> crate::zbus::Result<crate::zbus::OwnedObjectPath>;
 
     /// [📖](https://www.freedesktop.org/software/systemd/man/systemd.directives.html#ListMachines()) Call interface method `ListMachines`.
     #[zbus(name = "ListMachines")]
     fn list_machines(
         &self,
-    ) -> crate::zbus::Result<Vec<(String, String, String, crate::zvariant::OwnedObjectPath)>>;
+    ) -> crate::zbus::Result<Vec<(String, String, String, crate::zbus::OwnedObjectPath)>>;
 
     /// [📖](https://www.freedesktop.org/software/systemd/man/systemd.directives.html#ListImages()) Call interface method `ListImages`.
     #[zbus(name = "ListImages")]
@@ -41,7 +39,7 @@ pub trait Manager {
             u64,
             u64,
             u64,
-            crate::zvariant::OwnedObjectPath,
+            crate::zbus::OwnedObjectPath,
         )>,
     >;
 
@@ -55,8 +53,8 @@ pub trait Manager {
         class: String,
         leader: u32,
         root_directory: String,
-        scope_properties: Vec<(String, crate::zvariant::OwnedValue)>,
-    ) -> crate::zbus::Result<crate::zvariant::OwnedObjectPath>;
+        scope_properties: Vec<(String, crate::zbus::OwnedVariant)>,
+    ) -> crate::zbus::Result<crate::zbus::OwnedObjectPath>;
 
     /// [📖](https://www.freedesktop.org/software/systemd/man/systemd.directives.html#CreateMachineWithNetwork()) Call interface method `CreateMachineWithNetwork`.
     #[zbus(name = "CreateMachineWithNetwork")]
@@ -69,17 +67,17 @@ pub trait Manager {
         leader: u32,
         root_directory: String,
         ifindices: Vec<i32>,
-        scope_properties: Vec<(String, crate::zvariant::OwnedValue)>,
-    ) -> crate::zbus::Result<crate::zvariant::OwnedObjectPath>;
+        scope_properties: Vec<(String, crate::zbus::OwnedVariant)>,
+    ) -> crate::zbus::Result<crate::zbus::OwnedObjectPath>;
 
     /// [📖](https://www.freedesktop.org/software/systemd/man/systemd.directives.html#CreateMachineEx()) Call interface method `CreateMachineEx`.
     #[zbus(name = "CreateMachineEx")]
     fn create_machine_ex(
         &self,
         name: String,
-        properties: Vec<(String, crate::zvariant::OwnedValue)>,
-        scope_properties: Vec<(String, crate::zvariant::OwnedValue)>,
-    ) -> crate::zbus::Result<crate::zvariant::OwnedObjectPath>;
+        properties: Vec<(String, crate::zbus::OwnedVariant)>,
+        scope_properties: Vec<(String, crate::zbus::OwnedVariant)>,
+    ) -> crate::zbus::Result<crate::zbus::OwnedObjectPath>;
 
     /// [📖](https://www.freedesktop.org/software/systemd/man/systemd.directives.html#RegisterMachine()) Call interface method `RegisterMachine`.
     #[zbus(name = "RegisterMachine")]
@@ -91,7 +89,7 @@ pub trait Manager {
         class: String,
         leader: u32,
         root_directory: String,
-    ) -> crate::zbus::Result<crate::zvariant::OwnedObjectPath>;
+    ) -> crate::zbus::Result<crate::zbus::OwnedObjectPath>;
 
     /// [📖](https://www.freedesktop.org/software/systemd/man/systemd.directives.html#RegisterMachineWithNetwork()) Call interface method `RegisterMachineWithNetwork`.
     #[zbus(name = "RegisterMachineWithNetwork")]
@@ -104,15 +102,15 @@ pub trait Manager {
         leader: u32,
         root_directory: String,
         ifindices: Vec<i32>,
-    ) -> crate::zbus::Result<crate::zvariant::OwnedObjectPath>;
+    ) -> crate::zbus::Result<crate::zbus::OwnedObjectPath>;
 
     /// [📖](https://www.freedesktop.org/software/systemd/man/systemd.directives.html#RegisterMachineEx()) Call interface method `RegisterMachineEx`.
     #[zbus(name = "RegisterMachineEx")]
     fn register_machine_ex(
         &self,
         name: String,
-        properties: Vec<(String, crate::zvariant::OwnedValue)>,
-    ) -> crate::zbus::Result<crate::zvariant::OwnedObjectPath>;
+        properties: Vec<(String, crate::zbus::OwnedVariant)>,
+    ) -> crate::zbus::Result<crate::zbus::OwnedObjectPath>;
 
     /// [📖](https://www.freedesktop.org/software/systemd/man/systemd.directives.html#UnregisterMachine()) Call interface method `UnregisterMachine`.
     #[zbus(name = "UnregisterMachine")]
@@ -143,17 +141,15 @@ pub trait Manager {
 
     /// [📖](https://www.freedesktop.org/software/systemd/man/systemd.directives.html#OpenMachinePTY()) Call interface method `OpenMachinePTY`.
     #[zbus(name = "OpenMachinePTY")]
-    fn open_machine_pty(
-        &self,
-        name: String,
-    ) -> crate::zbus::Result<(crate::zvariant::OwnedFd, String)>;
+    fn open_machine_pty(&self, name: String)
+        -> crate::zbus::Result<(crate::zbus::OwnedFd, String)>;
 
     /// [📖](https://www.freedesktop.org/software/systemd/man/systemd.directives.html#OpenMachineLogin()) Call interface method `OpenMachineLogin`.
     #[zbus(name = "OpenMachineLogin")]
     fn open_machine_login(
         &self,
         name: String,
-    ) -> crate::zbus::Result<(crate::zvariant::OwnedFd, String)>;
+    ) -> crate::zbus::Result<(crate::zbus::OwnedFd, String)>;
 
     /// [📖](https://www.freedesktop.org/software/systemd/man/systemd.directives.html#OpenMachineShell()) Call interface method `OpenMachineShell`.
     #[zbus(name = "OpenMachineShell")]
@@ -164,7 +160,7 @@ pub trait Manager {
         path: String,
         args: Vec<String>,
         environment: Vec<String>,
-    ) -> crate::zbus::Result<(crate::zvariant::OwnedFd, String)>;
+    ) -> crate::zbus::Result<(crate::zbus::OwnedFd, String)>;
 
     /// [📖](https://www.freedesktop.org/software/systemd/man/systemd.directives.html#BindMountMachine()) Call interface method `BindMountMachine`.
     #[zbus(name = "BindMountMachine")]
@@ -220,7 +216,7 @@ pub trait Manager {
     fn open_machine_root_directory(
         &self,
         name: String,
-    ) -> crate::zbus::Result<crate::zvariant::OwnedFd>;
+    ) -> crate::zbus::Result<crate::zbus::OwnedFd>;
 
     /// [📖](https://www.freedesktop.org/software/systemd/man/systemd.directives.html#GetMachineUIDShift()) Call interface method `GetMachineUIDShift`.
     #[zbus(name = "GetMachineUIDShift")]
@@ -290,7 +286,7 @@ pub trait Manager {
     fn map_to_machine_user(
         &self,
         uid_outer: u32,
-    ) -> crate::zbus::Result<(String, crate::zvariant::OwnedObjectPath, u32)>;
+    ) -> crate::zbus::Result<(String, crate::zbus::OwnedObjectPath, u32)>;
 
     /// [📖](https://www.freedesktop.org/software/systemd/man/systemd.directives.html#MapFromMachineGroup()) Call interface method `MapFromMachineGroup`.
     #[zbus(name = "MapFromMachineGroup")]
@@ -301,14 +297,14 @@ pub trait Manager {
     fn map_to_machine_group(
         &self,
         gid_outer: u32,
-    ) -> crate::zbus::Result<(String, crate::zvariant::OwnedObjectPath, u32)>;
+    ) -> crate::zbus::Result<(String, crate::zbus::OwnedObjectPath, u32)>;
 
     /// Receive `MachineNew` signal.
     #[zbus(signal, name = "MachineNew")]
     fn machine_new(
         &self,
         machine: String,
-        path: crate::zvariant::OwnedObjectPath,
+        path: crate::zbus::OwnedObjectPath,
     ) -> crate::zbus::Result<()>;
 
     /// Receive `MachineRemoved` signal.
@@ -316,7 +312,7 @@ pub trait Manager {
     fn machine_removed(
         &self,
         machine: String,
-        path: crate::zvariant::OwnedObjectPath,
+        path: crate::zbus::OwnedObjectPath,
     ) -> crate::zbus::Result<()>;
 
     /// Get property `PoolPath`.
@@ -335,7 +331,6 @@ pub trait Manager {
 /// Proxy object for `org.freedesktop.machine1.Machine`.
 #[proxy(
     interface = "org.freedesktop.machine1.Machine",
-    gen_blocking = false,
     default_service = "org.freedesktop.machine1",
     assume_defaults = false
 )]
@@ -366,11 +361,11 @@ pub trait Machine {
 
     /// [📖](https://www.freedesktop.org/software/systemd/man/systemd.directives.html#OpenPTY()) Call interface method `OpenPTY`.
     #[zbus(name = "OpenPTY")]
-    fn open_pty(&self) -> crate::zbus::Result<(crate::zvariant::OwnedFd, String)>;
+    fn open_pty(&self) -> crate::zbus::Result<(crate::zbus::OwnedFd, String)>;
 
     /// [📖](https://www.freedesktop.org/software/systemd/man/systemd.directives.html#OpenLogin()) Call interface method `OpenLogin`.
     #[zbus(name = "OpenLogin")]
-    fn open_login(&self) -> crate::zbus::Result<(crate::zvariant::OwnedFd, String)>;
+    fn open_login(&self) -> crate::zbus::Result<(crate::zbus::OwnedFd, String)>;
 
     /// [📖](https://www.freedesktop.org/software/systemd/man/systemd.directives.html#OpenShell()) Call interface method `OpenShell`.
     #[zbus(name = "OpenShell")]
@@ -380,7 +375,7 @@ pub trait Machine {
         path: String,
         args: Vec<String>,
         environment: Vec<String>,
-    ) -> crate::zbus::Result<(crate::zvariant::OwnedFd, String)>;
+    ) -> crate::zbus::Result<(crate::zbus::OwnedFd, String)>;
 
     /// [📖](https://www.freedesktop.org/software/systemd/man/systemd.directives.html#BindMount()) Call interface method `BindMount`.
     #[zbus(name = "BindMount")]
@@ -420,7 +415,7 @@ pub trait Machine {
 
     /// [📖](https://www.freedesktop.org/software/systemd/man/systemd.directives.html#OpenRootDirectory()) Call interface method `OpenRootDirectory`.
     #[zbus(name = "OpenRootDirectory")]
-    fn open_root_directory(&self) -> crate::zbus::Result<crate::zvariant::OwnedFd>;
+    fn open_root_directory(&self) -> crate::zbus::Result<crate::zbus::OwnedFd>;
 
     /// Get property `Name`.
     #[zbus(property(emits_changed_signal = "const"), name = "Name")]

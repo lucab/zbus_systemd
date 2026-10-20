@@ -5,7 +5,6 @@ use crate::zbus::proxy;
 /// Proxy object for `org.freedesktop.timedate1`.
 #[proxy(
     interface = "org.freedesktop.timedate1",
-    gen_blocking = false,
     default_service = "org.freedesktop.timedate1",
     default_path = "/org/freedesktop/timedate1"
 )]

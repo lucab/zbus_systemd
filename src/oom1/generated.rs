@@ -5,14 +5,13 @@ use crate::zbus::proxy;
 /// Proxy object for `org.freedesktop.oom1.Manager`.
 #[proxy(
     interface = "org.freedesktop.oom1.Manager",
-    gen_blocking = false,
     default_service = "org.freedesktop.oom1",
     default_path = "/org/freedesktop/oom1"
 )]
 pub trait Manager {
     /// [📖](https://www.freedesktop.org/software/systemd/man/systemd.directives.html#DumpByFileDescriptor()) Call interface method `DumpByFileDescriptor`.
     #[zbus(name = "DumpByFileDescriptor")]
-    fn dump_by_file_descriptor(&self) -> crate::zbus::Result<crate::zvariant::OwnedFd>;
+    fn dump_by_file_descriptor(&self) -> crate::zbus::Result<crate::zbus::OwnedFd>;
 
     /// Receive `Killed` signal.
     #[zbus(signal, name = "Killed")]

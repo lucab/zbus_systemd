@@ -35,12 +35,13 @@ For a quickstart on how to use those interfaces, see the [examples](https://gith
 
 This crate internally uses `zbus` without any default Cargo features.
 That means that you have to decide which async executor to use, by enabling one of the following Cargo features:
- * `zbus-async-smol`: internally uses the `smol` executor (enabling the `async-io` feature in `zbus`).
  * `zbus-async-tokio`: internally uses the `tokio` executor (enabling the `tokio` feature in `zbus`).
+ * `zbus-async-zruntime`: internally uses the `zruntime` executor (enabling the `default-rt` feature in `zbus`).
 
 In case that `zbus` is already part of your dependency tree, you may decide to skip this choice and rely on [Cargo features unification mechanism](https://doc.rust-lang.org/cargo/reference/features.html#feature-unification) instead.
 
-Otherwise, if you aren't already depending on `zbus` and you don't enable any of the async features above, you will likely get a build error.
+Without either runtime feature, provide a runtime through zbus's `Builder::runtime`;
+creating a connection without one returns `zbus::Error::Unsupported`.
 
 ## License
 

@@ -5,8 +5,8 @@
 //! This library internally uses `zbus` without any default Cargo features.
 //!
 //! That means that you have to decide which async executor to use, by enabling one of the following Cargo features:
-//! * `zbus-async-smol`: internally uses the `smol` executor (enabling the `async-io` feature in `zbus`).
 //! * `zbus-async-tokio`: internally uses the `tokio` executor (enabling the `tokio` feature in `zbus`).
+//! * `zbus-async-zruntime`: internally uses the `zruntime` executor (enabling the `default-rt` feature in `zbus`).
 //!
 //! ## Auto-generated services
 //!
@@ -36,7 +36,6 @@ pub use helpers::*;
 
 pub use zbus;
 pub use zbus::names as znames;
-pub use zbus::zvariant;
 
 #[cfg_attr(docsrs, doc(cfg(feature = "home1")))]
 #[cfg(feature = "home1")]

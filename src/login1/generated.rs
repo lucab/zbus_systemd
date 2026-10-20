@@ -5,48 +5,35 @@ use crate::zbus::proxy;
 /// Proxy object for `org.freedesktop.login1.Manager`.
 #[proxy(
     interface = "org.freedesktop.login1.Manager",
-    gen_blocking = false,
     default_service = "org.freedesktop.login1",
     default_path = "/org/freedesktop/login1"
 )]
 pub trait Manager {
     /// [📖](https://www.freedesktop.org/software/systemd/man/systemd.directives.html#GetSession()) Call interface method `GetSession`.
     #[zbus(name = "GetSession")]
-    fn get_session(
-        &self,
-        session_id: String,
-    ) -> crate::zbus::Result<crate::zvariant::OwnedObjectPath>;
+    fn get_session(&self, session_id: String) -> crate::zbus::Result<crate::zbus::OwnedObjectPath>;
 
     /// [📖](https://www.freedesktop.org/software/systemd/man/systemd.directives.html#GetSessionByPID()) Call interface method `GetSessionByPID`.
     #[zbus(name = "GetSessionByPID")]
-    fn get_session_by_pid(&self, pid: u32)
-        -> crate::zbus::Result<crate::zvariant::OwnedObjectPath>;
+    fn get_session_by_pid(&self, pid: u32) -> crate::zbus::Result<crate::zbus::OwnedObjectPath>;
 
     /// [📖](https://www.freedesktop.org/software/systemd/man/systemd.directives.html#GetUser()) Call interface method `GetUser`.
     #[zbus(name = "GetUser")]
-    fn get_user(&self, uid: u32) -> crate::zbus::Result<crate::zvariant::OwnedObjectPath>;
+    fn get_user(&self, uid: u32) -> crate::zbus::Result<crate::zbus::OwnedObjectPath>;
 
     /// [📖](https://www.freedesktop.org/software/systemd/man/systemd.directives.html#GetUserByPID()) Call interface method `GetUserByPID`.
     #[zbus(name = "GetUserByPID")]
-    fn get_user_by_pid(&self, pid: u32) -> crate::zbus::Result<crate::zvariant::OwnedObjectPath>;
+    fn get_user_by_pid(&self, pid: u32) -> crate::zbus::Result<crate::zbus::OwnedObjectPath>;
 
     /// [📖](https://www.freedesktop.org/software/systemd/man/systemd.directives.html#GetSeat()) Call interface method `GetSeat`.
     #[zbus(name = "GetSeat")]
-    fn get_seat(&self, seat_id: String) -> crate::zbus::Result<crate::zvariant::OwnedObjectPath>;
+    fn get_seat(&self, seat_id: String) -> crate::zbus::Result<crate::zbus::OwnedObjectPath>;
 
     /// [📖](https://www.freedesktop.org/software/systemd/man/systemd.directives.html#ListSessions()) Call interface method `ListSessions`.
     #[zbus(name = "ListSessions")]
     fn list_sessions(
         &self,
-    ) -> crate::zbus::Result<
-        Vec<(
-            String,
-            u32,
-            String,
-            String,
-            crate::zvariant::OwnedObjectPath,
-        )>,
-    >;
+    ) -> crate::zbus::Result<Vec<(String, u32, String, String, crate::zbus::OwnedObjectPath)>>;
 
     /// [📖](https://www.freedesktop.org/software/systemd/man/systemd.directives.html#ListSessionsEx()) Call interface method `ListSessionsEx`.
     #[zbus(name = "ListSessionsEx")]
@@ -63,19 +50,17 @@ pub trait Manager {
             String,
             bool,
             u64,
-            crate::zvariant::OwnedObjectPath,
+            crate::zbus::OwnedObjectPath,
         )>,
     >;
 
     /// [📖](https://www.freedesktop.org/software/systemd/man/systemd.directives.html#ListUsers()) Call interface method `ListUsers`.
     #[zbus(name = "ListUsers")]
-    fn list_users(
-        &self,
-    ) -> crate::zbus::Result<Vec<(u32, String, crate::zvariant::OwnedObjectPath)>>;
+    fn list_users(&self) -> crate::zbus::Result<Vec<(u32, String, crate::zbus::OwnedObjectPath)>>;
 
     /// [📖](https://www.freedesktop.org/software/systemd/man/systemd.directives.html#ListSeats()) Call interface method `ListSeats`.
     #[zbus(name = "ListSeats")]
-    fn list_seats(&self) -> crate::zbus::Result<Vec<(String, crate::zvariant::OwnedObjectPath)>>;
+    fn list_seats(&self) -> crate::zbus::Result<Vec<(String, crate::zbus::OwnedObjectPath)>>;
 
     /// [📖](https://www.freedesktop.org/software/systemd/man/systemd.directives.html#ListInhibitors()) Call interface method `ListInhibitors`.
     #[zbus(name = "ListInhibitors")]
@@ -100,12 +85,12 @@ pub trait Manager {
         remote: bool,
         remote_user: String,
         remote_host: String,
-        properties: Vec<(String, crate::zvariant::OwnedValue)>,
+        properties: Vec<(String, crate::zbus::OwnedVariant)>,
     ) -> crate::zbus::Result<(
         String,
-        crate::zvariant::OwnedObjectPath,
+        crate::zbus::OwnedObjectPath,
         String,
-        crate::zvariant::OwnedFd,
+        crate::zbus::OwnedFd,
         u32,
         String,
         u32,
@@ -117,7 +102,7 @@ pub trait Manager {
     fn create_session_with_pidfd(
         &self,
         uid: u32,
-        pidfd: crate::zvariant::OwnedFd,
+        pidfd: crate::zbus::OwnedFd,
         service: String,
         arg_type: String,
         class: String,
@@ -130,12 +115,12 @@ pub trait Manager {
         remote_user: String,
         remote_host: String,
         flags: u64,
-        properties: Vec<(String, crate::zvariant::OwnedValue)>,
+        properties: Vec<(String, crate::zbus::OwnedVariant)>,
     ) -> crate::zbus::Result<(
         String,
-        crate::zvariant::OwnedObjectPath,
+        crate::zbus::OwnedObjectPath,
         String,
-        crate::zvariant::OwnedFd,
+        crate::zbus::OwnedFd,
         u32,
         String,
         u32,
@@ -325,7 +310,7 @@ pub trait Manager {
         who: String,
         why: String,
         mode: String,
-    ) -> crate::zbus::Result<crate::zvariant::OwnedFd>;
+    ) -> crate::zbus::Result<crate::zbus::OwnedFd>;
 
     /// [📖](https://www.freedesktop.org/software/systemd/man/systemd.directives.html#CanRebootParameter()) Call interface method `CanRebootParameter`.
     #[zbus(name = "CanRebootParameter")]
@@ -369,7 +354,7 @@ pub trait Manager {
     fn secure_attention_key(
         &self,
         seat_id: String,
-        object_path: crate::zvariant::OwnedObjectPath,
+        object_path: crate::zbus::OwnedObjectPath,
     ) -> crate::zbus::Result<()>;
 
     /// Receive `SessionNew` signal.
@@ -377,7 +362,7 @@ pub trait Manager {
     fn session_new(
         &self,
         session_id: String,
-        object_path: crate::zvariant::OwnedObjectPath,
+        object_path: crate::zbus::OwnedObjectPath,
     ) -> crate::zbus::Result<()>;
 
     /// Receive `SessionRemoved` signal.
@@ -385,7 +370,7 @@ pub trait Manager {
     fn session_removed(
         &self,
         session_id: String,
-        object_path: crate::zvariant::OwnedObjectPath,
+        object_path: crate::zbus::OwnedObjectPath,
     ) -> crate::zbus::Result<()>;
 
     /// Receive `UserNew` signal.
@@ -393,7 +378,7 @@ pub trait Manager {
     fn user_new(
         &self,
         uid: u32,
-        object_path: crate::zvariant::OwnedObjectPath,
+        object_path: crate::zbus::OwnedObjectPath,
     ) -> crate::zbus::Result<()>;
 
     /// Receive `UserRemoved` signal.
@@ -401,7 +386,7 @@ pub trait Manager {
     fn user_removed(
         &self,
         uid: u32,
-        object_path: crate::zvariant::OwnedObjectPath,
+        object_path: crate::zbus::OwnedObjectPath,
     ) -> crate::zbus::Result<()>;
 
     /// Receive `SeatNew` signal.
@@ -409,7 +394,7 @@ pub trait Manager {
     fn seat_new(
         &self,
         seat_id: String,
-        object_path: crate::zvariant::OwnedObjectPath,
+        object_path: crate::zbus::OwnedObjectPath,
     ) -> crate::zbus::Result<()>;
 
     /// Receive `SeatRemoved` signal.
@@ -417,7 +402,7 @@ pub trait Manager {
     fn seat_removed(
         &self,
         seat_id: String,
-        object_path: crate::zvariant::OwnedObjectPath,
+        object_path: crate::zbus::OwnedObjectPath,
     ) -> crate::zbus::Result<()>;
 
     /// Receive `PrepareForShutdown` signal.
@@ -429,7 +414,7 @@ pub trait Manager {
     fn prepare_for_shutdown_with_metadata(
         &self,
         start: bool,
-        metadata: ::std::collections::HashMap<String, crate::zvariant::OwnedValue>,
+        metadata: ::std::collections::HashMap<String, crate::zbus::OwnedVariant>,
     ) -> crate::zbus::Result<()>;
 
     /// Receive `PrepareForSleep` signal.
@@ -631,7 +616,7 @@ pub trait Manager {
     )]
     fn preparing_for_shutdown_with_metadata(
         &self,
-    ) -> crate::zbus::Result<::std::collections::HashMap<String, crate::zvariant::OwnedValue>>;
+    ) -> crate::zbus::Result<::std::collections::HashMap<String, crate::zbus::OwnedVariant>>;
 
     /// Get property `PreparingForSleep`.
     #[zbus(property(emits_changed_signal = "false"), name = "PreparingForSleep")]
@@ -702,7 +687,6 @@ pub trait Manager {
 /// Proxy object for `org.freedesktop.login1.Seat`.
 #[proxy(
     interface = "org.freedesktop.login1.Seat",
-    gen_blocking = false,
     default_service = "org.freedesktop.login1",
     assume_defaults = false
 )]
@@ -733,7 +717,7 @@ pub trait Seat {
 
     /// Get property `ActiveSession`.
     #[zbus(property(emits_changed_signal = "true"), name = "ActiveSession")]
-    fn active_session(&self) -> crate::zbus::Result<(String, crate::zvariant::OwnedObjectPath)>;
+    fn active_session(&self) -> crate::zbus::Result<(String, crate::zbus::OwnedObjectPath)>;
 
     /// Get property `CanTTY`.
     #[zbus(property(emits_changed_signal = "const"), name = "CanTTY")]
@@ -745,7 +729,7 @@ pub trait Seat {
 
     /// Get property `Sessions`.
     #[zbus(property(emits_changed_signal = "false"), name = "Sessions")]
-    fn sessions(&self) -> crate::zbus::Result<Vec<(String, crate::zvariant::OwnedObjectPath)>>;
+    fn sessions(&self) -> crate::zbus::Result<Vec<(String, crate::zbus::OwnedObjectPath)>>;
 
     /// Get property `IdleHint`.
     #[zbus(property(emits_changed_signal = "true"), name = "IdleHint")]
@@ -766,7 +750,6 @@ pub trait Seat {
 /// Proxy object for `org.freedesktop.login1.User`.
 #[proxy(
     interface = "org.freedesktop.login1.User",
-    gen_blocking = false,
     default_service = "org.freedesktop.login1",
     assume_defaults = false
 )]
@@ -813,7 +796,7 @@ pub trait User {
 
     /// Get property `Display`.
     #[zbus(property(emits_changed_signal = "true"), name = "Display")]
-    fn display(&self) -> crate::zbus::Result<(String, crate::zvariant::OwnedObjectPath)>;
+    fn display(&self) -> crate::zbus::Result<(String, crate::zbus::OwnedObjectPath)>;
 
     /// Get property `State`.
     #[zbus(property(emits_changed_signal = "false"), name = "State")]
@@ -821,7 +804,7 @@ pub trait User {
 
     /// Get property `Sessions`.
     #[zbus(property(emits_changed_signal = "false"), name = "Sessions")]
-    fn sessions(&self) -> crate::zbus::Result<Vec<(String, crate::zvariant::OwnedObjectPath)>>;
+    fn sessions(&self) -> crate::zbus::Result<Vec<(String, crate::zbus::OwnedObjectPath)>>;
 
     /// Get property `IdleHint`.
     #[zbus(property(emits_changed_signal = "true"), name = "IdleHint")]
@@ -846,7 +829,6 @@ pub trait User {
 /// Proxy object for `org.freedesktop.login1.Session`.
 #[proxy(
     interface = "org.freedesktop.login1.Session",
-    gen_blocking = false,
     default_service = "org.freedesktop.login1",
     assume_defaults = false
 )]
@@ -901,7 +883,7 @@ pub trait Session {
 
     /// [📖](https://www.freedesktop.org/software/systemd/man/systemd.directives.html#SetTTY()) Call interface method `SetTTY`.
     #[zbus(name = "SetTTY")]
-    fn set_tty(&self, tty_fd: crate::zvariant::OwnedFd) -> crate::zbus::Result<()>;
+    fn set_tty(&self, tty_fd: crate::zbus::OwnedFd) -> crate::zbus::Result<()>;
 
     /// [📖](https://www.freedesktop.org/software/systemd/man/systemd.directives.html#TakeDevice()) Call interface method `TakeDevice`.
     #[zbus(name = "TakeDevice")]
@@ -909,7 +891,7 @@ pub trait Session {
         &self,
         major: u32,
         minor: u32,
-    ) -> crate::zbus::Result<(crate::zvariant::OwnedFd, bool)>;
+    ) -> crate::zbus::Result<(crate::zbus::OwnedFd, bool)>;
 
     /// [📖](https://www.freedesktop.org/software/systemd/man/systemd.directives.html#ReleaseDevice()) Call interface method `ReleaseDevice`.
     #[zbus(name = "ReleaseDevice")]
@@ -938,7 +920,7 @@ pub trait Session {
         &self,
         major: u32,
         minor: u32,
-        fd: crate::zvariant::OwnedFd,
+        fd: crate::zbus::OwnedFd,
     ) -> crate::zbus::Result<()>;
 
     /// Receive `Lock` signal.
@@ -955,7 +937,7 @@ pub trait Session {
 
     /// Get property `User`.
     #[zbus(property(emits_changed_signal = "const"), name = "User")]
-    fn user(&self) -> crate::zbus::Result<(u32, crate::zvariant::OwnedObjectPath)>;
+    fn user(&self) -> crate::zbus::Result<(u32, crate::zbus::OwnedObjectPath)>;
 
     /// Get property `Name`.
     #[zbus(property(emits_changed_signal = "const"), name = "Name")]
@@ -975,7 +957,7 @@ pub trait Session {
 
     /// Get property `Seat`.
     #[zbus(property(emits_changed_signal = "const"), name = "Seat")]
-    fn seat(&self) -> crate::zbus::Result<(String, crate::zvariant::OwnedObjectPath)>;
+    fn seat(&self) -> crate::zbus::Result<(String, crate::zbus::OwnedObjectPath)>;
 
     /// Get property `TTY`.
     #[zbus(property(emits_changed_signal = "true"), name = "TTY")]
